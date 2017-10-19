@@ -36,6 +36,7 @@ function getBonusTime(diffTime){
 	if(diffTime <= MAX_TIME)
 		result = (MAX_TIME - diffTime) * MAX_POINTS / MAX_TIME
 
+	console.log(result)
 	return result
 }
 
@@ -242,6 +243,28 @@ exports.createUser = functions.https.onRequest(function(req, res) {
 
 });
 
+exports.startPhase1 = functions.https.onRequest(function(req, res) {
+
+	// Grab the text parameter.
+	console.log(req)
+	var email = req.body.email;
+	var password = req.body.password;
+	// Push the new message into the Realtime Database using the Firebase Admin SDK.
+	admin.auth().createUser({
+		email: email,
+		password: password,
+	})
+		.then(function(userRecord) {
+			// See the UserRecord reference doc for the contents of userRecord.
+			console.log("Successfully created new user:", userRecord.uid, email, password);
+			res.redirect(303, userRecord.uid);
+		})
+		.catch(function(error) {
+			console.log("Error creating new user:", error);
+		});
+
+});
+
 exports.createPhase = functions.auth.user().onCreate(function (event){
 	var user = event.data;
 	admin.database().ref('/phase1').push()
@@ -259,30 +282,32 @@ exports.checkOperation = functions.database.ref('/phase1/{pushId1}/operations/{p
 		var ref = event.data.adminRef;
 		var params = event.params;
 		var operationKey = ref.parent.key;
+		var userID = ref.parent.parent.parent.key
+		var timeStamp = admin.database.ServerValue.TIMESTAMP;
+		ref.parent.child("answerTimestamp").set(timeStamp);
 
-		return admin.database().ref('/phase1/{pushId1}/operations').once("value", function (snapshot) {
-			var timeStamp = admin.database.ServerValue.TIMESTAMP;
-			ref.parent.child(operationKey + "/answerTimestamp").set(timeStamp);
+		return admin.database().ref('/phase1/'+userID+'/operations').once("value", function (snapshot) {
+			var timeStampVal = snapshot.child(operationKey + "/answerTimestamp").val();
 
 			var correctAnswer = snapshot.child(operationKey + "/correctAnswer").val();
 			var score = 0, bonusTime = 0
-			var numChildren = ref.parent.parent.numChildren() + 1
+			var numChildren = parseInt(operationKey) + 1
 			if(event.data.val() === correctAnswer){
 				score = SCORE_BASE;
-
-				var timeDiff = timeStamp - snapshot.child(operationKey + "/timeStamp").val();
+				var createTime = parseInt(snapshot.child(operationKey + "/timestamp").val())
+				var timeDiff = parseInt(timeStampVal) - createTime;
 				bonusTime = getBonusTime(timeDiff)
-				ref.parent.child("score").set(score)
-				ref.parent.child("bonusTime").set(bonusTime)
 
 				if(numChildren >= 3){
 					var countCorrect = 1
-					for(var index = numChildren - 1; index > numChildren - 3; index--){
-						var pastValue = snapshot.child(index.toString())
-						if((pastValue.child("score").val() === SCORE_BASE)&&(!pastValue.child("bonusTriple").val())){
+					for(var index = numChildren - 2; index > numChildren - 4; index--){
+						var pastValue = snapshot.child(index)
+						if((pastValue.child("score").val() === SCORE_BASE)&&(!pastValue.child("bonusTriple").exists())){
 							countCorrect++;
-						}else
+						}else{
+							countCorrect = 0;
 							break;
+						}
 
 					}
 					if(countCorrect === 3){
@@ -290,6 +315,8 @@ exports.checkOperation = functions.database.ref('/phase1/{pushId1}/operations/{p
 					}
 				}
 			}
+			ref.parent.child("score").set(score)
+			ref.parent.child("bonusTime").set(bonusTime)
 
 			var operation = generateQuestion(1)
 			operation.timestamp = timeStamp
