@@ -1,1 +1,7 @@
 .idea/
+firebase/functions/node_modules/
+firebase/node_modules/
+firebase2/functions/node_modules/.bin/mime
+firebase2/functions/node_modules/.bin/mime.cmd
+firebase2/functions/node_modules/
+firebase2/node_modules/
