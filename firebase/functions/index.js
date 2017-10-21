@@ -7,7 +7,7 @@ admin.initializeApp(functions.config().firebase);
 // const cors = require('cors')({origin: true});
 const parser = require('body-parser');
 
-var jsonParser = parser.json();
+var urlParser = parser.urlencoded();
 //
 var shuffleArray = function(array) {
 	var currentIndex = array.length, temporaryValue, randomIndex;
@@ -36,7 +36,7 @@ function getBonusTime(diffTime){
 	if(diffTime <= MAX_TIME)
 		result = (MAX_TIME - diffTime) * MAX_POINTS / MAX_TIME
 
-	console.log(result)
+	result = Math.floor(result)
 	return result
 }
 
@@ -223,7 +223,7 @@ exports.createUser = functions.https.onRequest(function(req, res) {
 
 	// Grab the text parameter.
 	console.log(req)
-	jsonParser(req, res, function () {
+	urlParser(req, res, function () {
 		var email = req.body.email;
 		var password = req.body.password;
 		// Push the new message into the Realtime Database using the Firebase Admin SDK.
@@ -247,32 +247,58 @@ exports.startPhase1 = functions.https.onRequest(function(req, res) {
 
 	// Grab the text parameter.
 	console.log(req)
-	var email = req.body.email;
-	var password = req.body.password;
-	// Push the new message into the Realtime Database using the Firebase Admin SDK.
-	admin.auth().createUser({
-		email: email,
-		password: password,
-	})
-		.then(function(userRecord) {
-			// See the UserRecord reference doc for the contents of userRecord.
-			console.log("Successfully created new user:", userRecord.uid, email, password);
-			res.redirect(303, userRecord.uid);
-		})
-		.catch(function(error) {
-			console.log("Error creating new user:", error);
-		});
+	urlParser(req, res, function () {
+		// var token = req.body.token;
+		// // Push the new message into the Realtime Database using the Firebase Admin SDK.
+		// admin.auth().verifyIdToken(token)
+		// 	.then(function(decodedToken) {
+				var uid = req.body.uid//decodedToken.uid;
+				console.log(uid, req.body)
+				// admin.auth().getUser(uid)
+				// 	.then(function(userRecord) {
+				// 		console.log("Successfully fetched user data:", userRecord.toJSON());
+						admin.database().ref('/phase1').once("value", function (phaseData) {
+							var startDate = phaseData.child("phaseDate").val();
+							var endDate = phaseData.child("phaseEndDate").val();
+							var timeNow = Date.now();
 
+							console.log(timeNow, startDate, endDate)
+							if((timeNow >= startDate)&&(timeNow <= endDate)){
+								var phaseID = phaseData.child(uid);
+								var hasOperations = phaseID.child("operations").exists()
+								var started = phaseID.child("started")
+
+								console.log(phaseID.exists(), hasOperations)
+								if((!hasOperations)&&(phaseID.exists())&&(!started.val())){
+									var timeStamp = admin.database.ServerValue.TIMESTAMP;
+
+									var operation = generateQuestion(1);
+									operation.timestamp = timeStamp;
+									started.ref.set(true);
+									phaseID.ref.child("/operations/startTime").set(timeStamp);
+									phaseID.ref.child("/operations/1").set(operation);
+								}
+							}
+							res.redirect(303, uid);
+						});
+					})
+					// .catch(function(error) {
+					// 	console.log("Error fetching user data:", error);
+					// });
+			// }).catch(function(error) {
+			// console.log("Error on token: ", error);
+		// });
+	// })
 });
 
 exports.createPhase = functions.auth.user().onCreate(function (event){
 	var user = event.data;
-	admin.database().ref('/phase1').push()
-		.then(function(snapshot){
-			var userRef = admin.database().ref('/users/'+ user.uid)
-			console.log(snapshot.key);
-			userRef.set({phase1ID:snapshot.key});
-		});
+	admin.database().ref('/phase1').child(user.uid).child("started").set(false);
+		// .then(function(snapshot){
+		// 	var userRef = admin.database().ref('/users/'+ user.uid)
+		// 	console.log(snapshot.key);
+		// 	userRef.set({phase1ID:snapshot.key});
+		// });
 });
 
 exports.checkOperation = functions.database.ref('/phase1/{pushId1}/operations/{pushId2}/userAnswer')
