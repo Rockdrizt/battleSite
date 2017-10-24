@@ -269,6 +269,7 @@ exports.startPhase1 = functions.https.onRequest(function(req, res) {
 								var started = phaseID.child("started")
 
 								console.log(phaseID.exists(), hasOperations)
+								var response
 								if((!hasOperations)&&(phaseID.exists())&&(!started.val())){
 									var timeStamp = admin.database.ServerValue.TIMESTAMP;
 
@@ -277,9 +278,12 @@ exports.startPhase1 = functions.https.onRequest(function(req, res) {
 									started.ref.set(true);
 									phaseID.ref.child("/operations/startTime").set(timeStamp);
 									phaseID.ref.child("/operations/1").set(operation);
+									response = {operationsCreated:true, numberOperation:1, operation:operation}
+								}else{
+									response = {operationsCreated:false}
 								}
 							}
-							res.redirect(303, uid);
+							res.json(response);
 						});
 					})
 					// .catch(function(error) {
