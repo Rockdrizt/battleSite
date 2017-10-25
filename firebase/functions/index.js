@@ -4,11 +4,26 @@ const functions = require('firebase-functions');
 // The Firebase Admin SDK to access the Firebase Realtime Database.
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
-// const cors = require('cors')({origin: true});
+const cors = require('cors')({origin: true});
 const parser = require('body-parser');
+var CryptoJS = require("crypto-js");
+var sPhrase = "MrFfWN7Tg01o";
 
 var urlParser = parser.urlencoded();
 //
+
+function encrypt(value) {
+	var encryptValue = CryptoJS.AES.encrypt(value.toString(), sPhrase);
+
+	return encryptValue.toString();
+}
+
+function decrypt(value) {
+	var decrypted = CryptoJS.AES.decrypt(value, sPhrase);
+
+	return decrypted.toString(CryptoJS.enc.Utf8);
+}
+
 var shuffleArray = function(array) {
 	var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -208,12 +223,14 @@ function generateQuestion(level){
 	// 	}
 	// }
 
+	var encryptCorrectAnswer = encrypt(correctAnswer);
+	console.log("encrypt", encryptCorrectAnswer);
 	var data = {
 		operand1 : operand1,
 		operand2 : operand2,
 		operator : operator,
 		result : result,
-		correctAnswer : correctAnswer,
+		correctAnswer : encryptCorrectAnswer,
 		possibleAnswers:possibleAnswers
 	}
 	return data;
@@ -247,57 +264,60 @@ exports.startPhase1 = functions.https.onRequest(function(req, res) {
 
 	// Grab the text parameter.
 	console.log(req)
-	urlParser(req, res, function () {
-		// var token = req.body.token;
-		// // Push the new message into the Realtime Database using the Firebase Admin SDK.
-		// admin.auth().verifyIdToken(token)
-		// 	.then(function(decodedToken) {
-				var uid = req.body.uid//decodedToken.uid;
-				console.log(uid, req.body)
-				// admin.auth().getUser(uid)
-				// 	.then(function(userRecord) {
-				// 		console.log("Successfully fetched user data:", userRecord.toJSON());
-						admin.database().ref('/phase1').once("value", function (phaseData) {
-							var startDate = phaseData.child("phaseDate").val();
-							var endDate = phaseData.child("phaseEndDate").val();
-							var timeNow = Date.now();
 
-							console.log(timeNow, startDate, endDate)
-							if((timeNow >= startDate)&&(timeNow <= endDate)){
-								var phaseID = phaseData.child(uid);
-								var hasOperations = phaseID.child("operations").exists()
-								var started = phaseID.child("started")
+	cors(req, res, function () {
+		urlParser(req, res, function () {
+			// var token = req.body.token;
+			// // Push the new message into the Realtime Database using the Firebase Admin SDK.
+			// admin.auth().verifyIdToken(token)
+			// 	.then(function(decodedToken) {
+					var uid = req.body.uid//decodedToken.uid;
+					console.log(uid, req.body)
+					// admin.auth().getUser(uid)
+					// 	.then(function(userRecord) {
+					// 		console.log("Successfully fetched user data:", userRecord.toJSON());
+							admin.database().ref('/phase1').once("value", function (phaseData) {
+								var startDate = phaseData.child("phaseDate").val();
+								var endDate = phaseData.child("phaseEndDate").val();
+								var timeNow = Date.now();
 
-								console.log(phaseID.exists(), hasOperations)
-								var response
-								if((!hasOperations)&&(phaseID.exists())&&(!started.val())){
-									var timeStamp = admin.database.ServerValue.TIMESTAMP;
+								console.log(timeNow, startDate, endDate)
+								var response = {phaseEnded:true}
+								// if((timeNow >= startDate)&&(timeNow <= endDate)){
+									var phaseID = phaseData.child(uid);
+									var hasOperations = phaseID.child("operations").exists()
+									var startTime = phaseID.child("startTime")
 
-									var operation = generateQuestion(1);
-									operation.timestamp = timeStamp;
-									started.ref.set(true);
-									phaseID.ref.child("/operations/startTime").set(timeStamp);
-									phaseID.ref.child("/operations/1").set(operation);
-									response = {operationsCreated:true, numberOperation:1, operation:operation}
-								}else{
-									response = {operationsCreated:false}
-								}
-							}
-							res.json(response);
-						});
-					})
-					// .catch(function(error) {
-					// 	console.log("Error fetching user data:", error);
-					// });
-			// }).catch(function(error) {
-			// console.log("Error on token: ", error);
-		// });
-	// })
+									console.log(phaseID.exists(), hasOperations)
+									if((!hasOperations)&&(phaseID.exists())&&(!startTime.val())){
+										var timeStamp = admin.database.ServerValue.TIMESTAMP;
+
+										var operation = generateQuestion(1);
+										operation.timestamp = timeStamp;
+										startTime.ref.set(timeStamp);
+										// phaseID.ref.child("/startTime").set(timeStamp);
+										phaseID.ref.child("/operations/1").set(operation);
+										response = {operationsCreated:true, numberOperation:1, operation:operation}
+									}else{
+										response = {operationsCreated:false}
+									}
+								// }
+								res.status(200).send(response);
+							});
+						})
+						// .catch(function(error) {
+						// 	console.log("Error fetching user data:", error);
+						// });
+				// }).catch(function(error) {
+				// console.log("Error on token: ", error);
+			// });
+		// })
+	});
 });
 
 exports.createPhase = functions.auth.user().onCreate(function (event){
 	var user = event.data;
-	admin.database().ref('/phase1').child(user.uid).child("started").set(false);
+	admin.database().ref('/phase1').child(user.uid).child("startTime").set(false);
 		// .then(function(snapshot){
 		// 	var userRef = admin.database().ref('/users/'+ user.uid)
 		// 	console.log(snapshot.key);
@@ -320,9 +340,12 @@ exports.checkOperation = functions.database.ref('/phase1/{pushId1}/operations/{p
 			var timeStampVal = snapshot.child(operationKey + "/answerTimestamp").val();
 
 			var correctAnswer = snapshot.child(operationKey + "/correctAnswer").val();
+			correctAnswer = decrypt(correctAnswer)
+			// console.log(event.data.val(), correctAnswer)
+
 			var score = 0, bonusTime = 0
 			var numChildren = parseInt(operationKey) + 1
-			if(event.data.val() === correctAnswer){
+			if(event.data.val() === parseInt(correctAnswer)){
 				score = SCORE_BASE;
 				var createTime = parseInt(snapshot.child(operationKey + "/timestamp").val())
 				var timeDiff = parseInt(timeStampVal) - createTime;
