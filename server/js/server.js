@@ -11,6 +11,8 @@ var server = function () {
 	var userRef = null;
 	var ref
 	var newOperationCallBack = null;
+	var currentOperation = null;
+	var operationRef
 
 	function createListeners() {
 
@@ -22,31 +24,53 @@ var server = function () {
 			console.log("startPhase1")
 			ref.once("value").then(function (snapshot) {
 				console.log(snapshot)
-				var started = snapshot.child("started").val();
-				if(!started){
+				var startTime = snapshot.child("startTime").val();
+				if(!startTime){
 					var xhttp = new XMLHttpRequest();
 					xhttp.open("POST", "https://us-central1-mathtournamentonline.cloudfunctions.net/startPhase1", true);
 					xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 					xhttp.send("uid="+userRef.uid);
 					xhttp.onreadystatechange = function() {
-						var response = JSON.parse(xhttp.responseText);
-						if ((response.operation)&&(newOperationCallBack)){
-							newOperationCallBack(response.numberOperation, response.operation);
+						if (this.readyState === 4 && this.status === 200){
+							var response = JSON.parse(xhttp.responseText);
+							console.log(response)
+							if (response.operation){
+								currentOperation = {number:response.numberOperation, operation:response.operation}
+								addListeners(ref.child("operations/" + response.numberOperation))
+							}
 						}
-						console.log(response)
 					};
 				}else{
 					// return
 					var numOperations = snapshot.child("operations").numChildren();
-					var operation = snapshot.child("operations").child(numOperations).val()
-					if (newOperationCallBack) {
-						newOperationCallBack(numOperations, operation);
-					}
+					var operation = snapshot.child("operations").child(numOperations).val();
+					console.log(numOperations, operation);
+					currentOperation = {number:numOperations, operation:operation}
+					addListeners(ref.child("operations/" + numOperations))
 				}
 			})
 		}else{
 			console.log("notLogged")
 		}
+	}
+
+	function addListeners(snapshot) {
+		if(operationRef){
+			operationRef.off();
+		}
+		operationRef = snapshot.ref;
+
+		ref.child("operations/" + snapshot.key + "/score").on("value", function (snapshot) {
+			if(snapshot.val() > 0){
+				//callBackScore
+			}
+		})
+		ref.child("operations/" + snapshot.key + "/bonusTriple").on("value", function (snapshot) {
+
+		})
+		ref.child("operations/" + snapshot.key + "/bonusTime").on("value", function (snapshot) {
+
+		})
 	}
 	
 	function init() {
@@ -68,8 +92,8 @@ var server = function () {
 				userRef = user;
 				ref = database.ref("phase1/" + user.uid);
 				ref.child("operations").on("child_added", function (snapshot) {
-					if ((newOperationCallBack) && (user))
-						newOperationCallBack(snapshot);
+					currentOperation = {number:snapshot.key, operation:snapshot.val()}
+					addListeners(snapshot.ref)
 				})
 				startPhase1();
 				console.log("connected")
@@ -91,10 +115,18 @@ var server = function () {
 			});
 		}
 	}
+	
+	function logout() {
+		firebase.auth().signOut();
+	}
 
 	return{
 		init: init,
 		login: login,
+		logout:logout,
+		getCurrentOperation:function () {
+			return currentOperation;
+		}
 	}
 }()
 
