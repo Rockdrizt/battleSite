@@ -13,12 +13,38 @@ var server = function () {
 	var newOperationCallBack = null;
 	var currentOperation = null;
 	var operationRef
+	var events
 
-	function createListeners() {
+	var addEventListener = function(name, handler) {
+		if (events.hasOwnProperty(name))
+			events[name].push(handler);
+		else
+			events[name] = [handler];
+		console.log(events[name])
+	};
 
-	}
+	/* This is a bit tricky, because how would you identify functions?
+		This simple solution should work if you pass THE SAME handler. */
+	var removeEventListener = function(name, handler) {
+		if (!events.hasOwnProperty(name))
+			return;
+		var index = events[name].indexOf(handler);
+		if (index !== -1)
+			events[name].splice(index, 1);
+	};
+
+	var fireEvent = function(name, args) {
+		if (!events.hasOwnProperty(name))
+			return;
+		if (!args || !args.length)
+			args = [];
+		var evs = events[name], l = evs.length;
+		for (var i = 0; i < l; i++) {
+			evs[i].apply(null, args);
+		}
+	};
 	
-	function startPhase1() {
+	function startPhase1(successCallBack) {
 		console.log(userRef)
 		if (userRef){
 			console.log("startPhase1")
@@ -37,6 +63,7 @@ var server = function () {
 							if (response.operation){
 								currentOperation = {number:response.numberOperation, operation:response.operation}
 								addListeners(ref.child("operations/" + response.numberOperation))
+								if(successCallBack) successCallBack();
 							}
 						}
 					};
@@ -47,6 +74,7 @@ var server = function () {
 					console.log(numOperations, operation);
 					currentOperation = {number:numOperations, operation:operation}
 					addListeners(ref.child("operations/" + numOperations))
+					if(successCallBack) successCallBack();
 				}
 			})
 		}else{
@@ -61,20 +89,24 @@ var server = function () {
 		operationRef = snapshot.ref;
 
 		ref.child("operations/" + snapshot.key + "/score").on("value", function (snapshot) {
+			var data
 			if(snapshot.val() > 0){
-				//callBackScore
-			}
+				data = {isCorrect:true, score: snapshot.val()}
+			}else
+				data = {isCorrect:false, score: snapshot.val()}
+			fireEvent('onCompletedOperation',[data]);
 		})
 		ref.child("operations/" + snapshot.key + "/bonusTriple").on("value", function (snapshot) {
-
+			fireEvent('onTripleBonus',[snapshot.val()]);
 		})
 		ref.child("operations/" + snapshot.key + "/bonusTime").on("value", function (snapshot) {
-
+			fireEvent('onTimeBonus',[snapshot.val()]);
 		})
 	}
 	
-	function init() {
+	function init(successCallBack) {
 
+		events = {};
 		var config = {
 			apiKey: "AIzaSyAcbtFTrY02g0QnwDD9Vf6M12OjZ_DHLWE",
 			authDomain: "mathtournamentonline.firebaseapp.com",
@@ -95,7 +127,7 @@ var server = function () {
 					currentOperation = {number:snapshot.key, operation:snapshot.val()}
 					addListeners(snapshot.ref)
 				})
-				startPhase1();
+				startPhase1(successCallBack);
 				console.log("connected")
 			} else {
 				if(ref)
@@ -120,10 +152,19 @@ var server = function () {
 		firebase.auth().signOut();
 	}
 
+	function setAnswer(answer) {
+		if(userRef){
+			ref.child("operations/" + currentOperation.number + "/userAnswer").set(answer)
+		}
+	}
+
 	return{
 		init: init,
 		login: login,
 		logout:logout,
+		addEventListener:addEventListener,
+		removeEventListener:removeEventListener,
+		setAnswer:setAnswer,
 		getCurrentOperation:function () {
 			return currentOperation;
 		}
@@ -132,23 +173,23 @@ var server = function () {
 
 
 
-// function loadGame(){
-// 	if(gameFrame)
-// 		gameContainer.removeChild(gameFrame);
-// 	else
-// 		gameFrame = document.createElement("iframe")
-// 	gameFrame.src= src
-// 	gameFrame.style.borderStyle = "none"
-// 	gameFrame.scrolling = "no"
-// 	gameFrame.width = "100%"
-// 	gameFrame.height = "100%"
-// 	gameContainer.appendChild(gameFrame);
-// }
-//
-// window.onload =  function(){
-// 	gameContainer = document.getElementById("game-container")
-// 	loadGame()
-// 	server = new Server();
-// }
+function loadGame(){
+	if(gameFrame)
+		gameContainer.removeChild(gameFrame);
+	else
+		gameFrame = document.createElement("iframe")
+	gameFrame.src= src
+	gameFrame.style.borderStyle = "none"
+	gameFrame.scrolling = "no"
+	gameFrame.width = "100%"
+	gameFrame.height = "100%"
+	gameContainer.appendChild(gameFrame);
+}
+
+window.onload =  function(){
+	gameContainer = document.getElementById("game-container")
+	loadGame()
+	server = new Server();
+}
 
 // window.addEventListener("resize", loadGame);

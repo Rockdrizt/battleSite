@@ -1,4 +1,5 @@
 window.minigame = window.minigame || {}
+var server = parent.server;
 
 function startGame(){
 	window.game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.CANVAS, null, {init: init, create: create }, true, true);
@@ -14,10 +15,14 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				if(cliente) {
-					cliente.setReady(true)
-				}
+				if(server){
+					var onSuccess = function(){
+						sceneloader.show("operations")
+					}
+					server.init(onSuccess);
+				}else{
 					sceneloader.show("operations")
+				}
 	    	}
 
 	      	sceneloader.preload(sceneList, {onLoadFile: onLoadFile, onComplete: onCompleteSceneLoading})

@@ -340,12 +340,13 @@ exports.checkOperation = functions.database.ref('/phase1/{pushId1}/operations/{p
 			var timeStampVal = snapshot.child(operationKey + "/answerTimestamp").val();
 
 			var correctAnswer = snapshot.child(operationKey + "/correctAnswer").val();
-			correctAnswer = decrypt(correctAnswer)
+			correctAnswer = parseInt(decrypt(correctAnswer))
+			ref.parent.child("correctAnswer").set(correctAnswer)
 			// console.log(event.data.val(), correctAnswer)
 
 			var score = 0, bonusTime = 0
 			var numChildren = parseInt(operationKey) + 1
-			if(event.data.val() === parseInt(correctAnswer)){
+			if(event.data.val() === correctAnswer){
 				score = SCORE_BASE;
 				var createTime = parseInt(snapshot.child(operationKey + "/timestamp").val())
 				var timeDiff = parseInt(timeStampVal) - createTime;

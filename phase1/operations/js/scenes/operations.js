@@ -139,8 +139,8 @@ var operations = function(){
 
 		loadSounds()
 
-		if(cliente){
-			cliente.restartGame = stopGame
+		if(server){
+			server.restartGame = stopGame
 		}
 
 	}
@@ -184,8 +184,8 @@ var operations = function(){
 		buttonSelected = button
 		game.add.tween(timerText.scale).to({x:1.2, y:1.2}, 200, Phaser.Easing.Cubic.Out, true).yoyo(true)
 
-		if(cliente)
-			cliente.buttonOnClick(button.value, timeElapsed)
+		if(server)
+			server.setAnswer(button.value)
 		waitingGroup.tween = game.add.tween(waitingGroup).to({alpha:1}, 200, Phaser.Easing.Cubic.Out, true)
 
 		timeElapsed = 0
@@ -245,9 +245,9 @@ var operations = function(){
 		// operationsSong.stop()
 		// clock.tween.stop()
 		inputsEnabled = false
-		cliente.removeEventListener("onTurnEnds", checkAnswer)
-		cliente.removeEventListener("onGameEnds", showWinner)
-		cliente.removeEventListener("showPossibleAnswers", startRound)
+		server.removeEventListener("onTurnEnds", checkAnswer)
+		server.removeEventListener("onGameEnds", showWinner)
+		server.removeEventListener("showPossibleAnswers", startRound)
 
 		var tweenScene = game.add.tween(sceneGroup).to({alpha: 0}, 500, Phaser.Easing.Cubic.In, true, 750)
 		tweenScene.onComplete.add(function(){
@@ -298,12 +298,15 @@ var operations = function(){
 		isReady = true;
 
 		timeElapsed = 0
-		options = cliente ? cliente.currentOptions : [120, 200, 0]
+		var currentOperation = server ? server.getCurrentOperation() : null;
+		console.log(currentOperation)
+		options = currentOperation && currentOperation.operation ?
+			currentOperation.operation.possibleAnswers : [120, 200, 0]
 
-		clientData = (cliente)&&(cliente.currentData) ? cliente.currentData : {
+		clientData = currentOperation ? currentOperation.operation : {
 			operand1 : 88,
 			operand2 : 8,
-			opedator : "/",
+			operator : "/",
 			result:10,
 			correctAnswer : 10,
 			type :"yei"
@@ -346,10 +349,10 @@ var operations = function(){
 	}
 
 	function generateEquation(){
-		if(clientData.opedator === "/"){
+		if(clientData.operator === "/"){
 			equationGroup.equationText.text = clientData.operand2 + "ƒ" + clientData.operand1 + " =" + clientData.result
 		}else{
-			equationGroup.equationText.text = clientData.operand1 + clientData.opedator + clientData.operand2 + "=" + clientData.result
+			equationGroup.equationText.text = clientData.operand1 + clientData.operator + clientData.operand2 + "=" + clientData.result
 		}
 
 	}
@@ -391,7 +394,7 @@ var operations = function(){
 			var result = (seconds < 10) ? "0" + seconds : seconds;
 			result += ":" + decimals + centimals
 
-			if(cliente.numPlayer === event.numPlayer){
+			if(server.numPlayer === event.numPlayer){
 				differenceTimeText.text = "-" + result
 				differenceTimeText.fill = "#00a413"
 			}else{
@@ -413,7 +416,7 @@ var operations = function(){
 			wrongParticle.y = buttonSelected.centerY
 		}
 
-		if(cliente.numPlayer === event.numPlayer){
+		if(server.numPlayer === event.numPlayer){
 			sound.play("magic")
 			correctParticle.start(true, 1000, null, 5);
 		}else{
@@ -495,7 +498,7 @@ var operations = function(){
 		var winnerNum = event.winner
 		waitingGroup.loading.alpha = 0
 
-		if(winnerNum === cliente.numPlayer){
+		if(winnerNum === server.numPlayer){
 			waitingGroup.waitText.text = localization.getString(localizationData, "youWin")
 			waitingGroup.waitText.tint = 0x00A413
 		}else{
@@ -552,13 +555,13 @@ var operations = function(){
 
 			initialize()
 
-			var playerData = cliente ? cliente.player : {nickname:"Nickname"}
-			var numPlayer = cliente ? cliente.numPlayer : 1
-			var textInfo = playerData.nickname + " " + numPlayer
-			var fontStyle = {font: "36px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
-			var playerInfo = game.add.text(game.world.centerX,50,textInfo, fontStyle)
-			playerInfo.anchor.setTo(0.5, 0.5)
-			sceneGroup.add(playerInfo)
+			// var playerData = server ? server.player : {nickname:"Nickname"}
+			// var numPlayer = server ? server.numPlayer : 1
+			// var textInfo = playerData.nickname + " " + numPlayer
+			// var fontStyle = {font: "36px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
+			// var playerInfo = game.add.text(game.world.centerX,50,textInfo, fontStyle)
+			// playerInfo.anchor.setTo(0.5, 0.5)
+			// sceneGroup.add(playerInfo)
 
 			equationGroup = game.add.group()
 			equationGroup.x = game.world.centerX
@@ -589,18 +592,6 @@ var operations = function(){
 			differenceTimeText.strokeThickness = 6;
 			differenceTimeText.alpha = 0
 			sceneGroup.add(differenceTimeText)
-
-			if(cliente){
-				cliente.removeEventListener("onTurnEnds", checkAnswer)
-				cliente.removeEventListener("onGameEnds", showWinner)
-				cliente.removeEventListener("showPossibleAnswers", startRound)
-				cliente.addEventListener("onTurnEnds", checkAnswer)
-				cliente.addEventListener("showPossibleAnswers", startRound)
-				cliente.addEventListener("onGameEnds", showWinner)
-				// clientData.setReady(true)
-			}else{
-				game.time.events.add(1000, startRound)
-			}
 
 			createGameObjects()
 			// startRound(true)
@@ -639,6 +630,19 @@ var operations = function(){
 			// console.log("width", player.width)
 			loading.y = 100
 			waitingGroup.loading = loading
+
+			if(server){
+				server.removeEventListener("onCompletedOperation", checkAnswer)
+				// server.removeEventListener("onGameEnds", showWinner)
+				// server.removeEventListener("showPossibleAnswers", startRound)
+				server.addEventListener("onCompletedOperation", checkAnswer)
+				// server.addEventListener("showPossibleAnswers", startRound)
+				// server.addEventListener("onGameEnds", showWinner)
+				// clientData.setReady(true)
+				startRound()
+			}else{
+				game.time.events.add(1000, startRound)
+			}
 
 			// buttons.getButton(operationsSong,sceneGroup)
 		}
