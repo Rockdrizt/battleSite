@@ -49,8 +49,9 @@ var server = function () {
 		if (userRef){
 			console.log("startPhase1")
 			ref.once("value").then(function (snapshot) {
-				console.log(snapshot)
+				console.log("snapshot", snapshot)
 				var startTime = snapshot.child("startTime").val();
+				console.log("startTime", snapshot.key)
 				if(!startTime){
 					var xhttp = new XMLHttpRequest();
 					xhttp.open("POST", "https://us-central1-mathtournamentonline.cloudfunctions.net/startPhase1", true);
@@ -62,7 +63,7 @@ var server = function () {
 							console.log(response)
 							if (response.operation){
 								currentOperation = {number:response.numberOperation, operation:response.operation}
-								addListeners(ref.child("operations/" + response.numberOperation))
+								// addListeners()
 								if(successCallBack) successCallBack();
 							}
 						}
@@ -73,7 +74,8 @@ var server = function () {
 					var operation = snapshot.child("operations").child(numOperations).val();
 					console.log(numOperations, operation);
 					currentOperation = {number:numOperations, operation:operation}
-					addListeners(ref.child("operations/" + numOperations))
+					// addListeners()
+					console.log("callback")
 					if(successCallBack) successCallBack();
 				}
 			})
@@ -82,26 +84,34 @@ var server = function () {
 		}
 	}
 
-	function addListeners(snapshot) {
+	function addListeners() {
 		if(operationRef){
 			operationRef.off();
 		}
-		operationRef = snapshot.ref;
+		operationRef = ref.child("operations");
+		console.log(currentOperation.number)
 
-		ref.child("operations/" + snapshot.key + "/score").on("value", function (snapshot) {
+		operationRef.limitToLast(1).on("child_changed", function (snapshot) {
+			if(snapshot.key)
+			console.log("fireEventOnComplete")
 			var data
 			if(snapshot.val() > 0){
 				data = {isCorrect:true, score: snapshot.val()}
 			}else
 				data = {isCorrect:false, score: snapshot.val()}
-			fireEvent('onCompletedOperation',[data]);
+
+			snapshot.ref.parent.once("value", function (operationData) {
+				console.log("key", operationData.key)
+				currentOperation.operation.correctAnswer = operationData.child("correctAnswer").val();
+				fireEvent('onCompletedOperation', [data]);
+			})
 		})
-		ref.child("operations/" + snapshot.key + "/bonusTriple").on("value", function (snapshot) {
-			fireEvent('onTripleBonus',[snapshot.val()]);
-		})
-		ref.child("operations/" + snapshot.key + "/bonusTime").on("value", function (snapshot) {
-			fireEvent('onTimeBonus',[snapshot.val()]);
-		})
+	// 	ref.child("operations/" + snapshot.key + "/bonusTriple").on("value", function (snapshot) {
+	// 		fireEvent('onTripleBonus',[snapshot.val()]);
+	// 	})
+	// 	ref.child("operations/" + snapshot.key + "/bonusTime").on("value", function (snapshot) {
+	// 		fireEvent('onTimeBonus',[snapshot.val()]);
+	// 	})
 	}
 	
 	function init(successCallBack) {
@@ -123,10 +133,38 @@ var server = function () {
 				console.log(user)
 				userRef = user;
 				ref = database.ref("phase1/" + user.uid);
-				ref.child("operations").on("child_added", function (snapshot) {
-					currentOperation = {number:snapshot.key, operation:snapshot.val()}
-					addListeners(snapshot.ref)
-				})
+				// ref.child("operations").limitToLast(1).on("child_added", function (snapshot) {
+				// 	console.log("addListener", snapshot.key)
+				// 	currentOperation = {number:snapshot.key, operation:snapshot.val()}
+				// 	// addListeners(snapshot.ref)
+				// })
+				ref.child("operations").limitToLast(1).on("child_added", function(snapshot) {
+					snapshot.ref.orderByChild("correctAnswer").on("child_changed", function (itemSnapshot) {
+						console.log(itemSnapshot.key)
+						if(itemSnapshot.key === "correctAnswer"){
+							currentOperation.operation.correctAnswer = itemSnapshot.val();
+						}
+					});
+					snapshot.ref.on("child_added", function (itemSnapshot) {
+						if(itemSnapshot.key === "score"){
+							console.log("fireEventOnComplete")
+							var data
+							if(itemSnapshot.val() > 0){
+								data = {isCorrect:true, score: itemSnapshot.val()}
+							}else
+								data = {isCorrect:false, score: itemSnapshot.val()}
+
+
+							console.log("value", snapshot.child("correctAnswer").val())
+							fireEvent('onCompletedOperation', [data]);
+						}
+					})
+					if((currentOperation)&&(currentOperation.number < snapshot.key)){
+						currentOperation.operation = snapshot.val();
+						currentOperation.number = snapshot.key;
+						console.log(currentOperation)
+					}
+				});
 				startPhase1(successCallBack);
 				console.log("connected")
 			} else {
@@ -189,7 +227,7 @@ function loadGame(){
 window.onload =  function(){
 	gameContainer = document.getElementById("game-container")
 	loadGame()
-	server = new Server();
+	// server = new Server();
 }
 
 // window.addEventListener("resize", loadGame);

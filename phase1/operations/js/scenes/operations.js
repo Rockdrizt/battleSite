@@ -151,6 +151,7 @@ var operations = function(){
 			var button = buttonList[optionIndex]
 			var value = options[optionIndex]
 			button.value = value
+			console.log(button.value)
 			button.text.text = value
 			optionsGroup.add(button)
 			button.y = startY - optionIndex * 180
@@ -162,10 +163,6 @@ var operations = function(){
 
 			game.add.tween(button).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true, 300 * (numOptions - optionIndex))
 			game.add.tween(button.scale).to({x:1, y:1}, 300, Phaser.Easing.Back.Out, true, 300 * (numOptions - optionIndex))
-
-			if (clientData.correctAnswer === value){
-				correctButton = button
-			}
 		}
 	}
 
@@ -358,6 +355,14 @@ var operations = function(){
 	}
 	
 	function checkAnswer(event) {
+		for(var optionIndex = 0, numOptions = options.length; optionIndex < numOptions; optionIndex++) {
+			var button = buttonList[optionIndex]
+			console.log(clientData.correctAnswer, button.value)
+			if (clientData.correctAnswer === button.value) {
+				correctButton = button
+			}
+		}
+
 		if(waitingGroup.tween)
 			waitingGroup.tween.stop()
 		game.add.tween(waitingGroup).to({alpha:0}, 200, Phaser.Easing.Cubic.Out, true)
@@ -374,10 +379,10 @@ var operations = function(){
 				break
 
 		}
-		console.log(missingOperand)
 		generateEquation()
 		game.add.tween(equationGroup.scale).to({x:1.2, y:1.2}, 200, Phaser.Easing.Cubic.Out, true).yoyo(true)
 
+		console.log(correctButton.value)
 		if(correctButton.value !== buttonSelected.value){
 			// tweenTint(buttonSelected.img, 0xffffff, 0xbc0a00, 200)
 			buttonSelected.img.tint = 0xbc0a00
@@ -416,7 +421,7 @@ var operations = function(){
 			wrongParticle.y = buttonSelected.centerY
 		}
 
-		if(server.numPlayer === event.numPlayer){
+		if(event.isCorrect){
 			sound.play("magic")
 			correctParticle.start(true, 1000, null, 5);
 		}else{
@@ -424,7 +429,7 @@ var operations = function(){
 			wrongParticle.start(true, 1000, null, 5);
 		}
 
-		// game.time.events.add(3000, clearStage)
+		game.time.events.add(1000, startRound)
 
 	}
 
