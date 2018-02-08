@@ -1,5 +1,5 @@
 var buttons = {}
-var imagesPath = "../../shared/minigames/images/"
+var imagesPath = "../shared/minigames/images/"
 var game
 var gameSong
 
@@ -31,9 +31,14 @@ buttons.getButton = function(song,group,posX, posY){
 	buttonImage.pressed = false
 	buttonImage.inputEnabled = true
 	buttonImage.events.onInputDown.add(inputButton)
+	buttonImage.InputDown = inputButton
 	buttonImage.anchor.setTo(0.5,0.5)
+    buttonImage.input.priorityID = 1
+
+	return button
 		
 }
+
 
 function inputButton(btn){
 	

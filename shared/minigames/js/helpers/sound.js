@@ -18,11 +18,34 @@ var sound = function(){
 		game.sound.setDecodedCallback(decodedSounds, function(){}, this)
 	}
 
-	function play(soundId){
-		if(decodedSounds[soundId] !== "undefined"){
+	function play(soundId, params){
+		params = params || {}
+		var pitch = params.pitch || 1
+		var loop = params.loop
+		var volume = params.volume || 1
+
+		if(typeof decodedSounds[soundId] !== "undefined"){
 			decodedSounds[soundId].play()
+			decodedSounds[soundId]._sound.playbackRate.value = pitch
+			if (loop){
+				game.sound.setDecodedCallback(decodedSounds[soundId], function(){
+					decodedSounds[soundId].loopFull(volume)
+				}, this);
+			}
+			return decodedSounds[soundId]
 		}else{
 			console.warn("[Sound]"+"Not found Sound: "+soundId)
+		}
+	}
+
+	function stop(soundId, isDestroy) {
+
+
+		for(var key in decodedSounds){
+			var sound = decodedSounds[soundId]
+			if(sound){
+				sound.stop()
+			}
 		}
 	}
 
@@ -38,7 +61,8 @@ var sound = function(){
 		decode: decode,
 		init: init,
 		play: play,
-		stopAll:stopAll
+		stopAll:stopAll,
+		stop:stop
 	}
 
 }()

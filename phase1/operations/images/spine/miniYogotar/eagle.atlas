@@ -1,0 +1,139 @@
+
+eagle.png
+size: 638,268
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+normal/arm1
+  rotate: false
+  xy: 501, 2
+  size: 48, 59
+  orig: 48, 59
+  offset: 0, 0
+  index: -1
+normal/arm2
+  rotate: false
+  xy: 551, 10
+  size: 36, 53
+  orig: 36, 53
+  offset: 0, 0
+  index: -1
+normal/eyes_d2
+  rotate: false
+  xy: 241, 4
+  size: 136, 57
+  orig: 136, 57
+  offset: 0, 0
+  index: -1
+normal/faceshield
+  rotate: true
+  xy: 241, 63
+  size: 203, 177
+  orig: 203, 177
+  offset: 0, 0
+  index: -1
+normal/foot1_d
+  rotate: false
+  xy: 520, 157
+  size: 65, 34
+  orig: 65, 34
+  offset: 0, 0
+  index: -1
+normal/foot2_b
+  rotate: false
+  xy: 585, 194
+  size: 51, 15
+  orig: 51, 15
+  offset: 0, 0
+  index: -1
+normal/forearm1_a
+  rotate: false
+  xy: 585, 211
+  size: 50, 55
+  orig: 50, 55
+  offset: 0, 0
+  index: -1
+normal/forearm1_b
+  rotate: false
+  xy: 587, 138
+  size: 48, 54
+  orig: 48, 54
+  offset: 0, 0
+  index: -1
+normal/forearm2_a
+  rotate: false
+  xy: 446, 6
+  size: 53, 55
+  orig: 53, 55
+  offset: 0, 0
+  index: -1
+normal/hand1_a
+  rotate: false
+  xy: 569, 93
+  size: 53, 43
+  orig: 53, 43
+  offset: 0, 0
+  index: -1
+normal/hand2_a
+  rotate: false
+  xy: 589, 6
+  size: 44, 28
+  orig: 44, 28
+  offset: 0, 0
+  index: -1
+normal/head
+  rotate: true
+  xy: 2, 9
+  size: 257, 237
+  orig: 257, 237
+  offset: 0, 0
+  index: -1
+normal/leg1
+  rotate: false
+  xy: 520, 193
+  size: 63, 73
+  orig: 63, 73
+  offset: 0, 0
+  index: -1
+normal/leg2
+  rotate: true
+  xy: 379, 4
+  size: 57, 65
+  orig: 57, 65
+  offset: 0, 0
+  index: -1
+normal/mouth_b1
+  rotate: false
+  xy: 526, 65
+  size: 63, 26
+  orig: 63, 26
+  offset: 0, 0
+  index: -1
+normal/shin1
+  rotate: true
+  xy: 526, 93
+  size: 62, 41
+  orig: 62, 41
+  offset: 0, 0
+  index: -1
+normal/shin2
+  rotate: true
+  xy: 591, 36
+  size: 55, 37
+  orig: 55, 37
+  offset: 0, 0
+  index: -1
+normal/torso1
+  rotate: true
+  xy: 420, 152
+  size: 114, 98
+  orig: 114, 98
+  offset: 0, 0
+  index: -1
+normal/torso2
+  rotate: false
+  xy: 420, 63
+  size: 104, 87
+  orig: 104, 87
+  offset: 0, 0
+  index: -1

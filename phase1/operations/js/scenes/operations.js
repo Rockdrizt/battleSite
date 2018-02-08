@@ -91,6 +91,13 @@ var operations = function(){
 	var waitingGroup
 	var optionsGroup
 	var readyString
+	var skyBg
+	var ground
+	var miniEagle
+	var scoreText
+	var totalScore
+	var bonusText1
+	var bonusText2
 
 	function tweenTint(obj, startColor, endColor, time, delay, callback) {
 		// check if is valid object
@@ -136,6 +143,7 @@ var operations = function(){
 		buttonList = []
 		timeElapsed = 0
 		isReady = false
+		totalScore = 0
 
 		loadSounds()
 
@@ -165,6 +173,35 @@ var operations = function(){
 			game.add.tween(button.scale).to({x:1, y:1}, 300, Phaser.Easing.Back.Out, true, 300 * (numOptions - optionIndex))
 		}
 	}
+	
+	function showPoints(text1, text2, callback) {
+		bonusText1.scale.x = 0.4; bonusText1.scale.y = 0.4
+		// bonusText2.scale.x = 0.4; bonusText2.scale.y = 0.4
+
+		bonusText1.text = text1
+		bonusText2.text = text2
+
+		correctParticle.x = bonusText1.x; correctParticle.y = bonusText2.y
+		correctParticle.start(true, 1000, null, 5);
+		var btween1 = game.add.tween(bonusText1.scale).to({x:1.2, y:1.1}, 250, Phaser.Easing.Cubic.Out, true)
+		game.add.tween(bonusText1).to({alpha:1}, 500, Phaser.Easing.Cubic.Out, true)
+		var btween2 = game.add.tween(bonusText1.scale).to({x:1, y:1}, 250, Phaser.Easing.Cubic.In)
+		btween1.chain(btween2)
+
+		// var botTween1 = game.add.tween(bonusText2.scale).to({x:1, y:1}, 300, Phaser.Easing.Cubic.In, true, 200)
+		game.add.tween(bonusText2).to({alpha:1}, 500, Phaser.Easing.Cubic.Out, true)
+		// var botTween2 = game.add.tween(bonusText2.scale).to({x:1, y:1}, 150, Phaser.Easing.Cubic.In)
+		// botTween1.chain(botTween2)
+		btween2.onComplete.add(function () {
+			// game.add.tween(bonusText1.scale).to({x:0.4, y:0.4}, 500, Phaser.Easing.Cubic.Out, true, 500)
+			game.add.tween(bonusText1).to({alpha:0}, 500, Phaser.Easing.Cubic.Out, true, 500)
+			var btween3 = game.add.tween(bonusText2).to({alpha:0}, 500, Phaser.Easing.Cubic.Out, true, 500)
+			if(callback){
+				btween3.onComplete.add(callback)
+			}
+		})
+
+	}
 
 	function onClickButton(obj) {
 		startTimer = false
@@ -186,6 +223,12 @@ var operations = function(){
 		waitingGroup.tween = game.add.tween(waitingGroup).to({alpha:1}, 200, Phaser.Easing.Cubic.Out, true)
 
 		timeElapsed = 0
+
+		//TODO sumScore test
+		showPoints("Bien!", "+10000 x 3", function () {
+			showPoints("Time Bonus", "+5000")
+		})
+		sumScore(10000)
 	}
 	
 	function createGameObjects(){
@@ -268,6 +311,7 @@ var operations = function(){
 		// game.load.image('howTo',"images/operations/how" + localization.getLanguage() + ".png")
 		// game.load.image('buttonText',"images/operations/play" + localization.getLanguage() + ".png")
 		game.load.spine("loading", "images/spine/loading/skeleton.json")
+		game.load.spine("miniEagle", "images/spine/miniYogotar/eagle.json")
 		game.load.bitmapFont('WAG', 'fonts/WAG.png', 'fonts/WAG.xml');
 
 		buttons.getImages(game)
@@ -507,10 +551,28 @@ var operations = function(){
 			waitingGroup.waitText.text = localization.getString(localizationData, "youWin")
 			waitingGroup.waitText.tint = 0x00A413
 		}else{
-			waitingGroup.waitText.text = localization.getString(localizationData, "bestLuckRe")
+			waitingGroup.waitText.text = localization.getString(localizationData, "bestLuck")
 			waitingGroup.waitText.tint = 0xA40101
 		}
 		game.add.tween(waitingGroup).to({alpha:1},300, Phaser.Easing.Cubic.Out,true)
+	}
+
+	function sumScore(points) {
+		var toX = skyBg.tilePosition.x - points * 0.05
+		game.add.tween(skyBg.tilePosition).to({x:toX * 0.5}, 3000, null, true)
+		var moveGround = game.add.tween(ground.tilePosition).to({x:toX}, 3000, null, true)
+		miniEagle.setAnimation(["RUN"])
+		moveGround.onComplete.add(function () {
+			miniEagle.setAnimation(["IDLE"])
+			var sumPoints = totalScore + points
+			scoreText.text = sumPoints
+		})
+
+		moveGround.onUpdateCallback(function (tween, percent) {
+			console.log(percent)
+			var sumPoints = totalScore + Math.round(points * percent)
+			scoreText.text = sumPoints
+		})
 	}
 
 	return {
@@ -570,7 +632,7 @@ var operations = function(){
 
 			equationGroup = game.add.group()
 			equationGroup.x = game.world.centerX
-			equationGroup.y = 150
+			equationGroup.y = 80
 			sceneGroup.add(equationGroup)
 
 			readyString = localization.getString(localizationData, "ready")
@@ -581,12 +643,13 @@ var operations = function(){
 			equationGroup.equationText = equationText
 
 			var fontStyle3 = {font: "52px Arial", fontWeight: "bold", fill: "#ffffff", align: "center"}
-			timerText = game.add.text(game.world.centerX - 30,250,"0:00", fontStyle3)
+			timerText = game.add.text(game.world.centerX - 30,game.world.height - 80,"0:00", fontStyle3)
 			timerText.anchor.setTo(0.5, 0.5)
 			sceneGroup.add(timerText)
 
 			var stopWatch = sceneGroup.create(0, 245, "atlas.operations", "stopwatch")
 			stopWatch.x = game.world.centerX - 140
+			stopWatch.y = game.world.height - 80
 			stopWatch.anchor.setTo(0.5, 0.5)
 
 			var fontStyle4 = {font: "42px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "left"}
@@ -598,6 +661,15 @@ var operations = function(){
 			differenceTimeText.alpha = 0
 			sceneGroup.add(differenceTimeText)
 
+			skyBg = game.add.tileSprite(0, 150, game.world.width, 128, "atlas.operations", "sky")
+			sceneGroup.add(skyBg)
+			ground = game.add.tileSprite(0, 278, game.world.width, 36, "atlas.operations", "ground")
+			sceneGroup.add(ground)
+			miniEagle = createSpine("miniEagle", "normal")
+			sceneGroup.add(miniEagle)
+			miniEagle.y = 278
+			miniEagle.x = game.world.centerX - 180
+
 			createGameObjects()
 			// startRound(true)
 
@@ -605,6 +677,35 @@ var operations = function(){
 			sceneGroup.add(correctParticle)
 			wrongParticle = createPart("wrong")
 			sceneGroup.add(wrongParticle)
+
+			var scoreFontStyle = {font: "32px VAGRounded", fontWeight: "bold", fill: "#ffd117", align: "left"}
+			var scoreLabel = game.add.text(game.world.centerX - 65, 175, "Score:", scoreFontStyle)
+			sceneGroup.add(scoreLabel)
+			scoreLabel.anchor.setTo(0.5, 0.5)
+			scoreLabel.stroke = '#FFFFFF';
+			scoreLabel.strokeThickness = 5;
+
+			scoreText = game.add.text(game.world.centerX + 50, 175, "0", scoreFontStyle)
+			sceneGroup.add(scoreText)
+			scoreText.anchor.setTo(0.5, 0.5)
+			scoreText.stroke = '#FFFFFF';
+			scoreText.strokeThickness = 5;
+
+			var bonusFontStyle = {font: "40px VAGRounded", fontWeight: "bold", fill: "#ff82f8", align: "center"}
+			bonusText1 = game.add.text(game.world.centerX, 220, "¡Trio Perfecto!", bonusFontStyle)
+			sceneGroup.add(bonusText1)
+			bonusText1.anchor.setTo(0.5, 0.5)
+			bonusText1.stroke = '#FFFFFF';
+			bonusText1.strokeThickness = 5;
+			bonusText1.alpha = 0
+
+			var bonusFontStyle2 = {font: "40px VAGRounded", fontWeight: "bold", fill: "#ffd117", align: "center"}
+			bonusText2 = game.add.text(game.world.centerX, 270, "+10000 x 3", bonusFontStyle2)
+			sceneGroup.add(bonusText2)
+			bonusText2.anchor.setTo(0.5, 0.5)
+			bonusText2.stroke = '#FFFFFF';
+			bonusText2.strokeThickness = 5;
+			bonusText2.alpha = 0
 
 			waitingGroup = game.add.group()
 			waitingGroup.x = game.world.centerX

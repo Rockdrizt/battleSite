@@ -710,11 +710,11 @@ var battle = function(){
 			checkAnswer({numPlayer:2})
 		})
 
-		// var cloud = createSpine("cloud", "normal", "BITE")
-		// // cloud.setAnimation(["BITE"])
-		// cloud.x = game.world.centerX
-		// cloud.y = game.world.height - 200
-		// sceneGroup.add(cloud)
+		var cloud = createSpine("cloud", "normal", "IDLE")
+		// cloud.setAnimation(["BITE"])
+		cloud.x = game.world.centerX
+		cloud.y = game.world.height - 200
+		sceneGroup.add(cloud)
 
     }
 
@@ -803,6 +803,7 @@ var battle = function(){
 		game.load.audio('battleSong', soundsPath + 'songs/battleSong.mp3');
 		game.load.spine(avatar1, "images/spines/"+directory1+"/"+avatar1+".json")
 		game.load.spine(avatar2, "images/spines/"+directory2+"/"+avatar2+".json")
+		game.load.spine("cloud", "images/spines/nube/monkey.json")
 		game.load.spritesheet('startPower', 'images/battle/START.png', 200, 200, 11)
 		game.load.spritesheet('idlePower', 'images/battle/IDLE.png', 200, 200, 11)
 		game.load.spritesheet('confeti', 'images/battle/confeti.png', 64, 64, 6)

@@ -10,8 +10,17 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
+	"filename": "ground",
+	"frame": {"x":363,"y":131,"w":78,"h":36},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":78,"h":36},
+	"sourceSize": {"w":78,"h":36},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
 	"filename": "sign",
-	"frame": {"x":363,"y":67,"w":68,"h":54},
+	"frame": {"x":192,"y":142,"w":68,"h":54},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":68,"h":54},
@@ -19,8 +28,17 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
+	"filename": "sky",
+	"frame": {"x":363,"y":1,"w":78,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":78,"h":128},
+	"sourceSize": {"w":78,"h":128},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
 	"filename": "star",
-	"frame": {"x":363,"y":1,"w":64,"h":64},
+	"frame": {"x":1,"y":142,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
@@ -29,7 +47,7 @@
 },
 {
 	"filename": "stopwatch",
-	"frame": {"x":433,"y":67,"w":57,"h":64},
+	"frame": {"x":133,"y":142,"w":57,"h":64},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":4,"y":0,"w":57,"h":64},
@@ -38,7 +56,7 @@
 },
 {
 	"filename": "wrong",
-	"frame": {"x":429,"y":1,"w":64,"h":64},
+	"frame": {"x":67,"y":142,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
@@ -50,8 +68,8 @@
 	"version": "1.0",
 	"image": "atlas.png",
 	"format": "RGBA8888",
-	"size": {"w":494,"h":141},
+	"size": {"w":442,"h":207},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:7a96cf2b57f29a308e82a2471ec8e99e:ed5782021d1c9d3f11e58b8a585ae52b:cbce6b53f0f49e0bf15173c25c41f876$"
+	"smartupdate": "$TexturePacker:SmartUpdate:6333f5ca4148ba22b90a82b2fe544182:fa95b7ed92d57341e853abe4a12dfdcd:cbce6b53f0f49e0bf15173c25c41f876$"
 }
 }
