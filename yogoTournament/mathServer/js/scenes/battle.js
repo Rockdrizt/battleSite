@@ -223,6 +223,10 @@ var battle = function(){
 	var model
     var tutorial,mano;
 	var questionCounter
+	var timeElapsed
+	var battleTime
+	var startTimer
+	var timerText
 
     function loadSounds(){
 
@@ -262,6 +266,8 @@ var battle = function(){
         killedMonsters = 0
 		sumXp = 0
 		questionCounter = 1
+		timeElapsed = 0
+		startTimer = false
         
         sceneGroup.alpha = 0
         game.add.tween(sceneGroup).to({alpha:1},400, Phaser.Easing.Cubic.Out,true);
@@ -412,7 +418,7 @@ var battle = function(){
 		fromPlayer.proyectile.followObj.y = -160 * fromPlayer.scale.x
 		// game.add.tween(fromPlayer.proyectile.followObj).to({x:0}, 2000, Phaser.Easing.Cubic.In, true)
 
-		var fromScale = fromPlayer.numPlayer === 1 ? 1 : 0.6
+		var fromScale = 1//fromPlayer.numPlayer === 1 ? 1 : 0.6
 		// console.log("fromScale", fromScale)
 		zoomCamera((2 - fromScale) * 1.5, 4000)
 		game.add.tween(alphaMask).to({alpha:0.7}, 1000, Phaser.Easing.Cubic.Out, true)
@@ -989,6 +995,7 @@ var battle = function(){
 			sound.play("comboSound")
 		})
 		tweenReady4.onComplete.add(function(){
+			startTimer = true
 			startRound()
 			// checkPowerBars()
 		})
@@ -1636,6 +1643,15 @@ var battle = function(){
 		pointsText.setShadow(3, 3, 'rgba(0,0,0,0.5)', 0);
 
 	}
+	
+	function createTimer() {
+		var timerGroup = game.add.group()
+		hudGroup.add(timerGroup)
+
+		var fontStyle = {font: "78px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
+		timerText = game.add.text(game.world.centerX, 500, "5:00", fontStyle)
+		timerGroup.add(timerGroup)
+	}
 
     return {
         assets: assets,
@@ -1667,11 +1683,31 @@ var battle = function(){
 			assets.images.push(floorObj)
 			assets.images.push(bgObg)
 		},
+		update:function () {
+			if(startTimer) {
+				timeElapsed += game.time.elapsedMS
+				var timeRemaining = battleTime - timeElapsed
+				console.log(timeRemaining)
+				if(timeRemaining > 0)
+				{
+					var minutes = Math.floor((timeRemaining * 0.001) / 60)
+					var seconds = Math.floor(timeRemaining * 0.001) % 60
+					// var decimals = Math.floor(timeRemaining * 0.01) % 10
+					// var centimals = (Math.floor(timeElapsed / 10) % 10)
+					// elapsedSeconds = Math.round(elapsedSeconds * 100) / 100
+					var result = (seconds < 10) ? "0" + seconds : seconds;
+					// result += ":" + decimals + centimals
+					timerText.text = minutes + ":" + result
+				}
+
+			}
+		},
         create: function(event){
             
 
         	// game.camera.bounds = new Phaser.Rectangle(-200,0,game.world.width + 200,game.world.height)
 			// console.log(game.camera.bounds)
+			battleTime = server ? server.currentData.time : 300000
         	sceneGroup = game.add.group();
             //yogomeGames.mixpanelCall("enterGame",gameIndex);
 
@@ -1703,7 +1739,8 @@ var battle = function(){
 			var uiGroup = game.add.group()
 			hudGroup.add(uiGroup)
 			hudGroup.uiGroup = uiGroup
-
+			
+			createTimer()
 			// createCaptured()
 
 			var winGroup = game.add.group()
