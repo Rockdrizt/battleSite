@@ -303,11 +303,12 @@ var operations = function(){
 		clientData = (cliente)&&(cliente.currentData) ? cliente.currentData : {
 			operand1 : 88,
 			operand2 : 8,
-			opedator : "/",
+			operator : "/",
 			result:10,
 			correctAnswer : 10,
 			type :"yei"
 		}
+		console.log(clientData)
 
 		addButtons()
 		generateEquation()
@@ -346,10 +347,10 @@ var operations = function(){
 	}
 
 	function generateEquation(){
-		if(clientData.opedator === "/"){
+		if(clientData.operator === "/"){
 			equationGroup.equationText.text = clientData.operand2 + "ƒ" + clientData.operand1 + " =" + clientData.result
 		}else{
-			equationGroup.equationText.text = clientData.operand1 + clientData.opedator + clientData.operand2 + "=" + clientData.result
+			equationGroup.equationText.text = clientData.operand1 + clientData.operator + clientData.operand2 + "=" + clientData.result
 		}
 
 	}

@@ -41,7 +41,7 @@ var cleanArray = function(arr){
  * @class
  * @summary The class server is use to start a new game and init the reading of firebase
  * @public
- * @param {int} inLevel Level of the game. It could be {1|2|3} 1-Basic, 2- Medium, 3-Advanced 
+ * @param {int} inLevel Level of the game. It could be {1|2|3} 1-Basic, 2- Medium, 3-Advanced
  */
 // function Server(inLevel){
 function Server(){
@@ -168,6 +168,8 @@ function Server(){
 			case 3://blue
 				return HEALTH_BY_HIT;
 				break;
+			default:
+				return -1*DAMAGE_BY_HIT
 		}
 	}
 
@@ -187,6 +189,7 @@ function Server(){
 
 		var damage =checkDamage();
 
+		console.log(correctAnswer, p1Value, p2Value, "answers")
 		if(p1Value === p2Value && p1Value === correctAnswer){
 			timeDifference = Math.abs(p1Time - p2Time)
 			// console.log(timeDifference)
@@ -250,174 +253,28 @@ function Server(){
 	}
 
 	function generateQuestion(){
-		var operand1;
-		var operand2;
-		var result = "?";
-		var opedator = Math.floor((Math.random() * 3) + 1);
-		
-		switch(level){
-			case 2://Medium
-				MAX_OPERAND_VALUE = 500;
-				switch(opedator){
-					case 2: // -
-						opedator = "-";
-						operand1= Math.floor((Math.random() * 399 ) )+101;
-						operand2= Math.floor((Math.random() * 399 ) )+101;
-                        if(operand1< operand2){
-                            var aux = operand1;
-                            operand1 = operand2;
-                            operand2 = aux;
-                        }
-                        correctAnswer = operand1 -operand2;
-						break;
-					case 3: // x
-						opedator = "x";
-						operand1= Math.floor((Math.random() * 10 ) + 12 );
-						operand2= Math.floor((Math.random() * 10 ) + 12 );
-						correctAnswer = operand1 * operand2;
-						break;
-					case 4: // /
-						// operand1 = dividendo, operand2 = divisor
-						opedator = "/";
-						operand1= Math.floor((Math.random() * 10 ) + 12 );
-						operand2= Math.floor((Math.random() * 10 ) + 12);
-						var aux =  operand1 * operand2;
-						correctAnswer = operand1;
-						operand1 = aux;
-						break;
-					case 1: // +
-					default:
-						opedator = "+";
-						operand1= Math.floor((Math.random() * 250) + 1);
-						operand2= Math.floor((Math.random() * 250) + 1);
-						correctAnswer = operand1 +operand2;
-						break;
-				}
-				break;
-			case 3://Advance
-				MAX_OPERAND_VALUE = 999;
-				switch(opedator){
-					case 2: // -
-						opedator = "-";
-						operand1= Math.floor((Math.random() * 498 ) ) + 501;
-						operand2= Math.floor((Math.random() * 498 ) ) + 501;
-                        if(operand1< operand2){
-                            var aux = operand1;
-                            operand1 = operand2;
-                            operand2 = aux;
-                        }
-                        correctAnswer = operand1 -operand2;
-						break;
-					case 3: // x
-						opedator = "x";
-						operand1= Math.floor((Math.random() * 10 ) + 22 );
-						operand2= Math.floor((Math.random() * 10 ) + 21 );
-						correctAnswer = operand1 * operand2;
-						break;
-					case 4: // /
-						// operand1 = dividendo, operand2 = divisor
-						opedator = "/";
-						operand1= Math.floor((Math.random() * 10 ) + 22);
-						operand2= Math.floor((Math.random() * 10 ) + 21);
-						var aux =  operand1 * operand2;
-						correctAnswer = operand1;
-						operand1 = aux;
-						break;
-					case 1: // +
-					default:
-						opedator = "+";
-						operand1= Math.floor((Math.random() * 500) + 1);
-						operand2= Math.floor((Math.random() * 499) + 1);
-						correctAnswer = operand1 +operand2;
-						break;
-				}
-				break;
-			case 1://Basic
-				MAX_OPERAND_VALUE = 100;
-				switch(opedator){
-					case 2: // -
-						opedator = "-";
-						operand1= Math.floor((Math.random() * 99 ) + 1 );
-						operand2= Math.floor((Math.random() * 99 ) + 1);
-						if(operand1< operand2){
-							var aux = operand1;
-							operand1 = operand2;
-							operand2 = aux;
-						}
-						correctAnswer = operand1 -operand2;
-						break;
-					case 3: // x
-						opedator = "x";
-						operand1= Math.floor((Math.random() * 9 ) + 1 );
-						operand2= Math.floor((Math.random() * 11 ) + 1);
-						correctAnswer = operand1 * operand2;
-						break;
-					case 4: // /
-						// operand1 = dividendo, operand2 = divisor
-						opedator = "/";
-						operand1= Math.floor((Math.random() * 11 ) + 1 );
-						operand2= Math.floor((Math.random() * 9 ) + 1);
-						var aux =  operand1 * operand2;
-						correctAnswer = operand1;
-						operand1 = aux;
-						break;
-					case 1: // +
-					default:
-						opedator = "+";
-						operand1= Math.floor((Math.random() * 100) + 1);
-						operand2= Math.floor((Math.random() * 100) + 1);
-						correctAnswer = operand1 +operand2;
-						break;
-				}
-				var isEcuation = Math.floor((Math.random() * 2) + 1);
-				if(isEcuation===1){
-					result =correctAnswer;
-					correctAnswer = operand2;
-					operand2 = "?";
-				}
-				break;
-			case 4://kinder
-            default:
-                MAX_OPERAND_VALUE = 10;
-                switch(opedator){
-                    case 2: // -
-					case 3:
-                        opedator = "-";
-                        operand1= Math.floor((Math.random() * 9 ) + 1 );
-                        operand2= Math.floor((Math.random() * 9 ) + 1);
-                        if(operand1< operand2){
-                            var aux = operand1;
-                            operand1 = operand2;
-                            operand2 = aux;
-                        }
-                        correctAnswer = operand1 -operand2;
-                        break;
-                    case 1: // +
-					case 4:
-                    default:
-                        opedator = "+";
-                        operand1= Math.floor((Math.random() * 10) + 1);
-                        operand2= Math.floor((Math.random() * 10) + 1);
-                        correctAnswer = operand1 +operand2;
-                        break;
-                }
-		}
-		// operand1= Math.floor((Math.random() * MAX_OPERAND_VALUE) + 1);
-		// operand2= Math.floor((Math.random() * MAX_OPERAND_VALUE) + 1);
-		// correctAnswer = operand1 +operand2;
+
+		var operation = operationGenerator.generate()
+		correctAnswer = operation.correctAnswer
 
 		var possibleAnswers = [correctAnswer];
-        var percentage = 0;
-        percentage = Math.floor(correctAnswer * 0.25)+1;
+		// for(var i = 0; i< NUMBER_OF_FAKE_ANSWERS; i++){
+		// 	var n = correctAnswer;
+		// 	while(possibleAnswers.includes(n)){
+		//        var isSuma = Math.floor((Math.random() * 2) + 1);
+		//        if(isSuma ===1 )
+		// 			n = correctAnswer + Math.floor(Math.random() * percentage)+Math.floor(Math.random() * 2);
+		// 		else
+		//            n = correctAnswer - Math.floor(Math.random() * percentage)-Math.floor(Math.random() * 2);
+		// 	}
+		// 	possibleAnswers.push(n);
+		// }
+		var negativeOrPositive = Math.round(Math.random()) * 2 - 1;
 		for(var i = 0; i< NUMBER_OF_FAKE_ANSWERS; i++){
-			var n = correctAnswer;
-			while(possibleAnswers.includes(n)){
-                var isSuma = Math.floor((Math.random() * 2) + 1);
-                if(isSuma ===1 )
-					n = correctAnswer + Math.floor(Math.random() * percentage)+Math.floor(Math.random() * 2);
-				else
-                    n = correctAnswer - Math.floor(Math.random() * percentage)-Math.floor(Math.random() * 2);
-			}
+			var diff = Math.floor(correctAnswer / 10) > 1 ? 10 : 1
+			// 	while(possibleAnswers.includes(n)){
+			negativeOrPositive = negativeOrPositive * -1
+			var n = correctAnswer + diff * negativeOrPositive
 			possibleAnswers.push(n);
 		}
 
@@ -425,36 +282,28 @@ function Server(){
 		valores.p1answer = false;
 		valores.p2answer = false;
 
-		typeQuestion= Math.floor((Math.random() * 100) + 1);
-		if(valores.p1.life < INITIAL_LIFE && valores.p2.life < INITIAL_LIFE){
-			typeQuestion= Math.floor((Math.random() * 100) + 1);
-			if(typeQuestion<= 20){
-				typeQuestion= 2; //red
-			}else if(typeQuestion <= 40){
-				typeQuestion=3; //blue
-			}else{
-				typeQuestion= 1; //green
-			}
-		}else{
-			if(typeQuestion<= 20){
-				typeQuestion= 2; //red
-			}else {
-				typeQuestion=1; //green
-			}
-		}
+		// typeQuestion= Math.floor((Math.random() * 100) + 1);
+		// if(valores.p1.life < INITIAL_LIFE && valores.p2.life < INITIAL_LIFE){
+		// 	typeQuestion= Math.floor((Math.random() * 100) + 1);
+		// 	if(typeQuestion<= 20){
+		// 		typeQuestion= 2; //red
+		// 	}else if(typeQuestion <= 40){
+		// 		typeQuestion=3; //blue
+		// 	}else{
+		// 		typeQuestion= 1; //green
+		// 	}
+		// }else{
+		// 	if(typeQuestion<= 20){
+		// 		typeQuestion= 2; //red
+		// 	}else {
+		// 		typeQuestion=1; //green
+		// 	}
+		// }
 
-		var data = {
-			operand1 : operand1,
-			operand2 : operand2,
-			opedator : opedator,
-			result : result,
-			correctAnswer : correctAnswer,
-			type :typeQuestion
-		}
-		valores.data = data;
+		valores.data = operation;
 		refIdGame.child("data").set(valores.data);
 		refIdGame.child("possibleAnswers").set(valores.possibleAnswers);
-		self.fireEvent('afterGenerateQuestion',[data]);
+		self.fireEvent('afterGenerateQuestion',[operation]);
 	}
 	this.generateQuestion = generateQuestion;
 
@@ -466,11 +315,12 @@ function Server(){
 		self.p1Ready = false;
 		self.p2Ready = false;
 		console.log(self.events)
+		operationGenerator.setConfiguration()
 
 		var promise = makeid(currentId);
-        promise.then(function(id){
+		promise.then(function(id){
 
-        	id_game = id;
+			id_game = id;
 			level = inLevel
 			var serverReady = false;
 			valores = {
@@ -484,106 +334,109 @@ function Server(){
 				data:false,
 				gameReady:false,
 				gameEnded:false,
-				retry:false
+				retry:false,
+				time:300000
 			};
 			refIdGame= database.ref(id_game);
 			refIdGame.set(valores);
 
-            if(!currentId) {
+			if(!currentId) {
 				if(onStart) onStart()
 
-                var refP1 = database.ref(id_game + "/p1");
-                refP1.on('value', function (snapshot) {
-                    if (serverReady) {
-                        if (!snapshot.val()) {
-                            self.fireEvent('onPlayerDisconnect', [{numPlayer: 1, playerWinner: valores.p1}]);
-                        } else if (!valores.p1) {
-                            var p1 = snapshot.toJSON();
-                            valores.p1 = p1;
-                            self.fireEvent('onInitPlayer', [{numPlayer: 1, player: valores.p1}]);
-                            if (valores.p2) {
-                                self.currentData = valores
-                                self.fireEvent('onPlayersReady', [valores]);
-                            }
-                        }
-                    }
+				var refP1 = database.ref(id_game + "/p1");
+				refP1.on('value', function (snapshot) {
+					if (serverReady) {
+						if (!snapshot.val()) {
+							self.fireEvent('onPlayerDisconnect', [{numPlayer: 1, playerWinner: valores.p1}]);
+						} else if (!valores.p1) {
+							var p1 = snapshot.toJSON();
+							valores.p1 = p1;
+							self.fireEvent('onInitPlayer', [{numPlayer: 1, player: valores.p1}]);
+							if (valores.p2) {
+								self.currentData = valores
+								self.fireEvent('onPlayersReady', [valores]);
+							}
+						}
+					}
 
-                });
+				});
 
-                var refP2 = database.ref(id_game + "/p2");
-                refP2.on('value', function (snapshot) {
-                    if (serverReady) {
-                        if (!snapshot.val()) {
-                            self.fireEvent('onPlayerDisconnect', [{numPlayer: 2, playerWinner: valores.p2}]);
-                        } else if (!valores.p2) {
-                            var p2 = snapshot.toJSON();
-                            valores.p2 = p2;
-                            self.fireEvent('onInitPlayer', [{numPlayer: 2, player: valores.p2}]);
-                            if (valores.p1) {
-                                self.currentData = valores
-                                self.fireEvent('onPlayersReady', [valores]);
-                            }
-                        }
-                    }
-                });
+				var refP2 = database.ref(id_game + "/p2");
+				refP2.on('value', function (snapshot) {
+					if (serverReady) {
+						if (!snapshot.val()) {
+							self.fireEvent('onPlayerDisconnect', [{numPlayer: 2, playerWinner: valores.p2}]);
+						} else if (!valores.p2) {
+							var p2 = snapshot.toJSON();
+							valores.p2 = p2;
+							self.fireEvent('onInitPlayer', [{numPlayer: 2, player: valores.p2}]);
+							if (valores.p1) {
+								self.currentData = valores
+								self.fireEvent('onPlayersReady', [valores]);
+							}
+						}
+					}
+				});
 
-                var readyP1 = database.ref(id_game + "/p1/ready");
-                readyP1.on('value', function (snapshot) {
-                    if (serverReady) {
-                        var ready = snapshot.val()
-                        // console.log(ready)
-                        if (ready) {
-                            self.p1Ready = true;
-                            if (self.p2Ready) {
-                            	console.log("START GAME INIT")
-                                self.startGame()
-                            }
-                        }
-                    }
-                });
+				var readyP1 = database.ref(id_game + "/p1/ready");
+				readyP1.on('value', function (snapshot) {
+					if (serverReady) {
+						var ready = snapshot.val()
+						// console.log(ready)
+						if (ready) {
+							self.p1Ready = true;
+							if (self.p2Ready) {
+								console.log("START GAME INIT")
+								self.startGame()
+							}
+						}
+					}
+				});
 
-                var readyP2 = database.ref(id_game + "/p2/ready");
-                readyP2.on('value', function (snapshot) {
-                    if (serverReady) {
-                        var ready = snapshot.val()
-                        // console.log(ready)
-                        if (ready) {
-                            self.p2Ready = true;
-                            if (self.p1Ready) {
-                                self.startGame()
-                            }
-                        }
-                    }
-                });
+				var readyP2 = database.ref(id_game + "/p2/ready");
+				readyP2.on('value', function (snapshot) {
+					if (serverReady) {
+						var ready = snapshot.val()
+						// console.log(ready)
+						if (ready) {
+							self.p2Ready = true;
+							if (self.p1Ready) {
+								self.startGame()
+							}
+						}
+					}
+				});
 
-                var p1answer = database.ref(id_game + "/p1answer");
-                p1answer.on('value', function (snapshot) {
-                    var p1answer = snapshot.toJSON();
-                    valores.p1answer = p1answer;
-                    if (valores.p2answer) {
-                        checkResults();
-                    }
-                });
+				var p1answer = database.ref(id_game + "/p1answer");
+				p1answer.on('value', function (snapshot) {
+					var p1answer = snapshot.toJSON();
+					valores.p1answer = p1answer;
+					console.log("answer", p1answer)
+					if (valores.p2answer) {
+						checkResults();
+					}
+				});
 
-                var p2answer = database.ref(id_game + "/p2answer");
-                p2answer.on('value', function (snapshot) {
-                    var p2answer = snapshot.toJSON();
-                    valores.p2answer = p2answer;
-                    if (valores.p1answer) {
-                        checkResults();
-                    }
-                });
+				var p2answer = database.ref(id_game + "/p2answer");
+				p2answer.on('value', function (snapshot) {
+					var p2answer = snapshot.toJSON();
+					valores.p2answer = p2answer;
+					console.log("answer", p1answer)
+					if (valores.p1answer) {
+						checkResults();
+					}
+				});
 
-                //Borrando los datos al abandonar la partida
-                window.onbeforeunload = function () {
-                    // if(!id_game.includes("egs"))
-                    refIdGame.remove();
-                    // else
-                    // 	self.retry();
-                };
-                serverReady = true;
-            }
-        });
+				//Borrando los datos al abandonar la partida
+				window.onbeforeunload = function () {
+					// if(!id_game.includes("egs"))
+					refIdGame.remove();
+					// else
+					// 	self.retry();
+				};
+				serverReady = true;
+			}
+		});
 	};
 
 	this.setGameReady = function (value) {
@@ -608,7 +461,7 @@ function Server(){
 		// refIdGame.remove();
 
 	}
-	
+
 	this.setGameEnded = function (numPlayerWinner) {
 		var data = {winner:numPlayerWinner}
 		refIdGame.child("gameEnded").set(data);

@@ -37,8 +37,8 @@ var operationGenerator = function () {
 				{operand1X: 1, operand2X: 1, minRange: 50, maxRange: 90, paramToAnswer:OPERATION_PARAMS.operand2},
 			],
 			DIV: [
-				{operand1X: 2, operand2X: 1, minRange:1, maxRange: 9, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 2, operand2X: 1, minRange:1, maxRange: 9, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 1, operand2X: 1, minRange:1, maxRange: 9, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 1, operand2X: 1, minRange:1, maxRange: 9, paramToAnswer:OPERATION_PARAMS.operand2},
 			]
 		}
 	}
@@ -80,6 +80,7 @@ var operationGenerator = function () {
 		switch (operator){
 			case "SUM":
 				answer = (operand1 + operand2)
+				break
 			case "SUB":
 				if(operand1 < operand2){
 					var aux = operand2
@@ -87,8 +88,10 @@ var operationGenerator = function () {
 					operand1 = aux
 				}
 				answer = (operand1 - operand2)
+				break
 			case "MUL":
 				answer = (operand1 * operand2)
+				break
 			case "DIV":
 				if(operand1 < operand2){
 					var aux = operand1
@@ -100,6 +103,7 @@ var operationGenerator = function () {
 					operand1 = operand1 + (operand2 - diff)
 				console.log(operand1, operand2, "DIV")
 				answer = (operand1 / operand2)
+				break
 		}
 
 		operation.operand1 = operand1
@@ -166,6 +170,7 @@ var operationGenerator = function () {
 		if(rule.operand1X) {
 			var maxOperand1 = Math.pow(10, rule.operand1X) - 1
 			var minOperand1 = Math.pow(10, rule.operand1X - 1) - 1
+			minOperand1 = minOperand1 < 1 ? 1 : minOperand1
 			console.log(maxOperand1, minOperand1)
 			operand1 = Math.floor(Math.random() * (maxOperand1 - minOperand1)) + minOperand1
 		}else if(rule.operand1Const){
@@ -188,8 +193,39 @@ var operationGenerator = function () {
 			return
 		}
 
-		return checkRule(rule, operand1, operand2, operator)
+		var operation =  checkRule(rule, operand1, operand2, operator)
 
+		switch(rule.paramToAnswer){
+			case (OPERATION_PARAMS.result):
+				operation.correctAnswer = operation.result
+				operation.result = "?"
+				break
+			case OPERATION_PARAMS.operand1:
+				operation.correctAnswer = operation.operand1
+				operation.operand1 = "?"
+				break
+			case OPERATION_PARAMS.operand2:
+				operation.correctAnswer = operation.operand2
+				operation.operand2 = "?"
+				break
+		}
+
+		switch(operator){
+			case "SUM":
+				operation.operator = "+"
+				break
+			case "SUB":
+				operation.operator = "-"
+				break
+			case "MUL":
+				operation.operator = "x"
+				break
+			case "DIV":
+				operation.operator = "/"
+				break
+		}
+
+		return operation
 
 	}
 
@@ -205,61 +241,19 @@ var operationGenerator = function () {
 
 		counterOperators[operator]++
 
-		var correctAnswer, operand1, operand2, symbol
-		console.log( numPerOperator, operator, operationsPerRule, ruleNum)
-		// return rule
-		switch(operator){
-			case "SUB": // -
-				symbol = "-";
-				operand1= Phaser.rnd.integerInRange(range.min, range.max);
-				operand2= Phaser.rnd.integerInRange(range.min, range.max);
-				if(operand1< operand2){
-					var aux = operand1;
-					operand1 = operand2;
-					operand2 = aux;
-				}
-				correctAnswer = operand1 - operand2;
-				break;
-			case "MUL": // x
-				correctAnswer = Phaser.rnd.integerInRange(range.min, range.max);
-				symbol = "x";
-				var multiplies = getMultiplies(correctAnswer)
-				operand1= multiplies[Phaser.rnd.integerInRange(0, multiplies.length - 1)]
-				operand2= correctAnswer / operand1
-				break;
-			case "DIV": // /
-				// operand1 = dividendo, operand2 = divisor
-				symbol = "/";
-				operand2= Phaser.rnd.integerInRange(range.min, range.max);
-				operand1= Math.floor((Math.random() * 10 ) + 12);
-				var aux =  operand1 * operand2;
-				correctAnswer = operand1;
-				operand1 = aux;
-				break;
-			case "SUM": // +
-			default:
-				symbol = "+";
-				var maxOperand1 = rule.operand1X ? rule.operand1X * 10 - 1 : rule.operand1Const
-				var maxOperand2 = rule.operand2X
-				operand1= Phaser.rnd.integerInRange(range.min, range.max - 1);
-				operand2= Phaser.rnd.integerInRange(1, range.max - operand1 + 1);
-				correctAnswer = operand1 + operand2;
-				break;
-		}
-
-		return {opedator:symbol, operand1:operand1, operand2:operand2, correctAnswer:correctAnswer}
+		return getOperationRule(rule, operator)
 	}
 
 //numOfOperations is the theorical number of minimal operations per level based on time
 	function setConfiguration(ruleSet, numOfOperations) {
 		ruleSet = RULES_SET.EASY
 		currentRound = 0
-		numOfOperations = numOfOperations
+		numOfOperations = numOfOperations || 32
 		currentOperator = ruleSet
 		setOperators()
 		numPerOperator = Math.floor(numOfOperations / operatorsList.length)
 
-		return getOperationRule(ruleSet.DIV[1], "DIV")
+		// return getOperationRule(ruleSet.DIV[1], "DIV")
 	}
 
 	return{

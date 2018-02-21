@@ -132,7 +132,7 @@ var battle = function(){
     var NUM_OPTIONS = 3
     var MAX_HP = 100
 	var WIDTH_DISTANCE = 110
-	var HP_BAR_WIDTH = 350 //195
+	var HP_BAR_WIDTH = 335 //195
 	var DATA_CHAR_PATH = "data/characters/"
 	var ELEMENT_MULTIPLIERS = {
 		"fire": {
@@ -211,7 +211,7 @@ var battle = function(){
     var players
     var killedMonsters
 	var alphaMask
-	var ready, go
+	var roundGroup, go
 	var hudGroup
 	var frontGroup
 	var tapGroup
@@ -226,7 +226,8 @@ var battle = function(){
 	var timeElapsed
 	var battleTime
 	var startTimer
-	var timerText
+	var timerGroup
+	var equationGroup
 
     function loadSounds(){
 
@@ -408,7 +409,8 @@ var battle = function(){
 		// console.log(fromPlayer.multiplier)
     	game.add.tween(fromPlayer.hpBar).to({alpha:0}, 400, Phaser.Easing.Cubic.Out, true)
 		game.add.tween(targetPlayer.hpBar).to({alpha:0}, 400, Phaser.Easing.Cubic.Out, true)
-        
+		game.add.tween(timerGroup).to({alpha:0}, 400, Phaser.Easing.Cubic.Out, true)
+
     	fromPlayer.setAnimation(["CHARGE"], false)
 		fromPlayer.spine.speed = 0.5
 		fromPlayer.proyectile.startPower.alpha = 1
@@ -512,7 +514,7 @@ var battle = function(){
 		// card.scale.setTo(0.8, 0.8)
 		captureGroup.add(card)
 
-		var fontStyle = {font: "78px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
+		var fontStyle = {font: "78px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", align: "center"}
 		var capturedText = game.add.text(0, -200, localization.getString(localizationData, "newCard"), fontStyle)
 		capturedText.stroke = '#2a2a2a';
 		capturedText.strokeThickness = 12;
@@ -561,6 +563,7 @@ var battle = function(){
 					proyectile.idlePower.rotation = 0
 					game.add.tween(players[0].hpBar).to({alpha:1}, 500, Phaser.Easing.Cubic.Out, true)
 					game.add.tween(players[1].hpBar).to({alpha:1}, 500, Phaser.Easing.Cubic.Out, true)
+					game.add.tween(timerGroup).to({alpha:1}, 500, Phaser.Easing.Cubic.Out, true)
 
 					// if(from.numPlayer === 1){
 					// 	var index = percentage < 0.5 ? "WEAK" : percentage < 0.8 ? "GOOD" : "PERFECT"
@@ -574,7 +577,7 @@ var battle = function(){
 						addNumberPart(target, -combinedDamage, "#FF0000", -100)
 
 						if(target.hpBar.health > 0)
-							game.time.events.add(1000, startRound)
+							game.time.events.add(1000, showReadyGo)
 						else{
 							defeatPlayer(target)
 							game.time.events.add(3000, winPlayer, null, from)
@@ -606,30 +609,39 @@ var battle = function(){
 		hpGroup.scale.setTo(0.8 * scale, 0.8)
 		hpGroup.health = MAX_HP
 
-		var rectBg = game.add.graphics()
-		rectBg.beginFill(0x000000)
-		rectBg.alpha = 0.4
-		rectBg.drawRect(0,0, 390, 50)
-		rectBg.endFill()
-		rectBg.x = -195
-		rectBg.y = -25 - 5
-		hpGroup.add(rectBg)
+		// var rectBg = game.add.graphics()
+		// rectBg.beginFill(0x000000)
+		// rectBg.alpha = 0.4
+		// rectBg.drawRect(0,0, 390, 50)
+		// rectBg.endFill()
+		// rectBg.x = -195
+		// rectBg.y = -25 - 5
+		// hpGroup.add(rectBg)
 
-		var hpBg = sceneGroup.create(-150, -6, 'atlas.battle', 'energy')
-		hpBg.anchor.setTo(0, 0.5)
-		hpBg.scale.setTo(0.9, 0.9)
-		hpBg.width = HP_BAR_WIDTH
+		// var hpBg = sceneGroup.create(-150, -6, 'atlas.battle', 'energy')
+		// hpBg.anchor.setTo(0, 0.5)
+		// hpBg.scale.setTo(0.9, 0.9)
 
-		hpGroup.add(hpBg)
-
-		var container = hpGroup.create(0, -22, 'atlas.battle', 'lifebar')
+		var container = hpGroup.create(0, -34, 'atlas.battle', 'container_health')
 		container.anchor.setTo(0.5, 0.5)
-		container.scale.setTo(0.8, 0.8)
 
-		var fontStyle = {font: "30px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
+		var hpBg = game.add.graphics()
+		hpBg.beginFill(0x0eff09)
+		hpBg.drawRoundedRect(0,0, HP_BAR_WIDTH, 30)
+		hpBg.endFill()
+		hpGroup.add(hpBg)
+		hpBg.y = -34
+		hpBg.x = -HP_BAR_WIDTH * 0.5
+
+		var heart = hpGroup.create(-170, -20, 'atlas.battle', 'heart')
+		heart.anchor.setTo(0.5, 0.5)
+
+		// container.scale.setTo(0.8, 0.8)
+
+		var fontStyle = {font: "30px Luckiest Guy", fontWeight: "bold", fill: "#871b87", align: "center"}
 		var healthText = new Phaser.Text(game, 0, 5, "100/100", fontStyle)
-		healthText.x = -80
-		healthText.y = -50
+		healthText.x = -66
+		healthText.y = -58
 		healthText.anchor.setTo(0.5,0.5)
 		healthText.scale.x = scale
 		hpGroup.add(healthText)
@@ -649,19 +661,36 @@ var battle = function(){
 			this.health = MAX_HP
 		}
 
-		var fontStyle2 = {font: "28px VAGRounded", fontWeight: "bold", fill: "#ffffff", boundsAlignH: "left"}
+		var containerName = hpGroup.create(0, 60, 'atlas.battle', 'container_name')
+		containerName.anchor.setTo(0.5, 0.5)
+
+		var fontStyle2 = {font: "28px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", boundsAlignH: "left"}
 		var name = new Phaser.Text(game, 0, 5, "", fontStyle2)
 		name.stroke = '#2a2a2a';
 		name.strokeThickness = 6;
 		//name.x = HP_BAR_WIDTH*0.1
 		//name.y = -45
-		name.x = -120
-		name.y = -3
+		name.x = -95
+		name.y = -18
 		name.anchor.setTo(anchorX,0.5)
 		name.scale.x = scale
 		hpGroup.add(name)
 		hpGroup.name = name
 		name.setTextBounds(0, 0, 150, 0);
+
+		var fontStyle3 = {font: "45px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", boundsAlignH: "left"}
+		var wins = new Phaser.Text(game, 0, 58, "Wins: 0", fontStyle3)
+		hpGroup.add(wins)
+		wins.scale.x = scale
+		wins.setTextBounds(0, 0, 150, 0);
+		wins.anchor.setTo(0.5,0.5)
+		hpGroup.winCounter = 0
+
+		hpGroup.addWin = function () {
+			this.winCounter++
+			wins.text = "Wins: " + this.winCounter
+
+		}
 
 		return hpGroup
 	}
@@ -789,16 +818,18 @@ var battle = function(){
 			checkAnswer({numPlayer:1, timeDifference:200, answers:{p1:answer1, p2:answer2}})
 		})
 		//
-		// var input2 = game.add.graphics()
-		// input2.beginFill(0xffffff)
-		// input2.drawCircle(0,0, 200)
-		// input2.alpha = 0
-		// input2.endFill()
-		// player2.add(input2)
-		// input2.inputEnabled = true
-		// input2.events.onInputDown.add(function () {
-		// 	playerAttack(player2, player1, createProyectile, "proyectile")
-		// })
+		var input2 = game.add.graphics()
+		input2.beginFill(0xffffff)
+		input2.drawCircle(0,0, 200)
+		input2.alpha = 0
+		input2.endFill()
+		players[1].add(input2)
+		input2.inputEnabled = true
+		input2.events.onInputDown.add(function () {
+			var answer1 = {value:100, time:3450}
+			var answer2 = {value:100, time:3450}
+			checkAnswer({numPlayer:2, timeDifference:200, answers:{p1:answer1, p2:answer2}})
+		})
 
 		// var cloud = createSpine("cloud", "normal", "BITE")
 		// // cloud.setAnimation(["BITE"])
@@ -844,29 +875,38 @@ var battle = function(){
 
     }
 
-    function stopGame(tag){
+	function stopGame(){
 
+		//objectsGroup.timer.pause()
+		//timer.pause()
+		// sound.play("uuh")
+		console.log("stopGame")
+		players[0].hpBar.resetHealth()
+		players[1].hpBar.resetHealth()
 		sound.stopAll()
-		battleSong.stop()
 		sound.play("pop")
 
-        var tweenScene = game.add.tween(sceneGroup).to({alpha: 0}, 500, Phaser.Easing.Cubic.In, true, 200)
-        tweenScene.onComplete.add(function(){
+		var tweenScene = game.add.tween(sceneGroup).to({alpha: 0}, 500, Phaser.Easing.Cubic.In, true, 200)
+		tweenScene.onComplete.add(function(){
 			game.camera.x = 0
 			game.camera.y = 0
 			game.camera.scale.x = 1
 			game.camera.scale.y = 1
-			players[0].destroy()
-			players[1].destroy()
-
-			if(tag === "retry")
-				sceneloader.show("battle")
-			else if(tag === "exit") {
-				window.open("../epicMap/", '_self')
-				model.savePlayer(currentPlayer)
+			if(server){
+				server.removeEventListener('afterGenerateQuestion', generateQuestion);
+				server.removeEventListener('onTurnEnds', checkAnswer);
+				server.retry()
 			}
-        })
-    }
+			console.log("retryPressed")
+			// game.destroy()
+			console.log(parent.isKinder)
+			if(parent.isKinder)
+				window.open("indexSLP.html", "_self")
+			else
+				window.open("index.html", "_self")
+			// sceneloader.show("battle")
+		})
+	}
 
 	function preload(){
 
@@ -874,15 +914,17 @@ var battle = function(){
 		game.load.audio('battleSong', soundsPath + 'songs/battleSong.mp3');
 		// game.load.spine(avatar1, "images/spines/"+directory1+"/"+avatar1+".json")
 		// game.load.spine(avatar2, "images/spines/"+directory2+"/"+avatar2+".json")
-		game.load.spine("tap", "images/spines/tap/tap.json")
+		// game.load.spine("tap", "images/spines/tap/tap.json")
 		game.load.spritesheet('confeti', 'images/battle/confeti.png', 64, 64, 6)
 
-		game.load.image('ready',"images/battle/ready" + localization.getLanguage() + ".png")
-		game.load.image('go',"images/battle/go" + localization.getLanguage() + ".png")
+		game.load.image('round',"images/battle/shout_round.png")
+		game.load.image('start',"images/battle/shout_start.png")
 		game.load.bitmapFont('WAG', 'fonts/WAG.png', 'fonts/WAG.xml');
         game.load.spritesheet("hand", 'images/spines/Tuto/manita.png', 115, 111, 23)
 		game.load.image('retry',"images/battle/retry" + localization.getLanguage() + ".png")
 		game.load.image('share',"images/battle/share" + localization.getLanguage() + ".png")
+
+		game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
         
 		// buttons.getImages(game)
 		// console.log(parent.isKinder)
@@ -979,12 +1021,12 @@ var battle = function(){
 
     function showReadyGo() {
 		sound.play("swipe")
-    	var tweenReady1 = game.add.tween(ready).to({alpha:1}, 600, Phaser.Easing.Cubic.Out, true)
-		game.add.tween(ready.scale).to({x:0.3, y:0.3}, 600, Phaser.Easing.Back.Out, true)
-		var tweenReady2 = game.add.tween(ready).to({alpha:0}, 200, Phaser.Easing.Cubic.Out, null, 1000)
+    	var tweenReady1 = game.add.tween(roundGroup).to({alpha:1}, 600, Phaser.Easing.Cubic.Out, true)
+		game.add.tween(roundGroup.scale).from({x:0.5, y:0.5}, 600, Phaser.Easing.Back.Out, true)
+		var tweenReady2 = game.add.tween(roundGroup).to({alpha:0}, 200, Phaser.Easing.Cubic.Out, null, 1000)
 
 		var tweenReady3 = game.add.tween(go).to({alpha:1}, 300, Phaser.Easing.Quintic.Out)
-		var tweenScale = game.add.tween(go.scale).to({x:0.5, y:0.5}, 300, Phaser.Easing.Quintic.Out)
+		var tweenScale = game.add.tween(go.scale).from({x:0.5, y:0.5}, 300, Phaser.Easing.Quintic.Out)
 		var tweenReady4 = game.add.tween(go).to({alpha:0}, 200, Phaser.Easing.Cubic.Out, null, 1000)
 
 		tweenReady1.chain(tweenReady2)
@@ -1020,33 +1062,18 @@ var battle = function(){
 	}
 
 	function initQuestion(){
-		questionGroup.questionText.text = localization.getString(localizationData, "question") + questionCounter
+		// questionGroup.questionText.text = localization.getString(localizationData, "question") + questionCounter
 		questionCounter++
-		equationGroup.alpha = 0
-		game.add.tween(questionGroup).to({y: 0}, 1000, Phaser.Easing.Cubic.Out, true)
+		roundGroup.numberRound.text = questionCounter
+		// equationGroup.alpha = 0
+		// game.add.tween(questionGroup).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true)
 	}
 
 	function generateEquation(data){
-		if(data.opedator === "/"){
+		if(data.operator === "/"){
 			equationGroup.equation.text = data.operand2 + "ƒ" + data.operand1 + " =" + data.result
 		}else{
-			equationGroup.equation.text = data.operand1 + data.opedator + data.operand2 + "=" + data.result
-		}
-
-	}
-
-	function initQuestion(){
-		questionGroup.questionText.text = localization.getString(localizationData, "question") + questionCounter
-		questionCounter++
-		equationGroup.alpha = 0
-		game.add.tween(questionGroup).to({y: 0}, 1000, Phaser.Easing.Cubic.Out, true)
-	}
-
-	function generateEquation(data){
-		if(data.opedator === "/"){
-			equationGroup.equation.text = data.operand2 + "ƒ" + data.operand1 + " =" + data.result
-		}else{
-			equationGroup.equation.text = data.operand1 + data.opedator + data.operand2 + "=" + data.result
+			equationGroup.equation.text = data.operand1 + data.operator + data.operand2 + "=" + data.result
 		}
 
 	}
@@ -1078,33 +1105,39 @@ var battle = function(){
 			sceneGroup.correctParticle.x = playerWin.x
 			sceneGroup.correctParticle.y = playerWin.y - 150
 			sceneGroup.correctParticle.start(true, 1000, null, 5)
-			playerWin.setAnimation(["WIN", "IDLE"])
+			playerWin.setAnimation(["WIN", "IDLE"], true)
 			game.time.events.add(1000, function () {
 				game.add.tween(answersGroup).to({y:answersGroup.y + 184 * 0.9}, 1000, Phaser.Easing.Cubic.Out, true)
-				game.add.tween(questionGroup).to({y:-180}, 1000, Phaser.Easing.Cubic.Out, true)
 				playerAttack(playerWin, playerLose, createProyectile, "proyectile")
 			})
+
+			playerWin.hpBar.addWin()
 		}else{
-			players[0].setAnimation(["HIT", "IDLE"])
-			players[1].setAnimation(["HIT", "IDLE"])
+			players[0].setAnimation(["HIT", "IDLE"], true)
+			players[1].setAnimation(["HIT", "IDLE"], true)
 			game.time.events.add(1000, function(){
 				game.add.tween(answersGroup).to({y:answersGroup.y + 184 * 0.9}, 1000, Phaser.Easing.Cubic.Out, true)
-				game.add.tween(questionGroup).to({y:-180}, 1000, Phaser.Easing.Cubic.Out, true)
-				startRound()
+				showReadyGo()
 			})
 		}
+		game.add.tween(questionGroup).to({alpha:0}, 1000, Phaser.Easing.Cubic.Out, true)
 	}
 
 	function numbersEffect() {
-		sound.play("cut")
+		// sound.play("cut")
+		//
+		// equationGroup.alpha = 0
+		questionGroup.alpha = 0
+		//
+		// equationGroup.scale.x = 0.2
+		// equationGroup.scale.y = 0.2
+		questionGroup.scale.y = 0.2
+		questionGroup.scale.x = 0.2
 
-		equationGroup.alpha = 0
-
-		equationGroup.scale.x = 0.2
-		equationGroup.scale.y = 0.2
-
-		game.add.tween(equationGroup.scale).to({x: 1,y:1}, 800, Phaser.Easing.Bounce.Out, true)
-		game.add.tween(equationGroup).to({alpha:1}, 800, Phaser.Easing.Cubic.Out, true)
+		// game.add.tween(equationGroup.scale).to({x: 1,y:1}, 800, Phaser.Easing.Bounce.Out, true)
+		// game.add.tween(equationGroup).to({alpha:1}, 800, Phaser.Easing.Cubic.Out, true)
+		game.add.tween(questionGroup).to({alpha: 1}, 800, Phaser.Easing.Cubic.Out, true)
+		game.add.tween(questionGroup.scale).to({x:1, y:1}, 400, Phaser.Easing.Back.Out, true)
 	}
 
 	function generateQuestion(data) {
@@ -1119,7 +1152,7 @@ var battle = function(){
 		game.add.tween(answersGroup).to({y:game.world.height}, 500, Phaser.Easing.Cubic.Out, true)
 		sound.play("swipe")
 
-		var data = server ? server.currentData.data : {operand1:100, opedator:"+", operand2:100, result:200, correctAnswer:200}
+		var data = server ? server.currentData.data : {operand1:100, operator:"+", operand2:100, result:200, correctAnswer:200}
 		switch ("?"){
 			case data.operand1:
 				data.operand1 = data.correctAnswer
@@ -1193,9 +1226,9 @@ var battle = function(){
 		if(server){
 			server.generateQuestion()
 		}else{
-			game.time.events.add(1000, function () {
-				generateQuestion({operand1:200, opedator:"/", operand2:200, result:400})
-			})
+			// game.time.events.add(200, function () {
+				generateQuestion({operand1:200, operator:"/", operand2:200, result:400})
+			// })
 		}
 		// if(server)
 		// 	server.generateQuestion()
@@ -1223,7 +1256,7 @@ var battle = function(){
 		winBar.anchor.setTo(0.5, 0)
 		winBar.x = game.world.centerX
 
-		var fontStyle = {font: "55px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
+		var fontStyle = {font: "55px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", align: "center"}
 		var winText = game.add.text(0, -5, "VICTORY", fontStyle)
 		winText.anchor.setTo(0.5, 0)
 		hudGroup.winGroup.add(winText)
@@ -1278,7 +1311,7 @@ var battle = function(){
 		loseBar.anchor.setTo(0.5, 0)
 		loseBar.x = game.world.centerX
 
-		var fontStyle = {font: "55px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
+		var fontStyle = {font: "55px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", align: "center"}
 		var loseText = game.add.text(0, 22, "DON'T GIVE UP", fontStyle)
 		loseText.anchor.setTo(0.5, 0)
 		hudGroup.loseGroup.add(loseText)
@@ -1308,16 +1341,16 @@ var battle = function(){
         
         
 		if(inputsEnabled){
-            if(!tutorial){
-                game.add.tween(mano).to({alpha:0},100,Phaser.Easing.linear,true, 200).onComplete.add(function(){
-                        sceneGroup.add(mano);
-                        mano.position.x=game.world.centerX-90
-                        mano.position.y=game.world.centerY-140
-                        mano.animations.stop("hand")
-                        mano.animations.play('hand', 60, true);
-                        game.add.tween(mano).to({alpha:1},200,Phaser.Easing.linear,true, 100)
-                    })
-                }
+            // if(!tutorial){
+                // game.add.tween(mano).to({alpha:0},100,Phaser.Easing.linear,true, 200).onComplete.add(function(){
+                //         sceneGroup.add(mano);
+                //         mano.position.x=game.world.centerX-90
+                //         mano.position.y=game.world.centerY-140
+                //         mano.animations.stop("hand")
+                //         mano.animations.play('hand', 60, true);
+                //         game.add.tween(mano).to({alpha:1},200,Phaser.Easing.linear,true, 100)
+                //     })
+                // }
 			inputsEnabled = false
 			var toScaleX = btn.scale.x + 0.1
 			var toScaleY = btn.scale.y - 0.1
@@ -1331,6 +1364,8 @@ var battle = function(){
 				stopGame("retry")
 			else if(btn.tag === "exit")
 				stopGame("exit")
+			else
+				stopGame()
 		}
 	}
 
@@ -1338,7 +1373,7 @@ var battle = function(){
 		var statsGroup = game.add.group()
 		answersGroup.add(statsGroup)
 
-		var fontStyle = {font: "48px VAGRounded", fontWeight: "bold", fill: "#000000", align: "center"}
+		var fontStyle = {font: "48px Luckiest Guy", fontWeight: "bold", fill: "#000000", align: "center"}
 
 		var answerBg = statsGroup.create(200 * direction, -120, "atlas.battle", "answer")
 		answerBg.anchor.setTo(0.5, 0.5)
@@ -1384,7 +1419,7 @@ var battle = function(){
 		winnerBan.anchor.setTo(0.5, 0.5)
 		winnerBan.scale.x = 1.4
 
-		var fontStyle2 = {font: "32px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
+		var fontStyle2 = {font: "32px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", align: "center"}
 		var winString = localization.getString(localizationData, "winner")
 		var winnerText = game.add.text(0, -44, winString, fontStyle2)
 		winnerText.anchor.setTo(0.5, 0.5)
@@ -1394,7 +1429,7 @@ var battle = function(){
 		difTimeText.anchor.setTo(0.5, 0.5)
 		winnerGroup.add(difTimeText)
 
-		var fontStyle3 = {font: "32px VAGRounded", fontWeight: "bold", fill: "#000000", align: "center"}
+		var fontStyle3 = {font: "32px Luckiest Guy", fontWeight: "bold", fill: "#000000", align: "center"}
 		var diffLabel = game.add.text(75, 30, "sec", fontStyle3)
 		diffLabel.anchor.setTo(0.5, 0.5)
 		winnerGroup.add(diffLabel)
@@ -1446,36 +1481,37 @@ var battle = function(){
 
 	function createbattleUI() {
 
-		var fontStyle = {font: "72px VAGRounded", fontWeight: "bold", fill: "#350A00", align: "center"}
-		var fontStyle2 = {font: "72px VAGRounded", fontWeight: "bold", fill: "#000000", align: "center"}
+		var fontStyle = {font: "72px Luckiest Guy", fontWeight: "bold", fill: "#350A00", align: "center"}
+		var fontStyle2 = {font: "72px Luckiest Guy", fontWeight: "bold", fill: "#000000", align: "center"}
 
 		questionGroup = game.add.group()
 		questionGroup.x = game.world.centerX
-		questionGroup.y = -180
+		questionGroup.y = game.world.centerY - 50
+		questionGroup.alpha = 0
 		hudGroup.uiGroup.add(questionGroup)
-		questionGroup.scale.setTo(0.6, 0.6)
+		// questionGroup.scale.setTo(0.6, 0.6)
 
-		var topBar = questionGroup.create(0, 0, "atlas.battle", "top")
-		topBar.anchor.setTo(0.5, 0)
+		// var topBar = questionGroup.create(0, 0, "atlas.battle", "top")
+		// topBar.anchor.setTo(0.5, 0)
 
-		var container = questionGroup.create(0,0, "atlas.battle", "question")
-		container.y = 170
+		var container = questionGroup.create(0,0, "atlas.battle", "container_blue")
+		// container.y = 170
 		container.anchor.setTo(0.5, 0.5)
 
-		var questionString = localization.getString(localizationData, "question") + questionCounter
-		var questionText = new Phaser.Text(game, 0, 60, questionString, fontStyle2)
-		questionText.anchor.setTo(0.5,0.5)
-		questionGroup.add(questionText)
-		questionGroup.questionText = questionText
+		// var questionString = localization.getString(localizationData, "question") + questionCounter
+		// var questionText = new Phaser.Text(game, 0, 60, questionString, fontStyle2)
+		// questionText.anchor.setTo(0.5,0.5)
+		// questionGroup.add(questionText)
+		// questionGroup.questionText = questionText
 
 		equationGroup = game.add.group()
 		questionGroup.add(equationGroup)
 		equationGroup.y = container.y
-		equationGroup.alpha = 0
-		equationGroup.question = questionText
+		// equationGroup.alpha = 0
+		// equationGroup.question = ""
 
 		var equation = game.add.bitmapText(0,6,"WAG", "0+0=?", 72)
-		equation.scale.setTo(1.4, 1.4)
+		// equation.scale.setTo(1.4, 1.4)
 		equation.tint = 0x350A00
 		equation.anchor.setTo(0.5,0.5)
 		equationGroup.add(equation)
@@ -1506,12 +1542,22 @@ var battle = function(){
 		sceneGroup.wrongParticle = wrongParticle
 
 		// createConfeti()
+		roundGroup = game.add.group()
+		sceneGroup.add(roundGroup)
+		roundGroup.x = game.world.centerX
+		roundGroup.y = game.world.centerY
+		roundGroup.alpha = 0
 
-		ready = sceneGroup.create(game.world.centerX, game.world.centerY, "ready")
-		ready.anchor.setTo(0.5, 0.5)
-		ready.alpha = 0
+		var round = roundGroup.create(0, 0, "round")
+		round.anchor.setTo(0.5, 0.5)
 
-		go = sceneGroup.create(game.world.centerX, game.world.centerY, "go")
+		var fontStyle = {font: "110px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", align: "center"}
+		var roundText = game.add.text(180, -20, questionCounter, fontStyle)
+		roundText.anchor.setTo(0.5, 0.5)
+		roundGroup.add(roundText)
+		roundGroup.numberRound = roundText
+
+		go = sceneGroup.create(game.world.centerX, game.world.centerY, "start")
 		go.anchor.setTo(0.5, 0.5)
 		go.alpha = 0
 
@@ -1629,7 +1675,7 @@ var battle = function(){
 	function addNumberPart(obj,number, fill, offsetY){
 		offsetY = offsetY || 100
 		fill = fill || "#ffffff"
-		var fontStyle = {font: "38px VAGRounded", fontWeight: "bold", fill: fill, align: "center"}
+		var fontStyle = {font: "38px Luckiest Guy", fontWeight: "bold", fill: fill, align: "center"}
 
 		var pointsText = new Phaser.Text(sceneGroup.game, 0, 5, number, fontStyle)
 		pointsText.x = obj.world ? obj.world.x : obj.centerX
@@ -1645,12 +1691,26 @@ var battle = function(){
 	}
 	
 	function createTimer() {
-		var timerGroup = game.add.group()
-		hudGroup.add(timerGroup)
+		timerGroup = game.add.group()
+		timerGroup.y = 100
+		timerGroup.x = game.world.centerX
+		sceneGroup.add(timerGroup)
+		// timerGroup.cameraOffset.setTo(game.world.centerX, 100);
 
-		var fontStyle = {font: "78px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
-		timerText = game.add.text(game.world.centerX, 500, "5:00", fontStyle)
-		timerGroup.add(timerGroup)
+		var containerTime = timerGroup.create(0, 0, "atlas.battle", "container_time")
+		containerTime.anchor.setTo(0.5, 0.5)
+
+		var fontStyle = {font: "60px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", align: "center"}
+		var timerText = game.add.text(0, 11, "5:00", fontStyle)
+		timerGroup.add(timerText)
+		timerText.anchor.setTo(0.5, 0.5)
+
+		var fontStyle2 = {font: "34px Luckiest Guy", fontWeight: "bold", fill: "#363737", align: "center"}
+		var label = game.add.text(0, -60, "Time", fontStyle2)
+		timerGroup.add(label)
+		label.anchor.setTo(0.5, 0.5)
+
+		timerGroup.timerText = timerText
 	}
 
     return {
@@ -1687,7 +1747,6 @@ var battle = function(){
 			if(startTimer) {
 				timeElapsed += game.time.elapsedMS
 				var timeRemaining = battleTime - timeElapsed
-				console.log(timeRemaining)
 				if(timeRemaining > 0)
 				{
 					var minutes = Math.floor((timeRemaining * 0.001) / 60)
@@ -1697,7 +1756,7 @@ var battle = function(){
 					// elapsedSeconds = Math.round(elapsedSeconds * 100) / 100
 					var result = (seconds < 10) ? "0" + seconds : seconds;
 					// result += ":" + decimals + centimals
-					timerText.text = minutes + ":" + result
+					timerGroup.timerText.text = minutes + ":" + result
 				}
 
 			}
@@ -1739,8 +1798,7 @@ var battle = function(){
 			var uiGroup = game.add.group()
 			hudGroup.add(uiGroup)
 			hudGroup.uiGroup = uiGroup
-			
-			createTimer()
+
 			// createCaptured()
 
 			var winGroup = game.add.group()
@@ -1767,6 +1825,7 @@ var battle = function(){
 			frontGroup.fixedToCamera = true
 			frontGroup.cameraOffset.setTo(0, 0);
 
+			createTimer()
         }
     }
 }()
