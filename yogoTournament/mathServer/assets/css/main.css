@@ -1,0 +1,658 @@
+html{
+    height: 100%;
+}
+
+body{
+    position: absolute;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background: #18167a;
+    overflow: hidden;
+    font-family: 'Luckiest Guy', cursive !important;
+        background:linear-gradient(to bottom, rgb(89,0,128) 0%,rgb(73,132,204)  100%);
+
+}
+
+.luky-font{
+    font-family: 'Luckiest Guy', cursive !important;
+    color: white;
+}
+
+
+.redBtn{
+    background-image: url("../images/redButton.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    font-size: 2vw;
+    padding: 2.5vw;
+}
+
+.option1{
+    background-image: url("../images/option1.png");
+    background-repeat: no-repeat;
+    background-size: 80% 100%;
+    padding: 0.4vw;
+    background-position: center;
+    width: 100%;
+    text-align: center;
+}
+.option2{
+    background-image: url("../images/option2.png");
+    background-repeat: no-repeat;
+    background-size: 80% 100%;
+    padding: 0.4vw;
+    background-position: center;
+    width: 100%;
+    text-align: center;
+}
+.option3{
+    background-image: url("../images/option3.png");
+    background-repeat: no-repeat;
+    background-size: 80% 100%;
+    padding: 0.4vw;
+    background-position: center;
+    width: 100%;
+    text-align: center;
+}
+.option4{
+    background-image: url("../images/option4.png");
+    background-repeat: no-repeat;
+    background-size: 80% 100%;
+    padding: 0.4vw;
+    background-position: center;
+    width: 100%;
+    text-align: center;
+}
+
+.greenBtn{
+    background-image: url("../images/greenButton.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    padding: 2vw;
+    z-index: 5;
+        cursor: pointer;
+    color:#FFF;
+    font-size: 2vw;
+}
+
+.greenpink{
+    background-image: url("../images/bgpink.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    padding: 2vw;
+    z-index: 5;
+    cursor: pointer;
+    color:#FFF;
+    font-size: 2vw;
+}
+
+
+#bgGradient{
+    position: fixed;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    margin:0;
+    background-image: url("../images/bgmain.png");
+    background-position: center;    
+    opacity: 0.1;
+}
+
+#logo{
+    position: fixed;
+    width: 100%;
+    z-index: 12;
+}
+
+.logoTour{
+    padding: 2vw;
+    width: 100%;
+    max-width: 600px !important;
+    
+}
+
+.objectsmain{
+    position: absolute;
+    width: 100%;
+    height: 100% !important;
+    left:0%;
+    margin:0% !important;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+
+.object-center{
+    position: absolute;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+    color:#FFF;    
+}
+
+.object-center div{
+    text-align: center;
+    padding: 2vw;
+    margin: 1vw;
+    font-size: 3vw;
+    width: 50%;
+}
+
+
+#naoMain{
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    top: 50%;
+}
+
+#naoMain img{
+    width: 60%;
+    max-width: 250px;
+}
+
+#estrellaMain{
+    position: absolute;
+    top: 50%;
+    right: 16%;
+    margin: 0%;
+    width: 50%;
+    text-align: right;
+}
+
+
+#estrellaMain img{
+    max-width: 230px;
+}
+
+
+
+/*SECTION 2*/
+
+#section1{
+    display: block;
+}
+
+#section2{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.worlds{
+    position: absolute;
+    display: flex;
+    transform: translate(-50%, 0%);
+    left:50%;
+}
+
+#oonaMain{
+    position: absolute;
+    bottom: 0;
+    width: 50%;
+    margin: 0;
+}
+
+#oonaMain img{
+    width: 100%;
+    max-width: 350px;
+}
+
+#arturMain{
+    position: absolute;
+    bottom: 0;
+    right: 0%;
+    margin: 0%;
+    width: 50%;
+    text-align: right;
+}
+
+
+#arturMain img{
+    width: 100%;
+    max-width: 350px;
+}
+
+.textSubject{
+    left:50%;
+    transform: translate(-50%,0);
+    font-size: 4vw !important;
+    height: 15% !important;
+    
+}
+
+.slider{
+    z-index: 1213;
+    position: absolute;
+}
+
+.menuSlider{
+    position: absolute;
+    width: 0%;
+    left:0%;
+    top:0%;
+    transform: translate(-50%,-50%);
+}
+
+.textSubject{
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    text-align: center;
+    
+}
+.navButtons{
+    position: absolute;
+    width: 100%;
+    top: 80%;
+    height: 20%;
+    text-align: center;
+    z-index: 12000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#createGame{
+    cursor: pointer;
+}
+
+#backButton1{
+    cursor: pointer;
+}
+
+
+/*SECTION 3*/
+
+#section3{
+    position: absolute;
+    color: white;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+
+.titlered{
+    font-size: 3vw;
+    width: 40%;
+    height: 25%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: ab;
+    text-align: center;
+    background-image: url("../images/bgred.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    color:#345468;
+}
+
+.containerRules{
+    position: absolute;
+    height: 50%;
+    width: 50%;
+    left:50%;
+    transform: translate(-50%,10%);
+}
+
+.rules{
+    background-image: url("../images/bgblue.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    padding: 0.5vw;
+    display: flex;
+    justify-content: space-around;
+    font-size: 3vw;
+}
+
+.nextDifficulty{
+    transform: scale(-1,1);
+}
+
+.optionsDifficulty{
+    background-color: #00f9ff;
+    background-image: url("../images/patternCircles.png");
+    background-repeat:repeat;
+    background-position: center;    
+    height: 100%;
+    padding: 2vw !important;
+    border-radius: 0vw 0vw 3vw 3vw;
+}
+
+
+
+.iconDifficulty img{
+    position: relative;
+    padding: 4vw;
+    width: 100%;
+}
+
+
+#backButton3{
+    padding: 1vw !important;
+}
+
+.textRules{
+    color:#144a99;
+    font-size: 3vw;
+}
+
+.divisionShape{
+    width: 0%;
+    height: 70%;
+    border-radius: 2vw;
+    background-color: rgba(250,250,250,0.7);
+}
+
+.optionChoice{
+    font-size: 2vw;    
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.optionPink{
+    background-color: #f220f2;
+    font-size: 2vw;
+    border:0.3vw solid #FFF;
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;    
+}
+
+.optionYellow{
+    background-color: #edaa24;
+    font-size: 2vw;
+    border:0.3vw solid #FFF;
+    height: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+
+.optionGreen{
+    background-color: #24ed5d;
+    font-size: 2vw;
+    border:0.3vw solid #FFF;
+    height: 20%;
+    display: flex;
+    justify-content:space-between;
+    align-items: center; 
+}
+
+
+.checkBlank{
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkBlank img{
+    position: absolute;
+    top: 20%;
+}
+
+#modalDifficulty{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.m-containerDifficulty{
+    position: absolute;
+    background: #c0b4fc;
+    background-image: url("../images/patternoptions.png");
+    width: 50%;
+    height: 70%;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+
+.headerDifficulty{
+    position: absolute;
+    background-image: url("../images/headerModalDifficulty.png");
+    width: 100%;
+    height: 20%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    top:-10%;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+}
+
+.headerDifficulty p{
+    width: 50%;
+    font-size: 2vw;
+}
+.choiceOptions{
+    top:10%;
+    position: absolute;
+    width: 100%;
+    height: 90%;
+    overflow: scroll;
+}
+
+.optionOperations{
+    font-size: 2vw;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 0.5vw;
+    
+}
+
+.optionPar{
+    background-color: #a89df9;
+}
+
+.checkChoice{
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2vw;
+}
+
+.checkChoice img{
+    position: absolute;
+}
+
+/*SECTION 3*/
+
+#section4{
+    position: absolute;
+    color: white;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+
+.optionsTime{
+    background-color: #cc00ff;
+    text-align: center;
+    height: 100%;
+    border-radius: 2vw 0 0 2vw;
+    background-image: url("../images/patternCircles.png");
+}
+
+.optionsRounds{
+    background-color: #ffe966;
+    text-align: center;
+    height: 100%;
+    border-radius: 0 2vw 2vw 0;
+    background-image: url("../images/patternCircles.png");
+}
+
+.bgYellow{
+    background-image: url("../images/bgyellow.png");
+    width: 100%;
+    background-repeat: no-repeat;
+    font-size: 3vw;
+    background-size: contain;
+    background-position: center;
+    color:#3d3b2d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 3vw;
+    
+}
+
+.bgPurple{
+    background-image: url("../images/bgPurple.png");
+    width: 100%;
+    background-repeat: no-repeat;
+    font-size: 3vw;
+    background-size: contain;
+    background-position: center;
+    color:#FFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 3vw;
+    
+}
+
+.timeOptions{
+    font-size: 3vw;
+}
+
+#roundOptions{
+    position: relative;
+    background-image: url("../images/hexapurple.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    font-size: 4vw;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    margin-top: -5%;
+    height: 10%;
+}
+
+#restRound{
+    transform: scale(-1,1);
+}
+
+/*SECTION 5*/
+
+#section5{
+    position: absolute;
+    width: 80%;
+    left:10%;
+    height: 100%;
+}
+
+.containerPin{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:50%;
+    background-color: #00ff78;
+    background-image: url("../images/patternCircles.png");
+    border-radius:  0 0vw 2vw 2vw;
+}
+
+.bgGreen{
+    background-image: url("../images/bggreen.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100%;
+    margin-top: -15%;
+    font-size: 6vw;
+    position: absolute;
+    text-align: center;  
+    color:#FFF;
+}
+
+.bgpink{
+    background-image: url("../images/bgpink.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100%;
+    margin-top: -15%;
+    font-size: 2vw;
+    position: absolute;
+    text-align: center;  
+    color:#FFF;
+}
+
+#pin{
+    background-color: #FFF;
+    color:#006837;
+    font-size: 4vw;
+    margin-top: 10%;
+    width: 50%;
+    margin-left:50%;
+    transform: translate(-50%,0);
+    text-align: center;
+    border-radius: 2vw;
+}
+
+.textShare{
+    text-align: center;
+    padding: 1vw;
+    font-size: 1.5vw;
+    color:#000000;
+}
+
+.yogotarsSelecitons{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.yogotarSelect{
+    text-align: center;
+    width: 100%;
+    margin-left:20%;
+}
+
+.yogotarSelect .imageYogotar{
+    text-align: center;
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20%;
+    background-color:#FFF;  
+}
+
+.imageYogotar img{
+    width: 100%;
+}
+
+.playerName{
+    width: 50%;
+    font-size: 1vw;
+}
+
+#StartButton{
+    color: #FFF;
+}

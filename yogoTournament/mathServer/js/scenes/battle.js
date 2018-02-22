@@ -228,6 +228,7 @@ var battle = function(){
 	var startTimer
 	var timerGroup
 	var equationGroup
+	var timerEnded
 
     function loadSounds(){
 
@@ -590,16 +591,6 @@ var battle = function(){
         })
 
     }
-
-	function convertTimeFormat(timeValue){
-		var seconds = Math.floor(timeValue * 0.001)
-		var decimals = Math.floor(timeValue * 0.01) % 10
-		var centimals = (Math.floor(timeValue / 10) % 10)
-		// elapsedSeconds = Math.round(elapsedSeconds * 100) / 100
-		var result = (seconds < 10) ? "0" + seconds : seconds;
-		result += ":" + decimals + centimals
-		return result
-	}
 
 	function createHpbar(scale){
 		scale = scale || 1
@@ -1020,6 +1011,12 @@ var battle = function(){
 	}
 
     function showReadyGo() {
+		if(timerEnded){
+			var gameFinished = checkWins()
+			if(gameFinished)
+				return
+		}
+
 		sound.play("swipe")
     	var tweenReady1 = game.add.tween(roundGroup).to({alpha:1}, 600, Phaser.Easing.Cubic.Out, true)
 		game.add.tween(roundGroup.scale).from({x:0.5, y:0.5}, 600, Phaser.Easing.Back.Out, true)
@@ -1076,6 +1073,13 @@ var battle = function(){
 			equationGroup.equation.text = data.operand1 + data.operator + data.operand2 + "=" + data.result
 		}
 
+	}
+
+	function convertTimeFormat2(timeValue){
+		var minutes = Math.floor((timeValue * 0.001) / 60)
+		var seconds = Math.floor(timeValue * 0.001) % 60
+		var result = (seconds < 10) ? "0" + seconds : seconds;
+		return minutes + ":" + result
 	}
 
 	function convertTimeFormat(timeValue){
@@ -1701,7 +1705,8 @@ var battle = function(){
 		containerTime.anchor.setTo(0.5, 0.5)
 
 		var fontStyle = {font: "60px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", align: "center"}
-		var timerText = game.add.text(0, 11, "5:00", fontStyle)
+		var timerString = convertTimeFormat2(battleTime)
+		var timerText = game.add.text(0, 11, timerString, fontStyle)
 		timerGroup.add(timerText)
 		timerText.anchor.setTo(0.5, 0.5)
 
@@ -1711,6 +1716,19 @@ var battle = function(){
 		label.anchor.setTo(0.5, 0.5)
 
 		timerGroup.timerText = timerText
+	}
+
+	function checkWins() {
+		if(players[0].hpBar.winCounter === players[1].hpBar.winCounter)
+			return
+
+		var playerWin = players[0].hpBar.winCounter > players[1].hpBar.winCounter ? players[0] : players[1]
+		winPlayer(playerWin)
+
+		if(server)
+			server.removeEventListener('onTurnEnds', checkAnswer)
+
+		return true
 	}
 
     return {
@@ -1744,19 +1762,15 @@ var battle = function(){
 			assets.images.push(bgObg)
 		},
 		update:function () {
-			if(startTimer) {
+			if((startTimer)&&(!timerEnded)) {
 				timeElapsed += game.time.elapsedMS
 				var timeRemaining = battleTime - timeElapsed
 				if(timeRemaining > 0)
 				{
-					var minutes = Math.floor((timeRemaining * 0.001) / 60)
-					var seconds = Math.floor(timeRemaining * 0.001) % 60
-					// var decimals = Math.floor(timeRemaining * 0.01) % 10
-					// var centimals = (Math.floor(timeElapsed / 10) % 10)
-					// elapsedSeconds = Math.round(elapsedSeconds * 100) / 100
-					var result = (seconds < 10) ? "0" + seconds : seconds;
-					// result += ":" + decimals + centimals
-					timerGroup.timerText.text = minutes + ":" + result
+					timerGroup.timerText.text = convertTimeFormat2(timeRemaining)
+				}else {
+					timerEnded = true
+					checkWins()
 				}
 
 			}
@@ -1766,7 +1780,7 @@ var battle = function(){
 
         	// game.camera.bounds = new Phaser.Rectangle(-200,0,game.world.width + 200,game.world.height)
 			// console.log(game.camera.bounds)
-			battleTime = server ? server.currentData.time : 300000
+			battleTime = server ? server.currentData.time : 20000
         	sceneGroup = game.add.group();
             //yogomeGames.mixpanelCall("enterGame",gameIndex);
 

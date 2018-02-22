@@ -40,6 +40,109 @@ var operationGenerator = function () {
 				{operand1X: 1, operand2X: 1, minRange:1, maxRange: 9, paramToAnswer:OPERATION_PARAMS.result},
 				{operand1X: 1, operand2X: 1, minRange:1, maxRange: 9, paramToAnswer:OPERATION_PARAMS.operand2},
 			]
+		},
+
+		MEDIUM:{
+			SUM:[
+				{operand1X: 2, operand2Const: 10, minRange:20, maxRange: 109, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 2, minRange:20, maxRange: 50, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 2, minRange:20, maxRange: 50, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 2, operand2X: 2, minRange:51, maxRange: 198, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 2, minRange:51, maxRange: 198, paramToAnswer:OPERATION_PARAMS.result},
+			],
+			SUB:[
+				{operand1X: 2, operand2Const: 10, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 2, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 2, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.operand2},
+			],
+			MUL:[
+				{operand1X: 2, operand2Const: 10, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 2, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 2, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.operand2},
+			],
+			DIV:[
+				{operand1X: 2, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.operand2},
+			]
+		},
+
+		MEDIUM:{
+			SUM:[
+				{operand1X: 2, operand2Const: 10, minRange:20, maxRange: 109, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 2, minRange:20, maxRange: 50, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 2, minRange:20, maxRange: 50, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 2, operand2X: 2, minRange:51, maxRange: 198, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 2, minRange:51, maxRange: 198, paramToAnswer:OPERATION_PARAMS.result},
+			],
+			SUB:[
+				{operand1X: 2, operand2Const: 10, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 2, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 2, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.operand2},
+			],
+			MUL:[
+				{operand1X: 2, operand2Const: 10, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 2, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 2, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.operand2},
+			],
+			DIV:[
+				{operand1X: 2, operand2X: 1, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 1, paramToAnswer:OPERATION_PARAMS.operand2},
+			]
+		},
+
+		HARD:{
+			SUM:[
+				{operand1X: 3, operand2X: 1, minRange:101, maxRange: 1008, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 3, operand2X: 1, minRange:101, maxRange: 1008, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 3, operand2Const: 10, minRange:110, maxRange: 1009, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 3, operand2X: 2, minRange:110, maxRange: 1098, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 3, operand2X: 2, minRange:110, maxRange: 1098, paramToAnswer:OPERATION_PARAMS.operand2},
+			],
+			SUB:[
+				{operand1X: 3, operand2X: 2, minRange:90, maxRange: 989, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 3, operand2X: 2, minRange:90, maxRange: 989, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 4, operand2X: 1, minRange:991, maxRange: 9998, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 4, operand2X: 1, minRange:991, maxRange: 9998, paramToAnswer:OPERATION_PARAMS.operand2},
+			],
+			MUL:[
+				{operand1X: 3, operand2X: 1, minRange:100, maxRange: 8991, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 3, operand2Const: 10, minRange:1000, maxRange: 9990, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 3, operand2X: 2, minRange:90, maxRange: 98901, paramToAnswer:OPERATION_PARAMS.result},
+			],
+			DIV:[
+				{operand1X: 3, operand2X: 1, paramToAnswer:OPERATION_PARAMS.result},
+			]
+		},
+
+		MASTER:{
+			SUM:[
+				{operand1X: 4, operand2Const: 10, minRange:1010, maxRange: 10009, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 4, operand2X: 2, minRange:1010, maxRange: 10098, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 4, operand2X: 2, minRange:1010, maxRange: 10098, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 4, operand2X: 3, minRange:1100, maxRange: 10998, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 4, operand2X: 3, minRange:1100, maxRange: 10998, paramToAnswer:OPERATION_PARAMS.operand2},
+			],
+			SUB:[
+				{operand1X: 4, operand2X: 2, minRange:990, maxRange: 9900, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 4, operand2X: 2, minRange:990, maxRange: 9900, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 4, operand2X: 3, minRange:900, maxRange: 9000, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 4, operand2X: 3, minRange:900, maxRange: 9000, paramToAnswer:OPERATION_PARAMS.operand2},
+			],
+			MUL:[
+				{operand1X: 4, operand2X: 1, minRange:1000, maxRange: 89991, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 4, operand2X: 2, minRange:10000, maxRange: 989901, paramToAnswer:OPERATION_PARAMS.result},
+			],
+			DIV:[
+				{operand1X: 3, operand2X: 2, paramToAnswer:OPERATION_PARAMS.result},
+			]
 		}
 	}
 
@@ -47,7 +150,6 @@ var operationGenerator = function () {
 	var currentRound
 	var numOfOperations = 32
 	var numPerOperator
-	var currentOperator
 	var operatorsList
 	var counterOperators
 
@@ -131,8 +233,8 @@ var operationGenerator = function () {
 				else
 					operand2 = Math.floor(rule.maxRange / operand1)
 			}else{
-					operand1 = result
-					operand2 = (operand1 / operand2) > rule.maxRange ? rule.maxRange : operand2
+				operand1 = result
+				operand2 = (operand1 / operand2) > rule.maxRange ? rule.maxRange : operand2
 			}
 			//63: 9 60 / 8
 		}
@@ -164,13 +266,14 @@ var operationGenerator = function () {
 	}
 
 	function getOperationRule(rule, operator){
+		console.log(rule)
 
 		var operand1
 
 		if(rule.operand1X) {
 			var maxOperand1 = Math.pow(10, rule.operand1X) - 1
-			var minOperand1 = Math.pow(10, rule.operand1X - 1) - 1
-			minOperand1 = minOperand1 < 1 ? 1 : minOperand1
+			var minOperand1 = Math.pow(10, rule.operand1X - 1)
+			// minOperand1 = minOperand1 === 1 ? minOperand1 : minOperand1 + 1
 			console.log(maxOperand1, minOperand1)
 			operand1 = Math.floor(Math.random() * (maxOperand1 - minOperand1)) + minOperand1
 		}else if(rule.operand1Const){
@@ -184,7 +287,8 @@ var operationGenerator = function () {
 
 		if(rule.operand2X) {
 			var maxOperand2 = Math.pow(10, rule.operand2X) - 1
-			var minOperand2 = Math.pow(10, rule.operand2X - 1) + 1
+			var minOperand2 = Math.pow(10, rule.operand2X - 1)
+			// minOperand1 = minOperand1 === 1 ? minOperand1 : minOperand1 + 1
 			operand2 = Math.floor(Math.random() * (maxOperand2 - minOperand2)) + minOperand2
 		}else if(rule.operand2Const){
 			operand2 = rule.operand2Const
@@ -245,11 +349,11 @@ var operationGenerator = function () {
 	}
 
 //numOfOperations is the theorical number of minimal operations per level based on time
-	function setConfiguration(ruleSet, numOfOperations) {
-		ruleSet = RULES_SET.EASY
+	function setConfiguration(rules, numOfOperations) {
+		ruleSet = rules
+		console.log(ruleSet)
 		currentRound = 0
 		numOfOperations = numOfOperations || 32
-		currentOperator = ruleSet
 		setOperators()
 		numPerOperator = Math.floor(numOfOperations / operatorsList.length)
 
@@ -257,7 +361,9 @@ var operationGenerator = function () {
 	}
 
 	return{
+		RULES_SET:RULES_SET,
 		setConfiguration:setConfiguration,
+		OPERATION_PARAMS:OPERATION_PARAMS,
 		generate:generate
 	}
 }()

@@ -54,6 +54,7 @@ function Server(){
 	self.p1Ready = false;
 	self.p2Ready = false;
 	self.startGame = false
+	self.rulesSet = false
 
 	this.addEventListener = function(name, handler) {
 		if (self.events.hasOwnProperty(name))
@@ -310,24 +311,30 @@ function Server(){
 	/**
 	 * @summary Starts the server
 	 */
-	this.start = function(inLevel, currentId, onStart){
+
+	this.start = function(currentId, onStart, params){
+
+		var params = params || {}
+		var rules = params.rules || operationGenerator.RULES_SET.EASY
+		var battleTime = params.battleTime || 300000
+
 		self.events = {};
 		self.p1Ready = false;
 		self.p2Ready = false;
 		console.log(self.events)
-		operationGenerator.setConfiguration()
 
 		var promise = makeid(currentId);
 		promise.then(function(id){
 
 			id_game = id;
-			level = inLevel
+			operationGenerator.setConfiguration(rules)
+
 			var serverReady = false;
 			valores = {
+				rules:rules,
 				p1: false,
 				p2: false,
 				winner :false,
-				level: level,
 				p1answer : false,
 				p2answer : false,
 				possibleAnswers: [],
@@ -335,7 +342,7 @@ function Server(){
 				gameReady:false,
 				gameEnded:false,
 				retry:false,
-				time:300000
+				time:battleTime
 			};
 			refIdGame= database.ref(id_game);
 			refIdGame.set(valores);
@@ -485,6 +492,7 @@ window.onload =  function(){
 	gameContainer = document.getElementById("game-container")
 	loadGame()
 	server = new Server();
+	cliente = new Client();
 }
 
 // window.addEventListener("resize", loadGame);

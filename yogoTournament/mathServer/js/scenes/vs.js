@@ -276,7 +276,7 @@ var vs = function(){
     
     function preload(){
         
-		buttons.getImages(game)
+		// buttons.getImages(game)
 		
         game.stage.disableVisibilityChange = false;
         

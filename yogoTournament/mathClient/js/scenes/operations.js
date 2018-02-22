@@ -144,7 +144,7 @@ var operations = function(){
 		}
 
 	}
-	
+
 	function addButtons() {
 		var startY = game.world.height - 200
 		for(var optionIndex = 0, numOptions = options.length; optionIndex < numOptions; optionIndex++){
@@ -190,7 +190,7 @@ var operations = function(){
 
 		timeElapsed = 0
 	}
-	
+
 	function createGameObjects(){
 		optionsGroup = game.add.group()
 		sceneGroup.add(optionsGroup)
@@ -295,6 +295,8 @@ var operations = function(){
 	}
 
 	function startRound() {
+		console.log("show possible answers")
+
 		isReady = true;
 
 		timeElapsed = 0
@@ -320,11 +322,11 @@ var operations = function(){
 		game.add.tween(differenceTimeText).to({alpha:0}, 200, Phaser.Easing.Cubic.Out, true)
 		startTimer = true
 	}
-	
+
 	function addToPull(obj) {
 		pullGroup.add(obj)
 	}
-	
+
 	function clearStage() {
 		for(var buttonIndex = 0; buttonIndex < options.length; buttonIndex++){
 			var button = buttonList[buttonIndex]
@@ -354,7 +356,7 @@ var operations = function(){
 		}
 
 	}
-	
+
 	function checkAnswer(event) {
 		if(waitingGroup.tween)
 			waitingGroup.tween.stop()
@@ -490,7 +492,7 @@ var operations = function(){
 
 		return spineGroup
 	}
-	
+
 	function showWinner(event) {
 		clearStage()
 		var winnerNum = event.winner
