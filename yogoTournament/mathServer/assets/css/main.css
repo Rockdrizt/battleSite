@@ -110,7 +110,7 @@ body{
 
 .logoTour{
     padding: 2vw;
-    width: 100%;
+    width: 70%;
     max-width: 600px !important;
     
 }
@@ -132,9 +132,10 @@ body{
     position: absolute;
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content:center;
     align-content: center;
-    color:#FFF;    
+    color:#FFF; 
+    top:30%;
 }
 
 .object-center div{
@@ -142,7 +143,8 @@ body{
     padding: 2vw;
     margin: 1vw;
     font-size: 3vw;
-    width: 50%;
+    width: 100%;
+    min-width: 100px
 }
 
 
@@ -151,6 +153,8 @@ body{
     bottom: 0;
     width: 50%;
     top: 50%;
+    left: 0;
+    text-align: center;
 }
 
 #naoMain img{
@@ -160,16 +164,17 @@ body{
 
 #estrellaMain{
     position: absolute;
-    top: 50%;
-    right: 16%;
-    margin: 0%;
+    bottom: 0;
     width: 50%;
-    text-align: right;
+    top: 50%;
+    right: 0;
+    text-align: center;
 }
 
 
 #estrellaMain img{
-    max-width: 230px;
+    width: 40%;
+    max-width: 180px;
 }
 
 
@@ -224,9 +229,13 @@ body{
 .textSubject{
     left:50%;
     transform: translate(-50%,0);
-    font-size: 4vw !important;
-    height: 15% !important;
-    
+    font-size: 3vw !important;
+    height: 15% !important;  
+    z-index: 10000;
+}
+
+.textSubject p{
+    margin-top: 5% !important; 
 }
 
 .slider{
@@ -280,6 +289,10 @@ body{
     display: none;
 }
 
+
+.prevDifficulty{
+    z-index: 12;
+}
 
 .titlered{
     font-size: 3vw;
@@ -485,21 +498,23 @@ body{
     display: none;
 }
 
+.containerCustomize{
+    height: 100%;
+    background-image: url("../images/patternCircles.png");
+    background-color: #cc00ff;
+    border-radius: 2vw;
+    padding: 1vw;
+}
 
 .optionsTime{
-    background-color: #cc00ff;
+    
     text-align: center;
     height: 100%;
-    border-radius: 2vw 0 0 2vw;
-    background-image: url("../images/patternCircles.png");
 }
 
 .optionsRounds{
-    background-color: #ffe966;
     text-align: center;
     height: 100%;
-    border-radius: 0 2vw 2vw 0;
-    background-image: url("../images/patternCircles.png");
 }
 
 .bgYellow{
@@ -515,7 +530,7 @@ body{
     justify-content: center;
     margin-top: 10px;
     margin-bottom: 3vw;
-    
+    padding: 1vw;
 }
 
 .bgPurple{
@@ -531,6 +546,7 @@ body{
     justify-content: center;
     margin-top: 10px;
     margin-bottom: 3vw;
+    padding: 1vw;
     
 }
 
@@ -582,10 +598,11 @@ body{
     background-position: center;
     width: 100%;
     margin-top: -15%;
-    font-size: 6vw;
+    font-size: 4vw;
     position: absolute;
     text-align: center;  
     color:#FFF;
+    padding: 1vw;
 }
 
 .bgpink{
@@ -617,7 +634,7 @@ body{
     text-align: center;
     padding: 1vw;
     font-size: 1.5vw;
-    color:#000000;
+    color:#184831;
 }
 
 .yogotarsSelecitons{
@@ -651,8 +668,24 @@ body{
 .playerName{
     width: 50%;
     font-size: 1vw;
+    color:#184831;
 }
 
 #StartButton{
     color: #FFF;
+}
+
+.lock .planetImage{
+    filter: brightness(20%) ;
+
+}
+
+.lock span{
+    position: absolute;
+    margin-left: 160px;
+    margin-top:180px;
+    z-index: 1;
+    
+}
+.lock span img{
 }

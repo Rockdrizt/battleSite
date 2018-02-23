@@ -1,163 +1,167 @@
 <!doctype html>
 <html>
 <head>
-    <title class="languageTitle">Yogome tournament</title>
-    <meta name="viewport" content="width = 1050, user-scalable = no" />
-    <meta charset="UTF-8">   
-    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
-    <!-- Jquery   -->
-    <script src="assets/js/lib/jquery.min.js" ></script>
-    <!--  Bootstrap 3.0  -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    
-    <script type="text/javascript" src="assets/js/lib/greensock/TweenMax.min.js"></script>
-    <script type="text/javascript" src="assets/js/lib/iscroll-probe.js"></script>
+	<title class="languageTitle">Yogome tournament</title>
+	<meta name="viewport" content="width = 1050, user-scalable = no" />
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+	<!-- Jquery   -->
+	<script src="assets/js/lib/jquery.min.js" ></script>
+	<!--  Bootstrap 3.0  -->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<script type="text/javascript" src="assets/js/lib/greensock/TweenMax.min.js"></script>
+	<script type="text/javascript" src="assets/js/lib/iscroll-probe.js"></script>
 	<script type="text/javascript" src="assets/js/scrollmagic/minified//ScrollMagic.min.js"></script>
 	<script type="text/javascript" src="assets/js/scrollmagic/minified/plugins/animation.gsap.min.js"></script>
 	<script type="text/javascript" src="assets/js/scrollmagic/minified/plugins/debug.addIndicators.min.js"></script>
 
 	<script type="text/javascript" src="assets/js/jquery.easy_slides.js"></script>
-    <link rel="stylesheet" type="text/css" href="assets/css/jquery.easy_slides.css">
-    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
-    
+	<link rel="stylesheet" type="text/css" href="assets/css/jquery.easy_slides.css">
+	<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+
 </head>
-    <body>
+<body>
 
-	<section id="bgGradient"></section>
-	<section id="bgParallax"></section>
-	<div id="logo"><img class="logoTour img-responsive center-block" src="assets/images/logo.png"></div>
+<section id="bgGradient"></section>
+<section id="bgParallax"></section>
+<div id="logo"><img class="logoTour img-responsive center-block" src="assets/images/logo.png"></div>
 
 
 
-	<section id="section1" class="container">
-		<div class="row objectsmain">
-			<div class="object-left col-xs-4">
+<section id="section1" class="container">
+	<div class="row objectsmain">
+		<div class="object-left col-xs-4">
+		</div>
+		<div class="object-center col-xs-4 row">
+
+			<div id="createGame" class="greenBtn scaleButton col-xs-6">Create</div>
+			<div id="joinGame" class="greenpink scaleButton col-xs-6">JOIN</div>
+		</div>
+		<div class="object-right col-xs-4">
+		</div>
+	</div>
+
+	<div id="naoMain">
+		<img src="assets/images/oona.png">
+	</div>
+
+	<div id="estrellaMain">
+		<img src="assets/images/arturius.png">
+	</div>
+
+</section>
+
+<section id="section2">
+	<div class="slider slider_circle_10">
+		<div id="planet1" class="planets"><img src="assets/images/planets/mathdromeda.png"></div>
+		<div id="planet2" class="planets lock">
+			<span><img src="assets/images/lock.png"></span>
+			<img class="planetImage" src="assets/images/planets/codus.png">
+		</div>
+		<div id="planet3" class="planets lock"><span><img src="assets/images/lock.png"></span><img  class="planetImage"src="assets/images/planets/creat.png"></div>
+		<div id="planet4" class="planets lock"><span><img src="assets/images/lock.png"></span><img  class="planetImage"src="assets/images/planets/geogra.png"></div>
+		<div id="planet5" class="planets lock"><span><img src="assets/images/lock.png"></span><img  class="planetImage"src="assets/images/planets/health.png"></div>
+		<div id="planet6" class="planets lock"><span><img src="assets/images/lock.png"></span><img  class="planetImage"src="assets/images/planets/science.png"></div>
+		<div id="planet7" class="planets lock"><span><img src="assets/images/lock.png"></span><img  class="planetImage"src="assets/images/planets/wordo.png"></div>
+
+		<div class="next_button"><img src="assets/images/arrowYellow.png"></div>
+		<div class="prev_button"><img src="assets/images/arrowYellow.png"></div>
+
+	</div>
+
+	<div class="textSubject titlered"><p>MATH</p></div>
+
+
+	<div class="navButtons">
+		<!--            <img id="backButton1" src="assets/images/backButton.png">
+						<img id="nextButton1" src="assets/images/nextButton.png">
+		-->
+		<div id="backButton1" class="greenpink scaleButton col-xs-6">BACK</div>
+		<div id="nextButton1" class="greenBtn scaleButton col-xs-6">NEXT</div>
+
+	</div>
+
+</section>
+
+<section id="section3">
+	<div class="containerRules">
+		<div class="titlered">Difficulty</div>
+		<div class="rules">
+			<div class="prevDifficulty"><img src="assets/images/arrow_side.png"></div>
+			<div id="difficultyName">EASY</div>
+			<div class="nextDifficulty"><img src="assets/images/arrow_side.png"></div>
+		</div>
+		<div class="col-xs-8 col-xs-offset-2 optionsDifficulty">
+			<div class="col-xs-12 optionChoice">
+				<div id="checkBox1" class="checkBlank" data-type="SUM">
+					<img src="assets/images/blank_check.png">
+					<img class="markCheck" src="assets/images/mark_check.png">
+				</div>
+				<div class="option1">Addition</div>
+				<div class="divisionShape"></div>
+				<div class="showModal" data-type="SUM"><img src="assets/images/plus1.png"></div>
 			</div>
-			<div class="object-center col-xs-4 row">
-
-				<div id="createGame" class="greenBtn col-xs-6">Create</div>
-				<div id="joinGame" class="greenpink col-xs-6">JOIN</div>
-			</div>
-			<div class="object-right col-xs-4">
-			</div>
-		</div>
-
-		<div id="naoMain">
-			<img src="assets/images/oona.png">
-		</div>
-
-		<div id="estrellaMain">
-			<img src="assets/images/arturius.png">
-		</div>
-
-	</section>
-
-	<section id="section2">
-		<div class="slider slider_circle_10">
-			<div id="planet1" class="planets"><img src="assets/images/planets/mathdromeda.png"></div>
-			<div id="planet2" class="planets"><img src="assets/images/planets/codus.png"></div>
-			<div id="planet3" class="planets"><img src="assets/images/planets/creat.png"></div>
-			<div id="planet4" class="planets"><img src="assets/images/planets/geogra.png"></div>
-			<div id="planet5" class="planets"><img src="assets/images/planets/health.png"></div>
-			<div id="planet6" class="planets"><img src="assets/images/planets/science.png"></div>
-			<div id="planet7" class="planets"><img src="assets/images/planets/wordo.png"></div>
-
-			<div class="next_button"><img src="assets/images/arrowYellow.png"></div>
-			<div class="prev_button"><img src="assets/images/arrowYellow.png"></div>
-
-		</div>
-
-		<div class="textSubject titlered">MATH</div>
-
-
-		<div class="navButtons">
-			<!--                <img id="backButton1" src="assets/images/backButton.png">
-							<img id="nextButton1" src="assets/images/nextButton.png">
-			-->
-			<div id="backButton1" class="greenpink col-xs-6">BACK</div>
-			<div id="nextButton1" class="greenBtn col-xs-6">NEXT</div>
-
-		</div>
-
-	</section>
-
-	<section id="section3">
-		<div class="containerRules">
-			<div class="titlered">Difficulty</div>
-			<div class="rules">
-				<div class="prevDifficulty"><img src="assets/images/arrow_side.png"></div>
-				<div>EASY</div>
-				<div class="nextDifficulty"><img src="assets/images/arrow_side.png"></div>
-			</div>
-			<div class="col-xs-8 col-xs-offset-2 optionsDifficulty">
-				<div class="col-xs-12 optionChoice">
-					<div id="checkBox1" class="checkBlank" data-type="SUM">
-						<img src="assets/images/blank_check.png">
-						<img class="markCheck" src="assets/images/mark_check.png">
-					</div>
-					<div class="option1">Addition</div>
-					<div class="divisionShape"></div>
-					<div class="showModal" data-type="SUM"><img src="assets/images/plus1.png"></div>
+			<div class="col-xs-12 optionChoice">
+				<div id="checkBox2" class="checkBlank" data-type="SUB">
+					<img src="assets/images/blank_check.png">
+					<img class="markCheck" src="assets/images/mark_check.png">
 				</div>
-				<div class="col-xs-12 optionChoice">
-					<div id="checkBox2" class="checkBlank" data-type="SUB">
-						<img src="assets/images/blank_check.png">
-						<img class="markCheck" src="assets/images/mark_check.png">
-					</div>
-					<div class="option2">Substraction</div>
-					<div class="divisionShape"></div>
-					<div class="showModal" data-type="SUB"><img src="assets/images/plus2.png"></div>
-
-				</div>
-				<div class="col-xs-12 optionChoice">
-					<div id="checkBox3" class="checkBlank" data-type="MUL">
-						<img src="assets/images/blank_check.png">
-						<img class="markCheck" src="assets/images/mark_check.png">
-					</div>
-					<div class="option3">MULTIPLICATION</div>
-					<div class="divisionShape"></div>
-					<div class="showModal" data-type="MUL"><img src="assets/images/plus3.png"></div>
-				</div>
-				<div class="col-xs-12 optionChoice">
-					<div id="checkBox4" class="checkBlank" data-type="DIV">
-						<img src="assets/images/blank_check.png">
-						<img class="markCheck" src="assets/images/mark_check.png">
-					</div>
-					<div class="option4">DIVISION</div>
-					<div class="divisionShape"></div>
-					<div class="showModal" data-type="DIV"><img src="assets/images/plus4.png"></div>
-
-				</div>
-			</div>
-
-		</div>
-
-		<div id="modalDifficulty">
-			<div class="m-containerDifficulty">
-				<div class="headerDifficulty">
-					<p>MULTIPLICATION</p>
-					<img class="closeButton" src="assets/images/closeButton.png">
-				</div>
-				<div class="choiceOptions">
-
-				</div>
+				<div class="option2">Substraction</div>
+				<div class="divisionShape"></div>
+				<div class="showModal" data-type="SUB"><img src="assets/images/plus2.png"></div>
 
 			</div>
+			<div class="col-xs-12 optionChoice">
+				<div id="checkBox3" class="checkBlank" data-type="MUL">
+					<img src="assets/images/blank_check.png">
+					<img class="markCheck" src="assets/images/mark_check.png">
+				</div>
+				<div class="option3">MULTIPLICATION</div>
+				<div class="divisionShape"></div>
+				<div class="showModal" data-type="MUL"><img src="assets/images/plus3.png"></div>
+			</div>
+			<div class="col-xs-12 optionChoice">
+				<div id="checkBox4" class="checkBlank" data-type="DIV">
+					<img src="assets/images/blank_check.png">
+					<img class="markCheck" src="assets/images/mark_check.png">
+				</div>
+				<div class="option4">DIVISION</div>
+				<div class="divisionShape"></div>
+				<div class="showModal" data-type="DIV"><img src="assets/images/plus4.png"></div>
+
+			</div>
+		</div>
+
+	</div>
+
+	<div id="modalDifficulty">
+		<div class="m-containerDifficulty">
+			<div class="headerDifficulty">
+				<p>MULTIPLICATION</p>
+				<img class="closeButton" src="assets/images/closeButton.png">
+			</div>
+			<div class="choiceOptions">
+
+			</div>
 
 		</div>
 
-
-		<div class="navButtons">
-			<div id="backButton2" class="greenpink col-xs-6">BACK</div>
-			<div id="nextButton2" class="greenBtn col-xs-6">NEXT</div>
-		</div>
-
-	</section>
+	</div>
 
 
-	<section  id="section4">
-		<div class="containerRules">
-			<div class="titlered">Customize</div>
+	<div class="navButtons">
+		<div id="backButton2" class="greenpink scaleButton col-xs-6">BACK</div>
+		<div id="nextButton2" class="greenBtn scaleButton col-xs-6">NEXT</div>
+	</div>
+
+</section>
+
+
+<section  id="section4">
+	<div class="containerRules">
+		<div class="titlered">Customize</div>
+		<div class="row containerCustomize">
 			<div class="col-xs-6 optionsTime">
 				<div class="bgYellow">
 					TIME
@@ -195,108 +199,113 @@
 				</div>
 			</div>
 		</div>
+	</div>
 
 
-		<div class="navButtons">
-			<div id="backButton3" class="redBtn col-xs-6" >BACK</div>
-			<div id="nextButton3" class="greenBtn col-xs-6">SET UP</div>
+	<div class="navButtons">
+		<div id="backButton3" class="redBtn scaleButton col-xs-6" >BACK</div>
+		<div id="nextButton3" class="greenBtn scaleButton col-xs-6">SET UP</div>
+	</div>
+
+</section>
+
+<section id="section5">
+	<div class="containerRules">
+		<div class="titlered">Lobby</div>
+		<div class="containerPin">
+			<div class="bgGreen">PIN</div>
+			<div id="pin"></div>
+			<div class="textShare">Share this number with the other player</div>
+			<div>
+				<div class="yogotarsSelecitons">
+					<div class="yogotarSelect" id="yogotar1">
+						<span class="imageYogotar"></span>
+						<div class="playerName"></div>
+					</div>
+					<div class="yogotarSelect" id="yogotar2">
+						<span class="imageYogotar"></span>
+						<div class="playerName"></div>
+					</div>
+				</div>
+			</div>
 		</div>
+	</div>
+	<div class="navButtons">
+		<div id="StartButton" class="greenBtn" style="opacity: 0.3">START</div>
+	</div>
 
-	</section>
-        
-        <section id="section5">
-        <div class="containerRules">
-            <div class="titlered">Lobby</div>
-            <div class="containerPin">
-                <div class="bgGreen">PIN</div>
-                <div id="pin"></div>
-                <div class="textShare">Share this number with the other player</div>
-                <div>
-                    <div class="yogotarsSelecitons">
-                        <div class="yogotarSelect" id="yogotar1">
-                            <span class="imageYogotar"></span>
-                            <div class="playerName"></div>
-                        </div>
-                        <div class="yogotarSelect" id="yogotar2">
-                            <span class="imageYogotar"></span>
-                            <div class="playerName"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-            <div class="navButtons">
-                <div id="StartButton" class="greenBtn" style="opacity: 0.3">START</div>
-            </div>
-            
-        </section>
-    
-    </body>
-    
-<script type="text/javascript" src="assets/js/modalOptions.js"></script>
+</section>
+
+</body>
+
 <script src="assets/js/operationGenerator.js"></script>
+<script type="text/javascript" src="assets/js/modalOptions.js"></script>
 <script>
 	var server = parent.server;
 	var battleTime = 60000
 	var rule_set = operationGenerator.RULES_SET[current_set]
 	var customRules
-            //$("#logo").hide();
+	//$("#logo").hide();
 
-    $("#createGame").click(function(){
-        $("#logo").hide();
-        $("#section1").css("display","none");
-        $("#section2").css("display","block");
-    });
+	$("#createGame").click(function(){
+		$("#logo").hide();
+		$("#section1").css("display","none");
+		$("#section2").css("display","block");
+	});
 
 	$("#joinGame").click(function(){
 		window.open("../mathClient/index.html", "_self")
 	});
-                    
-    $("#backButton1").click(function(){
-        $("#logo").show();
-        $("#section1").css("display","block");
-        $("#section2").css("display","none");
-    });
-                    
-    $("#nextButton1").click(function(){
-        $("#section3").css("display","block");
-        $("#section2").css("display","none");
-    });
-                    
-    $("#backButton2").click(function(){
-        $("#section2").css("display","block");
-        $("#section3").css("display","none");
-    });
-                    
-    $("#nextButton2").click(function(){
 
-    	customRules = {}
+	$("#backButton1").click(function(){
+		$("#logo").show();
+		$("#section1").css("display","block");
+		$("#section2").css("display","none");
+	});
 
-		for(var i = 1;i<=4;i++){
-			var selected = $("#checkBox" + i).attr("selection");
-			var type = $("#checkBox" + i).data("type")
+	$("#nextButton1").click(function(){
+		$("#section3").css("display","block");
+		$("#section2").css("display","none");
+	});
 
-			if(selected === "1"){
-				customRules[type] = rule_set[type]
-				console.log(type, selected, rule_set[type])
+	$("#backButton2").click(function(){
+		$("#section2").css("display","block");
+		$("#section3").css("display","none");
+	});
+
+	$("#nextButton2").click(function(){
+
+		customRules = {}
+
+		for(var i = 1;i<=OPERATORS.length;i++){
+			var ruleSetOperator = difficultSet[OPERATORS[i-1]]
+
+			if(!operatorsObject[current_set][OPERATORS[i-1]].disable) {
+				customRules[OPERATORS[i-1]] = []
+				var customRulesOperator = customRules[OPERATORS[i-1]]
+				for (var j = 1; j <= ruleSetOperator.length; j++) {
+					if (!ruleSetOperator[j - 1].disable)
+						customRulesOperator.push(ruleSetOperator[j - 1])
+				}
 			}
+
 		}
 
 		console.log(customRules)
 
-        $("#section4").css("display","block");
-        $("#section3").css("display","none");
-    });
-                    
-    $("#backButton3").click(function(){
-        $("#section3").css("display","block");
-        $("#section4").css("display","none");
-    });
+		$("#section4").css("display","block");
+		$("#section3").css("display","none");
+	});
 
-    function showYogotar(event) {
+	$("#backButton3").click(function(){
+		$("#section3").css("display","block");
+		$("#section4").css("display","none");
+	});
 
-    	console.log("showYogotar")
-    	var numPlayer = event.numPlayer, player = event.player
+	function showYogotar(event) {
+
+		console.log("showYogotar")
+		var numPlayer = event.numPlayer, player = event.player
 		$("#yogotar" + numPlayer).find(".imageYogotar").html("<img src=\"assets/yogotars/" + player.avatar +".png\">")
 		$("#yogotar" + numPlayer).find(".playerName").html(player.nickname)
 
@@ -307,11 +316,11 @@
 		console.log("gameReady")
 		$("#StartButton").css("opacity", 1)
 	}
-                    
-    $("#nextButton3").click(function(){
-        
-        $("#section5").css("display","block");
-        $("#section4").css("display","none");
+
+	$("#nextButton3").click(function(){
+
+		$("#section5").css("display","block");
+		$("#section4").css("display","none");
 
 		var currentID = server.getIdGame()
 		function onStart() {
@@ -322,23 +331,23 @@
 		server.start(currentID, onStart, {battleTime:battleTime, rules:customRules});
 		server.addEventListener("onInitPlayer", showYogotar);
 		server.addEventListener('onPlayersReady', onPlayersReady);
-    });
-    
-    $("#StartButton").click(function(){
+	});
+
+	$("#StartButton").click(function(){
 		if(gameReady) {
 			server.removeEventListener('onPlayersReady', onPlayersReady);
 			server.removeEventListener('onInitPlayer', showYogotar);
 			window.open("battle.html", "_self")
 		}
-    });
-                                    
-   $(document).ready(function() {
-     $('.slider_circle_10').EasySlides({'autoplay': false, 'show': 13})
-   });
-        $("#section2").css("display","none");
-        $("#section3").css("display","none");
-        $("#section4").css("display","none");
-        $("#section5").css("display","none");
+	});
+
+	$(document).ready(function() {
+		$('.slider_circle_10').EasySlides({'autoplay': false, 'show': 13})
+	});
+	$("#section2").css("display","none");
+	$("#section3").css("display","none");
+	$("#section4").css("display","none");
+	$("#section5").css("display","none");
 
 	var counterTime = 1;
 
@@ -372,7 +381,23 @@
 			$("#roundOptions").find("span").text(counterRound);
 		}
 	});
-    
+
+	//animations
+	$(".scaleButton").mouseover(function(){
+		TweenMax.fromTo(this,0.5,{scale:1},{scale:1.1,ease:Elastic.easeOut});
+	});
+
+	$(".scaleButton").mouseout(function(){
+		TweenMax.fromTo(this,0.5,{scale:1.1},{scale:1,ease:Elastic.easeOut});
+	});
+
+	$(".scaleButton").mousedown(function(){
+		TweenMax.fromTo(this,0.5,{scale:1},{scale:0.9,ease:Elastic.easeOut});
+	});
+	$(".scaleButton").mouseup(function(){
+		TweenMax.fromTo(this,0.5,{scale:0.9},{scale:1,ease:Elastic.easeOut});
+	});
+
 </script>
-    
+
 </html>

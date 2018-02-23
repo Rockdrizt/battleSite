@@ -122,12 +122,40 @@ Usage:
                 icount = i - nextslide ;
                 while (icount < 0) {
                   icount = icount + count;
+                    
                 };
                 
                 while (icount > count) {
                   icount = icount - count;
                 };
-    
+                  
+                  switch(nextslide % 7){
+                      case 0:
+                          $(".textSubject").text("MATH")
+                          break;
+                      case 1:
+                          $(".textSubject").text("CODE")
+                          break;
+                      case 2:
+                          $(".textSubject").text("CREATIVITY")
+                          break;
+                      case 3:
+                          $(".textSubject").text("GEOGRAPHY")
+                          break;
+                      case 4:
+                          $(".textSubject").text("HEALTH")
+                          break;
+                      case 5:
+                          $(".textSubject").text("SCIENCE")
+                          break;
+                      case 6:
+                          $(".textSubject").text("LANGUAGE")
+                          break;
+                  }
+                  
+                  
+                  
+                
                 if (icount == 0) {
                   cssclass = 'active';
                   $(this_slider).find('.' + cssclass+ ':not(.nav_indicators ul li)').removeClass(cssclass);
@@ -185,6 +213,7 @@ Usage:
         $(this_slider).find('.next_button').click(function() {
           EasySlidesCanChange = true;
           EasySlidesNext();
+            
         });
         $(this_slider).find('.prev_button').click(function() {
           EasySlidesCanChange = true;

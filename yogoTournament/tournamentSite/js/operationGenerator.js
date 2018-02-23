@@ -65,34 +65,6 @@ var operationGenerator = function () {
 				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.operand2},
 			],
 			DIV:[
-				{operand1X: 2, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 2, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.operand2},
-			]
-		},
-
-		MEDIUM:{
-			SUM:[
-				{operand1X: 2, operand2Const: 10, minRange:20, maxRange: 109, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 2, operand2X: 2, minRange:20, maxRange: 50, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 2, operand2X: 2, minRange:20, maxRange: 50, paramToAnswer:OPERATION_PARAMS.operand2},
-				{operand1X: 2, operand2X: 2, minRange:51, maxRange: 198, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 2, operand2X: 2, minRange:51, maxRange: 198, paramToAnswer:OPERATION_PARAMS.result},
-			],
-			SUB:[
-				{operand1X: 2, operand2Const: 10, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 2, operand2X: 2, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 2, operand2X: 2, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.operand2},
-				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.operand2},
-			],
-			MUL:[
-				{operand1X: 2, operand2Const: 10, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 2, operand2X: 2, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 2, operand2X: 2, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.operand2},
-				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.operand2},
-			],
-			DIV:[
 				{operand1X: 2, operand2X: 1, paramToAnswer:OPERATION_PARAMS.result},
 				{operand1X: 2, operand2X: 1, paramToAnswer:OPERATION_PARAMS.operand2},
 			]

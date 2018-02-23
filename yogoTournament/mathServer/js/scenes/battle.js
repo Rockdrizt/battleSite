@@ -128,6 +128,8 @@ var battle = function(){
 		]
     }
 
+    var COLORS = {maxEnery:0x08ff03, midEnergy:0xcccd05, lowEnergy:0xff180a, tiltRed:0x7a2c14}
+
     var NUM_LIFES = 3
     var NUM_OPTIONS = 3
     var MAX_HP = 100
@@ -229,6 +231,10 @@ var battle = function(){
 	var timerGroup
 	var equationGroup
 	var timerEnded
+	var onBattle
+	var tweenReady1
+	var timesUp
+	var lastRound
 
     function loadSounds(){
 
@@ -270,6 +276,7 @@ var battle = function(){
 		questionCounter = 1
 		timeElapsed = 0
 		startTimer = false
+		onBattle = false
         
         sceneGroup.alpha = 0
         game.add.tween(sceneGroup).to({alpha:1},400, Phaser.Easing.Cubic.Out,true);
@@ -289,7 +296,7 @@ var battle = function(){
 
     }
 
-    function tweenTint(obj, startColor, endColor, time, delay, callback) {
+    function tweenTint(obj, startColor, endColor, time, delay, callback, loop) {
         // check if is valid object
         time = time || 250
         delay = delay || 0
@@ -310,6 +317,11 @@ var battle = function(){
                 colorTween.onComplete.add(callback, this);
             }
             // finally, start the tween
+
+			if(loop){
+            	colorTween.yoyo(true).loop(true)
+			}
+
             colorTween.start();
         }
     }
@@ -624,6 +636,16 @@ var battle = function(){
 		hpBg.y = -34
 		hpBg.x = -HP_BAR_WIDTH * 0.5
 
+		var heartBg = game.add.graphics()
+		heartBg.beginFill(0xffffff)
+		heartBg.drawRoundedRect(0,0, 80, 70, 27)
+		heartBg.endFill()
+		hpGroup.add(heartBg)
+		heartBg.x = -210
+		heartBg.y = -55
+		heartBg.color = COLORS.maxEnery
+		heartBg.tint = heartBg.color
+
 		var heart = hpGroup.create(-170, -20, 'atlas.battle', 'heart')
 		heart.anchor.setTo(0.5, 0.5)
 
@@ -645,6 +667,18 @@ var battle = function(){
 			game.add.tween(hpBg).to({width:newWidth}, 1000, Phaser.Easing.Cubic.Out, true)
 
 			this.healthText.text = this.health + "/" + MAX_HP
+
+			if((this.health < MAX_HP * 0.7)&&(this.health > MAX_HP * 0.3)&&(heartBg.color !== COLORS.midEnergy)) {
+				heartBg.color = COLORS.midEnergy
+				tweenTint(heartBg, COLORS.maxEnery, COLORS.midEnergy, 1000)
+			}
+			else if((this.health <= MAX_HP * 0.3)&&(heartBg.color !== COLORS.lowEnergy)){
+				heartBg.color = COLORS.lowEnergy
+				tweenTint(heartBg, COLORS.midEnergy, COLORS.lowEnergy, 1000, 0, function () {
+					tweenTint(heartBg, COLORS.lowEnergy, COLORS.tiltRed, 1000, 0, null, true)
+				})
+			}
+
 			// game.add.tween(this.healthText.scale).to({x:1.2 * scale, y:1.2}, 200, Phaser.Easing.Cubic.Out, true).yoyo(true)
 		}
 
@@ -910,12 +944,12 @@ var battle = function(){
 
 		game.load.image('round',"images/battle/shout_round.png")
 		game.load.image('start',"images/battle/shout_start.png")
+		game.load.image('lastRound',"images/battle/last_round.png")
+		game.load.image('timesUp',"images/battle/times_up.png")
 		game.load.bitmapFont('WAG', 'fonts/WAG.png', 'fonts/WAG.xml');
         game.load.spritesheet("hand", 'images/spines/Tuto/manita.png', 115, 111, 23)
 		game.load.image('retry',"images/battle/retry" + localization.getLanguage() + ".png")
 		game.load.image('share',"images/battle/share" + localization.getLanguage() + ".png")
-
-		game.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
         
 		// buttons.getImages(game)
 		// console.log(parent.isKinder)
@@ -1011,6 +1045,7 @@ var battle = function(){
 	}
 
     function showReadyGo() {
+		onBattle = false
 		if(timerEnded){
 			var gameFinished = checkWins()
 			if(gameFinished)
@@ -1018,7 +1053,7 @@ var battle = function(){
 		}
 
 		sound.play("swipe")
-    	var tweenReady1 = game.add.tween(roundGroup).to({alpha:1}, 600, Phaser.Easing.Cubic.Out, true)
+    	tweenReady1 = game.add.tween(roundGroup).to({alpha:1}, 600, Phaser.Easing.Cubic.Out, true)
 		game.add.tween(roundGroup.scale).from({x:0.5, y:0.5}, 600, Phaser.Easing.Back.Out, true)
 		var tweenReady2 = game.add.tween(roundGroup).to({alpha:0}, 200, Phaser.Easing.Cubic.Out, null, 1000)
 
@@ -1153,6 +1188,8 @@ var battle = function(){
 	}
 
 	function checkAnswer(event) {
+		onBattle = true
+
 		game.add.tween(answersGroup).to({y:game.world.height}, 500, Phaser.Easing.Cubic.Out, true)
 		sound.play("swipe")
 
@@ -1555,6 +1592,13 @@ var battle = function(){
 		var round = roundGroup.create(0, 0, "round")
 		round.anchor.setTo(0.5, 0.5)
 
+		lastRound = sceneGroup.create(game.world.centerX, game.world.centerY, "lastRound")
+		lastRound.anchor.setTo(0.5, 0.5)
+		timesUp = sceneGroup.create(game.world.centerX, game.world.centerY, "timesUp")
+		timesUp.anchor.setTo(0.5, 0.5)
+		lastRound.alpha = 0
+		timesUp.alpha = 0
+
 		var fontStyle = {font: "110px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", align: "center"}
 		var roundText = game.add.text(180, -20, questionCounter, fontStyle)
 		roundText.anchor.setTo(0.5, 0.5)
@@ -1719,11 +1763,18 @@ var battle = function(){
 	}
 
 	function checkWins() {
-		if(players[0].hpBar.winCounter === players[1].hpBar.winCounter)
+		if((players[0].hpBar.winCounter === players[1].hpBar.winCounter)||(onBattle))
 			return
 
+		tweenReady1.stop()
+		roundGroup.alpha = 0
+		go.alpha = 0
 		var playerWin = players[0].hpBar.winCounter > players[1].hpBar.winCounter ? players[0] : players[1]
-		winPlayer(playerWin)
+
+		game.add.tween(timesUp).to({alpha:1}, 600, Phaser.Easing.Cubic.Out, true)
+		game.add.tween(timesUp.scale).from({x:0.5, y:0.5}, 600, Phaser.Easing.Back.Out, true)
+		var tweenDissapear = game.add.tween(timesUp).to({alpha:0}, 600, Phaser.Easing.Cubic.Out, true, 1400)
+		tweenDissapear.onComplete.add(winPlayer.bind(null, playerWin))
 
 		if(server)
 			server.removeEventListener('onTurnEnds', checkAnswer)
@@ -1780,7 +1831,7 @@ var battle = function(){
 
         	// game.camera.bounds = new Phaser.Rectangle(-200,0,game.world.width + 200,game.world.height)
 			// console.log(game.camera.bounds)
-			battleTime = server ? server.currentData.time : 20000
+			battleTime = server ? server.currentData.time : 10000
         	sceneGroup = game.add.group();
             //yogomeGames.mixpanelCall("enterGame",gameIndex);
 

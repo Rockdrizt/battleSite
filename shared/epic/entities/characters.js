@@ -35,12 +35,10 @@ var charactersEntity = function () {
 
 	function preloadCards(scene, cards) {
 		var imageList = scene.assets.images
-		console.log(cards, "cards")
 		for(var pcardIndex = 0; pcardIndex < cards.length; pcardIndex++){
 			var name = cards[pcardIndex].id
-			var data = epicCharacters[name]
 			console.log(name, "playerCard")
-			var path = data.directory
+			var path = epicCharacters[name].directory
 			var yogotarReplace = name.replace("yogotar", "")
 			yogotarReplace = yogotarReplace.charAt(0).toLowerCase() + yogotarReplace.slice(1)
 			console.log(yogotarReplace)
@@ -52,22 +50,20 @@ var charactersEntity = function () {
 	}
 	
 	function getCard(card) {
-		var data = epicCharacters[card.id]
-
 		var cardGroup = game.add.group()
-		var cardBg = cardGroup.create(0,0, "atlas.cards", "t_" + data.stats.element)
+		var cardBg = cardGroup.create(0,0, "atlas.cards", "t_" + card.data.stats.element)
 		cardBg.anchor.setTo(0.5, 0.5)
 
 		var cardImage = cardGroup.create(0,0, card.id + "Card")
 		cardImage.anchor.setTo(0.5, 0.5)
 		cardImage.scale.setTo(0.8, 0.8)
-		cardImage.scale.x = data.visuals.cardFacing === "right" ? cardImage.scale.x * 1 : cardImage.scale.x * -1
+		cardImage.scale.x = card.data.visuals.cardFacing === "right" ? cardImage.scale.x * 1 : cardImage.scale.x * -1
 
 		var star = cardGroup.create(-78, -120, "atlas.cards", "star")
 		star.anchor.setTo(0.5, 0.5)
 		star.scale.setTo(0.8, 0.8)
 
-		var element = cardGroup.create((-256 + 55) * 0.5, (310 -20) * 0.5, "atlas.cards", "e_" + data.stats.element)
+		var element = cardGroup.create((-256 + 55) * 0.5, (310 -20) * 0.5, "atlas.cards", "e_" + card.data.stats.element)
 		element.anchor.setTo(0, 1)
 		element.scale.setTo(0.6, 0.6)
 
