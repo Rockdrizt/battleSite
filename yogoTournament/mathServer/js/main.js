@@ -7,6 +7,8 @@ function startGame(){
 
 	window.game = new Phaser.Game(document.body.clientWidth, document.body.clientHeight, Phaser.CANVAS, null, {init: init, create: create }, true, true);
     document.body.style.visibility = "hidden"
+
+	var battleScene
    
 	function preloadScenes(sceneList){
 
@@ -83,6 +85,8 @@ function startGame(){
 			// onUpdate: null
 		});
 
+		battleScene = window.innerHeight > window.innerWidth ? battleMobile : battle
+
         // var language = "EN"
         // if(window.location.search){
         //     var params = window.location.search.trim(1)
@@ -129,8 +133,8 @@ function startGame(){
 		// selectCards.setCharacters(enemyCards, selectedCards)
 
 		vs.setCharacters(cards)
-		battle.setCharacters(cards)
-		battle.setBackground()
+		battleScene.setCharacters(cards)
+		battleScene.setBackground()
 
         window.minigame.game = window.game
     	sceneloader.init(game)
@@ -142,7 +146,7 @@ function startGame(){
     	preloadScenes([
            // preloaderIntro,
 			selectCards,
-    		battle,
+    		battleScene,
 			vs,
             //result,
     	])

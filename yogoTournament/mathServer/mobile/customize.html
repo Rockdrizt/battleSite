@@ -1,0 +1,165 @@
+<!doctype html>
+<html>
+<head>
+    <title class="languageTitle">Yogome tournament</title>
+    <meta name="viewport" content="width = 1050, user-scalable = no" />
+    <meta charset="UTF-8">   
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/dificulty.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/customize.css" />
+    <!-- Jquery   -->
+    <script src="assets/js/lib/jquery.min.js" ></script>
+    <!--  Bootstrap 3.0  -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+    
+    <script type="text/javascript" src="assets/js/lib/greensock/TweenMax.min.js"></script>
+    <script type="text/javascript" src="assets/js/lib/iscroll-probe.js"></script>
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    
+    <script src="assets/js/Carousel.js"></script>
+    
+    <script>
+    $(document).ready(function() {
+        $('.carousel-container').carousel({
+            num: 1,
+            maxWidth: 450,
+            maxHeight: 450,
+            distance: 100,
+            scale: 0.6,
+            animationTime: 500,
+            autoPlay: false,
+            distance: 100
+        });
+    });
+    </script>
+    
+</head>
+    
+<body>
+     
+    <section id="bgGradient"></section>
+    
+    <div class="container font-luckiest">
+        
+        <div class="banner">CUSTOMIZE</div>
+        
+        <div class="menu-container">
+            
+            <div class="condition-container">
+                
+                <div class="condition-header">
+                    <span style="color: dimgrey">TIME</span>
+                </div>
+                
+                <div class="condition-body">
+                    
+                    <div class="col-xs-3 sub-grid">
+                        <div class="less-time"></div>
+                    </div>
+
+                    <div class="col-xs-6 sub-grid" style="display: initial">
+                        <div class="time-image"></div>
+                        <div id="time" style="font-size: 9vw">3:00</div>
+                        <div style="font-size: 5vw">minutes</div>
+                    </div>
+
+                    <div class="col-xs-3 sub-grid">
+                        <div class="more-time"></div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+            <div class="condition-container">
+                
+                <div class="condition-header" style="background-image: url('assets/images/titleRound.png');">
+                    <span>ROUNDS</span>
+                </div>
+                
+                <div class="condition-body">
+                    <div class="col-xs-3 sub-grid">
+                        <div class="less-rounds"></div>
+                    </div>
+
+                    <div class="col-xs-6 sub-grid">
+                        <div class="round-image" id="round"><span>3</span></div>
+                    </div>
+
+                    <div class="col-xs-3 sub-grid">
+                        <div class="more-rounds"></div>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <div class="object-center">
+
+            <button class="menuBtn red-btn" type="button" onclick="window.location.href='selectDifficult.html'">BACK</button>
+            
+            <button class="menuBtn green-btn" type="button" onclick="window.location.href='lobby.html'" style="font-size: 5.5vw;">CREATE ROOM</button>
+
+        </div>
+        
+    </div>
+
+
+<script>
+    var round = 3
+    var time = 3
+
+    $(".less-rounds").click(function(){
+
+        if(round > 1)
+            round--
+        else
+            round = 10
+        $("#round").text(round);
+    });
+
+    $(".more-rounds").click(function(){
+
+        if(round < 10)
+            round++
+        else 
+            round = 1
+        $("#round").text(round);
+    });
+
+    
+    $(".less-time").click(function(){
+
+        if(time > 1)
+            time--
+        else
+            time = 10
+        $("#time").text(time + ':00');
+    });
+
+    $(".more-time").click(function(){
+
+        if(time < 10)
+            time++
+        else 
+            time = 1
+        $("#time").text(time + ':00');
+    });
+    
+</script>
+    
+</body>       
+</html>
+
+
+        
+    
+
+
+
+

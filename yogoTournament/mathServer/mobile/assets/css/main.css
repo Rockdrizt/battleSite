@@ -1,0 +1,278 @@
+html{
+    height: 100%;
+}
+
+
+
+
+body{
+    position: absolute;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background: #18167a;
+    overflow: hidden;
+    background:linear-gradient(to bottom, rgb(89,0,128) 0%,rgb(73,132,204)  100%);
+}
+
+#bgGradient{
+    position: fixed;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    margin:0;
+    background-image: url("../images/bgmain.png");
+    background-position: center;    
+    opacity: 0.1;
+}
+
+
+#logo{
+    position: fixed;
+    width: 100%;
+    
+}
+
+.logoTour{
+    padding: 3vw;
+    width: 100%;
+    max-width: 900px !important;
+    padding-top: 10%;
+}
+
+.object-left{
+    
+    background-image: url("../images/tower-left.png");
+    transform: scale(1.5);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    bottom: 25%;
+    left: -15%;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: contain;
+}
+
+.object-right{
+    
+    background-image: url("../images/tower-right.png");
+    transform: scale(1.5);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    bottom: 25%;
+    right: -15%;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: contain;
+}
+
+.object-center{
+    width: 100%;
+    text-align: center;
+    height: 50%;
+    top: 5%;
+    z-index: 2;
+}
+
+.yogo-nao{
+    
+    background-image: url("../images/nao.png");
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: contain;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 30%;
+}
+
+.yogo-estrella{
+    
+    background-image: url("../images/estrella.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    right: 30%;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: contain;
+}
+
+.yogo-oona{
+    
+    background-image: url("../images/oona.png");
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: contain;
+    position: absolute;
+    height: 20%;
+    width: 100%;
+    top: 20%;
+    left: 10%;
+    transform: scale(1.3);
+}
+
+.yogo-arturius{
+    
+    background-image: url("../images/arturius.png");
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: contain;
+    position: absolute;
+    height: 30%;
+    width: 100%;
+    top: 20%;
+    right: 10%;
+}
+
+.yogotar{
+    position: absolute;
+    width: 50%;
+    top: 20%;
+    transform: scale(1.5);
+}
+
+.yogotar img{
+    width: 100%;
+    max-width: 250px;
+}
+
+.container{
+    position: absolute;
+    width: 100% !important;
+    height: 100% !important;
+    left:0%;
+    margin:0% !important;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.menuBtn {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border-style: none;
+    display:inline-block;
+    position: relative;
+    cursor:pointer;
+    width: 100%;
+    height: 22%;
+    text-align: center;
+}
+
+.green-btn{
+    background-image: url("../images/greenButton.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: transparent;
+    border-style: none;
+    padding: 2vw;
+    z-index: 5;
+    cursor: pointer;
+    color:#FFF;
+    font-size: 8vw;
+   
+}
+
+.pink-btn{
+    background-image: url("../images/pinkButton.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: transparent;
+    border-style: none;
+    padding: 2vw;
+    z-index: 5;
+    cursor: pointer;
+    color:#FFF;
+    font-size: 8vw;
+}
+
+.red-btn{
+    background-image: url("../images/redButton.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: transparent;
+    border-style: none;
+    padding: 2vw;
+    z-index: 5;
+    cursor: pointer;
+    color:#FFF;
+    font-size: 8vw;
+}
+
+
+.carousel-container {
+    height: 20%;
+    margin: 20% auto;
+    margin-bottom: 15%;
+}
+
+.carousel-container ul {}
+
+.carousel-container ul li {
+    /* transition: width .5s, height .5s, top .5s, left .5s;
+        -webkit-transition: width .5s, height .5s, top .5s, left .5s;
+        */
+    border: none;
+}
+
+.carousel-container ul li img {}
+
+.left{
+    cursor: pointer;
+    width: 15%;
+    left: -10%; 
+    padding-top: 60%;
+}
+
+.right {
+    cursor: pointer;
+    width: 15%;
+    transform: scaleX(-1);
+    right: -10%; 
+    padding-top: 60%;
+}
+
+.banner{
+    background-image: url("../images/bannerBlue.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 20%;
+    margin: 10% 15%;
+    font-size: 12vw;
+    color:#345468;
+    padding-top: 12%;
+}
+
+.font-luckiest{
+    font-family: 'Luckiest Guy', cursive !important;
+    color: white;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

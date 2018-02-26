@@ -1,0 +1,127 @@
+
+.menu-container{
+    height: 60%;
+    background-color: #cc00ff;
+}
+
+.condition-container{
+
+    height: 50%;
+    width: 100%;
+}
+
+.condition-header{
+    background-image: url("../images/titleTime.png");
+    background-repeat: no-repeat;
+    background-size: 60% 100%;
+    padding: 1vw;
+    background-position: center;
+    height: 20%;
+    text-align: center;
+    margin: 0% 10%;
+    font-size: 7vw;
+}
+
+.condition-body{
+    width: 100%;
+    height: 80%;
+}
+
+.more-time{
+    background-image: url(../images/time_more.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border-style: none;
+    width: 70%;
+    height: 100%;
+    margin-left: 20%;
+    font-size: 20vw;
+}
+
+.less-time{
+    background-image: url(../images/time_less.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border-style: none;
+    width: 70%;
+    height: 100%;
+    margin-left: 20%;
+    font-size: 20vw;
+}
+
+.more-rounds{
+    background-image: url(../images/round_arrow.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border-style: none;
+    width: 70%;
+    height: 100%;
+    margin-left: 20%;
+    transform: scaleX(-1);
+}
+
+.less-rounds{
+    background-image: url(../images/round_arrow.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border-style: none;
+    width: 70%;
+    height: 100%;
+    margin-left: 20%;
+}
+
+.round-image{
+    background-image: url(../images/round.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border-style: none;
+    width: 100%;
+    height: 50%;
+    margin-top: 30%;
+    font-size: 20vw;
+}
+
+.time-image{
+    background-image: url(../images/clock.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border-style: none;
+    width: 100%;
+    height: 40%;
+    margin-top: 5%;
+}
+
+.title-container{
+     background-color: darkseagreen;
+}
+
+.bottom-container{
+     background-color: lightskyblue;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

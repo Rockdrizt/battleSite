@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+    <title class="languageTitle">Yogome tournament</title>
+    <meta name="viewport" content="width = 1050, user-scalable = no" />
+    <meta charset="UTF-8">   
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+    <!-- Jquery   -->
+    <script src="assets/js/lib/jquery.min.js" ></script>
+    <!--  Bootstrap 3.0  -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+    
+    <script type="text/javascript" src="assets/js/lib/greensock/TweenMax.min.js"></script>
+    <script type="text/javascript" src="assets/js/lib/iscroll-probe.js"></script>
+    
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    
+    <script src="assets/js/Carousel.js"></script>
+    
+    <script>
+    $(document).ready(function() {
+        $('.carousel-container').carousel({
+            num: 3,
+            maxWidth: 450,
+            maxHeight: 450,
+            distance: 180,
+            scale: 0.4,
+            animationTime: 500,
+            autoPlay: false,
+        });
+    });
+    </script>
+
+</head>
+    
+<body>
+     
+    <section id="bgGradient"></section> 
+    
+     <div class="container font-luckiest">
+            
+    <div class="carousel-container">
+        <ul>
+            <div id="load-planets"></div>
+            <li>
+                <img src="assets/images/planets/codus.png" alt="" />
+            </li>
+            <li>
+                <img src="assets/images/planets/creat.png" alt="" />
+            </li>
+            <li>
+                <img src="assets/images/planets/health.png" alt="" />
+            </li>
+            <li>
+                <img src="assets/images/planets/geogra.png" alt="" />
+            </li>
+            <li>
+                <img src="assets/images/planets/wordo.png" alt="" />
+            </li>
+            <li>
+                <img src="assets/images/planets/mathdromeda.png" alt="" />
+            </li>
+            <li>
+                <img src="assets/images/planets/science.png" alt="" />
+            </li>
+            <img src="assets/images/arrowYellow.png" class="left">
+            <img src="assets/images/arrowYellow.png" class="right">
+        </ul>
+    </div>
+        
+        <div class="banner" id="subject">CODING</div>
+        
+        <div class="object-center" style="display: flex;">
+
+            <button class="menuBtn red-btn" type="button" onclick="window.location.href='index.html'">BACK</button>
+            
+            <button class="menuBtn green-btn" type="button" onclick="window.location.href='selectDifficult.html'">NEXT</button>
+            
+        </div>
+        
+    </div>
+        
+</body> 
+    
+<script>
+        
+    var index = 0;
+    
+    var subjectList = ['CODING', 'CREATIVITY', 'HEALTH', 'GEOGRAPHY', 'LANGUAGE', 'MATH', 'SCIENCE']
+    
+    $(".left").on('touchstart', function(){
+        if(index > 0){
+            index--
+        }
+        else{
+            index = subjectList.length - 1
+        }
+        $("#subject").text(subjectList[index]);
+    });
+    
+    $(".right").on('touchstart', function(){
+        if(index < subjectList.length -1){
+            index++
+        }
+        else{
+            index = 0
+        }
+        $("#subject").text(subjectList[index]);
+    });
+        
+</script>
+</html>

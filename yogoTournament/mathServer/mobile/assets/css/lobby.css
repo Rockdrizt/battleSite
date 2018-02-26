@@ -1,0 +1,101 @@
+
+
+.title-container{
+    
+}
+
+.bottom-container{
+    
+}
+
+.pin-container{
+    width: 100%;
+    height: 60%;
+    align-items: center;
+    text-align: center;
+}
+
+.pin-title{
+    background-image: url("../images/titlePin.png");
+    background-repeat: no-repeat;
+    background-size: 90% 100%;
+    padding: 3vw;
+    background-position: center;
+    height: 15%;
+    text-align: center;
+    margin: 0% 10%;
+    font-size: 9vw;
+}
+
+.pin-title span{
+   
+}
+
+.pin-body{
+    width: 80%;
+    height: 70%;
+    align-items: center;
+    background-color: #00ff78;
+    background-image: url("../images/dots.png");
+    text-align: center;
+    margin-left: 10%;
+    border-radius: 6vw;
+}
+
+.pin-style{
+    background-color: white;
+    padding-top: 5%;
+    font-size: 15vw;
+    color: #006837;
+    margin: 0% 10%;
+    transform: translateY(10%);
+    border-radius: 6vw;
+}
+
+.share-style{
+    font-size: 4vw; 
+    margin: 5%;
+    color: #184831;
+}
+
+.yogo-container{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 12vh;
+    background-color: white;
+    border: none;
+    height: 12vh;
+    display: inline-block;
+    margin: 1vh 2vh;
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24);
+}
+
+.mini{
+    padding-top: 30%;
+    color: #184831;
+}
+
+.players-container{
+    font-size: 3vw;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    margin: 0% 15%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
