@@ -2,25 +2,16 @@
 
 {
 	"filename": "button2",
-	"frame": {"x":1,"y":1,"w":360,"h":139},
+	"frame": {"x":1,"y":1,"w":340,"h":161},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":360,"h":139},
-	"sourceSize": {"w":360,"h":139},
-	"pivot": {"x":0.5,"y":0.5}
-},
-{
-	"filename": "sign",
-	"frame": {"x":363,"y":67,"w":68,"h":54},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":68,"h":54},
-	"sourceSize": {"w":68,"h":54},
+	"spriteSourceSize": {"x":0,"y":0,"w":340,"h":161},
+	"sourceSize": {"w":340,"h":161},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
 	"filename": "star",
-	"frame": {"x":363,"y":1,"w":64,"h":64},
+	"frame": {"x":1,"y":164,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
@@ -29,7 +20,7 @@
 },
 {
 	"filename": "stopwatch",
-	"frame": {"x":433,"y":67,"w":57,"h":64},
+	"frame": {"x":133,"y":164,"w":57,"h":64},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":4,"y":0,"w":57,"h":64},
@@ -37,8 +28,17 @@
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
+	"filename": "texture",
+	"frame": {"x":343,"y":1,"w":112,"h":128},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":112,"h":128},
+	"sourceSize": {"w":112,"h":128},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
 	"filename": "wrong",
-	"frame": {"x":429,"y":1,"w":64,"h":64},
+	"frame": {"x":67,"y":164,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
@@ -50,8 +50,8 @@
 	"version": "1.0",
 	"image": "atlas.png",
 	"format": "RGBA8888",
-	"size": {"w":494,"h":141},
+	"size": {"w":456,"h":229},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:7a96cf2b57f29a308e82a2471ec8e99e:ed5782021d1c9d3f11e58b8a585ae52b:cbce6b53f0f49e0bf15173c25c41f876$"
+	"smartupdate": "$TexturePacker:SmartUpdate:fb33824c593f8638ce4e3db678a12530:d68ad7ea49028652935e0bcef750ddf0:cbce6b53f0f49e0bf15173c25c41f876$"
 }
 }

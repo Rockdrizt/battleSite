@@ -193,6 +193,7 @@ var operations = function(){
 
 	function createGameObjects(){
 		optionsGroup = game.add.group()
+		optionsGroup.y = 30
 		sceneGroup.add(optionsGroup)
 
 		pullGroup = game.add.group()
@@ -200,6 +201,7 @@ var operations = function(){
 		pullGroup.y = -game.world.centerY * 2
 		sceneGroup.add(pullGroup)
 		pullGroup.alpha = 0
+		var fontStyle = {font: "72px VAGRounded", fontWeight: "bold", fill: "#603000", align: "center"}
 
 		for(var optionIndex = 0; optionIndex < MAX_OPTIONS; optionIndex++){
 			var button = game.add.group()
@@ -207,7 +209,6 @@ var operations = function(){
 
 			var buttonImg = button.create(0, 0, "atlas.operations", "button2")
 			buttonImg.anchor.setTo(0.5, 0.5)
-			var fontStyle = {font: "72px VAGRounded", fontWeight: "bold", fill: "#000000", align: "center"}
 			var buttonText = game.add.text(0,0,"0", fontStyle)
 			buttonText.anchor.setTo(0.5, 0.5)
 			button.add(buttonText)
@@ -349,9 +350,9 @@ var operations = function(){
 
 	function generateEquation(){
 		if(clientData.operator === "/"){
-			equationGroup.equationText.text = clientData.operand2 + "ƒ" + clientData.operand1 + " =" + clientData.result
+			equationGroup.equationText.text = clientData.operand1 + " ÷ " + clientData.operand2 + " = " + clientData.result
 		}else{
-			equationGroup.equationText.text = clientData.operand1 + clientData.operator + clientData.operand2 + "=" + clientData.result
+			equationGroup.equationText.text = clientData.operand1 + " " + clientData.operator + " " + clientData.operand2 + " = " + clientData.result
 		}
 
 	}
@@ -546,11 +547,29 @@ var operations = function(){
 
 			sceneGroup = game.add.group()
 
-			var background = game.add.graphics()
-			background.beginFill(0xFF4560)
-			background.drawRect(-2,-2, game.world.width + 2, game.world.height + 2)
-			background.endFill()
-			sceneGroup.add(background)
+			// var background = game.add.graphics()
+			// background.beginFill(0xFF4560)
+			// background.drawRect(-2,-2, game.world.width + 2, game.world.height + 2)
+			// background.endFill()
+			// sceneGroup.add(background)
+			//
+			var bg2 = game.add.graphics()
+			bg2.beginFill(0x38FFE0)
+			bg2.drawRect(-2, -2, game.world.width + 2, 200)
+			bg2.endFill()
+			sceneGroup.add(bg2)
+
+			var shadow = game.add.graphics(0, bg2.height - 2)
+			shadow.beginFill(0x000000)
+			shadow.drawRect(-2, 0, game.world.width + 2, 25)
+			shadow.endFill()
+			shadow.alpha = 0.5
+			sceneGroup.add(shadow)
+			// bg2.alpha = 0.5
+			//
+			var tileBg = game.add.tileSprite(-2, -2, game.world.width + 2, 200, "atlas.operations", "texture")
+			sceneGroup.add(tileBg)
+			tileBg.blendMode = PIXI.blendModes.MULTIPLY;
 
 			initialize()
 
@@ -558,33 +577,35 @@ var operations = function(){
 			var numPlayer = cliente ? cliente.numPlayer : 1
 			var textInfo = playerData.nickname + " " + numPlayer
 			var fontStyle = {font: "36px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
-			var playerInfo = game.add.text(game.world.centerX,50,textInfo, fontStyle)
-			playerInfo.anchor.setTo(0.5, 0.5)
-			sceneGroup.add(playerInfo)
+			// var playerInfo = game.add.text(game.world.centerX,50,textInfo, fontStyle)
+			// playerInfo.anchor.setTo(0.5, 0.5)
+			// sceneGroup.add(playerInfo)
 
 			equationGroup = game.add.group()
 			equationGroup.x = game.world.centerX
-			equationGroup.y = 150
+			equationGroup.y = 100
 			sceneGroup.add(equationGroup)
 
 			readyString = localization.getString(localizationData, "ready")
-			var fontStyle2 = {font: "72px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center", wordWrap: true, wordWrapWidth: 480}
-			var equationText = game.add.bitmapText(0,0,"WAG", readyString, 72)
+			var fontStyle2 = {font: "72px Luckiest Guy", fontWeight: "bold", fill: "#113860", align: "center", wordWrap: true, wordWrapWidth: 480}
+			// var equationText = game.add.bitmapText(0,0,"WAG", readyString, 72)
+			var equationText = game.add.text(0, 0, readyString, fontStyle2)
+
 			equationText.anchor.setTo(0.5, 0.5)
 			equationGroup.add(equationText)
 			equationGroup.equationText = equationText
 
 			var fontStyle3 = {font: "52px Arial", fontWeight: "bold", fill: "#ffffff", align: "center"}
-			timerText = game.add.text(game.world.centerX - 30,250,"0:00", fontStyle3)
+			timerText = game.add.text(game.world.centerX - 30,280,"0:00", fontStyle3)
 			timerText.anchor.setTo(0.5, 0.5)
 			sceneGroup.add(timerText)
 
-			var stopWatch = sceneGroup.create(0, 245, "atlas.operations", "stopwatch")
+			var stopWatch = sceneGroup.create(0, 275, "atlas.operations", "stopwatch")
 			stopWatch.x = game.world.centerX - 140
 			stopWatch.anchor.setTo(0.5, 0.5)
 
 			var fontStyle4 = {font: "42px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "left"}
-			differenceTimeText = game.add.text(game.world.centerX + 110,250,"+0:00", fontStyle4)
+			differenceTimeText = game.add.text(game.world.centerX + 110,280,"+0:00", fontStyle4)
 			differenceTimeText.anchor.setTo(0.5, 0.5)
 			differenceTimeText.fill = "#bc0a00"
 			differenceTimeText.stroke = '#FFFFFF';

@@ -1,19 +1,19 @@
 // var src = "https://play.yogome.com/epicweb/minigames/mathClient/index.html"
-// var src = "../mathClient/index.html"
+var src = "../mathClient/index.html"
 var gameFrame
 var gameContainer
 // var language = null
 
-// var config = {
-// 	apiKey: "AIzaSyBELTimQUqywzRlJTpIA2HZ8RTp9r_QF2E",
-// 	authDomain: "mathtournament-175416.firebaseapp.com",
-// 	databaseURL: "https://mathtournament-175416.firebaseio.com",
-// 	projectId: "mathtournament-175416",
-// 	storageBucket: "mathtournament-175416.appspot.com",
-// 	messagingSenderId: "973021572842"
-// };
-// // firebase.initializeApp(config);
-// var database = firebase.database();
+var config = {
+	apiKey: "AIzaSyBELTimQUqywzRlJTpIA2HZ8RTp9r_QF2E",
+	authDomain: "mathtournament-175416.firebaseapp.com",
+	databaseURL: "https://mathtournament-175416.firebaseio.com",
+	projectId: "mathtournament-175416",
+	storageBucket: "mathtournament-175416.appspot.com",
+	messagingSenderId: "973021572842"
+};
+firebase.initializeApp(config);
+var database = firebase.database();
 
 /**
  * @class
@@ -185,23 +185,23 @@ function Client(){
 	}
 }
 
-// function loadGame(){
-// 	if(gameFrame)
-// 		gameContainer.removeChild(gameFrame);
-// 	else
-// 		gameFrame = document.createElement("iframe")
-// 	gameFrame.src= src
-// 	gameFrame.style.borderStyle = "none"
-// 	gameFrame.scrolling = "no"
-// 	gameFrame.width = window.innerWidth
-// 	gameFrame.height = window.innerHeight
-// 	gameContainer.appendChild(gameFrame);
-// }
-//
-// window.onload =  function(){
-// 	gameContainer = document.getElementById("game-container")
-// 	loadGame()
-// 	cliente = new Client();
-// }
+function loadGame(){
+	if(gameFrame)
+		gameContainer.removeChild(gameFrame);
+	else
+		gameFrame = document.createElement("iframe")
+	gameFrame.src= src
+	gameFrame.style.borderStyle = "none"
+	gameFrame.scrolling = "no"
+	gameFrame.width = window.innerWidth
+	gameFrame.height = window.innerHeight
+	gameContainer.appendChild(gameFrame);
+}
+
+window.onload =  function(){
+	gameContainer = document.getElementById("game-container")
+	loadGame()
+	cliente = new Client();
+}
 
 // window.addEventListener("resize", loadGame);
