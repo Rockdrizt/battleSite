@@ -621,20 +621,22 @@ var battle = function(){
 		// rectBg.y = -25 - 5
 		// hpGroup.add(rectBg)
 
-		// var hpBg = sceneGroup.create(-150, -6, 'atlas.battle', 'energy')
-		// hpBg.anchor.setTo(0, 0.5)
-		// hpBg.scale.setTo(0.9, 0.9)
-
 		var container = hpGroup.create(0, -34, 'atlas.battle', 'container_health')
 		container.anchor.setTo(0.5, 0.5)
 
-		var hpBg = game.add.graphics()
-		hpBg.beginFill(0x0eff09)
-		hpBg.drawRoundedRect(0,0, HP_BAR_WIDTH, 30)
-		hpBg.endFill()
-		hpGroup.add(hpBg)
-		hpBg.y = -34
-		hpBg.x = -HP_BAR_WIDTH * 0.5
+		var hpBg = hpGroup.create(-HP_BAR_WIDTH * 0.4, -19, 'atlas.battle', 'lifebar_gradient')
+		hpBg.anchor.setTo(0, 0.5)
+		hpBg.scale.setTo(0.9, 0.9)
+		hpBg.width = HP_BAR_WIDTH
+
+		var hpBarMask = game.add.graphics()
+		hpBarMask.beginFill(0xffffff)
+		hpBarMask.drawRoundedRect(0,0, HP_BAR_WIDTH, 30)
+		hpBarMask.endFill()
+		hpGroup.add(hpBarMask)
+		hpBarMask.y = -34
+		hpBarMask.x = -HP_BAR_WIDTH * 0.5
+		hpBg.mask = hpBarMask
 
 		var heartBg = game.add.graphics()
 		heartBg.beginFill(0xffffff)
@@ -664,7 +666,7 @@ var battle = function(){
 			this.health = Phaser.Math.clamp(this.health + number, 0, MAX_HP)
 			var newWidth = this.health * HP_BAR_WIDTH / MAX_HP
 			// console.log(this.health, newWidth)
-			game.add.tween(hpBg).to({width:newWidth}, 1000, Phaser.Easing.Cubic.Out, true)
+			game.add.tween(hpBarMask).to({width:newWidth}, 1000, Phaser.Easing.Cubic.Out, true)
 
 			this.healthText.text = this.health + "/" + MAX_HP
 
@@ -686,7 +688,7 @@ var battle = function(){
 			this.health = MAX_HP
 		}
 
-		var containerName = hpGroup.create(0, 60, 'atlas.battle', 'container_name')
+		var containerName = hpGroup.create(50, 30, 'atlas.battle', 'container_name')
 		containerName.anchor.setTo(0.5, 0.5)
 
 		var fontStyle2 = {font: "28px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", boundsAlignH: "left"}
@@ -703,8 +705,8 @@ var battle = function(){
 		hpGroup.name = name
 		name.setTextBounds(0, 0, 150, 0);
 
-		var fontStyle3 = {font: "45px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", boundsAlignH: "left"}
-		var wins = new Phaser.Text(game, 0, 58, "Wins: 0", fontStyle3)
+		var fontStyle3 = {font: "36px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", boundsAlignH: "left"}
+		var wins = new Phaser.Text(game, 50, 27, "Wins: 0", fontStyle3)
 		hpGroup.add(wins)
 		wins.scale.x = scale
 		wins.setTextBounds(0, 0, 150, 0);
@@ -1771,9 +1773,10 @@ var battle = function(){
 		go.alpha = 0
 		var playerWin = players[0].hpBar.winCounter > players[1].hpBar.winCounter ? players[0] : players[1]
 
-		game.add.tween(timesUp).to({alpha:1}, 600, Phaser.Easing.Cubic.Out, true)
+		var tweenAppear = game.add.tween(timesUp).to({alpha:1}, 600, Phaser.Easing.Cubic.Out, true)
 		game.add.tween(timesUp.scale).from({x:0.5, y:0.5}, 600, Phaser.Easing.Back.Out, true)
-		var tweenDissapear = game.add.tween(timesUp).to({alpha:0}, 600, Phaser.Easing.Cubic.Out, true, 1400)
+		var tweenDissapear = game.add.tween(timesUp).to({alpha:0}, 600, Phaser.Easing.Cubic.Out, false, 1400)
+		tweenAppear.chain(tweenDissapear)
 		tweenDissapear.onComplete.add(winPlayer.bind(null, playerWin))
 
 		if(server)
