@@ -234,8 +234,8 @@ var operationGenerator = function () {
 				else
 					operand2 = Math.floor(rule.maxRange / operand1)
 			}else{
-					operand1 = result
-					operand2 = (operand1 / operand2) > rule.maxRange ? rule.maxRange : operand2
+				operand1 = result
+				operand2 = (operand1 / operand2) > rule.maxRange ? rule.maxRange : operand2
 			}
 			//63: 9 60 / 8
 		}
@@ -363,6 +363,7 @@ var operationGenerator = function () {
 		RULES_SET:RULES_SET,
 		setConfiguration:setConfiguration,
 		OPERATION_PARAMS:OPERATION_PARAMS,
-		generate:generate
+		generate:generate,
+		getOperationRule:getOperationRule
 	}
 }()
