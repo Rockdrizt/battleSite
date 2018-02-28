@@ -47,6 +47,7 @@
     text-align: center;
     background: #c0b4fc;
     background-image: url("../images/patternoptions.png");
+    overflow-y: scroll;
 }
 
 .modal-footer {

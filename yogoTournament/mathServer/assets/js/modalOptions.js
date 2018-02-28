@@ -49,8 +49,6 @@ printOperators()
 function printRule(rule, operator){
 	var string = ""
 
-	if(operator === "MUL")
-		string += "("
 	if(rule.paramToAnswer === operationGenerator.OPERATION_PARAMS.operand1)
 		string += "?"
 	else if(rule.operand1X) {
@@ -62,30 +60,26 @@ function printRule(rule, operator){
 	}else if(rule.operand1Const){
 		string += rule.operand1Const
 	}
-	if(operator === "MUL")
-		string += ")"
 
 	switch (operator){
 		case "SUM":
-			string+="+"
+			string+=" + "
             $(".headerDifficulty").find("p").text("ADDITION")
 			break
 		case "SUB":
-			string+="-"
+			string+=" - "
             $(".headerDifficulty").find("p").text("SUBSTRACTION")
 			break
 		case "MUL":
-			string+=""
+			string+=" x "
             $(".headerDifficulty").find("p").text("MULTIPLICATION")
 			break
 		case "DIV":
-			string+="÷"
+			string+=" ÷ "
             $(".headerDifficulty").find("p").text("DIVISION")
 			break
 	}
 
-	if(operator === "MUL")
-		string += "("
 	if(rule.paramToAnswer === operationGenerator.OPERATION_PARAMS.operand2)
 		string += "?"
 	else if(rule.operand2X) {
@@ -96,35 +90,21 @@ function printRule(rule, operator){
 	}else if(rule.operand2Const){
 		string += rule.operand2Const
 	}
-	if(operator === "MUL")
-		string += ")"
 
 	if(rule.paramToAnswer === operationGenerator.OPERATION_PARAMS.result)
-		string += "=?"
+		string += " = ?"
 	else {
-		string += "=X"
+		string += " = X"
 	}
 
-	if(rule.minRange) {
-		string += " Min " + rule.minRange
-	}
+	var operationExample = operationGenerator.getOperationRule(rule, operator)
+	var symbol = (operationExample.operator === "/" ? "÷" : operationExample.operator)
+	string += " (Example: " + operationExample.operand1 + " " + symbol + " " + operationExample.operand2 + " = " + operationExample.result + ")"
 
-	if(rule.maxRange) {
-		switch (operator){
-			case "SUM":
-				string += " Max Sum " + rule.maxRange
-				break
-			case "SUB":
-				string += " Max Difference " + rule.maxRange
-				break
-			case "MUL":
-				string += " Max Product " + rule.maxRange
-				break
-			case "DIV":
-				string += " " + rule.maxRange
-				break
-		}
-	}
+	var minRange = rule.minRange || 1
+	var maxRange = rule.maxRange || 1
+
+	string += "<br> Answer Range: " + minRange + " - " + maxRange
 
 	return string
 }
@@ -197,19 +177,19 @@ var difficultyNameLevel = 0;
     function levelDifficulty(difficultyNameLevel){
         switch(difficultyNameLevel){
             case 0:
-               $("#difficultyName").text("EASY");
+               $("#difficultyName").find("span").text("EASY");
                 current_set = "EASY"
             break; 
             case 1:
-               $("#difficultyName").text("MEDIUM");
+               $("#difficultyName").find("span").text("MEDIUM");
                 current_set = "MEDIUM"
             break;
             case 2:
-               $("#difficultyName").text("HARD");
+               $("#difficultyName").find("span").text("HARD");
                 current_set = "HARD"
             break;
             case 3:
-               $("#difficultyName").text("MASTER");
+               $("#difficultyName").find("span").text("MASTER");
                 current_set = "MASTER"
             break;
                 

@@ -648,8 +648,8 @@ var operations = function(){
 			waitingGroup.add(alphaRect)
 
 			var stringWait = localization.getString(localizationData, "reviewingAnswers")
-			// var fontStyle2 = {font: "72px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
-			var waitText = game.add.text(0, -140, stringWait, fontStyle2)
+			var fontStyle5 = {font: "72px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", align: "center", wordWrap: true, wordWrapWidth: 480}
+			var waitText = game.add.text(0, -50, stringWait, fontStyle5)
 			waitText.anchor.setTo(0.5, 0.5)
 			waitingGroup.add(waitText)
 			waitingGroup.alpha = 0
@@ -660,7 +660,7 @@ var operations = function(){
 			loading.scale.setTo(0.6, 0.6)
 			waitingGroup.add(loading)
 			// console.log("width", player.width)
-			loading.y = 100
+			loading.y = 210
 			waitingGroup.loading = loading
 
 			// buttons.getButton(operationsSong,sceneGroup)

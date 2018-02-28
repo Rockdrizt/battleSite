@@ -16,80 +16,190 @@
     <script type="text/javascript" src="assets/js/lib/iscroll-probe.js"></script>
     
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/jquerysctipttop.css" />
     
     <script src="assets/js/Carousel.js"></script>
     
-    <script>
-    $(document).ready(function() {
-        $('.carousel-container').carousel({
-            num: 3,
-            maxWidth: 450,
-            maxHeight: 450,
-            distance: 180,
-            scale: 0.4,
-            animationTime: 500,
-            autoPlay: false,
-        });
-    });
-    </script>
-
 </head>
+    <script>
+        function scalePlanets(){
+            if (window.matchMedia("(orientation: portrait)").matches) {
+               $(document).ready(function() {
+                    $('.carousel-container').carousel({
+                        num: 3,
+                        maxWidth: 450,
+                        maxHeight: 450,
+                        distance: 180,
+                        scale: 0.5,
+                        animationTime: 500,
+                        autoPlay: false,
+                    });
+                });
+            }
+            else{
+                $(document).ready(function() {
+                    $('.carousel-container').carousel({
+                        num: 3,
+                        maxWidth: 250,
+                        maxHeight: 250,
+                        distance: 180,
+                        scale: 0.6,
+                        animationTime: 500,
+                        autoPlay: false,
+                    });
+                });
+            }
+        }
+        
+        scalePlanets()
+    </script>
     
 <body>
-     
+
     <section id="bgGradient"></section> 
     
-     <div class="container font-luckiest">
-            
-    <div class="carousel-container">
-        <ul>
-            <div id="load-planets"></div>
-            <li>
-                <img src="assets/images/planets/codus.png" alt="" />
-            </li>
-            <li>
-                <img src="assets/images/planets/creat.png" alt="" />
-            </li>
-            <li>
-                <img src="assets/images/planets/health.png" alt="" />
-            </li>
-            <li>
-                <img src="assets/images/planets/geogra.png" alt="" />
-            </li>
-            <li>
-                <img src="assets/images/planets/wordo.png" alt="" />
-            </li>
-            <li>
-                <img src="assets/images/planets/mathdromeda.png" alt="" />
-            </li>
-            <li>
-                <img src="assets/images/planets/science.png" alt="" />
-            </li>
-            <img src="assets/images/arrowYellow.png" class="left">
-            <img src="assets/images/arrowYellow.png" class="right">
-        </ul>
-    </div>
+    <section id="portrait">
         
-        <div class="banner" id="subject">CODING</div>
-        
-        <div class="object-center" style="display: flex;">
+        <div class="container font-luckiest">
 
-            <button class="menuBtn red-btn" type="button" onclick="window.location.href='index.html'">BACK</button>
+            <div class="carousel-container">
+                <ul>
+                    <div class="load-planets"></div>
+                    <li>
+                        <div>
+                            <img src="assets/images/planets/mathdromeda.png" alt="" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="lock">
+                            <img src="assets/images/planets/creat_shade.png" alt="" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="lock">
+                            <img src="assets/images/planets/health_shade.png" alt="" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="lock">
+                            <img src="assets/images/planets/geogra_shade.png" alt="" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="lock">
+                            <img src="assets/images/planets/wordo_shade.png" alt="" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="lock">
+                            <img src="assets/images/planets/codus_shade.png" alt="" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="lock">
+                            <img src="assets/images/planets/science_shade.png" alt="" />
+                        </div>
+                    </li>
+                </ul>
             
-            <button class="menuBtn green-btn" type="button" onclick="window.location.href='selectDifficult.html'">NEXT</button>
+
+                <div class="selection-container">
+                    <img src="assets/images/arrowYellow.png" class="left" >
+                    <div class="banner-selection subject">MATH</div>
+                    <img src="assets/images/arrowYellow.png" class="right">
+                </div>
+                
+            </div>
             
+            <div class="object-center">
+
+                <div class="red-btn" type="button" onclick="window.location.href='index.html'">BACK</div>
+
+                <div class="green-btn" type="button" onclick="window.location.href='selectDifficult.html'">NEXT</div>
+
+            </div>
+
         </div>
         
-    </div>
+    </section>
+    
+    <section id="landscape">
         
+        <div class="container font-luckiest">
+
+            <div class="carousel-container">
+                <ul>
+                    <div class="load-planets"></div>
+                    <li>
+                        <div>
+                            <img src="assets/images/planets/mathdromeda.png" alt="" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="lock">
+                            <img src="assets/images/planets/creat_shade.png" alt="" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="lock">
+                            <img src="assets/images/planets/health_shade.png" alt="" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="lock">
+                            <img src="assets/images/planets/geogra_shade.png" alt="" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="lock">
+                            <img src="assets/images/planets/wordo_shade.png" alt="" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="lock">
+                            <img src="assets/images/planets/codus_shade.png" alt="" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="lock">
+                            <img src="assets/images/planets/science_shade.png" alt="" />
+                        </div>
+                    </li>
+                </ul>
+                
+                <div class="selection-container">
+                    <img src="assets/images/arrowYellow.png" class="left">
+                    <div class="banner-selection subject">MATH</div>
+                    <img src="assets/images/arrowYellow.png" class="right">
+                </div>
+                
+            </div>
+
+            <div class="object-center" style="width: 70%; margin-top: 6.5%; margin-left: 15%; display: flex; justify-content: center;">
+
+                <button class="menuBtn red-btn" style="margin: 0; font-size: 4vw;" type="button" type="button" onclick="window.location.href='index.html'">BACK</button>
+
+                <button class="menuBtn green-btn" style="margin: 0; font-size: 4vw;" type="button" onclick="window.location.href='selectDifficult.html'">NEXT</button>
+
+            </div>
+
+        </div>
+        
+    </section>
+    
 </body> 
     
 <script>
-        
+    
+    $( window ).on( "orientationchange", function( event ) {
+        location.reload();
+        scalePlanets()
+    });
+    
     var index = 0;
     
-    var subjectList = ['CODING', 'CREATIVITY', 'HEALTH', 'GEOGRAPHY', 'LANGUAGE', 'MATH', 'SCIENCE']
+    var subjectList = ['MATH', 'CREATIVITY', 'HEALTH', 'GEOGRAPHY', 'LANGUAGE', 'CODING', 'SCIENCE']
     
     $(".left").on('touchstart', function(){
         if(index > 0){
@@ -98,7 +208,7 @@
         else{
             index = subjectList.length - 1
         }
-        $("#subject").text(subjectList[index]);
+        $(".subject").text(subjectList[index]);
     });
     
     $(".right").on('touchstart', function(){
@@ -108,7 +218,7 @@
         else{
             index = 0
         }
-        $("#subject").text(subjectList[index]);
+        $(".subject").text(subjectList[index]);
     });
         
 </script>

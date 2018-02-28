@@ -492,7 +492,7 @@ window.onload =  function(){
 	gameContainer = document.getElementById("game-container")
 	loadGame()
 	server = new Server();
-	cliente = new Client();
+	// cliente = new Client();
 }
 
 // window.addEventListener("resize", loadGame);

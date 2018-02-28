@@ -20,28 +20,13 @@
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
     
-    <script src="assets/js/Carousel.js"></script>
-    
-    <script>
-    $(document).ready(function() {
-        $('.carousel-container').carousel({
-            num: 1,
-            maxWidth: 450,
-            maxHeight: 450,
-            distance: 100,
-            scale: 0.6,
-            animationTime: 500,
-            autoPlay: false,
-            distance: 100
-        });
-    });
-    </script>
-    
 </head>
     
 <body>
      
     <section id="bgGradient"></section> 
+    
+    <section id="portrait">
     
     <div class="container font-luckiest">
         
@@ -50,71 +35,176 @@
         <div class="dificult-container">
             
             <div class="left-arrow"></div>
-            <div id="lvl-text" style="width: 80%">EASY</div>
+            <div class="lvl-text" style="width: 80%;">EASY</div>
             <div class="right-arrow"></div>
  
         </div>
         
         <div class="menu-container">
             
-            <div class="subject-container">
+            <div class="subject-container" style="background-color: #4719ac">
                 
-                <div id="checkBox0" class="checkBlank">
+                <div class="checkBlank checkBox0">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
 
                 <div id="adition">ADITION</div>
 
-                <div class="plus-btn" id="plusImg1" data-type="SUM"></div>
+                <div class="plus-btn" data-type="SUM">
+                    <span>custom</span>
+                    <img src="assets/images/custom1.png" />
+                </div>
             
             </div>
             
-            <div class="subject-container">
-                <div id="checkBox1" class="checkBlank">
+            <div class="subject-container" style="background-color: #ac199f">
+                <div class="checkBlank checkBox1">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
 
                 <div id="substraction">SUBSTRACTION</div>
 
-                <div class="plus-btn" id="plusImg2" data-type="SUB"></div>
+                <div class="plus-btn" data-type="SUB">
+                    <span>custom</span>
+                    <img src="assets/images/custom2.png" />
+                </div>
+
             </div>
             
-            <div class="subject-container">
-                <div id="checkBox2" class="checkBlank">
+            <div class="subject-container" style="background-color: #e23405">
+                <div class="checkBlank checkBox2">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
 
                 <div id="multiplcation">MULTIPLICATION</div>
-
-                <div class="plus-btn" id="plusImg3" data-type="MUL"></div>
+            
+                <div class="plus-btn" data-type="MUL">
+                    <span>custom</span>
+                    <img src="assets/images/custom3.png" />
+                </div>
             </div>
             
-            <div class="subject-container">
-                <div id="checkBox3" class="checkBlank">
+            <div class="subject-container" style="background-color: #0096b6">
+                <div class="checkBlank checkBox3">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
 
                 <div id="division">DIVISION</div>
+                
+                <div class="plus-btn" data-type="DIV">
+                    <span>custom</span>
+                    <img src="assets/images/custom4.png">
+                </div>
 
-                <div class="plus-btn" id="plusImg4" data-type="DIV"></div>
             </div>
             
         </div>
        
         <div class="object-center">
 
-            <button class="menuBtn red-btn" type="button" onclick="window.location.href='selectSubject.html'">BACK</button>
+            <button class="red-btn" type="button" onclick="window.location.href='selectSubject.html'">BACK</button>
             
-            <button class="menuBtn green-btn" type="button" onclick="window.location.href='customize.html'">NEXT</button>
+            <button class="green-btn" type="button" onclick="window.location.href='customize.html'">NEXT</button>
 
         </div>
         
     </div>
 
+    </section>
+    
+    <section id="landscape">
+    
+    <div class="container font-luckiest">
+        
+        <div class="banner">DIFFICULTY</div>
+        
+        <div class="dificult-container">
+            
+            <div class="left-arrow"></div>
+            <div class="lvl-text" style="width: 40%; padding-top: 0">EASY</div>
+            <div class="right-arrow"></div>
+ 
+        </div>
+        
+        <div class="menu-container">
+            
+            <div class="subject-container" style="background-color: #4719ac">
+                
+                <div class="checkBlank checkBox0">
+                    <img src="assets/images/blank_check.png"> 
+                    <img class="markCheck" src="assets/images/mark_check.png">
+                </div>
+
+                <div id="adition">ADITION</div>
+
+                <div class="plus-btn" data-type="SUM">
+                    <span>custom</span>
+                    <img src="assets/images/custom1.png" />
+                </div>
+            
+            </div>
+            
+            <div class="subject-container" style="background-color: #ac199f">
+                <div class="checkBlank checkBox1">
+                    <img src="assets/images/blank_check.png"> 
+                    <img class="markCheck" src="assets/images/mark_check.png">
+                </div>
+
+                <div id="substraction">SUBSTRACTION</div>
+
+                <div class="plus-btn" data-type="SUB">
+                    <span>custom</span>
+                    <img src="assets/images/custom2.png" />
+                </div>
+
+            </div>
+            
+            <div class="subject-container" style="background-color: #e23405">
+                <div class="checkBlank checkBox2">
+                    <img src="assets/images/blank_check.png"> 
+                    <img class="markCheck" src="assets/images/mark_check.png">
+                </div>
+
+                <div id="multiplcation">MULTIPLICATION</div>
+            
+                <div class="plus-btn" data-type="MUL">
+                    <span>custom</span>
+                    <img src="assets/images/custom3.png" />
+                </div>
+            </div>
+            
+            <div class="subject-container" style="background-color: #0096b6">
+                <div class="checkBlank checkBox3">
+                    <img src="assets/images/blank_check.png"> 
+                    <img class="markCheck" src="assets/images/mark_check.png">
+                </div>
+
+                <div id="division">DIVISION</div>
+                
+                <div class="plus-btn" data-type="DIV">
+                    <span>custom</span>
+                        <img src="assets/images/custom4.png">
+                </div>
+
+            </div>
+            
+        </div>
+       
+        <div class="object-center">
+
+            <button class="red-btn" type="button" onclick="window.location.href='selectSubject.html'">BACK</button>
+            
+            <button class="green-btn" type="button" onclick="window.location.href='customize.html'">NEXT</button>
+
+        </div>
+        
+    </div>
+
+    </section>
     
     <!-- modal -->
     <div id="modal" class="modal ">
@@ -131,7 +221,7 @@
     </div>
 
 
-<script type="text/javascript" src="../assets/js/operationGenerator.js"></script>
+<script type="text/javascript" src="assets/js/operationGenerator.js"></script>
 <script type="text/javascript" src="assets/js/modal.js"></script>
 <script>
 
@@ -142,9 +232,9 @@
 	var operatorsObject = {}
 
     for(var i = 0; i < 4; i++){
-        $("#checkBox" + i).attr("selection",1);
+        $(".checkBox" + i).attr("selection",1);
 
-        $("#checkBox" + i).click(function(){
+        $(".checkBox" + i).click(function(){
 
              if($(this).attr("selection") == 1){
                  $(this).find(".markCheck").css("display","none");
@@ -167,7 +257,7 @@
         else{
             index = lvl.length - 1
         }
-        $("#lvl-text").text(lvl[index]);
+		$(".lvl-text").text(lvl[index]);
         current_set = lvl[index]
 		difficultSet = operationGenerator.RULES_SET[current_set]
     });
@@ -179,15 +269,11 @@
         else{
             index = 0
         }
-        $("#lvl-text").text(lvl[index]);
+		$(".lvl-text").text(lvl[index]);
 		current_set = lvl[index]
 		difficultSet = operationGenerator.RULES_SET[current_set]
     });
     
-    for(var r = 1; r <= 4; r++){
-        $("#plusImg"+r).css('background-image', "url('assets/images/plus" + r + ".png')");
-    }
-
 
 	function printRule(rule, operator){
 		var string = ""

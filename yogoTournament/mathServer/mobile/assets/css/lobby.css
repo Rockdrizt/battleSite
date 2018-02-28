@@ -1,16 +1,11 @@
 
 
-.title-container{
-    
-}
-
-.bottom-container{
-    
+.banner{
+    margin: 0 1%;
 }
 
 .pin-container{
     width: 100%;
-    height: 60%;
     align-items: center;
     text-align: center;
 }
@@ -19,26 +14,33 @@
     background-image: url("../images/titlePin.png");
     background-repeat: no-repeat;
     background-size: 90% 100%;
-    padding: 3vw;
+    padding-top: 2vw;
     background-position: center;
-    height: 15%;
     text-align: center;
-    margin: 0% 10%;
+    margin: 0% 5%;
     font-size: 9vw;
 }
 
-.pin-title span{
-   
+.object-center{
+    margin: 0;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.warning{
+    padding: 0 10%;
+}
+
+.warning img{
+    transform: scale(3);
 }
 
 .pin-body{
-    width: 80%;
-    height: 70%;
     align-items: center;
     background-color: #00ff78;
     background-image: url("../images/dots.png");
     text-align: center;
-    margin-left: 10%;
+    margin: 0 10%;
     border-radius: 6vw;
 }
 
@@ -55,44 +57,89 @@
 .share-style{
     font-size: 4vw; 
     margin: 5%;
+        margin-bottom: 0;
     color: #184831;
 }
+
 
 .yogo-container{
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    width: 12vh;
-    background-color: white;
-    border: none;
-    height: 12vh;
-    display: inline-block;
-    margin: 1vh 2vh;
-    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24);
-}
-
-.mini{
-    padding-top: 30%;
-    color: #184831;
-}
-
-.players-container{
-    font-size: 3vw;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    margin: 0% 15%;
+    margin-top: 5%;
+    font-size: 4vw;
 }
 
 
 
+@media screen and (orientation: portrait) {
+    
+    #portrait {
+        display: block;
+    }
+
+    #landscape {
+        display: none;
+    }
+}
 
 
+/*-----Landscape-----*/
 
+@media screen and (orientation : landscape){
+    
+    #portrait {
+        display: none;
+    }
 
+    #landscape {
+        display: block;
+    }
+    
+    .red-btn,
+    .green-btn{
+      font-size: 3vw;
+    }
 
+    .pin-title{
+        padding-top: 0.5vw;
+        font-size: 5vw;
+        margin: 0 22%;
+    }
 
+    .pin-body{
+       margin: 0 25%;
+    }
+
+    .pin-style{
+        padding-top: 2vw;
+        font-size: 5vw;
+    }
+
+    .share-style{
+        font-size: 3vw;
+    }
+
+    .object-center{
+       margin-left: 15%;
+    }
+    
+    .warning img {
+        transform: scale(1);
+    }
+    
+    .yogo-container{
+        margin-top: 10%;
+        font-size: 2vw;
+    }
+    
+    .yogo-oona, 
+    .yogo-arturius {
+        width: 25%;
+    }
+    
+    .yogo-arturius,
+    .yogo-oona{
+        transform: translateX(0);
+    }
+}
 
 
 

@@ -129,27 +129,48 @@ Usage:
                   icount = icount - count;
                 };
                   
+
+                  
+                  
                   switch(nextslide % 7){
                       case 0:
-                          $(".textSubject").text("MATH")
+                          $(".textSubject").text("MATH");
+                          $("#nextButton1").css("opacity",1);
+                          $("#nextButton1").click(function(){
+                              
+		$("#section3").css("display","block");
+		$("#section2").css("display","none");
+                          })
                           break;
                       case 1:
                           $(".textSubject").text("CODE")
+                          $("#nextButton1").css("opacity",0.5);
+                          $("#nextButton1").off( "click" );
                           break;
                       case 2:
-                          $(".textSubject").text("CREATIVITY")
+                          $(".textSubject").text("CREATIVITY");
+                          $("#nextButton1").css("opacity",0.5);
+                          $("#nextButton1").off( "click" );
                           break;
                       case 3:
-                          $(".textSubject").text("GEOGRAPHY")
+                          $(".textSubject").text("GEOGRAPHY");
+                          $("#nextButton1").css("opacity",0.5);
+                          $("#nextButton1").off( "click" );
                           break;
                       case 4:
-                          $(".textSubject").text("HEALTH")
+                          $(".textSubject").text("HEALTH");
+                          $("#nextButton1").css("opacity",0.5);
+                          $("#nextButton1").off( "click" );
                           break;
                       case 5:
-                          $(".textSubject").text("SCIENCE")
+                          $(".textSubject").text("SCIENCE");
+                          $("#nextButton1").css("opacity",0.5);
+                          $("#nextButton1").off( "click" );
                           break;
                       case 6:
-                          $(".textSubject").text("LANGUAGE")
+                          $(".textSubject").text("LANGUAGE");
+                          $("#nextButton1").css("opacity",0.5);
+                          $("#nextButton1").off( "click" );
                           break;
                   }
                   

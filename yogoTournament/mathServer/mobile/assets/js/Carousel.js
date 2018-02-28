@@ -288,6 +288,8 @@
                         scroll($target, 'right');
                     }
                 })($target));
+                
+                
 
                 (function($target) {
                     var autoPlay;

@@ -363,6 +363,7 @@ var operationGenerator = function () {
 		RULES_SET:RULES_SET,
 		setConfiguration:setConfiguration,
 		OPERATION_PARAMS:OPERATION_PARAMS,
-		generate:generate
+		generate:generate,
+		getOperationRule:getOperationRule
 	}
 }()

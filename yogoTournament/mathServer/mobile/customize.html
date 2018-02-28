@@ -20,97 +20,128 @@
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
     
-    <script src="assets/js/Carousel.js"></script>
-    
-    <script>
-    $(document).ready(function() {
-        $('.carousel-container').carousel({
-            num: 1,
-            maxWidth: 450,
-            maxHeight: 450,
-            distance: 100,
-            scale: 0.6,
-            animationTime: 500,
-            autoPlay: false,
-            distance: 100
-        });
-    });
-    </script>
-    
 </head>
     
 <body>
      
     <section id="bgGradient"></section>
     
-    <div class="container font-luckiest">
+    <section id="portrait">
         
-        <div class="banner">CUSTOMIZE</div>
-        
-        <div class="menu-container">
-            
-            <div class="condition-container">
-                
-                <div class="condition-header">
-                    <span style="color: dimgrey">TIME</span>
-                </div>
-                
-                <div class="condition-body">
-                    
-                    <div class="col-xs-3 sub-grid">
+        <div class="container font-luckiest">
+
+            <div class="banner">CUSTOMIZE</div>
+
+            <div class="menu-container">
+
+                <div>
+                    <div class="condition-header">TIME</div>
+
+                    <div class="condition-body">
+
                         <div class="less-time"></div>
-                    </div>
 
-                    <div class="col-xs-6 sub-grid" style="display: initial">
-                        <div class="time-image"></div>
-                        <div id="time" style="font-size: 9vw">3:00</div>
-                        <div style="font-size: 5vw">minutes</div>
-                    </div>
+                        <div style="display: initial">
+                            <div class="time-image"></div>
+                            <div class="time" style="font-size: 9vw">3:00</div>
+                            <div style="font-size: 5vw">minutes</div>
+                        </div>
 
-                    <div class="col-xs-3 sub-grid">
                         <div class="more-time"></div>
                     </div>
-                    
+
                 </div>
-                
-            </div>
-            
-            <div class="condition-container">
-                
-                <div class="condition-header" style="background-image: url('assets/images/titleRound.png');">
-                    <span>ROUNDS</span>
-                </div>
-                
-                <div class="condition-body">
-                    <div class="col-xs-3 sub-grid">
+
+                <div>
+                    <div class="condition-header">ROUNDS</div>
+
+                    <div class="condition-body">
+                        
                         <div class="less-rounds"></div>
-                    </div>
+                
+                        <div class="round-image">
+                            <p class="round">3</p>
+                        </div>
 
-                    <div class="col-xs-6 sub-grid">
-                        <div class="round-image" id="round"><span>3</span></div>
-                    </div>
-
-                    <div class="col-xs-3 sub-grid">
                         <div class="more-rounds"></div>
+
                     </div>
+
                 </div>
                 
             </div>
-            
+
+            <div class="object-center">
+
+                <button class="red-btn" type="button" onclick="window.location.href='selectDifficult.html'">BACK</button>
+
+                <button class="green-btn" type="button" style="font-size: 5.5vw;" onclick="window.location.href='lobby.html'">CREATE ROOM</button>
+
+            </div>
+
         </div>
-        
-        <div class="object-center">
 
-            <button class="menuBtn red-btn" type="button" onclick="window.location.href='selectDifficult.html'">BACK</button>
-            
-            <button class="menuBtn green-btn" type="button" onclick="window.location.href='lobby.html'" style="font-size: 5.5vw;">CREATE ROOM</button>
+    </section>
+    
+    <section id="landscape">
+        
+        <div class="container font-luckiest">
+
+            <div class="banner">CUSTOMIZE</div>
+
+            <div class="menu-container">
+
+                <div class="col-xs-6">
+                    <div class="condition-header">TIME</div>
+
+                    <div class="condition-body">
+
+                        <div class="less-time"></div>
+
+                        <div>
+                            <div class="time-image"></div>
+                            <div class="time" style="font-size: 5vw">3:00</div>
+                            <div style="font-size: 3vw">minutes</div>
+                        </div>
+
+                        <div class="more-time"></div>
+                    </div>
+
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="condition-header">ROUNDS</div>
+
+                    <div class="condition-body">
+                        
+                        <div class="less-rounds"></div>
+                
+                        <div class="round-image">
+                            <p class="round">3</p>
+                        </div>
+
+                        <div class="more-rounds"></div>
+
+                    </div>
+
+                </div>
+                
+            </div>
+
+            <div class="object-center">
+
+                <button class="red-btn" type="button" onclick="window.location.href='selectDifficult.html'">BACK</button>
+
+                <button class="green-btn" type="button" style="font-size:  3.2vw;" onclick="window.location.href='lobby.html'">CREATE ROOM</button>
+
+            </div>
 
         </div>
-        
-    </div>
 
+    </section>
 
 <script>
+    
     var round = 3
     var time = 3
 
@@ -120,7 +151,7 @@
             round--
         else
             round = 10
-        $("#round").text(round);
+        $(".round").text(round);
     });
 
     $(".more-rounds").click(function(){
@@ -129,7 +160,7 @@
             round++
         else 
             round = 1
-        $("#round").text(round);
+        $(".round").text(round);
     });
 
     
@@ -139,7 +170,7 @@
             time--
         else
             time = 10
-        $("#time").text(time + ':00');
+        $(".time").text(time + ':00');
     });
 
     $(".more-time").click(function(){
@@ -148,7 +179,7 @@
             time++
         else 
             time = 1
-        $("#time").text(time + ':00');
+        $(".time").text(time + ':00');
     });
     
 </script>

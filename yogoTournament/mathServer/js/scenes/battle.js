@@ -1105,9 +1105,9 @@ var battle = function(){
 
 	function generateEquation(data){
 		if(data.operator === "/"){
-			equationGroup.equation.text = data.operand2 + "ƒ" + data.operand1 + " =" + data.result
+			equationGroup.equation.text = data.operand1 + " ÷ " + data.operand2 + " = " + data.result
 		}else{
-			equationGroup.equation.text = data.operand1 + data.operator + data.operand2 + "=" + data.result
+			equationGroup.equation.text = data.operand1 + " " + data.operator + " " + data.operand2 + " = " + data.result
 		}
 
 	}
@@ -1524,7 +1524,7 @@ var battle = function(){
 
 	function createbattleUI() {
 
-		var fontStyle = {font: "72px Luckiest Guy", fontWeight: "bold", fill: "#350A00", align: "center"}
+		var fontStyle = {font: "62px Luckiest Guy", fontWeight: "bold", fill: "#113860", align: "center"}
 		var fontStyle2 = {font: "72px Luckiest Guy", fontWeight: "bold", fill: "#000000", align: "center"}
 
 		questionGroup = game.add.group()
@@ -1540,6 +1540,7 @@ var battle = function(){
 		var container = questionGroup.create(0,0, "atlas.battle", "container_blue")
 		// container.y = 170
 		container.anchor.setTo(0.5, 0.5)
+		container.scale.x = 1.4
 
 		// var questionString = localization.getString(localizationData, "question") + questionCounter
 		// var questionText = new Phaser.Text(game, 0, 60, questionString, fontStyle2)
@@ -1553,9 +1554,10 @@ var battle = function(){
 		// equationGroup.alpha = 0
 		// equationGroup.question = ""
 
-		var equation = game.add.bitmapText(0,6,"WAG", "0+0=?", 72)
+		// var equation = game.add.bitmapText(0,6,"WAG", "0+0=?", 72)
+		var equation = game.add.text(0, -16, "0+0=?", fontStyle)
 		// equation.scale.setTo(1.4, 1.4)
-		equation.tint = 0x350A00
+		// equation.tint = 0x350A00
 		equation.anchor.setTo(0.5,0.5)
 		equationGroup.add(equation)
 		equationGroup.equation = equation
@@ -1593,13 +1595,6 @@ var battle = function(){
 
 		var round = roundGroup.create(0, 0, "round")
 		round.anchor.setTo(0.5, 0.5)
-
-		lastRound = sceneGroup.create(game.world.centerX, game.world.centerY, "lastRound")
-		lastRound.anchor.setTo(0.5, 0.5)
-		timesUp = sceneGroup.create(game.world.centerX, game.world.centerY, "timesUp")
-		timesUp.anchor.setTo(0.5, 0.5)
-		lastRound.alpha = 0
-		timesUp.alpha = 0
 
 		var fontStyle = {font: "110px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", align: "center"}
 		var roundText = game.add.text(180, -20, questionCounter, fontStyle)
@@ -1892,6 +1887,13 @@ var battle = function(){
 			sceneGroup.add(frontGroup)
 			frontGroup.fixedToCamera = true
 			frontGroup.cameraOffset.setTo(0, 0);
+
+			lastRound = sceneGroup.create(game.world.centerX, game.world.centerY, "lastRound")
+			lastRound.anchor.setTo(0.5, 0.5)
+			timesUp = sceneGroup.create(game.world.centerX, game.world.centerY, "timesUp")
+			timesUp.anchor.setTo(0.5, 0.5)
+			lastRound.alpha = 0
+			timesUp.alpha = 0
 
 			createTimer()
         }

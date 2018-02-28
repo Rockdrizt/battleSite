@@ -2,9 +2,6 @@ html{
     height: 100%;
 }
 
-
-
-
 body{
     position: absolute;
     margin: 0;
@@ -16,9 +13,9 @@ body{
 }
 
 #bgGradient{
-    position: fixed;
+    
     margin: 0;
-    height: 100%;
+    
     width: 100%;
     margin:0;
     background-image: url("../images/bgmain.png");
@@ -28,16 +25,14 @@ body{
 
 
 #logo{
-    position: fixed;
     width: 100%;
-    
+    margin: 5% 0;
 }
 
 .logoTour{
     padding: 3vw;
     width: 100%;
     max-width: 900px !important;
-    padding-top: 10%;
 }
 
 .object-left{
@@ -71,9 +66,14 @@ body{
 .object-center{
     width: 100%;
     text-align: center;
-    height: 50%;
-    top: 5%;
-    z-index: 2;
+    margin: 5% 0;
+     display: flex;
+}
+
+.yogo-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .yogo-nao{
@@ -100,31 +100,21 @@ body{
     background-size: contain;
 }
 
-.yogo-oona{
-    
-    background-image: url("../images/oona.png");
-    background-repeat: no-repeat;
-    background-position: left bottom;
-    background-size: contain;
-    position: absolute;
-    height: 20%;
-    width: 100%;
-    top: 20%;
-    left: 10%;
-    transform: scale(1.3);
-}
-
+.yogo-oona,
 .yogo-arturius{
     
-    background-image: url("../images/arturius.png");
-    background-repeat: no-repeat;
-    background-position: right bottom;
-    background-size: contain;
-    position: absolute;
-    height: 30%;
-    width: 100%;
-    top: 20%;
-    right: 10%;
+    width: 50%;
+    text-align: center;
+    bottom: 0%;
+}
+
+.yogo-oona img{
+    width: 80%;
+    
+}
+
+.yogo-arturius img{
+    width: 60%;
 }
 
 .yogotar{
@@ -159,7 +149,6 @@ body{
     position: relative;
     cursor:pointer;
     width: 100%;
-    height: 22%;
     text-align: center;
 }
 
@@ -170,12 +159,14 @@ body{
     background-position: center;
     background-color: transparent;
     border-style: none;
-    padding: 2vw;
-    z-index: 5;
+    padding: 4vw;
+    padding-top: 6vw;
     cursor: pointer;
     color:#FFF;
     font-size: 8vw;
-   
+    margin: 2% 5%;
+    width: 40%;
+    z-index: 10;
 }
 
 .pink-btn{
@@ -185,11 +176,14 @@ body{
     background-position: center;
     background-color: transparent;
     border-style: none;
-    padding: 2vw;
-    z-index: 5;
     cursor: pointer;
     color:#FFF;
     font-size: 8vw;
+    margin: 2% 5%;
+    padding: 4vw;
+    padding-top: 6vw;
+    width: 40%;
+    z-index: 10;
 }
 
 .red-btn{
@@ -199,18 +193,20 @@ body{
     background-position: center;
     background-color: transparent;
     border-style: none;
-    padding: 2vw;
-    z-index: 5;
     cursor: pointer;
     color:#FFF;
     font-size: 8vw;
+    margin: 2% 5%;
+    padding: 4vw;
+    padding-top: 6vw;
+    width: 40%;
+    z-index: 10;
 }
 
 
 .carousel-container {
-    height: 20%;
-    margin: 20% auto;
-    margin-bottom: 15%;
+    height: 55% !important;
+    margin-bottom: 20%;
 }
 
 .carousel-container ul {}
@@ -224,32 +220,40 @@ body{
 
 .carousel-container ul li img {}
 
+.selection-container{
+    display: flex;
+    margin: 30% 5%;
+    align-items: center;
+    justify-content: center;
+}
+
 .left{
     cursor: pointer;
-    width: 15%;
-    left: -10%; 
-    padding-top: 60%;
+    width: 20%;
+    position: relative !important;
 }
 
 .right {
     cursor: pointer;
-    width: 15%;
     transform: scaleX(-1);
-    right: -10%; 
-    padding-top: 60%;
+    width: 20%;
+    position: relative !important;
 }
 
-.banner{
-    background-image: url("../images/bannerBlue.png");
+.banner-selection{
+    background-image: url(../images/bannerBlue.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    height: 20%;
-    margin: 10% 15%;
-    font-size: 12vw;
-    color:#345468;
-    padding-top: 12%;
+    height: 70%;
+    width: 65%;
+    margin: 15% 0;
+    font-size: 9vw;
+    color: #345468;
+    padding-top: 5%;
 }
+
+
 
 .font-luckiest{
     font-family: 'Luckiest Guy', cursive !important;
@@ -257,21 +261,156 @@ body{
     text-align: center;
 }
 
+.containerMainText{
+    width: 90%;
+    margin: 0 auto;
+    background-color: #9ffffa;
+    padding: 2vh;
+    border-radius: 2vw;
+}
+
+#mainText h1{
+    color:#033d68;
+    font-size: 4vh
+}
+#mainText p{
+    color:#00897f;
+    font-size: 2vh
+}
+
+@media screen and (orientation: portrait) {
+    
+    #portrait {
+        display: block;
+    }
+
+    #landscape {
+        display: none;
+    }
+}
+
+.lock img{
+    /*filter: brightness(20%) ;*/
+
+}
+
+.lock span{
+    position: absolute;
+    margin-left: 160px;
+    margin-top:140px;
+    z-index: 1;
+    
+}
+
+
+/*----- Landscape mode -----*/
+
+@media screen and (orientation : landscape){
+    
+    #portrait {
+        display: none;
+    }
+
+    #landscape {
+        display: block;
+    }
+    
+    #logo{
+        margin: 0.5vw 0;
+    }
+    
+    .logoTour {
+        width: 40%;
+        padding: 1vw;
+        padding-bottom: 0;
+    }
+
+    .yogo-container{
+        position: absolute;
+        width: 100%;
+    }
+    
+    .yogo-oona,
+    .yogo-arturius{
+        width: 33%;
+    }
+    
+    .yogo-arturius{
+        transform: translateX(5%);
+    }
+    
+    .yogo-oona{
+        transform: translateX(-15%);
+    }
+
+    .object-center{
+        margin: 0 0;
+        width: 70%;
+        margin-top: 0.5vw;
+        margin-left: 15%;
+        justify-content: center;
+    }
+
+    .green-btn,
+    .pink-btn,
+    .red-btn{
+        padding: 1vw;
+        padding-top: 2vw;
+        margin: 0; 
+        font-size: 4vw;
+            width: 30%;
+    }
+
+    .carousel-container {
+        height: 65% !important;
+        margin-bottom: 0;
+    }
+
+    .banner{
+        font-size: 6vw;
+        padding-top: 3%;
+        margin: 7% 15%;
+        margin-bottom: 3%;
+    }
+    
+    .selection-container{
+        margin: -5% 10%;
+    }
+
+    .left,
+    .right {
+        width: 15%;
+    }
+
+    .banner-selection{
+        font-size: 6vw;
+        padding-top: 3.5%;
+        margin: 7% 0;
+    }
+    
+    .carousel-container ul {
+        top: 3% !important;
+    }
+    
+    .containerMainText {
+        width: 40%;
+    }
+    
+    #mainText h1{
+        font-size: 7vh
+    }
+    #mainText p{
+        font-size: 4vh
+    }
+    
+}
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
+    
+    
 
 
 

@@ -80,7 +80,7 @@
 	}
 
 	function onError() {
-		alert("No se encuentra la partida");
+		alert("Pin Session not found");
 		$("#infoContainer").css("height",'100%');
 		$("#infoContainer").css("visibility",'visible');
 		//dataInfo.style.visibility = 'hidden';
@@ -94,7 +94,7 @@
 	}
 
 	var onGameFull = function(){
-		alert("La partida ya se encuentra ocupada");
+		alert("This PIN session is already occupied");
 		$("#infoContainer").css("height",'100%');
 		$("#infoContainer").css("visibility",'visible');
 		//dataInfo.style.visibility = 'hidden';
