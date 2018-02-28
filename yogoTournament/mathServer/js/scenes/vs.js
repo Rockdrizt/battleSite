@@ -573,7 +573,7 @@ var vs = function(){
 			var char = spineList[i]
 			var spine = game.add.spine(0,110,char.id)
 			spine.setSkinByName("normal")
-			spine.setAnimationByName(0,"IDLE",true)
+			spine.setAnimationByName(0,"idle",true)
 			spine.scale.setTo(char.scale * 0.9,char.scale * 0.9)
 			group.anim = spine
 			group.add(spine)

@@ -334,7 +334,7 @@ var battle = function(){
 		createConfeti()
 		inputsEnabled = true
 
-		player.setAnimation(["WIN", "WINSTILL"], true)
+		player.setAnimation(["win", "winstill"], true)
 		battleSong.stop()
 		sound.play("winBattle")
 
@@ -353,8 +353,8 @@ var battle = function(){
 		// target.hpBar.removeHealth(20)
 		sound.play(from.projectileData.impact.soundID)
 
-		target.statusAnimation = target.hpBar.health <= 40 ? "TIRED" : "IDLE"
-		target.setAnimation(["HIT", target.statusAnimation], true)
+		target.statusAnimation = target.hpBar.health <= 40 ? "tired" : "idle"
+		target.setAnimation(["hit", target.statusAnimation], true)
 		// console.log(target.spine.state)
 		target.add(from.hit)
 		from.hit.start(true, 1000, null, 5)
@@ -424,7 +424,7 @@ var battle = function(){
 		game.add.tween(targetPlayer.hpBar).to({alpha:0}, 400, Phaser.Easing.Cubic.Out, true)
 		game.add.tween(timerGroup).to({alpha:0}, 400, Phaser.Easing.Cubic.Out, true)
 
-    	fromPlayer.setAnimation(["CHARGE"], false)
+    	fromPlayer.setAnimation(["charge"], false)
 		fromPlayer.spine.speed = 0.5
 		fromPlayer.proyectile.startPower.alpha = 1
 		fromPlayer.proyectile.startPower.animations.play('start', fromPlayer.proyectile.startPower.fps, false)
@@ -455,7 +455,7 @@ var battle = function(){
 			percentage = percentage || 0
 			fromPlayer.spine.speed = 1
 			var targetX = targetPlayer.x < game.world.centerX ? 0 : game.world.width
-			fromPlayer.setAnimation(["ATTACK", "IDLE"], true)
+			fromPlayer.setAnimation(["attack", "idle"], true)
             
 			// game.add.tween(game.camera.scale).to({x:1.7, y:1.7}, 300, Phaser.Easing.Cubic.Out, true)
 			// moveCamera.onComplete.add(returnCamera)
@@ -487,7 +487,7 @@ var battle = function(){
 		// game.add.tween(player.hpBar).to({alpha:0}, 500, Phaser.Easing.Cubic.Out, true)
 
         game.time.events.add(400, function () {
-			player.setAnimation(["LOSE", "LOSESTILL"], true)
+			player.setAnimation(["lose", "losestill"], true)
 			// var dissapear = game.add.tween(player).to({alpha: 0}, 800, Phaser.Easing.Cubic.Out, true)
 			// dissapear.onComplete.add(stopGame)
 			// stopGame()
@@ -729,7 +729,7 @@ var battle = function(){
 		var spineScale = player.data.spine.options.scale
 		player.scale.setTo(playerScale * 0.8 * spineScale * scale, playerScale * 0.8 * spineScale)
 		sceneGroup.add(player)
-		player.statusAnimation = "IDLE"
+		player.statusAnimation = "idle"
 		// console.log("width", player.width)
 		player.x = position.x
 		player.y = position.y
@@ -813,8 +813,8 @@ var battle = function(){
 			idleSheet.animations.play('idle', idleSheet.fps, true)
 		}, this);
 
-		player.spine.setMixByName("RUN", "IDLE", 0.3)
-		player.spine.setMixByName("WIN", "IDLE", 0.3)
+		player.spine.setMixByName("run", "idle", 0.3)
+		player.spine.setMixByName("win", "idle", 0.3)
 
 		return player
 	}
@@ -1084,7 +1084,7 @@ var battle = function(){
 			player.originalX = player.x
 			player.x = player.numPlayer === 1 ? -100 : game.world.width + 100 //* player.scaleReference
 			// console.log(player.scaleReference, "scaleReference")
-			player.setAnimation(["RUN", "IDLE"], true)
+			player.setAnimation(["run", "idle"], true)
 			game.add.tween(player).to({x:player.originalX}, 1200, Phaser.Easing.Cubic.Out, true)
 
 			player.hpBar.alpha = 0
@@ -1146,7 +1146,7 @@ var battle = function(){
 			sceneGroup.correctParticle.x = playerWin.x
 			sceneGroup.correctParticle.y = playerWin.y - 150
 			sceneGroup.correctParticle.start(true, 1000, null, 5)
-			playerWin.setAnimation(["WIN", "IDLE"], true)
+			playerWin.setAnimation(["win", "idle"], true)
 			game.time.events.add(1000, function () {
 				game.add.tween(answersGroup).to({y:answersGroup.y + 184 * 0.9}, 1000, Phaser.Easing.Cubic.Out, true)
 				playerAttack(playerWin, playerLose, createProyectile, "proyectile")
@@ -1154,8 +1154,8 @@ var battle = function(){
 
 			playerWin.hpBar.addWin()
 		}else{
-			players[0].setAnimation(["HIT", "IDLE"], true)
-			players[1].setAnimation(["HIT", "IDLE"], true)
+			players[0].setAnimation(["hit", "idle"], true)
+			players[1].setAnimation(["hit", "idle"], true)
 			game.time.events.add(1000, function(){
 				game.add.tween(answersGroup).to({y:answersGroup.y + 184 * 0.9}, 1000, Phaser.Easing.Cubic.Out, true)
 				showReadyGo()
@@ -1626,7 +1626,7 @@ var battle = function(){
 	}
 
 	function createSpine(skeleton, skin, idleAnimation, x, y) {
-		idleAnimation = idleAnimation || "IDLE"
+		idleAnimation = idleAnimation || "idle"
 		var spineGroup = game.add.group()
 		x = x || 0
 		y = y || 0
