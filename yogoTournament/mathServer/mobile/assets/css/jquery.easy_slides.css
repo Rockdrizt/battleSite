@@ -331,11 +331,11 @@ transform: scale(0.7);
 .next_button,
 .prev_button {
     position: fixed;
-    left: 100% !important;
-    top: 197% !important;
+    left: 110% !important;
     width: 25% !important;
     opacity: 1 !important;
     z-index: 5000 !important;
+    margin-top: 40vh;
 }
 .next_button img,
 .prev_button img{
@@ -348,7 +348,7 @@ transform: scale(0.7);
 
 .prev_button {
   position: absolute;
-  left: -25% !important;
+  left: -35% !important;
 }  
 .next_button:hover,
 .prev_button:hover {
@@ -362,15 +362,15 @@ div.slider > div:not(.nav_indicators):not(.next_button):not(.prev_button) {
     
     .next_button,
     .prev_button{
-        top: 215% !important;
+        margin-top: 25vh;
     }
     
     .next_button{
-        left: 80% !important;
+        left: 100% !important;
     }
     
     .prev_button{
-        left: -10% !important;
+        left: -30% !important;
     }
     
     .next_button img,
