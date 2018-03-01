@@ -48,8 +48,14 @@
 
 .modal-body {
     text-align: center;
-    max-height: 66%;
+    max-height: 65vh !important;
     overflow-y: auto;
+}
+
+@media screen and (orientation : landscape){
+    .modal-body {
+        max-height: 54vh !important;
+    }
 }
 
 .modal-footer {

@@ -67,36 +67,37 @@ function printRule(rule, operator){
 		case "SUM":
 			string+=" + "
 			$(".headerDifficulty").find("p").text("ADDITION")
-			// $(".modal-header").css('background-color', '#912e99')
-			// $(".modal-footer").css('background-color', '#912e99')
-			// $(".modal-body").css('background-color', '#c0b4fc')
-			// operationColor = '#8b7bdb'
+			$(".headerDifficulty").css('background-color', '#912e99')
+			$(".confirmOptions").css('background-color', '#912e99')
+			$(".modal-body").css('background-color', '#c0b4fc')
+			operationColor = '#8b7bdb'
 			break
 		case "SUB":
 			string+=" - "
-			$(".headerDifficulty").find("p").text("SUBSTRACTION")
-			// $(".modal-header").css('background-color', '#4595c0')
-			// $(".modal-footer").css('background-color', '#4595c0')
-			// $(".modal-body").css('background-color', '#b6e9ff')
-			// operationColor = '#7dc1de'
+			$(".headerDifficulty").find("p").text("SUBTRACTION")
+			$(".headerDifficulty").css('background-color', '#4595c0')
+			$(".confirmOptions").css('background-color', '#4595c0')
+			$(".modal-body").css('background-color', '#b6e9ff')
+			operationColor = '#7dc1de'
 			break
 		case "MUL":
 			string+=" x "
 			$(".headerDifficulty").find("p").text("MULTIPLICATION")
-			// $(".modal-header").css('background-color', '#c93585')
-			// $(".modal-footer").css('background-color', '#c93585')
-			// $(".modal-body").css('background-color', '#ffb6e0')
-			// operationColor = '#de7db5'
+			$(".headerDifficulty").css('background-color', '#c93585')
+			$(".confirmOptions").css('background-color', '#c93585')
+			$(".modal-body").css('background-color', '#ffb6e0')
+			operationColor = '#de7db5'
 			break
 		case "DIV":
 			string+=" ÷ "
 			$(".headerDifficulty").find("p").text("DIVISION")
-			// $(".modal-header").css('background-color', '#e6bd5f')
-			// $(".modal-footer").css('background-color', '#e6bd5f')
-			// $(".modal-body").css('background-color', '#ffecae')
-			// operationColor = '#dec576'
+			$(".headerDifficulty").css('background-color', '#e6bd5f')
+			$(".confirmOptions").css('background-color', '#e6bd5f')
+			$(".modal-body").css('background-color', '#ffecae')
+			operationColor = '#dec576'
 			break
 	}
+
 	string += "</span>"
 
 	if(rule.paramToAnswer === operationGenerator.OPERATION_PARAMS.operand2)

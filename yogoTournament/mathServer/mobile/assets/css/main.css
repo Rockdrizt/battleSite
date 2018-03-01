@@ -32,6 +32,7 @@ body{
 #logo{
     width: 100%;
     margin: 5% 0;
+    margin-bottom: 1%;
 }
 
 .logoTour{
@@ -110,7 +111,7 @@ body{
 .yogo-oona,
 .yogo-arturius{
     
-    width: 50%;
+    width: 45%;
     text-align: center;
     bottom: 0%;
 }
@@ -350,7 +351,7 @@ body{
     
     .yogo-oona,
     .yogo-arturius{
-        width: 33%;
+       width: 25%;
     }
     
     .yogo-arturius{
@@ -380,6 +381,7 @@ body{
     }
 
     .green-btn, 
+    .pink-btn,
     .red-btn {
         padding-top: 1vw;
         padding-bottom: 0;
@@ -428,7 +430,7 @@ body{
     }
     
     .containerMainText {
-        width: 40%;
+        width: 55%;
     }
     
     #mainText h1{

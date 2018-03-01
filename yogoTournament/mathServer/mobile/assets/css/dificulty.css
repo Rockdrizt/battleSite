@@ -216,10 +216,6 @@
     padding-top: 4%;
 }
 
-.modal-body {
-    max-height: 68% !important;
-    overflow-y: auto;
-}
 
 .modal-body span{
     font-size: 4vw;
@@ -331,7 +327,7 @@
 
     .menu-container {
         padding: 2% 0;
-        margin: -1% 15%;
+        margin: -1% 25%;
         border-radius: 3vw;
     }
 
@@ -354,8 +350,8 @@
     }
 
     .plus-btn{
-        width: 5%;
-        margin-right: 10%;
+        width: 8%;
+        margin-right: 5%;
         transform: translateY(10%);
     }
     
