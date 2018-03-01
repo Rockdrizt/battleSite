@@ -81,7 +81,7 @@ body{
 .yogo-container{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .yogo-nao{
@@ -111,7 +111,7 @@ body{
 .yogo-oona,
 .yogo-arturius{
     
-    width: 45%;
+    width: 30%;
     text-align: center;
     bottom: 0%;
 }
@@ -167,12 +167,11 @@ body{
     background-position: center;
     background-color: transparent;
     border-style: none;
-    padding: 4vw;
-    padding-top: 6vw;
+        padding-top: 2vh;
     cursor: pointer;
     color:#FFF;
-    font-size: 8vw;
-    margin: 2% 5%;
+    font-size: 7vw;
+    margin: 0 5%;
     width: 40%;
     z-index: 10;
 }
@@ -187,9 +186,8 @@ body{
     cursor: pointer;
     color:#FFF;
     font-size: 8vw;
-    margin: 2% 5%;
-    padding: 4vw;
-    padding-top: 6vw;
+    margin: 0 5%;
+    padding-top: 2vh;
     width: 40%;
     z-index: 10;
 }
@@ -204,9 +202,8 @@ body{
     cursor: pointer;
     color:#FFF;
     font-size: 8vw;
-    margin: 2% 5%;
-    padding: 4vw;
-    padding-top: 6vw;
+    margin: 0 5%;
+    padding-top: 2vh;
     width: 40%;
     z-index: 10;
 }
