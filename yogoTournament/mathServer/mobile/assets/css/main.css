@@ -72,7 +72,6 @@ body{
 .object-center{
     width: 100%;
     text-align: center;
-    margin: 5% 0;
     display: flex;
     position: absolute; 
     bottom: 1%;
