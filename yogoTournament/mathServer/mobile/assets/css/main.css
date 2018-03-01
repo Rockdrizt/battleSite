@@ -70,11 +70,12 @@ body{
 }
 
 .object-center{
-    width: 100%;
+    width: 80%;
     text-align: center;
     display: flex;
-    position: absolute; 
+    position: absolute;
     bottom: 1%;
+    margin: 0 10%;
 }
 
 .yogo-container{
