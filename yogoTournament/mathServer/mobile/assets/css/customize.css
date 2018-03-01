@@ -132,13 +132,11 @@
     }
     
     .menu-container {
-        height: 65%;
+        height: 60vh;
         margin-top: 0;
     }
 
-    .less-time{
-        padding: 10%;
-    }
+   
 
     .condition-header{
         font-size: 4vw;
@@ -151,7 +149,7 @@
 
     .time-image{
         padding: 17%;
-        font-size: 6vh;
+        font-size: 5vh;
         margin: 0 0%;
     }
     
