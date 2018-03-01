@@ -8,7 +8,7 @@
     margin: 0 auto;
     user-select: none;
     left: 50%;
-    transform: translate(-50%, 0) scale(0.5);
+    transform: translate(-50%, -20%) scale(0.5);
 }
 .slider_circle_10 > *{
   transition: ease all 1s;
@@ -331,15 +331,15 @@ transform: scale(0.7);
 .next_button,
 .prev_button {
     position: fixed;
-    left: 71% !important;
-    top: 165% !important;
+    left: 100% !important;
+    top: 197% !important;
     width: 25% !important;
     opacity: 1 !important;
     z-index: 5000 !important;
 }
 .next_button img,
 .prev_button img{
-    width: 50%;
+    width: 80%;
 }
 
 .prev_button{
@@ -348,7 +348,7 @@ transform: scale(0.7);
 
 .prev_button {
   position: absolute;
-  left: 4% !important;
+  left: -25% !important;
 }  
 .next_button:hover,
 .prev_button:hover {
@@ -362,20 +362,20 @@ div.slider > div:not(.nav_indicators):not(.next_button):not(.prev_button) {
     
     .next_button,
     .prev_button{
-        top: 170% !important;
+        top: 215% !important;
     }
     
     .next_button{
-        left: 100% !important;
+        left: 80% !important;
     }
     
-    .next_button{
-        left: -30% !important;
+    .prev_button{
+        left: -10% !important;
     }
     
     .next_button img,
     .prev_button img{
-        width: 80%;
+        width: 60%;
     }
     
 }

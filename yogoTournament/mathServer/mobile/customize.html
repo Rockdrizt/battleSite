@@ -47,7 +47,7 @@
 
                         <div class="more-time col-xs-3"></div>
                     </div>
-                    <div style="font-size: 5vw">minute (s)</div>
+                    <div style="font-size: 5vw" class="minutes">minutes</div>
 
                 </div>
 
@@ -65,7 +65,7 @@
                         <div class="more-rounds col-xs-3"></div>
 
                     </div>
-                    <div style="font-size: 5vw">battles (s)</div>
+                    <div style="font-size: 5vw" class="battle">battles</div>
 
                 </div>
                 
@@ -104,7 +104,7 @@
 
                         <div class="more-time col-xs-3"></div>
                     </div>
-                    <div style="font-size: 5vh">minute (s)</div>
+                    <div style="font-size: 5vh" class="minutes">minutes</div>
 
                 </div>
 
@@ -122,7 +122,7 @@
                         <div class="more-rounds col-xs-3"></div>
 
                     </div>
-                    <div style="font-size: 5vh; padding-top: 1vh;">battles (s)</div>
+                    <div style="font-size: 5vh; padding-top: 1vh;" class="battles">battles</div>
 
                 </div>
             </div>
@@ -147,38 +147,58 @@
 
     $(".less-rounds").click(function(){
 
-        if(round > 1)
+        if(round > 1){
             round--
-        else
+        }
+        else{
             round = 10
+            $(".battles").text('battles');
+        }
+        if(round === 1){
+            $(".battles").text('battle');
+        }
         $(".round").text(round);
     });
 
     $(".more-rounds").click(function(){
 
-        if(round < 10)
+        if(round < 10){
             round++
-        else 
+            $(".battles").text('battles');
+        }
+        else{ 
             round = 1
+            $(".battles").text('battle');
+        }
         $(".round").text(round);
     });
 
     
     $(".less-time").click(function(){
 
-        if(time > 1)
+        if(time > 1){
             time--
-        else
+        }
+        else{
             time = 10
+            $(".minutes").text('minutes');
+        }
+        if(time === 1){
+            $(".minutes").text('minute');
+        }
         $(".time").text(time + ':00');
     });
 
     $(".more-time").click(function(){
 
-        if(time < 10)
+        if(time < 10){
             time++
-        else 
+            $(".minutes").text('minutes');
+        }
+        else{
             time = 1
+            $(".minutes").text('minute');
+        }
         $(".time").text(time + ':00');
     });
     
