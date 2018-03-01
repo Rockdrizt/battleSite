@@ -42,7 +42,7 @@
         
         <div class="menu-container">
             
-            <div class="subject-container" style="background-color: #4719ac">
+            <div class="subject-container" style="background-color: #912e99">
                 
                 <div class="checkBlank checkBox0">
                     <img src="assets/images/blank_check.png"> 
@@ -52,28 +52,28 @@
                 <div id="adition">ADITION</div>
 
                 <div class="plus-btn" data-type="SUM">
-                    <span>custom</span>
-                    <img src="assets/images/custom1.png" />
+                    
+                    <img src="assets/images/pencil.png" />
                 </div>
             
             </div>
             
-            <div class="subject-container" style="background-color: #ac199f">
+            <div class="subject-container" style="background-color: #4595c0">
                 <div class="checkBlank checkBox1">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
 
-                <div id="substraction">SUBSTRACTION</div>
+                <div id="substraction">SUBTRACTION</div>
 
                 <div class="plus-btn" data-type="SUB">
-                    <span>custom</span>
-                    <img src="assets/images/custom2.png" />
+                    
+                    <img src="assets/images/pencil.png" />
                 </div>
 
             </div>
             
-            <div class="subject-container" style="background-color: #e23405">
+            <div class="subject-container" style="background-color: #c93585">
                 <div class="checkBlank checkBox2">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
@@ -82,12 +82,12 @@
                 <div id="multiplcation">MULTIPLICATION</div>
             
                 <div class="plus-btn" data-type="MUL">
-                    <span>custom</span>
-                    <img src="assets/images/custom3.png" />
+                    
+                    <img src="assets/images/pencil.png" />
                 </div>
             </div>
             
-            <div class="subject-container" style="background-color: #0096b6">
+            <div class="subject-container" style="background-color: #e6bd5f">
                 <div class="checkBlank checkBox3">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
@@ -96,8 +96,8 @@
                 <div id="division">DIVISION</div>
                 
                 <div class="plus-btn" data-type="DIV">
-                    <span>custom</span>
-                    <img src="assets/images/custom4.png">
+                    
+                    <img src="assets/images/pencil.png">
                 </div>
 
             </div>
@@ -132,7 +132,7 @@
         
         <div class="menu-container">
             
-            <div class="subject-container" style="background-color: #4719ac">
+            <div class="subject-container" style="background-color: #912e99">
                 
                 <div class="checkBlank checkBox0">
                     <img src="assets/images/blank_check.png"> 
@@ -142,28 +142,28 @@
                 <div id="adition">ADITION</div>
 
                 <div class="plus-btn" data-type="SUM">
-                    <span>custom</span>
-                    <img src="assets/images/custom1.png" />
+                    
+                    <img src="assets/images/pencil.png" />
                 </div>
             
             </div>
             
-            <div class="subject-container" style="background-color: #ac199f">
+            <div class="subject-container" style="background-color: #4595c0">
                 <div class="checkBlank checkBox1">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
 
-                <div id="substraction">SUBSTRACTION</div>
+                <div id="substraction">SUBTRACTION</div>
 
                 <div class="plus-btn" data-type="SUB">
-                    <span>custom</span>
-                    <img src="assets/images/custom2.png" />
+                    
+                    <img src="assets/images/pencil.png" />
                 </div>
 
             </div>
             
-            <div class="subject-container" style="background-color: #e23405">
+            <div class="subject-container" style="background-color: #c93585">
                 <div class="checkBlank checkBox2">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
@@ -172,12 +172,12 @@
                 <div id="multiplcation">MULTIPLICATION</div>
             
                 <div class="plus-btn" data-type="MUL">
-                    <span>custom</span>
-                    <img src="assets/images/custom3.png" />
+                    
+                    <img src="assets/images/pencil.png" />
                 </div>
             </div>
             
-            <div class="subject-container" style="background-color: #0096b6">
+            <div class="subject-container" style="background-color: #e6bd5f">
                 <div class="checkBlank checkBox3">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
@@ -186,8 +186,8 @@
                 <div id="division">DIVISION</div>
                 
                 <div class="plus-btn" data-type="DIV">
-                    <span>custom</span>
-                        <img src="assets/images/custom4.png">
+                    
+                        <img src="assets/images/pencil.png">
                 </div>
 
             </div>
@@ -212,9 +212,6 @@
             <div class="modal-header">
                 <div class="title-modal">
                     <p>ADITION</p>
-                    <div class="close-btn">
-                        <img  src="assets/images/closeButton.png">
-                    </div>
                 </div>
                 
             </div>
@@ -233,6 +230,7 @@
 <script type="text/javascript" src="assets/js/operationGenerator.js"></script>
 <script type="text/javascript" src="assets/js/modal.js"></script>
 <script>
+	var operationGenerator = parent.operationGenerator || operationGenerator
 
     function setCustomRules() {
 		var customRules = {}
@@ -316,6 +314,7 @@
 		difficultSet = operationGenerator.RULES_SET[current_set]
     });
 
+    var operationColor
 
 	function printRule(rule, operator){
 		var string = ""
@@ -332,24 +331,42 @@
 			string += rule.operand1Const
 		}
 
+		string += "<span class='highlight'>"
 		switch (operator){
 			case "SUM":
 				string+=" + "
-				$(".headerDifficulty").find("p").text("ADDITION")
+				$(".title-modal").find("p").text("ADDITION")
+				$(".modal-header").css('background-color', '#912e99')
+				$(".modal-footer").css('background-color', '#912e99')
+				$(".modal-body").css('background-color', '#c0b4fc')
+                operationColor = '#8b7bdb'
 				break
 			case "SUB":
 				string+=" - "
-				$(".headerDifficulty").find("p").text("SUBSTRACTION")
+				$(".title-modal").find("p").text("SUBSTRACTION")
+                $(".modal-header").css('background-color', '#4595c0')
+				$(".modal-footer").css('background-color', '#4595c0')
+                $(".modal-body").css('background-color', '#b6e9ff')
+                operationColor = '#7dc1de'
 				break
 			case "MUL":
 				string+=" x "
-				$(".headerDifficulty").find("p").text("MULTIPLICATION")
+				$(".title-modal").find("p").text("MULTIPLICATION")
+                $(".modal-header").css('background-color', '#c93585')
+				$(".modal-footer").css('background-color', '#c93585')
+                $(".modal-body").css('background-color', '#ffb6e0')
+                operationColor = '#de7db5'
 				break
 			case "DIV":
 				string+=" ÷ "
-				$(".headerDifficulty").find("p").text("DIVISION")
+				$(".title-modal").find("p").text("DIVISION")
+                $(".modal-header").css('background-color', '#e6bd5f')
+				$(".modal-footer").css('background-color', '#e6bd5f')
+                $(".modal-body").css('background-color', '#ffecae')
+                operationColor = '#dec576'
 				break
 		}
+		string += "</span>"
 
 		if(rule.paramToAnswer === operationGenerator.OPERATION_PARAMS.operand2)
 			string += "?"
@@ -363,14 +380,14 @@
 		}
 
 		if(rule.paramToAnswer === operationGenerator.OPERATION_PARAMS.result)
-			string += " = ?"
+			string += " <span class='highlight'>=</span> ?"
 		else {
-			string += " = X"
+			string += " <span class='highlight'>=</span> X"
 		}
 
 		var operationExample = operationGenerator.getOperationRule(rule, operator)
 		var symbol = (operationExample.operator === "/" ? "÷" : operationExample.operator)
-		string += " (Example: " + operationExample.operand1 + " " + symbol + " " + operationExample.operand2 + " = " + operationExample.result + ")"
+		string += "  (Example: " + operationExample.operand1 + "<span class='highlight'> " + symbol + " </span>" + operationExample.operand2 + " <span class='highlight'>=</span> " + operationExample.result + ")"
 
 		var minRange = rule.minRange || 1
 		var maxRange = rule.maxRange || 1
@@ -390,11 +407,11 @@
 
 			$(".modal-body")
 				.append(' <div id="operation' + p + '" class="menu-options">' +
-					'<div><span>' + printRule(rule, operator) + '</span></div>' +
 					'<div id="checkChoice' + p + '"  class="checkChoice" data-num="' + p +'">' +
 					'<img src="assets/images/blank_check.png"> ' +
 					'<img class="markCheck" src="assets/images/mark_check.png"> ' +
 					'</div> ' +
+                    '<div><span>' + printRule(rule, operator) + '</span></div>' +
 					'</div>');
 
 			if(!rule.disable)
@@ -423,17 +440,13 @@
 					//aqui para guardar el seleccionado
 				}
 			});
-
-
+            
 			if (p % 2 === 0) {
-				$("#operation" + p).addClass("purple-back");
+				$("#operation" + p).css('background-color', operationColor);
 			}
 		}
 	}
-    
-    TweenMax.to($("#bgGradient"),10,{backgroundPosition:"0% 100%",repeat:-1,ease:Linear.easeNone});
-
-    
+      
 </script>
     
 </body>       

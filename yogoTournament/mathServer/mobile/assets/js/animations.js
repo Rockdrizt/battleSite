@@ -3,8 +3,6 @@
 
 /*TweenMax.fromTo($("#Obj"),1,{alpha:0},{alpha:1,ease:Back.easeOut,delay:1,onComplete:NextFunction})*/
 
-TweenMax.to($("#bgGradient"),10,{backgroundPosition:"0% 100%",repeat:-1,ease:Linear.easeNone});
-
 
 function shine(){
     TweenMax.to({}, 2, {

@@ -1,3 +1,7 @@
+.highlight{
+    color:white !important;
+}
+
 .logoTour{
     padding: 1vw;
     width: 47%;
@@ -29,8 +33,8 @@
     margin-bottom: 0%;
 }
 
-.right-arrow{
-    background-image: url(../images/arrowSide.png);
+.left-arrow{
+    background-image: url(../images/arrowYellow.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -38,19 +42,19 @@
     border-style: none;
     transform: scaleX(-1);
     width: 50%;
-    margin: -3% 0%;
+    margin: -2% 0%;
     /*transform: translateX(-10%); */
 }
 
-.left-arrow{
-    background-image: url(../images/arrowSide.png);
+.right-arrow{
+    background-image: url(../images/arrowYellow.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     background-color: transparent;
     border-style: none;
     width: 50%;
-    margin: -3% 0%;
+    margin: -2% 0%;
 }
 
 .bottom-container{
@@ -83,7 +87,6 @@
     
     align-items: center;
     background-color: #00f9ff;
-    background-image: url("../images/dots.png");
     text-align: center;
     margin: 0% 10%;
     border-radius: 6vw;
@@ -123,7 +126,7 @@
 
 
 .plus-btn{
-    width: 20%;
+    width: 15%;
     margin-right: 5%;
 }
 
@@ -168,9 +171,6 @@
 }
 
 .title-modal{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
     font-size: 9vw;
 }
 
@@ -206,7 +206,7 @@
     justify-content:space-around;
     align-items: center;
     left: -1vw;
-        position: fixed;
+    position: fixed;
     z-index: 1;
 
 }
@@ -217,13 +217,15 @@
 }
 
 .modal-body span{
-    font-size: 5vw;
+    font-size: 4vw;
+    color: purple;
+    font-family: "VAGRounded";
 }
 
 .menu-options{
     font-size: 2vw;
     display: flex;
-    justify-content:space-between;
+    justify-content:space-around;
     align-items: center;
     padding: 3vw;
     
@@ -242,10 +244,6 @@
     width: 10%;
 }
 
-.purple-back{
-    background-color: #a89df9;
-}
-
 .ok-btn{
     background-image: url(../images/greenButton.png);
     background-repeat: no-repeat;
@@ -259,6 +257,11 @@
     font-size: 4vh;
     z-index: 10;
     margin: 1% 36%;
+}
+
+.modal-header,
+.modal-footer{
+    background-blend-mode: multiply;
 }
 
 @media screen and (orientation: portrait) {
@@ -335,7 +338,6 @@
     .plus-btn{
         width: 10%;
         margin-right: 10%;
-        transform: translateY(12%);
     }
     
     .plus-btn span {

@@ -65,8 +65,8 @@ var operationGenerator = function () {
 				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.operand2},
 			],
 			DIV:[
-				{operand1X: 2, operand2X: 1, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 2, operand2X: 1, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 2, operand2X: 1, minRange:99, maxRange: 990, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 1, minRange:99, maxRange: 990, paramToAnswer:OPERATION_PARAMS.operand2},
 			]
 		},
 
@@ -90,7 +90,7 @@ var operationGenerator = function () {
 				{operand1X: 3, operand2X: 2, minRange:90, maxRange: 98901, paramToAnswer:OPERATION_PARAMS.result},
 			],
 			DIV:[
-				{operand1X: 3, operand2X: 1, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 3, operand2X: 1, minRange:100, maxRange:999, paramToAnswer:OPERATION_PARAMS.result},
 			]
 		},
 
@@ -113,7 +113,7 @@ var operationGenerator = function () {
 				{operand1X: 4, operand2X: 2, minRange:10000, maxRange: 989901, paramToAnswer:OPERATION_PARAMS.result},
 			],
 			DIV:[
-				{operand1X: 3, operand2X: 2, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 3, operand2X: 2, minRange:10, maxRange:99, paramToAnswer:OPERATION_PARAMS.result},
 			]
 		}
 	}
@@ -122,6 +122,7 @@ var operationGenerator = function () {
 	var currentRound
 	var numOfOperations = 32
 	var numPerOperator
+	var currentOperator
 	var operatorsList
 	var counterOperators
 
@@ -191,19 +192,25 @@ var operationGenerator = function () {
 		var operation = {operand1:operand1, operand2:operand2, operator:operator}
 		var result = makeOperation(operation)
 
+		var minRange = rule.minRange || MIN_RANGE_DEFAULT
+		if(operand1 > rule.maxRange)
+			operand1 = operand1 - minRange
+		if(operand2 > rule.maxRange)
+			operand2 = operand2 - minRange
+
 		if ((rule.maxRange) && (result > rule.maxRange)) {
 			if(operator === "SUM" || operator === "SUB") {
 				var dif = rule.maxRange - result
 				console.log(dif)
 				if (operand2 > operand1)
-					operand2 = operand2 + dif
+					operand2 = Math.abs(operand2 + dif)
 				else
-					operand1 = operand1 + dif
+					operand1 = Math.abs(operand1 + dif)
 			}else if(operator === "MUL"){
 				if (operand2 > operand1)
-					operand1 = Math.floor(rule.maxRange / operand2)
+					operand1 = Math.ceil(rule.maxRange / operand2)
 				else
-					operand2 = Math.floor(rule.maxRange / operand1)
+					operand2 = Math.ceil(rule.maxRange / operand1)
 			}else{
 				operand1 = result
 				operand2 = (operand1 / operand2) > rule.maxRange ? rule.maxRange : operand2
@@ -223,10 +230,10 @@ var operationGenerator = function () {
 					operand2 = operand2 + dif
 				}
 			}else if(operator === "MUL"){
-				if (operand2 > operand1)
-					operand1 = Math.floor(minRange / operand2)
+				if (operand2 < operand1)
+					operand1 = Math.ceil(minRange / operand2)
 				else
-					operand2 = Math.floor(minRange / operand1)
+					operand2 = Math.ceil(minRange / operand1)
 			}
 		}
 
@@ -238,14 +245,13 @@ var operationGenerator = function () {
 	}
 
 	function getOperationRule(rule, operator){
-		console.log(rule)
 
 		var operand1
 
 		if(rule.operand1X) {
 			var maxOperand1 = Math.pow(10, rule.operand1X) - 1
-			var minOperand1 = Math.pow(10, rule.operand1X - 1)
-			// minOperand1 = minOperand1 === 1 ? minOperand1 : minOperand1 + 1
+			var minOperand1 = Math.pow(10, rule.operand1X - 1) - 1
+			minOperand1 = minOperand1 < 1 ? 1 : minOperand1
 			console.log(maxOperand1, minOperand1)
 			operand1 = Math.floor(Math.random() * (maxOperand1 - minOperand1)) + minOperand1
 		}else if(rule.operand1Const){
@@ -259,8 +265,7 @@ var operationGenerator = function () {
 
 		if(rule.operand2X) {
 			var maxOperand2 = Math.pow(10, rule.operand2X) - 1
-			var minOperand2 = Math.pow(10, rule.operand2X - 1)
-			// minOperand1 = minOperand1 === 1 ? minOperand1 : minOperand1 + 1
+			var minOperand2 = Math.pow(10, rule.operand2X - 1) + 1
 			operand2 = Math.floor(Math.random() * (maxOperand2 - minOperand2)) + minOperand2
 		}else if(rule.operand2Const){
 			operand2 = rule.operand2Const
@@ -321,11 +326,11 @@ var operationGenerator = function () {
 	}
 
 //numOfOperations is the theorical number of minimal operations per level based on time
-	function setConfiguration(rules, numOfOperations) {
-		ruleSet = rules
-		console.log(ruleSet)
+	function setConfiguration(ruleSet, numOfOperations) {
+		ruleSet = RULES_SET.EASY
 		currentRound = 0
 		numOfOperations = numOfOperations || 32
+		currentOperator = ruleSet
 		setOperators()
 		numPerOperator = Math.floor(numOfOperations / operatorsList.length)
 
@@ -336,6 +341,7 @@ var operationGenerator = function () {
 		RULES_SET:RULES_SET,
 		setConfiguration:setConfiguration,
 		OPERATION_PARAMS:OPERATION_PARAMS,
-		generate:generate
+		generate:generate,
+		getOperationRule:getOperationRule
 	}
 }()

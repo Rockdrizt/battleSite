@@ -1,6 +1,6 @@
 
 .menu-container{
-    background-color: #cc00ff;
+    background-color: #4595c0;
     padding: 1% 0;
 }
 
@@ -41,8 +41,8 @@
     padding: 10%;
 }
 
-.more-rounds{
-    background-image: url(../images/round_arrow.png);
+.less-rounds{
+    background-image: url(../images/arrowYellow.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -52,8 +52,8 @@
     transform: scaleX(-1);
 }
 
-.less-rounds{
-    background-image: url(../images/round_arrow.png);
+.more-rounds{
+    background-image: url(../images/arrowYellow.png);
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
@@ -132,7 +132,7 @@
     }
     
     .menu-container {
-        height: 55%;
+        height: 65%;
         margin-top: 0;
     }
 

@@ -15,6 +15,7 @@ function scaleButtonAnimate(obj){
     });  
 }
 
+
 function clearElements(section){
    TweenLite.set(section, {clearProps:"all"}); 
 }

@@ -547,14 +547,14 @@ var operations = function(){
 
 			sceneGroup = game.add.group()
 
-			// var background = game.add.graphics()
-			// background.beginFill(0xFF4560)
-			// background.drawRect(-2,-2, game.world.width + 2, game.world.height + 2)
-			// background.endFill()
-			// sceneGroup.add(background)
+			var background = game.add.graphics()
+			background.beginFill(0xC03173)
+			background.drawRect(-2,-2, game.world.width + 2, game.world.height + 2)
+			background.endFill()
+			sceneGroup.add(background)
 			//
 			var bg2 = game.add.graphics()
-			bg2.beginFill(0x38FFE0)
+			bg2.beginFill(0x4698D1)
 			bg2.drawRect(-2, -2, game.world.width + 2, 200)
 			bg2.endFill()
 			sceneGroup.add(bg2)
@@ -567,9 +567,9 @@ var operations = function(){
 			sceneGroup.add(shadow)
 			// bg2.alpha = 0.5
 			//
-			var tileBg = game.add.tileSprite(-2, -2, game.world.width + 2, 200, "atlas.operations", "texture")
-			sceneGroup.add(tileBg)
-			tileBg.blendMode = PIXI.blendModes.MULTIPLY;
+			// var tileBg = game.add.tileSprite(-2, -2, game.world.width + 2, 200, "atlas.operations", "texture")
+			// sceneGroup.add(tileBg)
+			// tileBg.blendMode = PIXI.blendModes.MULTIPLY;
 
 			initialize()
 
@@ -587,7 +587,7 @@ var operations = function(){
 			sceneGroup.add(equationGroup)
 
 			readyString = localization.getString(localizationData, "ready")
-			var fontStyle2 = {font: "72px Luckiest Guy", fontWeight: "bold", fill: "#113860", align: "center", wordWrap: true, wordWrapWidth: 480}
+			var fontStyle2 = {font: "72px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", align: "center", wordWrap: true, wordWrapWidth: 480}
 			// var equationText = game.add.bitmapText(0,0,"WAG", readyString, 72)
 			var equationText = game.add.text(0, 0, readyString, fontStyle2)
 

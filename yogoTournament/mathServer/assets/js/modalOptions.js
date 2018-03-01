@@ -1,3 +1,5 @@
+
+var operationGenerator = parent.operationGenerator || operationGenerator
 var current_set = "EASY"
 var difficultSet = operationGenerator.RULES_SET[current_set]
 var ruleSet
@@ -61,6 +63,7 @@ function printRule(rule, operator){
 		string += rule.operand1Const
 	}
 
+	string += "<span class='highlight'>"
 	switch (operator){
 		case "SUM":
 			string+=" + "
@@ -68,7 +71,7 @@ function printRule(rule, operator){
 			break
 		case "SUB":
 			string+=" - "
-            $(".headerDifficulty").find("p").text("SUBSTRACTION")
+            $(".headerDifficulty").find("p").text("SUBTRACTION")
 			break
 		case "MUL":
 			string+=" x "
@@ -79,6 +82,7 @@ function printRule(rule, operator){
             $(".headerDifficulty").find("p").text("DIVISION")
 			break
 	}
+	string += "</span>"
 
 	if(rule.paramToAnswer === operationGenerator.OPERATION_PARAMS.operand2)
 		string += "?"
@@ -92,14 +96,14 @@ function printRule(rule, operator){
 	}
 
 	if(rule.paramToAnswer === operationGenerator.OPERATION_PARAMS.result)
-		string += " = ?"
+		string += " <span class='highlight'>=</span> ?"
 	else {
-		string += " = X"
+		string += " <span class='highlight'>=</span> X"
 	}
 
 	var operationExample = operationGenerator.getOperationRule(rule, operator)
 	var symbol = (operationExample.operator === "/" ? "÷" : operationExample.operator)
-	string += " (Example: " + operationExample.operand1 + " " + symbol + " " + operationExample.operand2 + " = " + operationExample.result + ")"
+	string += "  (Example: " + operationExample.operand1 + "<span class='highlight'> " + symbol + " </span>" + operationExample.operand2 + " <span class='highlight'>=</span> " + operationExample.result + ")"
 
 	var minRange = rule.minRange || 1
 	var maxRange = rule.maxRange || 1
