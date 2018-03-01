@@ -344,6 +344,7 @@ body{
     .yogo-container{
         position: absolute;
         width: 100%;
+        justify-content: space-between;
     }
     
     .yogo-oona,
