@@ -76,12 +76,14 @@ body{
     position: absolute;
     bottom: 1%;
     margin: 0 10%;
+    justify-content: space-around;
 }
 
 .yogo-container{
     display: flex;
     align-items: center;
     justify-content: space-around;
+        margin-top: 1vh;
 }
 
 .yogo-nao{
@@ -110,19 +112,14 @@ body{
 
 .yogo-oona,
 .yogo-arturius{
-    
-    width: 30%;
+
     text-align: center;
     bottom: 0%;
 }
 
-.yogo-oona img{
-    width: 80%;
-    
-}
-
+.yogo-oona img,
 .yogo-arturius img{
-    width: 60%;
+   height: 20vh;
 }
 
 .yogotar{
@@ -352,12 +349,16 @@ body{
        width: 25%;
     }
     
-    .yogo-arturius{
-        transform: translateX(5%);
+    .yogo-arturius img{
+        height: 26vh;
     }
     
     .yogo-oona{
-        transform: translateX(-15%);
+        transform: translateX(-10%);
+    }
+    
+    .yogo-oona img{
+        height: 25vh;
     }
 
     .object-center{
