@@ -70,12 +70,11 @@ body{
 }
 
 .object-center{
-    width: 80%;
+    width: 100%;
     text-align: center;
     display: flex;
     position: absolute;
     bottom: 1%;
-    margin: 0 10%;
     justify-content: space-around;
 }
 
@@ -168,9 +167,10 @@ body{
     cursor: pointer;
     color:#FFF;
     font-size: 7vw;
-    margin: 0 5%;
+    
     width: 40%;
     z-index: 10;
+    text-align: center;
 }
 
 .pink-btn{
@@ -183,10 +183,11 @@ body{
     cursor: pointer;
     color:#FFF;
     font-size: 8vw;
-    margin: 0 5%;
+    
     padding-top: 2vh;
     width: 40%;
     z-index: 10;
+    text-align: center;
 }
 
 .red-btn{
@@ -199,10 +200,10 @@ body{
     cursor: pointer;
     color:#FFF;
     font-size: 8vw;
-    margin: 0 5%;
     padding-top: 2vh;
     width: 40%;
     z-index: 10;
+    text-align: center;
 }
 
 

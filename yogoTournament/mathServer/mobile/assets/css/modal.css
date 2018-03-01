@@ -54,7 +54,7 @@
 
 @media screen and (orientation : landscape){
     .modal-body {
-        max-height: 50vh !important;
+        max-height: 60vh !important;
     }
 }
 
