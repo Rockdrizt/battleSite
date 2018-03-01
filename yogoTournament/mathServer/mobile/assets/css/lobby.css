@@ -62,7 +62,7 @@
 }
 
 .yogotarImg{
-    display: inline-flex;
+    display: block;
 }
 
 @media screen and (orientation: portrait) {
@@ -77,9 +77,9 @@
 
     .yogotarImg{
         align-items: center;
-        max-height: 30vh;
-        height: 30vh;
-        /* vertical-align: middle; */
+        max-height: 20vh;
+        height: 18vh;
+        /*vertical-align: middle;*/
     }
 
     .yogotarImg img{
@@ -151,6 +151,10 @@
     .yogotarImg img{
         width: 101%;
     }
+    
+    .yogotarImg{
+        display: inline-flex;
+    }
 
 }
 
@@ -158,6 +162,8 @@
 .yogo2 .yogotarImg{
     transform: scaleX(-1);
 }
+
+
 
 .yogotarLogo img{
     width: 65%;

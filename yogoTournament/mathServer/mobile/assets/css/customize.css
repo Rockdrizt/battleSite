@@ -28,7 +28,7 @@
     background-repeat: no-repeat;
     background-color: transparent;
     border-style: none;
-    padding: 10%;
+    padding: 7%;
 }
 
 .less-time{
@@ -38,7 +38,7 @@
     background-repeat: no-repeat;
     background-color: transparent;
     border-style: none;
-    padding: 10%;
+    padding: 7%;
 }
 
 .less-rounds{
@@ -48,7 +48,7 @@
     background-repeat: no-repeat;
     background-color: transparent;
     border-style: none;
-    padding: 10%;
+    padding: 7%;
     transform: scaleX(-1);
 }
 
@@ -59,7 +59,7 @@
     background-repeat: no-repeat;
     background-color: transparent;
     border-style: none;
-    padding: 10%;
+    padding: 7%;
 }
 
 .round-image{
