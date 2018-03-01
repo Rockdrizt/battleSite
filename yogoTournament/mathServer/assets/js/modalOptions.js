@@ -45,6 +45,7 @@ var printOperators = function() {
 printOperators()
 
 //var totalSum =  easy.sum
+var operationColor;
 
 function printRule(rule, operator){
 	var string = ""
@@ -65,7 +66,7 @@ function printRule(rule, operator){
 	switch (operator){
 		case "SUM":
 			string+=" + "
-			// $(".headerDifficulty").find("p").text("ADDITION")
+			$(".headerDifficulty").find("p").text("ADDITION")
 			// $(".modal-header").css('background-color', '#912e99')
 			// $(".modal-footer").css('background-color', '#912e99')
 			// $(".modal-body").css('background-color', '#c0b4fc')
@@ -73,7 +74,7 @@ function printRule(rule, operator){
 			break
 		case "SUB":
 			string+=" - "
-			// $(".headerDifficulty").find("p").text("SUBSTRACTION")
+			$(".headerDifficulty").find("p").text("SUBSTRACTION")
 			// $(".modal-header").css('background-color', '#4595c0')
 			// $(".modal-footer").css('background-color', '#4595c0')
 			// $(".modal-body").css('background-color', '#b6e9ff')
@@ -81,7 +82,7 @@ function printRule(rule, operator){
 			break
 		case "MUL":
 			string+=" x "
-			// $(".headerDifficulty").find("p").text("MULTIPLICATION")
+			$(".headerDifficulty").find("p").text("MULTIPLICATION")
 			// $(".modal-header").css('background-color', '#c93585')
 			// $(".modal-footer").css('background-color', '#c93585')
 			// $(".modal-body").css('background-color', '#ffb6e0')
@@ -170,6 +171,10 @@ function getRules(operator) {
 	});
 
 
+        if (p % 2 === 0) {
+				$("#operation" + p).css('background-color', operationColor);
+        }
+        
 		if (p % 2 === 0) {
 			console.log(p)
 			$("#operation" + p).addClass("optionPar");

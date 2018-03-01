@@ -607,16 +607,22 @@ body{
 }
 
 .confirmOptions .greenBtn{
-
-    width: 100%;
+    width: 20%;
     background-size: contain;
     position: absolute;
     text-align: center;
-    background-position: center;
-    padding: 0.5vw;
-    top:0%;
-    font-size: 3vw;
-    left:0;
+    background-position:50% 0%;
+    padding: 0vw;
+    height: 100%;
+    top:3%;
+    left:50%;
+    transform: translate(-50%,0%);
+}
+
+.confirmOptions span{
+    position: relative;
+    font-size: 2.5vw;
+    top:15%;
 }
 
 .closeButton{
@@ -631,7 +637,7 @@ body{
     position: absolute;
     top: 50%;
     transform: translate(0%, -30%);
-    font-size: 2vw;
+    font-size: 3vw;
     text-align: center;
     width: 100%;
     z-index: 20000;
@@ -690,14 +696,19 @@ body{
 }
 
 .containerCustomize{
-    background-image: url("../images/patternCircles.png");
-    background-color: #cc00ff;
+    background-color: #4595c0;
     border-radius: 2vw;
-    height: 110%;
+    height: 105%;
+    width: 100%;
+}
+
+.titleCustomize{
+    position: relative;
+    width: 97% !important;
+    background-size: 100% !important;
 }
 
 .optionsTime{
-
     text-align: center;
     height: 100%;
 }
@@ -705,6 +716,10 @@ body{
 .optionsRounds{
     text-align: center;
     height: 100%;
+}
+
+.buttonsumRest{
+    width: 25% !important;
 }
 
 .bgYellow{
@@ -742,6 +757,7 @@ body{
 
 .timeOptions{
     font-size: 3vw;
+    padding-top: 1vw;
 }
 
 
@@ -761,22 +777,22 @@ body{
 
 .containerPin{
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     top:38%;
+    left:10%;
     z-index: 1234123;
-    background-color: #00ff78;
-    background-image: url("../images/patternCircles.png");
+    background-color: #4595c0;
     border-radius:  0 0vw 2vw 2vw;
 }
 
 .bgGreen{
     background-image: url("../images/bggreen.png");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 100%;
     background-position: center;
     width: 100%;
-    margin-top: -15%;
+    margin-top: -13%;
     font-size: 4vw;
     position: absolute;
     text-align: center;
@@ -803,9 +819,9 @@ body{
 
 #pin{
     background-color: #FFF;
-    color:#006837;
+    color:#03659a;
     font-size: 4vw;
-    margin-top: 10%;
+    margin-top: 15%;
     width: 50%;
     margin-left:50%;
     transform: translate(-50%,0);
@@ -817,7 +833,8 @@ body{
     text-align: center;
     padding: 1vw;
     font-size: 1.5vw;
-    color:#184831;
+    color:#FFF;
+    width: 100%;
 }
 
 .yogotarsSelections{
@@ -845,6 +862,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    color:#FFF;
 }
 
 
@@ -861,15 +879,15 @@ body{
 }
 
 #playerName1{
-    width: 40%;
+    width: 30%;
     font-size: 3vw;
-    transform: translate(-23%,0%);
+    transform: translate(-65%,0%);
 }
 
 #playerName2{
-    width: 40%;
+    width: 30%;
     font-size: 3vw;
-    transform: translate(23%,0%);
+    transform: translate(65%,0%);
 }
 
 .yogotarSelect{
@@ -1021,7 +1039,7 @@ body{
     top: 50%;
     left: 50%;
     transform: translate(-50%,-55%);
-    width: 28%;
+    width: 36%;
 }
 
 .timeOptions img{
@@ -1031,4 +1049,10 @@ body{
 
 .scaleButton{
     cursor:pointer;
+}
+
+.textCustomize{
+    text-align: center;
+    font-size: 1.9vw;
+    margin-top: 3%;
 }
