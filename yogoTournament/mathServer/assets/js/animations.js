@@ -24,7 +24,6 @@ function clearElements(section){
 
 //animation 1
 //TweenMax.to('html',2,{opacity:0,ease:Linear.easeNone});
-TweenMax.to($("#bgGradient"),10,{backgroundPosition:"0% 100%",repeat:-1,ease:Linear.easeNone});
 TweenMax.set('#animation1',{'-webkit-filter':'brightness(0%)'});
 TweenMax.set('#naoMain',{'-webkit-filter':'brightness(100%)'});
 TweenMax.set('#estrellaMain',{'-webkit-filter':'brightness(100%)'});

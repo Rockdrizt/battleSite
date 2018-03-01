@@ -2,6 +2,10 @@ html{
     height: 100%;
 }
 
+.highlight{
+    color: white;
+}
+
 ::-webkit-scrollbar {
   width: 2%;
   height: 7px;
@@ -36,10 +40,6 @@ html{
   background: transparent;
 }
 
-.highlight{
-    color: white;
-}
-
 @font-face{
 	font-family: 'VAGRounded';
 	src: url('../../fonts/VAGRoundedStd-Bold.otf');
@@ -61,7 +61,7 @@ body{
     overflow: hidden;
     font-family: 'Luckiest Guy', cursive !important;
 /*    background:url("../images/stars01.png"), linear-gradient(to bottom, rgb(89,0,128) 0%,rgb(73,132,204)  100%);*/
-    background:linear-gradient(to bottom, rgb(89,0,128) 0%,rgb(73,132,204)  70%);
+    background:linear-gradient(to bottom, #240034 20%,#2d5380  100%);
     background-repeat: repeat;
     background-position: center;
 }
@@ -78,7 +78,7 @@ body{
     background-size: 100%;;
     background-position: 100% 30%;
     padding: 2vw;
-    z-index: 56;
+    z-index: 5611111;
     cursor: pointer;
     color:#FFF;
     font-size: 2vh;
@@ -89,30 +89,34 @@ body{
     position: absolute;
     left:20%;
     padding-top: 1vh !important;
+    font-size: 2.5vw;
 }
 
 .option1{
-
-    background-color: #4719ac;
-    padding: 0.4vw;
+    top:8%;
+    background-color: #912e99;
+    padding: 2vw;
     width: 100%;
     text-align: center;
 }
 .option2{
-    background-color: #ac199f;
-    padding: 0.4vw;
+    top:8%;
+    background-color: #4595c0;
+    padding: 2vw;
     width: 100%;
     text-align: center;
 }
 .option3{
-    background-color: #e23405;
-    padding: 0.4vw;
+    top:8%;
+    background-color: #c93585;
+    padding: 2vw;
     width: 100%;
     text-align: center;
 }
 .option4{
-    background-color: #0096b6;
-    padding: 0.4vw;
+    top:8%;
+    background-color: #e6bd5f;
+    padding: 2vw;
     width: 100%;
     text-align: center;
 }
@@ -138,7 +142,7 @@ body{
     z-index: 56;
     cursor: pointer;
     color:#FFF;
-    font-size: 2vh;
+    font-size: 4vh;
 }
 
 
@@ -148,10 +152,6 @@ body{
     height: 100%;
     width: 100%;
     margin:0;
-    background-image: url("../images/patternoptions.png");
-    background-position:center;
-    background-repeat: no-repeat;
-    background-size: cover;
     opacity: 0.1;
 }
 
@@ -191,7 +191,8 @@ body{
     align-content: center;
     color:#FFF;
     top:30%;
-
+    transform: scale(1.3);
+    z-index: 1;
 }
 
 .object-center div{
@@ -218,18 +219,19 @@ body{
     width: 30%;
     margin: 0 auto;
     max-width:500px;
-    background-color: #9ffffa;
+    margin-top: -5%;
+    background-color: #ccedff;
     padding: 2vh;
     border-radius: 2vw;
 }
 
 #mainText h1{
-    color:#033d68;
+    color:#491f9f;
     font-size: 4vh;
 
 }
 #mainText p{
-    color:#00897f;
+    color:#326a97;
     font-size: 2.5vh;
     font-family: "VAGRounded";
 }
@@ -237,8 +239,8 @@ body{
 #naoMain{
     position: absolute;
     bottom: 0;
-    width: 50%;
-    top: 50%;
+    width: 40%;
+    top: 45%;
     left: -3%;
     text-align: center;
 }
@@ -251,8 +253,8 @@ body{
 #estrellaMain{
     position: absolute;
     bottom: 0;
-    width: 50%;
-    top: 50%;
+    width: 40%;
+    top: 45%;
     right: 0;
     text-align: center;
 }
@@ -383,14 +385,10 @@ body{
 
 #difficultyName{
     position: absolute;
-    background-image: url("../images/bgdifficulty.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
     width:60%;
     left:20%;
     text-align: center;
-    font-size: 6vh;
+    font-size: 4vw;
     top: -10%;
 }
 
@@ -398,67 +396,76 @@ body{
 .prevDifficulty{
     z-index: 12;
     margin-top:-1%;
-    margin-left:0%;
-    width: 10%;
+    margin-left:-1%;
+    width: 40%;
+    transform: scale(-1,1);
 }
 
 .nextDifficulty{
-    transform: scale(-1,1);
+    
     z-index: 12;
     margin-top:-1%;
-    margin-left: 15%;
-    width: 10%;
+    margin-left: 80%;
+    width: 40%;
 }
 .nextDifficulty img,
 .prevDifficulty img{
-    width: 70% !important;
+    width: 100% !important;
 }
 
 .titlered{
-    font-size: 2vw;
-    width: 40%;
+    position:fixed;
+    font-size: 4vw !important;
+    width: 35%;
     height: 25%;
+    top:58%;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: ab;
     text-align: center;
     background-image: url("../images/bgred.png");
-    background-size: 70% !important;
+    background-size: 100% !important;
     background-position: 50% 40% !important;
     background-repeat: no-repeat;
-    color:#345468;
+    color:#FFF;
+    z-index: 1;
 }
 
 .containerRules{
     position: absolute;
-    height: 60%;
-    width: 60%;
+    height: 53%;
+    width: 50%;
     left:50%;
     z-index: 1;
     transform: translate(-50%,10%);
 }
 
 .rules{
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 100%;
+    width: 67%;
+    height: 17%;
     margin-left:50%;
     transform: translate(-50%,0%);
+    padding: 1vw;
+    background-image: url("../images/bgdifficulty.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center; 
+    z-index: 1;
+    
 }
 
 
 
 .optionsDifficulty{
     padding: 0 !important;
-    background-color: #00f9ff;
-    background-image: url("../images/patternCircles.png");
-    background-repeat:repeat;
-    background-position: center;
-    height: 80% !important;
-    border-radius: 0vw 0vw 3vw 3vw;
+    background-color: #befcfa;
+    height: 90% !important;
+    border-radius: 0vw 0vw 2vw 2vw;
 }
 
 
@@ -535,6 +542,12 @@ body{
 .checkBlank img{
     position: absolute;
     top: 20%;
+    width: 10%;
+}
+.checkBlank .markCheck{
+    position: absolute;
+    top: 30%;
+    width: 7%;
 }
 
 #modalCancel,
@@ -549,8 +562,6 @@ body{
 .m-containerDifficulty{
     position: absolute;
     background: #c0b4fc;
-    background-image: url("../images/patternCircles.png");
-    background-size: 30%;
     width: 50%;
     height: 70%;
     top:50%;
@@ -575,7 +586,6 @@ body{
     display: flex;
     align-content: center;
     justify-content:space-around;
-
 }
 
 .confirmOptions{
@@ -898,22 +908,24 @@ body{
 }
 
 .lock .planetImage{
-    filter: brightness(20%) ;
+    filter: brightness(100%) ;
 
 }
 
 .lock span{
     position: absolute;
-    margin-left: 145px;
-    margin-top:145px;
-    z-index: 1;
+    z-index: 1;  
+}
+.active .lock span{
+    position: absolute;
+    z-index: 1; 
     
 }
 
 .bgtitle{
     width: 100%;
     text-align: center;
-    font-size: 8vh;
+    font-size: 10vh;
     background-image: url("../images/bgtitle.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -923,7 +935,7 @@ body{
 
 .showModal{
    transform: translate(50%,30%);
-    width: 30%;
+    width: 15%;
 }
 
 .showModal span{

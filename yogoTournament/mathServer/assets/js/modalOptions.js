@@ -1,5 +1,3 @@
-
-var operationGenerator = parent.operationGenerator || operationGenerator
 var current_set = "EASY"
 var difficultSet = operationGenerator.RULES_SET[current_set]
 var ruleSet
@@ -67,19 +65,35 @@ function printRule(rule, operator){
 	switch (operator){
 		case "SUM":
 			string+=" + "
-            $(".headerDifficulty").find("p").text("ADDITION")
+			// $(".headerDifficulty").find("p").text("ADDITION")
+			// $(".modal-header").css('background-color', '#912e99')
+			// $(".modal-footer").css('background-color', '#912e99')
+			// $(".modal-body").css('background-color', '#c0b4fc')
+			// operationColor = '#8b7bdb'
 			break
 		case "SUB":
 			string+=" - "
-            $(".headerDifficulty").find("p").text("SUBTRACTION")
+			// $(".headerDifficulty").find("p").text("SUBSTRACTION")
+			// $(".modal-header").css('background-color', '#4595c0')
+			// $(".modal-footer").css('background-color', '#4595c0')
+			// $(".modal-body").css('background-color', '#b6e9ff')
+			// operationColor = '#7dc1de'
 			break
 		case "MUL":
 			string+=" x "
-            $(".headerDifficulty").find("p").text("MULTIPLICATION")
+			// $(".headerDifficulty").find("p").text("MULTIPLICATION")
+			// $(".modal-header").css('background-color', '#c93585')
+			// $(".modal-footer").css('background-color', '#c93585')
+			// $(".modal-body").css('background-color', '#ffb6e0')
+			// operationColor = '#de7db5'
 			break
 		case "DIV":
 			string+=" ÷ "
-            $(".headerDifficulty").find("p").text("DIVISION")
+			$(".headerDifficulty").find("p").text("DIVISION")
+			// $(".modal-header").css('background-color', '#e6bd5f')
+			// $(".modal-footer").css('background-color', '#e6bd5f')
+			// $(".modal-body").css('background-color', '#ffecae')
+			// operationColor = '#dec576'
 			break
 	}
 	string += "</span>"
@@ -122,13 +136,11 @@ function getRules(operator) {
 		var rule = ruleSet[p]
 
 		$(".choiceOptions")
-			.append(' <div id="operation' + p + '" class="optionOperations">' +
-				'<div class="operation">' + printRule(rule, operator) + '</div>' +
+			.append(' <div id="operation' + p + '" class="optionOperations">' + 
 				'<div id="checkChoice' + p + '"  class="checkChoice" data-num="' + p +'">' +
 				'<img src="assets/images/blank_check.png"> ' +
 				'<img class="markCheck" src="assets/images/mark_check.png"> ' +
-				'</div> ' +
-				'</div>');
+				'</div> ' + '<div class="operation">' + printRule(rule, operator) + '</div>' +'</div>');
 
     	if(!rule.disable)
 			$("#checkChoice" + p).attr("selection",1);
