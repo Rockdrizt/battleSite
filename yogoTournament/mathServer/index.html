@@ -207,7 +207,7 @@
                             </div>
                             <div class="timeOptions col-xs-12">
                                 <div id="restRound" class="col-xs-2  buttonsumRest"><img src="assets/images/restButton.png"></div>
-                                <div class="col-xs-6 textCustomize"> Battles</div>
+                                <div id="roundText" class="col-xs-6 textCustomize"> BATTLE</div>
                                 <div id="sumRound" class="col-xs-2 buttonsumRest"><img src="assets/images/sumButton.png"></div>
                             </div>
                             
@@ -495,12 +495,21 @@
 			counterRound--
 			$("#roundOptions").find("span").text(counterRound);
 		}
+        if(counterRound <= 1){
+            $("#roundText").html("BATTLE"); 
+        }
+        
 	});
 	$("#sumRound").click(function(){
 		if(counterRound < 10){
 			counterRound++
 			$("#roundOptions").find("span").text(counterRound);
 		}
+        
+                if(counterRound > 1){
+            $("#roundText").html("BATTLES"); 
+        }
+        
 	});
     
     
