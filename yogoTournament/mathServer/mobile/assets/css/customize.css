@@ -2,7 +2,6 @@
 .menu-container{
     background-color: #cc00ff;
     padding: 1% 0;
-    height: 65%;
 }
 
 .banner{
@@ -14,7 +13,6 @@
     text-align: center;
     margin: 0 10%;
     font-size: 9vw;
-    margin-top: 5%;
 }
 
 .condition-body{
@@ -30,7 +28,6 @@
     background-repeat: no-repeat;
     background-color: transparent;
     border-style: none;
-    margin: 0 10%;
     padding: 10%;
 }
 
@@ -41,7 +38,6 @@
     background-repeat: no-repeat;
     background-color: transparent;
     border-style: none;
-    margin: 0 10%;
     padding: 10%;
 }
 
@@ -52,7 +48,6 @@
     background-repeat: no-repeat;
     background-color: transparent;
     border-style: none;
-    margin: 0 6%;
     padding: 10%;
     transform: scaleX(-1);
 }
@@ -64,7 +59,6 @@
     background-repeat: no-repeat;
     background-color: transparent;
     border-style: none;
-    margin: 0 6%;
     padding: 10%;
 }
 
@@ -75,8 +69,8 @@
     background-repeat: no-repeat;
     background-color: transparent;
     border-style: none;
-    font-size: 15vw;
-    padding: 0 10%;
+    font-size: 8vh;
+    padding: 4%;
 }
 
 .round-image p{
@@ -95,11 +89,13 @@
     background-repeat: no-repeat;
     background-color: transparent;
     border-style: none;
-    padding: 50%
+    padding: 15%;
+    font-size: 4vh;
 }
 
-.object-center{
-    margin:  0;
+.time-image p{
+    margin: 0;
+    transform: translateY(25%);
 }
 
 .title-container{
@@ -150,17 +146,23 @@
     }
 
     .green-btn, .red-btn {
-        margin: 0 5%;
+        
     }
 
     .time-image{
-        padding: 25%;
+        padding: 17%;
+        font-size: 6vh;
+        margin: 0 0%;
+    }
+    
+    .more-rounds,
+    .less-rounds{
+        margin: 0;
     }
     
     .round-image{
         font-size: 7vw;
-        padding: 11% 10%;
-        transform: scale(1.4);
+        padding: 9% 15%;
     }
     
     .round-image p{
@@ -170,6 +172,7 @@
     
     .object-center{
         margin-left: 15%;
+        bottom: 1%
     }
     
     .banner{

@@ -39,16 +39,15 @@
 
                     <div class="condition-body">
 
-                        <div class="less-time"></div>
+                        <div class="less-time col-xs-3"></div>
 
-                        <div style="display: initial">
-                            <div class="time-image"></div>
-                            <div class="time" style="font-size: 9vw">3:00</div>
-                            <div style="font-size: 5vw">minutes</div>
-                        </div>
+                            <div class="time-image col-xs-6">
+                                <p class="time">3:00</p>
+                            </div>
 
-                        <div class="more-time"></div>
+                        <div class="more-time col-xs-3"></div>
                     </div>
+                    <div style="font-size: 5vw">minutes</div>
 
                 </div>
 
@@ -57,15 +56,16 @@
 
                     <div class="condition-body">
                         
-                        <div class="less-rounds"></div>
+                        <div class="less-rounds col-xs-3"></div>
                 
-                        <div class="round-image">
+                        <div class="round-image col-xs-6">
                             <p class="round">3</p>
                         </div>
 
-                        <div class="more-rounds"></div>
+                        <div class="more-rounds col-xs-3"></div>
 
                     </div>
+                    <div style="font-size: 6vw">battles</div>
 
                 </div>
                 
@@ -75,7 +75,7 @@
 
                 <button class="red-btn" type="button" onclick="window.location.href='selectDifficult.html'">BACK</button>
 
-                <button class="green-btn" type="button" style="font-size: 5.5vw;" onclick="window.location.href='lobby.html'">CREATE ROOM</button>
+                <button class="green-btn" type="button" onclick="window.location.href='lobby.html'">CREATE</button>
 
             </div>
 
@@ -96,43 +96,43 @@
 
                     <div class="condition-body">
 
-                        <div class="less-time"></div>
+                        <div class="less-time col-xs-3"></div>
 
-                        <div>
-                            <div class="time-image"></div>
-                            <div class="time" style="font-size: 5vw">3:00</div>
-                            <div style="font-size: 3vw">minutes</div>
-                        </div>
+                            <div class="time-image col-xs-6">
+                                <p class="time">3:00</p>
+                            </div>
 
-                        <div class="more-time"></div>
+                        <div class="more-time col-xs-3"></div>
                     </div>
+                    <div style="font-size: 7vh">minutes</div>
 
                 </div>
 
                 <div class="col-xs-6">
                     <div class="condition-header">ROUNDS</div>
 
-                    <div class="condition-body">
+                   <div class="condition-body">
                         
-                        <div class="less-rounds"></div>
+                        <div class="less-rounds col-xs-3"></div>
                 
-                        <div class="round-image">
+                        <div class="round-image col-xs-6">
                             <p class="round">3</p>
                         </div>
 
-                        <div class="more-rounds"></div>
+                        <div class="more-rounds col-xs-3"></div>
 
                     </div>
+                    <div style="font-size: 7vh">battles</div>
 
                 </div>
-                
             </div>
+            
 
             <div class="object-center">
 
                 <button class="red-btn" type="button" onclick="window.location.href='selectDifficult.html'">BACK</button>
 
-                <button class="green-btn" type="button" style="font-size:  3.2vw;" onclick="window.location.href='lobby.html'">CREATE ROOM</button>
+                <button class="green-btn" type="button" style="font-size: 3.5vw;" onclick="window.location.href='lobby.html'">CREATE</button>
 
             </div>
 
@@ -182,6 +182,8 @@
         $(".time").text(time + ':00');
     });
     
+    TweenMax.to($("#bgGradient"),10,{backgroundPosition:"0% 100%",repeat:-1,ease:Linear.easeNone});
+
 </script>
     
 </body>       

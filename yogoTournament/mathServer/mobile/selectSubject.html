@@ -17,7 +17,7 @@
     
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="assets/css/jquerysctipttop.css" />
+    
     
     <script src="assets/js/Carousel.js"></script>
     
@@ -112,9 +112,10 @@
                 
             </div>
             
-            <div class="object-center">
+            <div class="object-center" style="position: absolute;
+    bottom: 1%;">
 
-                <div class="red-btn" type="button" onclick="window.location.href='index.html'">BACK</div>
+                <div class="red-btn goBack" type="button">BACK</div>
 
                 <div class="green-btn" type="button" onclick="window.location.href='selectDifficult.html'">NEXT</div>
 
@@ -169,18 +170,18 @@
                 </ul>
                 
                 <div class="selection-container">
-                    <img src="assets/images/arrowYellow.png" class="left">
+                    <img src="assets/images/arrowYellow.png" class="left" >
                     <div class="banner-selection subject">MATH</div>
                     <img src="assets/images/arrowYellow.png" class="right">
                 </div>
                 
             </div>
 
-            <div class="object-center" style="width: 70%; margin-top: 6.5%; margin-left: 15%; display: flex; justify-content: center;">
+            <div class="object-center" style="    margin-left: 13.5%;">
 
-                <button class="menuBtn red-btn" style="margin: 0; font-size: 4vw;" type="button" type="button" onclick="window.location.href='index.html'">BACK</button>
+                <button class="red-btn goBack" type="button">BACK</button>
 
-                <button class="menuBtn green-btn" style="margin: 0; font-size: 4vw;" type="button" onclick="window.location.href='selectDifficult.html'">NEXT</button>
+                <button class="green-btn"type="button" onclick="window.location.href='selectDifficult.html'">NEXT</button>
 
             </div>
 
@@ -190,6 +191,7 @@
     
 </body> 
     
+    <script src="assets/js/animations.js"></script>
 <script>
     
     $( window ).on( "orientationchange", function( event ) {
@@ -197,29 +199,66 @@
         scalePlanets()
     });
     
+    $(".goBack").click(function(){
+        backAnimate1();
+    });
+    
     var index = 0;
+    var canClick = true;
     
     var subjectList = ['MATH', 'CREATIVITY', 'HEALTH', 'GEOGRAPHY', 'LANGUAGE', 'CODING', 'SCIENCE']
     
     $(".left").on('touchstart', function(){
-        if(index > 0){
-            index--
+        
+        if(canClick){
+            canClick = false
+            
+            if(index > 0){
+                index--
+            }
+            else{
+                index = subjectList.length - 1
+            }
+            $(".subject").text(subjectList[index]);
+            
+            setTimeout(delayToClick, 500);
         }
-        else{
-            index = subjectList.length - 1
-        }
-        $(".subject").text(subjectList[index]);
+        
     });
     
     $(".right").on('touchstart', function(){
-        if(index < subjectList.length -1){
-            index++
+        
+        if(canClick){
+            canClick = false
+            
+            if(index < subjectList.length -1){
+                index++
+            }
+            else{
+                index = 0
+            }
+            $(".subject").text(subjectList[index]);
+            
+            setTimeout(delayToClick, 500);
         }
-        else{
-            index = 0
-        }
-        $(".subject").text(subjectList[index]);
     });
+    
+    function delayToClick(){
+        canClick = true
+    }
         
 </script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

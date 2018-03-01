@@ -21,6 +21,8 @@
      
     <section id="bgGradient"></section>   
     
+    <div id="animation1"> 
+    
     <!-- portrait view -->
     <section id="portrait">
 
@@ -38,9 +40,9 @@
 
             <div class="object-center">
 
-                <div class="pink-btn" type="button">JOIN</div>
+                <div class="pink-btn joinGame" type="button">JOIN</div>
                 
-                <div class="green-btn" type="button" onclick="window.location.href='selectSubject.html'">CREATE</div>
+                <div class="green-btn createGame" type="button">CREATE</div>
 
             </div>
 
@@ -89,17 +91,35 @@
              
              <div class="object-center">
 
-                <div class="pink-btn" type="button">JOIN</div>
+                <div class="pink-btn joinGame" type="button">JOIN</div>
                  
-                <button class="green-btn" type="button" onclick="window.location.href='selectSubject.html'">CREATE</button>
+                <button class="green-btn createGame" type="button" >CREATE</button>
 
             </div>
 
         </div>
         
     </section>
+    
+    </div>
         
+    <script src="assets/js/animations.js"></script>
+    
 </body>       
+    <script>
+        
+        $( window ).ready(function( event ) {
+            shine();
+        });
+        
+        $(".createGame").click(function(){
+            animation1();
+        });
+        
+        $(".joinGame").click(function(){
+            window.open("../../mathClient/index.html", "_self")
+        });
+    </script>
 </html>
 
 

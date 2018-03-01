@@ -18,6 +18,10 @@ $(".close-btn").click(function() {
     modal.style.display = "none";
 });
 
+$(".ok-btn").click(function() {
+    modal.style.display = "none";
+});
+
 $(".close-warning").click(function() {
     warningModal.style.display = "none";
 });

@@ -18,14 +18,10 @@
     background-position: center;
     text-align: center;
     margin: 0% 5%;
-    font-size: 9vw;
+    font-size: 5vh;
 }
 
-.object-center{
-    margin: 0;
-    justify-content: space-around;
-    align-items: center;
-}
+
 
 .warning{
     padding: 0 10%;
@@ -41,21 +37,21 @@
     background-image: url("../images/dots.png");
     text-align: center;
     margin: 0 10%;
-    border-radius: 6vw;
+    border-radius: 6vh;
 }
 
 .pin-style{
     background-color: white;
     padding-top: 5%;
-    font-size: 15vw;
+    font-size: 6vh;
     color: #006837;
     margin: 0% 10%;
     transform: translateY(10%);
-    border-radius: 6vw;
+    border-radius: 6vh;
 }
 
 .share-style{
-    font-size: 4vw;
+    font-size: 3vh;
     margin: 5%;
     margin-bottom: 0;
     color: #184831;
@@ -64,7 +60,7 @@
 
 .yogo-container{
     margin-top: 5%;
-    font-size: 4vw;
+    font-size: 3vh;
 }
 
 .yogotarImg{
@@ -109,14 +105,9 @@
         display: block;
     }
 
-    .red-btn,
-    .green-btn{
-        font-size: 3vw;
-    }
-
     .pin-title{
         padding-top: 0.5vw;
-        font-size: 5vw;
+        font-size: 7vh;
         margin: 0 22%;
     }
 
@@ -126,15 +117,11 @@
 
     .pin-style{
         padding-top: 2vw;
-        font-size: 5vw;
+        font-size: 10vh;
     }
 
     .share-style{
-        font-size: 3vw;
-    }
-
-    .object-center{
-        margin-left: 15%;
+        font-size: 6vh;
     }
 
     .warning img {
@@ -142,8 +129,7 @@
     }
 
     .yogo-container{
-        /* margin-top: 10%; */
-        font-size: 2vw;
+        font-size: 2vh;
     }
 
     .yogo1,

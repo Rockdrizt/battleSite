@@ -246,9 +246,20 @@
     background-color: #a89df9;
 }
 
-
-
-
+.ok-btn{
+    background-image: url(../images/greenButton.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: transparent;
+    border-style: none;
+    padding-top: 1vh;
+    cursor: pointer;
+    color: #FFF;
+    font-size: 4vh;
+    z-index: 10;
+    margin: 1% 36%;
+}
 
 @media screen and (orientation: portrait) {
     
@@ -332,9 +343,7 @@
         padding-top: 1.5vw;
     }
 
-    .object-center{
-        margin-top: 1.5%;
-    }
+    
     
     .green-btn,
     .red-btn{
