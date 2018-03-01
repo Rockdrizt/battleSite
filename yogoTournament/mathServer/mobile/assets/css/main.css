@@ -304,16 +304,16 @@ body{
 }
 
 .lock img{
-    /*filter: brightness(20%) ;*/
+    filter: brightness(100%) ;
 
 }
 
 .lock span{
     position: absolute;
-    margin-left: 160px;
-    margin-top:140px;
+    margin-left: 45px;
+    margin-top: 60px;
     z-index: 1;
-    
+    transform: scale(1.3);    
 }
 
 .createGame,
@@ -438,6 +438,12 @@ body{
     }
     #mainText p{
         font-size: 3.5vh
+    }
+    
+    .lock span{
+        margin-left: 0;
+        margin-top:0;
+         transform: scale(1);
     }
     
 }

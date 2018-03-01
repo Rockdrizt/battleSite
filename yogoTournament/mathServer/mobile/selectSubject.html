@@ -65,44 +65,60 @@
 
             <div class="carousel-container">
                 <ul>
-                    <div class="load-planets"></div>
                     <li>
                         <div>
-                            <img src="assets/images/planets/mathdromeda.png" alt="" />
+                            <img src="assets/images/planets/mathdromeda.png" />
                         </div>
                     </li>
                     <li>
                         <div class="lock">
-                            <img src="assets/images/planets/creat_shade.png" alt="" />
+                            <span>
+                                <img src="assets/images/planets/creat_shade.png" />
+                            </span>
+                            <img src="assets/images/planets/creat.png" />
                         </div>
                     </li>
                     <li>
                         <div class="lock">
-                            <img src="assets/images/planets/health_shade.png" alt="" />
+                            <span>
+                                <img src="assets/images/planets/health_shade.png" />
+                            </span>
+                            <img src="assets/images/planets/health.png" />
                         </div>
                     </li>
                     <li>
                         <div class="lock">
-                            <img src="assets/images/planets/geogra_shade.png" alt="" />
+                            <span>
+                                <img src="assets/images/planets/geogra_shade.png" />
+                            </span>
+                            <img src="assets/images/planets/geogra.png" />
                         </div>
                     </li>
                     <li>
                         <div class="lock">
-                            <img src="assets/images/planets/wordo_shade.png" alt="" />
+                            <span>
+                                <img src="assets/images/planets/wordo_shade.png" />
+                            </span>
+                            <img src="assets/images/planets/wordo.png" />
                         </div>
                     </li>
                     <li>
                         <div class="lock">
-                            <img src="assets/images/planets/codus_shade.png" alt="" />
+                            <span>
+                                <img src="assets/images/planets/codus_shade.png" />
+                            </span>
+                            <img src="assets/images/planets/codus.png" />
                         </div>
                     </li>
                     <li>
                         <div class="lock">
-                            <img src="assets/images/planets/science_shade.png" alt="" />
+                            <span>
+                                <img src="assets/images/planets/science_shade.png" />
+                            </span>
+                            <img src="assets/images/planets/science.png" />
                         </div>
                     </li>
                 </ul>
-            
 
                 <div class="selection-container">
                     <img src="assets/images/arrowYellow.png" class="left" >
@@ -117,7 +133,7 @@
 
                 <div class="red-btn goBack" type="button">BACK</div>
 
-                <div class="green-btn" type="button" onclick="window.location.href='selectDifficult.html'">NEXT</div>
+                <div class="green-btn" type="button">NEXT</div>
 
             </div>
 
@@ -131,40 +147,57 @@
 
             <div class="carousel-container">
                 <ul>
-                    <div class="load-planets"></div>
                     <li>
                         <div>
-                            <img src="assets/images/planets/mathdromeda.png" alt="" />
+                            <img src="assets/images/planets/mathdromeda.png" />
                         </div>
                     </li>
                     <li>
                         <div class="lock">
-                            <img src="assets/images/planets/creat_shade.png" alt="" />
+                            <span>
+                                <img src="assets/images/planets/creat_shade.png" />
+                            </span>
+                            <img src="assets/images/planets/creat.png" />
                         </div>
                     </li>
                     <li>
                         <div class="lock">
-                            <img src="assets/images/planets/health_shade.png" alt="" />
+                            <span>
+                                <img src="assets/images/planets/health_shade.png" />
+                            </span>
+                            <img src="assets/images/planets/health.png" />
                         </div>
                     </li>
                     <li>
                         <div class="lock">
-                            <img src="assets/images/planets/geogra_shade.png" alt="" />
+                            <span>
+                                <img src="assets/images/planets/geogra_shade.png" />
+                            </span>
+                            <img src="assets/images/planets/geogra.png" />
                         </div>
                     </li>
                     <li>
                         <div class="lock">
-                            <img src="assets/images/planets/wordo_shade.png" alt="" />
+                            <span>
+                                <img src="assets/images/planets/wordo_shade.png" />
+                            </span>
+                            <img src="assets/images/planets/wordo.png" />
                         </div>
                     </li>
                     <li>
                         <div class="lock">
-                            <img src="assets/images/planets/codus_shade.png" alt="" />
+                            <span>
+                                <img src="assets/images/planets/codus_shade.png" />
+                            </span>
+                            <img src="assets/images/planets/codus.png" />
                         </div>
                     </li>
                     <li>
                         <div class="lock">
-                            <img src="assets/images/planets/science_shade.png" alt="" />
+                            <span>
+                                <img src="assets/images/planets/science_shade.png" />
+                            </span>
+                            <img src="assets/images/planets/science.png" />
                         </div>
                     </li>
                 </ul>
@@ -183,7 +216,7 @@
 
                 <button class="red-btn goBack" type="button">BACK</button>
 
-                <button class="green-btn"type="button" onclick="window.location.href='selectDifficult.html'">NEXT</button>
+                <button class="green-btn"type="button">NEXT</button>
 
             </div>
 
@@ -246,7 +279,23 @@
     });
     
     function delayToClick(){
+        colorNext()
         canClick = true
+    }
+    
+    $(".green-btn").click(function(){
+        if(index === 0){
+            window.location.href = 'selectDifficult.html';
+        }
+    });
+    
+    function colorNext(){
+        if(index === 0){
+            $(".green-btn").css('filter', 'brightness(100%)')
+        }
+        else{
+            $(".green-btn").css('filter', 'brightness(50%)')
+        }
     }
         
 </script>
