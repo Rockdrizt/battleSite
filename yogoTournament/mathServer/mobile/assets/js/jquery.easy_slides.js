@@ -42,7 +42,7 @@ Usage:
       var EasySlidesTimer;
       var EasySlidesCanChange = true;
       
-      var count = $(this_slider).children('*:not(.next_button, .prev_button, .nav_indicators)').length;
+      var count = $(this_slider).children('*:not(.next_button, .prev_button, .nav_indicators, .selection-container)').length;
       var cur_slide = 0;
       var mousedowned = false;
       var need_slide = 0;
@@ -53,11 +53,11 @@ Usage:
           var html = $(this_slider).html();
           $(html).appendTo(this_slider);
           $(this_slider).children('.next_button:eq(0), .prev_button:eq(0), .nav_indicators:eq(0)').remove();
-          slides = $(this_slider).children('*:not(.next_button, .prev_button, .nav_indicators)');
+          slides = $(this_slider).children('*:not(.next_button, .prev_button, .nav_indicators, .selection-container)');
 
           count = $(slides).length;
         }
-        slides = $(this_slider).children('*:not(.next_button, .prev_button, .nav_indicators)');
+        slides = $(this_slider).children('*:not(.next_button, .prev_button, .nav_indicators, .selection-container)');
 
         if ($(this_slider).children('.nav_indicators').length > 0) {
           var nav_indicators = '<ul>';
@@ -135,31 +135,40 @@ Usage:
                   switch(nextslide % 7){
                       case 0:
                           $(".subject").text("MATH");
-                          $(".green-btn").css('filter', 'brightness(100%)')
+                          $(".green-btn").css("opacity",1);
+                          $(".green-btn").click(function(){
+                              window.location.href = 'selectDifficult.html';
+                          })
                           break;
                       case 1:
                           $(".subject").text("CODE")
-                          $(".green-btn").css('filter', 'brightness(50%)')
+                          $(".green-btn").css("opacity",0.5);
+                          $(".green-btn").off( "click" );
                           break;
                       case 2:
                           $(".subject").text("CREATIVITY");
-                          $(".green-btn").css('filter', 'brightness(50%)')
+                          $(".green-btn").css("opacity",0.5);
+                          $(".green-btn").off( "click" );
                           break;
                       case 3:
                           $(".subject").text("GEOGRAPHY");
-                          $(".green-btn").css('filter', 'brightness(50%)')
+                          $(".green-btn").css("opacity",0.5);
+                          $(".green-btn").off( "click" );
                           break;
                       case 4:
                           $(".subject").text("HEALTH");
-                          $(".green-btn").css('filter', 'brightness(50%)')
+                          $(".green-btn").css("opacity",0.5);
+                          $(".green-btn").off( "click" );
                           break;
                       case 5:
                           $(".subject").text("SCIENCE");
-                          $(".green-btn").css('filter', 'brightness(50%)')
+                          $(".green-btn").css("opacity",0.5);
+                          $(".green-btn").off( "click" );
                           break;
                       case 6:
                           $(".subject").text("LANGUAGE");
-                          $(".green-btn").css('filter', 'brightness(50%)')
+                          $(".green-btn").css("opacity",0.5);
+                          $(".green-btn").off( "click" );
                           break;
                   }
                   
@@ -230,85 +239,7 @@ Usage:
           cur_slide --;
           EasySlidesNext(cur_slide);
         });
-        if (settings['touchevents']) {
-          var EasySliderMoved = function (xcur, ycur) {
-                  var offset = $(slides).find('.active').offset();
-                  var left = 0;
-                  var top = 0;
-                  if (typeof offset !== 'undefined') {
-                    left = offset.left;
-                    top = offset.top;
-                  }
-                  
-                  var p0 = $(this_slider).data('posstart'),
-                      p1 = {    x: xcur, 
-                                y: ycur,
-                                l: left,
-                                t: top,
-                           },
-                      d = 0;
-                  if (typeof p0 === 'undefined') {
-                    p0 = p1;
-                    $(this_slider).data('posstart', p1);
-                  }
-                  
-                  if (settings['vertical']) {
-                    d = p1.y - p0.y;
-                    top = p0.t  +  d;
-                    //$(this_slider).find('.active:not(.nav_indicators ul li)').offset({'top': top});
-                  } else {
-                    d = p1.x - p0.x;
-                    left = p0.l + d;
-                    //$(this_slider).find('.active:not(.nav_indicators ul li)').offset({'left': left});
-                  }
-                  if (settings['reverse']) {
-                    d = -d;
-                  }    
-                  if ((Math.abs(d) > settings['distancetochange']) && (EasySlidesCanChange)) {
-                    $(this_slider).data('posstart' , p1);
-                    
-                    if (d > 0) {
-                      cur_slide --;
-                    } else {
-                      cur_slide ++;
-                    }
-                    EasySlidesNext(cur_slide);
-                  }              
-          } 
-          /*События*/
-          $(this_slider).bind('mousemove', function(e) {
-            e.preventDefault();
-            if (e.buttons > 0) {
-              EasySliderMoved(e.pageX , e.pageY);
-              mousedowned = true;
-            } else {
-              if (mousedowned) {
-                EasySliderMoved(e.pageX , e.pageY);
-                $(this_slider).removeData('posstart');   
-                mousedowned = false;
-              }
-            }
-          });
-          $(this_slider).bind('mouseup', function(e) {
-              e.preventDefault();
-              if (mousedowned) {
-                EasySliderMoved(e.pageX , e.pageY);
-                $(this_slider).removeData('posstart');   
-                mousedowned = false;
-              }
-          })
-    
-          $(this_slider).bind('touchmove', function(e) {
-            e.preventDefault();
-            var touch = e.originalEvent.touches[0] || e.originalEvent.changedTouches[0];
-            EasySliderMoved(touch.pageX , touch.pageY);
-          });
-          $(this_slider).bind('touchend', function(e) {
-            e.preventDefault(); 
-            $(this_slider).removeData('posstart');         
-          });
-          
-        } 
+      
       }      
     });
   }

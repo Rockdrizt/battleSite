@@ -250,11 +250,9 @@ body{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    width: 100%;
-    margin: 15% 0;
+    margin: 0 15%;
     font-size: 8vw;
     padding-top: 2.5%;
-    transform: scale(1.2);
 }
 
 
@@ -425,9 +423,7 @@ body{
 
     .banner-selection{
         font-size: 6vw;
-        padding-top: 3.5%;
-        margin: 7% 0;
-        transform: scale(1);
+        margin-top: 5vh;
     }
     
     .carousel-container ul {

@@ -2,7 +2,7 @@
 /*********************************/
 
 .slider_circle_10 {
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 50%;
     margin: 0 auto;
@@ -330,15 +330,12 @@ transform: scale(0.7);
 }
 .next_button,
 .prev_button {
-  position: fixed;
-  left: 61%  !important;
-  top: 128%  !important;
-  width: 10%  !important;
-  opacity: 0.8 !important;
-  z-index: 5000 !important;
-  cursor: pointer;
-  text-align: center;
-  line-height: 30px;
+    position: fixed;
+    left: 71% !important;
+    top: 101% !important;
+    width: 25% !important;
+    opacity: 1 !important;
+    z-index: 5000 !important;
 }
 .next_button img,
 .prev_button img{
@@ -351,7 +348,7 @@ transform: scale(0.7);
 
 .prev_button {
   position: absolute;
-  left: 29%  !important;
+  left: 4% !important;
 }  
 .next_button:hover,
 .prev_button:hover {
@@ -360,3 +357,21 @@ transform: scale(0.7);
 div.slider > div:not(.nav_indicators):not(.next_button):not(.prev_button) {
   text-align: center;
 }
+
+@media screen and (orientation : landscape){
+    
+    .next_button,
+    .prev_button{
+        top: 108% !important;
+    }
+    
+}
+
+
+
+
+
+
+
+
+
