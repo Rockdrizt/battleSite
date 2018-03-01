@@ -241,3 +241,23 @@ var difficultyNameLevel = 0;
         }        
         levelDifficulty(difficultyNameLevel)
     })
+
+
+
+
+    $(window).resize(function () {
+      calculateNewScale();
+    });
+
+    calculateNewScale(); 
+
+function calculateNewScale() {
+      var percentageOn1 = $(window).width() / 1920;
+$("body").css({
+        "-moz-transform": "scale(" + percentageOn1 + ")",
+        "-webkit-transform": "scale(" + percentageOn1 + ")",
+        "transform": "scale(" + percentageOn1 + ")"
+      });        
+}
+      
+    
