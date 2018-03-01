@@ -151,7 +151,7 @@
                 <div class="m-containerDifficulty">
                     <div class="headerDifficulty">
                         <p>MULTIPLICATION</p>
-                        <img class="closeButton scaleButton" src="assets/images/closeButton.png">
+<!--                        <img class="closeButton scaleButton" src="assets/images/closeButton.png">-->
                     </div>
                     <div class="choiceOptions">
                         
@@ -189,7 +189,7 @@
                             </div>
                             <div class="timeOptions col-xs-12">
                                 <div id="restTime" class="col-xs-2  buttonsumRest"><img src="assets/images/restButton.png"></div>
-                                <div class="col-xs-6 textCustomize"> MINUTE (S)</div>
+                                <div id="minuteText" class="col-xs-6 textCustomize"> MINUTE</div>
                                 <div id="sumTime" class="col-xs-2 buttonsumRest"><img src="assets/images/sumButton.png"></div>
                             </div>
                             
@@ -466,13 +466,25 @@
 			$("#timeClock").find("span").text(counterTime);
 			battleTime = 60000 * counterTime
 		}
+        
+        if(counterTime <= 1){
+            $("#minuteText").html("MINUTE");
+        }        
+        
 	});
 	$("#sumTime").click(function(){
+
 		if(counterTime < 10){
 			counterTime++
 			$("#timeClock").find("span").text(counterTime);
 			battleTime = 60000 * counterTime
 		}
+
+        if(counterTime > 1){
+            $("#minuteText").html("MINUTES");
+        }
+                
+        
 	});
 
 
