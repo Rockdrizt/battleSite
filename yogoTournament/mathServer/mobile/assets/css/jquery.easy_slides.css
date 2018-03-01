@@ -332,7 +332,7 @@ transform: scale(0.7);
 .prev_button {
     position: fixed;
     left: 71% !important;
-    top: 101% !important;
+    top: 165% !important;
     width: 25% !important;
     opacity: 1 !important;
     z-index: 5000 !important;
@@ -362,7 +362,20 @@ div.slider > div:not(.nav_indicators):not(.next_button):not(.prev_button) {
     
     .next_button,
     .prev_button{
-        top: 108% !important;
+        top: 170% !important;
+    }
+    
+    .next_button{
+        left: 100% !important;
+    }
+    
+    .next_button{
+        left: -30% !important;
+    }
+    
+    .next_button img,
+    .prev_button img{
+        width: 80%;
     }
     
 }

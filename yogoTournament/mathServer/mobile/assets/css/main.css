@@ -253,6 +253,7 @@ body{
     margin: 0 15%;
     font-size: 8vw;
     padding-top: 2.5%;
+    margin-top: 75%;
 }
 
 
@@ -424,6 +425,7 @@ body{
     .banner-selection{
         font-size: 6vw;
         margin-top: 5vh;
+        margin-top: 55vh;
     }
     
     .carousel-container ul {
