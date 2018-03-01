@@ -194,6 +194,10 @@ $(".closeButton").click(function(){
 	$("#modalDifficulty").hide();
 });
 
+$(".okButton").click(function(){
+	$("#modalDifficulty").hide();
+});
+
 var difficultyNameLevel = 0;
     
     function levelDifficulty(difficultyNameLevel){
