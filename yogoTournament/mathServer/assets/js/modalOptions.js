@@ -244,7 +244,7 @@ var difficultyNameLevel = 0;
 
 
 
-
+/*
     $(window).resize(function () {
       calculateNewScale();
     });
@@ -252,7 +252,7 @@ var difficultyNameLevel = 0;
     calculateNewScale(); 
 
 function calculateNewScale() {
-      var percentageOn1 = $(window).width() / 1920;
+      var percentageOn1 = $(window).width() / 1400;
 $("body").css({
         "-moz-transform": "scale(" + percentageOn1 + ")",
         "-webkit-transform": "scale(" + percentageOn1 + ")",
@@ -260,4 +260,4 @@ $("body").css({
       });        
 }
       
-    
+*/    
