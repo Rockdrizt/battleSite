@@ -85,7 +85,7 @@ function startGame(){
 			// onUpdate: null
 		});
 
-		battleScene = window.innerHeight > window.innerWidth ? battleMobile : battle
+		battleScene = battle//window.innerHeight > window.innerWidth ? battleMobile : battle
 
         // var language = "EN"
         // if(window.location.search){
@@ -153,11 +153,21 @@ function startGame(){
     }
 }
 
+var testExp = new RegExp('Android|webOS|iPhone|iPad|' +
+	'BlackBerry|Windows Phone|'  +
+	'Opera Mini|IEMobile|Mobile' ,
+	'i');
+
+var isMobile = testExp.test(navigator.userAgent)
+
 var wfconfig = {
 
 	active: function() {
 		console.log("font loaded");
-		startGame();
+		if(isMobile)
+			window.minigame.orientation.init(startGame);
+		else
+			startGame()
 	},
 
 	google: {

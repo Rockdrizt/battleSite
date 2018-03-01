@@ -55,9 +55,9 @@
 }
 
 .share-style{
-    font-size: 4vw; 
+    font-size: 4vw;
     margin: 5%;
-        margin-bottom: 0;
+    margin-bottom: 0;
     color: #184831;
 }
 
@@ -67,16 +67,32 @@
     font-size: 4vw;
 }
 
-
+.yogotarImg{
+    display: inline-flex;
+}
 
 @media screen and (orientation: portrait) {
-    
+
     #portrait {
         display: block;
     }
 
     #landscape {
         display: none;
+    }
+
+    .yogotarImg{
+        align-items: center;
+        max-height: 30vh;
+        height: 30vh;
+        /* vertical-align: middle; */
+    }
+
+    .yogotarImg img{
+        /* height: inherit; */
+        max-height: inherit;
+        max-width: 100%;
+        /* vertical-align: middle; */
     }
 }
 
@@ -84,7 +100,7 @@
 /*-----Landscape-----*/
 
 @media screen and (orientation : landscape){
-    
+
     #portrait {
         display: none;
     }
@@ -92,10 +108,10 @@
     #landscape {
         display: block;
     }
-    
+
     .red-btn,
     .green-btn{
-      font-size: 3vw;
+        font-size: 3vw;
     }
 
     .pin-title{
@@ -105,7 +121,7 @@
     }
 
     .pin-body{
-       margin: 0 25%;
+        margin: 0 25%;
     }
 
     .pin-style{
@@ -118,27 +134,58 @@
     }
 
     .object-center{
-       margin-left: 15%;
+        margin-left: 15%;
     }
-    
+
     .warning img {
         transform: scale(1);
     }
-    
+
     .yogo-container{
-        margin-top: 10%;
+        /* margin-top: 10%; */
         font-size: 2vw;
     }
-    
-    .yogo-oona, 
-    .yogo-arturius {
+
+    .yogo1,
+    .yogo2 {
         width: 25%;
     }
-    
-    .yogo-arturius,
-    .yogo-oona{
+
+    .yogo1,
+    .yogo2{
         transform: translateX(0);
     }
+
+    /*.yogotarImg img{*/
+    /*width: 101%;*/
+    /*}*/
+    .yogotarImg{
+        min-height: 50vh;
+        align-items: center;
+    }
+
+    .yogotarImg img{
+        width: 101%;
+    }
+
+}
+
+
+.yogo2 .yogotarImg{
+    transform: scaleX(-1);
+}
+
+.yogotarLogo img{
+    width: 65%;
+    opacity: 0;
+}
+
+.yogotarNickname {
+    font-size: 4vw;
+}
+
+.startButton{
+    opacity: 0.5;
 }
 
 

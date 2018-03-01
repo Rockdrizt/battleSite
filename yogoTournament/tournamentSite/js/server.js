@@ -1,7 +1,14 @@
 var isKinder = isKinder != undefined ? isKinder : false
 // var src = isKinder ? "https://play.yogome.com/epicweb/minigames/mathServer/indexSLP.html":"https://play.yogome.com/epicweb/minigames/mathServer/index.html"
 // var isMobile =
-var src = "../mathServer/index.html"
+var testExp = new RegExp('Android|webOS|iPhone|iPad|' +
+	'BlackBerry|Windows Phone|'  +
+	'Opera Mini|IEMobile|Mobile' ,
+	'i');
+
+var isMobile = testExp.test(navigator.userAgent)
+
+var src = isMobile ? "../mathServer/mobile/index.html" : "../mathServer/index.html"
 var gameFrame
 var gameContainer
 var server

@@ -198,7 +198,7 @@
 
             <button class="red-btn" type="button" onclick="window.location.href='selectSubject.html'">BACK</button>
             
-            <button class="green-btn" type="button" onclick="window.location.href='customize.html'">NEXT</button>
+            <button class="green-btn" type="button" onclick="setCustomRules()">NEXT</button>
 
         </div>
         
@@ -233,11 +233,44 @@
 <script type="text/javascript" src="assets/js/modal.js"></script>
 <script>
 
+    function setCustomRules() {
+		var customRules = {}
+
+		for(var i = 1;i<=OPERATORS.length;i++){
+			var ruleSetOperator = difficultSet[OPERATORS[i-1]]
+
+			if(!operatorsObject[current_set][OPERATORS[i-1]].disable) {
+				customRules[OPERATORS[i-1]] = []
+				var customRulesOperator = customRules[OPERATORS[i-1]]
+				for (var j = 1; j <= ruleSetOperator.length; j++) {
+					if (!ruleSetOperator[j - 1].disable)
+						customRulesOperator.push(ruleSetOperator[j - 1])
+				}
+			}
+
+		}
+
+		parent.customRules = customRules
+		console.log(customRules)
+
+    	window.location.href='customize.html'
+	}
+
 	var current_set = "EASY"
-	var difficultSet = parent.ruleSet || operationGenerator.RULES_SET[current_set]
+	var difficultSet = operationGenerator.RULES_SET[current_set]
 	var ruleSet
 	var OPERATORS = ["SUM", "SUB", "MUL", "DIV"]
+	var DIFFICULTIES = ["EASY", "MEDIUM", "HARD", "MASTER"]
 	var operatorsObject = {}
+
+	for (var dif = 0; dif < DIFFICULTIES.length; dif++) {
+		var difName = DIFFICULTIES[dif]
+		operatorsObject[difName] = {}
+		for (var i = 0; i < OPERATORS.length; i++) {
+			var operator = OPERATORS[i]
+			operatorsObject[difName][operator] = {disable: false}
+		}
+	}
 
     for(var i = 0; i < 4; i++){
         $(".checkBox" + i).attr("selection",1);
