@@ -90,7 +90,7 @@
     text-align: center;
     margin: 0% 10%;
     border-radius: 6vw;
-    padding: 10% 0;
+    padding: 5% 0;
 }
 
 .subject-container{
@@ -126,7 +126,7 @@
 
 
 .plus-btn{
-    width: 15%;
+    width: 13%;
     margin-right: 5%;
 }
 
@@ -216,6 +216,11 @@
     padding-top: 4%;
 }
 
+.modal-body {
+    max-height: 68% !important;
+    overflow-y: auto;
+}
+
 .modal-body span{
     font-size: 4vw;
     color: purple;
@@ -244,6 +249,10 @@
     width: 10%;
 }
 
+.purple-back{
+    background-color: #a89df9;
+}
+
 .ok-btn{
     background-image: url(../images/greenButton.png);
     background-repeat: no-repeat;
@@ -258,6 +267,11 @@
     z-index: 10;
     margin: 1% 36%;
 }
+
+.modal-content{
+
+}
+
 
 .modal-header,
 .modal-footer{
@@ -294,6 +308,10 @@
         padding-top: 0;
         margin-top: 1%;
         font-size: 5vw;
+    }
+    
+    .modal-content{
+        max-height: 83% !important;
     }
 
     .dificult-container{
@@ -336,14 +354,12 @@
     }
 
     .plus-btn{
-        width: 10%;
+        width: 5%;
         margin-right: 10%;
+        transform: translateY(10%);
     }
     
-    .plus-btn span {
-        padding: 1.3vw;
-        padding-top: 1.5vw;
-    }
+   
 
     
     
@@ -360,14 +376,9 @@
         width: 10%;
         height: 90%;
         font-size: 1vh !important;
-        overflow-y: scroll;
         top: 30% !important;
         left: 4% !important;
 
-    }    
-
-    .modal-body{
-  
     }    
 
     .modal-body span{
@@ -395,6 +406,10 @@
     
     .title-modal p {
         transform: translateY(18%);
+    }
+    
+    .ok-btn{
+        font-size: 7vh;
     }
 }
 
