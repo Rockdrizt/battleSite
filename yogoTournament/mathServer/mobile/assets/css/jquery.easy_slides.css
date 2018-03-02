@@ -60,8 +60,13 @@
 transform: scale(0.7);
 }
 .slider_circle_10 .next1{
-  margin-left: 380px;
+  margin-left: 400px;
 }
+
+.slider_circle_10 .prev1{
+  margin-left: -570px;
+}
+
 .slider_circle_10 .prev2,
 .slider_circle_10 .next2{
   opacity: 0;
@@ -340,7 +345,7 @@ transform: scale(0.7);
     width: 25% !important;
     opacity: 1 !important;
     z-index: 5000 !important;
-    margin-top: 40vh;
+    margin-top: 60vh;
 }
 .next_button img,
 .prev_button img{
@@ -378,6 +383,10 @@ div.slider > div:not(.nav_indicators):not(.next_button):not(.prev_button) {
 
             slider_circle_10 .next1{
                 margin-left: 380px;
+            }
+            
+            .slider_circle_10 .prev1{
+                margin-left: -540px;
             }
 
             .active{
@@ -421,6 +430,11 @@ div.slider > div:not(.nav_indicators):not(.next_button):not(.prev_button) {
     .next_button img,
     .prev_button img{
         width: 80%;
+    }
+    
+    .active{
+        transform: scale(1);
+        
     }
     
     @media only screen 

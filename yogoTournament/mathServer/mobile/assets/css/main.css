@@ -250,10 +250,10 @@ body{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    margin: 0 15%;
-    font-size: 6vw;
-    padding-top: 1vh;
-    margin-top: 70vh;
+    margin: 0 10%;
+    font-size: 9vw;
+    padding-top: 1.5vh;
+    margin-top: 80vh;
     position: relative;
 }
 
@@ -463,7 +463,7 @@ body{
 
     .banner-selection{
         font-size: 4vw;
-        margin-top: 68vh;
+        margin-top: 66vh;
     }
     
     .carousel-container ul {
