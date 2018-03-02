@@ -58,15 +58,15 @@ var operationGenerator = function () {
 				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.operand2},
 			],
 			MUL:[
-				{operand1X: 2, operand2Const: 10, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 2, operand2X: 2, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 2, operand2X: 2, minRange:0, maxRange: 89, paramToAnswer:OPERATION_PARAMS.operand2},
-				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 3, operand2X: 1, minRange:91, maxRange: 990, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 2, operand2X: 1, minRange:10, maxRange: 495, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 1, minRange:10, maxRange: 495, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 2, operand2X: 1, minRange:60, maxRange: 891, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 1, minRange:60, maxRange: 891, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 2, operand2Const: 10, minRange:100, maxRange: 990, paramToAnswer:OPERATION_PARAMS.result},
 			],
 			DIV:[
-				{operand1X: 2, operand2X: 1, minRange:99, maxRange: 990, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 2, operand2X: 1, minRange:99, maxRange: 990, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 2, operand2X: 1, minRange:1, maxRange: 99, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 1, minRange:1, maxRange: 99, paramToAnswer:OPERATION_PARAMS.operand2},
 			]
 		},
 
@@ -175,7 +175,7 @@ var operationGenerator = function () {
 				}
 				var diff = operand1 % operand2
 				if(diff > 0)
-					operand1 = operand1 + (operand2 - diff)
+					operand1 = operand1 - diff
 				console.log(operand1, operand2, "DIV")
 				answer = (operand1 / operand2)
 				break
@@ -256,13 +256,24 @@ var operationGenerator = function () {
 		switch (operator){
 			case "SUM":
 				minOperand = rule.minRange - maxOperand2
-				minOperand = minOperand < limitOperandMin ? limitOperandMin : minOperand
 				maxOperand = rule.maxRange - minOperand2
-				maxOperand = maxOperand > limitOperandMax ? limitOperandMax : maxOperand
 				break
 			case "SUB":
+				minOperand = rule.minRange + minOperand2
+				maxOperand = rule.maxRange + maxOperand2
+				break
+			case "MUL":
+				minOperand = Math.ceil(rule.minRange / maxOperand2)
+				maxOperand = Math.ceil(rule.maxRange / minOperand2)
+				break
+			case "DIV":
+				minOperand = minOperand2 * rule.minRange
+				maxOperand = maxOperand2 * rule.maxRange
 				break
 		}
+		minOperand = minOperand < limitOperandMin ? limitOperandMin : minOperand
+		maxOperand = maxOperand > limitOperandMax ? limitOperandMax : maxOperand
+		console.log(maxOperand, minOperand)
 
 		return Math.floor(Math.random() * (maxOperand - minOperand)) + minOperand
 	}
@@ -277,11 +288,24 @@ var operationGenerator = function () {
 			case "SUM":
 				minOperand = rule.minRange - knownOperand
 				console.log(rule.minRange, knownOperand, minOperand)
-				minOperand = minOperand < limitOperandMin ? limitOperandMin : minOperand
 				maxOperand = rule.maxRange - knownOperand
-				maxOperand = maxOperand > limitOperandMax ? limitOperandMax : maxOperand
+				break
+			case "SUB":
+				maxOperand = knownOperand - rule.minRange
+				minOperand = knownOperand - rule.maxRange
+				break
+			case "MUL":
+				maxOperand = Math.ceil(rule.maxRange / knownOperand)
+				minOperand = Math.ceil(rule.minRange / knownOperand)
+				break
+			case "DIV":
+				maxOperand = Math.ceil(knownOperand / rule.minRange)
+				minOperand = Math.ceil(knownOperand / rule.maxRange)
 				break
 		}
+
+		minOperand = minOperand < limitOperandMin ? limitOperandMin : minOperand
+		maxOperand = maxOperand > limitOperandMax ? limitOperandMax : maxOperand
 		console.log(knownOperand, "Min: " + minOperand, "Max: " + maxOperand)
 
 		var operand = Math.floor(Math.random() * (maxOperand - minOperand)) + minOperand
