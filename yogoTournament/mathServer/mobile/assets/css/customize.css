@@ -4,11 +4,6 @@
     padding: 1% 0;
 }
 
-.banner{
-    margin: 0 1%;
-    
-}
-
 .condition-header{
     text-align: center;
     margin: 0 10%;
@@ -132,7 +127,6 @@
     }
     
     .menu-container {
-        height: 60vh;
         margin-top: 0;
     }
 
