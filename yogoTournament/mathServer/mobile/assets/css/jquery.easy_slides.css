@@ -35,6 +35,10 @@
   z-index: 10;
 }
 
+.active{
+    transform: scale(3)
+}
+
 .active .planetImage{
     width: 45%;
 }
@@ -348,7 +352,7 @@ transform: scale(0.7);
 
 .prev_button {
   position: absolute;
-  left: -35% !important;
+  left: -30% !important;
 }  
 .next_button:hover,
 .prev_button:hover {
