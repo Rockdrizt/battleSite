@@ -176,7 +176,6 @@ var operationGenerator = function () {
 				var diff = operand1 % operand2
 				if(diff > 0)
 					operand1 = operand1 - diff
-				console.log(operand1, operand2, "DIV")
 				answer = (operand1 / operand2)
 				break
 		}
@@ -273,7 +272,6 @@ var operationGenerator = function () {
 		}
 		minOperand = minOperand < limitOperandMin ? limitOperandMin : minOperand
 		maxOperand = maxOperand > limitOperandMax ? limitOperandMax : maxOperand
-		console.log(maxOperand, minOperand)
 
 		return Math.floor(Math.random() * (maxOperand - minOperand)) + minOperand
 	}
@@ -287,7 +285,6 @@ var operationGenerator = function () {
 		switch (operator){
 			case "SUM":
 				minOperand = rule.minRange - knownOperand
-				console.log(rule.minRange, knownOperand, minOperand)
 				maxOperand = rule.maxRange - knownOperand
 				break
 			case "SUB":
@@ -306,7 +303,6 @@ var operationGenerator = function () {
 
 		minOperand = minOperand < limitOperandMin ? limitOperandMin : minOperand
 		maxOperand = maxOperand > limitOperandMax ? limitOperandMax : maxOperand
-		console.log(knownOperand, "Min: " + minOperand, "Max: " + maxOperand)
 
 		var operand = Math.floor(Math.random() * (maxOperand - minOperand)) + minOperand
 
@@ -362,7 +358,6 @@ var operationGenerator = function () {
 	function getOperationRule(rule, operator){
 
 		var operation = getMinMaxOperands(rule, operator)
-		console.log(operation)
 		var answer =  makeOperation(operation)
 		operation.result = answer
 
