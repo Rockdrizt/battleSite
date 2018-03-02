@@ -79,7 +79,7 @@
     background-position: center;
     margin: 5% 1%;
     padding-top: 2vw;
-    font-size: 12vw;
+    font-size: 6vh;
     color: white;
 }
 
@@ -99,7 +99,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 3vw 0;
+    padding: 0.5vh 0;
 }
 
 #adition,
@@ -302,7 +302,7 @@
     .banner{
         margin: 0 0;
         padding-top: 0;
-        margin-top: 1%;
+        margin-top: 1vh;
         font-size: 5vw;
     }
     
@@ -350,9 +350,9 @@
     }
 
     .plus-btn{
-        width: 8%;
-        margin-right: 5%;
-        transform: translateY(10%);
+        width: 6vh;
+        margin-right: 4vw;
+        transform: translateY(0.5vh);
     }
     
    
@@ -396,7 +396,6 @@
     }
     
     .title-modal{
-        width: 85%;
         font-size: 5vw;
     }
     

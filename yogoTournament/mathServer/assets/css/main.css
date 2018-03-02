@@ -55,8 +55,9 @@ html{
 body{
     position: absolute;
     margin: 0;
-    height: 100%;
     width: 100%;
+    height: 100%;
+    
     background: #18167a;
     overflow: hidden;
     font-family: 'Luckiest Guy', cursive !important;
@@ -216,9 +217,8 @@ body{
 }
 
 .containerMainText{
-    width: 30%;
+    width: 42%;
     margin: 0 auto;
-    max-width:500px;
     margin-top: -5%;
     background-color: #ccedff;
     padding: 2vh;
@@ -227,12 +227,12 @@ body{
 
 #mainText h1{
     color:#491f9f;
-    font-size: 4vh;
+    font-size: 3vw;
 
 }
 #mainText p{
     color:#326a97;
-    font-size: 2.5vh;
+    font-size: 1.6vw;
     font-family: "VAGRounded";
 }
 
@@ -1055,4 +1055,8 @@ body{
     text-align: center;
     font-size: 1.9vw;
     margin-top: 3%;
+}
+
+.mainText2{
+    font-size: 2.5vw;
 }

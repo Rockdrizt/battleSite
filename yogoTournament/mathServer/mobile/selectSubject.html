@@ -18,42 +18,10 @@
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css" />
     
-    
-    <script src="assets/js/Carousel.js"></script>
+    <script type="text/javascript" src="assets/js/jquery.easy_slides.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery.easy_slides.css">
     
 </head>
-    <script>
-        function scalePlanets(){
-            if (window.matchMedia("(orientation: portrait)").matches) {
-               $(document).ready(function() {
-                    $('.carousel-container').carousel({
-                        num: 3,
-                        maxWidth: 450,
-                        maxHeight: 450,
-                        distance: 180,
-                        scale: 0.5,
-                        animationTime: 500,
-                        autoPlay: false,
-                    });
-                });
-            }
-            else{
-                $(document).ready(function() {
-                    $('.carousel-container').carousel({
-                        num: 3,
-                        maxWidth: 250,
-                        maxHeight: 250,
-                        distance: 180,
-                        scale: 0.6,
-                        animationTime: 500,
-                        autoPlay: false,
-                    });
-                });
-            }
-        }
-        
-        scalePlanets()
-    </script>
     
 <body>
 
@@ -63,61 +31,73 @@
         
         <div class="container font-luckiest">
 
-            <div class="carousel-container">
-                <ul>
-                    <div class="load-planets"></div>
-                    <li>
-                        <div>
-                            <img src="assets/images/planets/mathdromeda.png" alt="" />
-                        </div>
-                    </li>
-                    <li>
-                        <div class="lock">
-                            <img src="assets/images/planets/creat_shade.png" alt="" />
-                        </div>
-                    </li>
-                    <li>
-                        <div class="lock">
-                            <img src="assets/images/planets/health_shade.png" alt="" />
-                        </div>
-                    </li>
-                    <li>
-                        <div class="lock">
-                            <img src="assets/images/planets/geogra_shade.png" alt="" />
-                        </div>
-                    </li>
-                    <li>
-                        <div class="lock">
-                            <img src="assets/images/planets/wordo_shade.png" alt="" />
-                        </div>
-                    </li>
-                    <li>
-                        <div class="lock">
-                            <img src="assets/images/planets/codus_shade.png" alt="" />
-                        </div>
-                    </li>
-                    <li>
-                        <div class="lock">
-                            <img src="assets/images/planets/science_shade.png" alt="" />
-                        </div>
-                    </li>
-                </ul>
             
-
-                <div class="selection-container">
-                    <img src="assets/images/arrowYellow.png" class="left" >
-                    <div class="banner-selection subject">MATH</div>
-                    <img src="assets/images/arrowYellow.png" class="right">
+            <div class="slider slider_circle_10" style="margin-top: 15vh;">
+                
+                <div id="planet1" class="planets">
+                    <img class="planetImage" src="assets/images/planets/mathdromeda.png">
                 </div>
                 
+                <div id="planet2" class="planets lock">
+                    <span>
+                        <img src="assets/images/planets/codus_shade.png">
+                    </span>
+                    <img class="planetImage" src="assets/images/planets/codus.png">
+                </div>
+                
+                <div id="planet3" class="planets lock">
+                    <span>
+                        <img src="assets/images/planets/creat_shade.png">
+                    </span>
+                    <img  class="planetImage" src="assets/images/planets/creat.png">
+                </div>
+                
+                <div id="planet4" class="planets lock">
+                    <span>
+                        <img src="assets/images/planets/geogra_shade.png">
+                    </span>
+                    <img  class="planetImage" src="assets/images/planets/geogra.png">
+                </div>
+                
+                <div id="planet5" class="planets lock">
+                    <span>
+                        <img src="assets/images/planets/health_shade.png">
+                    </span>
+                    <img  class="planetImage" src="assets/images/planets/health.png">
+                </div>
+                
+                <div id="planet6" class="planets lock">
+                    <span>
+                        <img src="assets/images/planets/science_shade.png"></span>
+                    <img  class="planetImage" src="assets/images/planets/science.png">
+                </div>
+                
+                <div id="planet7" class="planets lock">
+                    <span>
+                        <img src="assets/images/planets/wordo_shade.png">
+                    </span>
+                    <img  class="planetImage" src="assets/images/planets/wordo.png">
+                </div>
+                
+                <div class="next_button">
+                     <img src="assets/images/arrowYellow.png">
+                </div>  
+                <div class="prev_button">
+                    <img src="assets/images/arrowYellow.png">
+                </div> 
+     
+            </div>        
+
+            <div class="banner-selection">
+                    <p class="subject">MATH</p>
             </div>
             
-            <div class="object-center" style="position: absolute;
-    bottom: 1%;">
+            
+            <div class="object-center" style="position: absolute; bottom: 1%; transform: translateX(-1%);">
 
-                <div class="red-btn goBack" type="button">BACK</div>
+                <div class="red-btn goBack" type="button" onclick="window.location.href='index.html'">BACK</div>
 
-                <div class="green-btn" type="button" onclick="window.location.href='selectDifficult.html'">NEXT</div>
+                <div class="green-btn" type="button" style="padding-top: 2vh; font-size: 8vw">NEXT</div>
 
             </div>
 
@@ -129,61 +109,72 @@
         
         <div class="container font-luckiest">
 
-            <div class="carousel-container">
-                <ul>
-                    <div class="load-planets"></div>
-                    <li>
-                        <div>
-                            <img src="assets/images/planets/mathdromeda.png" alt="" />
-                        </div>
-                    </li>
-                    <li>
-                        <div class="lock">
-                            <img src="assets/images/planets/creat_shade.png" alt="" />
-                        </div>
-                    </li>
-                    <li>
-                        <div class="lock">
-                            <img src="assets/images/planets/health_shade.png" alt="" />
-                        </div>
-                    </li>
-                    <li>
-                        <div class="lock">
-                            <img src="assets/images/planets/geogra_shade.png" alt="" />
-                        </div>
-                    </li>
-                    <li>
-                        <div class="lock">
-                            <img src="assets/images/planets/wordo_shade.png" alt="" />
-                        </div>
-                    </li>
-                    <li>
-                        <div class="lock">
-                            <img src="assets/images/planets/codus_shade.png" alt="" />
-                        </div>
-                    </li>
-                    <li>
-                        <div class="lock">
-                            <img src="assets/images/planets/science_shade.png" alt="" />
-                        </div>
-                    </li>
-                </ul>
+           <div class="slider slider_circle_10">
                 
-                <div class="selection-container">
-                    <img src="assets/images/arrowYellow.png" class="left" >
-                    <div class="banner-selection">
-                        <p class="subject">MATH</p>
-                    </div>
-                    <img src="assets/images/arrowYellow.png" class="right">
+                <div id="planet1" class="planets">
+                    <img class="planetImage" src="assets/images/planets/mathdromeda.png">
                 </div>
                 
+                <div id="planet2" class="planets lock">
+                    <span>
+                        <img src="assets/images/planets/codus_shade.png">
+                    </span>
+                    <img class="planetImage" src="assets/images/planets/codus.png">
+                </div>
+                
+                <div id="planet3" class="planets lock">
+                    <span>
+                        <img src="assets/images/planets/creat_shade.png">
+                    </span>
+                    <img  class="planetImage" src="assets/images/planets/creat.png">
+                </div>
+                
+                <div id="planet4" class="planets lock">
+                    <span>
+                        <img src="assets/images/planets/geogra_shade.png">
+                    </span>
+                    <img  class="planetImage" src="assets/images/planets/geogra.png">
+                </div>
+                
+                <div id="planet5" class="planets lock">
+                    <span>
+                        <img src="assets/images/planets/health_shade.png">
+                    </span>
+                    <img  class="planetImage" src="assets/images/planets/health.png">
+                </div>
+                
+                <div id="planet6" class="planets lock">
+                    <span>
+                        <img src="assets/images/planets/science_shade.png"></span>
+                    <img  class="planetImage" src="assets/images/planets/science.png">
+                </div>
+                
+                <div id="planet7" class="planets lock">
+                    <span>
+                        <img src="assets/images/planets/wordo_shade.png">
+                    </span>
+                    <img  class="planetImage" src="assets/images/planets/wordo.png">
+                </div>
+                
+                 <div class="next_button">
+                     <img src="assets/images/arrowYellow.png">
+                </div>  
+                <div class="prev_button">
+                    <img src="assets/images/arrowYellow.png">
+                </div> 
+     
+            </div>        
+                
+            <div class="banner-selection">
+                    <p class="subject">MATH</p>
             </div>
+                
 
             <div class="object-center" style="    margin-left: 13.5%;">
 
-                <button class="red-btn goBack" type="button">BACK</button>
+                <button class="red-btn" type="button" onclick="window.location.href='index.html'">BACK</button>
 
-                <button class="green-btn"type="button" onclick="window.location.href='selectDifficult.html'">NEXT</button>
+                <button class="green-btn" type="button">NEXT</button>
 
             </div>
 
@@ -196,58 +187,9 @@
     <script src="assets/js/animations.js"></script>
 <script>
     
-    $( window ).on( "orientationchange", function( event ) {
-        location.reload();
-        scalePlanets()
-    });
-    
-    $(".goBack").click(function(){
-        backAnimate1();
-    });
-    
-    var index = 0;
-    var canClick = true;
-    
-    var subjectList = ['MATH', 'CREATIVITY', 'HEALTH', 'GEOGRAPHY', 'LANGUAGE', 'CODING', 'SCIENCE']
-    
-    $(".left").on('touchstart', function(){
-        
-        if(canClick){
-            canClick = false
-            
-            if(index > 0){
-                index--
-            }
-            else{
-                index = subjectList.length - 1
-            }
-            $(".subject").text(subjectList[index]);
-            
-            setTimeout(delayToClick, 500);
-        }
-        
-    });
-    
-    $(".right").on('touchstart', function(){
-        
-        if(canClick){
-            canClick = false
-            
-            if(index < subjectList.length -1){
-                index++
-            }
-            else{
-                index = 0
-            }
-            $(".subject").text(subjectList[index]);
-            
-            setTimeout(delayToClick, 500);
-        }
-    });
-    
-    function delayToClick(){
-        canClick = true
-    }
+    $(document).ready(function() {
+		$('.slider_circle_10').EasySlides({'autoplay': false, 'show': 13})
+	});
         
 </script>
 </html>

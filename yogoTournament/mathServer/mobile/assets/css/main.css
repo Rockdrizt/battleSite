@@ -72,16 +72,17 @@ body{
 .object-center{
     width: 100%;
     text-align: center;
-    margin: 5% 0;
     display: flex;
-    position: absolute; 
+    position: absolute;
     bottom: 1%;
+    justify-content: space-around;
 }
 
 .yogo-container{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
+        margin-top: 1vh;
 }
 
 .yogo-nao{
@@ -110,19 +111,14 @@ body{
 
 .yogo-oona,
 .yogo-arturius{
-    
-    width: 45%;
+
     text-align: center;
     bottom: 0%;
 }
 
-.yogo-oona img{
-    width: 80%;
-    
-}
-
+.yogo-oona img,
 .yogo-arturius img{
-    width: 60%;
+   height: 20vh;
 }
 
 .yogotar{
@@ -167,14 +163,14 @@ body{
     background-position: center;
     background-color: transparent;
     border-style: none;
-    padding: 4vw;
-    padding-top: 6vw;
+        padding-top: 2vh;
     cursor: pointer;
     color:#FFF;
-    font-size: 8vw;
-    margin: 2% 5%;
+    font-size: 7vw;
+    
     width: 40%;
     z-index: 10;
+    text-align: center;
 }
 
 .pink-btn{
@@ -187,11 +183,11 @@ body{
     cursor: pointer;
     color:#FFF;
     font-size: 8vw;
-    margin: 2% 5%;
-    padding: 4vw;
-    padding-top: 6vw;
+    
+    padding-top: 2vh;
     width: 40%;
     z-index: 10;
+    text-align: center;
 }
 
 .red-btn{
@@ -204,11 +200,10 @@ body{
     cursor: pointer;
     color:#FFF;
     font-size: 8vw;
-    margin: 2% 5%;
-    padding: 4vw;
-    padding-top: 6vw;
+    padding-top: 2vh;
     width: 40%;
     z-index: 10;
+    text-align: center;
 }
 
 
@@ -239,6 +234,7 @@ body{
     cursor: pointer;
     width: 20%;
     position: relative !important;
+    z-index: 10;
 }
 
 .left {
@@ -246,6 +242,7 @@ body{
     transform: scaleX(-1);
     width: 20%;
     position: relative !important;
+    z-index: 11;
 }
 
 .banner-selection{
@@ -253,11 +250,11 @@ body{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    width: 100%;
-    margin: 15% 0;
-    font-size: 8vw;
-    padding-top: 2.5%;
-    transform: scale(1.2);
+    margin: 0 15%;
+    font-size: 6vw;
+    padding-top: 1vh;
+    margin-top: 70vh;
+    position: relative;
 }
 
 
@@ -292,6 +289,22 @@ body{
     font-family: "VAGRounded";
 }
 
+.lock .planetImage{
+    filter: brightness(100%) ;
+
+}
+
+.lock span{
+    position: absolute;
+    z-index: 1;  
+}
+.active .lock span{
+    position: absolute;
+    z-index: 1; 
+    
+}
+
+
 @media screen and (orientation: portrait) {
     
     #portrait {
@@ -301,19 +314,6 @@ body{
     #landscape {
         display: none;
     }
-}
-
-.lock img{
-    /*filter: brightness(20%) ;*/
-
-}
-
-.lock span{
-    position: absolute;
-    margin-left: 160px;
-    margin-top:140px;
-    z-index: 1;
-    
 }
 
 .createGame,
@@ -347,6 +347,7 @@ body{
     .yogo-container{
         position: absolute;
         width: 100%;
+        justify-content: space-between;
     }
     
     .yogo-oona,
@@ -354,12 +355,16 @@ body{
        width: 25%;
     }
     
-    .yogo-arturius{
-        transform: translateX(5%);
+    .yogo-arturius img{
+        height: 26vh;
     }
     
     .yogo-oona{
-        transform: translateX(-15%);
+        transform: translateX(-10%);
+    }
+    
+    .yogo-oona img{
+        height: 25vh;
     }
 
     .object-center{
@@ -419,10 +424,8 @@ body{
     }
 
     .banner-selection{
-        font-size: 6vw;
-        padding-top: 3.5%;
-        margin: 7% 0;
-        transform: scale(1);
+        font-size: 4vw;
+        margin-top: 58vh;
     }
     
     .carousel-container ul {
@@ -438,6 +441,12 @@ body{
     }
     #mainText p{
         font-size: 3.5vh
+    }
+    
+    .lock span{
+        margin-left: 0;
+        margin-top:0;
+         transform: scale(1);
     }
     
 }
