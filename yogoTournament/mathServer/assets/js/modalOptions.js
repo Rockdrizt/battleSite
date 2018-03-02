@@ -186,7 +186,7 @@ function getRules(operator) {
 var blurElement = {a:0};
 TweenMax.to(blurElement, 1, {a:0, onUpdate:applyBlur});
 function applyBlur(){
-    TweenMax.set(['#containerRules'], {webkitFilter:"blur(" + blurElement.a + "px)",filter:"blur(" + blurElement.a + "px)"});  
+    TweenMax.set(['.containerRules'], {webkitFilter:"blur(" + blurElement.a + "px)",filter:"blur(" + blurElement.a + "px)"});  
 };
 
 
