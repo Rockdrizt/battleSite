@@ -60,7 +60,7 @@
 transform: scale(0.7);
 }
 .slider_circle_10 .next1{
-  margin-left: 220px;
+  margin-left: 380px;
 }
 .slider_circle_10 .prev2,
 .slider_circle_10 .next2{
@@ -363,6 +363,46 @@ div.slider > div:not(.nav_indicators):not(.next_button):not(.prev_button) {
   text-align: center;
 }
 
+@media screen and (orientation: portrait) {
+    
+    @media only screen 
+        and (min-device-width: 768px) 
+        and (max-device-width: 1024px) 
+        and (-webkit-min-device-pixel-ratio: 2) {
+            
+            .slider_circle_10 .next1 ,
+            .slider_circle_10 .prev1{
+                top: -40% !important;
+                transform: scale(0.8) !important;
+            }
+
+            slider_circle_10 .next1{
+                margin-left: 380px;
+            }
+
+            .active{
+                transform: scale(2.5) translateX(1%);
+                top: 40vh !important;
+            }
+
+            .next_button img,
+            .prev_button img{
+                width: 100%;
+            }
+
+            .next_button{
+                left: 110%;
+            }
+            
+            .prev_button{
+                left: -35% !important;
+            }
+            
+    }
+}
+
+
+
 @media screen and (orientation : landscape){
     
     .next_button,
@@ -380,7 +420,51 @@ div.slider > div:not(.nav_indicators):not(.next_button):not(.prev_button) {
     
     .next_button img,
     .prev_button img{
-        width: 60%;
+        width: 80%;
+    }
+    
+    @media only screen 
+        and (min-device-width: 768px) 
+        and (max-device-width: 1024px) 
+        and (-webkit-min-device-pixel-ratio: 2) {
+     
+            .next1, 
+            .prev1,
+            .next_button,
+            .prev_button{
+                margin-top: 25vh;
+            }
+
+            .next_button{
+                left: 120% !important;
+            }
+
+            .prev_button{
+                left: -45% !important;
+            }
+
+            .next_button img,
+            .prev_button img{
+                width: 80%;
+            }
+
+            .slider_circle_10 .next1{
+                margin-left: 400px;
+            }
+
+            .slider_circle_10 .prev1{
+                margin-left: -640px;
+            }
+
+            .active{
+                transform: scale(2.3) translateX(-2%);
+                top: 50vh !important;
+            }
+
+            .next1, .prev1{
+                transform: scale(0.9) !important;
+            }
+            
     }
     
 }

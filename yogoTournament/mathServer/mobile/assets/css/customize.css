@@ -126,7 +126,7 @@
     }
     
     .menu-container {
-        margin: -1% 10%;
+        margin: 1% 10%;
     }
 
    
@@ -141,8 +141,8 @@
     }
 
     .time-image{
-        background-size: 90%;
-        padding: 15% 0;
+        background-size: 75%;
+        padding: 5% 0;
     }
     
     .time-image p{
@@ -159,10 +159,9 @@
     }
     
     .round-image{
-       
         font-size: 9vw;
-        background-size: 100%;
-        padding: 20% 0;
+        background-size: 85%;
+        padding: 5% 0;
     }
     
     .round-image p{
@@ -176,16 +175,16 @@
     }
     
     .banner{
-        margin-top: 1%;
+        margin: 1% 0;
     }
     
     
     @media only screen 
-      and (min-device-width: 768px) 
-      and (max-device-width: 1024px) 
-      and (-webkit-min-device-pixel-ratio: 2) {
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 2) {
 
-          
+      
           #portrait {
             display: none;
         }
@@ -195,7 +194,7 @@
         }
 
         .menu-container {
-            margin: -1% 10%;
+            margin: 1% 10%;
         }
 
 
@@ -228,7 +227,10 @@
         }
 
         .round-image{
-            font-size: 6vw;
+
+            font-size: 9vw;
+            background-size: 95%;
+            padding: 20% 0;
         }
 
         .round-image p{
@@ -241,11 +243,7 @@
             bottom: 1%
         }
 
-        .banner{
-            margin-top: 1%;
-        }
-          
-          
+        
     }
 }
 

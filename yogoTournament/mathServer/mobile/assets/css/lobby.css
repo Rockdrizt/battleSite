@@ -45,7 +45,7 @@
     color: #006837;
     margin: 0% 10%;
     transform: translateY(10%);
-    border-radius: 6vh;
+    border-radius: 5vh;
 }
 
 .share-style{
@@ -53,6 +53,10 @@
     margin: 5%;
     margin-bottom: 0;
     /*color: #184831;*/
+}
+
+.share-style p{
+    font-size: 4vh;
 }
 
 
@@ -119,6 +123,10 @@
     }
 
     .share-style{
+        font-size: 5vh;
+    }
+    
+    .share-style p{
         font-size: 6vh;
     }
 
