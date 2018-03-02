@@ -1,13 +1,13 @@
 
 .menu-container{
     background-color: #4595c0;
-    padding: 1% 0;
+    
 }
 
 .condition-header{
     text-align: center;
     margin: 0 10%;
-    font-size: 6vh;
+    font-size: 5vh;
 }
 
 .condition-body{
@@ -79,18 +79,17 @@
 
 .time-image{
     background-image: url(../images/clock.png);
-    background-size: contain;
+    background-size:60%;
     background-position: center;
     background-repeat: no-repeat;
     background-color: transparent;
     border-style: none;
-    padding: 15%;
-    font-size: 4vh;
 }
 
 .time-image p{
-    margin: 0;
+    margin: 27% 0;
     transform: translateY(25%);
+    font-size: 5vh;
 }
 
 .title-container{
@@ -127,7 +126,7 @@
     }
     
     .menu-container {
-        margin-top: 0;
+        margin: -1% 10%;
     }
 
    
@@ -142,14 +141,21 @@
     }
 
     .time-image{
-        padding: 17%;
-        font-size: 5vh;
-        margin: 0 0%;
+        background-size: 90%;
+        padding: 15% 0;
+    }
+    
+    .time-image p{
+       margin: 20% 0%;
+        font-size: 8vh;
     }
     
     .more-rounds,
-    .less-rounds{
-        margin: 0;
+    .less-rounds,
+    .less-time,
+    .more-time{
+        padding: 10%;
+        margin-top: 10%
     }
     
     .round-image{
@@ -170,6 +176,35 @@
         margin-top: 1%;
     }
 }
+
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
