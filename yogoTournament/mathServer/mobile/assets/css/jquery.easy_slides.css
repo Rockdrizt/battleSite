@@ -461,7 +461,7 @@ div.slider > div:not(.nav_indicators):not(.next_button):not(.prev_button) {
                 top: 50vh !important;
             }
 
-            .next1, prev1{
+            .next1, .prev1{
                 transform: scale(0.9) !important;
             }
             
