@@ -665,6 +665,7 @@ var battle = function(){
 		hpGroup.updateHealth = function (number) {
 			this.health = Phaser.Math.clamp(this.health + number, 0, MAX_HP)
 			var newWidth = this.health * HP_BAR_WIDTH / MAX_HP
+			var newWidth = newWidth <= 0 ? 1 : newWidth
 			// console.log(this.health, newWidth)
 			game.add.tween(hpBarMask).to({width:newWidth}, 1000, Phaser.Easing.Cubic.Out, true)
 
@@ -902,7 +903,7 @@ var battle = function(){
 
     }
 
-	function stopGame(){
+	function stopGame(tag){
 
 		//objectsGroup.timer.pause()
 		//timer.pause()
@@ -919,19 +920,22 @@ var battle = function(){
 			game.camera.y = 0
 			game.camera.scale.x = 1
 			game.camera.scale.y = 1
-			if(server){
-				server.removeEventListener('afterGenerateQuestion', generateQuestion);
-				server.removeEventListener('onTurnEnds', checkAnswer);
-				server.retry()
-			}
-			console.log("retryPressed")
-			// game.destroy()
-			console.log(parent.isKinder)
-			if(parent.isKinder)
-				window.open("indexSLP.html", "_self")
-			else
-				window.open("index.html", "_self")
-			// sceneloader.show("battle")
+			if(tag === "home") {
+				if (server) {
+					server.removeEventListener('afterGenerateQuestion', generateQuestion);
+					server.removeEventListener('onTurnEnds', checkAnswer);
+					server.retry()
+
+					// if(parent.isKinder)
+					// 	window.open("indexSLP.html", "_self")
+					// else
+					if(parent.isMobile)
+						window.open("mobile/index.html", "_self")
+					else
+						window.open("index.html", "_self")
+				}
+			}else
+				sceneloader.show("battle")
 		})
 	}
 
@@ -950,8 +954,6 @@ var battle = function(){
 		game.load.image('timesUp',"images/battle/times_up.png")
 		game.load.bitmapFont('WAG', 'fonts/WAG.png', 'fonts/WAG.xml');
         game.load.spritesheet("hand", 'images/spines/Tuto/manita.png', 115, 111, 23)
-		game.load.image('retry',"images/battle/retry" + localization.getLanguage() + ".png")
-		game.load.image('share',"images/battle/share" + localization.getLanguage() + ".png")
         
 		// buttons.getImages(game)
 		// console.log(parent.isKinder)
@@ -1318,29 +1320,24 @@ var battle = function(){
 		buttonGroup.y = game.world.centerY + 140
 		hudGroup.winGroup.add(buttonGroup)
 
-		var shareGroup = game.add.group()
-		shareGroup.x = 0; shareGroup.y = -70
-		buttonGroup.add(shareGroup)
-		shareGroup.tag = "share"
-		//button share in demo visible = false, descomment this line on finish mode
-		shareGroup.visible = false
+		var homeButton = buttonGroup.create(0, -70, "atlas.battle", "redButton")
+		homeButton.anchor.setTo(0.5, 0.5)
+		homeButton.tag = "home"
 
-		var shareBtn = shareGroup.create(0, 0, "atlas.battle", "share")
-		shareBtn.anchor.setTo(0.5, 0.5)
+		homeButton.inputEnabled = true
+		homeButton.events.onInputDown.add(onClickBtn)
 
-		var shareImg = shareGroup.create(-20, 0, "share")
-		shareImg.anchor.setTo(0.5, 0.5)
+		var homeLabel = game.add.text(0, -70, "Home", fontStyle)
+		homeLabel.anchor.setTo(0.5, 0.5)
+		buttonGroup.add(homeLabel)
 
-		var retryGroup = game.add.group()
-		retryGroup.x = 0; retryGroup.y = 0
-		buttonGroup.add(retryGroup)
-		retryGroup.tag = "retry"
-
-		var retryBtn = retryGroup.create(0, 0, "atlas.battle", "retry")
+		var retryBtn = buttonGroup.create(0, 80, "atlas.battle", "greenButton")
 		retryBtn.anchor.setTo(0.5, 0.5)
+		retryBtn.tag = "retry"
 
-		var retryImg = retryGroup.create(-20, 0, "retry")
-		retryImg.anchor.setTo(0.5, 0.5)
+		var retryLabel = game.add.text(0, 80, "Retry", fontStyle)
+		retryLabel.anchor.setTo(0.5, 0.5)
+		buttonGroup.add(retryLabel)
 
 		retryBtn.inputEnabled = true
 		retryBtn.events.onInputDown.add(onClickBtn)
@@ -1405,10 +1402,10 @@ var battle = function(){
 				sound.play("epicAttackButton")
 			}else if(btn.tag === "retry")
 				stopGame("retry")
-			else if(btn.tag === "exit")
-				stopGame("exit")
-			else
-				stopGame()
+			else if(btn.tag === "home")
+				stopGame("home")
+			// else
+			// 	stopGame()
 		}
 	}
 

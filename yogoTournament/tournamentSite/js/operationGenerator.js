@@ -418,6 +418,7 @@ var operationGenerator = function () {
 		// currentOperator = ruleSet
 		setOperators()
 		numPerOperator = Math.floor(numOfOperations / operatorsList.length)
+		numPerOperator = numPerOperator < 1 ? 1 : numPerOperator
 
 		// return getOperationRule(ruleSet.DIV[1], "DIV")
 	}
