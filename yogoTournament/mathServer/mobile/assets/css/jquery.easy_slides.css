@@ -36,7 +36,7 @@
 }
 
 .active{
-    transform: scale(3)
+    transform: scale(2)
 }
 
 .active .planetImage{
