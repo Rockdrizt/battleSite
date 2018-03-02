@@ -183,8 +183,8 @@ function getRules(operator) {
 	}
 }
 
-var blurElement = {a:0};
-TweenMax.to(blurElement, 1, {a:10, onUpdate:applyBlur});
+var blurElement = {a:10};
+TweenMax.to(blurElement, 1, {a:0, onUpdate:applyBlur});
 function applyBlur(){
     TweenMax.set(['.containerRules'], {webkitFilter:"blur(" + blurElement.a + "px)",filter:"blur(" + blurElement.a + "px)"});  
 };
