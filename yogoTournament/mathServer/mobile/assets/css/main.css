@@ -234,6 +234,7 @@ body{
     cursor: pointer;
     width: 20%;
     position: relative !important;
+    z-index: 10;
 }
 
 .left {
@@ -241,6 +242,7 @@ body{
     transform: scaleX(-1);
     width: 20%;
     position: relative !important;
+    z-index: 11;
 }
 
 .banner-selection{
@@ -248,11 +250,11 @@ body{
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    width: 100%;
-    margin: 15% 0;
-    font-size: 8vw;
-    padding-top: 2.5%;
-    transform: scale(1.2);
+    margin: 0 15%;
+    font-size: 6vw;
+    padding-top: 1vh;
+    margin-top: 70vh;
+    position: relative;
 }
 
 
@@ -287,6 +289,22 @@ body{
     font-family: "VAGRounded";
 }
 
+.lock .planetImage{
+    filter: brightness(100%) ;
+
+}
+
+.lock span{
+    position: absolute;
+    z-index: 1;  
+}
+.active .lock span{
+    position: absolute;
+    z-index: 1; 
+    
+}
+
+
 @media screen and (orientation: portrait) {
     
     #portrait {
@@ -296,19 +314,6 @@ body{
     #landscape {
         display: none;
     }
-}
-
-.lock img{
-    filter: brightness(100%) ;
-
-}
-
-.lock span{
-    position: absolute;
-    margin-left: 45px;
-    margin-top: 60px;
-    z-index: 1;
-    transform: scale(1.3);    
 }
 
 .createGame,
@@ -419,10 +424,8 @@ body{
     }
 
     .banner-selection{
-        font-size: 6vw;
-        padding-top: 3.5%;
-        margin: 7% 0;
-        transform: scale(1);
+        font-size: 4vw;
+        margin-top: 58vh;
     }
     
     .carousel-container ul {

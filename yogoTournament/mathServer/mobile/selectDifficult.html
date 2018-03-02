@@ -44,7 +44,7 @@
             
             <div class="subject-container" style="background-color: #912e99">
                 
-                <div class="checkBlank checkBox0">
+                <div class="checkBlank checkBox0" data-type="SUM">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
@@ -59,7 +59,7 @@
             </div>
             
             <div class="subject-container" style="background-color: #4595c0">
-                <div class="checkBlank checkBox1">
+                <div class="checkBlank checkBox1" data-type="SUB">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
@@ -74,7 +74,7 @@
             </div>
             
             <div class="subject-container" style="background-color: #c93585">
-                <div class="checkBlank checkBox2">
+                <div class="checkBlank checkBox2" data-type="MUL">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
@@ -88,7 +88,7 @@
             </div>
             
             <div class="subject-container" style="background-color: #e6bd5f">
-                <div class="checkBlank checkBox3">
+                <div class="checkBlank checkBox3" data-type="DIV">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
@@ -107,8 +107,8 @@
         <div class="object-center">
 
             <button class="red-btn" type="button" onclick="window.location.href='selectSubject.html'">BACK</button>
-            
-            <button class="green-btn" type="button" onclick="window.location.href='customize.html'" style="font-size: 8vw">NEXT</button>
+
+            <button class="green-btn" type="button" onclick="setCustomRules()" style="font-size: 8vw">NEXT</button>
 
         </div>
         
@@ -134,7 +134,7 @@
             
             <div class="subject-container" style="background-color: #912e99">
                 
-                <div class="checkBlank checkBox0">
+                <div class="checkBlank checkBox0" data-type="SUM">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
@@ -149,7 +149,7 @@
             </div>
             
             <div class="subject-container" style="background-color: #4595c0">
-                <div class="checkBlank checkBox1">
+                <div class="checkBlank checkBox1" data-type="SUB">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
@@ -164,7 +164,7 @@
             </div>
             
             <div class="subject-container" style="background-color: #c93585">
-                <div class="checkBlank checkBox2">
+                <div class="checkBlank checkBox2" data-type="MUL">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
@@ -178,7 +178,7 @@
             </div>
             
             <div class="subject-container" style="background-color: #e6bd5f">
-                <div class="checkBlank checkBox3">
+                <div class="checkBlank checkBox3" data-type="DIV">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
@@ -271,20 +271,39 @@
 		}
 	}
 
-    for(var i = 0; i < 4; i++){
-        $(".checkBox" + i).attr("selection",1);
+	var printOperators = function () {
+		for (var i = 0; i < 4; i++) {
+            var operator = OPERATORS[i]
 
-        $(".checkBox" + i).click(function(){
+			if(operatorsObject[current_set][operator].disable){
+				$(".checkBox" + i).attr("selection", 0);
+				$(".checkBox" + i).find(".markCheck").css("display", "none");
+			}else {
+				$(".checkBox" + i).attr("selection", 1);
+				$(".checkBox" + i).find(".markCheck").css("display", "block");
+			}
 
-             if($(this).attr("selection") == 1){
-                 $(this).find(".markCheck").css("display","none");
-                 $(this).attr("selection",0)
-             }else{
-                 $(this).find(".markCheck").css("display","block");
-                 $(this).attr("selection",1)
-             }
-        });
-    }
+			console.log($(".checkBox" + i).attr("selection"))
+
+			$(".checkBox" + i).click(function () {
+                console.log($(this).attr("selection"))
+
+				if ($(this).attr("selection") === "1") {
+					$(this).find(".markCheck").css("display", "none");
+					$(this).attr("selection", 0)
+					var type = $(this).data("type")
+					operatorsObject[current_set][type].disable = true
+				} else {
+					$(this).find(".markCheck").css("display", "block");
+					$(this).attr("selection", 1)
+					var type = $(this).data("type")
+					operatorsObject[current_set][type].disable = false
+				}
+			});
+		}
+	}
+
+	printOperators()
     
     var index = 0;
     
@@ -300,6 +319,7 @@
 		$(".lvl-text").text(lvl[index]);
         current_set = lvl[index]
 		difficultSet = operationGenerator.RULES_SET[current_set]
+        printOperators()
     });
     
     $(".right-arrow").click(function(){
@@ -312,6 +332,7 @@
 		$(".lvl-text").text(lvl[index]);
 		current_set = lvl[index]
 		difficultSet = operationGenerator.RULES_SET[current_set]
+        printOperators()
     });
 
     var operationColor

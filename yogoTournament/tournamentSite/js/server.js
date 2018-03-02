@@ -330,12 +330,13 @@ function Server(){
 		self.p1Ready = false;
 		self.p2Ready = false;
 		console.log(self.events)
+		var numPerOperations = Math.round(battleTime / 60000) * 3
 
 		var promise = makeid(currentId);
 		promise.then(function(id){
 
 			id_game = id;
-			operationGenerator.setConfiguration(rules)
+			operationGenerator.setConfiguration(rules, numPerOperations)
 
 			var serverReady = false;
 			valores = {
