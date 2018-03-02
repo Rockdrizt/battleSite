@@ -13,12 +13,12 @@ var operationGenerator = function () {
 	var RULES_SET = {
 		EASY: {
 			SUM: [
-				{operand1X: 1, operand2X: 1, maxRange: 9, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 1, operand2X: 1, maxRange: 9, paramToAnswer:OPERATION_PARAMS.operand2},
-				{operand1X: 1, operand2X: 1, maxRange: 19, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 2, operand2X: 1, maxRange: 19, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 2, operand2X: 1, maxRange: 104, paramToAnswer:OPERATION_PARAMS.result},
-				{operand1X: 2, operand2X: 1, maxRange: 104, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 1, operand2X: 1, minRange: 1, maxRange: 9, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 1, operand2X: 1, minRange: 1, maxRange: 9, paramToAnswer:OPERATION_PARAMS.operand2},
+				{operand1X: 1, operand2X: 1, minRange: 1, maxRange: 19, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1Const: 10, operand2X: 1, minRange: 11, maxRange: 19, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 1, minRange: 11, maxRange: 104, paramToAnswer:OPERATION_PARAMS.result},
+				{operand1X: 2, operand2X: 1, minRange: 11, maxRange: 104, paramToAnswer:OPERATION_PARAMS.operand2},
 				{operand1X: 2, operand2X: 1, minRange: 11, maxRange: 108, paramToAnswer:OPERATION_PARAMS.result},
 				{operand1X: 2, operand2X: 1, minRange: 11, maxRange: 108, paramToAnswer:OPERATION_PARAMS.operand2},
 			],
@@ -187,94 +187,160 @@ var operationGenerator = function () {
 
 	}
 
-	function checkRule(rule, operand1, operand2, operator){
+	// function checkRule(rule, operand1, operand2, operator){
+	//
+	// 	var operation = {operand1:operand1, operand2:operand2, operator:operator}
+	// 	var result = makeOperation(operation)
+	//
+	// 	var minRange = rule.minRange || MIN_RANGE_DEFAULT
+	// 	if(operand1 > rule.maxRange)
+	// 		operand1 = operand1 - minRange
+	// 	if(operand2 > rule.maxRange)
+	// 		operand2 = operand2 - minRange
+	//
+	// 	if ((rule.maxRange) && (result > rule.maxRange)) {
+	// 		if(operator === "SUM" || operator === "SUB") {
+	// 			var dif = rule.maxRange - result
+	// 			console.log(dif)
+	// 			if (operand2 > operand1)
+	// 				operand2 = Math.abs(operand2 + dif)
+	// 			else
+	// 				operand1 = Math.abs(operand1 + dif)
+	// 		}else if(operator === "MUL"){
+	// 			if (operand2 > operand1)
+	// 				operand1 = Math.ceil(rule.maxRange / operand2)
+	// 			else
+	// 				operand2 = Math.ceil(rule.maxRange / operand1)
+	// 		}else{
+	// 			operand1 = result
+	// 			operand2 = (operand1 / operand2) > rule.maxRange ? rule.maxRange : operand2
+	// 		}
+	// 		//63: 9 60 / 8
+	// 	}
+	//
+	// 	var minRange = rule.minRange || MIN_RANGE_DEFAULT
+	// 	console.log(result, minRange)
+	// 	if (result < minRange) {
+	// 		if(operator === "SUM" || operator === "SUB") {
+	// 			var dif = minRange - result
+	// 			console.log(dif)
+	// 			if (operand1 > operand2) {
+	// 				operand1 = operand1 + dif
+	// 			} else {
+	// 				operand2 = operand2 + dif
+	// 			}
+	// 		}else if(operator === "MUL"){
+	// 			if (operand2 < operand1)
+	// 				operand1 = Math.ceil(minRange / operand2)
+	// 			else
+	// 				operand2 = Math.ceil(minRange / operand1)
+	// 		}
+	// 	}
+	//
+	// 	operation = {operand1:operand1, operand2:operand2, operator:operator}
+	// 	result = makeOperation(operation)
+	// 	operation.result = result
+	//
+	// 	return operation
+	// }
 
-		var operation = {operand1:operand1, operand2:operand2, operator:operator}
-		var result = makeOperation(operation)
+	//when you need a random operand and you dont know the other operand yet
+	function getFirstOperand(operand1X, operand2X, operator, rule) {
+		var limitOperandMax = Math.pow(10, operand1X) - 1
+		var limitOperandMin = Math.pow(10, operand1X - 1)
+		var maxOperand2 = Math.pow(10, operand2X) - 1
+		var minOperand2 = Math.pow(10, operand2X - 1)
+		var maxOperand, minOperand
+		// var minOperand2 = rule.operand2Const || Math.pow(10, operandX - 1)
 
-		var minRange = rule.minRange || MIN_RANGE_DEFAULT
-		if(operand1 > rule.maxRange)
-			operand1 = operand1 - minRange
-		if(operand2 > rule.maxRange)
-			operand2 = operand2 - minRange
-
-		if ((rule.maxRange) && (result > rule.maxRange)) {
-			if(operator === "SUM" || operator === "SUB") {
-				var dif = rule.maxRange - result
-				console.log(dif)
-				if (operand2 > operand1)
-					operand2 = Math.abs(operand2 + dif)
-				else
-					operand1 = Math.abs(operand1 + dif)
-			}else if(operator === "MUL"){
-				if (operand2 > operand1)
-					operand1 = Math.ceil(rule.maxRange / operand2)
-				else
-					operand2 = Math.ceil(rule.maxRange / operand1)
-			}else{
-				operand1 = result
-				operand2 = (operand1 / operand2) > rule.maxRange ? rule.maxRange : operand2
-			}
-			//63: 9 60 / 8
+		switch (operator){
+			case "SUM":
+				minOperand = rule.minRange - maxOperand2
+				minOperand = minOperand < limitOperandMin ? limitOperandMin : minOperand
+				maxOperand = rule.maxRange - minOperand2
+				maxOperand = maxOperand > limitOperandMax ? limitOperandMax : maxOperand
+				break
+			case "SUB":
+				break
 		}
 
-		var minRange = rule.minRange || MIN_RANGE_DEFAULT
-		console.log(result, minRange)
-		if (result < minRange) {
-			if(operator === "SUM" || operator === "SUB") {
-				var dif = minRange - result
-				console.log(dif)
-				if (operand1 > operand2) {
-					operand1 = operand1 + dif
-				} else {
-					operand2 = operand2 + dif
-				}
-			}else if(operator === "MUL"){
-				if (operand2 < operand1)
-					operand1 = Math.ceil(minRange / operand2)
-				else
-					operand2 = Math.ceil(minRange / operand1)
-			}
-		}
-
-		operation = {operand1:operand1, operand2:operand2, operator:operator}
-		result = makeOperation(operation)
-		operation.result = result
-
-		return operation
+		return Math.floor(Math.random() * (maxOperand - minOperand)) + minOperand
 	}
+
+	//when you know the result of other operand
+	function getSecondOperand(knownOperand, operandX, rule, operator) {
+		var limitOperandMin = Math.pow(10, operandX - 1)
+		var limitOperandMax = Math.pow(10, operandX) - 1
+		var minOperand, maxOperand
+
+		switch (operator){
+			case "SUM":
+				minOperand = rule.minRange - knownOperand
+				console.log(rule.minRange, knownOperand, minOperand)
+				minOperand = minOperand < limitOperandMin ? limitOperandMin : minOperand
+				maxOperand = rule.maxRange - knownOperand
+				maxOperand = maxOperand > limitOperandMax ? limitOperandMax : maxOperand
+				break
+		}
+		console.log(knownOperand, "Min: " + minOperand, "Max: " + maxOperand)
+
+		var operand = Math.floor(Math.random() * (maxOperand - minOperand)) + minOperand
+
+		return operand
+	}
+
+	function getMinMaxOperands(rule, operator){
+
+		var operand2, operand1
+		if(rule.operand2Const){
+			operand2 = rule.operand2Const
+			operand1 = getSecondOperand(operand2, rule.operand1X, rule, operator)
+		}else{
+			operand1 = rule.operand1Const || getFirstOperand(rule.operand1X, rule.operand2X, operator, rule)
+			operand2 = getSecondOperand(operand1, rule.operand2X, rule, operator)
+		}
+
+		return {operand1:operand1, operator:operator, operand2:operand2}
+	}
+
+	// function checkRule(operand, operator, rule, min, max) {
+	// 	var otherOperand
+	// 	var minOperand, maxOperand
+	//
+	// 	switch (operator){
+	// 		case "MUL":
+	// 			minOperand = Math.floor(rule.minRange / operand)
+	// 			minOperand = minOperand < 1 ? 1 : minOperand
+	// 			maxOperand = Math.floor(rule.maxRange / operand)
+	// 			break
+	// 		case "SUM":
+	// 			minOperand = Math.floor(rule.minRange - operand)
+	// 			maxOperand = Math.floor(rule.maxRange - operand)
+	// 			break
+	// 		case "SUB":
+	// 			minOperand = Math.floor(rule.minRange + operand + 1)
+	// 			maxOperand = Math.floor(rule.maxRange + operand + 1)
+	// 			console.log("sub", min, max)
+	// 			break
+	// 		case "DIV":
+	// 			minOperand = Math.floor(rule.minRange * operand)
+	// 			maxOperand = Math.floor(rule.maxRange * operand)
+	//
+	// 	}
+	// 	minOperand = minOperand > min ? min : minOperand
+	// 	maxOperand = maxOperand > max ? max : maxOperand
+	// 	console.log(minOperand, maxOperand)
+	//
+	// 	otherOperand = Math.floor(Math.random() * (maxOperand - minOperand)) + minOperand
+	// 	return otherOperand
+	// }
 
 	function getOperationRule(rule, operator){
 
-		var operand1
-
-		if(rule.operand1X) {
-			var maxOperand1 = Math.pow(10, rule.operand1X) - 1
-			var minOperand1 = Math.pow(10, rule.operand1X - 1) - 1
-			minOperand1 = minOperand1 < 1 ? 1 : minOperand1
-			console.log(maxOperand1, minOperand1)
-			operand1 = Math.floor(Math.random() * (maxOperand1 - minOperand1)) + minOperand1
-		}else if(rule.operand1Const){
-			operand1 = rule.operand1Const
-		}else {
-			console.warn("operand 1 not found in rule")
-			return
-		}
-
-		var operand2
-
-		if(rule.operand2X) {
-			var maxOperand2 = Math.pow(10, rule.operand2X) - 1
-			var minOperand2 = Math.pow(10, rule.operand2X - 1) + 1
-			operand2 = Math.floor(Math.random() * (maxOperand2 - minOperand2)) + minOperand2
-		}else if(rule.operand2Const){
-			operand2 = rule.operand2Const
-		}else {
-			console.warn("operand 2 not found in rule")
-			return
-		}
-
-		var operation =  checkRule(rule, operand1, operand2, operator)
+		var operation = getMinMaxOperands(rule, operator)
+		console.log(operation)
+		var answer =  makeOperation(operation)
+		operation.result = answer
 
 		switch(rule.paramToAnswer){
 			case (OPERATION_PARAMS.result):
@@ -326,11 +392,11 @@ var operationGenerator = function () {
 	}
 
 //numOfOperations is the theorical number of minimal operations per level based on time
-	function setConfiguration(ruleSet, numOfOperations) {
-		ruleSet = RULES_SET.EASY
+	function setConfiguration(rules, numOfOperations) {
+		ruleSet = rules || RULES_SET.EASY
 		currentRound = 0
 		numOfOperations = numOfOperations || 32
-		currentOperator = ruleSet
+		// currentOperator = ruleSet
 		setOperators()
 		numPerOperator = Math.floor(numOfOperations / operatorsList.length)
 
