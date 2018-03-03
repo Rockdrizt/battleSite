@@ -277,7 +277,7 @@ var operationGenerator = function () {
 	}
 
 	//when you know the result of other operand
-	function getSecondOperand(knownOperand, operandX, rule, operator) {
+	function getSecondOperand(knownOperand, operandX, rule, operator, isFirst) {
 		var limitOperandMin = Math.pow(10, operandX - 1)
 		var limitOperandMax = Math.pow(10, operandX) - 1
 		var minOperand, maxOperand
@@ -288,8 +288,9 @@ var operationGenerator = function () {
 				maxOperand = rule.maxRange - knownOperand
 				break
 			case "SUB":
-				maxOperand = knownOperand - rule.minRange
-				minOperand = knownOperand - rule.maxRange
+				var negative = isFirst ? -1 : 1
+				maxOperand = (knownOperand - rule.minRange) * negative
+				minOperand = (knownOperand - rule.maxRange) * negative
 				break
 			case "MUL":
 				maxOperand = Math.ceil(rule.maxRange / knownOperand)
@@ -314,7 +315,7 @@ var operationGenerator = function () {
 		var operand2, operand1
 		if(rule.operand2Const){
 			operand2 = rule.operand2Const
-			operand1 = getSecondOperand(operand2, rule.operand1X, rule, operator)
+			operand1 = getSecondOperand(operand2, rule.operand1X, rule, operator, true)
 		}else{
 			operand1 = rule.operand1Const || getFirstOperand(rule.operand1X, rule.operand2X, operator, rule)
 			operand2 = getSecondOperand(operand1, rule.operand2X, rule, operator)

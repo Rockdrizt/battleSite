@@ -459,9 +459,10 @@ function Server(){
 		refIdGame.child("gameReady").set(value);
 	}
 
-	this.retry = function(){
+	this.retry = function(loc){
 		var date = new Date()
 		var actualDate = date.getMilliseconds()
+		loc = loc || "toHome"
 
 		valores.p1answer =false;
 		valores.p2answer =false;
@@ -471,7 +472,7 @@ function Server(){
 		valores.possibleAnswers = [];
 		valores.data = false;
 		valores.gameEnded = false;
-		valores.retry = {retry:true, date:actualDate};
+		valores.retry = {retry:loc, date:actualDate};
 		refIdGame.set(valores);
 		// refIdGame.off()
 		// refIdGame.remove();

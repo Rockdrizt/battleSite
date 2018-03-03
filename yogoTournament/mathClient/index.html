@@ -110,7 +110,7 @@
 	function startButton(){
 		if($("#idGame").val() != "" && $("#nickname").val() != ""){
 			magicSound.play();
-			var idGame = cliente.id_game || document.getElementById("idGame").value;
+			var idGame = document.getElementById("idGame").value;
 			var player = {
 				nickname: document.getElementById("nickname").value,
 				avatar: selectYogotarName,

@@ -26,21 +26,24 @@ var printOperators = function() {
 			$("#checkBox" + (i + 1)).find(".markCheck").css("display", "block");
 		}
 
-		$("#checkBox" + (i + 1)).click(function () {
-
-			if ($(this).attr("selection") == 1) {
-				$(this).find(".markCheck").css("display", "none");
-				$(this).attr("selection", 0)
-				var type = $(this).data("type")
-				operatorsObject[current_set][type].disable = true
-			} else {
-				$(this).find(".markCheck").css("display", "block");
-				$(this).attr("selection", 1)
-				var type = $(this).data("type")
-				operatorsObject[current_set][type].disable = false
-			}
-		});
 	}
+}
+
+for (var i = 0; i < OPERATORS.length; i++) {
+	$("#checkBox" + (i + 1)).click(function () {
+
+		if ($(this).attr("selection") == 1) {
+			$(this).find(".markCheck").css("display", "none");
+			$(this).attr("selection", 0)
+			var type = $(this).data("type")
+			operatorsObject[current_set][type].disable = true
+		} else {
+			$(this).find(".markCheck").css("display", "block");
+			$(this).attr("selection", 1)
+			var type = $(this).data("type")
+			operatorsObject[current_set][type].disable = false
+		}
+	});
 }
 printOperators()
 
