@@ -186,19 +186,33 @@ function getRules(operator) {
 	}
 }
 
+var blurElement = {a:10};
+TweenMax.to(blurElement, 1, {a:0, onUpdate:applyBlur});
+
+function applyBlur(){
+    TweenMax.set(['.containerRules'], {webkitFilter:"blur(" + blurElement.a + "px)",filter:"blur(" + blurElement.a + "px)"});  
+};
+
+
 $("#modalDifficulty").hide();
 $(".showModal").click(function(){
 	var operator = $(this).data("type")
 	getRules(operator)
 	$("#modalDifficulty").show();
+    //ANIMATION
+    TweenMax.to(blurElement, 1, {a:10, onUpdate:applyBlur});  
 });
 
 $(".closeButton").click(function(){
 	$("#modalDifficulty").hide();
+    //ANIMATION
+    TweenMax.to(blurElement, 1, {a:0, onUpdate:applyBlur});  
 });
 
 $(".okButton").click(function(){
+    TweenMax.to(blurElement, 0.2, {a:0, onUpdate:applyBlur}); 
 	$("#modalDifficulty").hide();
+    
 });
 
 var difficultyNameLevel = 0;

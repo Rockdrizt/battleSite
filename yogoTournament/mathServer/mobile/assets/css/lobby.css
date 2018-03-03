@@ -40,8 +40,8 @@
 
 .pin-style{
     background-color: white;
-    padding-top: 5%;
-    font-size: 6vh;
+    padding-top: 2vh;
+    font-size: 4vh;
     color: #006837;
     margin: 0% 10%;
     transform: translateY(10%);
@@ -57,6 +57,7 @@
 
 .share-style p{
     font-size: 4vh;
+    margin-top: 2vh;
 }
 
 
@@ -119,7 +120,7 @@
 
     .pin-style{
         padding-top: 2vw;
-        font-size: 10vh;
+        font-size: 8vh;
     }
 
     .share-style{
@@ -152,7 +153,7 @@
     /*width: 101%;*/
     /*}*/
     .yogotarImg{
-        min-height: 50vh;
+        min-height: 40vh;
         align-items: center;
     }
 
@@ -186,7 +187,58 @@
     opacity: 0.5;
 }
 
+/* Landscape IPAD*/
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+      
+      .pin-style{
+          padding-top: 4vh;
+          font-size: 8vh;
+      }
+}
 
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait) 
+    and (-webkit-min-device-pixel-ratio: 1) {
+        
+        .pin-style{
+          padding-top: 2vh;
+          font-size: 4vh;
+      }
+        
+}
+
+
+
+      /* Landscape IPAD PRO*/
+@media only screen 
+  and (min-device-width: 1366px) 
+  and (max-device-width: 1366px) 
+  and (orientation: portrait) 
+    and (-webkit-min-device-pixel-ratio: 2) {
+        
+      .pin-style{
+          padding-top: 2vh;
+          font-size: 4vh;
+      }
+}
+
+@media only screen 
+  and (min-device-width: 1366px) 
+  and (max-device-width: 1366px) 
+  and (orientation: landscape) 
+    and (-webkit-min-device-pixel-ratio: 2) {
+        
+        .pin-style{
+          padding-top: 4vh;
+          font-size: 8vh;
+      }
+}
 
 
 
