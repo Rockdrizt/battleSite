@@ -38,11 +38,13 @@ $(".close-warning").click(function() {
 });
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
+/*window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
+        TweenMax.to(blurElement, 0.2, {a:0, onUpdate:applyBlur});  
     }
     if (event.target == warningModal) {
         warningModal.style.display = "none";
+        TweenMax.to(blurElement, 0.2, {a:0, onUpdate:applyBlur});  
     }
-}
+}*/
