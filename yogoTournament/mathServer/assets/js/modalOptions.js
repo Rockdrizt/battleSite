@@ -27,7 +27,12 @@ var printOperators = function() {
 			$("#checkBox" + (i + 1)).find(".markCheck").css("display", "block");
 		}
 
-		$("#checkBox" + (i + 1)).click(function () {
+
+	}
+}
+
+for(var i = 0; i < OPERATORS.length; i++){
+    		$("#checkBox" + (i + 1)).click(function () {
 			if ($(this).attr("selection") == 1) {
 				$(this).find(".markCheck").css("display", "none");
 				$(this).attr("selection", 0)
@@ -40,19 +45,8 @@ var printOperators = function() {
 				operatorsObject[current_set][type].disable = false
 			}
             
-           /* if($("#checkBox1").attr("selection") == 0 &&
-                $("#checkBox2").attr("selection") == 0 &&
-                $("#checkBox3").attr("selection") == 0 &&
-                $("#checkBox4").attr("selection") == 0){
-                $("#nextButton2").css("opacity",0.4);
-                //$("body").off("click", "#nextButton2");
-            }else{
-                $("#nextButton2").css("opacity",1);
-                //$("body").on("click", "#nextButton2");
-            }
-            */
+          
 		});
-	}
 }
 
 for (var i = 0; i < OPERATORS.length; i++) {
