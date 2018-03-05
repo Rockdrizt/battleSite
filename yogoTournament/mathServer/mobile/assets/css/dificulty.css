@@ -133,7 +133,7 @@
 }
 
 .plus-btn img{
-    width: 100%;
+    width: 120%;
 }
 
 .plus-btn span{
@@ -363,7 +363,9 @@
     }
     
    
-
+    .plus-btn img{
+        width: 100%;
+    }
     
     
     .green-btn,
@@ -492,6 +494,10 @@
             transform: translateY(0.6vh);
       }
       
+        .plus-btn img{
+            width: 100%;
+        }
+      
 }
 
 
@@ -546,6 +552,10 @@
             margin-right: 4vw;
             transform: translateY(0.6vh);
       }
+      
+      .plus-btn img{
+            width: 100%;
+        }
 }       
 
 /* Landscape IPAD*/
