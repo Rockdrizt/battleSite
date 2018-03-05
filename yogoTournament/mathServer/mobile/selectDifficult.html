@@ -108,7 +108,7 @@
 
             <button class="red-btn" type="button" onclick="window.location.href='selectSubject.html'">BACK</button>
 
-            <button class="green-btn" type="button" onclick="setCustomRules()" style="font-size: 8vw">NEXT</button>
+            <button class="green-btn" type="button" style="font-size: 8vw">NEXT</button>
 
         </div>
         
@@ -198,7 +198,7 @@
 
             <button class="red-btn" type="button" onclick="window.location.href='selectSubject.html'">BACK</button>
             
-            <button class="green-btn" type="button" onclick="setCustomRules()" >NEXT</button>
+            <button class="green-btn" type="button"  >NEXT</button>
 
         </div>
         
@@ -306,6 +306,47 @@
 			}
 		});
 	}
+    
+    $(".checkBox" + i).click(function () {
+        var aux = 0
+            console.log($(this).attr("selection"))
+            
+            for(var i = 0; i < 4; i++){
+                if($(".checkBox" + i).attr("selection") == 1){
+                    aux++
+                }
+                
+                
+                /*if($(".checkBox" + i).attr("selection") == 1){
+                    aux++
+                    $(".green-btn").css("opacity",0.5);
+                    $(".green-btn").click(function(){
+                        
+                    });
+                    break;
+                    return
+                }
+                else{
+                    $(".green-btn").css("opacity",1);
+                    $(".green-btn").click(function(){
+                        window.location.href = 'customize.html';
+                    });
+                }*/
+            }
+        
+            if(aux !== 0){
+                $(".green-btn").css("opacity",1);
+                $(".green-btn").click(function(){
+                    setCustomRules()
+                });
+            }
+            else{
+                $(".green-btn").css("opacity",0.5);
+                $(".green-btn").click(function(){
+
+                });
+            }
+        });
 
 	printOperators()
     
