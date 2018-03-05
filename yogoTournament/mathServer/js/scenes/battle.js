@@ -277,6 +277,7 @@ var battle = function(){
 		timeElapsed = 0
 		startTimer = false
 		onBattle = false
+		timerEnded = false
         
         sceneGroup.alpha = 0
         game.add.tween(sceneGroup).to({alpha:1},400, Phaser.Easing.Cubic.Out,true);
@@ -1818,6 +1819,7 @@ var battle = function(){
 				{
 					timerGroup.timerText.text = convertTimeFormat2(timeRemaining)
 				}else {
+					timerGroup.timerText.text = "0:00"
 					timerEnded = true
 					checkWins()
 				}

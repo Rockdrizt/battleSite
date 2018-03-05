@@ -139,9 +139,11 @@
         font-size: 2vh;
     }
 
-    .yogo1,
-    .yogo2 {
+    .yogo1{
         width: 25%;
+    }
+    .yogo2 {
+        width: 20%;
     }
 
     .yogo1,
@@ -198,6 +200,12 @@
           padding-top: 4vh;
           font-size: 8vh;
       }
+      
+      .yogo1,
+        .yogo2 {
+            width: 25%;
+        }
+
 }
 
 @media only screen 
@@ -238,6 +246,11 @@
           padding-top: 4vh;
           font-size: 8vh;
       }
+        .yogo1,
+    .yogo2 {
+        width: 25%;
+    }
+
 }
 
 
