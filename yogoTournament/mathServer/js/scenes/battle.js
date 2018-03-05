@@ -277,7 +277,6 @@ var battle = function(){
 		timeElapsed = 0
 		startTimer = false
 		onBattle = false
-		timerEnded = false
         
         sceneGroup.alpha = 0
         game.add.tween(sceneGroup).to({alpha:1},400, Phaser.Easing.Cubic.Out,true);
