@@ -1,5 +1,6 @@
 var current_set = "EASY"
 var difficultSet = operationGenerator.RULES_SET[current_set]
+//var difficultSet = 2
 var ruleSet
 var OPERATORS = ["SUM", "SUB", "MUL", "DIV"]
 var DIFFICULTIES = ["EASY", "MEDIUM", "HARD", "MASTER"]
@@ -27,7 +28,6 @@ var printOperators = function() {
 		}
 
 		$("#checkBox" + (i + 1)).click(function () {
-
 			if ($(this).attr("selection") == 1) {
 				$(this).find(".markCheck").css("display", "none");
 				$(this).attr("selection", 0)
@@ -39,6 +39,18 @@ var printOperators = function() {
 				var type = $(this).data("type")
 				operatorsObject[current_set][type].disable = false
 			}
+            
+            if($("#checkBox1").attr("selection") == 0 &&
+                $("#checkBox2").attr("selection") == 0 &&
+                $("#checkBox3").attr("selection") == 0 &&
+                $("#checkBox4").attr("selection") == 0){
+                $("#nextButton2").css("opacity",0.4);
+                $("body").off("click", "#nextButton2");
+            }else{
+                $("#nextButton2").css("opacity",1);
+                $("body").on("click", "#nextButton2");
+            }
+            
 		});
 	}
 }
