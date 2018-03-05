@@ -230,6 +230,7 @@
 <!--<script type="text/javascript" src="assets/js/operationGenerator.js"></script>-->
 <script type="text/javascript" src="assets/js/modal.js"></script>
 <script>
+        
 	var operationGenerator = parent.operationGenerator //|| operationGenerator
 
     function setCustomRules() {
@@ -285,22 +286,25 @@
 
 			console.log($(".checkBox" + i).attr("selection"))
 
-			$(".checkBox" + i).click(function () {
-                console.log($(this).attr("selection"))
-
-				if ($(this).attr("selection") === "1") {
-					$(this).find(".markCheck").css("display", "none");
-					$(this).attr("selection", 0)
-					var type = $(this).data("type")
-					operatorsObject[current_set][type].disable = true
-				} else {
-					$(this).find(".markCheck").css("display", "block");
-					$(this).attr("selection", 1)
-					var type = $(this).data("type")
-					operatorsObject[current_set][type].disable = false
-				}
-			});
 		}
+	}
+
+	for (var i = 0; i < 4; i++) {
+		$(".checkBox" + i).click(function () {
+			console.log($(this).attr("selection"))
+
+			if ($(this).attr("selection") == 1) {
+				$(this).find(".markCheck").css("display", "none");
+				$(this).attr("selection", 0)
+				var type = $(this).data("type")
+				operatorsObject[current_set][type].disable = true
+			} else {
+				$(this).find(".markCheck").css("display", "block");
+				$(this).attr("selection", 1)
+				var type = $(this).data("type")
+				operatorsObject[current_set][type].disable = false
+			}
+		});
 	}
 
 	printOperators()
@@ -467,7 +471,7 @@
 			}
 		}
 	}
-      
+
 </script>
     
 </body>       

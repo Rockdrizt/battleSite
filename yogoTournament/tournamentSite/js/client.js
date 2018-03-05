@@ -115,7 +115,7 @@ function Client(){
 
 			self.refIdGame.child('gameEnded').on('value', function(snapshot) {
 				var gameEnded = snapshot.toJSON();
-				if(gameEnded.winner){
+				if((gameEnded)&&(gameEnded.winner)){
 					self.fireEvent('onGameEnds',[gameEnded]);
 					self.gameEnded = true
 				}
@@ -124,8 +124,8 @@ function Client(){
 			self.refIdGame.child('retry').on('value', function(snapshot) {
 				var values = snapshot.toJSON();
 				console.log("retryPressed", values)
-				if(values.retry){
-					self.restartGame()
+				if((values)&&(values.retry)){
+					self.restartGame(values.retry)
 					self.gameEnded = false
 				}
 			});

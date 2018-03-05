@@ -239,21 +239,26 @@ var operations = function(){
 
 	}
 
-	function stopGame(win){
+	function stopGame(loc){
 
 		//objectsGroup.timer.pause()
 		//timer.pause()
 		// operationsSong.stop()
 		// clock.tween.stop()
 		inputsEnabled = false
-		cliente.removeEventListener("onTurnEnds", checkAnswer)
-		cliente.removeEventListener("onGameEnds", showWinner)
-		cliente.removeEventListener("showPossibleAnswers", startRound)
 
 		var tweenScene = game.add.tween(sceneGroup).to({alpha: 0}, 500, Phaser.Easing.Cubic.In, true, 750)
 		tweenScene.onComplete.add(function(){
 
-			window.open("../mathClient/index.html", "_self")
+			console.log(loc)
+			if(loc === "inBattle")
+				sceneloader.show("operations")
+			else {
+				cliente.removeEventListener("onTurnEnds", checkAnswer)
+				cliente.removeEventListener("onGameEnds", showWinner)
+				cliente.removeEventListener("showPossibleAnswers", startRound)
+				window.open("../mathClient/index.html", "_self")
+			}
 			// var resultScreen = sceneloader.getScene("result")
 			// resultScreen.setScore(true, numPoints, gameIndex)
 
@@ -587,7 +592,7 @@ var operations = function(){
 			sceneGroup.add(equationGroup)
 
 			readyString = localization.getString(localizationData, "ready")
-			var fontStyle2 = {font: "72px Luckiest Guy", fontWeight: "bold", fill: "#ffffff", align: "center", wordWrap: true, wordWrapWidth: 480}
+			var fontStyle2 = {font: "62px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center", wordWrap: true, wordWrapWidth: 480}
 			// var equationText = game.add.bitmapText(0,0,"WAG", readyString, 72)
 			var equationText = game.add.text(0, 0, readyString, fontStyle2)
 

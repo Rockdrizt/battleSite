@@ -63,6 +63,8 @@ function Server(){
 	self.p2Ready = false;
 	self.startGame = false
 	self.rulesSet = false
+	self.battleTime = 60000
+	self.numberOperation
 
 	this.addEventListener = function(name, handler) {
 		if (self.events.hasOwnProperty(name))
@@ -238,8 +240,7 @@ function Server(){
 			valores.p1.life+=damage;
 			refIdGame.child("p1/life").set(valores.p1.life);
 		}
-		var date = new Date()
-		var actualDate = date.getMilliseconds()
+		var actualDate = firebase.database.ServerValue.TIMESTAMP
 		// console.log(actualDate)
 		var answers = {
 			p1:valores.p1answer,
@@ -309,6 +310,7 @@ function Server(){
 		// 	}
 		// }
 
+		operation.date = firebase.database.ServerValue.TIMESTAMP
 		valores.data = operation;
 		refIdGame.child("data").set(valores.data);
 		refIdGame.child("possibleAnswers").set(valores.possibleAnswers);
@@ -325,12 +327,15 @@ function Server(){
 		var params = params || {}
 		var rules = params.rules || operationGenerator.RULES_SET.EASY
 		var battleTime = params.battleTime || 300000
+		self.battleTime = battleTime
+		self.rules = rules
 
 		self.events = {};
 		self.p1Ready = false;
 		self.p2Ready = false;
 		console.log(self.events)
 		var numPerOperations = Math.round(battleTime / 60000) * 3
+		self.numberOperation = numPerOperations
 
 		var promise = makeid(currentId);
 		promise.then(function(id){
@@ -459,9 +464,10 @@ function Server(){
 		refIdGame.child("gameReady").set(value);
 	}
 
-	this.retry = function(){
+	this.retry = function(loc){
 		var date = new Date()
-		var actualDate = date.getMilliseconds()
+		var actualDate = date.getTime()
+		loc = loc || "toHome"
 
 		valores.p1answer =false;
 		valores.p2answer =false;
@@ -469,12 +475,15 @@ function Server(){
 		valores.p2.life =INITIAL_LIFE;
 		valores.winner =false;
 		valores.possibleAnswers = [];
+		valores.battleTime = self.battleTime;
+		valores.rules = self.rules
 		valores.data = false;
 		valores.gameEnded = false;
-		valores.retry = {retry:true, date:actualDate};
+		valores.retry = {retry:loc, date:actualDate};
 		refIdGame.set(valores);
 		// refIdGame.off()
 		// refIdGame.remove();
+		operationGenerator.setConfiguration(self.rules, self.numberOperation)
 
 	}
 

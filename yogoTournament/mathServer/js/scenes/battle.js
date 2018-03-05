@@ -277,6 +277,7 @@ var battle = function(){
 		timeElapsed = 0
 		startTimer = false
 		onBattle = false
+		timerEnded = false
         
         sceneGroup.alpha = 0
         game.add.tween(sceneGroup).to({alpha:1},400, Phaser.Easing.Cubic.Out,true);
@@ -934,8 +935,11 @@ var battle = function(){
 					else
 						window.open("index.html", "_self")
 				}
-			}else
+			}else {
+				if (server)
+					server.retry("inBattle")
 				sceneloader.show("battle")
+			}
 		})
 	}
 
@@ -1521,7 +1525,7 @@ var battle = function(){
 
 	function createbattleUI() {
 
-		var fontStyle = {font: "62px Luckiest Guy", fontWeight: "bold", fill: "#113860", align: "center"}
+		var fontStyle = {font: "52px VAGRounded", fontWeight: "bold", fill: "#113860", align: "center"}
 		var fontStyle2 = {font: "72px Luckiest Guy", fontWeight: "bold", fill: "#000000", align: "center"}
 
 		questionGroup = game.add.group()
