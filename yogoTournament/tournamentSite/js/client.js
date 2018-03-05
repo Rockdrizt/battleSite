@@ -1,5 +1,5 @@
 // var src = "https://play.yogome.com/epicweb/minigames/mathClient/index.html"
-var src = "../mathClient/index.html"
+var src = "../yogoTournament/mathClient/index.html"
 var gameFrame
 var gameContainer
 // var language = null

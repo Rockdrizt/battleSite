@@ -77,6 +77,22 @@ function startGame(){
     }
 }
 
+window.addEventListener('resize', function () {
+	var fullWidth = 540
+	var fullHeight = 960
+
+	var ratio = window.innerWidth / window.innerHeight
+	var gameHeight = Math.round(fullHeight)
+	var gameWidth = Math.round(fullHeight * ratio)
+
+	// game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
+	game.scale.setGameSize(gameWidth, gameHeight);
+	game.scale.refresh()
+	// var width = window.innerWidth; var height = window.innerHeight
+	// game.renderer.resize(width, height);game.world.setBounds(0, 0, width, height);game.camera.setSize(width, height);game.camera.setBoundsToWorld();game.scale.setShowAll();game.scale.refresh();
+
+})
+
 var wfconfig = {
 
 	active: function() {

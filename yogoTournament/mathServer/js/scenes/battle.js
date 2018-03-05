@@ -1819,6 +1819,7 @@ var battle = function(){
 				{
 					timerGroup.timerText.text = convertTimeFormat2(timeRemaining)
 				}else {
+					timerGroup.timerText.text = "0:00"
 					timerEnded = true
 					checkWins()
 				}
