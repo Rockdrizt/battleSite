@@ -45,10 +45,10 @@ var printOperators = function() {
                 $("#checkBox3").attr("selection") == 0 &&
                 $("#checkBox4").attr("selection") == 0){
                 $("#nextButton2").css("opacity",0.4);
-                $("body").off("click", "#nextButton2");
+                //$("body").off("click", "#nextButton2");
             }else{
                 $("#nextButton2").css("opacity",1);
-                $("body").on("click", "#nextButton2");
+                //$("body").on("click", "#nextButton2");
             }
             
 		});
