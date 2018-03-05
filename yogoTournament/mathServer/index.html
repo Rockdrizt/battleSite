@@ -382,27 +382,7 @@
 	});
 
 	$("#nextButton2").click(function(){
-
-		customRules = {}
-
-		for(var i = 1;i<=OPERATORS.length;i++){
-			var ruleSetOperator = difficultSet[OPERATORS[i-1]]
-
-			if(!operatorsObject[current_set][OPERATORS[i-1]].disable) {
-				customRules[OPERATORS[i-1]] = []
-				var customRulesOperator = customRules[OPERATORS[i-1]]
-				for (var j = 1; j <= ruleSetOperator.length; j++) {
-					if (!ruleSetOperator[j - 1].disable)
-						customRulesOperator.push(ruleSetOperator[j - 1])
-				}
-			}
-
-		}
-
-		console.log(customRules)
-
-		$("#section4").css("display","block");
-		$("#section3").css("display","none");
+		
 	});
 
 	$("#backButton3").click(function(){
