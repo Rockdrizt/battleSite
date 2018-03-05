@@ -362,6 +362,10 @@
 
 	printOperators()
     
+    $( window ).on( "orientationchange", function( event ) {
+        printOperators()
+    });
+    
     var index = 0;
     
     var lvl = ['EASY', 'MEDIUM', 'HARD', 'MASTER']
