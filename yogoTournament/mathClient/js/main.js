@@ -35,14 +35,21 @@ function startGame(){
 
 		// game.canvas.style.width = '50%';
 		// game.canvas.style.height = '100%';
-        var ratio = window.innerHeight / fullHeight
-        var gameHeight = Math.round(fullHeight)
-        var gameWidth = Math.round(fullWidth)
-		var newWidth = Math.round(fullWidth * ratio)
-		document.getElementById("inGame").style.width = newWidth + "px";
+		// var ratio = window.innerHeight / fullHeight
+		// var gameHeight = Math.round(fullHeight)
+		// var gameWidth = Math.round(fullWidth)
+		// var newWidth = Math.round(fullWidth * ratio)
+		// document.getElementById("inGame").style.width = newWidth + "px";
+		// game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
+		// game.scale.setGameSize(gameWidth, gameHeight);
 
-        game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
-        game.scale.setGameSize(gameWidth, gameHeight); game.input.maxPointers = 1
+		var ratio = window.innerWidth / window.innerHeight
+		var gameHeight = Math.round(fullHeight)
+		var gameWidth = Math.round(fullHeight * ratio)
+		game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
+		game.scale.setGameSize(gameWidth, gameHeight);
+
+        game.input.maxPointers = 1
 		game.scale.pageAlignHorizontally = true;
 		game.scale.pageAlignVertically = true;
 
@@ -83,26 +90,26 @@ function startGame(){
     }
 }
 
-window.addEventListener('resize', function () {
-	var fullWidth = 540
-	var fullHeight = 960
-
-	var ratio = window.innerHeight / fullHeight
-	console.log(fullWidth * ratio)
-	var newWidth = Math.round(fullWidth * ratio)
-	document.getElementById("inGame").style.width = newWidth + "px";
-
-	// game.scale.setGameSize(gameWidth, gameHeight);
-	// game.scale.scaleMode = window.innerHeight > window.innerWidth ? Phaser.ScaleManager.RESIZE : Phaser.ScaleManager.EXACT_FIT
-	game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
-	game.scale.pageAlignHorizontally = true;
-	game.scale.pageAlignVertically = true;
-	game.canvas.style.width = '100%';
-	game.canvas.style.height = '100%';
-	game.scale.refresh();
-	// game.scale.setGameSize(gameWidth, gameHeight);
-
-})
+// window.addEventListener('resize', function () {
+// 	var fullWidth = 540
+// 	var fullHeight = 960
+//
+// 	var ratio = window.innerHeight / fullHeight
+// 	console.log(fullWidth * ratio)
+// 	var newWidth = Math.round(fullWidth * ratio)
+// 	document.getElementById("inGame").style.width = newWidth + "px";
+//
+// 	// game.scale.setGameSize(gameWidth, gameHeight);
+// 	// game.scale.scaleMode = window.innerHeight > window.innerWidth ? Phaser.ScaleManager.RESIZE : Phaser.ScaleManager.EXACT_FIT
+// 	game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
+// 	game.scale.pageAlignHorizontally = true;
+// 	game.scale.pageAlignVertically = true;
+// 	game.canvas.style.width = '100%';
+// 	game.canvas.style.height = '100%';
+// 	game.scale.refresh();
+// 	// game.scale.setGameSize(gameWidth, gameHeight);
+//
+// })
 
 var wfconfig = {
 
