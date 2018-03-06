@@ -108,7 +108,7 @@
 
             <button class="red-btn" type="button" onclick="window.location.href='selectSubject.html'">BACK</button>
 
-            <button class="green-btn" type="button" onclick="setCustomRules()" style="font-size: 8vw">NEXT</button>
+            <button class="green-btn" type="button" style="font-size: 8vw">NEXT</button>
 
         </div>
         
@@ -134,7 +134,7 @@
             
             <div class="subject-container" style="background-color: #912e99">
                 
-                <div class="checkBlank checkBox0" data-type="SUM">
+                <div class="checkBlank checkBox4" data-type="SUM">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
@@ -149,7 +149,7 @@
             </div>
             
             <div class="subject-container" style="background-color: #4595c0">
-                <div class="checkBlank checkBox1" data-type="SUB">
+                <div class="checkBlank checkBox5" data-type="SUB">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
@@ -164,7 +164,7 @@
             </div>
             
             <div class="subject-container" style="background-color: #c93585">
-                <div class="checkBlank checkBox2" data-type="MUL">
+                <div class="checkBlank checkBox6" data-type="MUL">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
@@ -178,7 +178,7 @@
             </div>
             
             <div class="subject-container" style="background-color: #e6bd5f">
-                <div class="checkBlank checkBox3" data-type="DIV">
+                <div class="checkBlank checkBox7" data-type="DIV">
                     <img src="assets/images/blank_check.png"> 
                     <img class="markCheck" src="assets/images/mark_check.png">
                 </div>
@@ -198,7 +198,7 @@
 
             <button class="red-btn" type="button" onclick="window.location.href='selectSubject.html'">BACK</button>
             
-            <button class="green-btn" type="button" onclick="setCustomRules()" >NEXT</button>
+            <button class="green-btn" type="button" >NEXT</button>
 
         </div>
         
@@ -272,7 +272,7 @@
 		}
 	}
 
-	var printOperators = function () {
+	/*var printOperators = function () {
 		for (var i = 0; i < 4; i++) {
             var operator = OPERATORS[i]
 
@@ -287,27 +287,84 @@
 			console.log($(".checkBox" + i).attr("selection"))
 
 		}
-	}
+	}*/
 
-	for (var i = 0; i < 4; i++) {
-		$(".checkBox" + i).click(function () {
-			console.log($(this).attr("selection"))
+	$(".green-btn").css("opacity",0.5);
+    
+    var printOperators = function () {
+        for(var i = 0; i < 8; i++){
+            $(".checkBox" + i).attr("selection",0);
+            $(".checkBox" + i).find(".markCheck").css("display","none");
 
-			if ($(this).attr("selection") == 1) {
-				$(this).find(".markCheck").css("display", "none");
-				$(this).attr("selection", 0)
-				var type = $(this).data("type")
-				operatorsObject[current_set][type].disable = true
-			} else {
-				$(this).find(".markCheck").css("display", "block");
-				$(this).attr("selection", 1)
-				var type = $(this).data("type")
-				operatorsObject[current_set][type].disable = false
-			}
-		});
-	}
+            $(".checkBox" + i).click(function(){
+
+                 if($(this).attr("selection") == 1){
+                     $(this).find(".markCheck").css("display","none");
+                     $(this).attr("selection",0)
+                 }else{
+                     $(this).find(".markCheck").css("display","block");
+                     $(this).attr("selection",1)
+                 }
+            });
+
+            if(i < 4){
+                $(".checkBox" + i).click(function () {
+                    var aux = 0
+
+                    for(var j = 0; j < 4; j++){
+                        if($(".checkBox" + j).attr("selection") == 1){
+                            aux++
+                        }
+                    }
+
+                    console.log(aux)
+
+                    if(aux !== 0){
+                        $(".green-btn").css("opacity",1);
+                        $(".green-btn").click(function(){
+                            setCustomRules();
+                        });
+                    }
+                    else{
+                        $(".green-btn").css("opacity",0.5);
+                        $(".green-btn").off( "click" );
+                    }
+
+                });
+            }
+            else{
+                $(".checkBox" + i).click(function () {
+                    var aux = 0
+
+                    for(var j = 4; j < 8; j++){
+                        if($(".checkBox" + j).attr("selection") == 1){
+                            aux++
+                        }
+                    }
+
+                    console.log(aux)
+
+                    if(aux !== 0){
+                        $(".green-btn").css("opacity",1);
+                        $(".green-btn").click(function(){
+                            setCustomRules();
+                        });
+                    }
+                    else{
+                        $(".green-btn").css("opacity",0.5);
+                        $(".green-btn").off( "click" );
+                    }
+
+                });
+            }
+        }
+    }
 
 	printOperators()
+    
+    $( window ).on( "orientationchange", function( event ) {
+        printOperators()
+    });
     
     var index = 0;
     

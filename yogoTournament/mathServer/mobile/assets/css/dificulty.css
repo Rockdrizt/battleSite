@@ -344,7 +344,7 @@
     }
 
     .checkBlank img {
-        width: 5%;
+        width: 4.5%;
     }
 
     #adition,
@@ -363,7 +363,9 @@
     }
     
    
-
+    .plus-btn img{
+        width: 120%;
+    }
     
     
     .green-btn,
@@ -492,6 +494,10 @@
             transform: translateY(0.6vh);
       }
       
+        .plus-btn img{
+            width: 100%;
+        }
+      
 }
 
 
@@ -546,6 +552,10 @@
             margin-right: 4vw;
             transform: translateY(0.6vh);
       }
+      
+      .plus-btn img{
+            width: 100%;
+        }
 }       
 
 /* Landscape IPAD*/

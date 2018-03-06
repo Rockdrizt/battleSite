@@ -5,6 +5,30 @@ var OPERATORS = ["SUM", "SUB", "MUL", "DIV"]
 var DIFFICULTIES = ["EASY", "MEDIUM", "HARD", "MASTER"]
 var operatorsObject = {}
 
+
+function nextSectionButton2(){
+          customRules = {}
+
+		for(var i = 1;i<=OPERATORS.length;i++){
+			var ruleSetOperator = difficultSet[OPERATORS[i-1]]
+
+			if(!operatorsObject[current_set][OPERATORS[i-1]].disable) {
+				customRules[OPERATORS[i-1]] = []
+				var customRulesOperator = customRules[OPERATORS[i-1]]
+				for (var j = 1; j <= ruleSetOperator.length; j++) {
+					if (!ruleSetOperator[j - 1].disable)
+						customRulesOperator.push(ruleSetOperator[j - 1])
+				}
+			}
+
+		}
+
+		console.log(customRules)
+
+		$("#section4").css("display","block");
+		$("#section3").css("display","none");  
+}
+
 for (var dif = 0; dif < DIFFICULTIES.length; dif++) {
 	var difName = DIFFICULTIES[dif]
 	operatorsObject[difName] = {}
@@ -46,6 +70,22 @@ for (var i = 0; i < OPERATORS.length; i++) {
 			var type = $(this).data("type")
 			operatorsObject[current_set][type].disable = false
 		}
+        
+        if(
+            $("#checkBox1").attr("selection") == 0 &&
+            $("#checkBox2").attr("selection") == 0 &&
+            $("#checkBox3").attr("selection") == 0 &&
+            $("#checkBox4").attr("selection") == 0 
+            
+            ){
+                $("#nextButton2").css("opacity",0.5);
+                $("#nextButton2").unbind('click');
+           }else{
+               $("#nextButton2").bind('click');
+                $("#nextButton2").css("opacity",1);
+           }
+        
+        
 	});
 }
 printOperators()
