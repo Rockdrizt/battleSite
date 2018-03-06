@@ -652,7 +652,7 @@ var vs = function(){
             
             initialize()
 
-			buttons.getButton(spaceSong,sceneGroup)
+			// buttons.getButton(spaceSong,sceneGroup)
             
             animateScene()
             

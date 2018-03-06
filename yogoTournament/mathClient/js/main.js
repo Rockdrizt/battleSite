@@ -1,7 +1,7 @@
 window.minigame = window.minigame || {}
 
 function startGame(){
-	window.game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.CANVAS, null, {init: init, create: create }, true, true);
+	window.game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.CANVAS, "inGame", {init: init, create: create }, true, true);
     document.body.style.visibility = "hidden"
 
 	function preloadScenes(sceneList){
@@ -33,12 +33,18 @@ function startGame(){
         var fullWidth = 540
         var fullHeight = 960
 
-        var ratio = window.innerWidth / window.innerHeight
+		// game.canvas.style.width = '50%';
+		// game.canvas.style.height = '100%';
+        var ratio = window.innerHeight / fullHeight
         var gameHeight = Math.round(fullHeight)
-        var gameWidth = Math.round(fullHeight * ratio)
+        var gameWidth = Math.round(fullWidth)
+		var newWidth = Math.round(fullWidth * ratio)
+		document.getElementById("inGame").style.width = newWidth + "px";
 
         game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
         game.scale.setGameSize(gameWidth, gameHeight); game.input.maxPointers = 1
+		game.scale.pageAlignHorizontally = true;
+		game.scale.pageAlignVertically = true;
 
         game.stage.backgroundColor = "#ffffff"
         game.time.advancedTiming = true
@@ -81,15 +87,20 @@ window.addEventListener('resize', function () {
 	var fullWidth = 540
 	var fullHeight = 960
 
-	var ratio = window.innerWidth / window.innerHeight
-	var gameHeight = Math.round(fullHeight)
-	var gameWidth = Math.round(fullHeight * ratio)
+	var ratio = window.innerHeight / fullHeight
+	console.log(fullWidth * ratio)
+	var newWidth = Math.round(fullWidth * ratio)
+	document.getElementById("inGame").style.width = newWidth + "px";
 
-	// game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
-	game.scale.setGameSize(gameWidth, gameHeight);
-	game.scale.refresh()
-	// var width = window.innerWidth; var height = window.innerHeight
-	// game.renderer.resize(width, height);game.world.setBounds(0, 0, width, height);game.camera.setSize(width, height);game.camera.setBoundsToWorld();game.scale.setShowAll();game.scale.refresh();
+	// game.scale.setGameSize(gameWidth, gameHeight);
+	// game.scale.scaleMode = window.innerHeight > window.innerWidth ? Phaser.ScaleManager.RESIZE : Phaser.ScaleManager.EXACT_FIT
+	game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
+	game.scale.pageAlignHorizontally = true;
+	game.scale.pageAlignVertically = true;
+	game.canvas.style.width = '100%';
+	game.canvas.style.height = '100%';
+	game.scale.refresh();
+	// game.scale.setGameSize(gameWidth, gameHeight);
 
 })
 
