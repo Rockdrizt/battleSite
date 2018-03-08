@@ -993,7 +993,7 @@ var battle = function(){
 				assets.sounds.push({name:name, file:file})
 			}
 
-			getSoundsSpine(player.spine)
+			// getSoundsSpine(player.spine)
 			players.push(player)
 		}
 	}

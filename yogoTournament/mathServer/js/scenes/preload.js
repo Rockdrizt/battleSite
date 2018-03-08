@@ -29,8 +29,6 @@ var preloaderIntro = function(){
 			}
 		},
 
-        
-        
 		create: function(event){
 
 			var sceneGroup = game.add.group()

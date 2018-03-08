@@ -4,9 +4,52 @@ var sceneloader = function(){
 	var game = null
 	var initialized = false
 	var currentLoader = null
+	var spines
+	var files
 
 	function init(gameObject){
 		game = gameObject
+	}
+
+	function getSpineEvents(cacheKey, currentLoader, currentScene) {
+		var jsonFile = game.cache.getJSON(cacheKey)
+		console.log(cacheKey)
+		var events = jsonFile.events
+		// console.log(events, spine)
+		var soundsAdded = {}
+		var soundsList = game.cache.getJSON('sounds')
+		var assetsSounds = currentScene.assets.sounds
+
+		for(var key in events){
+			// var event = events[key]
+			var functionData = getFunctionData(key)
+
+			if((functionData)&&(functionData.name === "PLAY")){
+				var soundObj = {
+					name:functionData.param,
+					file:soundsList[functionData.param]
+				}
+				if(!soundsAdded[soundObj.name]){
+					assetsSounds.push(soundObj)
+					currentLoader.audio(soundObj.name, soundObj.file);
+					soundsAdded[soundObj.name] = soundObj.name
+				}
+			}
+		}
+	}
+
+	function getFunctionData(value) {
+		var indexOfFunc = value.indexOf(":")
+		var functionName = null
+		var param = null
+
+		if(indexOfFunc > -1){
+			functionName = value.substr(0, indexOfFunc)
+			param = value.substr(indexOfFunc + 1)
+		}
+		// console.log(functionName, param)
+
+		return {name: functionName, param: param}
 	}
 
 	function createNewLoader(callbacks){
@@ -35,6 +78,11 @@ var sceneloader = function(){
 			if(typeof(callbacks.onLoadFile) === "function"){
 				callbacks.onLoadFile(eventParams)
 			}
+
+			if((files[cachekey])&&(typeof (files[cachekey].onComplete)) === "function")
+				files[cachekey].onComplete()
+
+			console.log(cachekey)
 		})
 
 		newLoader.onLoadComplete.add(function(){
@@ -46,12 +94,13 @@ var sceneloader = function(){
 		return newLoader
 	}
 
-
 	function preload(scenes, callbacks){
 		var inputDevice = game.device.desktop ? "desktop" : "movil"
 
 		currentLoader = createNewLoader(callbacks)
 		buttons.getImages(currentLoader)
+		spines = []
+		files = {}
 
 		for(var indexScene = 0; indexScene < scenes.length; indexScene++){
 
@@ -75,8 +124,11 @@ var sceneloader = function(){
 				if(typeof assets.spines == "object"){
 					for(var indexSpine = 0; indexSpine < assets.spines.length; indexSpine++){
 						var currentSpine = assets.spines[indexSpine]
-						console.log(currentSpine.name, currentSpine.file)
+						currentSpine.currentScene = currentScene
+						// var spineLoader = new Phaser.Loader(game)
 						currentLoader.spine(currentSpine.name, currentSpine.file)
+						files[currentSpine.name] = {onComplete:getSpineEvents.bind(null, currentSpine.name, currentLoader, currentScene)}
+						// spineLoader.onFileComplete.add(getSoundsSpine)
 					}
 				}
 
@@ -161,7 +213,7 @@ var sceneloader = function(){
 			// var currentState = game.state.getCurrentState()
 			// var stage = currentState.stage
 
-			var texture = new Phaser.RenderTexture(game, game.world.width, game.world.height)
+			// var texture = new Phaser.RenderTexture(game, game.world.width, game.world.height)
 			
 		}	
 
