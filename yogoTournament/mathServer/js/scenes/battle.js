@@ -30,7 +30,14 @@ var battle = function(){
 			"dontgiveup":"NO TE RINDAS"
         }
     }
-
+	var bootFiles = {
+		jsons: [
+			{
+				name:"sounds",
+				file:"data/sounds/general.json"
+			}
+		]
+	}
 
     var assets = {
         atlases: [
@@ -45,15 +52,29 @@ var battle = function(){
 				image: "images/cards/atlas.png"
 			}
         ],
+	// 	game.load.image('round',"images/battle/shout_round.png")
+	// game.load.image('start',"images/battle/shout_start.png")
+	// game.load.image('lastRound',"images/battle/last_round.png")
+	// game.load.image('timesUp',"images/battle/times_up.png")
         images: [
 			{
 				name: "container",
 				file: "images/battle/container.png"},
 			{   name:"fondo",
-				file: "images/battle/fondo1.jpg"}
+				file: "images/battle/fondo1.jpg"},
+			{   name:"round",
+				file: "images/battle/shout_round.png"},
+			{   name:"start",
+				file: "images/battle/shout_start.png"},
+			{   name:"lastRound",
+				file: "images/battle/last_round.png"},
+			{   name:"timesUp",
+				file: "images/battle/times_up.png"},
         ],
         sounds: [
-            {	name: "pop",
+			{	name: "battleSong",
+				file: soundsPath + 'songs/battleLoop.mp3'},
+        	{	name: "pop",
                 file: soundsPath + "pop.mp3"},
             {	name: "magic",
                 file: soundsPath + "magic.mp3"},
@@ -87,29 +108,43 @@ var battle = function(){
                 file: soundsPath + "swordSmash.mp3"},
 			{   name: "comboSound",
                 file: soundsPath + "mathTournament/comboSound.mp3"},
-			{   name: "fireCharge",
-                file: soundsPath + "mathTournament/fireCharge2.mp3"},
-			{   name: "fireExplosion",
-				file: soundsPath + "mathTournament/fireExplosion2.mp3"},
-			{   name: "fireProjectile",
-				file: soundsPath + "mathTournament/fireProjectile1.mp3"},
-			{   name: "fireReveal",
-				file: soundsPath + "mathTournament/fireReveal1.mp3"},
-			{	name:"epicTapTouchGames",
-				file:"sounds/battle/TapWhoosh.mp3"},
-			{	name:"epicAttackButton",
-				file:"sounds/battle/buttonTick.mp3"},
-			{	name:"loseBattle",
-				file:"sounds/battle/loseBattle1.mp3"},
-			{	name:"starsCollision",
-				file:"sounds/battle/starsCollision1.mp3"},
-			{	name:"barLoad",
-				file:"sounds/battle/barLoad1.mp3"},
-			{	name:"levelBar",
-				file:"sounds/battle/levelBar1.wav"},
-			{	name:"levelUp",
-				file:"sounds/battle/levelUp2.mp3"}
+			// {   name: "fireCharge",
+             //    file: soundsPath + "mathTournament/fireCharge2.mp3"},
+			// {   name: "fireExplosion",
+			// 	file: soundsPath + "mathTournament/fireExplosion2.mp3"},
+			// {   name: "fireProjectile",
+			// 	file: soundsPath + "mathTournament/fireProjectile1.mp3"},
+			// {   name: "fireReveal",
+			// 	file: soundsPath + "mathTournament/fireReveal1.mp3"},
+			// {	name:"epicTapTouchGames",
+			// 	file:"sounds/battle/TapWhoosh.mp3"},
+			// {	name:"epicAttackButton",
+			// 	file:"sounds/battle/buttonTick.mp3"},
+			// {	name:"loseBattle",
+			// 	file:"sounds/battle/loseBattle1.mp3"},
+			// {	name:"starsCollision",
+			// 	file:"sounds/battle/starsCollision1.mp3"},
+			// {	name:"barLoad",
+			// 	file:"sounds/battle/barLoad1.mp3"},
+			// {	name:"levelBar",
+			// 	file:"sounds/battle/levelBar1.wav"},
+			// {	name:"levelUp",
+			// 	file:"sounds/battle/levelUp2.mp3"}
         ],
+		spritesheets:[
+			{
+				name:"hand",
+				file:"images/spines/Tuto/manita.png",
+				width:115,
+				height:111,
+				frames:23},
+			{
+				name:"confeti",
+				file:"images/battle/confeti.png",
+				width:64,
+				height:64,
+				frames:6},
+		],
 		spines: [
 			// {
 			// 	name:"yogotarEagle",
@@ -120,12 +155,6 @@ var battle = function(){
 			// 	file:"images/spines/Eagle/eagle.json"
 			// }
 		],
-		jsons: [
-			{
-				name:"sounds",
-				file:"data/sounds/general.json"
-			}
-		]
     }
 
     var COLORS = {maxEnery:0x08ff03, midEnergy:0xcccd05, lowEnergy:0xff180a, tiltRed:0x7a2c14}
@@ -724,10 +753,19 @@ var battle = function(){
 		return hpGroup
 	}
 
-    function createPlayer(spine, position, scale, playerScale) {
+    function createPlayer(pIndex, position, scale, playerScale) {
+
+		var player = createSpine(charactersCards[pIndex].id, "normal")
+		player.data = epicCharacters[charactersCards[pIndex].id]
+		player.card = charactersCards[pIndex]
+		player.numPlayer = pIndex + 1
+		var projectileName = player.data.stats.element
+		player.projectileName = projectileName
+		player.projectileData = projectilesData[projectileName]
+		player.y = -100
+		player.nickname = charactersCards[pIndex].nickname
 
 		playerScale = playerScale || 1
-		var player = spine
 		var spineScale = player.data.spine.options.scale
 		player.scale.setTo(playerScale * 0.8 * spineScale * scale, playerScale * 0.8 * spineScale)
 		sceneGroup.add(player)
@@ -759,7 +797,7 @@ var battle = function(){
 		var scaleShoot = {from:{x: 1, y: 1}, to:{x: 1, y: 1}}
 		player.scaleShoot = scaleShoot
 
-		var hitParticle = createPart("impact" + spine.projectileName)
+		var hitParticle = createPart("impact" + player.projectileName)
 		hitParticle.y = -100
 		sceneGroup.add(hitParticle)
 		player.hit = hitParticle
@@ -786,8 +824,8 @@ var battle = function(){
 		// followObj.endFill()
 		proyectile.followObj = followObj
 
-		var idleSheet = game.add.sprite(0, 0, 'idlePower' + spine.projectileName)
-		idleSheet.fps = spine.projectileData.sheet.idle.fps
+		var idleSheet = game.add.sprite(0, 0, 'idlePower' + player.projectileName)
+		idleSheet.fps = player.projectileData.sheet.idle.fps
 		idleSheet.animations.add('idle')
 		idleSheet.anchor.setTo(0.5, 0.5)
 		proyectile.add(idleSheet)
@@ -796,8 +834,8 @@ var battle = function(){
 		idleSheet.alpha = 0
 		proyectile.idlePower = idleSheet
 
-		var startSheet = game.add.sprite(0, 0, 'startPower' + spine.projectileName)
-		startSheet.fps = spine.projectileData.sheet.start.fps
+		var startSheet = game.add.sprite(0, 0, 'startPower' + player.projectileName)
+		startSheet.fps = player.projectileData.sheet.start.fps
 		var startAnimation = startSheet.animations.add('start')
 		startSheet.anchor.setTo(0.5, 0.5)
 		proyectile.add(startSheet)
@@ -828,8 +866,9 @@ var battle = function(){
         sceneGroup.add(pullGroup)
         pullGroup.alpha = 0
 
-		players[0] = createPlayer(players[0], {x:WIDTH_DISTANCE, y: game.world.height - 150}, 1)
-		players[1] = createPlayer(players[1], {x:game.world.width - 100, y: game.world.height - 150}, -1, 1)
+		players = []
+		players[0] = createPlayer(0, {x:WIDTH_DISTANCE, y: game.world.height - 150}, 1)
+		players[1] = createPlayer(1, {x:game.world.width - 100, y: game.world.height - 150}, -1, 1)
 		// players[0].multiplier = getMultiplier(players[0].data.stats.element, players[1].data.stats.element)
 		// players[1].multiplier = getMultiplier(players[1].data.stats.element, players[0].data.stats.element)
 		// player2.scale.setTo(playerScale * -1, playerScale)
@@ -946,56 +985,12 @@ var battle = function(){
 	function preload(){
 
 		game.stage.disableVisibilityChange = true;
-		game.load.audio('battleSong', soundsPath + 'songs/battleSong.mp3');
-		// game.load.spine(avatar1, "images/spines/"+directory1+"/"+avatar1+".json")
-		// game.load.spine(avatar2, "images/spines/"+directory2+"/"+avatar2+".json")
-		// game.load.spine("tap", "images/spines/tap/tap.json")
-		game.load.spritesheet('confeti', 'images/battle/confeti.png', 64, 64, 6)
 
-		game.load.image('round',"images/battle/shout_round.png")
-		game.load.image('start',"images/battle/shout_start.png")
-		game.load.image('lastRound',"images/battle/last_round.png")
-		game.load.image('timesUp',"images/battle/times_up.png")
-		game.load.bitmapFont('WAG', 'fonts/WAG.png', 'fonts/WAG.xml');
-        game.load.spritesheet("hand", 'images/spines/Tuto/manita.png', 115, 111, 23)
+		// game.load.bitmapFont('WAG', 'fonts/WAG.png', 'fonts/WAG.xml');
         
 		// buttons.getImages(game)
 		// console.log(parent.isKinder)
-		soundsList = game.cache.getJSON('sounds')
 		// console.log(assets.spines[0].name, assets.spines[0].file)
-		players = []
-		var projectilesList = {}
-		for(var pIndex = 0; pIndex < 2; pIndex++){
-
-			var player = createSpine(charactersCards[pIndex].id, "normal")
-			player.data = epicCharacters[charactersCards[pIndex].id]
-			player.card = charactersCards[pIndex]
-			player.numPlayer = pIndex + 1
-			var projectileName = player.data.stats.element
-			player.projectileName = projectileName
-			player.projectileData = projectilesData[projectileName]
-			player.y = -100
-			player.nickname = charactersCards[pIndex].nickname
-
-			if(typeof projectilesList[projectileName] === "undefined"){
-				var sheetData = player.projectileData.sheet
-				game.load.spritesheet('startPower' + projectileName, sheetData.start.path,
-					sheetData.start.frameWidth, sheetData.start.frameHeight, sheetData.start.frameMax)
-				game.load.spritesheet('idlePower' + projectileName, sheetData.idle.path,
-					sheetData.idle.frameWidth, sheetData.idle.frameHeight, sheetData.idle.frameMax)
-
-				projectilesList[projectileName] = sheetData
-				game.load.image('impact' + projectileName, player.projectileData.impact.particles[0])
-				// console.log(player.projectileData.impact.particles[0])
-				var name = player.projectileData.impact.soundID
-				var file = soundsList[name]
-				game.load.audio(name, file);
-				assets.sounds.push({name:name, file:file})
-			}
-
-			// getSoundsSpine(player.spine)
-			players.push(player)
-		}
 	}
 	
 	function checkPowerBars() {
@@ -1783,18 +1778,50 @@ var battle = function(){
 
     return {
         assets: assets,
+		bootFiles:bootFiles,
         name: "battle",
         preload:preload,
 		setCharacters:function (characters) {
 			charactersCards = []
+			var soundsList = game.cache.getJSON("sounds")
+
         	for(var charIndex = 0; charIndex < characters.length; charIndex++){
 				var character = characters[charIndex]
 				var data = epicCharacters[character.id]
-				// console.log(character, "character")
-				// var jsonPath = DATA_CHAR_PATH + character.name + ".json"
-				// assets.jsons.push({name:character.name + "Data", file:jsonPath})
+				var projectileName = data.stats.element
+				var projectileData = projectilesData[projectileName]
+				var projectilesList = {}
+
 				assets.spines.push({name:character.id, file:data.directory})
 				charactersCards.push(character)
+
+				if(typeof projectilesList[projectileName] === "undefined"){
+					var sheetData =projectileData.sheet
+					var sheetStartObj = {
+						name:'startPower' + projectileName,
+						file:sheetData.start.path,
+						width:sheetData.start.frameWidth,
+						height:sheetData.start.frameHeight,
+						frames:sheetData.start.frameMax
+					}
+					assets.spritesheets.push(sheetStartObj)
+
+					var sheetIdleObj = {
+						name:'idlePower' + projectileName,
+						file:sheetData.idle.path,
+						width:sheetData.idle.frameWidth,
+						height:sheetData.idle.frameHeight,
+						frames:sheetData.idle.frameMax
+					}
+					assets.spritesheets.push(sheetIdleObj)
+
+
+					assets.images.push({name: 'impact' + projectileName, file:projectileData.impact.particles[0]})
+					// console.log(player.projectileData.impact.particles[0])
+					var name = projectileData.impact.soundID
+					var file = soundsList[name]
+					assets.sounds.push({name:name, file:file})
+				}
 			}
 		},
 		setBackground:function (number) {
@@ -1849,12 +1876,6 @@ var battle = function(){
 			sceneGroup.add(alphaMask)
 			alphaMask.alpha = 0
 
-            battleSong = game.add.audio('battleSong')
-            game.sound.setDecodedCallback(battleSong, function(){
-                battleSong.loopFull(0.6)
-            }, this);
-
-
 			hudGroup = game.add.group();
 			sceneGroup.add(hudGroup)
 			hudGroup.fixedToCamera = true
@@ -1898,6 +1919,12 @@ var battle = function(){
 			timesUp.alpha = 0
 
 			createTimer()
+
+			game.time.events.add(500,
+				function () {
+					battleSong = sound.play("battleSong", {loop:true, volume:0.5})
+				})
+
         }
     }
 }()

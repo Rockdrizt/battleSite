@@ -4,8 +4,7 @@ var sceneloader = function(){
 	var game = null
 	var initialized = false
 	var currentLoader = null
-	var spines
-	var files
+	var loadingFiles
 
 	function init(gameObject){
 		game = gameObject
@@ -79,8 +78,8 @@ var sceneloader = function(){
 				callbacks.onLoadFile(eventParams)
 			}
 
-			if((files[cachekey])&&(typeof (files[cachekey].onComplete)) === "function")
-				files[cachekey].onComplete()
+			if((loadingFiles[cachekey])&&(typeof (loadingFiles[cachekey].onComplete)) === "function")
+				loadingFiles[cachekey].onComplete()
 
 			console.log(cachekey)
 		})
@@ -94,47 +93,48 @@ var sceneloader = function(){
 		return newLoader
 	}
 
-	function preload(scenes, callbacks){
+	function preload(scenes, callbacks, phase){
+		phase = phase || "preload"
+
 		var inputDevice = game.device.desktop ? "desktop" : "movil"
 
 		currentLoader = createNewLoader(callbacks)
 		buttons.getImages(currentLoader)
-		spines = []
-		files = {}
+		loadingFiles = {}
 
 		for(var indexScene = 0; indexScene < scenes.length; indexScene++){
 
 			var currentScene = scenes[indexScene]
+			var fileArray = phase === "preload" ? currentScene["assets"] : currentScene["bootFiles"]
 
 			var gameData = currentScene.getGameData ? currentScene.getGameData() : "none"
-			if(typeof gameData === "object"){
+			if((typeof gameData === "object")&&(phase === "preload")){
 				tutorialHelper.loadType(gameData, currentLoader)
 			}
 
-			if(currentScene.assets !== "undefined"){
-				var assets = currentScene.assets
+			if(typeof fileArray !== "undefined"){
 
-				if(typeof assets.jsons == "object"){
-					for(var indexJson = 0; indexJson < assets.jsons.length; indexJson++){
-						var currentJson = assets.jsons[indexJson]
+				if(typeof fileArray.jsons == "object"){
+					for(var indexJson = 0; indexJson < fileArray.jsons.length; indexJson++){
+						var currentJson = fileArray.jsons[indexJson]
 						currentLoader.json(currentJson.name, currentJson.file)
 					}
 				}
 
-				if(typeof assets.spines == "object"){
-					for(var indexSpine = 0; indexSpine < assets.spines.length; indexSpine++){
-						var currentSpine = assets.spines[indexSpine]
+				if(typeof fileArray.spines == "object"){
+					for(var indexSpine = 0; indexSpine < fileArray.spines.length; indexSpine++){
+						var currentSpine = fileArray.spines[indexSpine]
 						currentSpine.currentScene = currentScene
 						// var spineLoader = new Phaser.Loader(game)
 						currentLoader.spine(currentSpine.name, currentSpine.file)
-						files[currentSpine.name] = {onComplete:getSpineEvents.bind(null, currentSpine.name, currentLoader, currentScene)}
+						loadingFiles[currentSpine.name] = {onComplete:getSpineEvents.bind(null, currentSpine.name, currentLoader, currentScene)}
 						// spineLoader.onFileComplete.add(getSoundsSpine)
 					}
 				}
 
-				if(typeof assets.images == "object"){
-					for(var indexImage = 0; indexImage < assets.images.length; indexImage++){
-						var currentImage = assets.images[indexImage]
+				if(typeof fileArray.images == "object"){
+					for(var indexImage = 0; indexImage < fileArray.images.length; indexImage++){
+						var currentImage = fileArray.images[indexImage]
 						var file = currentImage.file
 						if(file.includes("%input")) {
 							var re = /%input/gi;
@@ -145,24 +145,31 @@ var sceneloader = function(){
 					}
 				}
 
-				if(typeof assets.sounds == "object"){
-					for(var indexSound = 0; indexSound < assets.sounds.length; indexSound++){
-						var currentSound = assets.sounds[indexSound]
+				if(typeof fileArray.sounds == "object"){
+					for(var indexSound = 0; indexSound < fileArray.sounds.length; indexSound++){
+						var currentSound = fileArray.sounds[indexSound]
 						currentLoader.audio(currentSound.name, currentSound.file)
 					}
 				}
 
-				if(typeof assets.atlases == "object"){
-					for(var indexAtlas = 0; indexAtlas < assets.atlases.length; indexAtlas++){
-						var currentAtlas = assets.atlases[indexAtlas]
+				if(typeof fileArray.atlases == "object"){
+					for(var indexAtlas = 0; indexAtlas < fileArray.atlases.length; indexAtlas++){
+						var currentAtlas = fileArray.atlases[indexAtlas]
 						currentLoader.atlas(currentAtlas.name, currentAtlas.image, currentAtlas.json, null, Phaser.Loader.TEXTURE_ATLAS_JSON_ARRAY)
 					}
 				}
 
-				if(typeof assets.spritesheets == "object"){
-					for(var indexSheet = 0; indexSheet < assets.spritesheets.length; indexSheet++){
-						var currentSheet = assets.spritesheets[indexSheet]
+				if(typeof fileArray.spritesheets == "object"){
+					for(var indexSheet = 0; indexSheet < fileArray.spritesheets.length; indexSheet++){
+						var currentSheet = fileArray.spritesheets[indexSheet]
 						currentLoader.spritesheet(currentSheet.name, currentSheet.file, currentSheet.width, currentSheet.height, currentSheet.frames)
+					}
+				}
+
+				if(typeof fileArray.particles == "object"){
+					for(var indexPart = 0; indexPart < fileArray.particles.length; indexPart++){
+						var currentPart = fileArray.particles[indexPart]
+						epicparticles.loadEmitter(currentLoader, currentPart.name, currentPart.texture, currentPart.file)
 					}
 				}
 			}

@@ -389,14 +389,15 @@ var epicparticles = function(){
 		}
 	}
 
-	function loadEmitter(loader, key){
-		var data = game.cache.getJSON(key)
-		var jsonURL = game.cache.getItem(key, Phaser.Cache.JSON, null, "url")
+	function loadEmitter(loader, key, texture, url){
+		// var data = game.cache.getJSON(key)
+		// var jsonURL = game.cache.getItem(key, Phaser.Cache.JSON, null, "url")
+		loader.json(key, url)
 
-		var index = jsonURL.lastIndexOf("/") + 1
-		var relativeUrl = jsonURL.substr(0, index)
+		var index = url.lastIndexOf("/") + 1
+		var relativeUrl = url.substr(0, index)
 
-		var textureUrl = relativeUrl + data.textureFileName
+		var textureUrl = relativeUrl + texture
 
 		loader.image(key, textureUrl)
 		loaders[key] = loaders[key] || loader
