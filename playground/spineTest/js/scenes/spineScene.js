@@ -1,7 +1,6 @@
 
 var soundsPath = "../../shared/minigames/sounds/"
 var spineScene = function(){
-	var server = parent.server || null
 
     var localizationData = {
         "EN":{

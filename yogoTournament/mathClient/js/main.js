@@ -46,7 +46,7 @@ function startGame(){
 		var ratio = window.innerWidth / window.innerHeight
 		var gameHeight = Math.round(fullHeight)
 		var gameWidth = Math.round(fullHeight * ratio)
-		game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
+		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
 		game.scale.setGameSize(gameWidth, gameHeight);
 
         game.input.maxPointers = 1
@@ -93,21 +93,24 @@ function startGame(){
 // window.addEventListener('resize', function () {
 // 	var fullWidth = 540
 // 	var fullHeight = 960
-//
-// 	var ratio = window.innerHeight / fullHeight
-// 	console.log(fullWidth * ratio)
-// 	var newWidth = Math.round(fullWidth * ratio)
-// 	document.getElementById("inGame").style.width = newWidth + "px";
-//
-// 	// game.scale.setGameSize(gameWidth, gameHeight);
-// 	// game.scale.scaleMode = window.innerHeight > window.innerWidth ? Phaser.ScaleManager.RESIZE : Phaser.ScaleManager.EXACT_FIT
-// 	game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
+// 	//
+// 	var ratio = window.innerWidth / window.innerHeight
+// 	// console.log(fullWidth * ratio)
+// 	// var newWidth = Math.round(fullWidth * ratio)
+// 	// document.getElementById("inGame").style.width = newWidth + "px";
+// 	//
+// 	// // game.scale.setGameSize(gameWidth, gameHeight);
+// 	// // game.scale.scaleMode = window.innerHeight > window.innerWidth ? Phaser.ScaleManager.RESIZE : Phaser.ScaleManager.EXACT_FIT
+// 	// game.scale.scaleMode = Phaser.ScaleManager.RESIZE
+// 	// game.canvas.style.width = '100%';
+// 	// game.canvas.style.height = '100%';
+// 	var gameHeight = Math.round(fullHeight)
+// 	var gameWidth = Math.round(fullHeight * ratio)
+// 	game.scale.setGameSize(gameWidth, gameHeight);
 // 	game.scale.pageAlignHorizontally = true;
 // 	game.scale.pageAlignVertically = true;
-// 	game.canvas.style.width = '100%';
-// 	game.canvas.style.height = '100%';
 // 	game.scale.refresh();
-// 	// game.scale.setGameSize(gameWidth, gameHeight);
+// 	game.state.restart()
 //
 // })
 
