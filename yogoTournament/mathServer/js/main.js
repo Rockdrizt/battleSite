@@ -89,7 +89,7 @@ function startGame(){
 						sceneloader.show("vs")
 					}
 				}else
-					sceneloader.show("battle")
+					sceneloader.show("vs")
 	    	}
 
 			document.body.style.visibility = "visible"

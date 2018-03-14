@@ -32,7 +32,10 @@ var vs = function(){
 				file: "images/vs/fondo.png"},
 		],
 		sounds: [
-            {	name: "magic",
+			{ 	name: "spaceSong",
+				file: soundsPath + "songs/versusSong.mp3"
+			},
+			{	name: "magic",
 				file: soundsPath + "magic.mp3"},
             {	name: "cut",
 				file: soundsPath + "cut.mp3"},
@@ -48,9 +51,13 @@ var vs = function(){
 				file: soundsPath + "gameLose.mp3"},
 			{	name: "energyCharge2",
 				file: soundsPath + "energyCharge2.mp3"},
-			
-			
 		],
+		spines: [
+			{
+				name:"vs",
+				file:"images/spines/vsLight/VS.json"
+			}
+		]
     }
     
         
@@ -278,20 +285,17 @@ var vs = function(){
         
 		// buttons.getImages(game)
 		
-        game.stage.disableVisibilityChange = false;
-        
-        game.load.spine('vs', "images/spines/vsLight/VS.json")  
-        game.load.audio('spaceSong', soundsPath + 'songs/versusSong.mp3');
+        game.stage.disableVisibilityChange = true;
 		
 		console.log(localization.getLanguage() + ' language')
 
 		// assets.spines.push({name:character.id, file:character.data.directory})
 
-		for(var i = 0; i < spineList.length;i++){
-
-			var character = spineList[i]
-			game.load.spine(character.id,character.dir)
-		}
+		// for(var i = 0; i < spineList.length;i++){
+		//
+		// 	var character = spineList[i]
+		// 	game.load.spine(character.id,character.dir)
+		// }
         
     }
     
