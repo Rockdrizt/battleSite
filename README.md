@@ -10,6 +10,10 @@ La aplicacion se divide en dos partes, la parte del cliente el client.js y el se
 
 ### Estructura base  de datos
 
+La estructura de la base de datos es similar a la estructura de un json, cada dato tiene su valor ya sea númerico o de string, o puede valer otro conjunto datos con sus respectivos valores y asi sucesivamente. Firebase te deja modificar su valor de cualquiera de esos campos, agregar nuevos valores o borrarlos respectivamente, cada cambio se refleja inmediatamente en el servidor en el firebase asi mismo como del lado del cliente, si es que el cliente por medio del api esta escuchando los cambios que suceden dentro de la base de datos.
+
+Esta es la estructura que se usa en MathTournament
+
 * 99063
 * 99491
 	* data  
@@ -55,7 +59,8 @@ La aplicacion se divide en dos partes, la parte del cliente el client.js y el se
 			* date: 932
 			* numPlayer: 1
 
-La estructura de la base de datos es similar a la estructura de un json, cada dato tiene su valor ya sea númerico o de string, o puede valer otro conjunto 
+El primer campo es el valor numerico gameID, que indicara el numero de la sesion a la cual el jugador se debe unir a la partida, basicamente es el ID del juego o de la batalla en especifico con sus propios jugadores y estadisticas.
+
 
 ### Eventos y Funciones Firebase
 
