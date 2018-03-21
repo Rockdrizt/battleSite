@@ -102,7 +102,7 @@ El **.set()** es para modificar o agregar un valor al campo de la base de datos.
 
 ## Client.js
 
-El client.js que se encuentra dentro de la carpeta MathTournament es la conexión con el api de firebase a los eventos y callbacks necesarios para la comunicación del juego de parte del jugador que seria el clienta al host que seria el servidor.
+El client.js que se encuentra dentro de la carpeta MathTournament es la conexión con el api de firebase a los eventos y callbacks necesarios para la comunicación del juego de parte del jugador que seria el cliente al host que seria el servidor.
 
 var client = new Client()
 
@@ -116,22 +116,55 @@ Se le mandan los parametros de los datos del jugador, el id del juego mas un cal
 
 client.addEventListener("showEquation", function(){...})
 
-**onClientInit** Se dispara cuando el jugador inicializa y empieza a capturar sus datos a la base del firebase, y regresa el numero del jugador
+**('onClientInit',[])** Se dispara cuando el jugador inicializa y empieza a capturar sus datos a la base del firebase
 
-**showEquation** Se dispara al detectar una nueva ecuacion, o cuando el valor de data en el servidor cambia, esto es para disparar la funcion del dibujado de la pregunta.
+**('showEquation',[data])** Se dispara al detectar una nueva ecuación, o cuando el valor de data en el servidor cambia, esto es para disparar la funcion del dibujado de la pregunta, manda la operación.
 
-**showPossibleAnswers** Al igual que el anterior se dispara cuando el valor de possibleAnswers se cambia.
+**('showPossibleAnswers',[possibleAnswers])** Al igual que el anterior se dispara cuando el valor de possibleAnswers se cambia y manda las opciones.
 
-**onTurnEnds** Cuando se detecta el cambio de valor en el campo **winner** en la base de datos se dispara el evento de que el turno termino.
+**('onTurnEnds',[values])** Cuando se detecta el cambio de valor en el campo **winner** en la base de datos se dispara el evento de que el turno termino y manda el numero del jugador que gano el turno más las respuestas de cada uno de los jugadores.
 
-**onGameEnds** Se dispara el evento de cuando la batalla termina y manda el numero de jugador que gano.
+**('onGameEnds',[gameEnded])** Se dispara el evento de cuando la batalla termina y manda el numero de jugador que gano que se inserta en el game.
+
+**('onGameFull',[])** Indica que la sesión del juego llego a su limite de jugadores.
 
 ### Callbacks:
 
 client.startGame = function(){...}
 
-**startGame** callback que se dispara al momento de generar el handshake del campo gameReady, este valor se cambia a true, cuando el juego ya esta cargado y listo para jugarse.
+**startGame()** callback que se dispara al momento de generar el handshake del campo gameReady, este valor se cambia a true, cuando el juego ya esta cargado y listo para jugarse.
 
-**restartGame** callback que se dispara al detectar que se intenta reiniciar el juego.
+**restartGame(String send)** callback que se dispara al detectar que se intenta reiniciar el juego. Parametros: String send (opcional): si el valor de send es igual a "inBattle" significa que se reinicia la batalla, si es diferente se manda al inicio de la pagina manteniendo el mismo gameId del juego.
+
+### Funciones:
+
+**buttonOnClick(int value, int time):** función para escribir en la base de datos, los valores de lo que respondio el jugador. Parametros: value el valor de la respuesta y time el tiempo en milisegundos de lo que se tardo en contestar.
+
+**setReady(boolean value):** manda que el jugador esta listo para iniciar la partida.
+
+
+## Server.js
+
+El server es el host que muestra la batalla y su estatus actual, se encarga de enviar las operaciones al cliente, y escuchar las respuestas del cliente.
+
+Para iniciar el servidor
+
+**sever.start(currentId, onStart, params)** currentId es un parametro opcional, es para indicar que se conecta a una sesión especificada en dado caso que no se mande, se crea un nuevo ID. El onStart es un callback que se llama cuando se encuentra un nuevo ID (esto para mostrar el pin cuando se encuentra uno, hay que recordar que la comunicación es asincrona. Los parametros es la configuración que se quiere asignar a la partida, como es el tiempo, las reglas y las rondas. TODO: Aun no se agregan las rondas a la configuración.
+
+
+### Eventos:
+
+**('onPlayerDisconnect', [{numPlayer:numPlayer, player: valoresPlayer] }]** Evento que indica que el jugador se desconecto y manda el numero del jugador que se desconecto y la informacion del jugador.
+
+
+**('onInitPlayer', [{numPlayer: numPlayer, player: valoresPlayer}]);** Evento que indica que se conecto un jugador al host.
+
+**('onPlayersReady', [valores])** Evento que indica que ya los dos jugadores se conectaron y estan listos para empezar la partida.
+
+### Callbacks:
+
+
+
+
 
 
