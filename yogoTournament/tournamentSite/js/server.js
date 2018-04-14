@@ -465,10 +465,10 @@ function Server(){
 		refIdGame.child("gameReady").set(value);
 	}
 
-	this.retry = function(loc){
+	this.retry = function(location){
 		var date = new Date()
 		var actualDate = date.getTime()
-		loc = loc || "toHome"
+		location = location || "toHome"
 
 		valores.p1answer =false;
 		valores.p2answer =false;
@@ -480,7 +480,7 @@ function Server(){
 		valores.rules = self.rules
 		valores.data = false;
 		valores.gameEnded = false;
-		valores.retry = {retry:loc, date:actualDate};
+		valores.retry = {retry:location, date:actualDate};
 		refIdGame.set(valores);
 		// refIdGame.off()
 		// refIdGame.remove();

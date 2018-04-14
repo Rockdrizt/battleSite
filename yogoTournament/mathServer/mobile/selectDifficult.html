@@ -243,7 +243,7 @@
 				customRules[OPERATORS[i-1]] = []
 				var customRulesOperator = customRules[OPERATORS[i-1]]
 				for (var j = 1; j <= ruleSetOperator.length; j++) {
-					if (!ruleSetOperator[j - 1].disable)
+					//if (!ruleSetOperator[j - 1].disable)
 						customRulesOperator.push(ruleSetOperator[j - 1])
 				}
 			}
@@ -251,24 +251,25 @@
 		}
 
 		parent.customRules = customRules
-		console.log(customRules)
 
     	window.location.href='customize.html'
 	}
 
-	var current_set = "EASY"
+	var current_set = parent.current_set
 	var difficultSet = operationGenerator.RULES_SET[current_set]
 	var ruleSet
 	var OPERATORS = ["SUM", "SUB", "MUL", "DIV"]
 	var DIFFICULTIES = ["EASY", "MEDIUM", "HARD", "MASTER"]
-	var operatorsObject = {}
+	var operatorsObject = parent.operatorsObject
 
 	for (var dif = 0; dif < DIFFICULTIES.length; dif++) {
 		var difName = DIFFICULTIES[dif]
-		operatorsObject[difName] = {}
-		for (var i = 0; i < OPERATORS.length; i++) {
-			var operator = OPERATORS[i]
-			operatorsObject[difName][operator] = {disable: false}
+		if(typeof operatorsObject[difName] === "undefined") {
+			operatorsObject[difName] = {}
+			for (var i = 0; i < OPERATORS.length; i++) {
+				var operator = OPERATORS[i]
+				operatorsObject[difName][operator] = {disable: false}
+			}
 		}
 	}
 
@@ -289,78 +290,93 @@
 		}
 	}*/
 
-	$(".green-btn").css("opacity",0.5);
-    
-    var printOperators = function () {
+	//$(".green-btn").css("opacity",0.5);
+	$(".green-btn").click(function(){
+		setCustomRules();
+	});
+
+	var printOperators = function() {
+		for (var i = 0; i < 8; i++) {
+			var operator = OPERATORS[i % 4]
+
+			if(operatorsObject[current_set][operator].disable){
+				$(".checkBox" + (i)).attr("selection", 0);
+				$(".checkBox" + (i)).find(".markCheck").css("display", "none");
+			}else {
+				$(".checkBox" + (i)).attr("selection", 1);
+				$(".checkBox" + (i)).find(".markCheck").css("display", "block");
+			}
+
+		}
+	}
+
+	printOperators()
+
+    function checkValidationBox(i) {
+		var operator = OPERATORS[i % 4]
+
+		if($(this).attr("selection") == 1){
+			$(this).find(".markCheck").css("display","none");
+			$(this).attr("selection",0)
+			operatorsObject[current_set][operator].disable = true
+
+		}else{
+			$(this).find(".markCheck").css("display","block");
+			$(this).attr("selection",1)
+			operatorsObject[current_set][operator].disable = false
+		}
+
+		if(i < 4){
+			var aux = 0
+
+			for(var j = 0; j < 4; j++){
+				if($(".checkBox" + j).attr("selection") == 1){
+					aux++
+				}
+			}
+
+			if(aux !== 0){
+				$(".green-btn").css("opacity",1);
+				$(".green-btn").click(function(){
+					setCustomRules();
+				});
+			}
+			else{
+				$(".green-btn").css("opacity",0.5);
+				$(".green-btn").off( "click" );
+			}
+
+		}else{
+			var aux2 = 0
+
+			for(var j = 4; j < 8; j++){
+				if($(".checkBox" + j).attr("selection") == 1){
+					aux2++
+				}
+			}
+
+			if(aux2 !== 0){
+				$(".green-btn").css("opacity",1);
+				$(".green-btn").click(function(){
+					setCustomRules();
+				});
+			}
+			else{
+				$(".green-btn").css("opacity",0.5);
+				$(".green-btn").off( "click" );
+			}
+
+		}
+	}
+
+	var addListeners = function () {
         for(var i = 0; i < 8; i++){
-            $(".checkBox" + i).attr("selection",0);
-            $(".checkBox" + i).find(".markCheck").css("display","none");
 
-            $(".checkBox" + i).click(function(){
-
-                 if($(this).attr("selection") == 1){
-                     $(this).find(".markCheck").css("display","none");
-                     $(this).attr("selection",0)
-                 }else{
-                     $(this).find(".markCheck").css("display","block");
-                     $(this).attr("selection",1)
-                 }
-            });
-
-            if(i < 4){
-                $(".checkBox" + i).click(function () {
-                    var aux = 0
-
-                    for(var j = 0; j < 4; j++){
-                        if($(".checkBox" + j).attr("selection") == 1){
-                            aux++
-                        }
-                    }
-
-                    console.log(aux)
-
-                    if(aux !== 0){
-                        $(".green-btn").css("opacity",1);
-                        $(".green-btn").click(function(){
-                            setCustomRules();
-                        });
-                    }
-                    else{
-                        $(".green-btn").css("opacity",0.5);
-                        $(".green-btn").off( "click" );
-                    }
-
-                });
-            }
-            else{
-                $(".checkBox" + i).click(function () {
-                    var aux = 0
-
-                    for(var j = 4; j < 8; j++){
-                        if($(".checkBox" + j).attr("selection") == 1){
-                            aux++
-                        }
-                    }
-
-                    console.log(aux)
-
-                    if(aux !== 0){
-                        $(".green-btn").css("opacity",1);
-                        $(".green-btn").click(function(){
-                            setCustomRules();
-                        });
-                    }
-                    else{
-                        $(".green-btn").css("opacity",0.5);
-                        $(".green-btn").off( "click" );
-                    }
-
-                });
-            }
+            $(".checkBox" + i).click(checkValidationBox.bind($(".checkBox" + i), i));
         }
     }
 
-	printOperators()
+	addListeners()
     
     $( window ).on( "orientationchange", function( event ) {
         printOperators()
@@ -499,7 +515,6 @@
 			if(!rule.disable)
 				$("#checkChoice" + p).attr("selection",1);
 			else {
-				console.log("disable rule")
 				$("#checkChoice" + p).find(".markCheck").css("display","none");
 				$("#checkChoice" + p).attr("selection", 0);
 			}

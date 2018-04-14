@@ -163,6 +163,16 @@ Para iniciar el servidor
 
 ### Callbacks:
 
+**startGame()** Cuando cada jugador esta en la pantalla de (Ready...) y esta listo para jugar llama a la función de startGame() para que el sever ya inicie el juego.
+
+### Funciones:
+
+**server.setGameReady(boolean value)** El handshake para indicar que el juego está listo (o no si manda un false como valor) para que en caso de que el valor sea true, cada jugador pueda iniciar sus respectivas cargas.
+
+**server.retry(String location)** Llamar a que se reinicia la batalla, dependiendo del parametro location que indica a que parte del sitio se desea mandar, ya sea de regreso en la misma batalla respetando las mismas configuraciones o de regreso al lobby solo guardando el gameId. ("inBattle" o "inLobby" por default se manda "inLobby")
+
+**server.setGameEnded(numPlayer)** Para indicar que el juego ya termino y se manda como parametro el numero del jugador que gano. Esto para notificar a los jugadores del lado del cliente que el juego termino y quien fue el ganador.
+
 
 
 
