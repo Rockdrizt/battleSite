@@ -53,7 +53,7 @@ function animation1(){
 
 function Next1(){
     $("#createGame").hide();
-    TweenMax.to($("#logo"),1,{y:"100%",ease:Back.easeInOut});
+    TweenMax.to($("#logo"),1,{y:"50%",ease:Back.easeInOut});
     TweenMax.to($("#naoMain"),1,{x:"100%",ease:Back.easeInOut});
     TweenMax.to($("#estrellaMain"),1,{x:"-100%",ease:Back.easeInOut});
     TweenMax.set('#naoMain',{'-webkit-filter':'brightness(0%)',delay:0.5});   
