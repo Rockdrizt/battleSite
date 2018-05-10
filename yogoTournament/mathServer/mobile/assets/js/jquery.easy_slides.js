@@ -141,7 +141,7 @@ Usage:
                           })
                           break;
                       case 1:
-                          $(".subject").text("CODE")
+                          $(".subject").text("CODING")
                           $(".green-btn").css("opacity",0.5);
                           $(".green-btn").off( "click" );
                           break;
