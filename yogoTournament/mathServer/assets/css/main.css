@@ -61,8 +61,8 @@ body{
     background: #18167a;
     overflow: hidden;
     font-family: 'Luckiest Guy', cursive !important;
-/*    background:url("../images/stars01.png"), linear-gradient(to bottom, rgb(89,0,128) 0%,rgb(73,132,204)  100%);*/
-    background:linear-gradient(to bottom, #240034 20%,#2d5380  100%);
+    background:url("../images/stars01.png"), linear-gradient(to bottom, rgb(89,0,128) 0%,rgb(73,132,204)  100%);
+   /* background:linear-gradient(to bottom, #240034 20%,#2d5380  100%);*/
     background-repeat: repeat;
     background-position: center;
 }
@@ -88,9 +88,8 @@ body{
 .operationType{
     text-align: left !important;
     position: absolute;
-    left:20%;
     padding-top: 1vh !important;
-    font-size: 2.5vw;
+    font-size: 1.5em;
 }
 
 .option1{
@@ -125,8 +124,8 @@ body{
 .greenBtn{
     background-image: url("../images/greenButton.png");
     background-repeat: no-repeat;
-    background-size: 100%;;
-    background-position: 100% 30%;
+    background-size: contain;
+    background-position: top center;
     padding: 2vw;
     z-index: 56;
     cursor: pointer;
@@ -135,13 +134,15 @@ body{
 }
 
 .greenpink{
-    background-image: url("../images/bgpink.png");
+    background-image: url(../images/bgpink.png);
     background-repeat: no-repeat;
-    background-size: 100%;;
-    background-position: 100% 30%;
+    background-size: contain;
+    background-position: top center;
     padding: 2vw;
     z-index: 56;
     cursor: pointer;
+    margin-left: 1vw;
+    margin-right: 1vw;
     color:#FFF;
     font-size: 4vh;
 }
@@ -200,7 +201,6 @@ body{
 .object-center div{
     text-align: center;
     padding: 2vw;
-    margin: 1vw;
     font-size: 3vw;
     width: 100%;
     min-width: 100px
@@ -390,7 +390,6 @@ body{
     left:20%;
     text-align: center;
     font-size: 4vw;
-    top: -10%;
 }
 
 
@@ -415,21 +414,20 @@ body{
 }
 
 .titlered{
-    position:fixed;
-    font-size: 4vw !important;
+    /* position: fixed; */
     width: 35%;
-    height: 25%;
-    top:58%;
+    /* height: 25%; */
+    top: 64%;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-image: url("../images/bgred.png");
-    background-size: 100% !important;
-    background-position: 50% 40% !important;
+    background-image: url(../images/bgred.png);
+    background-size: contain;
+    background-position: top center;
     background-repeat: no-repeat;
-    color:#FFF;
+    color: #FFF;
     z-index: 1;
 }
 
@@ -440,6 +438,7 @@ body{
     left:50%;
     z-index: 1;
     transform: translate(-50%,10%);
+    min-width: 500px;
 }
 
 .rules{
@@ -447,8 +446,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 67%;
-    height: 17%;
+    width: 83%;
     margin-left:50%;
     transform: translate(-50%,0%);
     padding: 1vw;
@@ -542,13 +540,13 @@ body{
 
 .checkBlank img{
     position: absolute;
-    top: 20%;
-    width: 10%;
+    width: 40%;
+    max-width: 60px;
 }
 .checkBlank .markCheck{
     position: absolute;
-    top: 30%;
-    width: 7%;
+    width: 30%;
+    max-width: 70px;    
 }
 
 #modalCancel,
@@ -568,6 +566,7 @@ body{
     top:50%;
     left:50%;
     transform: translate(-50%,-50%);
+    min-width: 400px;
 }
 
 
@@ -590,40 +589,30 @@ body{
 }
 
 .confirmOptions{
-    position: absolute;
-    background-image: url("../images/bgtransparent.png");
+position: absolute;
+    background-image: url(../images/bgtransparent.png);
     background-color: rgb(89,0,128);
     background-blend-mode: multiply;
     width: 100%;
-    left:50%;
+    left: 50%;
     height: 15%;
     transform: translate(-50%,0%);
     background-position: 100%;
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    bottom:-15%;
-    display: flex;
-    align-content: center;
-    justify-content:space-around;    
+    bottom: -15%;
 }
 
-.confirmOptions .greenBtn{
-    width: 20%;
-    background-size: contain;
-    position: absolute;
-    text-align: center;
-    background-position:50% 0%;
-    padding: 0vw;
-    height: 100%;
-    top:3%;
-    left:50%;
-    transform: translate(-50%,0%);
-}
-
-.confirmOptions span{
+.okButton{
     position: relative;
-    font-size: 2.5vw;
-    top:15%;
+    background-image: url(../images/greenButton.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    font-size: 3em;
+    padding: 0.5vw;
+    text-align: center;
+    min-width: 100px;
 }
 
 .closeButton{
@@ -944,7 +933,7 @@ body{
 .bgtitle{
     width: 100%;
     text-align: center;
-    font-size: 10vh;
+    font-size: 5vw;
     background-image: url("../images/bgtitle.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -967,8 +956,8 @@ body{
 }
 
 .showModal img{
-    transform: translate(-45%,-30%);
-    width: 70%;
+    transform: translate(-50%,-45%);
+    width: 40%;
 }
 
 #cancelLooby{
@@ -1060,4 +1049,41 @@ body{
 
 .mainText2{
     font-size: 2.5vw;
+}
+
+@media screen and (orientation : portrait){
+    #logo {
+        width: 100%;
+        top: 10%;
+    }
+    .containerMainText {
+        width: 80%;
+        margin-top: -10%;
+    }
+    
+    #mainText p {
+        font-size: 1em;
+    }
+    
+    #naoMain{
+        width: 60%;
+        top: 65%;
+    }
+    #estrellaMain {
+        top: 65%;
+    }
+    
+    #naoMain img,
+    #estrellaMain img {
+        width: 100%;
+        max-width: none;
+    } 
+    
+    .object-center div {
+    font-size: 6vw;
+    margin-top: 100%;
+    min-width: 150px;
+    }
+      
+    
 }
