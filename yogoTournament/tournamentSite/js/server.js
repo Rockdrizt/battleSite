@@ -9,7 +9,7 @@ var testExp = new RegExp('Android|webOS|iPhone|iPad|' +
 var isMobile = testExp.test(navigator.userAgent)
 
 //dev is without yogoTournament
-var src = isMobile ? "../yogoTournament/mathServer/index.html" : "../yogoTournament/mathServer/index.html"
+var src = isMobile ? "../yogoTournament/mathServer/mobile/index.html" : "../yogoTournament/mathServer/index.html"
 var gameFrame
 var gameContainer
 var server
