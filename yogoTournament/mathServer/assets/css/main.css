@@ -141,6 +141,7 @@ body{
     padding: 2vw;
     z-index: 56;
     cursor: pointer;
+    margin-left: 1vw;
     margin-right: 1vw;
     color:#FFF;
     font-size: 4vh;
@@ -1083,15 +1084,6 @@ position: absolute;
     margin-top: 100%;
     min-width: 150px;
     }
-    
-    .next_button {
-        transform: scale(2);
-        margin-top: 30%;
-    }
-    
-    .prev_button {
-            transform: scale(-2 ,2) !important;
-        margin-top: 30%;
-    }    
+      
     
 }

@@ -234,7 +234,7 @@ Usage:
         $(this_slider).find('.next_button').click(function() {
           EasySlidesCanChange = true;
           EasySlidesNext();
-            alert("ok");
+            
         });
         $(this_slider).find('.prev_button').click(function() {
           EasySlidesCanChange = true;

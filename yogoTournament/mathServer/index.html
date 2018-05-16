@@ -40,9 +40,9 @@
             <div class="object-left col-xs-4">
             </div>
             <div class="object-center col-xs-4">
-
+                <div id="createGame" class="greenBtn">CREATE</div>
                 <div id="joinGame" class="greenpink scaleButton">JOIN</div>
-                <div id="createGame" class="greenBtn scaleButton">CREATE</div>
+                
             </div>
 
             <div class="object-right col-xs-4">
@@ -308,7 +308,7 @@
 
 <script>
 	//|| operationGenerator
-
+    var BegincreateGame = false;
 	var server = parent.server;
 	var battleTime = 60000
 	var rule_set = operationGenerator.RULES_SET[current_set]
@@ -318,11 +318,45 @@
 
 
 	$("#createGame").click(function(){
-		animation1();
+        if(!BegincreateGame){
+            BegincreateGame = true
+           animation1(); 
+            TweenMax.fromTo(this,0.5,{scale:1},{scale:0.9,ease:Elastic.easeOut}); 
+        }
+		
 	});
+    
+ 
+    $("#createGame").mouseup(function(){
+        if(!BegincreateGame){
+            TweenMax.fromTo(this,0.5,{scale:0.9},{scale:1,ease:Elastic.easeOut}); 
+        }
+    });     
+    
+	$("#createGame").mouseover(function(){
+        if(!BegincreateGame){
+        TweenMax.fromTo(this,0.5,{scale:1},{scale:1.1,ease:Elastic.easeOut}); 
+		$(".containerMainText").html(`
+        <h1>Create</h1>
+        <p>Choose among different subjects and levels of difficulty.</p>
+        `);
+        }
+	});
+
+	$("#createGame").mouseout(function(){
+        if(!BegincreateGame){
+        TweenMax.fromTo(this,0.5,{scale:1.1},{scale:1,ease:Elastic.easeOut}); 
+		$(".containerMainText").html(`
+        <br>
+        <p>Invite your students to test their skills in several academic subjects. They’ll go head-to-head in an exciting battle of knowledge, inspiring a love of learning along the way.</p>
+        `);
+        }
+	});    
+    
 
 	$("#backButton1").click(function(){
 		backAnimate1();
+         BegincreateGame = false;
 	});
 
 
@@ -332,20 +366,7 @@
 	});
 
 
-	$("#createGame").mouseover(function(){
-		$(".containerMainText").html(`
-        <h1>Create</h1>
-        <p>Choose among different subjects and levels of difficulty.</p>
-        `);
-	});
 
-
-	$("#createGame").mouseout(function(){
-		$(".containerMainText").html(`
-        <br>
-        <p>Invite your students to test their skills in several academic subjects. They’ll go head-to-head in an exciting battle of knowledge, inspiring a love of learning along the way.</p>
-        `);
-	});
 
 
 	$("#joinGame").mouseover(function(){
@@ -355,6 +376,7 @@
         `);
 	});
 	$("#joinGame").mouseout(function(){
+        
 		$(".containerMainText").html(`
         <br>
         <p>Invite your students to test their skills in several academic subjects. They’ll go head-to-head in an exciting battle of knowledge, inspiring a love of learning along the way.</p>
@@ -420,7 +442,6 @@
 	}
 
 	$("#nextButton3").click(function(){
-
 		$("#section5").css("display","block");
 		$("#section4").css("display","none");
 
@@ -435,7 +456,8 @@
 
 		server.start(currentID, onStart, {battleTime:battleTime, rules:customRules});
 		server.addEventListener("onInitPlayer", showYogotar);
-		server.addEventListener('onPlayersReady', onPlayersReady);
+		server.addEventListener('onPlayersReady', onPlayersReady);           
+
 	});
 
 	$("#StartButton").click(function(){
