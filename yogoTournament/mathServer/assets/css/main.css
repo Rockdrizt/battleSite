@@ -447,14 +447,15 @@ body{
     align-items: center;
     justify-content: space-around;
     width: 83%;
-    margin-left:50%;
+    margin-left: 50%;
     transform: translate(-50%,0%);
-    padding: 1vw;
-    background-image: url("../images/bgdifficulty.png");
+    /* padding: 1vw; */
+    background-image: url(../images/bgdifficulty.png);
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center; 
+    background-position: center;
     z-index: 1;
+    margin-top: 2%;
     
 }
 
@@ -937,7 +938,7 @@ position: absolute;
     background-image: url("../images/bgtitle.png");
     background-repeat: no-repeat;
     background-size: contain;
-    background-position: center;
+    background-position: top center;
     color:#FFF;
 }
 

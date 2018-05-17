@@ -39,6 +39,7 @@ body{
     padding: 3vw;
     width: 100%;
     max-width: 900px !important;
+    width: 80%;
 }
 
 .object-left{
@@ -254,7 +255,6 @@ body{
     font-size: 9vw;
     padding-top: 1.5vh;
     margin-top: 80vh;
-    position: relative;
 }
 
 

@@ -350,6 +350,7 @@ transform: scale(0.7);
 .next_button img,
 .prev_button img{
     width: 80%;
+        margin-top: 280%;
 }
 
 .prev_button{
@@ -397,6 +398,7 @@ div.slider > div:not(.nav_indicators):not(.next_button):not(.prev_button) {
             .next_button img,
             .prev_button img{
                 width: 100%;
+                    margin-top: 240%;
             }
 
             .next_button{
@@ -430,6 +432,7 @@ div.slider > div:not(.nav_indicators):not(.next_button):not(.prev_button) {
     .next_button img,
     .prev_button img{
         width: 80%;
+        margin-top: 210%;
     }
     
     .active{
@@ -460,6 +463,7 @@ div.slider > div:not(.nav_indicators):not(.next_button):not(.prev_button) {
             .next_button img,
             .prev_button img{
                 width: 80%;
+                    margin-top: 280%;
             }
 
             .slider_circle_10 .next1{
