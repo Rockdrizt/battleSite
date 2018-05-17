@@ -24,7 +24,7 @@ Usage:
   $.fn.EasySlides = function( options ) {  
     var settings = $.extend( {
       'autoplay': false,
-      'timeout': 2000,
+      'timeout': 1000,
       'show': 5,
       'vertical': false,
       'reverse': false,
@@ -32,7 +32,7 @@ Usage:
       'delayaftershow': 100,
       'stepbystep': true,
       'startslide': 0,
-      'distancetochange': 10,
+      'distancetochange': 1,
       'beforeshow': function () {},
       'aftershow': function () {},
       
