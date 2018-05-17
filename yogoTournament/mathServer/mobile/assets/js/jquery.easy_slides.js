@@ -24,12 +24,12 @@ Usage:
   $.fn.EasySlides = function( options ) {  
     var settings = $.extend( {
       'autoplay': false,
-      'timeout': 3000,
+      'timeout': 2000,
       'show': 5,
       'vertical': false,
       'reverse': false,
       'touchevents': true,
-      'delayaftershow': 300,
+      'delayaftershow': 100,
       'stepbystep': true,
       'startslide': 0,
       'distancetochange': 10,
