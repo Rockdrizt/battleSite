@@ -90,7 +90,7 @@
     align-items: center;
     background-color: #00f9ff;
     text-align: center;
-    margin: 0% 10%;
+    margin: 2% 10%;
     border-radius: 6vw;
     padding: 5% 0;
 }
@@ -334,7 +334,7 @@
 
     .menu-container {
         padding: 2% 0;
-        margin: -1% 25%;
+        margin: 2% 25%;
         border-radius: 3vw;
     }
 
@@ -476,7 +476,7 @@
       
       .menu-container{
             padding: 3% 0;
-            margin: -1% 14%;
+            margin: 2% 14%;
             border-radius: 3vw;
       }
       
@@ -535,7 +535,7 @@
       
       .menu-container{
             padding: 3% 0;
-            margin: -1% 14%;
+            margin: 2% 14%;
             border-radius: 3vw;
       }
       
