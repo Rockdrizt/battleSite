@@ -495,7 +495,6 @@ body{
             .banner-selection{
                 background-size: contain;
                 font-size: 5vw;
-                margin: 0 30%;
                 padding-top: 2vh;
             }
             
@@ -563,6 +562,7 @@ body{
 .banner-selection p{
     margin: 0%;
     line-height: 1.6;
+    font-size: 1em;
 }
     
 
