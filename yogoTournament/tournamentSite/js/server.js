@@ -102,12 +102,19 @@ function Server(){
 	var valores = null;
 	var correctAnswer= false;
 	var refIdGame = null;
+	var setFb = null
 	var typeQuestion = 0;
 
 	this.getIdGame= function(){
 		return id_game;
 	};
 
+	var setfb = function(ref, value) {
+		ref.set(value).catch(function (reason) {
+			console.log(reason)
+			setfb(ref, value)
+		})
+	}
 
 	/**
 	 * @summary Generates a code for the current game.
@@ -207,24 +214,16 @@ function Server(){
 			// console.log(timeDifference)
 			if(p1Time < p2Time){
 				valores.winner = 1
-				//valores.p2.life+=damage;
-				//refIdGame.child("p2/life").set(valores.p2.life);
 			}else{
 				valores.winner = 2
-				//valores.p1.life+=damage;
-				//refIdGame.child("p1/life").set(valores.p1.life);
 			}
 		}else{
 			switch(correctAnswer){
 				case p1Value:
-					//valores.p2.life+=damage;
 					valores.winner = 1
-					//refIdGame.child("p2/life").set(valores.p2.life);
 					break;
 				case p2Value:
-					//valores.p1.life+=damage;
 					valores.winner = 2
-					//refIdGame.child("p1/life").set(valores.p1.life);
 					break;
 				default:
 					valores.winner = -1;
@@ -233,13 +232,13 @@ function Server(){
 
 		if(valores.winner === 1 && (typeQuestion === 1 || typeQuestion === 2) ){
 			valores.p2.life+=damage;
-			refIdGame.child("p2/life").set(valores.p2.life);
+			setfb(refIdGame.child("p2/life"), valores.p2.life)//refIdGame.child("p2/life").set(valores.p2.life);
 		}else if(valores.winner === 2 && typeQuestion === 3 ){
 			valores.p2.life+=damage;
-			refIdGame.child("p2/life").set(valores.p2.life);
+			setfb(refIdGame.child("p2/life"), valores.p2.life)//refIdGame.child("p2/life").set(valores.p2.life);
 		}else {
 			valores.p1.life+=damage;
-			refIdGame.child("p1/life").set(valores.p1.life);
+			setfb(refIdGame.child("p1/life"), valores.p1.life)//refIdGame.child("p1/life").set(valores.p1.life);
 		}
 		var actualDate = firebase.database.ServerValue.TIMESTAMP
 		// console.log(actualDate)
@@ -248,7 +247,7 @@ function Server(){
 			p2:valores.p2answer
 		}
 		var data = { numPlayer: valores.winner, timeDifference: timeDifference, answers:answers, date:actualDate }
-		refIdGame.child("winner").set(data);
+		setfb(refIdGame.child("winner"), data)//refIdGame.child("winner").set(data);
 		self.fireEvent('onTurnEnds',[data]);
 
 		// valores.p1answer=false;
@@ -269,17 +268,6 @@ function Server(){
 		correctAnswer = operation.correctAnswer
 
 		var possibleAnswers = [correctAnswer];
-		// for(var i = 0; i< NUMBER_OF_FAKE_ANSWERS; i++){
-		// 	var n = correctAnswer;
-		// 	while(possibleAnswers.includes(n)){
-		//        var isSuma = Math.floor((Math.random() * 2) + 1);
-		//        if(isSuma ===1 )
-		// 			n = correctAnswer + Math.floor(Math.random() * percentage)+Math.floor(Math.random() * 2);
-		// 		else
-		//            n = correctAnswer - Math.floor(Math.random() * percentage)-Math.floor(Math.random() * 2);
-		// 	}
-		// 	possibleAnswers.push(n);
-		// }
 		var negativeOrPositive = Math.round(Math.random()) * 2 - 1;
 		for(var i = 0; i< NUMBER_OF_FAKE_ANSWERS; i++){
 			var diff = Math.floor(correctAnswer / 10) > 1 ? 10 : 1
@@ -293,28 +281,10 @@ function Server(){
 		valores.p1answer = false;
 		valores.p2answer = false;
 
-		// typeQuestion= Math.floor((Math.random() * 100) + 1);
-		// if(valores.p1.life < INITIAL_LIFE && valores.p2.life < INITIAL_LIFE){
-		// 	typeQuestion= Math.floor((Math.random() * 100) + 1);
-		// 	if(typeQuestion<= 20){
-		// 		typeQuestion= 2; //red
-		// 	}else if(typeQuestion <= 40){
-		// 		typeQuestion=3; //blue
-		// 	}else{
-		// 		typeQuestion= 1; //green
-		// 	}
-		// }else{
-		// 	if(typeQuestion<= 20){
-		// 		typeQuestion= 2; //red
-		// 	}else {
-		// 		typeQuestion=1; //green
-		// 	}
-		// }
-
 		operation.date = firebase.database.ServerValue.TIMESTAMP
 		valores.data = operation;
-		refIdGame.child("data").set(valores.data);
-		refIdGame.child("possibleAnswers").set(valores.possibleAnswers);
+		setfb(refIdGame.child("data"), valores.data)//refIdGame.child("data").set(valores.data);
+		setfb(refIdGame.child("possibleAnswers"), valores.possibleAnswers)//refIdGame.child("possibleAnswers").set(valores.possibleAnswers);
 		self.fireEvent('afterGenerateQuestion',[operation]);
 	}
 	this.generateQuestion = generateQuestion;
@@ -359,8 +329,8 @@ function Server(){
 				retry:false,
 				time:battleTime
 			};
-			refIdGame= database.ref(id_game);
-			refIdGame.set(valores);
+			refIdGame = database.ref(id_game);
+			setfb(refIdGame, valores)//refIdGame.set(valores);
 
 			if(!currentId) {
 				if(onStart) onStart()
@@ -462,7 +432,7 @@ function Server(){
 	};
 
 	this.setGameReady = function (value) {
-		refIdGame.child("gameReady").set(value);
+		setfb(refIdGame.child("gameReady"), value)//refIdGame.child("gameReady").set(value);
 	}
 
 	this.retry = function(location){
@@ -481,7 +451,7 @@ function Server(){
 		valores.data = false;
 		valores.gameEnded = false;
 		valores.retry = {retry:location, date:actualDate};
-		refIdGame.set(valores);
+		setfb(refIdGame, valores)//refIdGame.set(valores);
 		// refIdGame.off()
 		// refIdGame.remove();
 		operationGenerator.setConfiguration(self.rules, self.numberOperation)
@@ -490,7 +460,7 @@ function Server(){
 
 	this.setGameEnded = function (numPlayerWinner) {
 		var data = {winner:numPlayerWinner}
-		refIdGame.child("gameEnded").set(data);
+		setfb(refIdGame.child("gameEnded"), data)//refIdGame.child("gameEnded").set(data);
 	}
 }
 

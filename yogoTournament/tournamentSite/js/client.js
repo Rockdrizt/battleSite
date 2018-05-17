@@ -65,14 +65,21 @@ function Client(){
 	this.time = null;
 	this.restartGame = null
 
+	var setfb = function(ref, value) {
+		ref.set(value).catch(function (reason) {
+			console.log(reason)
+			setfb(ref, value)
+		})
+	}
+
 	function initialize(idGame, player, val){
 		var p1 = val.p1;
 		var p2 = val.p2;
 		if(!p1){
-			self.refIdGame.child("p1").set(player);
+			setfb(self.refIdGame.child("p1"), player)//self.refIdGame.child("p1").set(player);
 			self.numPlayer = 1;
 		}else if(!p2){
-			self.refIdGame.child("p2").set(player);
+			setfb(self.refIdGame.child("p2"), player)//self.refIdGame.child("p2").set(player);
 			self.numPlayer = 2;
 			console.log("SET PLAYER 2")
 		}else{
@@ -159,7 +166,7 @@ function Client(){
 		//Reportando la salida del juego
 		window.onbeforeunload = function(){
 			if(self.numPlayer!=null)
-				self.refIdGame.child("p"+self.numPlayer).set(false);
+				setfb(self.refIdGame.child("p" + self.numPlayer), false)//self.refIdGame.child("p"+self.numPlayer).set(false);
 		};
 	};
 
@@ -175,13 +182,15 @@ function Client(){
 				time: time,
 				value: value
 			}
-			self.refIdGame.child("p"+self.numPlayer+"answer").set(answer);
+			setfb(self.refIdGame.child("p" + self.numPlayer + "answer"), answer)
+			//self.refIdGame.child("p"+self.numPlayer+"answer").set(answer);
 		}
 	};
 	
 	this.setReady = function (value) {
 		self.player.ready = value
-		self.refIdGame.child("p"+self.numPlayer+"/ready").set(value);
+		setfb(self.refIdGame.child("p" + self.numPlayer + "/ready"), value)
+		//self.refIdGame.child("p"+self.numPlayer+"/ready").set(value);
 	}
 }
 
@@ -192,7 +201,7 @@ function loadGame(){
 		gameFrame = document.createElement("iframe")
 	gameFrame.src= src
 	gameFrame.style.borderStyle = "none"
-	gameFrame.scrolling = "no"
+	//gameFrame.scrolling = "no"
 	gameFrame.width = "100%"
 	gameFrame.height = "100%"
 	gameContainer.appendChild(gameFrame);

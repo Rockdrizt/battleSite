@@ -134,7 +134,7 @@
 
                 <button class="red-btn" type="button" onclick="window.location.href='selectDifficult.html'">BACK</button>
 
-                <button class="green-btn" type="button" style="font-size: 3.5vw;" onclick="window.location.href='lobby.html'">CREATE</button>
+                <button class="green-btn" type="button" style="font-size: 3.5vw;" onclick="gotoLobby()">CREATE</button>
 
             </div>
 
@@ -203,7 +203,11 @@
         }
         $(".time").text(time + ':00');
     });
-    
+
+    function gotoLobby() {
+		parent.battleTime = time * 60000
+		window.location.href='lobby.html'
+	}
 
 </script>
     
