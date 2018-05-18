@@ -252,15 +252,6 @@ body{
     transform: scale(-1,1)
 }
 
-.banner-selection{
-    background-image: url(../images/selectionTitle.png);
-    background-size: cover;
-    background-repeat: repeat-x;
-    background-position: top center;
-    font-size: 3.5em;
-}
-
-
 
 .font-luckiest{
     font-family: 'Luckiest Guy', cursive !important;
@@ -328,6 +319,7 @@ body{
                 font-size: 8vw;
             }
             
+            
             .active{
                 transform: scale(2.5);
                 top: 40vh !important;
@@ -356,6 +348,8 @@ body{
         font-size: 4vw;
     }
         
+
+        
     .active{
         transform: scale(1.3) !important;
         top: 20vh !important;
@@ -364,6 +358,22 @@ body{
 }
 
 @media screen and (orientation : landscape){
+    
+    .menuPlanets{
+        height: 10%;
+        background-repeat: no-repeat !important;
+        background-size: 85% 100% !important;
+    }
+    
+    .banner-selection p{
+    font-size: 3em !important; 
+        }  
+    
+    .nextButtonGallery,
+.prevButtonGallery{
+    height: 100% !important;
+    max-height: 180px;
+}
     
     #portrait {
         display: none;
@@ -463,11 +473,7 @@ body{
     }
 
     .banner-selection{
-        font-size: 4vw;
-    }
-    
-    .carousel-container ul {
-        top: 3% !important;
+        font-size: 1em !important; 
     }
     
     .containerMainText {
@@ -493,15 +499,13 @@ body{
         and (-webkit-min-device-pixel-ratio: 2) {
             
             .banner-selection{
-                background-size: contain;
-                font-size: 5vw;
-                padding-top: 2vh;
             }
             
             .active{
                 transform: scale(2) !important;
                 top: 50vh !important;
             }
+            
             
 
             .logoTour{
@@ -538,7 +542,13 @@ body{
 
 .menuPlanets{
     position: relative;
-    height: 13%;
+    background-image: url(../images/selectionTitle.png);
+    background-size: cover;
+    background-repeat: repeat-x;
+    background-position: top center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .planets{
@@ -562,7 +572,7 @@ body{
 .banner-selection p{
     margin: 0%;
     line-height: 1.6;
-    font-size: 9.5vw;
+    font-size: 6em; 
 }
     
 
