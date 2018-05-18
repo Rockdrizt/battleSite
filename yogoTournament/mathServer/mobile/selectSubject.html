@@ -73,6 +73,7 @@
 <script>
     var changePlanetCounter = 0;
     var planetsImages = ["mathdromeda","codus_shade","creat","geogra","health","science","wordo"];
+    var planetsTexts = ["Math","Coding","Creativity","geography","health","science","Language"];
     
     $(".nextButtonGallery").click(function(){
         if(changePlanetCounter < planetsImages.length-1){
@@ -81,6 +82,7 @@
             changePlanetCounter = 0;     
         }
         $(".planetImage").attr("src","assets/images/planets/" + planetsImages[changePlanetCounter] + ".png");
+        $(".subject").text(planetsTexts[changePlanetCounter]);
         TweenMax.fromTo($(".planetImage"),0.4,{scale:1.3},{scale:1});
         TweenMax.fromTo(this,0.4,{scale:1.3},{scale:1});
     });    
@@ -92,6 +94,7 @@
            changePlanetCounter-- 
         }
         $(".planetImage").attr("src","assets/images/planets/" + planetsImages[changePlanetCounter] + ".png"); 
+        $(".subject").text(planetsTexts[changePlanetCounter]);
         TweenMax.fromTo($(".planetImage"),0.4,{scale:1.3},{scale:1});
         TweenMax.fromTo(this,0.4,{scale:1.3},{scale:1});
     });
