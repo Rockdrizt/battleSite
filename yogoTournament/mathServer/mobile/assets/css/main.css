@@ -549,6 +549,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 10%;
 }
 
 .planets{
@@ -571,8 +572,8 @@ body{
 
 .banner-selection p{
     margin: 0%;
-    line-height: 1.6;
-    font-size: 6em; 
+    line-height: 2;
+    font-size: 3em; 
 }
     
 
