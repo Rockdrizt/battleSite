@@ -366,7 +366,8 @@ body{
     }
     
     .banner-selection p{
-    font-size: 3em !important; 
+    font-size: 2em !important; 
+        margin-top: 2% !important;
         }  
     
     .nextButtonGallery,
