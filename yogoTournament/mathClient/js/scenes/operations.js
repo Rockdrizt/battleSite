@@ -160,8 +160,8 @@ var operations = function(){
 			button.scale.x = 0.4; button.scale.y = 0.4
 			button.img.tint = 0xffffff
 
-			game.add.tween(button).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true, 300 * (numOptions - optionIndex))
-			game.add.tween(button.scale).to({x:1, y:1}, 300, Phaser.Easing.Back.Out, true, 300 * (numOptions - optionIndex))
+			game.add.tween(button).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)//300 * (numOptions - optionIndex
+			game.add.tween(button.scale).to({x:1, y:1}, 300, Phaser.Easing.Back.Out, true)//300 * (numOptions - optionIndex
 
 			if (clientData.correctAnswer === value){
 				correctButton = button

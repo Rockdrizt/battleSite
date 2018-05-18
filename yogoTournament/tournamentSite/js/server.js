@@ -109,10 +109,14 @@ function Server(){
 		return id_game;
 	};
 
+	var intervalTime
 	var setfb = function(ref, value) {
+		if(intervalTime)
+			clearInterval(intervalTime)
+
 		ref.set(value).catch(function (reason) {
-			console.log(reason)
-			setfb(ref, value)
+			console.log("error", reason)
+			setInterval(function(){ setfb(ref, value) }, 3000);
 		})
 	}
 
