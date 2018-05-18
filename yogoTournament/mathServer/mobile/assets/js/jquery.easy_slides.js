@@ -136,9 +136,7 @@ Usage:
                       case 0:
                           $(".subject").text("MATH");
                           $(".green-btn").css("opacity",1);
-                          $(".green-btn").click(function(){
-                              window.location.href = 'selectDifficult.html';
-                          })
+                          
                           break;
                       case 1:
                           $(".subject").text("CODING")

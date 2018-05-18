@@ -85,6 +85,15 @@
         $(".subject").text(planetsTexts[changePlanetCounter]);
         TweenMax.fromTo($(".planetImage"),0.4,{scale:1.3},{scale:1});
         TweenMax.fromTo(this,0.4,{scale:1.3},{scale:1});
+        if(changePlanetCounter == 0){
+             $(".green-btn").click(function(){
+                window.location.href = 'selectDifficult.html';
+             })  
+            $(".green-btn").css("opacity",1);
+            }else{
+            $(".green-btn").css("opacity",0.5);
+            $(".green-btn").click(function(){})  
+        }
     });    
     
     $(".prevButtonGallery").click(function(){
@@ -97,12 +106,27 @@
         $(".subject").text(planetsTexts[changePlanetCounter]);
         TweenMax.fromTo($(".planetImage"),0.4,{scale:1.3},{scale:1});
         TweenMax.fromTo(this,0.4,{scale:1.3},{scale:1});
+        
+        if(changePlanetCounter == 0){
+             $(".green-btn").click(function(){
+                window.location.href = 'selectDifficult.html';
+             })  
+            $(".green-btn").css("opacity",1);
+            }else{
+            $(".green-btn").css("opacity",0.5);
+            $(".green-btn").click(function(){})  
+        }
     });
+   
     
-    
-    $(document).ready(function() {
-		$('.slider_circle_10').EasySlides({'autoplay': false, 'show': 13})
-	});
+        $(".green-btn").click(function(){
+            if(changePlanetCounter == 0){
+               window.location.href = 'selectDifficult.html'; 
+            }
+                
+             })  
+
+        
         
 </script>
 </html>
