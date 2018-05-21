@@ -314,6 +314,7 @@ body{
         and (max-device-width: 1024px) 
         and (-webkit-min-device-pixel-ratio: 2) {
             
+          
             .banner-selection{
                 background-size: 100% 100%;
                 font-size: 8vw;
@@ -354,10 +355,18 @@ body{
         transform: scale(1.3) !important;
         top: 20vh !important;
     }
+        
+        
 
 }
 
 @media screen and (orientation : landscape){
+    
+      .banner-selection p {
+                opacity: 0.6;
+            font-size: 4em !important;
+            }
+            
     
     .menuPlanets{
         height: 10%;
@@ -507,8 +516,6 @@ body{
                 top: 50vh !important;
             }
             
-            
-
             .logoTour{
                width: 50%;
                 padding: 2vw;
@@ -571,10 +578,10 @@ body{
     height: 100%;
 }
 
-.banner-selection p{
+.banner-selection p {
     margin: 0%;
     line-height: 2;
-    font-size: 2em; 
+    font-size: 4vh;
 }
     
 
