@@ -808,16 +808,22 @@ position: absolute;
     width: 40%;
 }
 
-#pin{
+.bgPin{
+    position: relative;
+    background-color: transparent;
+    transform: translate(-50%,0);
     background-color: #FFF;
     color:#03659a;
     font-size: 4vw;
     margin-top: 15%;
     width: 50%;
     margin-left:50%;
-    transform: translate(-50%,0);
     text-align: center;
-    border-radius: 2vw;
+    border-radius: 2vw;     
+}
+
+#pin{
+    transform: translate(0%,10%); 
 }
 
 .textShare{

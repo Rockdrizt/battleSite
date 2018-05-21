@@ -79,11 +79,12 @@
 
 .time-image{
     background-image: url(../images/clock.png);
-    background-size:60%;
     background-position: center;
     background-repeat: no-repeat;
     background-color: transparent;
     border-style: none;
+    padding: 1.5vw;
+    background-size: contain;
 }
 
 .time-image p{
@@ -143,13 +144,12 @@
     }
 
     .time-image{
-        background-size: 75%;
-        padding: 5% 0;
+    background-size: contain;
+    padding: 2vw;
     }
     
     .time-image p{
-       margin: 20% 0%;
-        font-size: 8vh;
+        font-size: 7vh;
     }
     
     .more-rounds,
