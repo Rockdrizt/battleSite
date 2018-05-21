@@ -70,6 +70,8 @@ var battle = function(){
 				file: "images/battle/last_round.png"},
 			{   name:"timesUp",
 				file: "images/battle/times_up.png"},
+			{   name:"tieBreak",
+				file: "images/battle/tiebreak.png"},
         ],
         sounds: [
 			{	name: "battleSong",
@@ -264,6 +266,8 @@ var battle = function(){
 	var tweenReady1
 	var timesUp
 	var lastRound
+	var isTimerShowed
+	var tieBreak
 
     function loadSounds(){
 
@@ -620,7 +624,7 @@ var battle = function(){
 						addNumberPart(target, -combinedDamage, "#FF0000", -100)
 
 						if(target.hpBar.health > 0)
-							game.time.events.add(1000, showReadyGo)
+							game.time.events.add(1000, startRound)
 						else{
 							defeatPlayer(target)
 							game.time.events.add(3000, winPlayer, null, from)
@@ -1047,13 +1051,19 @@ var battle = function(){
 
 	}
 
+	function startRound() {
+		if(timerEnded) {
+			if (!isTimerShowed)
+				showTimesUp()
+			else
+				checkWins()
+		}
+		else
+			showReadyGo()
+	}
+
     function showReadyGo() {
 		onBattle = false
-		if(timerEnded){
-			var gameFinished = checkWins()
-			if(gameFinished)
-				return
-		}
 
 		sound.play("swipe")
     	tweenReady1 = game.add.tween(roundGroup).to({alpha:1}, 600, Phaser.Easing.Cubic.Out, true)
@@ -1073,7 +1083,7 @@ var battle = function(){
 		})
 		tweenReady4.onComplete.add(function(){
 			startTimer = true
-			startRound()
+			startQuestion()
 			// checkPowerBars()
 		})
 	}
@@ -1154,12 +1164,12 @@ var battle = function(){
 			})
 
 			playerWin.hpBar.addWin()
-		}else{
+		}else{ //SI HAY EMPATE
 			players[0].setAnimation(["hit", "idle"], true)
 			players[1].setAnimation(["hit", "idle"], true)
 			game.time.events.add(1000, function(){
 				game.add.tween(answersGroup).to({y:answersGroup.y + 184 * 0.9}, 1000, Phaser.Easing.Cubic.Out, true)
-				showReadyGo()
+				startRound()
 			})
 		}
 		game.add.tween(questionGroup).to({alpha:0}, 1000, Phaser.Easing.Cubic.Out, true)
@@ -1262,7 +1272,7 @@ var battle = function(){
 
 	}
 
-	function startRound() {
+	function startQuestion() {
 		players[0].stats.clear()
 		players[1].stats.clear()
 
@@ -1602,6 +1612,10 @@ var battle = function(){
 		go.anchor.setTo(0.5, 0.5)
 		go.alpha = 0
 
+		tieBreak = sceneGroup.create(game.world.centerX, game.world.centerY, "tieBreak")
+		tieBreak.anchor.setTo(0.5, 0.5)
+		tieBreak.alpha = 0
+
 		createWinOverlay()
 		// createLoseOverlay()
 
@@ -1707,7 +1721,7 @@ var battle = function(){
         game.add.tween(tutoGroup).to({alpha:0},500,Phaser.Easing.linear,true).onComplete.add(function(){
             
             tutoGroup.y = -game.world.height
-            startRound()
+            startQuestion()
             // startTimer(missPoint)
         })
     }
@@ -1755,20 +1769,41 @@ var battle = function(){
 		timerGroup.timerText = timerText
 	}
 
-	function checkWins() {
-		if((players[0].hpBar.winCounter === players[1].hpBar.winCounter)||(onBattle))
-			return
+	function showTimesUp() {
+		isTimerShowed = true;
 
 		tweenReady1.stop()
 		roundGroup.alpha = 0
 		go.alpha = 0
-		var playerWin = players[0].hpBar.winCounter > players[1].hpBar.winCounter ? players[0] : players[1]
 
 		var tweenAppear = game.add.tween(timesUp).to({alpha:1}, 600, Phaser.Easing.Cubic.Out, true)
 		game.add.tween(timesUp.scale).from({x:0.5, y:0.5}, 600, Phaser.Easing.Back.Out, true)
 		var tweenDissapear = game.add.tween(timesUp).to({alpha:0}, 600, Phaser.Easing.Cubic.Out, false, 1400)
 		tweenAppear.chain(tweenDissapear)
-		tweenDissapear.onComplete.add(winPlayer.bind(null, playerWin))
+		tweenDissapear.onComplete.add(checkWins)
+	}
+
+	function showTieBreak() {
+		if(tieBreak.alpha === 1){
+			showReadyGo()
+			return
+		}
+
+		var tweenAppear = game.add.tween(tieBreak).to({alpha:1}, 600, Phaser.Easing.Cubic.Out, true)
+		game.add.tween(tieBreak.scale).from({x:0.5, y:0.5}, 600, Phaser.Easing.Back.Out, true)
+		var tweenDissapear = game.add.tween(tieBreak).to({alpha:0}, 600, Phaser.Easing.Cubic.Out, false, 1400)
+		tweenAppear.chain(tweenDissapear)
+		tweenDissapear.onComplete.add(showReadyGo)
+	}
+
+	function checkWins() {
+		if(players[0].hpBar.winCounter === players[1].hpBar.winCounter){
+			showTieBreak()
+			return
+		}
+
+		var playerWin = players[0].hpBar.winCounter > players[1].hpBar.winCounter ? players[0] : players[1]
+		winPlayer(playerWin)
 
 		if(server)
 			server.removeEventListener('onTurnEnds', checkAnswer)
@@ -1848,7 +1883,7 @@ var battle = function(){
 				}else {
 					timerGroup.timerText.text = "0:00"
 					timerEnded = true
-					checkWins()
+					if(!onBattle)showTimesUp()
 				}
 
 			}
