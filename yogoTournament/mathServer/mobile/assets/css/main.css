@@ -362,10 +362,6 @@ body{
 
 @media screen and (orientation : landscape){
     
-      .banner-selection p {
-                opacity: 0.6;
-            font-size: 4em !important;
-            }
             
     
     .menuPlanets{
@@ -375,7 +371,7 @@ body{
     }
     
     .banner-selection p{
-    font-size: 2em !important; 
+    font-size: 4em !important; 
         margin-top: 2% !important;
         }  
     
