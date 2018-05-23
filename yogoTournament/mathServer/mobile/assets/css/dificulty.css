@@ -305,8 +305,9 @@
            margin: 0 0;
     padding-top: 2vh;
     margin-top: 1vh;
-    font-size: 6vw;
+    font-size: 4vw;
     background-size: 80% 100%;
+        background-size: contain
     }
     
     .modal-content{
@@ -339,12 +340,12 @@
     }
 
     .subject-container {
-        font-size: 3.5vw;
+        font-size: 2.8vw;
         padding: 0 0;
     }
 
     .checkBlank img {
-        width: 4.5%;
+        width: 3.5%;
     }
 
     #adition,
@@ -426,7 +427,7 @@
   and (max-device-width: 812px) 
   and (-webkit-min-device-pixel-ratio: 3)
   and (orientation: landscape) { 
-      
+
       /*.menu-container {
             align-items: center;
             background-color: #00f9ff;
@@ -445,10 +446,11 @@
 /* Landscape IPAD*/
 @media only screen 
   and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
+  and (max-device-width: 920px) 
   and (orientation: landscape) 
   and (-webkit-min-device-pixel-ratio: 1) {
 
+      
      .lvl-text{
           width: 50%;
           padding-top: 1vh;
@@ -457,7 +459,7 @@
 
       .banner{
           background-size: 95% 100%;
-          font-size: 7vw;
+          font-size: 2vw;
       }
       
       .dificult-container{
@@ -556,36 +558,6 @@
             width: 100%;
         }
 }       
-
-/* Landscape IPAD*/
-@media only screen 
-  and (min-device-width: 768px) 
-  and (max-device-width: 1024px) 
-  and (orientation: landscape) 
-  and (-webkit-min-device-pixel-ratio: 1) {
-      
-      .banner{
-            margin-bottom: 0;
-        }
-        
-        .dificult-container{
-            margin: 0% 0;
-            font-size: 7vw;
-            padding-top: 2%;
-            margin-bottom: 0%;
-        }
-        
-        .left-arrow{
-              transform: translate(1vh, -1vh) scaleX(-1);
-                margin: -1.5% 0%;
-          }
-
-          .right-arrow{
-              transform: translate(-1vh, -1vh);
-              margin: -1.5% 0%;
-          }
-}
-
 
 
       /* Landscape IPAD PRO*/
