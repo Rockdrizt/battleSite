@@ -457,8 +457,8 @@
       }
 
       .banner{
-          background-size: 95% 100%;
-          font-size: 2vw;
+          background-size: contain;
+          font-size: 6vw;
       }
       
       .dificult-container{
