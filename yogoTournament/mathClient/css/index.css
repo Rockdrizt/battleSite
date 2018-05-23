@@ -14,6 +14,19 @@ body{
 
 }
 
+.container-buttons{
+}
+
+.buttons{
+    position: relative;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    width: 100%;
+    left: 50%;
+    transform: translate(-50%,0%);
+}
+
 .nameBlock{
 	position: absolute;
 	height: 100%;
@@ -28,6 +41,7 @@ body{
 	max-height: 9vh;
 }
 
+.buttonBack,
 .buttonStart{
 	background-image: url("../images/star_button_name.png");
 	background-size: contain;
@@ -39,6 +53,10 @@ body{
 	width: 90%;
 	color: white !important;
 	font-size: 0.9em !important;
+}
+
+.buttonBack{
+  background-image: url("../images/bgpink.png");  
 }
 
 #arrowLeft img{

@@ -33,7 +33,8 @@
 		"EN":{
 			"pin":"Write PIN",
 			"Nickname": "Nickname",
-			"start":"Start Game",
+			"start":"Start",
+			"back":"Back",
 			"player":"Player",
 			"ready":"Ready!",
 			"waiting":"Waiting for your Opponent"
@@ -43,6 +44,7 @@
 			"pin":"Escribe el PIN",
 			"Nickname": "Apodo",
 			"start":"Empezar",
+            "back":"Regresar",
 			"player":"Jugador",
 			"ready":"¡Listo!",
 			"waiting":"Esperando a tu rival"
@@ -90,6 +92,8 @@
 		$("#arrowLeft").show();
 		$("input").prop("disabled",false);
 		$(".loading").remove();
+        location.reload();
+
 
 	}
 
@@ -107,6 +111,11 @@
 	}
 
 	cliente = parent.cliente;
+    
+    function backButton(){
+            window.location.href = "https://play.yogome.com/tournament";
+    }
+    
 	function startButton(){
 		if($("#idGame").val() != "" && $("#nickname").val() != ""){
 			magicSound.play();
@@ -152,11 +161,18 @@
 	<section id="infoContainer">
 		<section id="dataInfo">
 			<div id="pin">
-				<input id="idGame" type="text" min="0" inputmode="numeric" placeholder="PIN" maxlength="6"/>
+				<input id="idGame" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" type="text" min="0" inputmode="numeric" placeholder="PIN" maxlength="6"/>
 			</div>
 			<input type="text" id="nickname" placeholder="Nickname" maxlength="10"/>
 		</section>
-		<input type="button" id="start" onclick="startButton()" class="buttonStart"/>
+        <div class="container-buttons">
+            <div  class="buttons">
+                <input type="button" id="back" onclick="backButton()" class="buttonBack"/>
+                <input type="button" id="start" onclick="startButton()" class="buttonStart"/>
+            </div>
+
+        </div>
+
 		<div id="resultado"></div>
 	</section>
 </div>
@@ -166,6 +182,7 @@
 	$(".text0").text(localizationData[language].pin);
 	$(".text1").text(localizationData[language].Nickname);
 	$("#start").attr("value",localizationData["EN"].start);
+	$("#back").attr("value",localizationData["EN"].back);
 
 	if((cliente)&&(cliente.id_game)){
 //		var pinSection = document.getElementById("pin");
