@@ -454,7 +454,7 @@
 			$("#pin").text(server.getIdGame())
 		}
 
-		server.start(currentID, onStart, {battleTime:battleTime, rules:customRules});
+		server.start(currentID, onStart, {battleTime:battleTime, rules:customRules, maxRounds:counterRound});
 		server.addEventListener("onInitPlayer", showYogotar);
 		server.addEventListener('onPlayersReady', onPlayersReady);           
 
