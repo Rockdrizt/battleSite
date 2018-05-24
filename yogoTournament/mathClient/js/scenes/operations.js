@@ -326,6 +326,9 @@ var operations = function(){
 
 		game.add.tween(differenceTimeText).to({alpha:0}, 200, Phaser.Easing.Cubic.Out, true)
 		startTimer = true
+		timerText.text = "00:00"
+		game.add.tween(timerText).to({alpha:1}, 200, Phaser.Easing.Cubic.In, true)
+		game.add.tween(differenceTimeText.scale).to({x:1.2, y:1.2}, 300, Phaser.Easing.Cubic.Out, true).yoyo(true)
 	}
 
 	function addToPull(obj) {
@@ -345,12 +348,14 @@ var operations = function(){
 
 		game.add.tween(differenceTimeText).to({alpha:0}, 300, Phaser.Easing.Cubic.Out, true)
 		game.add.tween(differenceTimeText.scale).to({x:0.4, y:0.4}, 300, Phaser.Easing.Cubic.Out, true)
+
+		startTimer = false
 		var resetTimer = game.add.tween(timerText).to({alpha:0}, 200, Phaser.Easing.Cubic.Out, true)
-		resetTimer.onComplete.add(function () {
-			timerText.text = "00:00"
-			game.add.tween(timerText).to({alpha:1}, 200, Phaser.Easing.Cubic.In, true)
-			game.add.tween(differenceTimeText.scale).to({x:1.2, y:1.2}, 300, Phaser.Easing.Cubic.Out, true).yoyo(true)
-		})
+		// resetTimer.onComplete.add(function () {
+		// 	timerText.text = "00:00"
+		// 	game.add.tween(timerText).to({alpha:1}, 200, Phaser.Easing.Cubic.In, true)
+		// 	game.add.tween(differenceTimeText.scale).to({x:1.2, y:1.2}, 300, Phaser.Easing.Cubic.Out, true).yoyo(true)
+		// })
 	}
 
 	function generateEquation(){
@@ -498,6 +503,18 @@ var operations = function(){
 		return spineGroup
 	}
 
+	function setTimeOut() {
+		inputsEnabled = false
+
+		//check if timer is running (means that he didn't answer yet, if is set answer of -1 to client
+		if(!startTimer)
+			return
+
+		startTimer = false
+		cliente.buttonOnClick(":(", timeElapsed)
+		timeElapsed = 0
+	}
+
 	function showWinner(event) {
 		clearStage()
 		var winnerNum = event.winner
@@ -548,6 +565,7 @@ var operations = function(){
 				}
 			}
 		},
+		clearStage:clearStage,
 		create: function(event){
 
 			sceneGroup = game.add.group()
@@ -625,6 +643,8 @@ var operations = function(){
 				cliente.addEventListener("onTurnEnds", checkAnswer)
 				cliente.addEventListener("showPossibleAnswers", startRound)
 				cliente.addEventListener("onGameEnds", showWinner)
+
+				cliente.timeOutCallback = setTimeOut
 				// clientData.setReady(true)
 			}else{
 				game.time.events.add(1000, startRound)

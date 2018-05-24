@@ -268,6 +268,7 @@ var battle = function(){
 	var lastRound
 	var isTimerShowed
 	var tieBreak
+	var maxRounds
 
     function loadSounds(){
 
@@ -311,6 +312,7 @@ var battle = function(){
 		startTimer = false
 		onBattle = false
 		timerEnded = false
+		isTimerShowed = false
         
         sceneGroup.alpha = 0
         game.add.tween(sceneGroup).to({alpha:1},400, Phaser.Easing.Cubic.Out,true);
@@ -1052,23 +1054,35 @@ var battle = function(){
 	}
 
 	function startRound() {
+		onBattle = false
+
 		if(timerEnded) {
 			if (!isTimerShowed)
 				showTimesUp()
 			else
 				checkWins()
 		}
+		else if(questionCounter > maxRounds){
+			checkWins()
+		}
 		else
 			showReadyGo()
 	}
 
     function showReadyGo() {
-		onBattle = false
-
 		sound.play("swipe")
-    	tweenReady1 = game.add.tween(roundGroup).to({alpha:1}, 600, Phaser.Easing.Cubic.Out, true)
-		game.add.tween(roundGroup.scale).from({x:0.5, y:0.5}, 600, Phaser.Easing.Back.Out, true)
-		var tweenReady2 = game.add.tween(roundGroup).to({alpha:0}, 200, Phaser.Easing.Cubic.Out, null, 1000)
+
+		var whatToTween
+		if((timerEnded)||(questionCounter > maxRounds))
+			whatToTween = tieBreak
+		else if(maxRounds === questionCounter)
+			whatToTween = lastRound
+		else
+			whatToTween = roundGroup
+
+    	tweenReady1 = game.add.tween(whatToTween).to({alpha:1}, 600, Phaser.Easing.Cubic.Out, true)
+		game.add.tween(whatToTween.scale).from({x:0.5, y:0.5}, 600, Phaser.Easing.Back.Out, true)
+		var tweenReady2 = game.add.tween(whatToTween).to({alpha:0}, 200, Phaser.Easing.Cubic.Out, null, 1000)
 
 		var tweenReady3 = game.add.tween(go).to({alpha:1}, 300, Phaser.Easing.Quintic.Out)
 		var tweenScale = game.add.tween(go.scale).from({x:0.5, y:0.5}, 300, Phaser.Easing.Quintic.Out)
@@ -1769,11 +1783,24 @@ var battle = function(){
 		timerGroup.timerText = timerText
 	}
 
+	// function checkTimeOut(){
+	// 	if(!onBattle) {
+	// 		if (server) {
+	// 			server.setTimeOut()
+	// 		}
+	// 	}
+	//
+	// 	if(!onBattle) {
+	// 		showTimesUp()
+	// 	}
+	// }
+
 	function showTimesUp() {
 		isTimerShowed = true;
 
 		tweenReady1.stop()
 		roundGroup.alpha = 0
+		questionGroup.alpha = 0
 		go.alpha = 0
 
 		var tweenAppear = game.add.tween(timesUp).to({alpha:1}, 600, Phaser.Easing.Cubic.Out, true)
@@ -1783,22 +1810,22 @@ var battle = function(){
 		tweenDissapear.onComplete.add(checkWins)
 	}
 
-	function showTieBreak() {
-		if(tieBreak.alpha === 1){
-			showReadyGo()
-			return
-		}
-
-		var tweenAppear = game.add.tween(tieBreak).to({alpha:1}, 600, Phaser.Easing.Cubic.Out, true)
-		game.add.tween(tieBreak.scale).from({x:0.5, y:0.5}, 600, Phaser.Easing.Back.Out, true)
-		var tweenDissapear = game.add.tween(tieBreak).to({alpha:0}, 600, Phaser.Easing.Cubic.Out, false, 1400)
-		tweenAppear.chain(tweenDissapear)
-		tweenDissapear.onComplete.add(showReadyGo)
-	}
+	// function showTieBreak() {
+	// 	if(tieBreak.alpha === 1){
+	// 		showReadyGo()
+	// 		return
+	// 	}
+	//
+	// 	var tweenAppear = game.add.tween(tieBreak).to({alpha:1}, 600, Phaser.Easing.Cubic.Out, true)
+	// 	game.add.tween(tieBreak.scale).from({x:0.5, y:0.5}, 600, Phaser.Easing.Back.Out, true)
+	// 	var tweenDissapear = game.add.tween(tieBreak).to({alpha:0}, 600, Phaser.Easing.Cubic.Out, false, 1400)
+	// 	tweenAppear.chain(tweenDissapear)
+	// 	tweenDissapear.onComplete.add(showReadyGo)
+	// }
 
 	function checkWins() {
 		if(players[0].hpBar.winCounter === players[1].hpBar.winCounter){
-			showTieBreak()
+			showReadyGo()
 			return
 		}
 
@@ -1883,7 +1910,10 @@ var battle = function(){
 				}else {
 					timerGroup.timerText.text = "0:00"
 					timerEnded = true
-					if(!onBattle)showTimesUp()
+					if(!onBattle){
+						if(server)
+							server.setTimeOut()
+					}
 				}
 
 			}
@@ -1893,8 +1923,9 @@ var battle = function(){
 
         	// game.camera.bounds = new Phaser.Rectangle(-200,0,game.world.width + 200,game.world.height)
 			// console.log(game.camera.bounds)
-			battleTime = server ? server.currentData.time : 10000
-        	sceneGroup = game.add.group();
+			battleTime = server ? server.currentData.time : 20000
+			maxRounds = server ? server.currentData.maxRounds : 1
+			sceneGroup = game.add.group();
             //yogomeGames.mixpanelCall("enterGame",gameIndex);
 
 

@@ -64,6 +64,7 @@ function Client(){
 	var self = this;
 	this.time = null;
 	this.restartGame = null
+	this.timeOutCallback = null
 
 	var setfb = function(ref, value) {
 		ref.set(value).catch(function (reason) {
@@ -136,6 +137,12 @@ function Client(){
 					self.gameEnded = false
 				}
 			});
+
+			self.refIdGame.child('timeOut').on('value', function (snapshot) {
+				var timeOut = snapshot.val()
+				if(timeOut)
+					self.timeOutCallback()
+			})
 
 		}
 		self.time= (new Date()).getTime();

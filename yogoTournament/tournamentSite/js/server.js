@@ -65,6 +65,7 @@ function Server(){
 	self.startGame = false
 	self.rulesSet = false
 	self.battleTime = 60000
+	self.maxRounds = 1
 	self.numberOperation
 
 	this.addEventListener = function(name, handler) {
@@ -304,6 +305,7 @@ function Server(){
 		var battleTime = params.battleTime || 300000
 		self.battleTime = battleTime
 		self.rules = rules
+		self.maxRounds = params.maxRounds || self.maxRounds
 
 		self.events = {};
 		self.p1Ready = false;
@@ -331,7 +333,9 @@ function Server(){
 				gameReady:false,
 				gameEnded:false,
 				retry:false,
-				time:battleTime
+				time:battleTime,
+				maxRounds:self.maxRounds,
+				timeOut:false,
 			};
 			refIdGame = database.ref(id_game);
 			setfb(refIdGame, valores)//refIdGame.set(valores);
@@ -450,11 +454,13 @@ function Server(){
 		valores.p2.life =INITIAL_LIFE;
 		valores.winner =false;
 		valores.possibleAnswers = [];
-		valores.battleTime = self.battleTime;
+		valores.time = self.battleTime;
+		valores.maxRounds = self.maxRounds;
 		valores.rules = self.rules
 		valores.data = false;
 		valores.gameEnded = false;
 		valores.retry = {retry:location, date:actualDate};
+		valores.timeOut = false
 		setfb(refIdGame, valores)//refIdGame.set(valores);
 		// refIdGame.off()
 		// refIdGame.remove();
@@ -465,6 +471,10 @@ function Server(){
 	this.setGameEnded = function (numPlayerWinner) {
 		var data = {winner:numPlayerWinner}
 		setfb(refIdGame.child("gameEnded"), data)//refIdGame.child("gameEnded").set(data);
+	}
+
+	this.setTimeOut = function () {
+		setfb(refIdGame.child("timeOut"), true)
 	}
 }
 
