@@ -252,6 +252,7 @@ $(".okButton").click(function(){
 var difficultyNameLevel = 0;
     
     function levelDifficulty(difficultyNameLevel){
+        TweenMax.fromTo($("#difficultyName"),0.3,{scale:1.5},{scale:1});
         switch(difficultyNameLevel){
             case 0:
                $("#difficultyName").find("span").text("EASY");
@@ -276,6 +277,7 @@ var difficultyNameLevel = 0;
     }
     
     $(".prevDifficulty").click(function(){
+        TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
         if(difficultyNameLevel >= 1){
             difficultyNameLevel--
         }else{
@@ -285,6 +287,7 @@ var difficultyNameLevel = 0;
     })
     
     $(".nextDifficulty").click(function(){
+        TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
         if(difficultyNameLevel != 3){
             difficultyNameLevel++
         }else{

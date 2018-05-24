@@ -234,9 +234,11 @@ Usage:
         $(this_slider).find('.next_button').click(function() {
           EasySlidesCanChange = true;
           EasySlidesNext();
+             TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
             
         });
         $(this_slider).find('.prev_button').click(function() {
+             TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
           EasySlidesCanChange = true;
           cur_slide --;
           EasySlidesNext(cur_slide);

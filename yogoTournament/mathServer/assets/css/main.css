@@ -769,7 +769,7 @@ position: absolute;
 .containerPin{
     position: absolute;
     width: 80%;
-    height: 80%;
+    height: 100%;
     top:38%;
     left:10%;
     z-index: 1234123;

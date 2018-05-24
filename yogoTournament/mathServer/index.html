@@ -481,6 +481,7 @@
 	var counterTime = 1;
 
 	$("#restTime").click(function(){
+        TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
 		if(counterTime > 1){
 			counterTime--
 			$("#timeClock").find("span").text(counterTime);
@@ -493,7 +494,7 @@
 
 	});
 	$("#sumTime").click(function(){
-
+        TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
 		if(counterTime < 10){
 			counterTime++
 			$("#timeClock").find("span").text(counterTime);
@@ -511,6 +512,7 @@
 	var counterRound = 1;
 
 	$("#restRound").click(function(){
+        TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
 		if(counterRound > 1){
 			counterRound--
 			$("#roundOptions").find("span").text(counterRound);
@@ -521,6 +523,7 @@
 
 	});
 	$("#sumRound").click(function(){
+        TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
 		if(counterRound < 10){
 			counterRound++
 			$("#roundOptions").find("span").text(counterRound);

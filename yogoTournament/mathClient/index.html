@@ -163,7 +163,7 @@
 			<div id="pin">
 				<input id="idGame" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" type="text" min="0" inputmode="numeric" placeholder="PIN" maxlength="6"/>
 			</div>
-			<input type="text" id="nickname" placeholder="Nickname" maxlength="10"/>
+			<input id="nickname" type="text" placeholder="Nickname" maxlength="10" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" />
 		</section>
         <div class="container-buttons">
             <div  class="buttons">
