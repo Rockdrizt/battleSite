@@ -269,6 +269,7 @@ var battle = function(){
 	var isTimerShowed
 	var tieBreak
 	var maxRounds
+	var roundsFlag
 
     function loadSounds(){
 
@@ -1062,7 +1063,7 @@ var battle = function(){
 			else
 				checkWins()
 		}
-		else if(questionCounter > maxRounds){
+		else if((questionCounter > maxRounds)&&(roundsFlag)){
 			checkWins()
 		}
 		else
@@ -1073,9 +1074,9 @@ var battle = function(){
 		sound.play("swipe")
 
 		var whatToTween
-		if((timerEnded)||(questionCounter > maxRounds))
+		if((timerEnded)||((questionCounter > maxRounds) && roundsFlag))
 			whatToTween = tieBreak
-		else if(maxRounds === questionCounter)
+		else if((maxRounds === questionCounter)&&(roundsFlag))
 			whatToTween = lastRound
 		else
 			whatToTween = roundGroup
@@ -1925,6 +1926,7 @@ var battle = function(){
 			// console.log(game.camera.bounds)
 			battleTime = server ? server.currentData.time : 20000
 			maxRounds = server ? server.currentData.maxRounds : 1
+			roundsFlag = maxRounds > 0
 			sceneGroup = game.add.group();
             //yogomeGames.mixpanelCall("enterGame",gameIndex);
 
