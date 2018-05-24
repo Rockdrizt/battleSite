@@ -148,7 +148,7 @@
     var time = 3
 
     $(".less-rounds").click(function(){
-
+        TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
         if(round > 1){
             round--
         }
@@ -163,7 +163,7 @@
     });
 
     $(".more-rounds").click(function(){
-
+        TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
         if(round < 10){
             round++
             $(".battles").text('battles');
@@ -177,7 +177,7 @@
 
     
     $(".less-time").click(function(){
-
+        TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
         if(time > 1){
             time--
         }
@@ -192,7 +192,7 @@
     });
 
     $(".more-time").click(function(){
-
+        TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
         if(time < 10){
             time++
             $(".minutes").text('minutes');

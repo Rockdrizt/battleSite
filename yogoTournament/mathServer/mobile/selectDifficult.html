@@ -387,6 +387,8 @@
     var lvl = ['EASY', 'MEDIUM', 'HARD', 'MASTER']
     
     $(".left-arrow").click(function(){
+        TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
+
         if(index > 0){
             index--
         }
@@ -400,6 +402,8 @@
     });
     
     $(".right-arrow").click(function(){
+        TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
+
         if(index < lvl.length -1){
             index++
         }
