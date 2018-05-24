@@ -43,15 +43,15 @@ function startGame(){
 		// game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
 		// game.scale.setGameSize(gameWidth, gameHeight);
 
-		var ratio = window.innerWidth / window.innerHeight
+		var ratio = document.body.clientWidth / document.body.clientHeight
 		var gameHeight = Math.round(fullHeight)
 		var gameWidth = Math.round(fullHeight * ratio)
-		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
+		game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
 		game.scale.setGameSize(gameWidth, gameHeight);
 
         game.input.maxPointers = 1
-		game.scale.pageAlignHorizontally = true;
-		game.scale.pageAlignVertically = true;
+		// game.scale.pageAlignHorizontally = true;
+		// game.scale.pageAlignVertically = true;
 
         game.stage.backgroundColor = "#ffffff"
         game.time.advancedTiming = true
