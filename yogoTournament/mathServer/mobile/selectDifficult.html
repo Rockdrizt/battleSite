@@ -2,7 +2,8 @@
 <html>
 <head>
     <title class="languageTitle">Yogome tournament</title>
-    <meta name="viewport" content="width = 1050, user-scalable = no" />
+    
+    <meta name="viewport" content="width = 1050, user-scalable = yes" />
     <meta charset="UTF-8">   
     <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
     <link rel="stylesheet" type="text/css" href="assets/css/dificulty.css" />
@@ -387,7 +388,7 @@
     var lvl = ['EASY', 'MEDIUM', 'HARD', 'MASTER']
     
     $(".left-arrow").click(function(){
-        TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
+        TweenMax.fromTo($(".lvl-text"),0.3,{scale:1.5},{scale:1});
 
         if(index > 0){
             index--
@@ -402,8 +403,7 @@
     });
     
     $(".right-arrow").click(function(){
-        TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
-
+        TweenMax.fromTo($(".lvl-text"),0.3,{scale:1.5},{scale:1});
         if(index < lvl.length -1){
             index++
         }

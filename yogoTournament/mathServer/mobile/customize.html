@@ -149,17 +149,20 @@
 
     $(".less-rounds").click(function(){
         TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
-        if(round > 1){
+        if(round > 0){
             round--
+            $(".round").text(round);
         }
         else{
             round = 10
             $(".battles").text('battles');
+             $(".round").text(round);
         }
-        if(round === 1){
+        if(round === 0){
             $(".battles").text('battle');
+            $(".round").text("∞");
         }
-        $(".round").text(round);
+       
     });
 
     $(".more-rounds").click(function(){
@@ -167,12 +170,15 @@
         if(round < 10){
             round++
             $(".battles").text('battles');
+            $(".round").text(round);
         }
         else{ 
-            round = 1
+            round = 0
             $(".battles").text('battle');
+            $(".round").text("∞");
         }
-        $(".round").text(round);
+        
+        
     });
 
     
