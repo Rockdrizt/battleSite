@@ -198,7 +198,7 @@
                 </div>
                 <div class="row">
                     <div id="roundOptions" class="col-xs-12 vcenter">
-                        <span>1</span>
+                        <span>∞</span>
                         <img src="assets/images/hexa.png">
                     </div>
                     <div class="timeOptions col-xs-12">
@@ -505,33 +505,46 @@
 			$("#minuteText").html("MINUTES");
 		}
 
+        if(counterRound == 0){
+           $("#roundOptions").find("span").text("∞");
+           }
+        
 
 	});
 
 
-	var counterRound = 1;
+	var counterRound = 0;
 
 	$("#restRound").click(function(){
         TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
-		if(counterRound > 1){
+		if(counterRound > 0){
 			counterRound--
-			$("#roundOptions").find("span").text(counterRound);
+			
 		}
-		if(counterRound <= 1){
+		if(counterRound <= 0){
 			$("#roundText").html("BATTLE");
-		}
+            $("#roundOptions").find("span").text("∞");
+
+		}else{
+            $("#roundOptions").find("span").text(counterRound);      
+        }
 
 	});
 	$("#sumRound").click(function(){
         TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
 		if(counterRound < 10){
 			counterRound++
-			$("#roundOptions").find("span").text(counterRound);
 		}
 
-		if(counterRound > 1){
+		if(counterRound > 0){
 			$("#roundText").html("BATTLES");
 		}
+        
+        if(counterRound == 0){
+           $("#roundOptions").find("span").text("∞");
+           }else{
+               $("#roundOptions").find("span").text(counterRound);
+           }
 
 	});
 
