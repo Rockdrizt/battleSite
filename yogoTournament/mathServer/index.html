@@ -202,6 +202,7 @@
                         <img src="assets/images/hexa.png">
                     </div>
                     <div class="timeOptions col-xs-12">
+                        <div id="infinito" style="position: absolute;width: 20%;left: 50%;transform: translate(-50%,-100%);top: -45%;"><img src="assets/images/infinito.png"></div>
                         <div id="restRound" class="col-xs-2  buttonsumRest"><img src="assets/images/restButton.png"></div>
                         <div id="roundText" class="col-xs-6 textCustomize"> BATTLE</div>
                         <div id="sumRound" class="col-xs-2 buttonsumRest"><img src="assets/images/sumButton.png"></div>
@@ -514,6 +515,7 @@
 
 
 	var counterRound = 0;
+    $("#roundOptions").find("span").css("opacity",0);
 
 	$("#restRound").click(function(){
         TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
@@ -524,9 +526,13 @@
 		if(counterRound <= 0){
 			$("#roundText").html("BATTLE");
             $("#roundOptions").find("span").text("∞");
+            $("#roundOptions").find("span").css("opacity",0);
+            $("#infinito").css("opacity",1);
 
 		}else{
-            $("#roundOptions").find("span").text(counterRound);      
+            $("#roundOptions").find("span").text(counterRound);   
+            $("#roundOptions").find("span").css("opacity",1); 
+            $("#infinito").css("opacity",0);
         }
 
 	});
@@ -541,9 +547,13 @@
 		}
         
         if(counterRound == 0){
-           $("#roundOptions").find("span").text("∞");
+                $("#roundOptions").find("span").text("∞");
+                $("#roundOptions").find("span").css("opacity",0);
+                $("#infinito").css("opacity",1);
            }else{
-               $("#roundOptions").find("span").text(counterRound);
+                $("#roundOptions").find("span").text(counterRound);
+                $("#roundOptions").find("span").css("opacity",1);
+                $("#infinito").css("opacity",0);
            }
 
 	});
