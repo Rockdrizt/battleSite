@@ -331,9 +331,9 @@ transform: scale(0.7);
 .next_button,
 .prev_button {
   position: fixed;
-  left: 61%  !important;
-  top: 128%  !important;
-  width: 10%  !important;
+  left: 65%  !important;
+  top: 147%  !important;
+  width: 12%  !important;
   opacity: 0.8 !important;
   z-index: 5000 !important;
   cursor: pointer;
@@ -351,7 +351,7 @@ transform: scale(0.7);
 
 .prev_button {
   position: absolute;
-  left: 29%  !important;
+  left: 22%  !important;
 }  
 .next_button:hover,
 .prev_button:hover {
