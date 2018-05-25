@@ -1916,7 +1916,7 @@ var battle = function(){
         	// game.camera.bounds = new Phaser.Rectangle(-200,0,game.world.width + 200,game.world.height)
 			// console.log(game.camera.bounds)
 			battleTime = server ? server.currentData.time : 20000
-			maxRounds = server ? server.currentData.maxRounds : 1
+			maxRounds = server ? server.currentData.maxRounds : 0
 			roundsFlag = maxRounds > 0
 			sceneGroup = game.add.group();
             //yogomeGames.mixpanelCall("enterGame",gameIndex);

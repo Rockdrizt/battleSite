@@ -305,7 +305,7 @@ function Server(){
 		var battleTime = params.battleTime || 300000
 		self.battleTime = battleTime
 		self.rules = rules
-		self.maxRounds = params.maxRounds || self.maxRounds
+		self.maxRounds = typeof params.maxRounds !== "undefined" ? params.maxRounds : self.maxRounds
 
 		self.events = {};
 		self.p1Ready = false;
