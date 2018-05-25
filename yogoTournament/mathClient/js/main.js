@@ -1,7 +1,7 @@
 window.minigame = window.minigame || {}
 
 function startGame(){
-	window.game = new Phaser.Game(window.innerWidth, window.innerHeight, Phaser.CANVAS, "inGame", {init: init, create: create }, true, true);
+	window.game = new Phaser.Game(document.body.clientWidth, document.body.clientHeight, Phaser.CANVAS, null, {init: init, create: create }, true, true);
     document.body.style.visibility = "hidden"
 
 	function preloadScenes(sceneList){
@@ -46,8 +46,9 @@ function startGame(){
 		var ratio = document.body.clientWidth / document.body.clientHeight
 		var gameHeight = Math.round(fullHeight)
 		var gameWidth = Math.round(fullHeight * ratio)
-		game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
+		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
 		game.scale.setGameSize(gameWidth, gameHeight);
+        console.log(gameWidth, gameHeight)
 
         game.input.maxPointers = 1
 		// game.scale.pageAlignHorizontally = true;
@@ -90,35 +91,38 @@ function startGame(){
     }
 }
 
-// window.addEventListener('resize', function () {
-// 	var fullWidth = 540
-// 	var fullHeight = 960
-// 	//
-// 	var ratio = window.innerWidth / window.innerHeight
-// 	// console.log(fullWidth * ratio)
-// 	// var newWidth = Math.round(fullWidth * ratio)
-// 	// document.getElementById("inGame").style.width = newWidth + "px";
-// 	//
-// 	// // game.scale.setGameSize(gameWidth, gameHeight);
-// 	// // game.scale.scaleMode = window.innerHeight > window.innerWidth ? Phaser.ScaleManager.RESIZE : Phaser.ScaleManager.EXACT_FIT
-// 	// game.scale.scaleMode = Phaser.ScaleManager.RESIZE
-// 	// game.canvas.style.width = '100%';
-// 	// game.canvas.style.height = '100%';
-// 	var gameHeight = Math.round(fullHeight)
-// 	var gameWidth = Math.round(fullHeight * ratio)
-// 	game.scale.setGameSize(gameWidth, gameHeight);
-// 	game.scale.pageAlignHorizontally = true;
-// 	game.scale.pageAlignVertically = true;
-// 	game.scale.refresh();
-// 	game.state.restart()
-//
-// })
+window.addEventListener('orientationchange', function () {
+	if (window.innerWidth < window.innerHeight){
+		var fullWidth = 540
+		var fullHeight = 960
+		// // console.log(fullWidth * ratio)
+		// // var newWidth = Math.round(fullWidth * ratio)
+		// // document.getElementById("inGame").style.width = newWidth + "px";
+		// //
+		// // // game.scale.setGameSize(gameWidth, gameHeight);
+		// //game.scale.scaleMode = window.innerHeight > window.innerWidth ? Phaser.ScaleManager.RESIZE : Phaser.ScaleManager.EXACT_FIT
+		// // game.scale.scaleMode = Phaser.ScaleManager.RESIZE
+		// // game.canvas.style.width = '100%';
+		// // game.canvas.style.height = '100%';
+		// var ratio = document.body.clientWidth / document.body.clientHeight
+		var gameHeight = Math.round(fullHeight)
+		var gameWidth = Math.round(fullHeight * ratio)
+		// //game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
+		game.scale.setGameSize(gameWidth, gameHeight);
+		// console.log(gameWidth, gameHeight)
+		game.scale.refresh();
+		// game.state.restart()
+	}
+	//clearInterval(interval)
+
+})
 
 var wfconfig = {
 
 	active: function() {
 		console.log("font loaded");
-		startGame();
+		window.minigame.orientation.init(startGame);
+		//startGame()
 	},
 
 	google: {
