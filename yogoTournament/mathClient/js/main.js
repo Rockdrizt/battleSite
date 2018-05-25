@@ -118,7 +118,7 @@ var wfconfig = {
 
 	active: function() {
 		console.log("font loaded");
-		startGame();
+		window.minigame.orientation.init(startGame);
 	},
 
 	google: {

@@ -159,7 +159,7 @@
 			$(".pin").text(server.getIdGame())
 		}
 
-		server.start(currentID, onStart, {battleTime: battleTime, rules: parent.customRules});
+		server.start(currentID, onStart, {battleTime: battleTime, rules: parent.customRules, maxRounds:parent.maxRounds});
 		server.addEventListener("onInitPlayer", showYogotar);
 		server.addEventListener('onPlayersReady', onPlayersReady);
 	}
