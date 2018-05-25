@@ -876,41 +876,32 @@ var battle = function(){
 		players = []
 		players[0] = createPlayer(0, {x:WIDTH_DISTANCE, y: game.world.height - 150}, 1)
 		players[1] = createPlayer(1, {x:game.world.width - 100, y: game.world.height - 150}, -1, 1)
-		// players[0].multiplier = getMultiplier(players[0].data.stats.element, players[1].data.stats.element)
-		// players[1].multiplier = getMultiplier(players[1].data.stats.element, players[0].data.stats.element)
-		// player2.scale.setTo(playerScale * -1, playerScale)
 
-		var input1 = game.add.graphics()
-		input1.beginFill(0xffffff)
-		input1.drawCircle(0,0, 200)
-		input1.alpha = 0
-		input1.endFill()
-		players[0].add(input1)
-		input1.inputEnabled = true
-		input1.events.onInputDown.add(function () {
-			var answer1 = {value:100, time:3450}
-			var answer2 = {value:100, time:3450}
-			checkAnswer({numPlayer:1, timeDifference:200, answers:{p1:answer1, p2:answer2}})
-		})
+		// var input1 = game.add.graphics()
+		// input1.beginFill(0xffffff)
+		// input1.drawCircle(0,0, 200)
+		// input1.alpha = 0
+		// input1.endFill()
+		// players[0].add(input1)
+		// input1.inputEnabled = true
+		// input1.events.onInputDown.add(function () {
+		// 	var answer1 = {value:100, time:3450}
+		// 	var answer2 = {value:100, time:3450}
+		// 	checkAnswer({numPlayer:1, timeDifference:200, answers:{p1:answer1, p2:answer2}})
+		// })
 		//
-		var input2 = game.add.graphics()
-		input2.beginFill(0xffffff)
-		input2.drawCircle(0,0, 200)
-		input2.alpha = 0
-		input2.endFill()
-		players[1].add(input2)
-		input2.inputEnabled = true
-		input2.events.onInputDown.add(function () {
-			var answer1 = {value:100, time:3450}
-			var answer2 = {value:100, time:3450}
-			checkAnswer({numPlayer:2, timeDifference:200, answers:{p1:answer1, p2:answer2}})
-		})
-
-		// var cloud = createSpine("cloud", "normal", "BITE")
-		// // cloud.setAnimation(["BITE"])
-		// cloud.x = game.world.centerX
-		// cloud.y = game.world.height - 200
-		// sceneGroup.add(cloud)
+		// var input2 = game.add.graphics()
+		// input2.beginFill(0xffffff)
+		// input2.drawCircle(0,0, 200)
+		// input2.alpha = 0
+		// input2.endFill()
+		// players[1].add(input2)
+		// input2.inputEnabled = true
+		// input2.events.onInputDown.add(function () {
+		// 	var answer1 = {value:100, time:3450}
+		// 	var answer2 = {value:100, time:3450}
+		// 	checkAnswer({numPlayer:2, timeDifference:200, answers:{p1:answer1, p2:answer2}})
+		// })
 
     }
 
