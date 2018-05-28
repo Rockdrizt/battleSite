@@ -113,11 +113,15 @@
 </body>       
     <script>
         
+    var popSound = new Audio('sounds/pop.mp3');
+    var magicSound = new Audio('sounds/magic.mp3');
+        
         $( window ).ready(function( event ) {
             shine();
         });
         
         $(".createGame").click(function(){
+            magicSound.play();
             animation1();
             $(".createGame").off( "click" );
         });

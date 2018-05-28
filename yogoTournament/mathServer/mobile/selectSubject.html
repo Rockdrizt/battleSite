@@ -71,11 +71,14 @@
     
     <script src="assets/js/animations.js"></script>
 <script>
+    var popSound = new Audio('sounds/pop.mp3');
+    var magicSound = new Audio('sounds/magic.mp3');
     var changePlanetCounter = 0;
     var planetsImages = ["mathdromeda","codus_shade","creat","geogra","health","science","wordo"];
     var planetsTexts = ["Math","Coding","Creativity","geography","health","science","Language"];
     
     $(".nextButtonGallery").click(function(){
+        popSound.play();
         if(changePlanetCounter < planetsImages.length-1){
            changePlanetCounter++ 
         }else if(changePlanetCounter == planetsImages.length-1){
@@ -97,6 +100,7 @@
     });    
     
     $(".prevButtonGallery").click(function(){
+        popSound.play();
          if(changePlanetCounter == 0){
            changePlanetCounter = planetsImages.length-1;     
         }else{
@@ -121,6 +125,7 @@
     
         $(".green-btn").click(function(){
             if(changePlanetCounter == 0){
+                magicSound.play();
                window.location.href = 'selectDifficult.html'; 
             }
                 

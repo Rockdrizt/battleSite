@@ -232,6 +232,8 @@
 <script type="text/javascript" src="assets/js/modal.js"></script>
 <script>
         
+    var popSound = new Audio('sounds/pop.mp3');
+    var magicSound = new Audio('sounds/magic.mp3');
 	var operationGenerator = parent.operationGenerator //|| operationGenerator
 
     function setCustomRules() {
@@ -388,6 +390,7 @@
     var lvl = ['EASY', 'MEDIUM', 'HARD', 'MASTER']
     
     $(".left-arrow").click(function(){
+        popSound.play();
         TweenMax.fromTo($(".lvl-text"),0.3,{scale:1.5},{scale:1});
 
         if(index > 0){
@@ -403,6 +406,7 @@
     });
     
     $(".right-arrow").click(function(){
+        popSound.play();
         TweenMax.fromTo($(".lvl-text"),0.3,{scale:1.5},{scale:1});
         if(index < lvl.length -1){
             index++

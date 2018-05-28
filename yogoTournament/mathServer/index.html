@@ -297,7 +297,6 @@
     </div>
 
 </section>
-
 </body>
 <!--<script src="assets/js/operationGenerator.js"></script>    -->
 <script>var operationGenerator = parent.operationGenerator</script>
@@ -314,11 +313,15 @@
 	var battleTime = 60000
 	var rule_set = operationGenerator.RULES_SET[current_set]
 	var customRules
-	var gameReady = false
+	var gameReady = false;
+    var popSound = new Audio('sounds/pop.mp3');
+    var magicSound = new Audio('sounds/magic.mp3');
+   
 	//$("#logo").hide();
 
 
 	$("#createGame").click(function(){
+         magicSound.play();
         if(!BegincreateGame){
             BegincreateGame = true
            animation1(); 
@@ -362,6 +365,7 @@
 
 
 	$("#joinGame").click(function(){
+        magicSound.play();
 //		window.open("../tournamentSite/client.html", "_top")
 		window.open("../../player/index.html", "_top")
 	});
@@ -388,16 +392,19 @@
 
 
 	$("#nextButton1").click(function(){
+        magicSound.play();
 		$("#section3").css("display","block");
 		$("#section2").css("display","none");
 	});
 
 	$("#backButton2").click(function(){
+        magicSound.play();
 		$("#section2").css("display","block");
 		$("#section3").css("display","none");
 	});
 
 	$("#nextButton2").click(function(){
+        magicSound.play();
 		customRules = {}
 
 		for(var i = 1;i<=OPERATORS.length;i++){
@@ -421,6 +428,7 @@
 	});
 
 	$("#backButton3").click(function(){
+        magicSound.play();
 		$("#section3").css("display","block");
 		$("#section4").css("display","none");
 	});
@@ -443,6 +451,7 @@
 	}
 
 	$("#nextButton3").click(function(){
+        magicSound.play();
 		$("#section5").css("display","block");
 		$("#section4").css("display","none");
 
@@ -462,6 +471,7 @@
 	});
 
 	$("#StartButton").click(function(){
+        magicSound.play();
 		if(gameReady) {
 			server.removeEventListener('onPlayersReady', onPlayersReady);
 			server.removeEventListener('onInitPlayer', showYogotar);
@@ -482,6 +492,7 @@
 	var counterTime = 1;
 
 	$("#restTime").click(function(){
+        popSound.play();
         TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
 		if(counterTime > 1){
 			counterTime--
@@ -495,6 +506,7 @@
 
 	});
 	$("#sumTime").click(function(){
+        popSound.play();
         TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
 		if(counterTime < 10){
 			counterTime++
@@ -518,6 +530,7 @@
     $("#roundOptions").find("span").css("opacity",0);
 
 	$("#restRound").click(function(){
+        popSound.play();
         TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
 		if(counterRound > 0){
 			counterRound--
@@ -537,6 +550,7 @@
 
 	});
 	$("#sumRound").click(function(){
+        popSound.play();
         TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
 		if(counterRound < 10){
 			counterRound++
@@ -563,6 +577,7 @@
 
 	$("#modalCancel").hide();
 	$("#closeCancel").click(function(){
+        popSound.play();
 		$("#modalCancel").hide();
 	});
 
