@@ -4,6 +4,7 @@ var ruleSet
 var OPERATORS = ["SUM", "SUB", "MUL", "DIV"]
 var DIFFICULTIES = ["EASY", "MEDIUM", "HARD", "MASTER"]
 var operatorsObject = {}
+var popSound = new Audio('sounds/pop.mp3');
 
 
 function nextSectionButton2(){
@@ -284,6 +285,7 @@ var difficultyNameLevel = 0;
             difficultyNameLevel = 3;
         }        
         levelDifficulty(difficultyNameLevel)
+        popSound.play();
     })
     
     $(".nextDifficulty").click(function(){
@@ -294,6 +296,7 @@ var difficultyNameLevel = 0;
             difficultyNameLevel = 0;
         }        
         levelDifficulty(difficultyNameLevel)
+        popSound.play();
     })
 
 

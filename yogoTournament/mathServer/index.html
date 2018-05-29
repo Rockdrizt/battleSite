@@ -392,19 +392,20 @@
 
 
 	$("#nextButton1").click(function(){
-        magicSound.play();
 		$("#section3").css("display","block");
 		$("#section2").css("display","none");
+        magicSound.play();
 	});
 
 	$("#backButton2").click(function(){
-        magicSound.play();
+        
 		$("#section2").css("display","block");
 		$("#section3").css("display","none");
+        magicSound.play();
 	});
 
 	$("#nextButton2").click(function(){
-        magicSound.play();
+        
 		customRules = {}
 
 		for(var i = 1;i<=OPERATORS.length;i++){
@@ -425,12 +426,13 @@
 
 		$("#section4").css("display","block");
 		$("#section3").css("display","none");
+        magicSound.play();
 	});
 
 	$("#backButton3").click(function(){
-        magicSound.play();
 		$("#section3").css("display","block");
 		$("#section4").css("display","none");
+        magicSound.play();
 	});
 
 	function showYogotar(event) {
@@ -451,7 +453,6 @@
 	}
 
 	$("#nextButton3").click(function(){
-        magicSound.play();
 		$("#section5").css("display","block");
 		$("#section4").css("display","none");
 
@@ -467,16 +468,18 @@
 		server.start(currentID, onStart, {battleTime:battleTime, rules:customRules, maxRounds:counterRound});
 		server.addEventListener("onInitPlayer", showYogotar);
 		server.addEventListener('onPlayersReady', onPlayersReady);           
+                magicSound.play();
 
 	});
 
 	$("#StartButton").click(function(){
-        magicSound.play();
+        
 		if(gameReady) {
 			server.removeEventListener('onPlayersReady', onPlayersReady);
 			server.removeEventListener('onInitPlayer', showYogotar);
 			window.open("battle.html", "_self")
 		}
+        magicSound.play();
 	});
 
 	$(document).ready(function() {

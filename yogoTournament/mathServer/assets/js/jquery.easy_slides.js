@@ -19,6 +19,7 @@ Usage:
       });
 
 */
+var popSound = new Audio('sounds/pop.mp3');
 (function( $ ){
 
   $.fn.EasySlides = function( options ) {  
@@ -232,12 +233,14 @@ Usage:
         });
   
         $(this_slider).find('.next_button').click(function() {
+            popSound.play();
           EasySlidesCanChange = true;
           EasySlidesNext();
              TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
             
         });
         $(this_slider).find('.prev_button').click(function() {
+            popSound.play();
              TweenMax.fromTo($(this).find("img"),0.3,{scale:1.5},{scale:1});
           EasySlidesCanChange = true;
           cur_slide --;
