@@ -146,8 +146,10 @@
     
     var round = 0
     var time = 3
+    var popSound = new Audio('sounds/pop.mp3');
 
     $(".less-rounds").click(function(){
+        popSound.play();
         TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
         if(round > 0){
             round--
@@ -159,13 +161,18 @@
              $(".round").text(round);
         }
         if(round === 0){
-            $(".battles").text('battle');
+            $(".battles").text('battles');
             $(".round").text("∞");
+        }
+        if(round === 1){
+            $(".battles").text('battle');
+            $(".round").text(round);
         }
        
     });
 
     $(".more-rounds").click(function(){
+        popSound.play();
         TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
         if(round < 10){
             round++
@@ -174,15 +181,21 @@
         }
         else{ 
             round = 0
-            $(".battles").text('battle');
+            $(".battles").text('battles');
             $(".round").text("∞");
         }
         
+         if(round == 1) { 
+            
+            $(".battles").text('battle');
+            $(".round").text(round);
+        }
         
     });
 
     
     $(".less-time").click(function(){
+        popSound.play();
         TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
         if(time > 1){
             time--
@@ -198,6 +211,7 @@
     });
 
     $(".more-time").click(function(){
+        popSound.play();
         TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
         if(time < 10){
             time++
