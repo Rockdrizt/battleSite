@@ -1,6 +1,6 @@
 
 var soundsPath = "../../shared/minigames/sounds/"
-var spineScene = function(){
+var battleScene = function(){
 
     var localizationData = {
         "EN":{
@@ -42,10 +42,10 @@ var spineScene = function(){
         sounds: [
 		],
 		spines: [
-			{
-				name:"yogotarEagle",
-				file:"images/spines/Eagle/eagle.json"
-			},
+			// {
+			// 	name:"yogotarEagle",
+			// 	file:"images/spines/Eagle/eagle.json"
+			// },
 			// {
 			// 	name:"yogotarEagle",
 			// 	file:"images/spines/Eagle/eagle.json"
@@ -185,7 +185,7 @@ var spineScene = function(){
     return {
         assets: assets,
 		bootFiles:bootFiles,
-        name: "spineScene",
+        name: "battleScene",
         preload:preload,
 		update:function () {
 			epicparticles.update()
@@ -219,6 +219,9 @@ var spineScene = function(){
 			eagle.setAnimation(["run"], true)
 
 			initialize()
-        }
+        },
+		setCharacters: function () {
+			
+		}
     }
 }()

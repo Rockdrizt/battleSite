@@ -28,7 +28,7 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				sceneloader.show("spineScene")
+				sceneloader.show("battleScene")
 	    	}
 
 			document.body.style.visibility = "visible"
@@ -82,7 +82,7 @@ function startGame(){
     function create(){
 		console.log("createEpicBattle")
     	bootConfigFiles([
-			spineScene
+			battleScene
             //result,
     	])
     }
