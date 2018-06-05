@@ -181,6 +181,19 @@ var battleScene = function(){
 		return spineGroup
 	}
 
+	function setCharacter(character) {
+
+    	var jsonObject = {
+    		name: character + "Data",
+			file: "data/characters/" + character + ".json"
+		}
+
+		bootFiles.jsons.push(jsonObject)
+
+		assets.character = assets.character || {}
+		assets.character.push(character)
+	}
+
 
     return {
         assets: assets,
@@ -220,8 +233,15 @@ var battleScene = function(){
 
 			initialize()
         },
-		setCharacters: function () {
-			
+		setTeams: function (teams) {
+			for(var teamIndex = 0; teamIndex < teams.length; teamIndex++){
+				var team = teams[teamIndex]
+
+				for(var charIndex = 0; charIndex < team.length; charIndex++){
+					var character = team[charIndex]
+					setCharacter(character)
+				}
+			}
 		}
     }
 }()
