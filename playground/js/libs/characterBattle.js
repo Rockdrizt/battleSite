@@ -5,33 +5,69 @@ var characterBattle = function () {
 	var currentLoader
 	var currentGame
 
-	function addParticle(particleName){
+	function extractSound(soundID) {
+		var soundsList = game.cache.getJSON('sounds')
+		var assetsSounds = currentScene.assets.sounds
+
+		assetsSounds.push({
+			name:soundID,
+			file: soundsList[soundID]
+		})
+	}
+
+	function addParticle(particlePath){
+
+		var particleName = particlePath.substr(particlePath.lastIndexOf('/') + 1);
+		particleName = particleName.replace(".json/i", "");
+		var index = particleName.indexOf(".");
+		particleName = particleName.substring(index, particleName.length)
+
 		var assets = currentScene.assets
 
 		assets.particles = assets.particles || []
 		assets.particles.push({
 			name:particleName,
-			file
+			file:particlePath,
+			texture: particleName + ".png"
 		})
+	}
+
+	function extractParticles(particles) {
+		for(var particleIndex = 0; particleIndex < particles.length; particleIndex++){
+			var particlePath = particles[particleIndex]
+			addParticle(particlePath)
+		}
 	}
 
 	function addProjectile(id){
 		var projectileDat = currentGame.cache.getJSON(id + "Data")
 
 		if(projectileDat.particles){
-			for(var particleIndex = 0; particleIndex < projectileDat.particles.length; particleIndex++){
-				var particleName = p
-			}
+			extractParticles(projectileDat.particles)
+		}
+
+		if(projectileDat.impact.particles){
+			extractParticles(projectileDat.impact.particles)
+		}
+
+		if(projectileDat.impact.soundID){
+			extractSound(projectileDat.impact.soundID)
 		}
 	}
 
-	function addSpine(character) {
+	function addSpine(character, data) {
 		var assets = currentScene.assets
 
 		assets.spines = assets.spines || []
 		assets.spines.push({
 			name:character,
-			file:spineFile,
+			file:data.directory,
+			data:data
+		})
+
+		console.log({
+			name:character,
+			file:data.directory,
 			data:data
 		})
 	}
@@ -42,7 +78,6 @@ var characterBattle = function () {
 	}
 
 	function loadProjectilesData(characterName, characterData) {
-		var assets = currentScene.assets
 
 		if(typeof characterData.attacks === "undefined")
 			return
@@ -67,7 +102,7 @@ var characterBattle = function () {
 
 		loader.json(character.name + "Data", character.file)
 		loadingFiles[character.name + "Data"] = {onComplete:function(){
-			var characterData = game.cache.getJSON(character + "Data")
+			var characterData = game.cache.getJSON(character.name + "Data")
 			addSpine(character.name, characterData)
 			loadProjectilesData(character.name, characterData)
 		}}

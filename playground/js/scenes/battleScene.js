@@ -1,5 +1,5 @@
 
-var soundsPath = "../../shared/minigames/sounds/"
+var soundsPath = "https://play.yogome.com/shared/minigames/sounds/"
 var battleScene = function(){
 
     var localizationData = {
@@ -35,6 +35,12 @@ var battleScene = function(){
 				name:"sounds",
 				file:"data/sounds/general.json"
 			},
+		],
+		characters: [
+			{
+				name:"yogotarEagle",
+				file:"data/characters/yogotarEagle.json"
+			}
 		]
 	}
 
@@ -44,7 +50,7 @@ var battleScene = function(){
 		spines: [
 			// {
 			// 	name:"yogotarEagle",
-			// 	file:"images/spines/Eagle/eagle.json"
+			// 	file:"spines/Eagle/eagle.json"
 			// },
 			// {
 			// 	name:"yogotarEagle",

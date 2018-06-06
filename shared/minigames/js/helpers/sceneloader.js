@@ -58,13 +58,13 @@ var sceneloader = function(){
 		var inputDevice = game.device.desktop ? "desktop" : "movil"
 
 		currentLoader = createNewLoader(callbacks)
-		buttons.getImages(currentLoader)
+		//buttons.getImages(currentLoader)
 		loadingFiles = {}
 
 		for(var indexScene = 0; indexScene < scenes.length; indexScene++){
 
 			var currentScene = scenes[indexScene]
-			var fileArray = phase === "preload" ? currentScene["assets"] : currentScene["preload"]
+			var fileArray = phase === "preload" ? currentScene["assets"] : currentScene["bootFiles"]
 
 			var gameData = currentScene.getGameData ? currentScene.getGameData() : "none"
 			if((typeof gameData === "object")&&(phase === "preload")){
@@ -81,19 +81,18 @@ var sceneloader = function(){
 				}
 
 				if(typeof fileArray.characters == "object"){
-					for(var indexPart = 0; indexPart < fileArray.particles.length; indexPart++){
+					for(var indexPart = 0; indexPart < fileArray.characters.length; indexPart++){
 						var currentCharacter = fileArray.characters[indexPart]
-						characterBattle.loadCharacter(currentLoader, currentCharacter, fileArray, loadingFiles, game)
+						characterBattle.loadCharacter(currentLoader, currentCharacter, currentScene, loadingFiles, game)
 					}
 				}
 
 				if(typeof fileArray.spines == "object"){
 					for(var indexSpine = 0; indexSpine < fileArray.spines.length; indexSpine++){
 						var currentSpine = fileArray.spines[indexSpine]
-						currentSpine.currentScene = currentScene
 						// var spineLoader = new Phaser.Loader(game)
 						// spineLoader.onFileComplete.add(getSoundsSpine)
-						spineLoader.loadSpine(currentLoader, currentSpine, loadingFiles)
+						spineLoader.loadSpine(currentLoader, currentSpine, loadingFiles, currentScene)
 					}
 				}
 

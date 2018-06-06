@@ -40,9 +40,9 @@ var spineLoader = function () {
 		return {name: functionName, param: param}
 	}
 
-	function loadSpine(loader, currentSpine, loadingFiles) {
+	function loadSpine(loader, currentSpine, loadingFiles, currentScene) {
 		loader.spine(currentSpine.name, currentSpine.file)
-		loadingFiles[currentSpine.name] = {onComplete:getSpineEvents.bind(null, currentSpine.name, currentLoader, currentScene)}
+		loadingFiles[currentSpine.name] = {onComplete:getSpineEvents.bind(null, currentSpine.name, loader, currentScene)}
 	}
 
 	return {
