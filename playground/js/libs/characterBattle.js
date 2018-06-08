@@ -20,7 +20,7 @@ var characterBattle = function () {
 		var particleName = particlePath.substr(particlePath.lastIndexOf('/') + 1);
 		particleName = particleName.replace(".json/i", "");
 		var index = particleName.indexOf(".");
-		particleName = particleName.substring(index, particleName.length)
+		particleName = particleName.substring(0, index)
 
 		var assets = currentScene.assets
 
@@ -60,14 +60,9 @@ var characterBattle = function () {
 
 		assets.spines = assets.spines || []
 		assets.spines.push({
-			name:character,
+			name:character.name,
 			file:data.directory,
-			data:data
-		})
-
-		console.log({
-			name:character,
-			file:data.directory,
+			scales:character.scales,
 			data:data
 		})
 	}
@@ -103,7 +98,7 @@ var characterBattle = function () {
 		loader.json(character.name + "Data", character.file)
 		loadingFiles[character.name + "Data"] = {onComplete:function(){
 			var characterData = game.cache.getJSON(character.name + "Data")
-			addSpine(character.name, characterData)
+			addSpine(character, characterData)
 			loadProjectilesData(character.name, characterData)
 		}}
 

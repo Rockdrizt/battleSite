@@ -42,7 +42,7 @@ function startGame(){
     function init(){
 
         var fullWidth = 1024
-        var fullHeight = 768
+        var fullHeight = 1080
 
         var ratio = document.body.clientWidth / document.body.clientHeight
         var gameHeight = Math.round(fullHeight)
@@ -77,6 +77,8 @@ function startGame(){
         window.minigame.game = window.game
     	sceneloader.init(game)
     	sound.init(game)
+
+		battleScene.setCharacter("yogotarLuna")
     }
 
     function create(){

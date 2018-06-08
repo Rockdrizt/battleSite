@@ -38,8 +38,9 @@ var battleScene = function(){
 		],
 		characters: [
 			{
-				name:"yogotarEagle",
-				file:"data/characters/yogotarEagle.json"
+				name:"yogotarLuna",
+				file:"data/characters/yogotarLuna.json",
+				scales:['@0.5x']
 			}
 		]
 	}
@@ -73,6 +74,7 @@ var battleScene = function(){
 
     var sceneGroup
 	var clickLatch
+	var teams
 
     function loadSounds(){
 
@@ -115,7 +117,7 @@ var battleScene = function(){
 
 		var spineSkeleton = game.add.spine(0, 0, skeleton)
 		spineSkeleton.x = x; spineSkeleton.y = y
-		// spineSkeleton.scale.setTo(0.8,0.8)
+		//spineSkeleton.scale.setTo(0.8,0.8)
 		spineSkeleton.setSkinByName(skin)
 		spineSkeleton.setAnimationByName(0, idleAnimation, true)
 		// spineSkeleton.autoUpdateTransform ()
@@ -189,15 +191,16 @@ var battleScene = function(){
 
 	function setCharacter(character) {
 
-    	var jsonObject = {
-    		name: character + "Data",
-			file: "data/characters/" + character + ".json"
+    	var charObj = {
+    		name: character,
+			file: "data/characters/" + character + ".json",
+			scales: ["@0.5x"]
 		}
-
-		bootFiles.jsons.push(jsonObject)
-
-		assets.character = assets.character || {}
-		assets.character.push(character)
+		bootFiles.characters.push(charObj)
+		//TODO: this is a placeholder remove this later
+		//teams = []
+		//var team1 = [bootFiles.characters[bootFiles.characters.length - 1]]
+		//teams.push(team1)
 	}
 
 
@@ -221,7 +224,7 @@ var battleScene = function(){
 			}
 		},
         create: function(event){
-            
+
 			sceneGroup = game.add.group()
 
 			var background = game.add.graphics()
@@ -230,15 +233,19 @@ var battleScene = function(){
 			background.endFill()
 			sceneGroup.add(background)
 
-			var eagle = createSpine("yogotarEagle", "normal", "idle")
+			var char1 = assets.spines[0]
+			var nameLowerCase = char1.data.name.toLowerCase()
+
+			var eagle = createSpine(char1.name, nameLowerCase, "attack_ultra")
 			eagle.x = game.world.centerX
 			eagle.y = game.world.height
 			sceneGroup.add(eagle)
 
-			eagle.setAnimation(["run"], true)
+			//eagle.setAnimation(["run"], true)
 
 			initialize()
         },
+		setCharacter:setCharacter,
 		setTeams: function (teams) {
 			for(var teamIndex = 0; teamIndex < teams.length; teamIndex++){
 				var team = teams[teamIndex]

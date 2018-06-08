@@ -2,29 +2,11 @@
 	"category":"yogotar",
 	"attacks": {
 		"normal": [
-			{
-				"id": "fireball2",
-				"attachment": "particle2",
-				"delay": 350,
-				"multiplier": 1
-			},
-			{
-				"id": "fireball2",
-				"attachment": "particle4",
-				"delay": 350,
-				"multiplier": 1
-			}
 		],
 		"special": [
-			{
-				"id": "fireSplash1",
-				"attachment": "particle2",
-				"delay": 350,
-				"multiplier": 1
-			}
 		]
 	},
-	"directory": "images/spines/Dinamita/dinamita.json",
+	"directory": "spines/Dinamita/dinamita.json",
 	"name": "Dinamita",
 	"spine": {
 		"options": {
