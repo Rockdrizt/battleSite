@@ -37,11 +37,11 @@ var battleScene = function(){
 			},
 		],
 		characters: [
-			{
-				name:"yogotarLuna",
-				file:"data/characters/yogotarLuna.json",
-				scales:['@0.5x']
-			}
+			// {
+			// 	name:"yogotarLuna",
+			// 	file:"data/characters/yogotarLuna.json",
+			// 	scales:['@0.5x']
+			// }
 		]
 	}
 
@@ -88,7 +88,20 @@ var battleScene = function(){
         loadSounds()
 
     }
+	
+    function addParticle(character, params) {
+		console.log(character)
 
+    	var attachmentName = params[0]
+		var particleName = params[1]
+
+    	var slot = character.getSlotByAttachment(attachmentName)
+		var emitter = epicparticles.newEmitter(particleName) //particleName
+		slot.add(emitter)
+		character.spine.setToSetupPose()
+
+		console.log(particleName)
+	}
 
 	function preload(){
 
@@ -96,17 +109,11 @@ var battleScene = function(){
 	}
 
 	function getFunctionData(value) {
-		var indexOfFunc = value.indexOf(":")
-		var functionName = null
-		var param = null
+		var functionArrays = value.split(":")
+		var functionName = functionArrays[0]
+		var params = functionArrays.slice(1)
 
-		if(indexOfFunc > -1){
-			functionName = value.substr(0, indexOfFunc)
-			param = value.substr(indexOfFunc + 1)
-		}
-		// console.log(functionName, param)
-
-		return {name: functionName, param: param}
+		return {name: functionName, params: params}
 	}
 
 	function createSpine(skeleton, skin, idleAnimation, x, y) {
@@ -169,7 +176,22 @@ var battleScene = function(){
 			}
 		}
 
+		spineGroup.getSlotByAttachment = function (attachmentName) {
+			var slotIndex
+			for(var index = 0, n = spineSkeleton.skeletonData.slots.length; index < n; index++){
+				var slotData = spineSkeleton.skeletonData.slots[index]
+				if(slotData.attachmentName === attachmentName){
+					slotIndex = index
+				}
+			}
+
+			if (slotIndex){
+				return spineSkeleton.slotContainers[slotIndex]
+			}
+		}
+
 		spineSkeleton.onEvent.add(function (i,e) {
+			console.log(i, e)
 			var eventName = e.data.name
 
 			if((!eventName)&&(typeof eventName !== 'string'))
@@ -180,7 +202,11 @@ var battleScene = function(){
 
 			if(functionData.name === "PLAY"){
 				// console.log(functionData.param)
-				sound.play(functionData.param)
+				sound.play(functionData.params[0])
+			}
+			if(functionData.name === "SPAWN"){
+				// console.log(functionData.param)
+				addParticle(spineGroup, functionData.params)
 			}
 		})
 
@@ -236,10 +262,12 @@ var battleScene = function(){
 			var char1 = assets.spines[0]
 			var nameLowerCase = char1.data.name.toLowerCase()
 
-			var eagle = createSpine(char1.name, nameLowerCase, "attack_ultra")
+			console.log(assets.spines)
+			var eagle = createSpine(char1.name, nameLowerCase, "hit_super")
 			eagle.x = game.world.centerX
 			eagle.y = game.world.height
 			sceneGroup.add(eagle)
+			console.log(eagle)
 
 			//eagle.setAnimation(["run"], true)
 
