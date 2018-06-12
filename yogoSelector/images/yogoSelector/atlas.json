@@ -1,0 +1,165 @@
+{"frames": [
+
+{
+	"filename": "light1",
+	"frame": {"x":955,"y":73,"w":150,"h":456},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":10,"w":150,"h":456},
+	"sourceSize": {"w":150,"h":466},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "light2",
+	"frame": {"x":804,"y":73,"w":149,"h":474},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":11,"w":149,"h":474},
+	"sourceSize": {"w":149,"h":485},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "pinkLight",
+	"frame": {"x":1,"y":1,"w":1668,"h":70},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":9,"w":1668,"h":70},
+	"sourceSize": {"w":1668,"h":88},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "ready",
+	"frame": {"x":1,"y":359,"w":591,"h":208},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":14,"y":16,"w":591,"h":208},
+	"sourceSize": {"w":618,"h":230},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "teamBar0",
+	"frame": {"x":1,"y":73,"w":798,"h":138},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":0,"w":798,"h":138},
+	"sourceSize": {"w":802,"h":138},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "teamBar1",
+	"frame": {"x":1,"y":213,"w":767,"h":144},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":7,"y":0,"w":767,"h":144},
+	"sourceSize": {"w":774,"h":144},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "token0",
+	"frame": {"x":1107,"y":73,"w":193,"h":226},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":193,"h":226},
+	"sourceSize": {"w":193,"h":226},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "token1",
+	"frame": {"x":1107,"y":301,"w":193,"h":226},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":193,"h":226},
+	"sourceSize": {"w":193,"h":226},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "token2",
+	"frame": {"x":1302,"y":73,"w":193,"h":226},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":193,"h":226},
+	"sourceSize": {"w":193,"h":226},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "yogo0",
+	"frame": {"x":1822,"y":360,"w":146,"h":168},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":146,"h":168},
+	"sourceSize": {"w":146,"h":168},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "yogo1",
+	"frame": {"x":1497,"y":73,"w":163,"h":186},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":163,"h":186},
+	"sourceSize": {"w":163,"h":186},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "yogo2",
+	"frame": {"x":1497,"y":261,"w":162,"h":183},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":162,"h":183},
+	"sourceSize": {"w":162,"h":183},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "yogo3",
+	"frame": {"x":1671,"y":1,"w":175,"h":175},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":175,"h":175},
+	"sourceSize": {"w":175,"h":175},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "yogo4",
+	"frame": {"x":1662,"y":178,"w":163,"h":180},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":163,"h":180},
+	"sourceSize": {"w":163,"h":180},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "yogo5",
+	"frame": {"x":594,"y":359,"w":208,"h":182},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":208,"h":182},
+	"sourceSize": {"w":208,"h":182},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "yogo6",
+	"frame": {"x":1661,"y":360,"w":159,"h":181},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":159,"h":181},
+	"sourceSize": {"w":159,"h":181},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "yogo7",
+	"frame": {"x":1302,"y":301,"w":188,"h":172},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":188,"h":172},
+	"sourceSize": {"w":188,"h":172},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "atlas.png",
+	"format": "RGBA8888",
+	"size": {"w":1969,"h":568},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:2ca28d41845eb8b9328787038800882b:f6449d57dbe243993684e774bcff91f6:cbce6b53f0f49e0bf15173c25c41f876$"
+}
+}
