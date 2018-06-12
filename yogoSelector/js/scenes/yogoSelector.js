@@ -33,37 +33,36 @@ var yogoSelector = function(){
             },
             {
                 name: "player0",
-                file: "images/yogoSelector/player0.png",
+                file: "images/yogoSelector/dinamita.png",
             },
             {
                 name: "player1",
-                file: "images/yogoSelector/player1.png",
+                file: "images/yogoSelector/luna.png",
             },
             {
                 name: "player2",
-                file: "images/yogoSelector/player2.png",
+                file: "images/yogoSelector/nao.png",
             },
             {
                 name: "player3",
-                file: "images/yogoSelector/player3.png",
+                file: "images/yogoSelector/theffanie.png",
             },
             {
                 name: "player4",
-                file: "images/yogoSelector/player4.png",
+                file: "images/yogoSelector/eagle.png",
             },
             {
                 name: "player5",
-                file: "images/yogoSelector/player5.png",
+                file: "images/yogoSelector/tomiko.png",
             },
             {
                 name: "player6",
-                file: "images/yogoSelector/player6.png",
+                file: "images/yogoSelector/arthurius.png",
             },
             {
                 name: "player7",
-                file: "images/yogoSelector/player7.png",
+                file: "images/yogoSelector/estrella.png",
             },
-            
 		],
 		sounds: [
 		],
@@ -79,6 +78,7 @@ var yogoSelector = function(){
     }
 
 	var sceneGroup
+    var tile
     var teamsBarGroup
     var yogoGroup
     var alphaGroup
@@ -98,31 +98,10 @@ var yogoSelector = function(){
         
         counter = 0
 	}
-
-    function popObject(obj,delay){
-         
-        game.time.events.add(delay,function(){
-            
-            sound.play("cut")
-            obj.alpha = 1
-            game.add.tween(obj.scale).from({ y:0.01},250,Phaser.Easing.linear,true)
-        },this)
-    }
-    
-    function animateScene() {
-                
-        sceneGroup.alpha = 0
-        game.add.tween(sceneGroup).to({alpha:1},400, Phaser.Easing.Cubic.Out,true)
-    }
     
     function preload(){
 		
         game.stage.disableVisibilityChange = false
-    }
-    
-    function releaseButton(obj){
-        
-        obj.parent.children[1].alpha = 1
     }
 
 	function createBackground(){
@@ -139,39 +118,19 @@ var yogoSelector = function(){
             bmd.rect(0, y, bmd.width, y + 1, Phaser.Color.getWebRGB(color))
             y += 2
         }
-        
         sceneGroup.add(back)
-        tile = game.add.tileSprite(0, 0, game.world.width, game.world.height, "tile")
+        
+        tile = game.add.tileSprite(game.world.centerX, game.world.centerY, game.world.width + 150, game.world.width + 180, "tile")
+        tile.anchor.setTo(0.5)
         tile.tint = 0x0099AA
+        tile.angle = -45
         sceneGroup.add(tile)
     }
 
 	function update(){
         tile.tilePosition.y -= 0.2
     }
-    
-    function createPart(key){
-        var particle = game.add.emitter(0, 0, 100)
-        particle.makeParticles('atlas.yogoSelector',key)
-        particle.minParticleSpeed.setTo(-200, -50)
-        particle.maxParticleSpeed.setTo(200, -100)
-        particle.minParticleScale = 0.3
-        particle.maxParticleScale = .8
-        particle.gravity = 150
-        particle.angularDrag = 30
-        particle.setAlpha(1, 0, 2000, Phaser.Easing.Cubic.In)
-        return particle
-    }
-    
-    function createParticles(){
-        
-        /*particleCorrect = createPart('star')
-        sceneGroup.add(particleCorrect)
-        
-        particleWrong = createPart('smoke')
-        sceneGroup.add(particleWrong)*/
-    }
-    
+
     function createYogotars(){
         
         alphaGroup = game.add.group()
@@ -346,7 +305,7 @@ var yogoSelector = function(){
 		
 		assets: assets,
 		name: "yogoSelector",
-		//update: update,
+		update: update,
         preload:preload,
 		create: function(event){
             
@@ -354,7 +313,6 @@ var yogoSelector = function(){
 			
 			createBackground()	
             initialize()
-            //createParticles()
             createYogotars()
             createTeamsBars()
             createSelector()
