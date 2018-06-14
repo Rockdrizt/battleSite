@@ -83,11 +83,11 @@
 },
 {
 	"filename": "yogo0",
-	"frame": {"x":1822,"y":360,"w":146,"h":168},
+	"frame": {"x":594,"y":359,"w":208,"h":182},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":146,"h":168},
-	"sourceSize": {"w":146,"h":168},
+	"spriteSourceSize": {"x":0,"y":0,"w":208,"h":182},
+	"sourceSize": {"w":208,"h":182},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
@@ -128,11 +128,11 @@
 },
 {
 	"filename": "yogo5",
-	"frame": {"x":594,"y":359,"w":208,"h":182},
+	"frame": {"x":1822,"y":360,"w":146,"h":168},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":208,"h":182},
-	"sourceSize": {"w":208,"h":182},
+	"spriteSourceSize": {"x":0,"y":0,"w":146,"h":168},
+	"sourceSize": {"w":146,"h":168},
 	"pivot": {"x":0.5,"y":0.5}
 },
 {
@@ -160,6 +160,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1969,"h":568},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:2ca28d41845eb8b9328787038800882b:f6449d57dbe243993684e774bcff91f6:cbce6b53f0f49e0bf15173c25c41f876$"
+	"smartupdate": "$TexturePacker:SmartUpdate:027d443daa2779a7daeba2646dbae985:77842c1d507c1b019bcee94f9580e7fa:cbce6b53f0f49e0bf15173c25c41f876$"
 }
 }
