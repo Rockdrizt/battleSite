@@ -410,6 +410,10 @@ var epicparticles = function(){
 		emitters.push(emitter)
 
 		var data = game.cache.getJSON(key)
+		if(!data){
+			console.warn("Particle " + key + " not found.")
+			return false
+		}
 
 		emitter.emitterType = data.emitterType
 		emitter.sourcePosition = {
@@ -502,6 +506,7 @@ var epicparticles = function(){
 	return {
 		loadEmitter: loadEmitter,
 		newEmitter: newEmitter,
+		removeEmitter:removeEmitter,
 		update: update,
 		init: init,
 	}

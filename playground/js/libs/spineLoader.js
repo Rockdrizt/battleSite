@@ -10,12 +10,16 @@ var spineLoader = function () {
 			file:soundsList[name]
 		}
 
+		if(typeof soundObj.file === "undefined"){
+			console.warn("sound " + name + " not found")
+			return
+		}
+
 		assetsSounds.push(soundObj)
 		currentLoader.audio(soundObj.name, soundObj.file);
 	}
 
-	function addParticle(functionData, assetsParticles, string){
-		var name = functionData.params[1]
+	function addParticle(name, assetsParticles, string){
 
 		var particleObj = {
 			name:name,
@@ -36,8 +40,8 @@ var spineLoader = function () {
 		var events = jsonFile.events
 		console.log(events, spine)
 
-		//var soundsList = game.cache.getJSON('sounds')
-		//var assetsSounds = currentScene.assets.sounds
+		var soundsList = game.cache.getJSON('sounds')
+		var assetsSounds = currentScene.assets.sounds
 
 		currentScene.assets.particles = currentScene.assets.particles || []
 		var assetsParticles = currentScene.assets.particles
@@ -49,12 +53,18 @@ var spineLoader = function () {
 
 			var objContent = events[key]
 
-			// if((functionData)&&(functionData.name === "PLAY")){
-			// 	addSound(functionData, soundsList, assetsSounds)
-			// }
+			if((functionData)&&(functionData.name === "PLAY")){
+				addSound(functionData, soundsList, assetsSounds)
+			}
 
 			if((functionData)&&(functionData.name === "SPAWN")){
-				addParticle(functionData, assetsParticles, objContent.string)
+				var name = functionData.params[1]
+				addParticle(name, assetsParticles, objContent.string)
+			}
+
+			if((functionData)&&(functionData.name === "STAGESPAWN")){
+				var name = functionData.params[functionData.params.length - 1]
+				addParticle(name, assetsParticles, objContent.string)
 			}
 		}
 	}
