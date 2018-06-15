@@ -78,7 +78,7 @@ function startGame(){
     	sceneloader.init(game)
     	sound.init(game)
 
-		battleScene.setCharacter("yogotarDinamita")
+		battleScene.setCharacter("yogotarLuna")
     }
 
     function create(){

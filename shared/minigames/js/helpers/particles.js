@@ -320,8 +320,15 @@ var epicparticles = function(){
 		particle.sprite.height = particle.particleSize
 
 		particle.sprite.alpha = c.a
+		var r = c.r * 255
+		var g = c.g * 255
+		var b = c.b * 255
 
-		// TODO implement tint/Color
+		var tint = Phaser.Color.getColor(r, g, b)
+		particle.sprite.tint = tint
+		//particle.sprite.blendMode = PIXI.blendModes.MULTIPLY;
+
+		//console.log(emitter.blendFuncSource)
 	}
 
 	function removeParticleAtIndex(emitter, index){

@@ -2,29 +2,13 @@
 	"category":"yogotar",
 	"attacks": {
 		"normal": [
-			{
-				"id": "waterball",
-				"attachment": "particle2",
-				"delay": 150,
-				"multiplier": 1
-			},
-			{
-				"id": "waterball",
-				"attachment": "particle4",
-				"delay": 350,
-				"multiplier": 1
-			}
+			
 		],
 		"special": [
-			{
-				"id": "explosionWater",
-				"attachment": "particle2",
-				"delay": 350,
-				"multiplier": 1
-			}
+			
 		]
 	},
-	"directory": "images/spines/Estrella/estrella.json",
+	"directory": "spines/Estrella/estrella.json",
 	"name": "Estrella",
 	"spine": {
 		"options": {

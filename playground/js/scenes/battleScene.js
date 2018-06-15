@@ -163,7 +163,7 @@ var battleScene = function(){
 			return
 
 		slot.add(emitter)
-		character.spine.setToSetupPose()
+		//character.spine.setToSetupPose()
 		slot[particleName] = emitter
 	}
 
@@ -239,6 +239,7 @@ var battleScene = function(){
 				entry.onComplete = onComplete
 			}
 
+			spineSkeleton.setToSetupPose()
 			return entry
 		}
 
@@ -376,8 +377,7 @@ var battleScene = function(){
 			var char1 = assets.spines[0]
 			var nameLowerCase = char1.data.name.toLowerCase()
 
-			console.log(assets.spines)
-			var eagle = createSpine(char1.name, nameLowerCase, "hit_super")
+			var eagle = createSpine(char1.name, nameLowerCase, "run")
 			eagle.x = -game.world.centerX * 0.5
 			eagle.y = game.world.centerY - 100
 			sceneGroup.add(eagle)
