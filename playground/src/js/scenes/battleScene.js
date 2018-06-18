@@ -1,39 +1,39 @@
 
 var soundsPath = "https://play.yogome.com/shared/minigames/sounds/"
-var battleScene = function(){
+var battleScene = function() {
 
 	var localizationData = {
-		"EN":{
-			"howTo":"How to Play?",
-			"moves":"Moves left",
-			"question":"Question ",
-			"winner":"WINNER",
-			"victory":"VICTORY",
-			"newCard":"New Card",
-			"perfect":"PERFECT",
-			"good":"GOOD",
-			"weak":"WEAK",
-			"dontgiveup":"DON'T GIVE UP"
+		"EN": {
+			"howTo": "How to Play?",
+			"moves": "Moves left",
+			"question": "Question ",
+			"winner": "WINNER",
+			"victory": "VICTORY",
+			"newCard": "New Card",
+			"perfect": "PERFECT",
+			"good": "GOOD",
+			"weak": "WEAK",
+			"dontgiveup": "DON'T GIVE UP"
 		},
 
-		"ES":{
-			"moves":"Movimientos extra",
-			"howTo":"�C�mo jugar?",
-			"question":"Pregunta ",
-			"winner":"GANADOR",
-			"victory":"VICTORIA",
-			"newCard":"Nueva Carta",
-			"perfect":"PERFECTO",
-			"good":"BIEN",
-			"weak":"DEBIL",
-			"dontgiveup":"NO TE RINDAS"
+		"ES": {
+			"moves": "Movimientos extra",
+			"howTo": "�C�mo jugar?",
+			"question": "Pregunta ",
+			"winner": "GANADOR",
+			"victory": "VICTORIA",
+			"newCard": "Nueva Carta",
+			"perfect": "PERFECTO",
+			"good": "BIEN",
+			"weak": "DEBIL",
+			"dontgiveup": "NO TE RINDAS"
 		}
 	}
 	var bootFiles = {
 		jsons: [
 			{
-				name:"sounds",
-				file:"data/sounds/tournament.json"
+				name: "sounds",
+				file: "data/sounds/tournament.json"
 			},
 		],
 		characters: [
@@ -46,8 +46,7 @@ var battleScene = function(){
 	}
 
 	var assets = {
-		sounds: [
-		],
+		sounds: [],
 		images: [
 			{
 				name: "stage",
@@ -64,7 +63,7 @@ var battleScene = function(){
 			// 	file:"images/spines/Eagle/eagle.json"
 			// }
 		],
-		particles:[
+		particles: [
 			{
 				name: 'pickedEnergy',
 				file: 'particles/battle/pickedEnergy/specialBar1.json',
@@ -80,10 +79,11 @@ var battleScene = function(){
 
 	var sceneGroup
 	var clickLatch
-	var teams
+	var teams = []
 	var particles
+	var eagle
 
-	function loadSounds(){
+	function loadSounds() {
 
 		// console.log(assets.sounds)
 		sound.decode(assets.sounds)
@@ -110,17 +110,17 @@ var battleScene = function(){
 		return buttonGroup
 	}
 
-	function createMenuAnimations(eagle) {
-		var animations = eagle.spine.skeletonData.animations
+	function createMenuAnimations(characterGroup) {
+		var animations = characterGroup.spine.skeletonData.animations
 
 		function changeAnimation(name) {
-			eagle.setAnimation([name], true)
+			characterGroup.setAnimation([name], true)
 		}
 
-		for (var animationIndex = 0; animationIndex < animations.length; animationIndex++){
+		for (var animationIndex = 0; animationIndex < animations.length; animationIndex++) {
 			var animationName = animations[animationIndex].name
 			var pivotY = Math.floor(animationIndex / 10)
- 			var pivotX = animationIndex % 10
+			var pivotX = animationIndex % 10
 
 			var button = createButton(changeAnimation.bind(null, animationName))
 			button.x = pivotX * 200
@@ -129,7 +129,7 @@ var battleScene = function(){
 		}
 	}
 
-	function initialize(){
+	function initialize() {
 		particles = {}
 		game.stage.backgroundColor = "#ffffff"
 		//gameActive = true
@@ -139,13 +139,13 @@ var battleScene = function(){
 
 	function addParticle(group, offsetX, offsetY, zindex, particleName) {
 		var emitter = epicparticles.newEmitter(particleName)
-		if(!emitter)
+		if (!emitter)
 			return
 
 		emitter.x = offsetX
 		emitter.y = offsetY
 		group.add(emitter)
-		if(zindex === "back")
+		if (zindex === "back")
 			group.sendToBack(emitter)
 
 		particles[particleName] = emitter
@@ -159,7 +159,7 @@ var battleScene = function(){
 
 		var slot = character.getSlotByAttachment(attachmentName)
 		var emitter = epicparticles.newEmitter(particleName)
-		if(!emitter)
+		if (!emitter)
 			return
 
 		slot.add(emitter)
@@ -181,7 +181,7 @@ var battleScene = function(){
 		epicparticles.removeEmitter(emitter)
 	}
 
-	function preload(){
+	function preload() {
 
 		game.stage.disableVisibilityChange = true;
 	}
@@ -195,7 +195,7 @@ var battleScene = function(){
 	}
 
 	function getGroupRef(ref, self) {
-		switch (ref){
+		switch (ref) {
 			case "self" :
 				return self
 			case "stage" :
@@ -212,7 +212,8 @@ var battleScene = function(){
 		y = y || 0
 
 		var spineSkeleton = game.add.spine(0, 0, skeleton)
-		spineSkeleton.x = x; spineSkeleton.y = y
+		spineSkeleton.x = x;
+		spineSkeleton.y = y
 		//spineSkeleton.scale.setTo(0.8,0.8)
 		spineSkeleton.setSkinByName(skin)
 		spineSkeleton.setAnimationByName(0, idleAnimation, true)
@@ -222,7 +223,7 @@ var battleScene = function(){
 
 		spineGroup.setAnimation = function (animations, loop, onComplete, args) {
 			var entry
-			for(var index = 0; index < animations.length; index++) {
+			for (var index = 0; index < animations.length; index++) {
 				var animation = animations[index]
 				var isLoop = (index === animations.length - 1) && loop
 				if (index === 0)
@@ -235,7 +236,7 @@ var battleScene = function(){
 			if (args)
 				entry.args = args
 
-			if(onComplete){
+			if (onComplete) {
 				entry.onComplete = onComplete
 			}
 
@@ -254,50 +255,52 @@ var battleScene = function(){
 
 		spineGroup.getSlotContainer = function (slotName) {
 			var slotIndex
-			for(var index = 0, n = spineSkeleton.skeletonData.slots.length; index < n; index++){
+			for (var index = 0, n = spineSkeleton.skeletonData.slots.length; index < n; index++) {
 				var slotData = spineSkeleton.skeletonData.slots[index]
-				if(slotData.name === slotName){
+				if (slotData.name === slotName) {
 					slotIndex = index
 				}
 			}
 
-			if (slotIndex){
+			if (slotIndex) {
 				return spineSkeleton.slotContainers[slotIndex]
 			}
 		}
 
 		spineGroup.getSlotByAttachment = function (attachmentName) {
 			var slotIndex
-			for(var index = 0, n = spineSkeleton.skeletonData.slots.length; index < n; index++){
+			for (var index = 0, n = spineSkeleton.skeletonData.slots.length; index < n; index++) {
 				var slotData = spineSkeleton.skeletonData.slots[index]
-				if(slotData.attachmentName === attachmentName){
+				if (slotData.attachmentName === attachmentName) {
 					slotIndex = index
 				}
 			}
 
-			if (slotIndex){
+			if (slotIndex) {
 				return spineSkeleton.slotContainers[slotIndex]
 			}
 		}
 
-		spineSkeleton.onEvent.add(function (i,e) {
+		spineSkeleton.onEvent.add(function (i, e) {
 			var eventName = e.data.name
 
-			if((!eventName)&&(typeof eventName !== 'string'))
+			if ((!eventName) && (typeof eventName !== 'string'))
 				return
 
 			var functionData = getFunctionData(eventName)
-			if((!functionData)||(!functionData.name)){return}
+			if ((!functionData) || (!functionData.name)) {
+				return
+			}
 
-			if(functionData.name === "PLAY"){
+			if (functionData.name === "PLAY") {
 				// console.log(functionData.param)
 				sound.play(functionData.params[0])
 			}
-			if(functionData.name === "SPAWN"){
+			if (functionData.name === "SPAWN") {
 				// console.log(functionData.param)
 				addParticleCharacter(spineGroup, functionData.params)
 			}
-			if(functionData.name === "STAGESPAWN"){
+			if (functionData.name === "STAGESPAWN") {
 				// console.log(functionData.param)
 				var ref = functionData.params[0]
 				var group = getGroupRef(ref, spineGroup)
@@ -308,11 +311,11 @@ var battleScene = function(){
 
 				addParticle(group, offsetX, offsetY, zIndex, particleName)
 			}
-			if(functionData.name === "DESPAWN"){
+			if (functionData.name === "DESPAWN") {
 				// console.log(functionData.param)
 				removeParticleCharacter(spineGroup, functionData.params)
 			}
-			if(functionData.name === "STAGEDESPAWN"){
+			if (functionData.name === "STAGEDESPAWN") {
 				// console.log(functionData.param)
 				removeParticle(functionData.params)
 			}
@@ -324,20 +327,35 @@ var battleScene = function(){
 		return spineGroup
 	}
 
-	function setCharacter(character) {
+	function setCharacter(character, teamIndex) {
 
 		var charObj = {
 			name: character,
 			file: "data/characters/" + character + ".json",
-			scales: ["@0.5x"]
+			scales: ["@0.5x"],
+			teamNum:teamIndex
 		}
 		bootFiles.characters.push(charObj)
-		//TODO: this is a placeholder remove this later
-		//teams = []
-		//var team1 = [bootFiles.characters[bootFiles.characters.length - 1]]
-		//teams.push(team1)
 	}
 
+	function placeYogotars() {
+
+		for(var teamIndex = 0; teamIndex < teams.length; teamIndex++){
+			var teamCharacters = teams[teamIndex]
+
+			for(var charIndex = 0; charIndex < teamCharacters.length; charIndex++){
+				var character = teamCharacters[charIndex]
+				var nameLowerCase = character.data.name.toLowerCase()
+
+				eagle = createSpine(character.name, nameLowerCase, "run")
+				eagle.x = -game.world.centerX * 0.5
+				eagle.y = game.world.centerY - 100
+				sceneGroup.add(eagle)
+				console.log(eagle)
+			}
+		}
+
+	}
 
 	return {
 		assets: assets,
@@ -374,29 +392,31 @@ var battleScene = function(){
 			stage.scale.setTo(1.12, 1.12)
 			stage.anchor.setTo(0.5, 0.5)
 
-			var char1 = assets.spines[0]
-			var nameLowerCase = char1.data.name.toLowerCase()
+			// placeYogotars()
 
-			var eagle = createSpine(char1.name, nameLowerCase, "run")
-			eagle.x = -game.world.centerX * 0.5
-			eagle.y = game.world.centerY - 100
-			sceneGroup.add(eagle)
-			console.log(eagle)
-
-			createMenuAnimations(eagle)
+			// createMenuAnimations(eagle)
 
 			//eagle.setAnimation(["run"], true)
 
 			initialize()
 		},
 		setCharacter:setCharacter,
-		setTeams: function (teams) {
-			for(var teamIndex = 0; teamIndex < teams.length; teamIndex++){
-				var team = teams[teamIndex]
+		onLoadCharacter:function (characterObj) {
+			var teamIndex = characterObj.teamNum
+
+			if(typeof teams[teamIndex] === "undefined")
+				teams[teamIndex] = []
+
+			teams[teamIndex].push(characterObj)
+		},
+		setTeams: function (myTeams) {
+			teams = []
+			for(var teamIndex = 0; teamIndex < myTeams.length; teamIndex++){
+				var team = myTeams[teamIndex]
 
 				for(var charIndex = 0; charIndex < team.length; charIndex++){
 					var character = team[charIndex]
-					setCharacter(character)
+					setCharacter(character, teamIndex)
 				}
 			}
 		}
