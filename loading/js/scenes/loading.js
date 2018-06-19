@@ -129,28 +129,35 @@ var loading = function(){
         var pivotX = 0.25
         var aux = 1
         var pivotS = 1
+        var offsetY = 400
         
         for(var i = 0; i < 6; i++){
             
-            var container = splashArtGroup.create(game.world.centerX * pivotX, game.world.height * aux, "atlas.loading", "container" + aux)
-            container.scale.setTo(0.9)
-            container.anchor.setTo(0.5, aux)
+            var container = game.add.sprite(0, 100 * aux, "atlas.loading", "container" + aux)
+            var splash = game.add.sprite(0, offsetY, "player" + i)
             
-            var splashArt = game.add.sprite(0, 0, "player" + i)
+            var bmd = game.make.bitmapData(splash.width, container.height + 100)
+            bmd.alphaMask(splash, container)
+            
+            var splashArt = game.add.image(game.world.centerX * pivotX, game.world.height * aux, bmd)
             splashArt.anchor.setTo(0.5, aux)
-            container.addChild(splashArt)
-            splashArtGroup.splashArt = splashArt
+            splashArt.scale.setTo(0.9)
+            splashArtGroup.add(splashArt)
             
             if(i === 2){
                 aux = 0
+                offsetY = 100
             }
            
             i === 2 ? pivotX += 0.5 : pivotX += 0.25
             
             if(pivotS === i){
                 pivotS += 2
-                container.scale.setTo(-0.9, 0.9)
+                splashArt.scale.setTo(-0.9, 0.9)
             }
+            
+            container.destroy()
+            splash.destroy()
         }
         
         VS = sceneGroup.create(game.world.centerX, game.world.centerY, "atlas.loading", "vs")
