@@ -204,6 +204,15 @@ var epicparticles = function(){
 		emitter.emitCounter = 0
 	}
 
+	function componentToHex(c) {
+		var hex = c.toString(16);
+		return hex.length == 1 ? "0" + hex : hex;
+	}
+
+	function rgbToHex(r, g, b) {
+		return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+	}
+
 	function updateParticleAtIndex(emitter, index, delta){
 		var particle = emitter.particles[index]
 
@@ -325,7 +334,7 @@ var epicparticles = function(){
 		var b = c.b * 255
 
 		var tint = Phaser.Color.getColor(r, g, b)
-		particle.sprite.tint = tint
+		particle.sprite.tint = 0xffffff
 		//particle.sprite.blendMode = PIXI.blendModes.MULTIPLY;
 
 		//console.log(emitter.blendFuncSource)
