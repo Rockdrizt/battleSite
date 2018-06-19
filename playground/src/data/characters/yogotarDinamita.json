@@ -2,26 +2,8 @@
 	"category":"yogotar",
 	"attacks": {
 		"normal": [
-			{
-				"id": "earthExplosion1",
-				"attachment": "particle2",
-				"delay": 350,
-				"multiplier": 1
-			},
-			{
-				"id": "fireball2",
-				"attachment": "particle4",
-				"delay": 350,
-				"multiplier": 1
-			}
 		],
 		"special": [
-			{
-				"id": "fireSplash1",
-				"attachment": "particle2",
-				"delay": 350,
-				"multiplier": 1
-			}
 		]
 	},
 	"directory": "spines/Dinamita/dinamita.json",
