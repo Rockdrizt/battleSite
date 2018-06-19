@@ -78,7 +78,12 @@ function startGame(){
     	sceneloader.init(game)
     	sound.init(game)
 
-		battleScene.setCharacter("yogotarLuna", 0)
+		var teams = [
+			["yogotarLuna", "yogotarLuna", "yogotarLuna"],
+			["yogotarLuna", "yogotarLuna", "yogotarLuna"]
+		]
+
+		battleScene.setTeams(teams)
     }
 
     function create(){

@@ -55,14 +55,15 @@ var characterBattle = function () {
 		}
 	}
 
-	function addSpine(character) {
+	function addSpine(character, data) {
 		var assets = currentScene.assets
 
 		assets.spines = assets.spines || []
 		assets.spines.push({
 			name:character.name,
 			file:data.directory,
-			scales:character.scales
+			scales:character.scales,
+			data:data
 		})
 	}
 
@@ -97,10 +98,9 @@ var characterBattle = function () {
 		loader.json(character.name + "Data", character.file)
 		loadingFiles[character.name + "Data"] = {onComplete:function(){
 				var characterData = game.cache.getJSON(character.name + "Data")
-				// addSpine(character, characterData)
-				// character.data = characterData
-				// battleScene.onLoadCharacter(character)
-				// loadProjectilesData(character.name, characterData)
+				addSpine(character, characterData)
+				character.data = characterData
+				loadProjectilesData(character.name, characterData)
 			}}
 
 	}

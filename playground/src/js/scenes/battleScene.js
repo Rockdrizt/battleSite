@@ -77,6 +77,21 @@ var battleScene = function() {
 		]
 	}
 
+	var SIDES = {
+		LEFT:{direction: -1, scale:{x:1}},
+		RIGHT:{direction: 1, scale:{x:-1}},
+	}
+
+	var POSITIONS = {
+		UP:{x:130, y: -200, scale:{x:0.8, y:0.8}},
+		MID:{x:350, y: 0, scale:{x:0.9, y:0.9}},
+		DOWN:{x:-70, y: 120, scale:{x:1, y:1}},
+	}
+
+	var ORDER_SIDES = [SIDES.LEFT, SIDES.RIGHT]
+	var ORDER_POSITIONS = [POSITIONS.UP, POSITIONS.MID, POSITIONS.DOWN]
+	var CHARACTER_CENTER_OFFSET = {x:-200, y: -200}
+
 	var sceneGroup
 	var clickLatch
 	var teams = []
@@ -338,18 +353,34 @@ var battleScene = function() {
 		bootFiles.characters.push(charObj)
 	}
 
+	function getSpineInfo(characterName) {
+		for(var spineIndex = 0; spineIndex < assets.spines.length; spineIndex++){
+			if(characterName === assets.spines[spineIndex].name)
+				return assets.spines[spineIndex]
+		}
+	}
+
 	function placeYogotars() {
 
 		for(var teamIndex = 0; teamIndex < teams.length; teamIndex++){
 			var teamCharacters = teams[teamIndex]
+			var side = ORDER_SIDES[teamIndex]
 
 			for(var charIndex = 0; charIndex < teamCharacters.length; charIndex++){
-				var character = teamCharacters[charIndex]
+				var characterName = teamCharacters[charIndex]
+				var character = getSpineInfo(characterName)
+
 				var nameLowerCase = character.data.name.toLowerCase()
+				var position = ORDER_POSITIONS[charIndex]
+
+				var xOffset = CHARACTER_CENTER_OFFSET.x * side.scale.x + position.x * side.scale.x
 
 				eagle = createSpine(character.name, nameLowerCase, "run")
-				eagle.x = -game.world.centerX * 0.5
-				eagle.y = game.world.centerY - 100
+				eagle.x = game.world.centerX * 0.5 * side.direction + xOffset
+				eagle.y = CHARACTER_CENTER_OFFSET.y + game.world.centerY + position.y
+				console.log("postion", eagle.position)
+				eagle.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
+				eagle.data = character.data
 				sceneGroup.add(eagle)
 				console.log(eagle)
 			}
@@ -392,25 +423,17 @@ var battleScene = function() {
 			stage.scale.setTo(1.12, 1.12)
 			stage.anchor.setTo(0.5, 0.5)
 
-			// placeYogotars()
+			placeYogotars()
 
-			// createMenuAnimations(eagle)
+			createMenuAnimations(eagle)
 
 			//eagle.setAnimation(["run"], true)
 
 			initialize()
 		},
 		setCharacter:setCharacter,
-		onLoadCharacter:function (characterObj) {
-			var teamIndex = characterObj.teamNum
-
-			if(typeof teams[teamIndex] === "undefined")
-				teams[teamIndex] = []
-
-			teams[teamIndex].push(characterObj)
-		},
 		setTeams: function (myTeams) {
-			teams = []
+			teams = myTeams
 			for(var teamIndex = 0; teamIndex < myTeams.length; teamIndex++){
 				var team = myTeams[teamIndex]
 
