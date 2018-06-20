@@ -167,8 +167,6 @@ var battleScene = function() {
 	}
 
 	function addParticleCharacter(character, params) {
-		console.log(character)
-
 		var attachmentName = params[0]
 		var particleName = params[1]
 
@@ -298,6 +296,7 @@ var battleScene = function() {
 
 		spineSkeleton.onEvent.add(function (i, e) {
 			var eventName = e.data.name
+			console.log(eventName)
 
 			if ((!eventName) && (typeof eventName !== 'string'))
 				return
