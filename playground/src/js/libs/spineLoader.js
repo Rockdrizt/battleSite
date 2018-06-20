@@ -34,7 +34,6 @@ var spineLoader = function () {
 	}
 
 	function getSpineEvents(cacheKey, currentScene) {
-		console.log("callSpine event")
 
 		var jsonFile = game.cache.getJSON(cacheKey)
 		var events = jsonFile.events

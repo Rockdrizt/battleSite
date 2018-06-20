@@ -159,7 +159,7 @@ body{
 
 #logo{
     position: fixed;
-    width: 53%;
+    width: 50%;
     left: 50%;
     transform: translate(-50%,0%);
     z-index: 12;
@@ -167,7 +167,7 @@ body{
 
 .logoTour{
     padding: 2vh;
-    width: 70%;
+    width: 60%;
     max-width: 600px !important;
 
 }
