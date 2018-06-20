@@ -96,7 +96,7 @@ var battleScene = function() {
 	var clickLatch
 	var teams = []
 	var particles
-	var eagle
+	var mainSpine
 
 	function loadSounds() {
 
@@ -125,11 +125,11 @@ var battleScene = function() {
 		return buttonGroup
 	}
 
-	function createMenuAnimations(characterGroup) {
-		var animations = characterGroup.spine.skeletonData.animations
+	function createMenuAnimations() {
+		var animations = mainSpine.spine.skeletonData.animations
 
 		function changeAnimation(name) {
-			characterGroup.setAnimation([name], true)
+			mainSpine.setAnimation([name], true)
 		}
 
 		for (var animationIndex = 0; animationIndex < animations.length; animationIndex++) {
@@ -360,6 +360,10 @@ var battleScene = function() {
 		}
 	}
 
+	function selectYogotar(obj) {
+		mainSpine = obj.parent
+	}
+
 	function placeYogotars() {
 
 		for(var teamIndex = 0; teamIndex < teams.length; teamIndex++){
@@ -375,14 +379,28 @@ var battleScene = function() {
 
 				var xOffset = CHARACTER_CENTER_OFFSET.x * side.scale.x + position.x * side.scale.x
 
-				eagle = createSpine(character.name, nameLowerCase, "run")
-				eagle.x = game.world.centerX * 0.5 * side.direction + xOffset
-				eagle.y = CHARACTER_CENTER_OFFSET.y + game.world.centerY + position.y
-				console.log("postion", eagle.position)
-				eagle.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
-				eagle.data = character.data
-				sceneGroup.add(eagle)
-				console.log(eagle)
+				var spineGroup = createSpine(character.name, nameLowerCase, "run")
+				spineGroup.x = game.world.centerX * 0.5 * side.direction + xOffset
+				spineGroup.y = CHARACTER_CENTER_OFFSET.y + game.world.centerY + position.y
+				console.log("postion", spineGroup.position)
+				spineGroup.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
+				spineGroup.data = character.data
+				sceneGroup.add(spineGroup)
+				console.log(spineGroup)
+
+				var rect = game.add.graphics()
+				rect.beginFill(0xffffff)
+				rect.drawRect(0, 0, 200, 400)
+				rect.endFill()
+				rect.x = -100
+				rect.y = -400
+				rect.alpha = 0
+				spineGroup.add(rect)
+				rect.inputEnabled = true
+				rect.events.onInputDown.add(selectYogotar)
+
+				if(charIndex === 1)
+					mainSpine = spineGroup
 			}
 		}
 
@@ -425,7 +443,7 @@ var battleScene = function() {
 
 			placeYogotars()
 
-			createMenuAnimations(eagle)
+			createMenuAnimations()
 
 			//eagle.setAnimation(["run"], true)
 

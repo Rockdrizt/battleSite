@@ -6,3 +6,4 @@ firebase2/functions/node_modules/.bin/mime.cmd
 firebase2/functions/node_modules/
 firebase2/node_modules/
 *.DS_Store
+playground/node_modules/

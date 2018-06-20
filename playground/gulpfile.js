@@ -21,8 +21,8 @@ var gulp = require('gulp'),
 var _TOURNAMENT = {
   SERVER : {
     PORT : 3004,
-    BASE_DIR : "src/",
-    START_PATH : ""
+    BASE_DIR : "../",
+    START_PATH : "playground"
   },
   FILE_WATCH : [
     '.html',
@@ -34,13 +34,9 @@ var _TOURNAMENT = {
     JS_SINGLE : true,
     JS_SINGLE_SCRIPTS : [
         "src/js/main.js",
-        "src/js/dao/Storage.dao.js",
-        "src/js/network/Services.network.js",
-        "src/js/scene/Scene.prototype.js",
-        "src/js/scene/SceneObject.prototype.js",
-        "src/js/core/jose.js",
-        "src/js/core/joshe.js",
-        "src/js/controllers/leaderboard.controller.js"
+        "src/js/scenes/battleScene.js",
+        "src/js/scenes/preload.js",
+        "src/js/libs/spineLoader.js"
     ],
     CSS : true
   },
