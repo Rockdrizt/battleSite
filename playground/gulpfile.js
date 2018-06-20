@@ -394,13 +394,13 @@ gulp.task('initServer', function(done) {
 //Gulp principal task.
 
 gulp.task('default', function () {
-  if(!fs.existsSync(_TOURNAMENT.ROUTES.DIST.HTML)){
-    console.log('INICIANDO ESTRUCTURA BASE...');
-    gulp.start('initBaseProject');
-    gulp.start('initServer');
-  }
-  else{
+  // if(!fs.existsSync(_TOURNAMENT.ROUTES.DIST.HTML)){
+  //   console.log('INICIANDO ESTRUCTURA BASE...');
+  //   gulp.start('initBaseProject');
+  //   gulp.start('initServer');
+  // }
+  // else{
     console.log('GENERANDO ARCHIVOS DE DISTRIBUCION...');
     gulp.start('initServer');
-  }
+  // }
 })
