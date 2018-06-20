@@ -204,6 +204,15 @@ var epicparticles = function(){
 		emitter.emitCounter = 0
 	}
 
+	function componentToHex(c) {
+		var hex = c.toString(16);
+		return hex.length == 1 ? "0" + hex : hex;
+	}
+
+	function rgbToHex(r, g, b) {
+		return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+	}
+
 	function updateParticleAtIndex(emitter, index, delta){
 		var particle = emitter.particles[index]
 
@@ -320,8 +329,15 @@ var epicparticles = function(){
 		particle.sprite.height = particle.particleSize
 
 		particle.sprite.alpha = c.a
+		var r = c.r * 255
+		var g = c.g * 255
+		var b = c.b * 255
 
-		// TODO implement tint/Color
+		var tint = Phaser.Color.getColor(r, g, b)
+		particle.sprite.tint = 0xffffff
+		//particle.sprite.blendMode = PIXI.blendModes.MULTIPLY;
+
+		//console.log(emitter.blendFuncSource)
 	}
 
 	function removeParticleAtIndex(emitter, index){
@@ -410,6 +426,10 @@ var epicparticles = function(){
 		emitters.push(emitter)
 
 		var data = game.cache.getJSON(key)
+		if(!data){
+			console.warn("Particle " + key + " not found.")
+			return false
+		}
 
 		emitter.emitterType = data.emitterType
 		emitter.sourcePosition = {
@@ -502,6 +522,7 @@ var epicparticles = function(){
 	return {
 		loadEmitter: loadEmitter,
 		newEmitter: newEmitter,
+		removeEmitter:removeEmitter,
 		update: update,
 		init: init,
 	}

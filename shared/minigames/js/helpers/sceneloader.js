@@ -10,47 +10,6 @@ var sceneloader = function(){
 		game = gameObject
 	}
 
-	function getSpineEvents(cacheKey, currentLoader, currentScene) {
-		var jsonFile = game.cache.getJSON(cacheKey)
-		console.log(cacheKey)
-		var events = jsonFile.events
-		// console.log(events, spine)
-		var soundsAdded = {}
-		var soundsList = game.cache.getJSON('sounds')
-		var assetsSounds = currentScene.assets.sounds
-
-		for(var key in events){
-			// var event = events[key]
-			var functionData = getFunctionData(key)
-
-			if((functionData)&&(functionData.name === "PLAY")){
-				var soundObj = {
-					name:functionData.param,
-					file:soundsList[functionData.param]
-				}
-				if(!soundsAdded[soundObj.name]){
-					assetsSounds.push(soundObj)
-					currentLoader.audio(soundObj.name, soundObj.file);
-					soundsAdded[soundObj.name] = soundObj.name
-				}
-			}
-		}
-	}
-
-	function getFunctionData(value) {
-		var indexOfFunc = value.indexOf(":")
-		var functionName = null
-		var param = null
-
-		if(indexOfFunc > -1){
-			functionName = value.substr(0, indexOfFunc)
-			param = value.substr(indexOfFunc + 1)
-		}
-		// console.log(functionName, param)
-
-		return {name: functionName, param: param}
-	}
-
 	function createNewLoader(callbacks){
 		
 		callbacks = callbacks || {}
@@ -99,7 +58,7 @@ var sceneloader = function(){
 		var inputDevice = game.device.desktop ? "desktop" : "movil"
 
 		currentLoader = createNewLoader(callbacks)
-		buttons.getImages(currentLoader)
+		//buttons.getImages(currentLoader)
 		loadingFiles = {}
 
 		for(var indexScene = 0; indexScene < scenes.length; indexScene++){
@@ -121,14 +80,19 @@ var sceneloader = function(){
 					}
 				}
 
+				if(typeof fileArray.characters == "object"){
+					for(var indexPart = 0; indexPart < fileArray.characters.length; indexPart++){
+						var currentCharacter = fileArray.characters[indexPart]
+						characterBattle.loadCharacter(currentLoader, currentCharacter, currentScene, loadingFiles, game)
+					}
+				}
+
 				if(typeof fileArray.spines == "object"){
 					for(var indexSpine = 0; indexSpine < fileArray.spines.length; indexSpine++){
 						var currentSpine = fileArray.spines[indexSpine]
-						currentSpine.currentScene = currentScene
 						// var spineLoader = new Phaser.Loader(game)
-						currentLoader.spine(currentSpine.name, currentSpine.file)
-						loadingFiles[currentSpine.name] = {onComplete:getSpineEvents.bind(null, currentSpine.name, currentLoader, currentScene)}
 						// spineLoader.onFileComplete.add(getSoundsSpine)
+						spineLoader.loadSpine(currentLoader, currentSpine, loadingFiles, currentScene)
 					}
 				}
 
