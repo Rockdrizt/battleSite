@@ -92,7 +92,7 @@ var epicparticles = function(){
 
 		// Init the direction of the particle.  The newAngle is calculated using the angle passed in and the
 		// angle variance.
-		var newAngle = toRadians(emitter.angle + emitter.angleVariance * randomSideFloat());
+		var newAngle = emitter.angle + emitter.angleVariance * randomSideFloat();
 
 		// Create a new GLKVector2 using the newAngle
 		var vector = {
@@ -116,8 +116,8 @@ var epicparticles = function(){
 		// Set the default diameter of the particle from the source position
 		particle.radius = emitter.maxRadius + emitter.maxRadiusVariance * randomSideFloat()
 		particle.radiusDelta = emitter.maxRadius / particle.timeToLive
-		particle.angle = toRadians(emitter.angle + emitter.angleVariance * randomSideFloat())
-		particle.degreesPerSecond = toRadians(emitter.rotatePerSecond + emitter.rotatePerSecondVariance * randomSideFloat())
+		particle.angle = emitter.angle + emitter.angleVariance * randomSideFloat()
+		particle.degreesPerSecond = emitter.rotatePerSecond + emitter.rotatePerSecondVariance * randomSideFloat()
 
 		particle.radialAcceleration = emitter.radialAcceleration + emitter.radialAccelVariance * randomSideFloat()
 		particle.tangentialAcceleration = emitter.tangentialAcceleration + emitter.tangentialAccelVariance * randomSideFloat()
