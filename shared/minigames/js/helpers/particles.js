@@ -92,7 +92,7 @@ var epicparticles = function(){
 
 		// Init the direction of the particle.  The newAngle is calculated using the angle passed in and the
 		// angle variance.
-		var newAngle = emitter.angle + emitter.angleVariance * randomSideFloat();
+		var newAngle = toRadians(emitter.angleData+ emitter.angleVariance * randomSideFloat());
 
 		// Create a new GLKVector2 using the newAngle
 		var vector = {
@@ -116,8 +116,8 @@ var epicparticles = function(){
 		// Set the default diameter of the particle from the source position
 		particle.radius = emitter.maxRadius + emitter.maxRadiusVariance * randomSideFloat()
 		particle.radiusDelta = emitter.maxRadius / particle.timeToLive
-		particle.angle = emitter.angle + emitter.angleVariance * randomSideFloat()
-		particle.degreesPerSecond = emitter.rotatePerSecond + emitter.rotatePerSecondVariance * randomSideFloat()
+		particle.angle = toRadians(emitter.angleData+ emitter.angleVariance * randomSideFloat())
+		particle.degreesPerSecond = toRadians(emitter.rotatePerSecond + emitter.rotatePerSecondVariance * randomSideFloat())
 
 		particle.radialAcceleration = emitter.radialAcceleration + emitter.radialAccelVariance * randomSideFloat()
 		particle.tangentialAcceleration = emitter.tangentialAcceleration + emitter.tangentialAccelVariance * randomSideFloat()
@@ -175,7 +175,7 @@ var epicparticles = function(){
 		// TODO set missing values to sprite
 		particle.sprite.x = particle.position.x
 		particle.sprite.y = particle.position.y
-		particle.sprite.angle = particle.rotation
+		particle.sprite.angle = Phaser.Math.radToDeg(particle.rotation)
 
 		particle.sprite.width = particle.particleSize
 		particle.sprite.height = particle.particleSize
@@ -444,7 +444,7 @@ var epicparticles = function(){
 		emitter.speedVariance = data.speedVariance
 		emitter.particleLifespan = data.particleLifespan
 		emitter.particleLifespanVariance = data.particleLifespanVariance
-		emitter.angle = data.angle
+		emitter.angleData = data.angle
 		emitter.angleVariance = data.angleVariance
 		emitter.gravity = {
 			x: data.gravityx,

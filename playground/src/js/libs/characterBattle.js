@@ -4,6 +4,7 @@ var characterBattle = function () {
 	var loadingFiles
 	var currentLoader
 	var currentGame
+	var projectiles = {}
 
 	function extractSound(soundID) {
 		var soundsList = game.cache.getJSON('sounds')
@@ -41,6 +42,7 @@ var characterBattle = function () {
 
 	function addProjectile(id){
 		var projectileDat = currentGame.cache.getJSON(id + "Data")
+		projectiles[id] = projectileDat
 
 		if(projectileDat.particles){
 			extractParticles(projectileDat.particles)
@@ -106,6 +108,9 @@ var characterBattle = function () {
 	}
 
 	return {
-		loadCharacter:loadCharacter
+		loadCharacter:loadCharacter,
+		getParticles:function () {
+			return projectiles
+		}
 	}
 }()
