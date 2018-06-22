@@ -308,7 +308,31 @@
 "tournamentRockCrack1":"sounds/characters/rockCrack1.mp3",
 "tournamentWindDamage1":"sounds/characters/windDamage1.mp3",
 "tournamentIceDamage1":"sounds/characters/iceDamage1.mp3",
-"tournamentBoyHurt2":"sounds/characters/boyHurt2.mp3"
+"tournamentBoyHurt2":"sounds/characters/boyHurt2.mp3",
+    "tournamentSpinJump1":"sounds/characters/spinJump1.mp3",
+"tournamentHitGround2":"sounds/characters/hitGround2.mp3",
+"tournamentHitGround3":"sounds/characters/hitGround3.mp3",
+"tournamentFireBurn1":"sounds/characters/fireBurn1.mp3",
+"tournamentRingBell1":"sounds/characters/ringBell1.mp3",
+"tournamentImpactMeteorite1":"sounds/characters/impactMeteorite1.mp3",
+"tournamentHandClap1":"sounds/characters/handClap1.mp3",
+"tournamentEarthQuake2":"sounds/characters/earthQuake2.mp3",
+"tournamentScifiTeleport1":"sounds/characters/scifiTeleport1.mp3",
+"tournamentFootStep2":"sounds/characters/footStep1.mp3",
+"tournamentScifiBeep1":"sounds/characters/scifiBeep1.mp3",
+"tournamentScifiBeep2":"sounds/characters/scifiBeep2.mp3",
+"tournamentScifiBeep3":"sounds/characters/scifiBeep3.mp3",
+"tournamentScifiBeep4":"sounds/characters/scifiBeep4.mp3",
+"tournamentScifiBeep5":"sounds/characters/scifiBeep5.mp3",
+"tournamentScifiBeep6":"sounds/characters/scifiBeep6.mp3",
+"tournamentScifiInterface1":"sounds/characters/scifiInterface1.mp3",
+"tournamentScifiInterface2":"sounds/characters/scifiInterface2.mp3",
+"tournamentScifiInterface3":"sounds/characters/scifiInterface3.mp3",
+"tournamentScifiInterface4":"sounds/characters/scifiInterface4.mp3",
+"tournamentScifiInterface5":"sounds/characters/scifiInterface5.mp3",
+"tournamentIceHit2":"sounds/characters/iceHit2.mp3",
+"tournamentIceAvalanche1":"sounds/characters/iceAvalanche1.mp3",
+"tournamentIceShard1":"sounds/characters/iceShard1.mp3"
 
 
 }
