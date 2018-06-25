@@ -72,6 +72,9 @@ var reward = function(){
     var closeSquare;                        //Reference at a line of squares
     var title;                              //Reference of title's information
     var textTitle;                          //Reference of text
+    var lightColocation;                    //Reference of position's light in x
+    var lightColocationY;                   //Reference of position's light in y
+    var light;                              //Array of lights
     
      //////////////////
     // Principal flow
@@ -84,13 +87,15 @@ var reward = function(){
     //To start some variables and start flow
 	function initialize(){
         game.stage.backgroundColor = "#ffffff";
-        loseColocation = 150;
         loseColocationX = game.width - 550;
         squareLoser = [];
         closeSquare = [];
         indexWinner = 0;
         title = [];
-        textTitle = ["Tiempo: 25 min", "Aciertos: 29"]
+        textTitle = ["Tiempo: 25 min", "Aciertos: 29"];
+        lightColocation = [350,550,1150,1350];
+        lightColocationY = [335,235,235,335]
+        light = [];
 
         loadSounds();
 	}
@@ -102,8 +107,8 @@ var reward = function(){
 
     //Complete GamePlay update
 	function update(){
-        // tile.tilePosition.x -= 0.4
-        // tile.tilePosition.y -= 0.4
+        tile.tilePosition.x -= 0.4;
+        tile.tilePosition.y -= 0.4;
     }
 
     //////////////////
@@ -138,14 +143,17 @@ var reward = function(){
         var namePlayer;
         var brainPlayer;
         var tweenCup;
+        var sferaPlayer;
         if(indexWinner == 0){
             cupPlayer = "blueCup";
             namePlayer = "equipoAzul";
             brainPlayer = "blueBrain";
+            sferaPlayer = "esferaAzul";
         }else{
             cupPlayer = "pinkCup";
             namePlayer = "equipoRosa";
             brainPlayer = "pinkBrain"
+            sferaPlayer = "esferaRosa";
         }
         console.log("Entre");
         var cup = game.add.sprite(50, game.height/2 - 350, cupPlayer);
@@ -159,11 +167,19 @@ var reward = function(){
         brainWin.alpha = 0;
         sceneGroup.add(brainWin);
 
+        for (var y = 0; y < 4; y++) {
+            light.push(game.add.sprite(lightColocation[y], lightColocationY[y],"atlas.reward", sferaPlayer));
+            light[y].anchor.setTo(0.5,0.5);
+            light[y].scale.setTo(0,0);
+            sceneGroup.add(light[y]);
+        }
+
+        loseColocation = game.height;
         for(var i=0; i<3; i++){
-            squareLoser.push(game.add.sprite(loseColocationX, -300,"atlas.reward","ventanaFondo"));
+            squareLoser.push(game.add.sprite(game.width + 300, loseColocation,"atlas.reward","ventanaFondo"));
             sceneGroup.add(squareLoser[i]);
-            loseColocationX += 50;
-            closeSquare.push(game.add.sprite(squareLoser[i].x - 2, squareLoser[i].y + squareLoser[i].height - 5,"atlas.reward","ventanaFrente"));
+            closeSquare.push(game.add.sprite(game.width + 300 - 2, loseColocation + squareLoser[i].height - 5,"atlas.reward","ventanaFrente"));
+            loseColocation += squareLoser[i].height + 10;
          }
 
         for(var x=0; x<2; x++){
@@ -178,19 +194,28 @@ var reward = function(){
 
         var nameWin = game.add.sprite(-500, 50,"atlas.reward", namePlayer);
         sceneGroup.add(nameWin);
-        var tweenNameWin = game.add.tween(nameWin).to({ x: 0 }, 2000, Phaser.Easing.Bounce.Out, true, 0, 0);
+
+        var tweenNameWin = game.add.tween(nameWin).to({ x: 0 }, 1000, Phaser.Easing.Bounce.Out, true, 0, 0);
+        var tweenLigth;
         tweenNameWin.onComplete.add(function(){
-            game.add.tween(cupGray).to({ alpha: 0 }, 1000, Phaser.Easing.Linear.Out, true, 0, 0);
-            tweenCup = game.add.tween(cup).to({ blendMode: PIXI.blendModes.NORMAL }, 2000, Phaser.Easing.Linear.Out, true, 0, 0);
-            game.add.tween(brainWin).to({ alpha: 1 }, 300, Phaser.Easing.Bounce.InOut, true, 0, 6);
-            tweenCup.onComplete.add(function(){
-                game.add.tween(brainWin).to({ y: -35 }, 2000, Phaser.Easing.Sinusoidal.InOut, true, 0, -1,true, 2000);
-                for(var j=0; j<3; j++){
-                    game.add.tween(squareLoser[j]).to({ y: loseColocation }, 3000, Phaser.Easing.Bounce.Out, true, 0, 0);
-                    game.add.tween(closeSquare[j]).to({ y: loseColocation + squareLoser[j].height - 5 }, 3000, Phaser.Easing.Bounce.Out, true, 0, 0);
-                    loseColocation += squareLoser[j].height + 10;
-                }
-                game.time.events.add(Phaser.Timer.SECOND * 6, showInformation, this);
+            for (var y = 0; y < 4; y++) {
+                tweenLigth = game.add.tween(light[y].scale).to({ x: 1, y: 1 }, 1000, Phaser.Easing.Linear.Out, true, 0, 0);
+            }
+            tweenLigth.onComplete.add(function(){
+                game.add.tween(cupGray).to({ alpha: 0 }, 1000, Phaser.Easing.Linear.Out, true, 0, 0);
+                tweenCup = game.add.tween(cup).to({ blendMode: PIXI.blendModes.NORMAL }, 2000, Phaser.Easing.Linear.Out, true, 0, 0);
+                game.add.tween(brainWin).to({ alpha: 1 }, 300, Phaser.Easing.Bounce.InOut, true, 0, 6);
+                tweenCup.onComplete.add(function(){
+                    game.add.tween(brainWin).to({ y: -35 }, 2000, Phaser.Easing.Sinusoidal.InOut, true, 0, -1,true, 2000);
+                    loseColocation = 150;
+                    for(var j=0; j<3; j++){
+                        game.add.tween(squareLoser[j]).to({ x: loseColocationX, y: loseColocation }, 3000, Phaser.Easing.Sinusoidal.Out, true, 0, 0);
+                        game.add.tween(closeSquare[j]).to({ x: loseColocationX - 2, y: loseColocation + squareLoser[j].height - 5 }, 3000, Phaser.Easing.Sinusoidal.Out, true, 0, 0);
+                        loseColocationX += 50;
+                        loseColocation += squareLoser[j].height + 10;
+                    }
+                    game.time.events.add(Phaser.Timer.SECOND * 6, showInformation, this);
+                });
             });
         });
     }
