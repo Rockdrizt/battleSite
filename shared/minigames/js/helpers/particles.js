@@ -509,10 +509,11 @@ var epicparticles = function(){
 		emitter.elapsedTime = 0
 
 		emitter.key = key
+		emitter.absolute = data.absolutePosition
 		emitter.particles = []
 
 		// Create particle pool
-		for (i = 0; i < emitter.maxParticles; i++) {
+		for (var i = 0; i < emitter.maxParticles; i++) {
 			emitter.particles[i] = newParticle(emitter)
 		}
 
