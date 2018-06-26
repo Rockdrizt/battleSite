@@ -175,7 +175,13 @@ var battleScene = function() {
 		if (!emitter)
 			return
 
-		slot.add(emitter)
+		if(emitter.absolute) {
+			emitter.x = slot.x
+			emitter.y = slot.y
+			sceneGroup.add(emitter)
+		}
+		else
+			slot.add(emitter)
 		//character.spine.setToSetupPose()
 		slot[particleName] = emitter
 	}

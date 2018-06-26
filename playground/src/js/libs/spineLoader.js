@@ -23,11 +23,12 @@ var spineLoader = function () {
 
 		var particleObj = {
 			name:name,
-			file:string ? "particles/characters/" + string : "particles/characters/" + name + "/" + name + ".json",
+			file:typeof string === "string" ? "particles/characters/" + string
+				: "particles/characters/" + name + "/" + name + ".json",
 			texture:name + ".png"
 		}
 
-		console.log("particle", particleObj)
+		console.log(particleObj)
 
 		assetsParticles.push(particleObj)
 		epicparticles.loadEmitter(currentLoader, particleObj.name, particleObj.texture, particleObj.file)
@@ -36,8 +37,8 @@ var spineLoader = function () {
 	function getSpineEvents(cacheKey, currentScene) {
 
 		var jsonFile = game.cache.getJSON(cacheKey)
-		var events = jsonFile.events
-		console.log(events, spine)
+		var animations = jsonFile.animations
+		console.log(jsonFile, spine)
 
 		var soundsList = game.cache.getJSON('sounds')
 		var assetsSounds = currentScene.assets.sounds
@@ -45,25 +46,33 @@ var spineLoader = function () {
 		currentScene.assets.particles = currentScene.assets.particles || []
 		var assetsParticles = currentScene.assets.particles
 
-		console.log(events)
-		for(var key in events){
-			var functionData = getFunctionData(key)
-			console.log(functionData.name)
+		console.log(animations)
+		for(var animation in animations){
+			console.log(animation)
+			var events = animations[animation].events
+			console.log("events", animations[animation])
+			if(events) {
+				for (var eventIndex = 0; eventIndex < events.length; eventIndex++) {
+					var objContent = events[eventIndex]
+					var key = objContent.name
 
-			var objContent = events[key]
+					var functionData = getFunctionData(key)
+					console.log(functionData.name)
 
-			if((functionData)&&(functionData.name === "PLAY")){
-				addSound(functionData, soundsList, assetsSounds)
-			}
+					if ((functionData) && (functionData.name === "PLAY")) {
+						addSound(functionData, soundsList, assetsSounds)
+					}
 
-			if((functionData)&&(functionData.name === "SPAWN")){
-				var name = functionData.params[1]
-				addParticle(name, assetsParticles, objContent.string)
-			}
+					if ((functionData) && (functionData.name === "SPAWN")) {
+						var name = functionData.params[1]
+						addParticle(name, assetsParticles, objContent.string)
+					}
 
-			if((functionData)&&(functionData.name === "STAGESPAWN")){
-				var name = functionData.params[functionData.params.length - 1]
-				addParticle(name, assetsParticles, objContent.string)
+					if ((functionData) && (functionData.name === "STAGESPAWN")) {
+						var name = functionData.params[functionData.params.length - 1]
+						addParticle(name, assetsParticles, objContent.string)
+					}
+				}
 			}
 		}
 	}

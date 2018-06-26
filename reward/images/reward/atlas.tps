@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.8.0</string>
+        <string>4.8.1</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -181,7 +181,7 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">../../../Applications/MAMP/htdocs/prueba/reward/images/reward/barraAmarilla.png</key>
+            <key type="filename">barraAmarilla.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -194,8 +194,8 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../Applications/MAMP/htdocs/prueba/reward/images/reward/equipoAzul.png</key>
-            <key type="filename">../../../Applications/MAMP/htdocs/prueba/reward/images/reward/equipoRosa.png</key>
+            <key type="filename">equipoAzul.png</key>
+            <key type="filename">equipoRosa.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -208,7 +208,22 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../Applications/MAMP/htdocs/prueba/reward/images/reward/ventanaFondo.png</key>
+            <key type="filename">esferaAzul.png</key>
+            <key type="filename">esferaGris.png</key>
+            <key type="filename">esferaRosa.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>29,29,58,58</rect>
+                <key>scale9Paddings</key>
+                <rect>29,29,58,58</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">ventanaFondo.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -221,7 +236,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">../../../Applications/MAMP/htdocs/prueba/reward/images/reward/ventanaFrente.png</key>
+            <key type="filename">ventanaFrente.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -237,11 +252,14 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>../../../Applications/MAMP/htdocs/prueba/reward/images/reward/ventanaFrente.png</filename>
-            <filename>../../../Applications/MAMP/htdocs/prueba/reward/images/reward/ventanaFondo.png</filename>
-            <filename>../../../Applications/MAMP/htdocs/prueba/reward/images/reward/equipoRosa.png</filename>
-            <filename>../../../Applications/MAMP/htdocs/prueba/reward/images/reward/equipoAzul.png</filename>
-            <filename>../../../Applications/MAMP/htdocs/prueba/reward/images/reward/barraAmarilla.png</filename>
+            <filename>barraAmarilla.png</filename>
+            <filename>equipoAzul.png</filename>
+            <filename>equipoRosa.png</filename>
+            <filename>ventanaFondo.png</filename>
+            <filename>ventanaFrente.png</filename>
+            <filename>esferaAzul.png</filename>
+            <filename>esferaGris.png</filename>
+            <filename>esferaRosa.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
