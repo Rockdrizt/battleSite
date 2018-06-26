@@ -5,14 +5,14 @@
   "rotatePerSecond" : 360,
   "radialAcceleration" : -2000,
   "yCoordFlipped" : -1,
-  "emitterType" : 0,
+  "emitterType" : 2,
   "blendFuncSource" : 1,
   "finishColorVarianceAlpha" : 0,
   "rotationEnd" : 0,
   "startColorVarianceBlue" : 0,
   "rotatePerSecondVariance" : 0,
   "particleLifespan" : 1,
-  "minRadius" : 300,
+  "minRadius" : 0,
   "configName" : "windDamage1",
   "tangentialAcceleration" : 173.1965,
   "rotationStart" : 16.07556,
@@ -52,5 +52,5 @@
   "particleLifespanVariance" : 0.5,
   "angleVariance" : -10,
   "angle" : -10,
-  "maxRadius" : 0
+  "maxRadius" : 300
 }

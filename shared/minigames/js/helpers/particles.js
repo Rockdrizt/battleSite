@@ -17,8 +17,8 @@ var epicparticles = function(){
 	}
 
 	function normalize(point, scale) {
-		var norm = Math.sqrt(point.x * point.x + point.y * point.y)
-		if (norm != 0) {
+		var norm = Math.sqrt((point.x * point.x) + (point.y * point.y))
+		if (norm !== 0) {
 			return {
 				x: scale * point.x / norm,
 				y: scale * point.y / norm
@@ -217,7 +217,7 @@ var epicparticles = function(){
 		var particle = emitter.particles[index]
 
 		// If maxRadius is greater than 0 then the particles are going to spin otherwise they are effected by speed and gravity
-		if (emitter.emitterType == kParticleTypeRadial) {
+		if (emitter.emitterType === kParticleTypeRadial) {
 
 			// FIX 2
 			// Update the angle of the particle from the sourcePosition and the radius.  This is only done of the particles are rotating
@@ -228,8 +228,8 @@ var epicparticles = function(){
 			particle.sprite.height = particle.radius * 2
 
 			var tmp = {
-				x: sourcePosition.x - Math.cos(particle.angle) * particle.radius,
-				y: sourcePosition.y - Math.sin(particle.angle) * particle.radius
+				x: emitter.sourcePosition.x - Math.cos(particle.angle) * particle.radius,
+				y: emitter.sourcePosition.y - Math.sin(particle.angle) * particle.radius
 			}
 			particle.position = tmp
 
