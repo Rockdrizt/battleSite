@@ -74,6 +74,18 @@ var startScreen = function(){
 				name:"ardilla",
 				file:"images/spines/skeleton.json"
 			}*/
+		],
+        particles: [
+			{
+				name: 'bubbles',
+				file: 'images/particles/bubbles/Particles_hexagon.json',
+				texture: 'Particles_hexagon.png'
+			},
+			{
+				name: 'hexagonLigth',
+				file: 'images/particles/hexagonLigth/ligth_bottom Hexagon.json',
+				texture: 'ligth_bottom Hexagon.png'
+			}
 		]
     }
     
@@ -122,6 +134,7 @@ var startScreen = function(){
 
 	function update(){
         tile.tilePosition.y -= 0.4
+        epicparticles.update()
     }
     
     function createYogotars(){
@@ -214,6 +227,15 @@ var startScreen = function(){
                     
                     var slide = game.add.tween(logosGroup.playBtn).to({x:game.world.centerX + 270}, 500, Phaser.Easing.Cubic.In, true)
                     slide.onComplete.add(function(){
+                        
+                        var emitter = epicparticles.newEmitter("hexagonLigth")
+                        emitter.x = logosGroup.playBtn.x
+                        emitter.y = logosGroup.playBtn.y
+                        
+                        emitter = epicparticles.newEmitter("bubbles")
+                        emitter.x = logosGroup.playBtn.x
+                        emitter.y = logosGroup.playBtn.y
+                        
                         logosGroup.playBtn.inputEnabled = true
                     })
                     

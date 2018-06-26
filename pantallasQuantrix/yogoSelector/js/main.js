@@ -1,7 +1,7 @@
 window.minigame = window.minigame || {}
 
 function startGame(){
-	window.game = new Phaser.Game(document.body.clientWidth, document.body.clientHeight, Phaser.CANVAS, null, {init: init, create: create }, true, true);
+	window.game = new Phaser.Game(document.body.clientWidth, document.body.clientHeight, Phaser.canvas, null, {init: init, create: create }, true, true);
     document.body.style.visibility = "hidden"
 
 	function preloadScenes(sceneList){
@@ -27,7 +27,7 @@ function startGame(){
 
     function init(){
 
-        var fullWidth = 1024
+        var fullWidth = 540
         var fullHeight = 1080
 
         var ratio = document.body.clientWidth / document.body.clientHeight
@@ -42,7 +42,7 @@ function startGame(){
         game.stage.disableVisibilityChange = true;        
 
         game.plugins.add(PhaserSpine.SpinePlugin);
-        epicparticles.init(game)
+        //epicparticles.init(game)
         
         var language = "EN"
         /*if(window.location.search){

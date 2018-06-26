@@ -198,7 +198,7 @@ var loading = function(){
 		
 		assets: assets,
 		name: "loading",
-		//update: update,
+		update: update,
         preload:preload,
 		create: function(event){
             
