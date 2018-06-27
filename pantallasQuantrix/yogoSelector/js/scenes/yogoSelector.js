@@ -33,7 +33,7 @@ var yogoSelector = function(){
             },
             {
                 name: "player0",
-                file: "images/yogoSelector/dinamita.png",
+                file: "images/yogoSelector/tomiko.png",
             },
             {
                 name: "player1",
@@ -53,7 +53,7 @@ var yogoSelector = function(){
             },
             {
                 name: "player5",
-                file: "images/yogoSelector/tomiko.png",
+                file: "images/yogoSelector/dinamita.png",
             },
             {
                 name: "player6",
@@ -66,7 +66,7 @@ var yogoSelector = function(){
             {
                 name: "ok",
                 file: "images/yogoSelector/ok.png",
-            },
+            }
 		],
 		sounds: [
 		],
@@ -74,13 +74,14 @@ var yogoSelector = function(){
         ],
         spines:[
             {
-				name:"player0",
-				file:"images/spines/dinamita/dinamita.json",
-                scales: ["@0.5x"],
+				name:"eagle",
+				file:"images/spines/eagle/eagle.json",
+                scales: ["@0.5x"]
 			},
             {
-				name:"player4",
-				file:"images/spines/eagle/eagle.json"
+				name:"dinamita",
+				file:"images/spines/dinamita/dinamita.json",
+                scales: ["@0.5x"]
 			},
 			/*
             {
@@ -115,13 +116,12 @@ var yogoSelector = function(){
     var tile
     var teamsBarGroup
     var buttonsGroup
+    var pullGroup
     var alphaGroup
     var bravoGroup
     var readyGroup
-    var currentSelect
-    var team
-    var auxArray = [-1, -1, -1]
-    var teamPivot
+    var chosenOne
+    var STATES = {yellow: 0, red: 1, blue: 2, bicolor: 3}
     
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -130,11 +130,9 @@ var yogoSelector = function(){
 	function initialize(){
 
         game.stage.backgroundColor = "#ffffff"
+        chosenOne = 1
         
         loadSounds()
-        currentSelect = -1
-        team = 1
-        teamPivot = 0
 	}
     
     function preload(){
@@ -166,35 +164,86 @@ var yogoSelector = function(){
     }
 
 	function update(){
-        tile.tilePosition.y -= 0.2
+        tile.tilePosition.y -= 0.4
     }
 
     function createTeams(){
         
         alphaGroup = game.add.group()
+        alphaGroup.teamPivot = 0
+        alphaGroup.currentSelect = -1
+        alphaGroup.auxArray = [-1, -1, -1]
+        alphaGroup.color = STATES.red
         sceneGroup.add(alphaGroup)
         
         bravoGroup = game.add.group()
+        bravoGroup.teamPivot = 2
+        bravoGroup.currentSelect = -1
+        bravoGroup.auxArray = [-1, -1, -1]
+        bravoGroup.color = STATES.blue
         sceneGroup.add(bravoGroup)
         
-        var pivot = 0.2
+        var pivotX = 0.3
         
         for(var i = 0; i < 3; i++){
             
-            var player = alphaGroup.create(game.world.centerX * pivot, game.world.centerY - 170, "player" + i)
+            var player = alphaGroup.create(game.world.centerX * pivotX, game.world.centerY + 90, "atlas.yogoSelector", "star")
             player.anchor.setTo(0.5)
             player.check = false
             player.alpha = 0
             
-            player = bravoGroup.create(game.world.centerX * pivot + game.world.centerX, game.world.centerY - 170, "player" + i)
+            player = bravoGroup.create(game.world.centerX * pivotX + game.world.centerX, game.world.centerY + 90, "atlas.yogoSelector", "star")
             player.anchor.setTo(0.5)
             player.check = false
             player.alpha = 0
             
-            pivot += 0.3
+            pivotX += 0.2
         }
         alphaGroup.children[1].y += 150
         bravoGroup.children[1].y += 150
+    }
+    
+    function createPullGroup(){
+        
+        pullGroup = game.add.group()
+        sceneGroup.add(pullGroup)
+        
+        console.log(assets.spines.length)
+        
+        for(var i = 0; i < 3/*assets.spines.length*/; i++){
+            
+            var player = game.add.spine(alphaGroup.children[i].centerX, 0, assets.spines[0].name)
+            player.setAnimationByName(0, "wait", true)
+            player.setSkinByName(assets.spines[0].name)
+            player.name = assets.spines[0].name
+            pullGroup.add(player)
+        }
+        //wait   select     ready
+        
+        for(var i = 0; i < 3/*assets.spines.length*/; i++){
+            
+            var player = game.add.spine(bravoGroup.children[i].centerX, 0, assets.spines[1].name)
+            player.setAnimationByName(0, "wait", true)
+            player.setSkinByName(assets.spines[1].name)
+            player.scale.setTo(-1, 1)
+            player.name = assets.spines[1].name
+            pullGroup.add(player)
+        }
+    }
+    
+    function createSpine(x, y, character, anim, skin){
+        
+        x = x || 0
+		y = y || 0
+        anim = anim || "idle"
+        skin = skin || "normal"
+        
+        var player = game.add.spine(x, y, character)
+        player.setAnimationByName(0, anim, true)
+        player.setSkinByName(skin)
+        sceneGroup.add(player)
+        
+        return player
     }
     
     function createTeamsBars(){
@@ -229,20 +278,23 @@ var yogoSelector = function(){
         var pivotX = 0.3
         var pivotY = 270
         var aux = 0
-        var color = [2,2,1,0,1,0,1,2]
 
         for(var i = 0; i < 8; i++){
             
             var subGroup = game.add.group()
             subGroup.x = game.world.centerX * pivotX
             subGroup.y = game.world.height - pivotY
-            subGroup.isSelected = false
+            subGroup.color = STATES.yellow
             buttonsGroup.add(subGroup)
             
             var token = subGroup.create(0, 0, "atlas.yogoSelector", "token" + 0)
             token.anchor.setTo(0.5)
             token.inputEnabled = true
-            token.events.onInputDown.add(pressBtn, this)
+            token.events.onInputDown.add(function(btn){
+                
+                //chosenOne = catch team input
+                pressBtn(btn, chosenOne)
+            }, this)
             token.tag = i
             token.canClick = false
             subGroup.token = token
@@ -292,15 +344,18 @@ var yogoSelector = function(){
         readyGroup.ready = ready
     }
     
-    function pressBtn(btn){
+    function pressBtn(btn, team){
         
         if(btn.canClick){
             
             btn.canClick = false
             
-            if(!btn.parent.isSelected){
-                if(teamPivot < 3){
-                    markYogotar(btn.parent, team)
+            var teamGroup
+            team === 1 ? teamGroup = alphaGroup : teamGroup = bravoGroup
+            
+            if(btn.parent.color === STATES.yellow){        
+                if(teamGroup.teamPivot < 3){
+                    markYogotar(btn.parent, teamGroup)
                     animateButton(btn.parent, team, true)
                 }
                 else{
@@ -308,41 +363,84 @@ var yogoSelector = function(){
                 }
             }
             else{
-                btn.parent.isSelected = false
-                animateButton(btn.parent, 0, false)
-                removeCharacter(btn.parent, team)
+                
+                switch(btn.parent.color){
+                        
+                    case STATES.red:
+                        if(team === STATES.red){
+                            animateButton(btn.parent, STATES.yellow, false)
+                            removeCharacter(btn.parent, alphaGroup)
+                        }
+                        else{
+                            if(bravoGroup.teamPivot < 3){
+                                markYogotar(btn.parent, bravoGroup)
+                                animateButton(btn.parent, STATES.bicolor, true)
+                            }
+                            else{
+                                btn.canClick = true
+                            }
+                        }
+                    break
+                    
+                    case STATES.blue:
+                        if(team === STATES.blue){
+                            animateButton(btn.parent, STATES.yellow, false)
+                            removeCharacter(btn.parent, bravoGroup)
+                        }
+                        else{
+                            if(alphaGroup.teamPivot < 3){
+                                markYogotar(btn.parent, alphaGroup)
+                                animateButton(btn.parent, STATES.bicolor, true)
+                            }
+                            else{
+                                btn.canClick = true
+                            }
+                        }
+                    break
+                    
+                    case STATES.bicolor:
+                        if(team === STATES.red){
+                            btn.parent.color = STATES.blue
+                            animateButton(btn.parent, STATES.blue, true)
+                            removeCharacter(btn.parent, alphaGroup)
+                        }
+                        else{
+                            btn.parent.color = STATES.red
+                            animateButton(btn.parent, STATES.red, true)
+                            removeCharacter(btn.parent, bravoGroup)
+                        }
+                    break
+                }
             }
         }
         //getReady()
     }
     
-    function animateButton(obj, team, turnOn){
+    function animateButton(obj, color, turnOn){
         
-        obj.token.loadTexture("atlas.yogoSelector", "token" + team)
+        obj.token.loadTexture("atlas.yogoSelector", "token" + color)
         game.add.tween(obj.token.scale).to({x: 1.2, y:1.2}, 100, Phaser.Easing.linear, true, 0, 0, true).onComplete.add(function(){
             obj.token.canClick = true
         })
         game.add.tween(obj.yogotar.scale).to({x: 1.2, y:1.2}, 100, Phaser.Easing.linear, true, 0, 0, true)
         
         if(turnOn){
-            obj.light.loadTexture("atlas.yogoSelector", "light" + team)
+            obj.light.loadTexture("atlas.yogoSelector", "light" + color)
             obj.light.alpha = 1
             game.add.tween(obj.light.scale).from({y:0}, 150, Phaser.Easing.linear, true)
         }
         else{
             obj.light.alpha = 0
-            obj.isSelected = false
+            obj.color = color
         }
     }
     
-    function markYogotar(obj, team){
+    function markYogotar(obj, teamGroup){
         
         restoreAll()
 
-        currentSelect = obj.token.tag
-        var currentTeam
-        team === 1 ? slot = alphaGroup.children[teamPivot] : currentTeam = bravoGroup.children[teamPivot]
-        //createSpine(slot.centerX, slot.centerY, "player" + obj.token.tag)
+        teamGroup.currentSelect = obj.token.tag
+        var slot = teamGroup.children[teamGroup.teamPivot]
 
         slot.loadTexture("player" + obj.token.tag)
         if(slot.alpha === 0){
@@ -351,27 +449,22 @@ var yogoSelector = function(){
         }
     }
     
-    function createSpine(x, y, character){
+    function selectYogotar(obj, teamGroup){
         
-        var anim = game.add.spine(x, y, character)
-        anim.setAnimationByName(0, "ready", true)
-        anim.setSkinByName("dinamita")
-        sceneGroup.add(anim)
-        
-        return anim
+        teamGroup.currentSelect = obj.token.tag
+        pullGroup.children[obj.token.tag - 4].x = teamGroup.children[teamGroup.teamPivot].centerX
+        game.add.tween(pullGroup.children[obj.token.tag - 4]).to({y: teamGroup.children[teamGroup.teamPivot].y}, 100, Phaser.Easing.Cubic.Out, true)
     }
     
-    function removeCharacter(obj, team){
+    function removeCharacter(obj, teamGroup){
        
         restoreAll()
 
-        var teamGroup
-        team === 1 ? teamGroup = alphaGroup : teamGroup = bravoGroup
-
-        var index = auxArray.indexOf(obj.token.tag)
+        var index = teamGroup.auxArray.indexOf(obj.token.tag)
         teamGroup.children[index].check = false
-        auxArray[index] = -1
-        teamPivot = auxArray.indexOf(-1) //index
+        teamGroup.auxArray[index] = -1
+        teamGroup.currentSelect = -1
+        teamGroup.teamPivot = teamGroup.auxArray.indexOf(-1) //index
         teamGroup.forEach(takeOff ,this)
     }
     
@@ -387,41 +480,71 @@ var yogoSelector = function(){
     }
     
     function restoreAll(){
-
+    
         for(var i = 0; i < buttonsGroup.length; i++){
             
-            if(!buttonsGroup.children[i].isSelected){
-                buttonsGroup.children[i].token.loadTexture("atlas.yogoSelector", "token0")
-                buttonsGroup.children[i].light.alpha = 0
+            var btn = buttonsGroup.children[i]
+            
+            if(btn.color === STATES.yellow){
+                btn.token.loadTexture("atlas.yogoSelector", "token0")
+                btn.light.alpha = 0
             }
+            else{
+                btn.token.loadTexture("atlas.yogoSelector", "token" + btn.color)
+                btn.light.loadTexture("atlas.yogoSelector", "light" + btn.color)
+            }
+            
+            /*if(!alphaGroup.auxArray.includes(btn.token.tag)){
+                if(!bravoGroup.auxArray.includes(btn.token.tag)){
+                    btn.token.loadTexture("atlas.yogoSelector", "token0")
+                    btn.light.alpha = 0
+                }
+            }*/
         }
-        currentSelect = -1
     }
     
     function createOk(){
         
-        ok = sceneGroup.create(game.world.centerX, game.world.height - 300, "ok")
+        var ok = sceneGroup.create(game.world.centerX - 100, game.world.height - 300, "ok")
         ok.anchor.setTo(0.5)
+        ok.tint = 0xff0000
+        ok.tag = 1
         ok.inputEnabled = true
         ok.events.onInputDown.add(clickOk,this)
+        
+        var ok = sceneGroup.create(game.world.centerX + 100, game.world.height - 300, "ok")
+        ok.anchor.setTo(0.5)
+        ok.tint = 0x0000ff
+        ok.tag = 2
+        ok.inputEnabled = true
+        ok.events.onInputDown.add(clickOk,this)
+        
+        var ok = sceneGroup.create(game.world.centerX, game.world.height - 300, "atlas.yogoSelector", "star")
+        ok.anchor.setTo(0.5)
+        ok.inputEnabled = true
+        ok.events.onInputDown.add(function(){
+            
+            chosenOne === 1 ? chosenOne = 2 : chosenOne = 1
+            
+        },this)
     }
     
     function clickOk(btn){
         
-        if(currentSelect !== -1 && teamPivot < 3 && !auxArray.includes(currentSelect)){
+        var teamGroup
+        btn.tag === 1 ? teamGroup = alphaGroup : teamGroup = bravoGroup
+        
+        if(teamGroup.currentSelect !== -1 && teamGroup.teamPivot < 3 && !teamGroup.auxArray.includes(teamGroup.currentSelect)){
 
             game.add.tween(btn.scale).to({x: 0.5, y:0.5}, 100, Phaser.Easing.linear, true, 0, 0, true)
 
-            buttonsGroup.children[currentSelect].isSelected = true
-            auxArray[teamPivot] = currentSelect
-            team === 1 ? alphaGroup.children[teamPivot].check = true : bravoGroup.children[teamPivot].check = true
-            var aux = auxArray.indexOf(-1) 
-            aux === -1 ? teamPivot = 3 : teamPivot = aux
-            /*for(var i = 0; i < auxArray.length; i++){
-                if(auxArray[i] === -1)
-                    break
-            }
-            i < auxArray.length ? teamPivot = i : teamPivot = 2*/
+            buttonsGroup.children[teamGroup.currentSelect].color += teamGroup.color
+            teamGroup.auxArray[teamGroup.teamPivot] = teamGroup.currentSelect
+            teamGroup.children[teamGroup.teamPivot].check = true
+            var aux = teamGroup.auxArray.indexOf(-1) 
+            aux === -1 ? teamGroup.teamPivot = 3 : teamGroup.teamPivot = aux
+            
+            //pullGroup.children[0].remove()
         }            
     }
     
@@ -484,13 +607,12 @@ var yogoSelector = function(){
 			createBackground()	
             initialize()
             createTeams()
+            createPullGroup()
             createTeamsBars()
             createButtons()
             createReady()
             createOk()
             animateScene()
-            
-            createSpine(game.world.centerX, game.world.centerY, "player0")
 		}
 	}
 }()

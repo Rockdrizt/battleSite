@@ -207,6 +207,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">light3.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>34,34,67,67</rect>
+                <key>scale9Paddings</key>
+                <rect>34,34,67,67</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">pinkLight.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -230,6 +243,19 @@
                 <rect>155,58,309,115</rect>
                 <key>scale9Paddings</key>
                 <rect>155,58,309,115</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">star.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>16,16,32,32</rect>
+                <key>scale9Paddings</key>
+                <rect>16,16,32,32</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -271,6 +297,19 @@
                 <rect>48,57,97,113</rect>
                 <key>scale9Paddings</key>
                 <rect>48,57,97,113</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">token3.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>25,23,50,47</rect>
+                <key>scale9Paddings</key>
+                <rect>25,23,50,47</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -398,6 +437,9 @@
             <filename>yogo5.png</filename>
             <filename>ready.png</filename>
             <filename>pinkLight.png</filename>
+            <filename>light3.png</filename>
+            <filename>token3.png</filename>
+            <filename>star.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
