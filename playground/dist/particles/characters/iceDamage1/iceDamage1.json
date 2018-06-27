@@ -29,10 +29,10 @@
   "sourcePositionVariancey" : 250,
   "startColorRed" : 0.9999018,
   "finishColorVarianceRed" : 0,
-  "absolutePosition" : false,
+  "absolutePosition" : true,
   "textureFileName" : "iceDamage1.png",
   "startColorVarianceAlpha" : 0,
-  "maxParticles" : 150,
+  "maxParticles" : 200,
   "finishColorVarianceGreen" : 0,
   "finishParticleSize" : 43.66787,
   "duration" : 0.1,
@@ -50,7 +50,7 @@
   "textureImageData" : "",
   "tangentialAccelVariance" : -0,
   "particleLifespanVariance" : 1,
-  "angleVariance" : -360,
-  "angle" : -0,
+  "angleVariance" : -45,
+  "angle" : -90,
   "maxRadius" : 397.01
 }
