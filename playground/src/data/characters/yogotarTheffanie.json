@@ -2,23 +2,11 @@
 	"category":"yogotar",
 	"attacks": {
 		"normal": [
-			{
-				"id": "fireball1",
-				"attachment": "particle1",
-				"delay": 350,
-				"multiplier": 1
-			}
 		],
 		"special": [
-			{
-				"id": "fireballSpecial",
-				"attachment": "particle1",
-				"delay": 350,
-				"multiplier": 1
-			}
 		]
 	},
-	"directory": "images/spines/Theffanie/theffanie.json",
+	"directory": "spines/Theffanie/theffanie.json",
 	"name": "Theffanie",
 	"spine": {
 		"options": {
