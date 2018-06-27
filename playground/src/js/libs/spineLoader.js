@@ -1,7 +1,6 @@
 var spineLoader = function () {
 
 	var currentLoader
-	var particles = {}
 
 	function getGroupRef(ref, self) {
 		switch (ref) {
@@ -25,7 +24,10 @@ var spineLoader = function () {
 		if (zindex === "back")
 			group.sendToBack(emitter)
 
-		particles[particleName] = emitter
+		if(typeof group.particles === "undefined")
+			group.particles = {}
+
+		group.particles[particleName] = emitter
 	}
 
 	function drawParticleCharacter(character, params) {
@@ -33,6 +35,11 @@ var spineLoader = function () {
 		var particleName = params[1]
 
 		var slot = character.getSlotByAttachment(attachmentName)
+		if(typeof slot === "undefined"){
+			console.warn(attachmentName + " attachment not found")
+			return
+		}
+
 		var emitter = epicparticles.newEmitter(particleName)
 		if (!emitter)
 			return
@@ -46,7 +53,10 @@ var spineLoader = function () {
 		else
 			slot.add(emitter)
 		//character.spine.setToSetupPose()
-		slot[particleName] = emitter
+		if(typeof slot.particles === "undefined")
+			slot.particles = {}
+
+		slot.particles[particleName] = emitter
 	}
 
 	function removeParticleCharacter(character, params) {
@@ -54,12 +64,12 @@ var spineLoader = function () {
 		var particleName = params[1]
 
 		var slot = character.getSlotByAttachment(attachmentName)
-		var emitter = slot[particleName]
+		var emitter = slot.particles[particleName]
 		epicparticles.removeEmitter(emitter)
 	}
 
-	function removeParticle(particleName) {
-		var emitter = particles[particleName]
+	function removeParticle(character, particleName) {
+		var emitter = character.particles[particleName]
 		epicparticles.removeEmitter(emitter)
 	}
 
@@ -176,7 +186,7 @@ var spineLoader = function () {
 			}
 			if (functionData.name === "STAGEDESPAWN") {
 				// console.log(functionData.param)
-				removeParticle(functionData.params)
+				removeParticle(spineGroup, functionData.params)
 			}
 
 		})
