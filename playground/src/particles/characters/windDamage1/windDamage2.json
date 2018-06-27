@@ -41,7 +41,7 @@
   "gravityx" : 0,
   "maxRadiusVariance" : 0,
   "finishParticleSizeVariance" : 78.30769,
-  "gravityy" : -150,
+  "gravityy" : 0,
   "rotationEndVariance" : 432.9327,
   "startColorBlue" : 0.5228063,
   "rotationStartVariance" : 0,

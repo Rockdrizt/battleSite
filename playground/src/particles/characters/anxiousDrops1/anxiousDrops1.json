@@ -29,7 +29,7 @@
   "sourcePositionVariancey" : 10,
   "startColorRed" : 0.4472581,
   "finishColorVarianceRed" : 0,
-  "absolutePosition" : false,
+  "absolutePosition" : true,
   "textureFileName" : "anxiousDrops1.png",
   "startColorVarianceAlpha" : 0,
   "maxParticles" : 30,

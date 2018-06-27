@@ -3,6 +3,7 @@ var epicparticles = function(){
 	var emitters = []
 	var loaders = {}
 	var datas = {}
+	var sceneGroup
 
 	var kParticleTypeGravity = 1
 	var kParticleTypeRadial = 2
@@ -334,7 +335,7 @@ var epicparticles = function(){
 		var b = c.b * 255
 
 		var tint = Phaser.Color.getColor(r, g, b)
-		particle.sprite.tint = 0xffffff
+		particle.sprite.tint = tint
 		//particle.sprite.blendMode = PIXI.blendModes.MULTIPLY;
 
 		//console.log(emitter.blendFuncSource)

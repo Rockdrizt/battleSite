@@ -3,8 +3,13 @@ var characterBattle = function () {
 	var currentScene
 	var loadingFiles
 	var currentLoader
-	var currentGame
+	var game
 	var projectiles = {}
+
+	function createCharacter(charName, skin, animation) {
+
+		return spineLoader.createSpine(charName, skin, animation)
+	}
 
 	function extractSound(soundID) {
 		var soundsList = game.cache.getJSON('sounds')
@@ -41,7 +46,7 @@ var characterBattle = function () {
 	}
 
 	function addProjectile(id){
-		var projectileDat = currentGame.cache.getJSON(id + "Data")
+		var projectileDat = game.cache.getJSON(id + "Data")
 		projectiles[id] = projectileDat
 
 		if(projectileDat.particles){
@@ -90,12 +95,12 @@ var characterBattle = function () {
 		}
 	}
 
-	function loadCharacter(loader, character, battleScene, files, game) {
+	function loadCharacter(loader, character, battleScene, files, currentGame) {
 
 		currentScene = battleScene
 		currentLoader = loader
 		loadingFiles = files
-		currentGame = game
+		game = currentGame
 
 		loader.json(character.name + "Data", character.file)
 		loadingFiles[character.name + "Data"] = {onComplete:function(){
@@ -109,7 +114,8 @@ var characterBattle = function () {
 
 	return {
 		loadCharacter:loadCharacter,
-		getParticles:function () {
+		createCharacter:createCharacter,
+		getProjectiles:function () {
 			return projectiles
 		}
 	}

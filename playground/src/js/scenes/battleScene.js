@@ -142,6 +142,8 @@ var battleScene = function() {
 			button.y = pivotY * 50
 			button.label.text = animationName
 		}
+
+		//var buttonAttack = createButton(characterBattle)
 	}
 
 	function initialize() {
@@ -152,199 +154,9 @@ var battleScene = function() {
 
 	}
 
-	function addParticle(group, offsetX, offsetY, zindex, particleName) {
-		var emitter = epicparticles.newEmitter(particleName)
-		if (!emitter)
-			return
-
-		emitter.x = offsetX
-		emitter.y = offsetY
-		group.add(emitter)
-		if (zindex === "back")
-			group.sendToBack(emitter)
-
-		particles[particleName] = emitter
-	}
-
-	function addParticleCharacter(character, params) {
-		var attachmentName = params[0]
-		var particleName = params[1]
-
-		var slot = character.getSlotByAttachment(attachmentName)
-		var emitter = epicparticles.newEmitter(particleName)
-		if (!emitter)
-			return
-
-		if(emitter.absolute) {
-			emitter.x = slot.x
-			emitter.y = slot.y
-			sceneGroup.add(emitter)
-		}
-		else
-			slot.add(emitter)
-		//character.spine.setToSetupPose()
-		slot[particleName] = emitter
-	}
-
-	function removeParticleCharacter(character, params) {
-		var attachmentName = params[0]
-		var particleName = params[1]
-
-		var slot = character.getSlotByAttachment(attachmentName)
-		var emitter = slot[particleName]
-		epicparticles.removeEmitter(emitter)
-	}
-
-	function removeParticle(particleName) {
-		var emitter = particles[particleName]
-		epicparticles.removeEmitter(emitter)
-	}
-
 	function preload() {
 
 		game.stage.disableVisibilityChange = true;
-	}
-
-	function getFunctionData(value) {
-		var functionArrays = value.split(":")
-		var functionName = functionArrays[0]
-		var params = functionArrays.slice(1)
-
-		return {name: functionName, params: params}
-	}
-
-	function getGroupRef(ref, self) {
-		switch (ref) {
-			case "self" :
-				return self
-			case "stage" :
-				return sceneGroup
-			default:
-				return sceneGroup
-		}
-	}
-
-	function createSpine(skeleton, skin, idleAnimation, x, y) {
-		idleAnimation = idleAnimation || "idle"
-		var spineGroup = game.add.group()
-		x = x || 0
-		y = y || 0
-
-		var spineSkeleton = game.add.spine(0, 0, skeleton)
-		spineSkeleton.x = x;
-		spineSkeleton.y = y
-		//spineSkeleton.scale.setTo(0.8,0.8)
-		spineSkeleton.setSkinByName(skin)
-		spineSkeleton.setAnimationByName(0, idleAnimation, true)
-		// spineSkeleton.autoUpdateTransform ()
-		spineGroup.add(spineSkeleton)
-
-
-		spineGroup.setAnimation = function (animations, loop, onComplete, args) {
-			var entry
-			for (var index = 0; index < animations.length; index++) {
-				var animation = animations[index]
-				var isLoop = (index === animations.length - 1) && loop
-				if (index === 0)
-					entry = spineSkeleton.setAnimationByName(0, animation, isLoop)
-				else
-					spineSkeleton.addAnimationByName(0, animation, isLoop)
-
-			}
-
-			if (args)
-				entry.args = args
-
-			if (onComplete) {
-				entry.onComplete = onComplete
-			}
-
-			spineSkeleton.setToSetupPose()
-			return entry
-		}
-
-		spineGroup.setSkinByName = function (skin) {
-			spineSkeleton.setSkinByName(skin)
-			spineSkeleton.setToSetupPose()
-		}
-
-		spineGroup.setAlive = function (alive) {
-			spineSkeleton.autoUpdate = alive
-		}
-
-		spineGroup.getSlotContainer = function (slotName) {
-			var slotIndex
-			for (var index = 0, n = spineSkeleton.skeletonData.slots.length; index < n; index++) {
-				var slotData = spineSkeleton.skeletonData.slots[index]
-				if (slotData.name === slotName) {
-					slotIndex = index
-				}
-			}
-
-			if (slotIndex) {
-				return spineSkeleton.slotContainers[slotIndex]
-			}
-		}
-
-		spineGroup.getSlotByAttachment = function (attachmentName) {
-			var slotIndex
-			for (var index = 0, n = spineSkeleton.skeletonData.slots.length; index < n; index++) {
-				var slotData = spineSkeleton.skeletonData.slots[index]
-				if (slotData.attachmentName === attachmentName) {
-					slotIndex = index
-				}
-			}
-
-			if (slotIndex) {
-				return spineSkeleton.slotContainers[slotIndex]
-			}
-		}
-
-		spineSkeleton.onEvent.add(function (i, e) {
-			var eventName = e.data.name
-			console.log(eventName)
-
-			if ((!eventName) && (typeof eventName !== 'string'))
-				return
-
-			var functionData = getFunctionData(eventName)
-			if ((!functionData) || (!functionData.name)) {
-				return
-			}
-
-			if (functionData.name === "PLAY") {
-				// console.log(functionData.param)
-				sound.play(functionData.params[0])
-			}
-			if (functionData.name === "SPAWN") {
-				// console.log(functionData.param)
-				addParticleCharacter(spineGroup, functionData.params)
-			}
-			if (functionData.name === "STAGESPAWN") {
-				// console.log(functionData.param)
-				var ref = functionData.params[0]
-				var group = getGroupRef(ref, spineGroup)
-				var offsetX = functionData.params[1]
-				var offsetY = functionData.params[2]
-				var particleName = functionData.params[4]
-				var zIndex = functionData.params[3]
-
-				addParticle(group, offsetX, offsetY, zIndex, particleName)
-			}
-			if (functionData.name === "DESPAWN") {
-				// console.log(functionData.param)
-				removeParticleCharacter(spineGroup, functionData.params)
-			}
-			if (functionData.name === "STAGEDESPAWN") {
-				// console.log(functionData.param)
-				removeParticle(functionData.params)
-			}
-
-		})
-
-		spineGroup.spine = spineSkeleton
-
-		return spineGroup
 	}
 
 	function setCharacter(character, teamIndex) {
@@ -384,14 +196,14 @@ var battleScene = function() {
 
 				var xOffset = CHARACTER_CENTER_OFFSET.x * side.scale.x + position.x * side.scale.x
 
-				var spineGroup = createSpine(character.name, nameLowerCase, "run")
-				spineGroup.x = game.world.centerX * 0.5 * side.direction + xOffset
-				spineGroup.y = CHARACTER_CENTER_OFFSET.y + game.world.centerY + position.y
-				console.log("postion", spineGroup.position)
-				spineGroup.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
-				spineGroup.data = character.data
-				sceneGroup.add(spineGroup)
-				console.log(spineGroup)
+				var character = characterBattle.createCharacter(character.name, nameLowerCase, "run")
+				character.x = game.world.centerX * 0.5 * side.direction + xOffset
+				character.y = CHARACTER_CENTER_OFFSET.y + game.world.centerY + position.y
+				console.log("postion", character.position)
+				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
+				character.data = character.data
+				sceneGroup.add(character)
+				console.log(character)
 
 				var rect = game.add.graphics()
 				rect.beginFill(0xffffff)
@@ -400,12 +212,12 @@ var battleScene = function() {
 				rect.x = -100
 				rect.y = -400
 				rect.alpha = 0
-				spineGroup.add(rect)
+				character.add(rect)
 				rect.inputEnabled = true
 				rect.events.onInputDown.add(selectYogotar)
 
 				if(charIndex === 1)
-					mainSpine = spineGroup
+					mainSpine = character
 			}
 		}
 

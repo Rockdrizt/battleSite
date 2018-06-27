@@ -1,6 +1,190 @@
 var spineLoader = function () {
 
 	var currentLoader
+	var particles = {}
+
+	function getGroupRef(ref, self) {
+		switch (ref) {
+			case "self" :
+				return self
+			case "stage" :
+				return ref.parent
+			default:
+				return ref.parent
+		}
+	}
+
+	function drawParticle(group, offsetX, offsetY, zindex, particleName) {
+		var emitter = epicparticles.newEmitter(particleName)
+		if (!emitter)
+			return
+
+		emitter.x = offsetX
+		emitter.y = offsetY
+		group.add(emitter)
+		if (zindex === "back")
+			group.sendToBack(emitter)
+
+		particles[particleName] = emitter
+	}
+
+	function drawParticleCharacter(character, params) {
+		var attachmentName = params[0]
+		var particleName = params[1]
+
+		var slot = character.getSlotByAttachment(attachmentName)
+		var emitter = epicparticles.newEmitter(particleName)
+		if (!emitter)
+			return
+
+		if(emitter.absolute) {
+			emitter.x = slot.x
+			emitter.y = slot.y
+			console.log("cord", slot.x, slot.y)
+			character.add(emitter)
+		}
+		else
+			slot.add(emitter)
+		//character.spine.setToSetupPose()
+		slot[particleName] = emitter
+	}
+
+	function removeParticleCharacter(character, params) {
+		var attachmentName = params[0]
+		var particleName = params[1]
+
+		var slot = character.getSlotByAttachment(attachmentName)
+		var emitter = slot[particleName]
+		epicparticles.removeEmitter(emitter)
+	}
+
+	function removeParticle(particleName) {
+		var emitter = particles[particleName]
+		epicparticles.removeEmitter(emitter)
+	}
+
+	function createSpine(skeleton, skin, idleAnimation, x, y) {
+		idleAnimation = idleAnimation || "idle"
+		var spineGroup = game.add.group()
+		x = x || 0
+		y = y || 0
+
+		var spineSkeleton = game.add.spine(0, 0, skeleton)
+		spineSkeleton.x = x;
+		spineSkeleton.y = y
+		//spineSkeleton.scale.setTo(0.8,0.8)
+		spineSkeleton.setSkinByName(skin)
+		spineSkeleton.setAnimationByName(0, idleAnimation, true)
+		// spineSkeleton.autoUpdateTransform ()
+		spineGroup.add(spineSkeleton)
+
+
+		spineGroup.setAnimation = function (animations, loop, onComplete, args) {
+			var entry
+			for (var index = 0; index < animations.length; index++) {
+				var animation = animations[index]
+				var isLoop = (index === animations.length - 1) && loop
+				if (index === 0)
+					entry = spineSkeleton.setAnimationByName(0, animation, isLoop)
+				else
+					spineSkeleton.addAnimationByName(0, animation, isLoop)
+
+			}
+
+			if (args)
+				entry.args = args
+
+			if (onComplete) {
+				entry.onComplete = onComplete
+			}
+
+			spineSkeleton.setToSetupPose()
+			return entry
+		}
+
+		spineGroup.setSkinByName = function (skin) {
+			spineSkeleton.setSkinByName(skin)
+			spineSkeleton.setToSetupPose()
+		}
+
+		spineGroup.setAlive = function (alive) {
+			spineSkeleton.autoUpdate = alive
+		}
+
+		spineGroup.getSlotContainer = function (slotName) {
+			var slotIndex
+			for (var index = 0, n = spineSkeleton.skeletonData.slots.length; index < n; index++) {
+				var slotData = spineSkeleton.skeletonData.slots[index]
+				if (slotData.name === slotName) {
+					slotIndex = index
+				}
+			}
+
+			if (slotIndex) {
+				return spineSkeleton.slotContainers[slotIndex]
+			}
+		}
+
+		spineGroup.getSlotByAttachment = function (attachmentName) {
+			var slotIndex
+			for (var index = 0, n = spineSkeleton.skeletonData.slots.length; index < n; index++) {
+				var slotData = spineSkeleton.skeletonData.slots[index]
+				if (slotData.attachmentName === attachmentName) {
+					slotIndex = index
+				}
+			}
+
+			if (slotIndex) {
+				return spineSkeleton.slotContainers[slotIndex]
+			}
+		}
+
+		spineSkeleton.onEvent.add(function (i, e) {
+			var eventName = e.data.name
+			console.log(eventName)
+
+			if ((!eventName) && (typeof eventName !== 'string'))
+				return
+
+			var functionData = getFunctionData(eventName)
+			if ((!functionData) || (!functionData.name)) {
+				return
+			}
+
+			if (functionData.name === "PLAY") {
+				// console.log(functionData.param)
+				sound.play(functionData.params[0])
+			}
+			if (functionData.name === "SPAWN") {
+				// console.log(functionData.param)
+				drawParticleCharacter(spineGroup, functionData.params)
+			}
+			if (functionData.name === "STAGESPAWN") {
+				// console.log(functionData.param)
+				var ref = functionData.params[0]
+				var group = getGroupRef(ref, spineGroup)
+				var offsetX = functionData.params[1]
+				var offsetY = functionData.params[2]
+				var particleName = functionData.params[4]
+				var zIndex = functionData.params[3]
+
+				drawParticle(group, offsetX, offsetY, zIndex, particleName)
+			}
+			if (functionData.name === "DESPAWN") {
+				// console.log(functionData.param)
+				removeParticleCharacter(spineGroup, functionData.params)
+			}
+			if (functionData.name === "STAGEDESPAWN") {
+				// console.log(functionData.param)
+				removeParticle(functionData.params)
+			}
+
+		})
+
+		spineGroup.spine = spineSkeleton
+
+		return spineGroup
+	}
 
 	function addSound(functionData, soundsList, assetsSounds){
 		var name = functionData.params[0]
@@ -93,6 +277,7 @@ var spineLoader = function () {
 	}
 
 	return {
-		loadSpine:loadSpine
+		loadSpine:loadSpine,
+		createSpine:createSpine
 	}
 }()
