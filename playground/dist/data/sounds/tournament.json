@@ -337,7 +337,8 @@
 "tournamentBowCharge1":"sounds/characters/bowCharge1.mp3",
 "tournamentJetEngine1":"sounds/characters/jetEngine1.mp3",
 "tournamentJetStart1":"sounds/characters/jetStart1.mp3",
-"tournamentJetStop1":"sounds/characters/jetStop1.mp3"
+"tournamentJetStop1":"sounds/characters/jetStop1.mp3",
+"tournamentCapeWid1":"sounds/characters/capeWind1.mp3"
 
 
 }
