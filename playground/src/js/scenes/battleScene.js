@@ -232,7 +232,7 @@ var battleScene = function() {
 			epicparticles.update()
 			if (game.input.activePointer.isDown){
 				if (!clickLatch) {
-					var emitter = epicparticles.newEmitter("pickedEnergy")
+					var emitter = epicparticles.newEmitter("pickedEnergy", {x:game.input.activePointer.x, y:game.input.activePointer.y})
 					emitter.x = game.input.activePointer.x
 					emitter.y = game.input.activePointer.y
 				}
@@ -241,6 +241,9 @@ var battleScene = function() {
 			} else {
 				clickLatch = false
 			}
+		},
+		render:function () {
+			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
 		},
 		create: function(event){
 
