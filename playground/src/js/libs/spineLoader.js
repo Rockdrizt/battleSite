@@ -18,7 +18,7 @@ var spineLoader = function () {
 		if (!emitter)
 			return
 
-		emitter.x = offsetX
+		emitter.x = group.scale.x > 0 ? offsetX : offsetX * -1
 		emitter.y = offsetY
 		emitter.scale.x = group.scale.x
 		group.add(emitter)
@@ -46,7 +46,7 @@ var spineLoader = function () {
 			return
 
 		if(emitter.absolute) {
-			emitter.x = slot.x
+			emitter.x = character.scale.x > 0 ? slot.x : slot.x * -1
 			emitter.y = slot.y
 			console.log("cord", slot.x, slot.y)
 			character.add(emitter)

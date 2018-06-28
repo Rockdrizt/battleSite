@@ -332,7 +332,12 @@
 "tournamentScifiInterface5":"sounds/characters/scifiInterface5.mp3",
 "tournamentIceHit2":"sounds/characters/iceHit2.mp3",
 "tournamentIceAvalanche1":"sounds/characters/iceAvalanche1.mp3",
-"tournamentIceShard1":"sounds/characters/iceShard1.mp3"
+"tournamentIceShard1":"sounds/characters/iceShard1.mp3",
+"tournamentBowShoot1":"sounds/characters/bowShoot1.mp3",
+"tournamentBowCharge1":"sounds/characters/bowCharge1.mp3",
+"tournamentJetEngine1":"sounds/characters/jetEngine1.mp3",
+"tournamentJetStart1":"sounds/characters/jetStart1.mp3",
+"tournamentJetStop1":"sounds/characters/jetStop1.mp3"
 
 
 }
