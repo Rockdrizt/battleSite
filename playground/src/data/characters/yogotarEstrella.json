@@ -1,11 +1,9 @@
 {
 	"category":"yogotar",
 	"attacks": {
-		"normal": [
-			
+		"normal": [	
 		],
-		"special": [
-			
+		"special": [	
 		]
 	},
 	"directory": "spines/Estrella/estrella.json",
