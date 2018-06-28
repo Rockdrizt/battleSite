@@ -243,7 +243,10 @@ var epicparticles = function(){
 				y: 0
 			}
 			var radial
-			var tangential
+			var tangential = {
+				x: 0,
+				y: 0
+			}
 			var vectorZero = {
 				x: 0,
 				y: 0
@@ -265,7 +268,8 @@ var epicparticles = function(){
 				radial = normalize(particle.position, 1)
 			}
 
-			tangential = radial
+			tangential.x = radial.x
+			tangential.y = radial.y
 			radial.x *= particle.radialAcceleration
 			radial.y *= particle.radialAcceleration
 
