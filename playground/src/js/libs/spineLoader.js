@@ -20,6 +20,7 @@ var spineLoader = function () {
 
 		emitter.x = offsetX
 		emitter.y = offsetY
+		emitter.scale.x = group.scale.x
 		group.add(emitter)
 		if (zindex === "back")
 			group.sendToBack(emitter)
@@ -50,9 +51,11 @@ var spineLoader = function () {
 			console.log("cord", slot.x, slot.y)
 			character.add(emitter)
 		}
-		else
+		else {
 			slot.add(emitter)
-		//character.spine.setToSetupPose()
+		}
+		emitter.scale.x = character.scale.x
+
 		if(typeof slot.particles === "undefined")
 			slot.particles = {}
 
