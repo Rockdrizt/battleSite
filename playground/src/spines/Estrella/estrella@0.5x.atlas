@@ -860,258 +860,265 @@ normal1/yogo_ice_front
   index: -1
 
 estrella2.png
-size: 1024,1024
+size: 2048,512
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 normal/arm1
   rotate: true
-  xy: 564, 708
+  xy: 1631, 310
   size: 24, 30
   orig: 24, 30
   offset: 0, 0
   index: -1
 normal/eyes_a1
-  rotate: true
-  xy: 812, 737
+  rotate: false
+  xy: 1877, 477
   size: 86, 30
   orig: 86, 30
   offset: 0, 0
   index: -1
 normal/eyes_b1
   rotate: false
-  xy: 390, 708
+  xy: 159, 125
   size: 85, 24
   orig: 85, 24
   offset: 0, 0
   index: -1
 normal/eyes_b3
   rotate: false
-  xy: 477, 708
+  xy: 246, 138
   size: 85, 24
   orig: 85, 24
   offset: 0, 0
   index: -1
 normal/eyes_c1
-  rotate: true
-  xy: 777, 737
+  rotate: false
+  xy: 246, 164
   size: 86, 33
   orig: 86, 33
   offset: 0, 0
   index: -1
 normal/eyes_c2
-  rotate: false
-  xy: 252, 84
+  rotate: true
+  xy: 1569, 304
   size: 85, 33
   orig: 85, 33
   offset: 0, 0
   index: -1
 normal/eyes_f1
   rotate: false
-  xy: 387, 666
+  xy: 1623, 396
   size: 76, 40
   orig: 76, 40
   offset: 0, 0
   index: -1
 normal/eyes_g1
-  rotate: false
-  xy: 934, 991
+  rotate: true
+  xy: 1536, 301
   size: 88, 31
   orig: 88, 31
   offset: 0, 0
   index: -1
 normal/eyes_g2
   rotate: false
-  xy: 934, 958
+  xy: 1787, 476
   size: 88, 31
   orig: 88, 31
   offset: 0, 0
   index: -1
 normal/eyes_h1
-  rotate: true
-  xy: 387, 443
+  rotate: false
+  xy: 775, 190
   size: 79, 27
   orig: 79, 27
   offset: 0, 0
   index: -1
 normal/eyes_h3
-  rotate: true
-  xy: 387, 524
+  rotate: false
+  xy: 1965, 480
   size: 80, 27
   orig: 80, 27
   offset: 0, 0
   index: -1
 normal/eyes_h4
   rotate: true
-  xy: 416, 524
+  xy: 1604, 309
   size: 80, 25
   orig: 80, 25
   offset: 0, 0
   index: -1
 normal/eyes_h5
-  rotate: false
-  xy: 465, 678
+  rotate: true
+  xy: 1536, 219
   size: 80, 28
   orig: 80, 28
   offset: 0, 0
   index: -1
 normal/eyes_i1
   rotate: false
-  xy: 90, 2
+  xy: 2, 2
   size: 84, 44
   orig: 84, 44
   offset: 0, 0
   index: -1
 normal/eyes_i2
   rotate: false
-  xy: 165, 72
+  xy: 1536, 391
   size: 85, 45
   orig: 85, 45
   offset: 0, 0
   index: -1
 normal/eyes_i3
   rotate: false
-  xy: 2, 2
+  xy: 1699, 463
   size: 86, 44
   orig: 86, 44
   offset: 0, 0
   index: -1
 normal/eyes_i4
   rotate: false
-  xy: 777, 825
+  xy: 159, 151
   size: 85, 46
   orig: 85, 46
   offset: 0, 0
   index: -1
 normal/forearm1_a
   rotate: false
-  xy: 376, 319
+  xy: 1049, 191
   size: 26, 26
   orig: 26, 26
   offset: 0, 0
   index: -1
 normal/forearm2_a
   rotate: true
-  xy: 596, 708
+  xy: 1077, 193
   size: 24, 27
   orig: 24, 27
   offset: 0, 0
   index: -1
 normal/hand1_b
-  rotate: false
-  xy: 416, 467
+  rotate: true
+  xy: 1663, 310
   size: 24, 25
   orig: 24, 25
   offset: 0, 0
   index: -1
 normal/hand1_c
-  rotate: false
-  xy: 574, 680
+  rotate: true
+  xy: 1106, 192
   size: 25, 26
   orig: 25, 26
   offset: 0, 0
   index: -1
 normal/hand1_e
-  rotate: true
-  xy: 387, 409
+  rotate: false
+  xy: 955, 191
   size: 32, 26
   orig: 32, 26
   offset: 0, 0
   index: -1
 normal/leg1_a
   rotate: false
-  xy: 864, 835
+  xy: 88, 10
   size: 32, 36
   orig: 32, 36
   offset: 0, 0
   index: -1
 normal/leg1_c
   rotate: false
-  xy: 376, 378
+  xy: 891, 188
   size: 30, 29
   orig: 30, 29
   offset: 0, 0
   index: -1
 normal/leg2_a
-  rotate: false
-  xy: 339, 84
+  rotate: true
+  xy: 856, 188
   size: 29, 33
   orig: 29, 33
   offset: 0, 0
   index: -1
 normal/leg2_c
   rotate: false
-  xy: 376, 347
+  xy: 923, 188
   size: 30, 29
   orig: 30, 29
   offset: 0, 0
   index: -1
-normal/shin1_b
+normal/particle
   rotate: false
-  xy: 547, 678
+  xy: 334, 145
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: -1
+normal/shin1_b
+  rotate: true
+  xy: 989, 192
   size: 25, 28
   orig: 25, 28
   offset: 0, 0
   index: -1
 normal/shin2_b
-  rotate: false
-  xy: 416, 494
+  rotate: true
+  xy: 1019, 192
   size: 25, 28
   orig: 25, 28
   offset: 0, 0
   index: -1
 normal/torso1
   rotate: false
-  xy: 387, 606
+  xy: 1631, 336
   size: 57, 58
   orig: 57, 58
   offset: 0, 0
   index: -1
 normal1/estrella_cloak1
   rotate: false
-  xy: 777, 873
+  xy: 2, 48
   size: 136, 68
   orig: 136, 68
   offset: 0, 0
   index: -1
 normal1/estrella_cloak2
   rotate: false
-  xy: 2, 48
+  xy: 1536, 438
   size: 161, 69
   orig: 161, 69
   offset: 0, 0
   index: -1
 normal1/estrella_cloak4
   rotate: false
-  xy: 777, 943
+  xy: 2, 118
   size: 155, 79
   orig: 155, 79
   offset: 0, 0
   index: -1
 normal1/estrella_super1
   rotate: false
-  xy: 390, 734
+  xy: 775, 219
   size: 385, 288
   orig: 385, 288
   offset: 0, 0
   index: -1
 normal1/estrella_super2
   rotate: false
-  xy: 2, 119
+  xy: 1162, 219
   size: 372, 288
   orig: 372, 288
   offset: 0, 0
   index: -1
 normal1/estrella_super4
   rotate: false
-  xy: 2, 409
+  xy: 390, 204
   size: 383, 303
   orig: 383, 303
   offset: 0, 0
   index: -1
 normal1/estrella_super5
   rotate: false
-  xy: 2, 714
+  xy: 2, 199
   size: 386, 308
   orig: 386, 308
   offset: 0, 0
