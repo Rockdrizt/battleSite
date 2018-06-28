@@ -2,10 +2,8 @@
 	"category":"yogotar",
 	"attacks": {
 		"normal": [
-
 		],
 		"special": [
-
 		]
 	},
 	"directory": "spines/Eagle/eagle.json",

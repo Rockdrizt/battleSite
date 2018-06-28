@@ -79,7 +79,7 @@ function startGame(){
     	sound.init(game)
 
 		var teams = [
-			["yogotarDinamita", "yogotarTheffanie", "yogotarLuna"],
+			["yogotarDinamita", "yogotarEstrella", "yogotarLuna"],
 			["yogotarEagle", "yogotarEstrella", "yogotarEagle"]
 		]
 

@@ -2,33 +2,8 @@
 	"category":"yogotar",
 	"attacks": {
 		"normal": [
-			{
-				"id": "rocksAttack1",
-				"attachment": "particle1",
-				"delay": 380,
-				"multiplier": 1
-			}
-
 		],
 		"special": [
-			{
-				"id": "rocksAttack1",
-				"attachment": "particle1",
-				"delay": 800,
-				"multiplier": 1
-			},
-			{
-				"id": "rocksAttack2",
-				"attachment": "particle1",
-				"delay": 800,
-				"multiplier": 1
-			},
-			{
-				"id": "rocksAttack3",
-				"attachment": "particle1",
-				"delay": 800,
-				"multiplier": 1
-			}
 		]
 	},
 	"directory": "spines/Luna/luna.json",
