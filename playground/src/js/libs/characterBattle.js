@@ -5,6 +5,17 @@ var characterBattle = function () {
 	var currentLoader
 	var game
 	var projectiles = {}
+	
+	function createProjectile() {
+		
+	}
+	
+	function attackUltra(character) {
+		var ultra = character.data.attacks.ultra[0]
+		
+		var ultraProjectile = projectiles[ultra.id]
+		
+	}
 
 	function createCharacter(charName, skin, animation) {
 
@@ -45,6 +56,13 @@ var characterBattle = function () {
 		}
 	}
 
+	function extractSpines(spines) {
+		for(var spineIndex = 0; spineIndex < spines.length; spineIndex++){
+			var spine = spines[spineIndex]
+			spineLoader.loadSpine(currentLoader, spine, loadingFiles, currentScene)
+		}
+	}
+
 	function addProjectile(id){
 		var projectileDat = game.cache.getJSON(id + "Data")
 		projectiles[id] = projectileDat
@@ -55,6 +73,10 @@ var characterBattle = function () {
 
 		if(projectileDat.impact.particles){
 			extractParticles(projectileDat.impact.particles)
+		}
+
+		if(projectileDat.spines){
+			extractSpines(projectileDat.spines)
 		}
 
 		if(projectileDat.impact.soundID){
