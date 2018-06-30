@@ -6,8 +6,22 @@ var characterBattle = function () {
 	var game
 	var projectiles = {}
 	
-	function createProjectile() {
-		
+	function createProjectile(ultraProjectile) {
+		for(var indexAttack = 0; indexAttack < ultraProjectile.length; indexAttack++){
+			var attackElement = ultraProjectile[indexAttack]
+
+			if(attackElement.spines){
+				var spines = attackElement.spines
+				for(var spineIndex = 0; spineIndex < spines.length; spineIndex++){
+					var spine = spines[spineIndex]
+					var file = spine.file
+					var spineSkeleton = file.substr(file.lastIndexOf('/') + 1);
+					var index = spineSkeleton.indexOf(".");
+					spineSkeleton = spineSkeleton.substring(0, index)
+					spineLoader.createSpine(spineSkeleton, spine.skin)
+				}
+			}
+		}
 	}
 	
 	function attackUltra(character) {
