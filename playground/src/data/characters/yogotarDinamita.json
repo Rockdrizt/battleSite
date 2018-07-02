@@ -4,6 +4,14 @@
 		"normal": [
 		],
 		"special": [
+		],
+		"ultra":[
+			{
+				"id": "ultraDinamita",
+				"attachment": "particle2",
+				"delay": 450,
+				"multiplier": 1
+			}
 		]
 	},
 	"directory": "spines/Dinamita/dinamita.json",

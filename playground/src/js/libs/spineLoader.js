@@ -1,6 +1,7 @@
 var spineLoader = function () {
 
 	var currentLoader
+	var particles = {}
 
 	function getGroupRef(ref, self) {
 		switch (ref) {
@@ -14,6 +15,10 @@ var spineLoader = function () {
 	}
 
 	function drawParticle(group, offsetX, offsetY, zindex, particleName) {
+		if((particles[particleName])&&(particles[particleName].duration < 0)) {
+			return
+		}
+
 		var emitter = epicparticles.newEmitter(particleName)
 		if (!emitter)
 			return
@@ -25,15 +30,16 @@ var spineLoader = function () {
 		if (zindex === "back")
 			group.sendToBack(emitter)
 
-		if(typeof group.particles === "undefined")
-			group.particles = {}
-
-		group.particles[particleName] = emitter
+		particles[particleName] = emitter
 	}
 
 	function drawParticleCharacter(character, params) {
 		var attachmentName = params[0]
 		var particleName = params[1]
+
+		if((particles[particleName])&&(particles[particleName].duration < 0)) {
+			return
+		}
 
 		var slot = character.getSlotByAttachment(attachmentName)
 		if(typeof slot === "undefined"){
@@ -56,23 +62,28 @@ var spineLoader = function () {
 		}
 		emitter.scale.x = character.scale.x
 
-		if(typeof slot.particles === "undefined")
-			slot.particles = {}
-
-		slot.particles[particleName] = emitter
+		particles[particleName] = emitter
+		console.log(emitter.duration)
 	}
 
 	function removeParticleCharacter(character, params) {
 		var attachmentName = params[0]
 		var particleName = params[1]
 
-		var slot = character.getSlotByAttachment(attachmentName)
-		var emitter = slot.particles[particleName]
+		//var slot = character.getSlotByAttachment(attachmentName)
+		console.log(particles)
+		var emitter = particles[particleName]
+		if(!emitter)
+			return
+
 		epicparticles.removeEmitter(emitter)
 	}
 
-	function removeParticle(character, particleName) {
-		var emitter = character.particles[particleName]
+	function removeParticle(particleName) {
+		var emitter = particles[particleName]
+		if(!emitter)
+			return
+
 		epicparticles.removeEmitter(emitter)
 	}
 
@@ -189,7 +200,7 @@ var spineLoader = function () {
 			}
 			if (functionData.name === "STAGEDESPAWN") {
 				// console.log(functionData.param)
-				removeParticle(spineGroup, functionData.params)
+				removeParticle(functionData.params)
 			}
 
 		})

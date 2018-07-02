@@ -76,6 +76,8 @@ var epicparticles = function(){
 			particleSizeDelta: 0,
 			timeToLive: 0
 		}
+
+
 	}
 
 	function init(gameObject){
@@ -184,6 +186,13 @@ var epicparticles = function(){
 		particle.sprite.alpha = particle.color.a
 
 		particle.sprite.visible = true
+
+		var r = start.r * 255
+		var g = start.g * 255
+		var b = start.b * 255
+
+		var tint = Phaser.Color.getColor(r, g, b)
+		//particle.sprite.tint = tint
 	}
 
 	function addParticle(emitter){
@@ -332,8 +341,11 @@ var epicparticles = function(){
 		var g = c.g * 255
 		var b = c.b * 255
 
-		var tint = Phaser.Color.getColor(r, g, b)
-		particle.sprite.tint = tint
+		/*if(emitter.frameCounter % 4 === 0) {
+			var tint = Phaser.Color.getColor(r, g, b)
+			//particle.sprite.tint = tint
+		}*/
+
 		//particle.sprite.blendMode = PIXI.blendModes.MULTIPLY;
 
 		//console.log(emitter.blendFuncSource)
@@ -363,6 +375,7 @@ var epicparticles = function(){
 		for (var i = 0; i < arrayLength; i++) {
 			var emitter = emitters[i]
 			var key = emitter.key
+			emitter.frameCounter++
 
 			if (emitter.active == true && emitter.emissionRate > 0) {
 				var rate = 1.0 / emitter.emissionRate
@@ -510,6 +523,7 @@ var epicparticles = function(){
 		emitter.key = key
 		emitter.absolute = data.absolutePosition
 		emitter.particles = []
+		emitter.frameCounter = 0
 
 		// Create particle pool
 		for (var i = 0; i < emitter.maxParticles; i++) {
