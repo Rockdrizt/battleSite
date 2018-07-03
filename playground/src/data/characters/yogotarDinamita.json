@@ -8,8 +8,8 @@
 		"ultra":[
 			{
 				"id": "ultraDinamita",
-				"attachment": "particle2",
-				"delay": 450,
+				"attachment": "particle8",
+				"delay": 1000,
 				"multiplier": 1
 			}
 		]

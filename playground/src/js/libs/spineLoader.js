@@ -2,6 +2,7 @@ var spineLoader = function () {
 
 	var currentLoader
 	var particles = {}
+	var spines = {}
 
 	function getGroupRef(ref, self) {
 		switch (ref) {
@@ -87,7 +88,10 @@ var spineLoader = function () {
 		epicparticles.removeEmitter(emitter)
 	}
 
-	function createSpine(skeleton, skin, idleAnimation, x, y) {
+	function createSpine(skeleton, skin, idleAnimation, x, y, unlike) {
+		if((spines[skeleton]) && (!unlike))
+			return spines[skeleton]
+
 		idleAnimation = idleAnimation || "idle"
 		var spineGroup = game.add.group()
 		x = x || 0
@@ -207,6 +211,7 @@ var spineLoader = function () {
 
 		spineGroup.spine = spineSkeleton
 
+		spines[skeleton] = spineGroup
 		return spineGroup
 	}
 

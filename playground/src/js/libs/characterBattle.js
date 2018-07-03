@@ -4,36 +4,69 @@ var characterBattle = function () {
 	var loadingFiles
 	var currentLoader
 	var game
-	var projectiles = {}
-	
-	function createProjectile(ultraProjectile) {
-		for(var indexAttack = 0; indexAttack < ultraProjectile.length; indexAttack++){
-			var attackElement = ultraProjectile[indexAttack]
+	var projectilesData = {}
 
-			if(attackElement.spines){
-				var spines = attackElement.spines
-				for(var spineIndex = 0; spineIndex < spines.length; spineIndex++){
-					var spine = spines[spineIndex]
-					var file = spine.file
-					var spineSkeleton = file.substr(file.lastIndexOf('/') + 1);
-					var index = spineSkeleton.indexOf(".");
-					spineSkeleton = spineSkeleton.substring(0, index)
-					spineLoader.createSpine(spineSkeleton, spine.skin)
-				}
+	function createProjectile(projectileData) {
+		var projectile = game.add.group()
+
+		if(projectileData.spines){
+			var spines = projectileData.spines
+			projectile.spines = []
+
+			for(var spineIndex = 0; spineIndex < spines.length; spineIndex++){
+				var spine = spines[spineIndex]
+				var file = spine.file
+				var spineSkeleton = file.substr(file.lastIndexOf('/') + 1);
+				var index = spineSkeleton.indexOf(".");
+
+				spineSkeleton = spineSkeleton.substring(0, index)
+				var spineGroup = spineLoader.createSpine(spineSkeleton, spine.skin, "in_ultra")
+				spineGroup.data = spine
+
+				console.log(spineGroup.spine)
+				projectile.add(spineGroup)
+
+				projectile.spines.push(spineGroup)
 			}
 		}
+
+		projectile.data = projectileData
+
+		return projectile
 	}
-	
+
 	function attackUltra(character) {
 		var ultra = character.data.attacks.ultra[0]
-		
-		var ultraProjectile = projectiles[ultra.id]
-		
+
+		var ultraProjectile = projectilesData[ultra.id]
+		var projectile = createProjectile(ultraProjectile)
+
+		character.setAnimation(["attack_ultra"], false)
+		game.time.events.add(ultra.delay, function () {
+			projectile.alpha = 1
+			projectile.x = slot.x + character.x
+			projectile.y = slot.y + character.y
+
+			if(projectile.spines) {
+				for(var projectileIndex = 0; projectileIndex < projectile.spines.length; projectileIndex++){
+					var spineGroup = projectile.spines[projectileIndex]
+					var onShootAnimations = spineGroup.data.onShootAnimations
+
+					spineGroup.setAnimation(onShootAnimations, true)
+				}
+			}
+		})
+
+		var slot = character.getSlotByAttachment(ultra.attachment)
+		console.log("slot", slot.x, slot.y)
+		projectile.alpha = 0
+
+		return projectile
 	}
 
 	function createCharacter(charName, skin, animation) {
 
-		return spineLoader.createSpine(charName, skin, animation)
+		return spineLoader.createSpine(charName, skin, animation, 0, 0, true)
 	}
 
 	function extractSound(soundID) {
@@ -73,13 +106,19 @@ var characterBattle = function () {
 	function extractSpines(spines) {
 		for(var spineIndex = 0; spineIndex < spines.length; spineIndex++){
 			var spine = spines[spineIndex]
+			var file = spine.file
+			var name = file.substr(file.lastIndexOf('/') + 1);
+			var index = name.indexOf(".");
+			name = name.substring(0, index)
+
+			spine.name = name
 			spineLoader.loadSpine(currentLoader, spine, loadingFiles, currentScene)
 		}
 	}
 
 	function addProjectile(id){
 		var projectileDat = game.cache.getJSON(id + "Data")
-		projectiles[id] = projectileDat
+		projectilesData[id] = projectileDat
 
 		if(projectileDat.particles){
 			extractParticles(projectileDat.particles)
@@ -152,7 +191,8 @@ var characterBattle = function () {
 		loadCharacter:loadCharacter,
 		createCharacter:createCharacter,
 		getProjectiles:function () {
-			return projectiles
-		}
+			return projectilesData
+		},
+		attackUltra:attackUltra
 	}
 }()

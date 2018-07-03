@@ -125,6 +125,12 @@ var battleScene = function() {
 		return buttonGroup
 	}
 
+	function attackUltra() {
+		console.log(mainSpine)
+		var projectile = characterBattle.attackUltra(mainSpine)
+		sceneGroup.add(projectile)
+	}
+
 	function createMenuAnimations() {
 		var animations = mainSpine.spine.skeletonData.animations
 
@@ -132,10 +138,11 @@ var battleScene = function() {
 			mainSpine.setAnimation([name], true)
 		}
 
+		var pivotY, pivotX
 		for (var animationIndex = 0; animationIndex < animations.length; animationIndex++) {
 			var animationName = animations[animationIndex].name
-			var pivotY = Math.floor(animationIndex / 10)
-			var pivotX = animationIndex % 10
+			pivotY = Math.floor(animationIndex / 10)
+			pivotX = animationIndex % 10
 
 			var button = createButton(changeAnimation.bind(null, animationName))
 			button.x = pivotX * 200
@@ -143,7 +150,10 @@ var battleScene = function() {
 			button.label.text = animationName
 		}
 
-		//var buttonAttack = createButton(characterBattle)
+		var buttonAttack = createButton(attackUltra)
+		buttonAttack.x = 0
+		buttonAttack.y = (pivotY + 1) * 50
+		buttonAttack.label.text = "ultra"
 	}
 
 	function initialize() {
@@ -189,19 +199,19 @@ var battleScene = function() {
 
 			for(var charIndex = 0; charIndex < teamCharacters.length; charIndex++){
 				var characterName = teamCharacters[charIndex]
-				var character = getSpineInfo(characterName)
+				var characterData = getSpineInfo(characterName)
 
-				var nameLowerCase = character.data.name.toLowerCase()
+				var nameLowerCase = characterData.data.name.toLowerCase()
 				var position = ORDER_POSITIONS[charIndex]
 
 				var xOffset = CHARACTER_CENTER_OFFSET.x * side.scale.x + position.x * side.scale.x
 
-				var character = characterBattle.createCharacter(character.name, nameLowerCase, "run")
+				var character = characterBattle.createCharacter(characterData.name, nameLowerCase, "run")
 				character.x = game.world.centerX * 0.5 * side.direction + xOffset
 				character.y = CHARACTER_CENTER_OFFSET.y + game.world.centerY + position.y
 				console.log("postion", character.position)
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
-				character.data = character.data
+				character.data = characterData.data
 				sceneGroup.add(character)
 				console.log(character)
 
