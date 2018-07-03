@@ -309,7 +309,7 @@
 "tournamentWindDamage1":"sounds/characters/windDamage1.mp3",
 "tournamentIceDamage1":"sounds/characters/iceDamage1.mp3",
 "tournamentBoyHurt2":"sounds/characters/boyHurt2.mp3",
-    "tournamentSpinJump1":"sounds/characters/spinJump1.mp3",
+"tournamentSpinJump1":"sounds/characters/spinJump1.mp3",
 "tournamentHitGround2":"sounds/characters/hitGround2.mp3",
 "tournamentHitGround3":"sounds/characters/hitGround3.mp3",
 "tournamentFireBurn1":"sounds/characters/fireBurn1.mp3",
@@ -338,7 +338,11 @@
 "tournamentJetEngine1":"sounds/characters/jetEngine1.mp3",
 "tournamentJetStart1":"sounds/characters/jetStart1.mp3",
 "tournamentJetStop1":"sounds/characters/jetStop1.mp3",
-"tournamentCapeWind1":"sounds/characters/capeWind1.mp3"
+"tournamentCapeWind1":"sounds/characters/capeWind1.mp3",
+"tournamentShieldSmash1":"sounds/characters/shieldSmash1.mp3",
+"tournamentShieldSmash2":"sounds/characters/shieldSmash2.mp3",
+"tournamentShieldSmash3":"sounds/characters/shieldSmash3.mp3",
+"tournamentShieldSmash4":"sounds/characters/shieldSmash4.mp3"
 
 
 }
