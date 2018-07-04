@@ -206,7 +206,7 @@ var battleScene = function() {
 
 				var xOffset = CHARACTER_CENTER_OFFSET.x * side.scale.x + position.x * side.scale.x
 
-				var character = characterBattle.createCharacter(characterData.name, nameLowerCase, "run")
+				var character = characterBattle.createCharacter(characterData.name, nameLowerCase + "1", "run")
 				character.x = game.world.centerX * 0.5 * side.direction + xOffset
 				character.y = CHARACTER_CENTER_OFFSET.y + game.world.centerY + position.y
 				console.log("postion", character.position)
