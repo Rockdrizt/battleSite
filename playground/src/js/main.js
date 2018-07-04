@@ -80,7 +80,9 @@ function startGame(){
 
 		var teams = [
 			["yogotarDinamita", "yogotarEstrella", "yogotarLuna"],
-			["yogotarEagle", "yogotarTheffanie", "yogotarEstrella"]
+		
+			["yogotarEagle", "yogotarTheffanie", "yogotarArthurius"],
+		
 		]
 
 		battleScene.setTeams(teams)

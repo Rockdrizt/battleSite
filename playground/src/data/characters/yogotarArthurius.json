@@ -2,23 +2,11 @@
 	"category":"yogotar",
 	"attacks": {
 		"normal": [
-			{
-				"id": "rocksAttack1",
-				"attachment": "particle1",
-				"delay": 580,
-				"multiplier": 1
-			}
 		],
 		"special": [
-			{
-				"id": "swordAttack1",
-				"attachment": "particle8",
-				"delay": 350,
-				"multiplier": 1
-			}
 		]
 	},
-	"directory": "images/spines/Arthurius/arthurius.json",
+	"directory": "spines/Arthurius/arthurius.json",
 	"name": "Arthurius",
 	"spine": {
 		"options": {
