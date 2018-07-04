@@ -2,23 +2,11 @@
 	"category":"yogotar",
 	"attacks": {
 		"normal": [
-			{
-				"id": "waterball",
-				"attachment": "particle2",
-				"delay": 350,
-				"multiplier": 1
-			}
 		],
 		"special": [
-			{
-				"id": "waterbeamSpecial",
-				"attachment": "particle3",
-				"delay": 350,
-				"multiplier": 1
-			}
 		]
 	},
-	"directory": "images/spines/Nao/nao.json",
+	"directory": "spines/Nao/nao.json",
 	"name": "Nao",
 	"spine": {
 		"options": {
@@ -26,7 +14,6 @@
 			"events": [],
 			"animationSpeed": 10,
 			"useAtlas":"spines/characters/nao/skeleton.atlas"
-
 		}
 	},
 	"stats": {
