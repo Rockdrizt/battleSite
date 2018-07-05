@@ -69,20 +69,26 @@ var yogoSelector = function(){
             }
 		],
 		sounds: [
+           
 		],
         spritesheets: [
         ],
         spines:[
-            {
+            /*{
 				name:"eagle",
 				file:"images/spines/eagle/eagle.json",
                 scales: ["@0.5x"]
-			},
+			},*/
             {
 				name:"dinamita",
-				file:"images/spines/dinamita/dinamita.json",
+				file:"images/spines/dinamita/dinamitaSelector.json",
                 scales: ["@0.5x"]
 			},
+            /*{
+				name:"nao",
+				file:"images/spines/nao/nao.json",
+                scales: ["@0.5x"]
+			},*/
 			/*
             {
 				name:"player1",
@@ -109,7 +115,13 @@ var yogoSelector = function(){
 				name:"player7",
 				file:"images/spines/estrella/estrella.json"
 			},*/
-		]
+		],
+        jsons: [
+			{
+				name: "sounds",
+				file: "sounds/tournament.json"
+			},
+		],
     }
 
 	var sceneGroup
@@ -122,6 +134,7 @@ var yogoSelector = function(){
     var readyGroup
     var chosenOne
     var STATES = {yellow: 0, red: 1, blue: 2, bicolor: 3}
+    var mainSpine
     
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -209,13 +222,13 @@ var yogoSelector = function(){
         pullGroup = game.add.group()
         sceneGroup.add(pullGroup)
         
-        console.log(assets.spines.length)
+        //console.log(assets.spines.length)
         
         for(var i = 0; i < 3/*assets.spines.length*/; i++){
             
-            var player = game.add.spine(alphaGroup.children[i].centerX, 0, assets.spines[0].name)
+            var player = game.add.spine(alphaGroup.children[i].centerX, 500, assets.spines[0].name)
             player.setAnimationByName(0, "wait", true)
-            player.setSkinByName(assets.spines[0].name)
+            player.setSkinByName(assets.spines[0].name + "1")
             player.name = assets.spines[0].name
             pullGroup.add(player)
         }
@@ -223,13 +236,28 @@ var yogoSelector = function(){
         
         for(var i = 0; i < 3/*assets.spines.length*/; i++){
             
-            var player = game.add.spine(bravoGroup.children[i].centerX, 0, assets.spines[1].name)
+            var player = game.add.spine(bravoGroup.children[i].centerX, 500, assets.spines[0].name)
             player.setAnimationByName(0, "wait", true)
-            player.setSkinByName(assets.spines[1].name)
+            player.setSkinByName(assets.spines[0].name + "2")
             player.scale.setTo(-1, 1)
-            player.name = assets.spines[1].name
+            player.name = assets.spines[0].name
             pullGroup.add(player)
         }
+    }
+    
+    function createMainSpine(){
+        
+        mainSpine = characterBattle.createCharacter("dinamita", "dinamita1", "wait")
+        mainSpine.x = game.world.centerX
+        mainSpine.y = game.world.centerY
+        mainSpine.scale.setTo(-1, 1)
+        mainSpine.name = assets.spines[0].name
+        /*mainSpine = game.add.spine(game.world.centerX, game.world.centerY, "dinamita")
+        mainSpine.setAnimationByName(0, "ready", true)
+        mainSpine.setSkinByName("dinamita1")
+        mainSpine.scale.setTo(-1, 1)
+        mainSpine.name = assets.spines[0].name*/
+        pullGroup.add(mainSpine)
     }
     
     function createSpine(x, y, character, anim, skin){
@@ -597,6 +625,57 @@ var yogoSelector = function(){
         })
     }
     
+    function createMenuAnimations() {
+        
+		var animations = mainSpine.spine.skeletonData.animations
+
+		function changeAnimation(name) {
+            //mainSpine.setAnimationByName(0, "hit_normal", false)
+            /*mainSpine.setToSetupPose()
+            mainSpine.autoUpdateTransform()
+            mainSpine.setAnimationByName(0, [name], true)*/
+			mainSpine.setAnimation([name], true)
+		}
+
+		var pivotY, pivotX
+		for (var animationIndex = 0; animationIndex < animations.length; animationIndex++) {
+			var animationName = animations[animationIndex].name
+			pivotY = Math.floor(animationIndex / 10)
+			pivotX = animationIndex % 10
+
+			var button = createButton(changeAnimation.bind(null, animationName))
+			button.x = pivotX * 200
+			button.y = pivotY * 50
+			button.label.text = animationName
+		}
+
+		/*var buttonAttack = createButton(attackUltra)
+		buttonAttack.x = 0
+		buttonAttack.y = (pivotY + 1) * 50
+		buttonAttack.label.text = "ultra"*/
+	}
+    
+    function createButton(callback) {
+		var buttonGroup = game.add.group()
+
+		var rectBg = game.add.graphics()
+		rectBg.beginFill(0x000000)
+		rectBg.lineStyle(5, 0xffffff, 1)
+		rectBg.drawRect(0, 0, 200, 50)
+		rectBg.endFill()
+		buttonGroup.add(rectBg)
+
+		rectBg.inputEnabled = true
+		rectBg.events.onInputDown.add(callback)
+
+		var fontStyle = {font: "24px Arial", fontWeight: "bold", fill: "#ffffff", align: "center"}
+		var text = game.add.text(10, 10, "", fontStyle)
+		buttonGroup.add(text)
+		buttonGroup.label = text
+
+		return buttonGroup
+	}
+    
 	return {
 		
 		assets: assets,
@@ -615,6 +694,8 @@ var yogoSelector = function(){
             createButtons()
             createReady()
             createOk()
+            createMainSpine()
+            createMenuAnimations()
             animateScene()
 		}
 	}

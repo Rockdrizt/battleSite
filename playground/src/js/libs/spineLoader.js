@@ -112,6 +112,8 @@ var spineLoader = function () {
 			for (var index = 0; index < animations.length; index++) {
 				var animation = animations[index]
 				var isLoop = (index === animations.length - 1) && loop
+                spineSkeleton.setToSetupPose()
+                spineSkeleton.autoUpdateTransform()
 				if (index === 0)
 					entry = spineSkeleton.setAnimationByName(0, animation, isLoop)
 				else

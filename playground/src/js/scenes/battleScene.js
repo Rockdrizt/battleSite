@@ -135,6 +135,7 @@ var battleScene = function() {
 		var animations = mainSpine.spine.skeletonData.animations
 
 		function changeAnimation(name) {
+            mainSpine.spine.setAnimationByName(0, "hit_normal", false)
 			mainSpine.setAnimation([name], true)
 		}
 
