@@ -138,6 +138,7 @@ var yogoSelector = function(){
     function preload(){
 		
         game.stage.disableVisibilityChange = false
+        game.load.bitmapFont('skwig', 'images/fonts/font.png', 'images/fonts/font.fnt')
     }
 
 	function createBackground(){
@@ -248,7 +249,7 @@ var yogoSelector = function(){
     
     function createTeamsBars(){
         
-        var fontStyle = {font: "65px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
+        var fontStyle = {font: "65px skwig", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
         
         teamsBarGroup = game.add.group()
         sceneGroup.add(teamsBarGroup)
@@ -259,9 +260,11 @@ var yogoSelector = function(){
             img.anchor.setTo(i, 0)
             img.scale.setTo(0.8)
             
-            var text = new Phaser.Text(sceneGroup.game, 320, 25, "Equipo Alpha", fontStyle)
+            var text = game.add.bitmapText(320, 25, 'skwig', "Equipo Alpha",75)
+            
+            //var text = new Phaser.Text(sceneGroup.game, 320, 25, "Equipo Alpha", fontStyle)
             text.anchor.setTo(0.5, 0)
-            text.setShadow(5, 5, 'rgba(0,0,0,0.5)', 15)
+            //text.setShadow(5, 5, 'rgba(0,0,0,0.5)', 15)
             text.alpha = 0
             img.addChild(text)
             img.text = text
