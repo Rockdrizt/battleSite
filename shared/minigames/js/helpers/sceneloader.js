@@ -23,6 +23,25 @@ var sceneloader = function(){
 			}
 		})
 
+		newLoader.onFileError.add(function (key, file) {
+			var event = {
+				key:key,
+				file:file
+			}
+			if(typeof(callbacks.onError) === "function")
+				callbacks.onError(event)
+		})
+
+		newLoader.onFileStart.add(function (progress, key, file) {
+			var event = {
+				progress:progress,
+				key:key,
+				file:file
+			}
+			if(typeof(callbacks.onFileStart) === "function")
+				callbacks.onStartFile(event)
+		})
+
 		newLoader.onFileComplete.add(function(progress, cachekey, success, totalLoaded, totalFiles){
 			//console.log("[Resource Loader]:"+cachekey+"("+totalLoaded+"/"+totalFiles+")")
 			var eventParams = {
@@ -53,9 +72,12 @@ var sceneloader = function(){
 	}
 
 	function preload(scenes, callbacks, phase){
+		var preloadAlpha = document.getElementById("preloadBattle");
+
 		phase = phase || "preload"
 
 		var inputDevice = game.device.desktop ? "desktop" : "movil"
+		var language = localization.getLanguage();
 
 		currentLoader = createNewLoader(callbacks)
 		//buttons.getImages(currentLoader)
@@ -92,19 +114,30 @@ var sceneloader = function(){
 						var currentSpine = fileArray.spines[indexSpine]
 						// var spineLoader = new Phaser.Loader(game)
 						// spineLoader.onFileComplete.add(getSoundsSpine)
-						spineLoader.loadSpine(currentLoader, currentSpine, loadingFiles, currentScene)
+						//spineLoader.loadSpine(currentLoader, currentSpine, loadingFiles, currentScene)
+
+						currentLoader.spine(currentSpine.name, currentSpine.file)
 					}
 				}
 
 				if(typeof fileArray.images == "object"){
 					for(var indexImage = 0; indexImage < fileArray.images.length; indexImage++){
+
 						var currentImage = fileArray.images[indexImage]
+						if (preloadAlpha)
+							preloadAlpha.append('<p>' + JSON.stringify(currentImage) + '</p>')
+
 						var file = currentImage.file
-						if(file.includes("%input")) {
-							var re = /%input/gi;
-							file = file.replace(re, inputDevice);
-							console.log("file", file)
-						}
+						// if(file.includes("%lang")) {
+						// 	var re = /%lang/gi;
+						// 	file = file.replace(re, language);
+						// 	file = localization.getString(currentScene.localizationData, currentImage.name)
+						// }
+						//
+						// if(file.includes("%input")) {
+						// 	var re = /%input/gi;
+						// 	file = file.replace(re, inputDevice);
+						// }
 						currentLoader.image(currentImage.name, file)
 					}
 				}
@@ -139,7 +172,7 @@ var sceneloader = function(){
 			}
 
 			else{
-				console.warn("Scene with no Assets to preload")
+				console.warn("Scene with no Assets to preload ", currentScene)
 			}
 
 			saveScene(currentScene)

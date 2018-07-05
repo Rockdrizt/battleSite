@@ -22,6 +22,9 @@ var preloaderIntro = function(){
 	return {
 		assets: assets,
 		name: "preloaderIntro",
+		preload:function () {
+			game.stage.disableVisibilityChange = true;
+		},
 		updateLoadingBar: function(loadedFiles, totalFiles){
 			if(loadingBar){
 				var loadingStep = loadingBar.width / totalFiles

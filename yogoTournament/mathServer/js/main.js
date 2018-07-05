@@ -50,12 +50,12 @@ function startGame(){
 
 
 		//TODO: change charactersSet to player and enemy cards for both battle and versus
-		charactersEntity.preloadCards(vs, cards)
+		//charactersEntity.preloadCards(vs, cards)
 		// selectCards.setCharacters(enemyCards, selectedCards)
 
 		vs.setCharacters(cards)
 		battleScene.setCharacters(cards)
-		battleScene.setBackground()
+		//battleScene.setBackground()
 	}
 
 	function bootConfigFiles(sceneList) {
@@ -80,6 +80,7 @@ function startGame(){
 
 	    	function onCompleteSceneLoading(){
 				var preloadAlpha = document.getElementById("preloadBattle");
+				//preloadAlpha.append("<p>Preload complete</p>")
 				preloadAlpha.style.visibility = "hidden";
 				if(server){
 					server.setGameReady(true)
@@ -194,9 +195,9 @@ function startGame(){
 		console.log("createEpicBattle")
     	bootConfigFiles([
            // preloaderIntro,
-			selectCards,
+			//selectCards,
     		battleScene,
-			vs,
+			vs
             //result,
     	])
     }

@@ -19,17 +19,17 @@ var vs = function(){
 	}
     
 
-	assets = {
+	var assets = {
         atlases: [
             {   
                 name: "atlas.vs",
                 json: "images/vs/atlas.json",
-                image: "images/vs/atlas.png",
-            },
+                image: "images/vs/atlas.png"
+            }
         ],
         images: [
 			{   name:"background",
-				file: "images/vs/fondo.png"},
+				file: "images/vs/fondo.png"}
 		],
 		sounds: [
 			{ 	name: "spaceSong",
@@ -50,7 +50,7 @@ var vs = function(){
 			{	name: "gameLose",
 				file: soundsPath + "gameLose.mp3"},
 			{	name: "energyCharge2",
-				file: soundsPath + "energyCharge2.mp3"},
+				file: soundsPath + "energyCharge2.mp3"}
 		],
 		spines: [
 			{
