@@ -112,11 +112,9 @@ var sceneloader = function(){
 				if(typeof fileArray.spines == "object"){
 					for(var indexSpine = 0; indexSpine < fileArray.spines.length; indexSpine++){
 						var currentSpine = fileArray.spines[indexSpine]
-						// var spineLoader = new Phaser.Loader(game)
-						// spineLoader.onFileComplete.add(getSoundsSpine)
-						//spineLoader.loadSpine(currentLoader, currentSpine, loadingFiles, currentScene)
+						spineLoader.loadSpine(currentLoader, currentSpine, loadingFiles, currentScene)
 
-						currentLoader.spine(currentSpine.name, currentSpine.file)
+						//currentLoader.spine(currentSpine.name, currentSpine.file)
 					}
 				}
 
@@ -128,16 +126,16 @@ var sceneloader = function(){
 							preloadAlpha.append('<p>' + JSON.stringify(currentImage) + '</p>')
 
 						var file = currentImage.file
-						// if(file.includes("%lang")) {
-						// 	var re = /%lang/gi;
-						// 	file = file.replace(re, language);
-						// 	file = localization.getString(currentScene.localizationData, currentImage.name)
-						// }
-						//
-						// if(file.includes("%input")) {
-						// 	var re = /%input/gi;
-						// 	file = file.replace(re, inputDevice);
-						// }
+						if(file.includes("%lang")) {
+							var re = /%lang/gi;
+							file = file.replace(re, language);
+							file = localization.getString(currentScene.localizationData, currentImage.name)
+						}
+
+						if(file.includes("%input")) {
+							var re = /%input/gi;
+							file = file.replace(re, inputDevice);
+						}
 						currentLoader.image(currentImage.name, file)
 					}
 				}
