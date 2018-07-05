@@ -122,8 +122,6 @@ var sceneloader = function(){
 					for(var indexImage = 0; indexImage < fileArray.images.length; indexImage++){
 
 						var currentImage = fileArray.images[indexImage]
-						if (preloadAlpha)
-							preloadAlpha.append('<p>' + JSON.stringify(currentImage) + '</p>')
 
 						var file = currentImage.file
 						if(file.includes("%lang")) {
