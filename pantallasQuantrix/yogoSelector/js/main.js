@@ -42,7 +42,7 @@ function startGame(){
         game.stage.disableVisibilityChange = true;        
 
         game.plugins.add(PhaserSpine.SpinePlugin);
-        //epicparticles.init(game)
+        epicparticles.init(game)
         
         var language = "EN"
         /*if(window.location.search){
