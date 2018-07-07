@@ -97,6 +97,7 @@ var battleScene = function() {
 	var teams = []
 	var particles
 	var mainSpine
+	var targetSpine
 
 	function loadSounds() {
 
@@ -127,7 +128,7 @@ var battleScene = function() {
 
 	function attackUltra() {
 		console.log(mainSpine)
-		var projectile = characterBattle.attackUltra(mainSpine)
+		var projectile = characterBattle.attackUltra(mainSpine, targetSpine)
 		sceneGroup.add(projectile)
 	}
 
@@ -199,19 +200,14 @@ var battleScene = function() {
 
 			for(var charIndex = 0; charIndex < teamCharacters.length; charIndex++){
 				var characterName = teamCharacters[charIndex]
-				var characterData = getSpineInfo(characterName)
-
-				var nameLowerCase = characterData.data.name.toLowerCase()
+				var character = characterBattle.createCharacter(characterName)
 				var position = ORDER_POSITIONS[charIndex]
-
 				var xOffset = CHARACTER_CENTER_OFFSET.x * side.scale.x + position.x * side.scale.x
 
-				var character = characterBattle.createCharacter(characterData.name, nameLowerCase + "1", "run")
 				character.x = game.world.centerX * 0.5 * side.direction + xOffset
 				character.y = CHARACTER_CENTER_OFFSET.y + game.world.centerY + position.y
 				console.log("postion", character.position)
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
-				character.data = characterData.data
 				sceneGroup.add(character)
 				console.log(character)
 
@@ -228,6 +224,8 @@ var battleScene = function() {
 
 				if(charIndex === 1)
 					mainSpine = character
+
+				targetSpine = character
 			}
 		}
 

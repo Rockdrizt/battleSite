@@ -35,7 +35,7 @@ var characterBattle = function () {
 		return projectile
 	}
 
-	function attackUltra(character) {
+	function attackUltra(character, enemy) {
 		var ultra = character.data.attacks.ultra[0]
 
 		var ultraProjectile = projectilesData[ultra.id]
@@ -55,6 +55,8 @@ var characterBattle = function () {
 					spineGroup.setAnimation(onShootAnimations, true)
 				}
 			}
+
+			scripts.run(projectile.data.onShoot, {self:projectile, target:enemy})
 		})
 
 		var slot = character.getSlotByAttachment(ultra.attachment)
@@ -64,9 +66,15 @@ var characterBattle = function () {
 		return projectile
 	}
 
-	function createCharacter(charName, skin, animation) {
+	function createCharacter(charName) {
+		var characterData = game.cache.getJSON(charName + "Data")
+		var nameLowerCase = characterData.name.toLowerCase()
 
-		return spineLoader.createSpine(charName, skin, animation, 0, 0, true)
+		var character = spineLoader.createSpine(charName, nameLowerCase + "1", "run", 0, 0, true)
+		character.data = characterData
+		character.impactPoint = character.getSlotByAttachment(characterData.visuals.impactAttachment)
+
+		return character
 	}
 
 	function extractSound(soundID) {
