@@ -128,8 +128,8 @@ var battleScene = function() {
 
 	function attackUltra() {
 		console.log(mainSpine)
-		var projectile = characterBattle.attackUltra(mainSpine, targetSpine)
-		sceneGroup.add(projectile)
+		characterBattle.attack(mainSpine, targetSpine, "ultra")
+		//sceneGroup.add(projectile)
 	}
 
 	function createMenuAnimations() {
@@ -201,12 +201,14 @@ var battleScene = function() {
 
 			for(var charIndex = 0; charIndex < teamCharacters.length; charIndex++){
 				var characterName = teamCharacters[charIndex]
-				var character = characterBattle.createCharacter(characterName)
 				var position = ORDER_POSITIONS[charIndex]
 				var xOffset = CHARACTER_CENTER_OFFSET.x * side.scale.x + position.x * side.scale.x
 
-				character.x = game.world.centerX * 0.5 * side.direction + xOffset
-				character.y = CHARACTER_CENTER_OFFSET.y + game.world.centerY + position.y
+				var characterPos = {
+					x : game.world.centerX * 0.5 * side.direction + xOffset,
+					y : CHARACTER_CENTER_OFFSET.y + game.world.centerY + position.y
+				}
+				var character = characterBattle.createCharacter(characterName, characterPos)
 				console.log("postion", character.position)
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
 				sceneGroup.add(character)

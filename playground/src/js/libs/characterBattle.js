@@ -4,7 +4,6 @@ var characterBattle = function () {
 	var loadingFiles
 	var currentLoader
 	var game
-	var projectilesData = {}
 
 	function createProjectile(projectileData) {
 		var projectile = game.add.group()
@@ -20,13 +19,24 @@ var characterBattle = function () {
 				var index = spineSkeleton.indexOf(".");
 
 				spineSkeleton = spineSkeleton.substring(0, index)
-				var spineGroup = spineLoader.createSpine(spineSkeleton, spine.skin, "in_ultra")
+				var spineGroup = spineLoader.createSpine(spineSkeleton, spine.skin, "idle")
 				spineGroup.data = spine
 
-				console.log(spineGroup.spine)
 				projectile.add(spineGroup)
-
 				projectile.spines.push(spineGroup)
+			}
+		}
+
+		if(projectile.particles){
+			var particles = projectile.particles
+
+			for(var particleIndex = 0; particleIndex < particles.length; particleIndex++){
+				var particleFile = particles[particleIndex]
+				var particleName = particleFile.substr(particleFile.lastIndexOf('/') + 1);
+				var index = particleName.indexOf(".");
+				particleName = particleName.substring(0, index)
+
+				particleBattle.drawParticle(projectile, 0, 0, null, particleName)
 			}
 		}
 
@@ -35,44 +45,53 @@ var characterBattle = function () {
 		return projectile
 	}
 
-	function attackUltra(character, enemy) {
-		var ultra = character.data.attacks.ultra[0]
+	function attack(character, enemy, type) {
+		var attackType = type || "normal"
+		var attacks = character.data.attacks[attackType]
+		character.setAnimation(["attack_normal", "idle_normal"], true)
+		console.log(enemy.impactPoint)
 
-		var ultraProjectile = projectilesData[ultra.id]
-		var projectile = createProjectile(ultraProjectile)
+		for(var projectileIndex = 0; projectileIndex < attacks.length; projectileIndex++){
+			var projectileInfo = attacks[projectileIndex]
+			var projectileData = game.cache.getJSON(projectileInfo.id + "Data")
 
-		character.setAnimation(["attack_ultra"], false)
-		game.time.events.add(ultra.delay, function () {
-			projectile.alpha = 1
-			projectile.x = slot.x + character.x
-			projectile.y = slot.y + character.y
+			game.time.events.add(projectileInfo.delay, function () {
+				var projectile = createProjectile(projectileData)
 
-			if(projectile.spines) {
-				for(var projectileIndex = 0; projectileIndex < projectile.spines.length; projectileIndex++){
-					var spineGroup = projectile.spines[projectileIndex]
-					var onShootAnimations = spineGroup.data.onShootAnimations
+				var slot = character.getSlotByAttachment(projectileInfo.attachment)
+				projectile.x = character.x + slot.x
+				projectile.y = character.y + slot.y
+				character.parent.add(projectile)
 
-					spineGroup.setAnimation(onShootAnimations, true)
+				if(projectile.spines) {
+					for(var projectileIndex = 0; projectileIndex < projectile.spines.length; projectileIndex++){
+						var spineGroup = projectile.spines[projectileIndex]
+						var onShootAnimations = spineGroup.data.onShootAnimations
+
+						spineGroup.setAnimation(onShootAnimations, true)
+					}
 				}
-			}
 
-			scripts.run(projectile.data.onShoot, {self:projectile, target:enemy})
-		})
+				scripts.run(projectile.data.onShoot, {self:projectile, target:enemy})
+			})
+		}
 
-		var slot = character.getSlotByAttachment(ultra.attachment)
-		console.log("slot", slot.x, slot.y)
-		projectile.alpha = 0
 
-		return projectile
+		//return projectile
 	}
 
-	function createCharacter(charName) {
+	function createCharacter(charName, position) {
 		var characterData = game.cache.getJSON(charName + "Data")
 		var nameLowerCase = characterData.name.toLowerCase()
 
 		var character = spineLoader.createSpine(charName, nameLowerCase + "1", "run", 0, 0, true)
+		character.x = position.x; character.y = position.y
 		character.data = characterData
-		character.impactPoint = character.getSlotByAttachment(characterData.visuals.impactAttachment)
+		var impactSlot = character.getSlotByAttachment(characterData.visuals.impactAttachment)
+		character.impactPoint = {
+			x:impactSlot.x + character.x,
+			y:impactSlot.y + character.y
+		}
 
 		return character
 	}
@@ -126,7 +145,6 @@ var characterBattle = function () {
 
 	function addProjectile(id){
 		var projectileDat = game.cache.getJSON(id + "Data")
-		projectilesData[id] = projectileDat
 
 		if(projectileDat.particles){
 			extractParticles(projectileDat.particles)
@@ -198,9 +216,6 @@ var characterBattle = function () {
 	return {
 		loadCharacter:loadCharacter,
 		createCharacter:createCharacter,
-		getProjectiles:function () {
-			return projectilesData
-		},
-		attackUltra:attackUltra
+		attack:attack
 	}
 }()
