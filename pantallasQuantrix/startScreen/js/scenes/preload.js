@@ -6,11 +6,10 @@ var preloaderIntro = function(){
 				json: "images/preload/atlas.json",
 				image: "images/preload/atlas.png"
 			}],
-		images: [
-           { 
+		images: [            
+            { 
                 name:'logo',
-                file: "images/preload/logo.png"}
-            
+                file: "images/preload/bgTile.png"}
         ],
 		sounds: [
 
@@ -32,26 +31,44 @@ var preloaderIntro = function(){
 		create: function(event){
 
 			var sceneGroup = game.add.group()
+            
+            var bmd = game.add.bitmapData(game.world.width, game.world.height)
+            var back = bmd.addToWorld()
 
-			var logo = sceneGroup.create(game.world.centerX, game.world.centerY, 'logo')
-			logo.anchor.setTo(0.5, 0.5)
-            logo.scale.setTo(0);
-             game.add.tween(logo.scale).to({x:0.5,y:0.5},400, Phaser.Easing.Back.Out,true)
+            var y = 0
+
+            for (var i = 0; i < bmd.height; i++)
+            {
+                var color = Phaser.Color.interpolateColor(0x05072B, 0x0D014D, bmd.height, i)
+
+                bmd.rect(0, y, bmd.width, y + 1, Phaser.Color.getWebRGB(color))
+                y += 2
+            }
+            sceneGroup.add(back)
+
+			var logo = sceneGroup.create(game.world.centerX, game.world.centerY - 100, 'logoAtlas', 'logo')
+			logo.anchor.setTo(0.5)
+            logo.scale.setTo(0)
+            game.add.tween(logo.scale).to({x:1,y:1},400, Phaser.Easing.Back.Out,true)
 
 			var loadingGroup = new Phaser.Group(game)
 			sceneGroup.add(loadingGroup)
 
 			var loadingBottom = loadingGroup.create(0, 0, 'logoAtlas', 'loading_bottom')
-			loadingBottom.anchor.y = 0.5
+			loadingBottom.anchor.setTo(0, 0.5)
+			loadingBottom.scale.setTo(1, 1.5)
 
 			var loadingTop = loadingGroup.create(0, 0, 'logoAtlas', 'loading_top')
 			loadingTop.anchor.y = 0.5
+			loadingTop.scale.setTo(1.2, 1)
+            
+            loadingBottom.width = loadingTop.width
 
 			loadingGroup.bottomBar = loadingBottom
 			loadingGroup.topBar = loadingTop
 
-			loadingGroup.x = game.world.centerX - loadingGroup.width * 0.5
-			loadingGroup.y = (game.world.centerY + 100) - loadingGroup.height * 0.5
+			loadingGroup.x = game.world.centerX - loadingBottom.width * 0.5
+			loadingGroup.y = (game.world.centerY + 200) 
 
 			loadingBar = loadingGroup
 			loadingBar.topBar.width = 0
