@@ -65,12 +65,6 @@ var startScreen = function(){
             },
 		],
 		sounds: [
-            {	name: "goldShine",
-				file: soundsPath + "goldShine.mp3"},
-            {	name: "pop",
-				file: soundsPath + "pop.mp3"},
-            {	name: "cut",
-				file: soundsPath + "cut.mp3"},
 		],
         spritesheets: [
             
@@ -95,6 +89,7 @@ var startScreen = function(){
     var tile
     var yogoGroup
     var logosGroup
+    var startSong
     
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -219,8 +214,8 @@ var startScreen = function(){
         lastTween.onComplete.add(function(){
             
             logosGroup.cuantrix.alpha = 1
-            var logo1 = game.add.tween(logosGroup.cuantrix.scale).from({x:0, y:0}, 200, Phaser.Easing.Cubic.In, true)
-            sound.play("goldShine")
+            var logo1 = game.add.tween(logosGroup.cuantrix.scale).from({x:0, y:0}, 300, Phaser.Easing.Cubic.In, true)
+            sound.play("swipe")
             var logo2 = game.add.tween(logosGroup.televisa).to({alpha:1}, 500, Phaser.Easing.Cubic.In, false)
             
             logo2.onComplete.add(function(){
@@ -247,6 +242,7 @@ var startScreen = function(){
                     })
                     
                     logosGroup.board.alpha = 1
+                    sound.play("brightTransition")
                     game.add.tween(logosGroup.boardMask.scale).from({x: 0}, 500, Phaser.Easing.Cubic.In, true)
                 })
             })
@@ -263,6 +259,7 @@ var startScreen = function(){
             sound.play("pop")
             game.add.tween(btn.scale).to({x: 1.2, y:1.2}, 100, Phaser.Easing.linear, true, 0, 0, true).onComplete.add(function(){
                 sceneloader.show("yogoSelector")
+                startSong.stop()
             })
         }
     }
@@ -280,6 +277,8 @@ var startScreen = function(){
 			sceneGroup = game.add.group()
 			
             initialize()
+            
+            startSong = sound.play("startSong", {loop:true, volume:0.6})
             
             createYogotars()
             createLogos()

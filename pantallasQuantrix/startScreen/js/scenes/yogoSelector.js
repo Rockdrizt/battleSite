@@ -50,8 +50,16 @@ var yogoSelector = function(){
 				file: soundsPath + "robotBeep.mp3"},
             {	name: "winBattle1",
 				file: soundsPath + "winBattle1.mp3"},
+            {	name: "pop",
+				file: soundsPath + "pop.mp3"},
+            {	name: "brightTransition",
+				file: soundsPath + "brightTransition.mp3"},
+            {	name: "cut",
+				file: soundsPath + "cut.mp3"},
             {	name: "gameSong",
 				file: soundsPath + "songs/weLoveElectricCars.mp3"},
+            {	name: "startSong",
+				file: soundsPath + "songs/battleLoop.mp3"},
 		],
         spritesheets: [
         ],
@@ -87,8 +95,8 @@ var yogoSelector = function(){
                 scales: ["@0.5x"]
 			},
             {
-				name:"dinamita",
-				file:"images/spines/dinamita/dinamitaSelector.json",
+				name:"arthurius",
+				file:"images/spines/arthurius/arthuriusSelector.json",
                 scales: ["@0.5x"]
 			},
             {
@@ -141,7 +149,7 @@ var yogoSelector = function(){
 
 	function initialize(){
 
-        game.stage.backgroundColor = "#ffffff"
+        game.stage.backgroundColor = "#0D014D"
         chosenOne = 1
         
         loadSounds()
@@ -432,7 +440,11 @@ var yogoSelector = function(){
     function changeColor(obj, color){
         
         obj.token.loadTexture("atlas.yogoSelector", "token" + color)
-        obj.light.loadTexture("atlas.yogoSelector", "light" + color)
+        if(color !== 0)
+            obj.light.loadTexture("atlas.yogoSelector", "light" + color)
+        else{
+            obj.light.alpha = 0
+        }
     }
     
     function markYogotar(obj, teamGroup){
@@ -622,6 +634,9 @@ var yogoSelector = function(){
             while(i !== 5){
                 buttonsGroup.children[i].yogotar.alpha = 1
                 game.add.tween(buttonsGroup.children[i].yogotar.scale).from({x: 0,y: 0}, 500, Phaser.Easing.Cubic.Out, true, delay)
+                game.time.events.add(delay, function(){sound.play("pop")})
+                
+                
                 i === 2 ? i = 7 : i--
                 delay += 300
             }
@@ -812,10 +827,7 @@ var yogoSelector = function(){
             createOk()
             animateSelector()
             
-            //createSplashArt()
             createReady()
-            
-            //sceneGroup.alpha = 0
 		}
 	}
 }()
