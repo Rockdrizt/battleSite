@@ -65,25 +65,27 @@ var startScreen = function(){
             },
 		],
 		sounds: [
+            {	name: "goldShine",
+				file: soundsPath + "goldShine.mp3"},
+            {	name: "pop",
+				file: soundsPath + "pop.mp3"},
+            {	name: "cut",
+				file: soundsPath + "cut.mp3"},
 		],
         spritesheets: [
             
         ],
         spines:[
-			/*{
-				name:"ardilla",
-				file:"images/spines/skeleton.json"
-			}*/
 		],
         particles: [
 			{
 				name: 'bubbles',
-				file: 'images/particles/bubbles/Particles_hexagon.json',
+				file: 'particles/bubbles/Particles_hexagon.json',
 				texture: 'Particles_hexagon.png'
 			},
 			{
 				name: 'hexagonLigth',
-				file: 'images/particles/hexagonLigth/ligth_bottom Hexagon.json',
+				file: 'particles/hexagonLigth/ligth_bottom Hexagon.json',
 				texture: 'ligth_bottom Hexagon.png'
 			}
 		]
@@ -100,7 +102,7 @@ var startScreen = function(){
 
 	function initialize(){
 
-        game.stage.backgroundColor = "#ffffff"
+        game.stage.backgroundColor = "#0D014D"
         loadSounds()
 	}
     
@@ -123,13 +125,13 @@ var startScreen = function(){
             bmd.rect(0, y, bmd.width, y + 1, Phaser.Color.getWebRGB(color))
             y += 2
         }
-        sceneGroup.add(back)
+        //sceneGroup.add(back)
         
         tile = game.add.tileSprite(game.world.centerX, game.world.centerY, game.world.width + 150, game.world.width + 180, "tile")
         tile.anchor.setTo(0.5)
         tile.tint = 0x0099AA
         tile.angle = 45
-        sceneGroup.add(tile)
+        //sceneGroup.add(tile)
     }
 
 	function update(){
@@ -210,6 +212,7 @@ var startScreen = function(){
             
             lastTween = game.add.tween(yogoGroup.children[i]).from({x: - 250}, 200, Phaser.Easing.Cubic.Out, true, delay)
             game.add.tween(yogoGroup.children[i + 4]).from({x: game.world.width + 250}, 200, Phaser.Easing.Cubic.Out, true, delay)
+            game.time.events.add(delay, function(){sound.play("cut")})
             delay += 250
         }
         
@@ -217,20 +220,24 @@ var startScreen = function(){
             
             logosGroup.cuantrix.alpha = 1
             var logo1 = game.add.tween(logosGroup.cuantrix.scale).from({x:0, y:0}, 200, Phaser.Easing.Cubic.In, true)
+            sound.play("goldShine")
             var logo2 = game.add.tween(logosGroup.televisa).to({alpha:1}, 500, Phaser.Easing.Cubic.In, false)
             
             logo2.onComplete.add(function(){
                 
                 logosGroup.playBtn.alpha = 1
-                var btnShow = game.add.tween(logosGroup.playBtn.scale).from({x:0, y: 0}, 200, Phaser.Easing.linear, true)
-                btnShow.onComplete.add(function(){
+                game.add.tween(logosGroup.playBtn.scale).from({x:0, y: 0}, 200, Phaser.Easing.linear, true).onComplete.add(function(){
                     
-                    var slide = game.add.tween(logosGroup.playBtn).to({x:game.world.centerX + 270}, 500, Phaser.Easing.Cubic.In, true)
-                    slide.onComplete.add(function(){
+                    var emitter = epicparticles.newEmitter("hexagonLigth")
+                    emitter.x = logosGroup.playBtn.x
+                    emitter.y = logosGroup.playBtn.y
+                    game.add.tween(emitter).to({x:game.world.centerX + 270}, 500, Phaser.Easing.Cubic.In, true)
+                     
+                    game.add.tween(logosGroup.playBtn).to({x:game.world.centerX + 270}, 500, Phaser.Easing.Cubic.In, true).onComplete.add(function(){
                         
-                        var emitter = epicparticles.newEmitter("hexagonLigth")
+                        /*var emitter = epicparticles.newEmitter("hexagonLigth")
                         emitter.x = logosGroup.playBtn.x
-                        emitter.y = logosGroup.playBtn.y
+                        emitter.y = logosGroup.playBtn.y*/
                         
                         emitter = epicparticles.newEmitter("bubbles")
                         emitter.x = logosGroup.playBtn.x
@@ -253,8 +260,9 @@ var startScreen = function(){
         if(btn.canClick){
             
             btn.canClick = false
+            sound.play("pop")
             game.add.tween(btn.scale).to({x: 1.2, y:1.2}, 100, Phaser.Easing.linear, true, 0, 0, true).onComplete.add(function(){
-                console.log("Start Game")
+                sceneloader.show("yogoSelector")
             })
         }
     }
@@ -267,10 +275,12 @@ var startScreen = function(){
         preload:preload,
 		create: function(event){
             
+            createBackground()	
+            
 			sceneGroup = game.add.group()
 			
-			createBackground()	
             initialize()
+            
             createYogotars()
             createLogos()
             startAnimation()

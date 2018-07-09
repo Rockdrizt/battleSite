@@ -42,12 +42,16 @@ var yogoSelector = function(){
             }
 		],
 		sounds: [
-            {	name: "pop",
-				file: soundsPath + "pop.mp3"},
+            {	name: "swordSmash",
+				file: soundsPath + "swordSmash.mp3"},
             {	name: "swipe",
 				file: soundsPath + "swipe.mp3"},
             {	name: "robotBeep",
 				file: soundsPath + "robotBeep.mp3"},
+            {	name: "winBattle1",
+				file: soundsPath + "winBattle1.mp3"},
+            {	name: "pop",
+				file: soundsPath + "pop.mp3"},
             {	name: "gameSong",
 				file: soundsPath + "songs/weLoveElectricCars.mp3"},
 		],
@@ -85,8 +89,8 @@ var yogoSelector = function(){
                 scales: ["@0.5x"]
 			},
             {
-				name:"dinamita",
-				file:"images/spines/dinamita/dinamitaSelector.json",
+				name:"arthurius",
+				file:"images/spines/arthurius/arthuriusSelector.json",
                 scales: ["@0.5x"]
 			},
             {
@@ -139,7 +143,7 @@ var yogoSelector = function(){
 
 	function initialize(){
 
-        game.stage.backgroundColor = "#ffffff"
+        game.stage.backgroundColor = "#0D014D"
         chosenOne = 1
         
         loadSounds()
@@ -197,7 +201,7 @@ var yogoSelector = function(){
         bravoGroup.side = SIDE.rigth
         sceneGroup.add(bravoGroup)
         
-        var pivotX = 0.2
+        var pivotX = 0.25
         
         for(var i = 0; i < 3; i++){
             
@@ -213,7 +217,7 @@ var yogoSelector = function(){
             player.alpha = 0
             player.yogo = null
             
-            pivotX += 0.3
+            pivotX += 0.25
         }
         alphaGroup.children[1].y += 120
         bravoGroup.children[1].y += 120
@@ -336,12 +340,19 @@ var yogoSelector = function(){
             var teamGroup
             team === 1 ? teamGroup = alphaGroup : teamGroup = bravoGroup
             
-            teamGroup.marker = btn.parent
-            
-            if(btn.parent.color === STATES.yellow){        
+            if(btn.parent.color === STATES.yellow){
                 if(teamGroup.teamPivot < 3){
+                    
+                    teamGroup.marker = btn.parent
                     markYogotar(btn.parent, teamGroup)
-                    animateButton(btn.parent, team, true)
+                    
+                    if(alphaGroup.marker == bravoGroup.marker){
+                        animateButton(btn.parent, STATES.bicolor, true)
+                    }
+                    else{
+                        animateButton(btn.parent, team, true)
+                        team === 1 ? changeColor(bravoGroup.marker, bravoGroup.color) : changeColor(alphaGroup.marker, alphaGroup.color)
+                    }
                 }
                 else{
                     btn.canClick = true
@@ -420,6 +431,16 @@ var yogoSelector = function(){
         }
     }
     
+    function changeColor(obj, color){
+        
+        obj.token.loadTexture("atlas.yogoSelector", "token" + color)
+        if(color !== 0)
+            obj.light.loadTexture("atlas.yogoSelector", "light" + color)
+        else{
+            obj.light.alpha = 0
+        }
+    }
+    
     function markYogotar(obj, teamGroup){
         
         restoreAll()
@@ -447,7 +468,6 @@ var yogoSelector = function(){
             slot.yogo.setAnimation(["ready"], true)
             game.add.tween(slot.yogo).to({y: 0}, 100, Phaser.Easing.Cubic.In, true)
             slot.yogo = null
-            //slot.yogo.y = 0
             markYogotar(obj, teamGroup)
         }
     }
@@ -574,7 +594,10 @@ var yogoSelector = function(){
             //var aux = teamGroup.auxArray.indexOf(-1) 
             aux === -1 ? teamGroup.teamPivot = 3 : teamGroup.teamPivot = aux
             
-            
+            if(alphaGroup.teamPivot == 3 && bravoGroup.teamPivot == 3){
+                buttonsGroup.setAll("token.canClick", false)
+                game.time.events.add(2000, getReady)
+            }
         }            
     }
     
@@ -605,6 +628,9 @@ var yogoSelector = function(){
             while(i !== 5){
                 buttonsGroup.children[i].yogotar.alpha = 1
                 game.add.tween(buttonsGroup.children[i].yogotar.scale).from({x: 0,y: 0}, 500, Phaser.Easing.Cubic.Out, true, delay)
+                game.time.events.add(delay, function(){sound.play("pop")})
+                
+                
                 i === 2 ? i = 7 : i--
                 delay += 300
             }
@@ -612,6 +638,8 @@ var yogoSelector = function(){
             game.time.events.add(delay, function(){
                 buttonsGroup.setAll("token.canClick", true)
                 //getReady()
+                pressBtn(alphaGroup.marker.token, 1)
+                pressBtn(bravoGroup.marker.token, 2)
             })
         })
     }    
@@ -634,12 +662,12 @@ var yogoSelector = function(){
             images[x + 3] = bravoGroup.auxArray[x]
         }
         
-        images[0] = 0
+        //images[0] = 0
         
         for(var i = 0; i < 6; i++){
             
             var container = game.add.sprite(0, 100 * aux, "atlas.loading", "container" + aux)
-            var splash = game.add.sprite(0, offsetY, "atlas.loading", assets.spines[images[0]].name)
+            var splash = game.add.sprite(0, offsetY, "atlas.loading", assets.spines[images[i]].name)
             
             var bmd = game.make.bitmapData(splash.width, container.height + 100)
             bmd.alphaMask(splash, container)
@@ -711,10 +739,12 @@ var yogoSelector = function(){
         dots.x = game.world.centerX
         dots.y = game.world.centerY
         
+        gameSong.stop()
         readyGroup.pinkLight.alpha = 1
         readyGroup.emitter.alpha = 1
         game.add.tween(readyGroup.pinkLight.scale).from({x: 0}, 100, Phaser.Easing.linear, true).onComplete.add(function(){
             readyGroup.ready.alpha = 1
+            sound.play("swordSmash")
             game.add.tween(readyGroup.ready.scale).from({x: 0, y:0}, 200, Phaser.Easing.linear, true)
         })
         
@@ -728,6 +758,8 @@ var yogoSelector = function(){
         
         var delay = 500
         var aux = 0
+        
+        sound.play("winBattle1")
         
         for(var i = 0; i < splashArtGroup.length; i++){
             
@@ -789,10 +821,7 @@ var yogoSelector = function(){
             createOk()
             animateSelector()
             
-            //createSplashArt()
             createReady()
-            
-            //sceneGroup.alpha = 0
 		}
 	}
 }()
