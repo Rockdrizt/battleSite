@@ -344,7 +344,10 @@
 "tournamentShieldSmash3":"sounds/characters/shieldSmash3.mp3",
 "tournamentShieldSmash4":"sounds/characters/shieldSmash4.mp3",
 "tournamentSpinningWeapon1":"sounds/characters/spinningWeapon1.mp3",
-"tournamentSpinningWeapon2":"sounds/characters/spinningWeapon2.mp3"
+"tournamentSpinningWeapon2":"sounds/characters/spinningWeapon2.mp3",
+"tournamentJetLoop1":"sounds/characters/jetLoop1.mp3",
+"tournamentFireCharge5":"sounds/characters/fireCharge5.mp3",
+"tournamentFireCharge6":"sounds/characters/fireCharge6.mp3"
 
 
 }
