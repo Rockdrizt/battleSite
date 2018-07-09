@@ -42,6 +42,14 @@ var yogoSelector = function(){
             }
 		],
 		sounds: [
+            {	name: "pop",
+				file: soundsPath + "pop.mp3"},
+            {	name: "swipe",
+				file: soundsPath + "swipe.mp3"},
+            {	name: "robotBeep",
+				file: soundsPath + "robotBeep.mp3"},
+            {	name: "gameSong",
+				file: soundsPath + "songs/weLoveElectricCars.mp3"},
 		],
         spritesheets: [
         ],
@@ -52,8 +60,23 @@ var yogoSelector = function(){
                 scales: ["@0.5x"]
 			},
             {
+				name:"luna",
+				file:"images/spines/luna/lunaSelector.json",
+                scales: ["@0.5x"]
+			},
+            {
 				name:"dinamita",
 				file:"images/spines/dinamita/dinamitaSelector.json",
+                scales: ["@0.5x"]
+			},
+            {
+				name:"theffanie",
+				file:"images/spines/theffanie/theffanieSelector.json",
+                scales: ["@0.5x"]
+			},
+            {
+				name:"eagle",
+				file:"images/spines/eagle/eagleSelector.json",
                 scales: ["@0.5x"]
 			},
             {
@@ -67,23 +90,8 @@ var yogoSelector = function(){
                 scales: ["@0.5x"]
 			},
             {
-				name:"dinamita",
-				file:"images/spines/dinamita/dinamitaSelector.json",
-                scales: ["@0.5x"]
-			},
-            {
-				name:"dinamita",
-				file:"images/spines/dinamita/dinamitaSelector.json",
-                scales: ["@0.5x"]
-			},
-            {
-				name:"dinamita",
-				file:"images/spines/dinamita/dinamitaSelector.json",
-                scales: ["@0.5x"]
-			},
-            {
-				name:"dinamita",
-				file:"images/spines/dinamita/dinamitaSelector.json",
+				name:"estrella",
+				file:"images/spines/estrella/estrellaSelector.json",
                 scales: ["@0.5x"]
 			},
 		],
@@ -96,23 +104,25 @@ var yogoSelector = function(){
         particles: [
 			{
 				name: 'horizontalLine',
-				file: 'images/particles/horizontalLine/intence_horison_ligth.json',
+				file: 'particles/horizontalLine/intence_horison_ligth.json',
 				texture: 'intence_horison_ligth.png'
 			},
 			{
 				name: 'particlesHorizontal',
-				file: 'images/particles/particlesHorizontal/particle_horison_ligth.json',
+				file: 'particles/particlesHorizontal/particle_horison_ligth.json',
 				texture: 'particle_horison_ligth.png'
 			}
 		]
     }
 
+    var gameSong
 	var sceneGroup
     var teamsBarGroup
     var buttonsGroup
     var pullGroup
     var alphaGroup
     var bravoGroup
+    var marker
     
     var chosenOne
     var tile
@@ -187,26 +197,26 @@ var yogoSelector = function(){
         bravoGroup.side = SIDE.rigth
         sceneGroup.add(bravoGroup)
         
-        var pivotX = 0.3
+        var pivotX = 0.2
         
         for(var i = 0; i < 3; i++){
             
-            var player = alphaGroup.create(game.world.centerX * pivotX, game.world.centerY + 90, "atlas.yogoSelector", "star")
+            var player = alphaGroup.create(game.world.centerX * pivotX, game.world.centerY + 50, "atlas.yogoSelector", "star")
             player.anchor.setTo(0.5)
             player.check = false
             player.alpha = 0
             player.yogo = null
             
-            player = bravoGroup.create(game.world.centerX * pivotX + game.world.centerX, game.world.centerY + 90, "atlas.yogoSelector", "star")
+            player = bravoGroup.create(game.world.centerX * pivotX + game.world.centerX, game.world.centerY + 50, "atlas.yogoSelector", "star")
             player.anchor.setTo(0.5)
             player.check = false
             player.alpha = 0
             player.yogo = null
             
-            pivotX += 0.2
+            pivotX += 0.3
         }
-        alphaGroup.children[1].y += 150
-        bravoGroup.children[1].y += 150
+        alphaGroup.children[1].y += 120
+        bravoGroup.children[1].y += 120
     }
     
     function createPullGroup(){
@@ -216,15 +226,16 @@ var yogoSelector = function(){
         
         var aux = 0
 
-        for(var i = 0; i < 16/*assets.spines.length*/; i++){
+        for(var i = 0; i < assets.spines.length * 2; i++){
             
             if(i > 0 && i % 2 == 0)
                 aux++
             
-            var player = characterBattle.createCharacter(assets.spines[0].name, assets.spines[0].name + "1", "wait")
+            //var player = characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + "1", "wait")
+            var player = characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + "1", "ready")
             player.x = 0
             player.y = 0
-            player.name = assets.spines[0].name
+            player.name = assets.spines[aux].name
             player.tag = aux
             player.used = false
             pullGroup.add(player)
@@ -311,6 +322,9 @@ var yogoSelector = function(){
         buttonsGroup.children[0].yogotar.x -= 30
         buttonsGroup.children[3].yogotar.x += 10
         buttonsGroup.children[7].yogotar.x += 10
+        
+        alphaGroup.marker = buttonsGroup.children[0]
+        bravoGroup.marker = buttonsGroup.children[3]
     }
     
     function pressBtn(btn, team){
@@ -321,6 +335,8 @@ var yogoSelector = function(){
             
             var teamGroup
             team === 1 ? teamGroup = alphaGroup : teamGroup = bravoGroup
+            
+            teamGroup.marker = btn.parent
             
             if(btn.parent.color === STATES.yellow){        
                 if(teamGroup.teamPivot < 3){
@@ -423,12 +439,15 @@ var yogoSelector = function(){
                 yogo.scale.setTo(teamGroup.side, 1)
                 slot.yogo = yogo
                 game.add.tween(yogo).from({y:0}, 100, Phaser.Easing.Cubic.Out, true)
+                sound.play("swipe")
             }
         }
         else{
-            slot.yogo.y = 0
             slot.yogo.used = false
+            slot.yogo.setAnimation(["ready"], true)
+            game.add.tween(slot.yogo).to({y: 0}, 100, Phaser.Easing.Cubic.In, true)
             slot.yogo = null
+            //slot.yogo.y = 0
             markYogotar(obj, teamGroup)
         }
     }
@@ -468,6 +487,7 @@ var yogoSelector = function(){
         else
             teamGroup.teamPivot = teamGroup.auxArray.lastIndexOf(-1) //index
         teamGroup.forEach(takeOff ,this)
+        sound.play("robotBeep")
     }
     
     function takeOff(obj){
@@ -476,6 +496,7 @@ var yogoSelector = function(){
             
             game.add.tween(obj.yogo).to({y: 0}, 100, Phaser.Easing.Cubic.In, true).onComplete.add(function(){
                 obj.yogo.used = false
+                obj.yogo.setAnimation(["ready"], true)
                 obj.yogo = null
             })
         }
@@ -487,13 +508,15 @@ var yogoSelector = function(){
             
             var btn = buttonsGroup.children[i]
             
-            if(btn.color === STATES.yellow){
-                btn.token.loadTexture("atlas.yogoSelector", "token0")
-                btn.light.alpha = 0
-            }
-            else{
-                btn.token.loadTexture("atlas.yogoSelector", "token" + btn.color)
-                btn.light.loadTexture("atlas.yogoSelector", "light" + btn.color)
+            if(btn != alphaGroup.marker && btn != bravoGroup.marker){
+                if(btn.color === STATES.yellow){
+                    btn.token.loadTexture("atlas.yogoSelector", "token0")
+                    btn.light.alpha = 0
+                }
+                else{
+                    btn.token.loadTexture("atlas.yogoSelector", "token" + btn.color)
+                    btn.light.loadTexture("atlas.yogoSelector", "light" + btn.color)
+                }
             }
             
             /*if(!alphaGroup.auxArray.includes(btn.token.tag)){
@@ -588,7 +611,7 @@ var yogoSelector = function(){
             
             game.time.events.add(delay, function(){
                 buttonsGroup.setAll("token.canClick", true)
-                getReady()
+                //getReady()
             })
         })
     }    
@@ -754,8 +777,11 @@ var yogoSelector = function(){
             
 			sceneGroup = game.add.group()
 			loadingGroup = game.add.group()
-        
+            
             initialize()
+            
+            gameSong = sound.play("gameSong", {loop:true, volume:0.6})
+        
             createTeams()
             createPullGroup()
             createTeamsBars()
