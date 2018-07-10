@@ -69,6 +69,7 @@ var particleBattle = function () {
 
 	function removeParticle(particleName) {
 		var emitter = particles[particleName]
+		delete particles[particleName]
 		if(!emitter)
 			return
 

@@ -27,8 +27,9 @@ var characterBattle = function () {
 			}
 		}
 
-		if(projectile.particles){
-			var particles = projectile.particles
+		if(projectileData.particles){
+			var particles = projectileData.particles
+			projectile.particles = []
 
 			for(var particleIndex = 0; particleIndex < particles.length; particleIndex++){
 				var particleFile = particles[particleIndex]
@@ -37,8 +38,28 @@ var characterBattle = function () {
 				particleName = particleName.substring(0, index)
 
 				particleBattle.drawParticle(projectile, 0, 0, null, particleName)
+
+				projectile.particles.push(particleName)
 			}
 		}
+		
+		game.time.events.add(projectileData.timing.removal, function () {
+			if(projectile.particles){
+				for(var particleIndex = 0; particleIndex < projectile.particles.length; particleIndex++){
+					var particleName = projectile.particles[particleIndex]
+					particleBattle.removeParticle(particleName)
+				}
+			}
+
+			if(projectile.spines){
+				for(var spineIndex = 0; spineIndex < projectile.particles.length; spineIndex++){
+					var spine = projectile.spines[particleIndex]
+
+					projectile.remove(spine)
+				}
+			}
+
+		})
 
 		projectile.data = projectileData
 
