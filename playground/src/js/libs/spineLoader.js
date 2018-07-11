@@ -2,6 +2,7 @@ var spineLoader = function () {
 
 	var currentLoader
 	var spines = {}
+	var pullGroup
 
 	function getGroupRef(ref, self) {
 		switch (ref) {
@@ -14,9 +15,90 @@ var spineLoader = function () {
 		}
 	}
 
+	function removeSpine() {
+		pullGroup.add(this)
+	}
+
+	function setAnimation(animations, loop, onComplete, args) {
+		var spineSkeleton = this
+		var entry
+		for (var index = 0; index < animations.length; index++) {
+			var animation = animations[index]
+			var isLoop = (index === animations.length - 1) && loop
+			spineSkeleton.setToSetupPose()
+			spineSkeleton.autoUpdateTransform()
+			if (index === 0)
+				entry = spineSkeleton.setAnimationByName(0, animation, isLoop)
+			else
+				spineSkeleton.addAnimationByName(0, animation, isLoop)
+
+		}
+
+		if (args)
+			entry.args = args
+
+		if (onComplete) {
+			entry.onComplete = onComplete
+		}
+
+		spineSkeleton.setToSetupPose()
+		return entry
+	}
+
+	function setSkin(skin) {
+		var spineSkeleton = this
+
+		spineSkeleton.setSkinByName(skin)
+		spineSkeleton.setToSetupPose()
+	}
+
+	function playEvent(i, e) {
+		var spineGroup = this
+		var eventName = e.data.name
+		console.log(eventName)
+
+		if ((!eventName) && (typeof eventName !== 'string'))
+			return
+
+		var functionData = getFunctionData(eventName)
+		if ((!functionData) || (!functionData.name)) {
+			return
+		}
+
+		if (functionData.name === "PLAY") {
+			// console.log(functionData.param)
+			sound.play(functionData.params[0])
+		}
+		if (functionData.name === "SPAWN") {
+			// console.log(functionData.param)
+			particleBattle.drawParticleCharacter(spineGroup, functionData.params)
+		}
+		if (functionData.name === "STAGESPAWN") {
+			// console.log(functionData.param)
+			var ref = functionData.params[0]
+			var group = getGroupRef(ref, spineGroup)
+			var offsetX = functionData.params[1]
+			var offsetY = functionData.params[2]
+			var particleName = functionData.params[4]
+			var zIndex = functionData.params[3]
+
+			particleBattle.drawParticle(group, offsetX, offsetY, zIndex, particleName)
+		}
+		if (functionData.name === "DESPAWN") {
+			// console.log(functionData.param)
+			particleBattle.removeParticleCharacter(spineGroup, functionData.params)
+		}
+		if (functionData.name === "STAGEDESPAWN") {
+			// console.log(functionData.param)
+			particleBattle.removeParticle(functionData.params)
+		}
+
+	}
+
 	function createSpine(skeleton, skin, idleAnimation, x, y, unlike) {
-		if((spines[skeleton]) && (!unlike))
+		if(spines[skeleton]) {
 			return spines[skeleton]
+		}
 
 		idleAnimation = idleAnimation || "idle"
 		var spineGroup = game.add.group()
@@ -33,53 +115,27 @@ var spineLoader = function () {
 		spineGroup.add(spineSkeleton)
 
 
-		spineGroup.setAnimation = function (animations, loop, onComplete, args) {
-			var entry
-			for (var index = 0; index < animations.length; index++) {
-				var animation = animations[index]
-				var isLoop = (index === animations.length - 1) && loop
-                spineSkeleton.setToSetupPose()
-                spineSkeleton.autoUpdateTransform()
-				if (index === 0)
-					entry = spineSkeleton.setAnimationByName(0, animation, isLoop)
-				else
-					spineSkeleton.addAnimationByName(0, animation, isLoop)
+		spineGroup.setAnimation = setAnimation.bind(spineSkeleton)
 
-			}
-
-			if (args)
-				entry.args = args
-
-			if (onComplete) {
-				entry.onComplete = onComplete
-			}
-
-			spineSkeleton.setToSetupPose()
-			return entry
-		}
-
-		spineGroup.setSkinByName = function (skin) {
-			spineSkeleton.setSkinByName(skin)
-			spineSkeleton.setToSetupPose()
-		}
+		spineGroup.setSkinByName = setSkin.bind(spineSkeleton)
 
 		spineGroup.setAlive = function (alive) {
-			spineSkeleton.autoUpdate = alive
-		}
+			this.autoUpdate = alive
+		}.bind(spineSkeleton)
 
 		spineGroup.getSlotContainer = function (slotName) {
 			var slotIndex
-			for (var index = 0, n = spineSkeleton.skeletonData.slots.length; index < n; index++) {
-				var slotData = spineSkeleton.skeletonData.slots[index]
+			for (var index = 0, n = this.skeletonData.slots.length; index < n; index++) {
+				var slotData = this.skeletonData.slots[index]
 				if (slotData.name === slotName) {
 					slotIndex = index
 				}
 			}
 
 			if (slotIndex) {
-				return spineSkeleton.slotContainers[slotIndex]
+				return this.slotContainers[slotIndex]
 			}
-		}
+		}.bind(spineSkeleton)
 
 		spineGroup.getSlotByAttachment = function (attachmentName) {
 			var slotIndex
@@ -93,53 +149,17 @@ var spineLoader = function () {
 			if (slotIndex) {
 				return spineSkeleton.slotContainers[slotIndex]
 			}
-		}
+		}.bind(spineSkeleton)
 
-		spineSkeleton.onEvent.add(function (i, e) {
-			var eventName = e.data.name
-			console.log(eventName)
-
-			if ((!eventName) && (typeof eventName !== 'string'))
-				return
-
-			var functionData = getFunctionData(eventName)
-			if ((!functionData) || (!functionData.name)) {
-				return
-			}
-
-			if (functionData.name === "PLAY") {
-				// console.log(functionData.param)
-				sound.play(functionData.params[0])
-			}
-			if (functionData.name === "SPAWN") {
-				// console.log(functionData.param)
-				particleBattle.drawParticleCharacter(spineGroup, functionData.params)
-			}
-			if (functionData.name === "STAGESPAWN") {
-				// console.log(functionData.param)
-				var ref = functionData.params[0]
-				var group = getGroupRef(ref, spineGroup)
-				var offsetX = functionData.params[1]
-				var offsetY = functionData.params[2]
-				var particleName = functionData.params[4]
-				var zIndex = functionData.params[3]
-
-				particleBattle.drawParticle(group, offsetX, offsetY, zIndex, particleName)
-			}
-			if (functionData.name === "DESPAWN") {
-				// console.log(functionData.param)
-				particleBattle.removeParticleCharacter(spineGroup, functionData.params)
-			}
-			if (functionData.name === "STAGEDESPAWN") {
-				// console.log(functionData.param)
-				particleBattle.removeParticle(functionData.params)
-			}
-
-		})
+		spineSkeleton.onEvent.add(playEvent.bind(spineGroup))
 
 		spineGroup.spine = spineSkeleton
 
-		spines[skeleton] = spineGroup
+		spineGroup.remove = removeSpine.bind(spineGroup)
+
+		if(!unlike)
+			spines[skeleton] = spineGroup
+
 		return spineGroup
 	}
 
@@ -233,8 +253,15 @@ var spineLoader = function () {
 		loadingFiles[currentSpine.name] = {onComplete:getSpineEvents.bind(null, currentSpine.name, currentScene)}
 	}
 
+	function init() {
+		pullGroup = game.add.group()
+		pullGroup.alpha = 0
+		pullGroup.y = -game.world.height
+	}
+
 	return {
 		loadSpine:loadSpine,
-		createSpine:createSpine
+		createSpine:createSpine,
+		init:init,
 	}
 }()

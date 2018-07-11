@@ -64,7 +64,7 @@ var particleBattle = function () {
 		if(!emitter)
 			return
 
-		epicparticles.removeEmitter(emitter)
+		emitter.remove()
 	}
 
 	function removeParticle(particleName) {
@@ -73,7 +73,7 @@ var particleBattle = function () {
 		if(!emitter)
 			return
 
-		epicparticles.removeEmitter(emitter)
+		emitter.remove()
 	}
 
 	return {

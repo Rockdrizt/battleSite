@@ -5,67 +5,6 @@ var characterBattle = function () {
 	var currentLoader
 	var game
 
-	function createProjectile(projectileData) {
-		var projectile = game.add.group()
-
-		if(projectileData.spines){
-			var spines = projectileData.spines
-			projectile.spines = []
-
-			for(var spineIndex = 0; spineIndex < spines.length; spineIndex++){
-				var spine = spines[spineIndex]
-				var file = spine.file
-				var spineSkeleton = file.substr(file.lastIndexOf('/') + 1);
-				var index = spineSkeleton.indexOf(".");
-
-				spineSkeleton = spineSkeleton.substring(0, index)
-				var spineGroup = spineLoader.createSpine(spineSkeleton, spine.skin, "idle")
-				spineGroup.data = spine
-
-				projectile.add(spineGroup)
-				projectile.spines.push(spineGroup)
-			}
-		}
-
-		if(projectileData.particles){
-			var particles = projectileData.particles
-			projectile.particles = []
-
-			for(var particleIndex = 0; particleIndex < particles.length; particleIndex++){
-				var particleFile = particles[particleIndex]
-				var particleName = particleFile.substr(particleFile.lastIndexOf('/') + 1);
-				var index = particleName.indexOf(".");
-				particleName = particleName.substring(0, index)
-
-				particleBattle.drawParticle(projectile, 0, 0, null, particleName)
-
-				projectile.particles.push(particleName)
-			}
-		}
-		
-		game.time.events.add(projectileData.timing.removal, function () {
-			if(projectile.particles){
-				for(var particleIndex = 0; particleIndex < projectile.particles.length; particleIndex++){
-					var particleName = projectile.particles[particleIndex]
-					particleBattle.removeParticle(particleName)
-				}
-			}
-
-			if(projectile.spines){
-				for(var spineIndex = 0; spineIndex < projectile.particles.length; spineIndex++){
-					var spine = projectile.spines[particleIndex]
-
-					projectile.remove(spine)
-				}
-			}
-
-		})
-
-		projectile.data = projectileData
-
-		return projectile
-	}
-
 	function attack(character, enemy, type) {
 		var attackType = type || "normal"
 		var attacks = character.data.attacks[attackType]
@@ -74,26 +13,17 @@ var characterBattle = function () {
 
 		for(var projectileIndex = 0; projectileIndex < attacks.length; projectileIndex++){
 			var projectileInfo = attacks[projectileIndex]
-			var projectileData = game.cache.getJSON(projectileInfo.id + "Data")
 
 			game.time.events.add(projectileInfo.delay, function () {
-				var projectile = createProjectile(projectileData)
+				var projectileData = game.cache.getJSON(projectileInfo.id + "Data")
 
+				var projectile = epicProjectiles.new(projectileData)
 				var slot = character.getSlotByAttachment(projectileInfo.attachment)
-				projectile.x = character.x + slot.x
-				projectile.y = character.y + slot.y
+				projectile.x = character.x + slot.x * character.scale.x
+				projectile.y = character.y + slot.y * character.scale.y
 				character.parent.add(projectile)
 
-				if(projectile.spines) {
-					for(var projectileIndex = 0; projectileIndex < projectile.spines.length; projectileIndex++){
-						var spineGroup = projectile.spines[projectileIndex]
-						var onShootAnimations = spineGroup.data.onShootAnimations
-
-						spineGroup.setAnimation(onShootAnimations, true)
-					}
-				}
-
-				scripts.run(projectile.data.onShoot, {self:projectile, target:enemy})
+				projectile.setTarget(enemy)
 			})
 		}
 
@@ -117,73 +47,6 @@ var characterBattle = function () {
 		return character
 	}
 
-	function extractSound(soundID) {
-		var soundsList = game.cache.getJSON('sounds')
-		var assetsSounds = currentScene.assets.sounds
-
-		assetsSounds.push({
-			name:soundID,
-			file: soundsList[soundID]
-		})
-	}
-
-	function addParticle(particlePath){
-
-		var particleName = particlePath.substr(particlePath.lastIndexOf('/') + 1);
-		particleName = particleName.replace(".json/i", "");
-		var index = particleName.indexOf(".");
-		particleName = particleName.substring(0, index)
-
-		var assets = currentScene.assets
-
-		assets.particles = assets.particles || []
-		assets.particles.push({
-			name:particleName,
-			file:particlePath,
-			texture: particleName + ".png"
-		})
-	}
-
-	function extractParticles(particles) {
-		for(var particleIndex = 0; particleIndex < particles.length; particleIndex++){
-			var particlePath = particles[particleIndex]
-			addParticle(particlePath)
-		}
-	}
-
-	function extractSpines(spines) {
-		for(var spineIndex = 0; spineIndex < spines.length; spineIndex++){
-			var spine = spines[spineIndex]
-			var file = spine.file
-			var name = file.substr(file.lastIndexOf('/') + 1);
-			var index = name.indexOf(".");
-			name = name.substring(0, index)
-
-			spine.name = name
-			spineLoader.loadSpine(currentLoader, spine, loadingFiles, currentScene)
-		}
-	}
-
-	function addProjectile(id){
-		var projectileDat = game.cache.getJSON(id + "Data")
-
-		if(projectileDat.particles){
-			extractParticles(projectileDat.particles)
-		}
-
-		if(projectileDat.impact.particles){
-			extractParticles(projectileDat.impact.particles)
-		}
-
-		if(projectileDat.spines){
-			extractSpines(projectileDat.spines)
-		}
-
-		if(projectileDat.impact.soundID){
-			extractSound(projectileDat.impact.soundID)
-		}
-	}
-
 	function addSpine(character, data) {
 		var assets = currentScene.assets
 
@@ -194,11 +57,6 @@ var characterBattle = function () {
 			scales:character.scales,
 			data:data
 		})
-	}
-
-	function loadProjectileData(id) {
-		currentLoader.json(id + "Data", "data/projectiles/" + id + ".json")
-		loadingFiles[id + "Data"] = {onComplete:addProjectile.bind(null, id)}
 	}
 
 	function loadProjectilesData(characterName, characterData) {
@@ -212,7 +70,7 @@ var characterBattle = function () {
 
 			for(var attackIndex = 0; attackIndex < attacks.length; attackIndex++){
 				var id = attacks[attackIndex].id
-				loadProjectileData(id)
+				epicProjectiles.load(id, currentLoader, loadingFiles, currentScene)
 			}
 		}
 	}
