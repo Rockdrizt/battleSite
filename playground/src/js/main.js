@@ -76,6 +76,7 @@ function startGame(){
 
         window.minigame.game = window.game
     	sceneloader.init(game)
+		spineLoader.init()
     	sound.init(game)
 
 		var teams = [

@@ -524,6 +524,8 @@ var epicparticles = function(){
 		emitter.absolute = data.absolutePosition
 		emitter.particles = []
 		emitter.frameCounter = 0
+		emitter.stop = stopParticleEmitter.bind(null, emitter)
+		emitter.remove = removeEmitter.bind(null, emitter)
 
 		// Create particle pool
 		for (var i = 0; i < emitter.maxParticles; i++) {
@@ -536,7 +538,6 @@ var epicparticles = function(){
 	return {
 		loadEmitter: loadEmitter,
 		newEmitter: newEmitter,
-		removeEmitter:removeEmitter,
 		update: update,
 		init: init,
 	}
