@@ -14,7 +14,8 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				sceneloader.show("startScreen")
+				//sceneloader.show("startScreen")
+				sceneloader.show("yogoSelector")
 	    	}
 
 	      	sceneloader.preload(sceneList, {onLoadFile: onLoadFile, onComplete: onCompleteSceneLoading})

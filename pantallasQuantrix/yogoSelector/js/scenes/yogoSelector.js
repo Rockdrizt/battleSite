@@ -236,9 +236,6 @@ var yogoSelector = function(){
 
         for(var i = 0; i < assets.spines.length * 2; i++){
             
-            if(i > 0 && i % 2 == 0)
-                aux++
-            
             //var player = characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + "1", "wait")
             var player = characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + "1", "ready")
             player.x = 0
@@ -247,6 +244,8 @@ var yogoSelector = function(){
             player.tag = aux
             player.used = false
             pullGroup.add(player)
+            
+            aux = i - aux
         }
     }
     
@@ -469,7 +468,7 @@ var yogoSelector = function(){
         }
         else{
             slot.yogo.used = false
-            slot.yogo.setAnimation(["ready"], true)
+            slot.yogo.setAnimation(["ready"], false)
             game.add.tween(slot.yogo).to({y: 0}, 100, Phaser.Easing.Cubic.In, true)
             slot.yogo = null
             markYogotar(obj, teamGroup)
@@ -520,7 +519,7 @@ var yogoSelector = function(){
             
             game.add.tween(obj.yogo).to({y: 0}, 100, Phaser.Easing.Cubic.In, true).onComplete.add(function(){
                 obj.yogo.used = false
-                obj.yogo.setAnimation(["ready"], true)
+                obj.yogo.setAnimation(["ready"], false)
                 obj.yogo = null
             })
         }
