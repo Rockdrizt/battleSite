@@ -65,8 +65,8 @@ var yogoSelector = function(){
         ],
         spines:[
             {
-				name:"dinamita",
-				file:"images/spines/dinamita/dinamitaSelector.json",
+				name:"tomiko",
+				file:"images/spines/tomiko/tomikoSelector.json",
                 scales: ["@0.5x"]
 			},
             {
@@ -75,8 +75,8 @@ var yogoSelector = function(){
                 scales: ["@0.5x"]
 			},
             {
-				name:"dinamita",
-				file:"images/spines/dinamita/dinamitaSelector.json",
+				name:"nao",
+				file:"images/spines/nao/naoSelector.json",
                 scales: ["@0.5x"]
 			},
             {
@@ -242,9 +242,9 @@ var yogoSelector = function(){
                 aux++
             
             //var player = characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + "1", "wait")
-            var player = characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + "1", "ready")
+            var player = characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + "1", "")
             player.x = 0
-            player.y = 0
+            player.y = -100
             player.name = assets.spines[aux].name
             player.tag = aux
             player.used = false
@@ -465,14 +465,17 @@ var yogoSelector = function(){
                 yogo.y = slot.y
                 yogo.scale.setTo(teamGroup.side, 1)
                 slot.yogo = yogo
-                game.add.tween(yogo).from({y:0}, 100, Phaser.Easing.Cubic.Out, true)
+                game.add.tween(yogo).from({y: -100}, 200, Phaser.Easing.Cubic.Out, true)
                 sound.play("swipe")
             }
         }
         else{
             slot.yogo.used = false
-            slot.yogo.setAnimation(["ready"], true)
-            game.add.tween(slot.yogo).to({y: 0}, 100, Phaser.Easing.Cubic.In, true)
+            if(slot.yogo.tag == 0 || slot.yogo.tag == 2) 
+                slot.yogo.setAnimation(["wait"], false)
+            else
+                slot.yogo.setAnimation(["ready"], false)
+            game.add.tween(slot.yogo).to({y: -100}, 200, Phaser.Easing.Cubic.In, true)
             slot.yogo = null
             markYogotar(obj, teamGroup)
         }
@@ -495,6 +498,7 @@ var yogoSelector = function(){
             if(!list[j].used){
                 list[j].setAnimation(["wait"], true)
                 list[j].setSkinByName(list[j].name + (j+1))
+                pullGroup.bringToTop(list[j])
                 return list[j]
             }
         }
@@ -520,9 +524,13 @@ var yogoSelector = function(){
         
         if(!obj.check){
             
-            game.add.tween(obj.yogo).to({y: 0}, 100, Phaser.Easing.Cubic.In, true).onComplete.add(function(){
+            game.add.tween(obj.yogo).to({y: -100}, 200, Phaser.Easing.Cubic.In, true).onComplete.add(function(){
                 obj.yogo.used = false
-                obj.yogo.setAnimation(["ready"], true)
+                if(slot.yogo.tag == 0 || slot.yogo.tag == 2) 
+                    slot.yogo.setAnimation(["wait"], false)
+                else
+                    slot.yogo.setAnimation(["ready"], false)
+                //obj.yogo.setAnimation(["wait"], false)
                 obj.yogo = null
             })
         }
