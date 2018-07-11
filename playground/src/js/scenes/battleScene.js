@@ -88,6 +88,8 @@ var battleScene = function() {
 		DOWN:{x:-70, y: 120, scale:{x:1, y:1}},
 	}
 
+	var ATTACKS = ["normal", "super", "ultra"]
+
 	var ORDER_SIDES = [SIDES.LEFT, SIDES.RIGHT]
 	var ORDER_POSITIONS = [POSITIONS.UP, POSITIONS.MID, POSITIONS.DOWN]
 	var CHARACTER_CENTER_OFFSET = {x:-200, y: -200}
@@ -97,7 +99,8 @@ var battleScene = function() {
 	var teams = []
 	var particles
 	var mainSpine
-	var targetSpine
+	var mainYogotorars
+	var attackCounter
 
 	function loadSounds() {
 
@@ -105,11 +108,13 @@ var battleScene = function() {
 		sound.decode(assets.sounds)
 	}
 
-	function createButton(callback) {
+	function createButton(callback, color) {
+		color = color || 0x000000
+
 		var buttonGroup = game.add.group()
 
 		var rectBg = game.add.graphics()
-		rectBg.beginFill(0x000000)
+		rectBg.beginFill(color)
 		rectBg.lineStyle(5, 0xffffff, 1)
 		rectBg.drawRect(0, 0, 200, 50)
 		rectBg.endFill()
@@ -126,9 +131,13 @@ var battleScene = function() {
 		return buttonGroup
 	}
 
-	function attackUltra() {
+	function attack(obj) {
+		var type = obj.parent.tag
 		console.log(mainSpine)
-		characterBattle.attack(mainSpine, targetSpine, "ultra")
+		var charAttacking = mainYogotorars[attackCounter % 2]
+		attackCounter++
+		var target = mainYogotorars[attackCounter % 2]
+		characterBattle.attack(charAttacking, target, type)
 		//sceneGroup.add(projectile)
 	}
 
@@ -136,7 +145,6 @@ var battleScene = function() {
 		var animations = mainSpine.spine.skeletonData.animations
 
 		function changeAnimation(name) {
-            mainSpine.spine.setAnimationByName(0, "hit_normal", false)
 			mainSpine.setAnimation([name], true)
 		}
 
@@ -152,15 +160,20 @@ var battleScene = function() {
 			button.label.text = animationName
 		}
 
-		var buttonAttack = createButton(attackUltra)
-		buttonAttack.x = 0
-		buttonAttack.y = (pivotY + 1) * 50
-		buttonAttack.label.text = "ultra"
+		for(var attackIndex = 0; attackIndex < ATTACKS.length; attackIndex++){
+			var buttonAttack = createButton(attack, 0xff0000)
+			buttonAttack.tag = ATTACKS[attackIndex]
+			buttonAttack.x = attackIndex * 200
+			buttonAttack.y = (pivotY + 1) * 50
+			buttonAttack.label.text = ATTACKS[attackIndex]
+		}
 	}
 
 	function initialize() {
 		particles = {}
 		game.stage.backgroundColor = "#ffffff"
+		mainYogotorars = []
+		attackCounter = 0
 		//gameActive = true
 		loadSounds()
 
@@ -180,13 +193,6 @@ var battleScene = function() {
 			teamNum:teamIndex
 		}
 		bootFiles.characters.push(charObj)
-	}
-
-	function getSpineInfo(characterName) {
-		for(var spineIndex = 0; spineIndex < assets.spines.length; spineIndex++){
-			if(characterName === assets.spines[spineIndex].name)
-				return assets.spines[spineIndex]
-		}
 	}
 
 	function selectYogotar(obj) {
@@ -228,7 +234,9 @@ var battleScene = function() {
 				if(charIndex === 1)
 					mainSpine = character
 
-				targetSpine = character
+				if(ORDER_POSITIONS[charIndex] === POSITIONS.MID){
+					mainYogotorars[teamIndex] = character
+				}
 			}
 		}
 
@@ -272,13 +280,14 @@ var battleScene = function() {
 			stage.scale.setTo(1.12, 1.12)
 			stage.anchor.setTo(0.5, 0.5)
 
+			initialize()
+
 			placeYogotars()
 
 			createMenuAnimations()
 
 			//eagle.setAnimation(["run"], true)
 
-			initialize()
 		},
 		setCharacter:setCharacter,
 		setTeams: function (myTeams) {

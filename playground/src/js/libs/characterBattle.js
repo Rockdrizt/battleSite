@@ -8,8 +8,13 @@ var characterBattle = function () {
 	function attack(character, enemy, type) {
 		var attackType = type || "normal"
 		var attacks = character.data.attacks[attackType]
-		character.setAnimation(["attack_normal", "idle_normal"], true)
+		character.setAnimation(["attack_" + type, "idle_normal"], true)
 		console.log(enemy.impactPoint)
+
+		if(typeof attacks === "undefined") {
+			console.warn("Attack " + attackType + " is not defined.")
+			return
+		}
 
 		for(var projectileIndex = 0; projectileIndex < attacks.length; projectileIndex++){
 			var projectileInfo = attacks[projectileIndex]
@@ -27,8 +32,6 @@ var characterBattle = function () {
 			})
 		}
 
-
-		//return projectile
 	}
 
 	function createCharacter(charName, position) {

@@ -13,18 +13,10 @@
       "file":"spines/Dinamita/dinamita_projectiles.json",
       "scales":["@0.5x"],
       "skin":"dinamita1_projectiles",
-      "animations":["in_ultra", "idle_ultra"]
+      "animations":["idle_normal"]
     }
   ],
   "impact":{
-    "spines":[
-      {
-        "file":"spines/Dinamita/dinamita_projectiles.json",
-        "scales":["@0.5x"],
-        "skin":"dinamita1_projectiles",
-        "animations":["out_ultra"]
-      }
-    ],
     "particles":[
       "particles/characters/explosionFire1/explosionFire1.json",
       "particles/characters/explosionFire1/explosionFire2.json",
@@ -56,12 +48,6 @@
       "name":"transitionParams",
       "index":"x",
       "copyFrom":"targetX"
-    },
-    {
-      "id":"set",
-      "name":"transitionParams",
-      "index":"y",
-      "copyFrom":"targetY"
     },
     {
       "id":"set",

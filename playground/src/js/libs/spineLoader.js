@@ -25,8 +25,6 @@ var spineLoader = function () {
 		for (var index = 0; index < animations.length; index++) {
 			var animation = animations[index]
 			var isLoop = (index === animations.length - 1) && loop
-			spineSkeleton.setToSetupPose()
-			spineSkeleton.autoUpdateTransform()
 			if (index === 0)
 				entry = spineSkeleton.setAnimationByName(0, animation, isLoop)
 			else
@@ -139,15 +137,15 @@ var spineLoader = function () {
 
 		spineGroup.getSlotByAttachment = function (attachmentName) {
 			var slotIndex
-			for (var index = 0, n = spineSkeleton.skeletonData.slots.length; index < n; index++) {
-				var slotData = spineSkeleton.skeletonData.slots[index]
+			for (var index = 0, n = this.skeletonData.slots.length; index < n; index++) {
+				var slotData = this.skeletonData.slots[index]
 				if (slotData.attachmentName === attachmentName) {
 					slotIndex = index
 				}
 			}
 
 			if (slotIndex) {
-				return spineSkeleton.slotContainers[slotIndex]
+				return this.slotContainers[slotIndex]
 			}
 		}.bind(spineSkeleton)
 

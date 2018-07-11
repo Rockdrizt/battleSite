@@ -3,30 +3,22 @@ var epicProjectiles = function(){
 
 	function removeProjectile() {
 		var projectile = this
+		projectile.destroy()
+	}
 
-		if(projectile.particles){
-			for(var particleIndex = 0; particleIndex < projectile.particles.length; particleIndex++){
-				var particle = projectile.particles[particleIndex]
-				particle.remove()
-			}
+	function stopProjectile(){
+		var projectile = this
+
+		for(var particleIndex = 0; particleIndex < projectile.particles.length; particleIndex++){
+			var particle = projectile.particles[particleIndex]
+			particle.remove()
 		}
 
 		if(projectile.spines){
 			for(var spineIndex = 0; spineIndex < projectile.spines.length; spineIndex++){
 				var spine = projectile.spines[spineIndex]
-
 				spine.remove()
 			}
-		}
-
-	}
-
-	function stopParticles(){
-		var projectile = this
-
-		for(var particleIndex = 0; particleIndex < projectile.particles.length; particleIndex++){
-			var particle = projectile.particles[particleIndex]
-			particle.stop()
 		}
 	}
 
@@ -68,10 +60,34 @@ var epicProjectiles = function(){
 				projectile.parent.add(particleGroup)
 			}
 
+			if(impactData.spines){
+				var spines = impactData.spines
+				projectile.spines = []
+				var spinesGroup = game.add.group()
+
+				for(var spineIndex = 0; spineIndex < spines.length; spineIndex++){
+					var spineData = spines[spineIndex]
+					var file = spineData.file
+					var spineSkeleton = file.substr(file.lastIndexOf('/') + 1);
+					var index = spineSkeleton.indexOf(".");
+
+					spineSkeleton = spineSkeleton.substring(0, index)
+					var spineGroup = spineLoader.createSpine(spineSkeleton, spineData.skin, "idle")
+					spineGroup.data = spineData
+
+					var onShootAnimations = spineData.animations
+					spineGroup.setAnimation(onShootAnimations, false, spineGroup.remove)
+
+					spinesGroup.add(spineGroup)
+				}
+
+				spinesGroup.x = x
+				spinesGroup.y = y
+				projectile.parent.add(spinesGroup)
+			}
+
 			if (impactData.soundID)
 				sound.play(impactData.soundID)
-
-
 		}
 	}
 
@@ -79,7 +95,7 @@ var epicProjectiles = function(){
 		var self = this
 
 		game.time.events.add(self.data.timing.removal, removeProjectile, self)
-		game.time.events.add(self.data.timing.stop, stopParticles, self)
+		game.time.events.add(self.data.timing.stop, stopProjectile, self)
 
 		//TODO: here goes the damage
 		var params = {
@@ -238,7 +254,7 @@ var epicProjectiles = function(){
 					var spineGroup = spineLoader.createSpine(spineSkeleton, spineData.skin, "idle")
 					spineGroup.data = spineData
 
-					var onShootAnimations = spineData.onShootAnimations
+					var onShootAnimations = spineData.animations
 					spineGroup.setAnimation(onShootAnimations, true)
 
 					projectile.add(spineGroup)
