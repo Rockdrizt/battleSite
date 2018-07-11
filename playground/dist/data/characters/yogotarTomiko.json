@@ -2,30 +2,11 @@
 	"category":"yogotar",
 	"attacks": {
 		"normal": [
-			{
-				"id": "windball",
-				"attachment": "particle2",
-				"delay": 350,
-				"multiplier": 1
-			},
-
-			{
-				"id": "windball",
-				"attachment": "particle4",
-				"delay": 350,
-				"multiplier": 1
-			}
 		],
 		"special": [
-			{
-				"id": "windProjectile1",
-				"attachment": "particle7",
-				"delay": 350,
-				"multiplier": 1
-			}
 		]
 	},
-	"directory": "images/spines/Tomiko/tomiko.json",
+	"directory": "spines/Tomiko/tomiko.json",
 	"name": "Tomiko",
 	"spine": {
 		"options": {
