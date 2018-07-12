@@ -108,6 +108,33 @@ var battleScene = function() {
 		sound.decode(assets.sounds)
 	}
 
+	function rotateTeam(teamIndex){
+		var team = teams[teamIndex]
+		var side = ORDER_SIDES[teamIndex]
+		var copyPositions = []
+
+		for (var playerIndex = 0; playerIndex < team.length; playerIndex++)
+		{
+			var character = team[playerIndex]
+
+			var playerPos = playerIndex - 1 < 0 ? ORDER_POSITIONS.length - 1 : playerIndex - 1
+			var newPosition = ORDER_POSITIONS[playerPos]
+			copyPositions[playerIndex] = newPosition
+
+			var xOffset = CHARACTER_CENTER_OFFSET.x * side.scale.x + newPosition.x * side.scale.x
+
+			var characterPos = {
+				x : game.world.centerX * 0.5 * side.direction + xOffset,
+				y : CHARACTER_CENTER_OFFSET.y + game.world.centerY + newPosition.y
+			}
+
+			game.add.tween(character).to({x:characterPos.x, y:characterPos.y}, 500, null, true)
+			game.add.tween(character.scale).to({x:newPosition.scale.x, y:newPosition.scale.y}, 500, null, true)
+		}
+
+		ORDER_POSITIONS = copyPositions
+	}
+
 	function createButton(callback, color) {
 		color = color || 0x000000
 
@@ -167,6 +194,11 @@ var battleScene = function() {
 			buttonAttack.y = (pivotY + 1) * 50
 			buttonAttack.label.text = ATTACKS[attackIndex]
 		}
+
+		var rotateButton = createButton(rotateTeam.bind(null, 0), 0xffff00)
+		rotateButton.x = attackIndex * 200
+		rotateButton.y = (pivotY + 1) * 50
+		rotateButton.label.text = "rotate"
 	}
 
 	function initialize() {
@@ -230,6 +262,8 @@ var battleScene = function() {
 				character.add(rect)
 				rect.inputEnabled = true
 				rect.events.onInputDown.add(selectYogotar)
+
+				teams[teamIndex][charIndex] = character
 
 				if(charIndex === 1)
 					mainSpine = character
