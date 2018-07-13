@@ -34,6 +34,7 @@ var characterBattle = function () {
 				var slot = self.getSlotByAttachment(projectileInfo.attachment)
 				projectile.x = self.x + slot.x * self.scale.x
 				projectile.y = self.y + slot.y * self.scale.y
+				projectile.scale.x *= self.scale.x
 				self.parent.add(projectile)
 
 				projectile.setTarget(enemy)

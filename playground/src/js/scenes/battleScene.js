@@ -306,7 +306,7 @@ var battleScene = function() {
 			groupPoint.drawRect(0, 0, 50, 10)
 			groupPoint.endFill()
 			groupPoint.x = game.world.centerX * 0.5 * side.direction + 100 * side.direction
-			groupPoint.y = 240
+			groupPoint.y = CHARACTER_CENTER_OFFSET.y + game.world.centerY + POSITIONS.MID.y
 			groupPoint.characters = teamCharacters
 			groupPoint.impactPoint = {x:groupPoint.x, y:groupPoint.y}
 			groupPoint.takeDamage = takeGroupDamage.bind(groupPoint)

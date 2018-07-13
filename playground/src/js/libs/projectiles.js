@@ -9,9 +9,11 @@ var epicProjectiles = function(){
 	function stopProjectile(){
 		var projectile = this
 
-		for(var particleIndex = 0; particleIndex < projectile.particles.length; particleIndex++){
-			var particle = projectile.particles[particleIndex]
-			particle.remove()
+		if(projectile.particles) {
+			for (var particleIndex = 0; particleIndex < projectile.particles.length; particleIndex++) {
+				var particle = projectile.particles[particleIndex]
+				particle.remove()
+			}
 		}
 
 		if(projectile.spines){
