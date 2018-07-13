@@ -4,27 +4,15 @@
     "removal":1700,
     "hit":600
   },
-  "particles":[
-    "particles/characters/normalProjectileFire1/normalProjectileFire1.json",
-    "particles/characters/normalProjectileFire1/normalProjectileFire2.json"
-  ],
   "spines":[
     {
-      "file":"spines/Dinamita/dinamita_projectiles.json",
+      "file":"spines/Theffanie/theffanie_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"dinamita1_projectiles",
-      "animations":["in_ultra", "idle_ultra"]
+      "skin":"theffanie_projectiles",
+      "animations":["idle_super"]
     }
   ],
   "impact":{
-    "spines":[
-      {
-        "file":"spines/Dinamita/dinamita_projectiles.json",
-        "scales":["@0.5x"],
-        "skin":"dinamita1_projectiles",
-        "animations":["out_ultra"]
-      }
-    ],
     "particles":[
       "particles/characters/explosionFire1/explosionFire1.json",
       "particles/characters/explosionFire1/explosionFire2.json",

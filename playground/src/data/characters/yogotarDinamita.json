@@ -3,9 +3,9 @@
 	"attacks": {
 		"normal": [
 			{
-				"id": "normalDinamita",
-				"attachment": "particle8",
-				"delay": 1000,
+				"id": "normalFire",
+				"attachment": "particle2",
+				"delay": 500,
 				"multiplier": 1
 			}
 		],
@@ -16,7 +16,7 @@
 			{
 				"id": "ultraDinamita",
 				"attachment": "particle8",
-				"delay": 1000,
+				"delay": 1200,
 				"multiplier": 1
 			}
 		]
@@ -39,6 +39,6 @@
 		"shadowScaleX": 1,
 		"shadowScaleY": 1.4,
 		"cardFacing": "right",
-		"impactAttachment": "torso1"
+		"impactAttachment": "particle8"
 	}
 }

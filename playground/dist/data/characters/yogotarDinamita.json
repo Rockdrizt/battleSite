@@ -2,8 +2,15 @@
 	"category":"yogotar",
 	"attacks": {
 		"normal": [
+			{
+				"id": "normalDinamita",
+				"attachment": "particle8",
+				"delay": 1000,
+				"multiplier": 1
+			}
 		],
 		"special": [
+
 		],
 		"ultra":[
 			{
