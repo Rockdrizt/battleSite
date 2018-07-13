@@ -5,10 +5,14 @@ var characterBattle = function () {
 	var currentLoader
 	var game
 
-	function attack(character, enemy, type) {
+	function attack(enemy, type) {
+		var self = this
+
 		var attackType = type || "normal"
-		var attacks = character.data.attacks[attackType]
-		character.setAnimation(["attack_" + type, "idle_normal"], true)
+		var attacks = self.data.attacks[attackType]
+		var element = self.data.stats.element
+
+		self.setAnimation(["attack_" + type, "idle_normal"], true)
 		console.log(enemy.impactPoint)
 
 		if(typeof attacks === "undefined") {
@@ -22,11 +26,15 @@ var characterBattle = function () {
 			game.time.events.add(projectileInfo.delay, function () {
 				var projectileData = game.cache.getJSON(projectileInfo.id + "Data")
 
-				var projectile = epicProjectiles.new(projectileData)
-				var slot = character.getSlotByAttachment(projectileInfo.attachment)
-				projectile.x = character.x + slot.x * character.scale.x
-				projectile.y = character.y + slot.y * character.scale.y
-				character.parent.add(projectile)
+				var options = {
+					element:element,
+					type:type
+				}
+				var projectile = epicProjectiles.new(projectileData, options)
+				var slot = self.getSlotByAttachment(projectileInfo.attachment)
+				projectile.x = self.x + slot.x * self.scale.x
+				projectile.y = self.y + slot.y * self.scale.y
+				self.parent.add(projectile)
 
 				projectile.setTarget(enemy)
 			})
@@ -38,7 +46,7 @@ var characterBattle = function () {
 		var characterData = game.cache.getJSON(charName + "Data")
 		var nameLowerCase = characterData.name.toLowerCase()
 
-		var character = spineLoader.createSpine(charName, nameLowerCase + "1", "run", 0, 0, true)
+		var character = spineLoader.createSpine(charName, nameLowerCase + "1", "idle_normal", 0, 0, true)
 		character.x = position.x; character.y = position.y
 		character.data = characterData
 		var impactSlot = character.getSlotByAttachment(characterData.visuals.impactAttachment)
@@ -46,6 +54,9 @@ var characterBattle = function () {
 			x:impactSlot.x + character.x,
 			y:impactSlot.y + character.y
 		}
+
+		character.takeDamage = takeDamage.bind(character)
+		character.attack = attack.bind(character)
 
 		return character
 	}
@@ -95,9 +106,18 @@ var characterBattle = function () {
 
 	}
 
+	function takeDamage(type, element) {
+		var self = this
+
+		var animationName = "hit_" + type
+		if(type === "ultra")
+			animationName = animationName + "_" + element
+
+		self.setAnimation([animationName, "idle_normal"], true)
+	}
+
 	return {
 		loadCharacter:loadCharacter,
-		createCharacter:createCharacter,
-		attack:attack
+		createCharacter:createCharacter
 	}
 }()

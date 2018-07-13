@@ -113,6 +113,11 @@ var battleScene = function() {
 		var side = ORDER_SIDES[teamIndex]
 		var copyPositions = []
 
+		function returnNormal(obj) {
+			obj.setAnimation(["idle_normal"], true)
+			obj.scale.x = obj.prevScale
+		}
+
 		for (var playerIndex = 0; playerIndex < team.length; playerIndex++)
 		{
 			var character = team[playerIndex]
@@ -128,10 +133,24 @@ var battleScene = function() {
 				y : CHARACTER_CENTER_OFFSET.y + game.world.centerY + newPosition.y
 			}
 
-			game.add.tween(character).to({x:characterPos.x, y:characterPos.y}, 500, null, true)
-			game.add.tween(character.scale).to({x:newPosition.scale.x, y:newPosition.scale.y}, 500, null, true)
+			character.setAnimation(["run"], true)
+
+			character.prevScale = newPosition.scale.x
+			var toScaleX = newPosition.scale.x //facing direction
+			if(character.x > characterPos.x) { //check facing direction
+				character.scale.x *= -1
+				toScaleX *= -1
+			}
+
+			game.add.tween(character.scale).to({x:toScaleX, y:newPosition.scale.y}, 490, null, true)
+			var moveTween = game.add.tween(character).to({x:characterPos.x, y:characterPos.y}, 500, null, true)
+			moveTween.onComplete.add(returnNormal)
+
+			if(ORDER_POSITIONS[playerPos] === POSITIONS.MID)
+				mainYogotorars[teamIndex] = character
 		}
 
+		sceneGroup.sort('y', Phaser.Group.SORT_ASCENDING)
 		ORDER_POSITIONS = copyPositions
 	}
 
@@ -163,17 +182,17 @@ var battleScene = function() {
 		console.log(mainSpine)
 		var charAttacking = mainYogotorars[attackCounter % 2]
 		attackCounter++
-		var target = mainYogotorars[attackCounter % 2]
-		characterBattle.attack(charAttacking, target, type)
+		var target = type === "ultra" ? teams[attackCounter % 2].groupPoint : mainYogotorars[attackCounter % 2]
+		charAttacking.attack(target, type)
 		//sceneGroup.add(projectile)
+	}
+
+	function changeAnimation(name) {
+		mainSpine.setAnimation([name], true)
 	}
 
 	function createMenuAnimations() {
 		var animations = mainSpine.spine.skeletonData.animations
-
-		function changeAnimation(name) {
-			mainSpine.setAnimation([name], true)
-		}
 
 		var pivotY, pivotX
 		for (var animationIndex = 0; animationIndex < animations.length; animationIndex++) {
@@ -231,6 +250,16 @@ var battleScene = function() {
 		mainSpine = obj.parent
 	}
 
+	function takeGroupDamage(type, element) {
+		var team = this.characters
+
+		for(var teamIndex = 0; teamIndex < team.length; teamIndex++){
+			var character = team[teamIndex]
+
+			character.takeDamage(type, element)
+		}
+	}
+
 	function placeYogotars() {
 
 		for(var teamIndex = 0; teamIndex < teams.length; teamIndex++){
@@ -249,8 +278,8 @@ var battleScene = function() {
 				var character = characterBattle.createCharacter(characterName, characterPos)
 				console.log("postion", character.position)
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
+				character.teamIndex = teamIndex
 				sceneGroup.add(character)
-				console.log(character)
 
 				var rect = game.add.graphics()
 				rect.beginFill(0xffffff)
@@ -272,6 +301,20 @@ var battleScene = function() {
 					mainYogotorars[teamIndex] = character
 				}
 			}
+
+			var groupPoint = game.add.graphics()
+			groupPoint.beginFill(0xffffff)
+			groupPoint.drawRect(0, 0, 50, 10)
+			groupPoint.endFill()
+			groupPoint.x = game.world.centerX * 0.5 * side.direction + 100 * side.direction
+			groupPoint.y = 240
+			groupPoint.characters = teamCharacters
+			groupPoint.impactPoint = {x:groupPoint.x, y:groupPoint.y}
+			groupPoint.takeDamage = takeGroupDamage.bind(groupPoint)
+			teamCharacters.groupPoint = groupPoint
+
+			sceneGroup.add(groupPoint)
+
 		}
 
 	}

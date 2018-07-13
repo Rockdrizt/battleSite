@@ -52,6 +52,12 @@
     {
       "id":"set",
       "name":"transitionParams",
+      "index":"y",
+      "copyFrom":"targetY"
+    },
+    {
+      "id":"set",
+      "name":"transitionParams",
       "index":"time",
       "value":550
     },

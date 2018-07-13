@@ -89,6 +89,8 @@ var epicProjectiles = function(){
 			if (impactData.soundID)
 				sound.play(impactData.soundID)
 		}
+
+		enemy.takeDamage(projectile.type, projectile.element)
 	}
 
 	function setTarget(enemy) {
@@ -237,7 +239,7 @@ var epicProjectiles = function(){
 	}
 
 	return{
-		new:function (projectileData) {
+		new:function (projectileData, options) {
 			var projectile = game.add.group()
 
 			if(projectileData.spines){
@@ -281,6 +283,8 @@ var epicProjectiles = function(){
 
 			projectile.data = projectileData
 			projectile.setTarget = setTarget.bind(projectile)
+			projectile.element = options.element
+			projectile.type = options.type
 
 			return projectile
 		},
