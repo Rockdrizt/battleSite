@@ -118,8 +118,7 @@ var battleScene = function() {
 			obj.scale.x = obj.prevScale
 		}
 
-		for (var playerIndex = 0; playerIndex < team.length; playerIndex++)
-		{
+		for (var playerIndex = 0; playerIndex < team.length; playerIndex++) {
 			var character = team[playerIndex]
 
 			var playerPos = playerIndex - 1 < 0 ? ORDER_POSITIONS.length - 1 : playerIndex - 1
