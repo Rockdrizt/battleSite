@@ -39,6 +39,6 @@
 		"shadowScaleX": 1,
 		"shadowScaleY": 1.4,
 		"cardFacing": "right",
-		"impactAttachment": "particle8"
+		"impactAttachment": "torso1"
 	}
 }

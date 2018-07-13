@@ -1,9 +1,30 @@
 {
 	"category":"yogotar",
 	"attacks": {
-		"normal": [	
+		"normal": [
+		{
+				"id": "normalWater",
+				"attachment": "particle2",
+				"delay": 500,
+				"multiplier": 1
+			}
 		],
-		"special": [	
+        "super": [
+            {
+				"id": "superTheffanie",
+				"attachment": "particle4",
+				"delay": 1350,
+				"multiplier": 1
+			}
+
+		],
+		"ultra":[
+			{
+				"id": "ultraDinamita",
+				"attachment": "particle8",
+				"delay": 1200,
+				"multiplier": 1
+			}
 		]
 	},
 	"directory": "spines/Estrella/estrella.json",
