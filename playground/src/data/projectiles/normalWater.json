@@ -1,30 +1,21 @@
 {
   "timing":{
-    "stop":600,
+    "stop":490,
     "removal":1700,
-    "hit":600
+    "hit":490
   },
   "particles":[
-    "particles/characters/normalProjectileFire1/normalProjectileFire1.json",
-    "particles/characters/normalProjectileFire1/normalProjectileFire2.json"
+    "particles/characters/normalAttackWater2/normalAttackWater3.json"
   ],
   "spines":[
     {
-      "file":"spines/Dinamita/dinamita_projectiles.json",
+      "file":"spines/Estrella/estrella_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"dinamita1_projectiles",
-      "animations":["in_ultra", "idle_ultra"]
+      "skin":"estrella_projectiles",
+      "animations":["idle_normal"]
     }
   ],
   "impact":{
-    "spines":[
-      {
-        "file":"spines/Dinamita/dinamita_projectiles.json",
-        "scales":["@0.5x"],
-        "skin":"dinamita1_projectiles",
-        "animations":["out_ultra"]
-      }
-    ],
     "particles":[
       "particles/characters/explosionFire1/explosionFire1.json",
       "particles/characters/explosionFire1/explosionFire2.json",
@@ -56,12 +47,6 @@
       "name":"transitionParams",
       "index":"x",
       "copyFrom":"targetX"
-    },
-    {
-      "id":"set",
-      "name":"transitionParams",
-      "index":"y",
-      "copyFrom":"targetY"
     },
     {
       "id":"set",

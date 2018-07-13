@@ -5,7 +5,7 @@ window.minigame = window.minigame || {}
 
 function startGame(){
 
-	window.game = new Phaser.Game(document.body.clientWidth, document.body.clientHeight, Phaser.WEBGL, null, {init: init, create: create }, true, true);
+	window.game = new Phaser.Game(document.body.clientWidth, document.body.clientHeight, Phaser.CANVAS, null, {init: init, create: create }, true, true);
     document.body.style.visibility = "hidden"
 
 	function bootConfigFiles(sceneList) {
@@ -80,7 +80,7 @@ function startGame(){
     	sound.init(game)
 
 		var teams = [
-			["yogotarDinamita", "yogotarDinamita", "yogotarLuna"],
+			["yogotarDinamita", "yogotarEstrella", "yogotarLuna"],
 		
 			["yogotarEagle", "yogotarDinamita", "yogotarEstrella"],
 		

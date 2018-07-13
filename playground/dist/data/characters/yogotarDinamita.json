@@ -2,14 +2,21 @@
 	"category":"yogotar",
 	"attacks": {
 		"normal": [
+			{
+				"id": "normalFire",
+				"attachment": "particle2",
+				"delay": 500,
+				"multiplier": 1
+			}
 		],
 		"special": [
+
 		],
 		"ultra":[
 			{
 				"id": "ultraDinamita",
 				"attachment": "particle8",
-				"delay": 1000,
+				"delay": 1200,
 				"multiplier": 1
 			}
 		]

@@ -1,0 +1,313 @@
+
+estrella_projectiles.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+normal1/estrella_super1
+  rotate: false
+  xy: 2, 2
+  size: 385, 288
+  orig: 385, 288
+  offset: 0, 0
+  index: -1
+normal1/estrella_super2
+  rotate: false
+  xy: 389, 2
+  size: 372, 288
+  orig: 372, 288
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_00
+  rotate: false
+  xy: 2, 1609
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_01
+  rotate: false
+  xy: 2, 1170
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_02
+  rotate: false
+  xy: 501, 1609
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_03
+  rotate: false
+  xy: 2, 731
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_04
+  rotate: false
+  xy: 501, 1170
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_05
+  rotate: false
+  xy: 1000, 1609
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_06
+  rotate: false
+  xy: 2, 292
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_07
+  rotate: false
+  xy: 501, 731
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_08
+  rotate: false
+  xy: 1000, 1170
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_09
+  rotate: false
+  xy: 1499, 1609
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_10
+  rotate: false
+  xy: 501, 292
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_11
+  rotate: false
+  xy: 1000, 731
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_12
+  rotate: false
+  xy: 1499, 1170
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_13
+  rotate: false
+  xy: 1000, 292
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_14
+  rotate: false
+  xy: 1499, 731
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_15
+  rotate: false
+  xy: 1499, 292
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/flame_1
+  rotate: false
+  xy: 763, 47
+  size: 205, 243
+  orig: 205, 243
+  offset: 0, 0
+  index: -1
+normal1/flame_2
+  rotate: false
+  xy: 970, 47
+  size: 205, 243
+  orig: 205, 243
+  offset: 0, 0
+  index: -1
+normal1/flame_3
+  rotate: false
+  xy: 1177, 47
+  size: 205, 243
+  orig: 205, 243
+  offset: 0, 0
+  index: -1
+normal1/flame_4
+  rotate: false
+  xy: 1384, 47
+  size: 205, 243
+  orig: 205, 243
+  offset: 0, 0
+  index: -1
+normal1/flame_5
+  rotate: false
+  xy: 1591, 47
+  size: 205, 243
+  orig: 205, 243
+  offset: 0, 0
+  index: -1
+normal1/flame_6
+  rotate: false
+  xy: 1798, 47
+  size: 205, 243
+  orig: 205, 243
+  offset: 0, 0
+  index: -1
+normal1/grieta_fuego
+  rotate: true
+  xy: 1998, 1739
+  size: 307, 48
+  orig: 307, 48
+  offset: 0, 0
+  index: -1
+
+estrella_projectiles2.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+normal1/estrella_super3
+  rotate: false
+  xy: 1499, 1689
+  size: 384, 311
+  orig: 384, 311
+  offset: 0, 0
+  index: -1
+normal1/estrella_super4
+  rotate: false
+  xy: 1000, 631
+  size: 383, 303
+  orig: 383, 303
+  offset: 0, 0
+  index: -1
+normal1/estrella_super5
+  rotate: false
+  xy: 501, 375
+  size: 386, 308
+  orig: 386, 308
+  offset: 0, 0
+  index: -1
+normal1/estrella_super6
+  rotate: false
+  xy: 1000, 936
+  size: 380, 312
+  orig: 380, 312
+  offset: 0, 0
+  index: -1
+normal1/estrella_super7
+  rotate: false
+  xy: 1000, 1250
+  size: 387, 311
+  orig: 387, 311
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_16
+  rotate: false
+  xy: 2, 1563
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_17
+  rotate: false
+  xy: 2, 1124
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_18
+  rotate: false
+  xy: 501, 1563
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_19
+  rotate: false
+  xy: 2, 685
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_20
+  rotate: false
+  xy: 501, 1124
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_21
+  rotate: false
+  xy: 1000, 1563
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_22
+  rotate: false
+  xy: 2, 246
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/estrella_ultra_23
+  rotate: false
+  xy: 501, 685
+  size: 497, 437
+  orig: 497, 437
+  offset: 0, 0
+  index: -1
+normal1/flame_10
+  rotate: true
+  xy: 1499, 1482
+  size: 205, 242
+  orig: 205, 242
+  offset: 0, 0
+  index: -1
+normal1/flame_7
+  rotate: false
+  xy: 2, 2
+  size: 205, 242
+  orig: 205, 242
+  offset: 0, 0
+  index: -1
+normal1/flame_8
+  rotate: false
+  xy: 209, 2
+  size: 205, 242
+  orig: 205, 242
+  offset: 0, 0
+  index: -1
+normal1/flame_9
+  rotate: true
+  xy: 501, 168
+  size: 205, 242
+  orig: 205, 242
+  offset: 0, 0
+  index: -1
+normal1/water_ball1
+  rotate: false
+  xy: 1885, 1863
+  size: 137, 137
+  orig: 137, 137
+  offset: 0, 0
+  index: -1

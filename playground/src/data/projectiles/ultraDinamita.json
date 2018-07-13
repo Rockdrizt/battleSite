@@ -1,8 +1,8 @@
 {
   "timing":{
-    "stop":490,
+    "stop":600,
     "removal":1700,
-    "hit":490
+    "hit":600
   },
   "particles":[
     "particles/characters/normalProjectileFire1/normalProjectileFire1.json",
@@ -30,7 +30,7 @@
       "particles/characters/explosionFire1/explosionFire2.json",
       "particles/characters/explosionFire1/explosionFire3.json"
     ],
-    "soundID":"epicFireExplosion1"
+    "soundID":"tournamentFireExplosion1"
   },
   "onShoot":[
     {
