@@ -1,9 +1,30 @@
 {
 	"category":"yogotar",
-	"attacks": {
+    "attacks": {
 		"normal": [
+			{
+				"id": "normalWind",
+				"attachment": "particle4",
+				"delay": 500,
+				"multiplier": 1
+			}
 		],
-		"special": [
+		"super": [
+            {
+				"id": "superDinamita",
+				"attachment": "particle14",
+				"delay": 800,
+				"multiplier": 1
+			}
+
+		],
+		"ultra":[
+			{
+				"id": "ultraDinamita",
+				"attachment": "particle8",
+				"delay": 1200,
+				"multiplier": 1
+			}
 		]
 	},
 	"directory": "spines/Eagle/eagle.json",
