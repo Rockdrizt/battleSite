@@ -11,18 +11,30 @@
 		],
         "super": [
             {
-				"id": "superTheffanie",
+				"id": "superEstrella",
 				"attachment": "particle4",
-				"delay": 1350,
+				"delay": 1000,
+				"multiplier": 1
+			},
+             {
+				"id": "superEstrella",
+				"attachment": "particle4",
+				"delay": 1200,
+				"multiplier": 1
+			},
+             {
+				"id": "superEstrella",
+				"attachment": "particle4",
+				"delay": 1400,
 				"multiplier": 1
 			}
 
 		],
 		"ultra":[
 			{
-				"id": "ultraDinamita",
-				"attachment": "particle8",
-				"delay": 1200,
+				"id": "ultraEstrella",
+				"attachment": "particle12",
+				"delay": 400,
 				"multiplier": 1
 			}
 		]

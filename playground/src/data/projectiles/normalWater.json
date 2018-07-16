@@ -17,11 +17,12 @@
   ],
   "impact":{
     "particles":[
-      "particles/characters/explosionFire1/explosionFire1.json",
-      "particles/characters/explosionFire1/explosionFire2.json",
-      "particles/characters/explosionFire1/explosionFire3.json"
+      "particles/characters/impactWater6/impactWater15.json",
+      "particles/characters/impactWater6/impactWater16.json",
+      "particles/characters/impactWater6/impactWater17.json",
+      "particles/characters/impactWater6/impactWater18.json"
     ],
-    "soundID":"tournamentFireExplosion1"
+    "soundID":"tournamentImpactWater1"
   },
   "onShoot":[
     {

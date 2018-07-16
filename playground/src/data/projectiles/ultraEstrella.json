@@ -1,12 +1,15 @@
 {
   "timing":{
-    "stop":600,
-    "removal":1700,
-    "hit":600
+    "stop":1750,
+    "removal":3000,
+    "hit":1750
   },
   "particles":[
-    "particles/characters/normalProjectileFire1/normalProjectileFire1.json",
-    "particles/characters/normalProjectileFire1/normalProjectileFire2.json"
+    "particles/characters/estrellaSuper2/estrellaSuper7.json",
+    "particles/characters/estrellaSuper2/estrellaSuper8.json",
+    "particles/characters/estrellaSuper2/estrellaSuper9.json",
+    "particles/characters/estrellaSuper2/estrellaSuper10.json",
+    "particles/characters/estrellaSuper2/estrellaSuper11.json"
   ],
   "spines":[
     {
@@ -20,9 +23,9 @@
     "particles":[
       "particles/characters/estrellaSuper1/estrellaSuper1.json",
       "particles/characters/estrellaSuper1/estrellaSuper2.json",
-      "particles/characters/estrellaSuper1/estrellaSuper3.json"
-      "particles/characters/estrellaSuper1/estrellaSuper4.json"
-      "particles/characters/estrellaSuper1/estrellaSuper5.json"
+      "particles/characters/estrellaSuper1/estrellaSuper3.json",
+      "particles/characters/estrellaSuper1/estrellaSuper4.json",
+      "particles/characters/estrellaSuper1/estrellaSuper5.json",
       "particles/characters/estrellaSuper1/estrellaSuper6.json"
     ],
     "soundID":"tournamentIceHit2"
@@ -62,7 +65,14 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":550
+      "value":650
+        
+    },
+    {
+      "id":"set",
+      "name":"transitionParams",
+      "index":"delay",
+      "value":1100
     },
     {
       "index":"to",
