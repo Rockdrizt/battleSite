@@ -4,12 +4,18 @@
 		"normal": [
 			{
 				"id": "normalFire",
-				"attachment": "particle2",
+				"attachment": "particle4",
 				"delay": 500,
 				"multiplier": 1
 			}
 		],
-		"special": [
+		"super": [
+            {
+				"id": "superDinamita",
+				"attachment": "particle12",
+				"delay": 800,
+				"multiplier": 1
+			}
 
 		],
 		"ultra":[

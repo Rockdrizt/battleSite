@@ -5,9 +5,9 @@
     "hit":600
   },
   "particles":[
-    "particles/characters/windNormal1/windNormal1.json",
-    "particles/characters/windNormal1/windNormal2.json",
-    "particles/characters/windNormal1/windNormal3.json"
+    "particles/characters/windNormal/windNormal1.json",
+    "particles/characters/windNormal/windNormal2.json",
+    "particles/characters/windNormal/windNormal2.json"
   ],
   "spines":[
     {
@@ -59,7 +59,7 @@
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":200
+      "value":100
     },  
     {
       "index":"to",
