@@ -116,6 +116,7 @@ var battleScene = function() {
 		function returnNormal(obj) {
 			obj.setAnimation(["idle_normal"], true)
 			obj.scale.x = obj.prevScale
+			obj.updatePosition()
 		}
 
 		for (var playerIndex = 0; playerIndex < team.length; playerIndex++) {
