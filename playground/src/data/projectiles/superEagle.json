@@ -4,23 +4,27 @@
     "removal":1700,
     "hit":600
   },
-  "particles":[
-    "particles/characters/windNormal1/windNormal1.json",
-    "particles/characters/windNormal1/windNormal2.json",
-    "particles/characters/windNormal1/windNormal3.json"
+    "particles":[
+    "particles/characters/windSuper1/windSuper1.json",
+    "particles/characters/windSuper1/windSuper2.json",
+    "particles/characters/windSuper1/windSuper3.json",
+    "particles/characters/windSuper1/windSuper4.json",
+    "particles/characters/windSuper1/windSuper5.json",
+    "particles/characters/windSuper1/windSuper6.json"
   ],
-  "spines":[
+     "spines":[
     {
       "file":"spines/Eagle/eagle_projectiles.json",
       "scales":["@0.5x"],
       "skin":"eagle_projectiles",
-      "animations":["in_normal","idle_normal"]
+      "animations":["in_super", "idle_super", "out_super"]
     }
   ],
   "impact":{
     "particles":[
-      "particles/characters/impactWind5/impactWind16.json",
-      "particles/characters/impactWind5/impactWind17.json"
+      "particles/characters/impactWind6/impactWind18.json",
+      "particles/characters/impactWind6/impactWind19.json",
+      "particles/characters/impactWind6/impactWind20.json"
     ],
     "soundID":"tournamentWindImpact1"
   },
@@ -52,15 +56,15 @@
     {
       "id":"set",
       "name":"transitionParams",
-      "index":"time",
-      "value":450
+      "index":"y",
+      "copyFrom":"targetY"
     },
     {
       "id":"set",
       "name":"transitionParams",
-      "index":"delay",
-      "value":200
-    },  
+      "index":"time",
+      "value":550
+    },
     {
       "index":"to",
       "id":"execute",
