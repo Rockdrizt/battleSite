@@ -1,28 +1,24 @@
 {
   "timing":{
-    "stop":800,
+    "stop":1000,
     "removal":1700,
-    "hit":800
+    "hit":1000
   },
-  "particles":[
-    "particles/characters/normalAttackWater2/normalAttackWater3.json"
-  ],
   "spines":[
     {
-      "file":"spines/Estrella/estrella_projectiles.json",
+      "file":"spines/Luna/luna_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"estrella_projectiles",
-      "animations":["in_normal","idle_normal"]
+      "skin":"luna_projectiles",
+      "animations":["in_super", "idle_super"]
     }
   ],
   "impact":{
     "particles":[
-      "particles/characters/impactWater6/impactWater15.json",
-      "particles/characters/impactWater6/impactWater16.json",
-      "particles/characters/impactWater6/impactWater17.json",
-      "particles/characters/impactWater6/impactWater18.json"
+      "particles/characters/lunaSuper1/lunaSuper1.json",
+      "particles/characters/lunaSuper1/lunaSuper2.json",
+      "particles/characters/lunaSuper1/lunaSuper3.json"
     ],
-    "soundID":"tournamentImpactWater1"
+    "soundID":"tournamentRockImpact3"
   },
   "onShoot":[
     {
@@ -52,15 +48,21 @@
     {
       "id":"set",
       "name":"transitionParams",
-      "index":"time",
-      "value":500    
+      "index":"y",
+      "copyFrom":"targetY"
     },
     {
       "id":"set",
       "name":"transitionParams",
+      "index":"time",
+      "value":400
+    },
+      {
+      "id":"set",
+      "name":"transitionParams",
       "index":"delay",
-      "value":300
-    }, 
+      "value":600
+    },
     {
       "index":"to",
       "id":"execute",
