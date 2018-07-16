@@ -30,7 +30,7 @@
       "particles/characters/explosionFire1/explosionFire2.json",
       "particles/characters/explosionFire1/explosionFire3.json"
     ],
-    "soundID":"tournamentFireExplosion1"
+    "soundID":"tournamentFireExplosion4"
   },
   "onShoot":[
     {

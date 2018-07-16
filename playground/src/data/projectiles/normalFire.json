@@ -59,7 +59,7 @@
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":200
+      "value":100
     },  
     {
       "index":"to",
