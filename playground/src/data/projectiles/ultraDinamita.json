@@ -70,12 +70,6 @@
       "value":550
     },
     {
-      "id":"set",
-      "name":"transitionParams",
-      "index":"delay",
-      "value":550
-    },
-    {
       "index":"to",
       "id":"execute",
       "variable":"transition",

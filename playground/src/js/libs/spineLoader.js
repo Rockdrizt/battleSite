@@ -39,7 +39,7 @@ var spineLoader = function () {
 			entry.onComplete = onComplete
 		}
 
-		spineSkeleton.setToSetupPose()
+		//spineSkeleton.setToSetupPose()
 		return entry
 	}
 

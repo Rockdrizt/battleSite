@@ -5,6 +5,17 @@ var characterBattle = function () {
 	var currentLoader
 	var game
 
+	function updatePosition() {
+		this.spine.setToSetupPose()
+		this.spine.updateTransform()
+
+		var impactSlot = this.getSlotContainer(this.data.visuals.impactAttachment)
+		this.impactPoint = {
+			x:impactSlot.x + this.x,
+			y:impactSlot.y + this.y
+		}
+	}
+
 	function attack(enemy, type) {
 		var self = this
 
@@ -50,14 +61,11 @@ var characterBattle = function () {
 		var character = spineLoader.createSpine(charName, nameLowerCase + "1", "idle_normal", 0, 0, true)
 		character.x = position.x; character.y = position.y
 		character.data = characterData
-		var impactSlot = character.getSlotByAttachment(characterData.visuals.impactAttachment)
-		character.impactPoint = {
-			x:impactSlot.x + character.x,
-			y:impactSlot.y + character.y
-		}
 
 		character.takeDamage = takeDamage.bind(character)
 		character.attack = attack.bind(character)
+		character.updatePosition = updatePosition.bind(character)
+		character.updatePosition()
 
 		return character
 	}
