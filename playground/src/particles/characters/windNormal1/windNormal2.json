@@ -25,7 +25,7 @@
   "blendFuncDestination" : 772,
   "finishColorAlpha" : 0,
   "sourcePositionVariancex" : 0,
-  "startParticleSize" : 300,
+  "startParticleSize" : 200,
   "sourcePositionVariancey" : 0,
   "startColorRed" : 0,
   "finishColorVarianceRed" : 0.1,
