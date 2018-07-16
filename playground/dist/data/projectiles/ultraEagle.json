@@ -1,38 +1,27 @@
 {
   "timing":{
-    "stop":600,
-    "removal":1700,
-    "hit":600
+    "stop":3000,
+    "removal":5000,
+    "hit":2500
   },
   "particles":[
-    "particles/characters/normalProjectileFire1/normalProjectileFire1.json",
-    "particles/characters/normalProjectileFire1/normalProjectileFire2.json"
+    "particles/characters/windUltra1/windUltra1.json",
+    "particles/characters/windUltra1/windUltra2.json",
+    "particles/characters/windUltra1/windUltra3.json",
+    "particles/characters/windUltra1/windUltra4.json",
+    "particles/characters/windUltra1/windUltra5.json"
   ],
   "spines":[
     {
-      "file":"spines/Dinamita/dinamita_projectiles.json",
+      "file":"spines/Eagle/eagle_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"dinamita1_projectiles",
-      "animations":["in_ultra", "idle_ultra"]
+      "skin":"eagle_projectiles",
+      "animations":["idle_ultra"]
     }
   ],
-  
-    
   "impact":{
-    "spines":[
-      {
-        "file":"spines/Dinamita/dinamita_projectiles.json",
-        "scales":["@0.5x"],
-        "skin":"dinamita1_projectiles",
-        "animations":["out_ultra"]
-      }
-    ],
-    "particles":[
-      "particles/characters/explosionFire1/explosionFire1.json",
-      "particles/characters/explosionFire1/explosionFire2.json",
-      "particles/characters/explosionFire1/explosionFire3.json"
-    ],
-    "soundID":"tournamentFireExplosion4"
+      
+    "soundID":"tournamentIceHit2"
   },
   "onShoot":[
     {
@@ -69,13 +58,14 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":550
+      "value":500
+        
     },
     {
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":550
+      "value":1000
     },
     {
       "index":"to",
