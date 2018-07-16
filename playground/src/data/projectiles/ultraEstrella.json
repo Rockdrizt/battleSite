@@ -10,27 +10,22 @@
   ],
   "spines":[
     {
-      "file":"spines/Dinamita/dinamita_projectiles.json",
+      "file":"spines/Estrella/estrella_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"dinamita1_projectiles",
+      "skin":"estrella_projectiles",
       "animations":["in_ultra", "idle_ultra"]
     }
   ],
   "impact":{
-    "spines":[
-      {
-        "file":"spines/Dinamita/dinamita_projectiles.json",
-        "scales":["@0.5x"],
-        "skin":"dinamita1_projectiles",
-        "animations":["out_ultra"]
-      }
-    ],
     "particles":[
-      "particles/characters/explosionFire1/explosionFire1.json",
-      "particles/characters/explosionFire1/explosionFire2.json",
-      "particles/characters/explosionFire1/explosionFire3.json"
+      "particles/characters/estrellaSuper1/estrellaSuper1.json",
+      "particles/characters/estrellaSuper1/estrellaSuper2.json",
+      "particles/characters/estrellaSuper1/estrellaSuper3.json"
+      "particles/characters/estrellaSuper1/estrellaSuper4.json"
+      "particles/characters/estrellaSuper1/estrellaSuper5.json"
+      "particles/characters/estrellaSuper1/estrellaSuper6.json"
     ],
-    "soundID":"tournamentFireExplosion1"
+    "soundID":"tournamentIceHit2"
   },
   "onShoot":[
     {
@@ -67,12 +62,6 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":550
-    },
-    {
-      "id":"set",
-      "name":"transitionParams",
-      "index":"delay",
       "value":550
     },
     {

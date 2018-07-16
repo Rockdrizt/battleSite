@@ -1,8 +1,8 @@
 {
   "timing":{
-    "stop":490,
+    "stop":800,
     "removal":1700,
-    "hit":490
+    "hit":800
   },
   "particles":[
     "particles/characters/normalAttackWater2/normalAttackWater3.json"
@@ -12,7 +12,7 @@
       "file":"spines/Estrella/estrella_projectiles.json",
       "scales":["@0.5x"],
       "skin":"estrella_projectiles",
-      "animations":["idle_normal"]
+      "animations":["in_normal","idle_normal"]
     }
   ],
   "impact":{
@@ -52,8 +52,15 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":550
+      "value":500
+        
     },
+    {
+      "id":"set",
+      "name":"transitionParams",
+      "index":"delay",
+      "value":300
+    }, 
     {
       "index":"to",
       "id":"execute",

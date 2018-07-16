@@ -4,8 +4,8 @@
 		"normal": [
 		{
 				"id": "normalWater",
-				"attachment": "particle2",
-				"delay": 500,
+				"attachment": "particle4",
+				"delay": 600,
 				"multiplier": 1
 			}
 		],
@@ -46,6 +46,6 @@
 		"shadowScaleX": 0.8,
 		"shadowScaleY": 1.1,
 		"cardFacing": "right",
-		"impactAttachment": "torso1"
+		"impactAttachment": "head"
 	}
 }
