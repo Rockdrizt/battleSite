@@ -194,6 +194,9 @@ var yogoSelector = function(){
         alphaGroup.teamPivot = 0
         alphaGroup.currentSelect = -1
         alphaGroup.auxArray = [-1, -1, -1]
+        alphaGroup.slots = [{x:0, y:0, yogo:null, check: false},
+                            {x:0, y:0, yogo:null, check: false},
+                            {x:0, y:0, yogo:null, check: false}]
         alphaGroup.color = STATES.red
         alphaGroup.side = SIDE.left
         sceneGroup.add(alphaGroup)
@@ -202,6 +205,9 @@ var yogoSelector = function(){
         bravoGroup.teamPivot = 2
         bravoGroup.currentSelect = -1
         bravoGroup.auxArray = [-1, -1, -1]
+        bravoGroup.slots = [{x:0, y:0, yogo:null, check: false},
+                            {x:0, y:0, yogo:null, check: false},
+                            {x:0, y:0, yogo:null, check: false}]
         bravoGroup.color = STATES.blue
         bravoGroup.side = SIDE.rigth
         sceneGroup.add(bravoGroup)
@@ -210,22 +216,18 @@ var yogoSelector = function(){
         
         for(var i = 0; i < 3; i++){
             
-            var player = alphaGroup.create(game.world.centerX * pivotX, game.world.centerY + 50, "atlas.yogoSelector", "star")
-            player.anchor.setTo(0.5)
-            player.check = false
-            player.alpha = 0
-            player.yogo = null
+            alphaGroup.slots[i].x = game.world.centerX * pivotX
+            alphaGroup.slots[i].y = game.world.centerY + 50
+            alphaGroup.slots[i].yogo = null
             
-            player = bravoGroup.create(game.world.centerX * pivotX + game.world.centerX, game.world.centerY + 50, "atlas.yogoSelector", "star")
-            player.anchor.setTo(0.5)
-            player.check = false
-            player.alpha = 0
-            player.yogo = null
+            bravoGroup.slots[i].x = game.world.centerX * pivotX + game.world.centerX
+            bravoGroup.slots[i].y = game.world.centerY + 50
+            bravoGroup.slots[i].yogo = null
             
             pivotX += 0.25
         }
-        alphaGroup.children[1].y += 120
-        bravoGroup.children[1].y += 120
+        alphaGroup.slots[1].y += 120
+        bravoGroup.slots[1].y += 120
     }
     
     function createPullGroup(){
@@ -234,21 +236,21 @@ var yogoSelector = function(){
         sceneGroup.add(pullGroup)
         
         var aux = 0
-        var skinNum = 2
+        var skinNum = 1
 
         for(var i = 0; i < assets.spines.length * 2; i++){
             
-            //var player = characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + "1", "wait")
-            var player = characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + skinNum, "")
+            var player = characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait")
             player.x = 0
             player.y = -100
             player.name = assets.spines[aux].name
             player.tag = aux
             player.used = false
+            player.setAlive(false)
             pullGroup.add(player)
             
             aux = i - aux
-            i % 2 ? skinNum = 2 : skinNum = 1
+            i % 2 ? skinNum = 1 : skinNum = 2
         }
     }
     
@@ -462,7 +464,7 @@ var yogoSelector = function(){
         
         restoreAll()
 
-        var slot = teamGroup.children[teamGroup.teamPivot]
+        var slot = teamGroup.slots[teamGroup.teamPivot]
         
         if(slot.yogo == null){
             
@@ -471,7 +473,9 @@ var yogoSelector = function(){
             var yogo = getYogotar(obj.token.tag)
 
             if(yogo){
-                teamGroup.teamPivot == 1 ? pullGroup.bringToTop(yogo) : pullGroup.sendToBack(yogo)
+                pullGroup.remove(yogo)
+                teamGroup.add(yogo)
+                teamGroup.teamPivot == 1 ? teamGroup.bringToTop(yogo) : teamGroup.sendToBack(yogo)
                 yogo.used = true
                 yogo.x = slot.x
                 yogo.y = slot.y
@@ -482,12 +486,11 @@ var yogoSelector = function(){
             }
         }
         else{
-            if(slot.yogo.tag == 0 || slot.yogo.tag == 2) 
-                slot.yogo.setAnimation(["wait"], false)
-            else
-                slot.yogo.setAnimation(["ready"], false)
             game.add.tween(slot.yogo).to({y: -100}, 200, Phaser.Easing.Cubic.In, true)
+            slot.yogo.setAlive(false)
             slot.yogo.used = false
+            teamGroup.remove(slot.yogo)
+            pullGroup.add(slot.yogo)
             slot.yogo = null
             markYogotar(obj, teamGroup)
         }
@@ -501,10 +504,13 @@ var yogoSelector = function(){
             
             var yogo = pullGroup.children[i]
             if(yogo.tag == tag && !yogo.used){
-                yogo.setAnimation(["wait"], true)
                 yogoNotUsed = yogo
+                break
             }
         }
+        
+        yogoNotUsed.setAlive(true)
+        yogoNotUsed.setAnimation(["wait"], true)
         return yogoNotUsed
     }
     
@@ -513,30 +519,29 @@ var yogoSelector = function(){
         restoreAll()
 
         var index = teamGroup.auxArray.indexOf(obj.token.tag)
-        teamGroup.children[index].check = false
+        teamGroup.slots[index].check = false
         teamGroup.auxArray[index] = -1
         teamGroup.currentSelect = -1
+        
         if(teamGroup == alphaGroup)
             teamGroup.teamPivot = teamGroup.auxArray.indexOf(-1) //index
         else
             teamGroup.teamPivot = teamGroup.auxArray.lastIndexOf(-1) //index
-        teamGroup.forEach(takeOff ,this)
-        sound.play("robotBeep")
-    }
-    
-    function takeOff(obj){
         
-        if(!obj.check){
+        sound.play("robotBeep")
+        
+        for(var i = 0; i < 3; i++){
             
-            game.add.tween(obj.yogo).to({y: -100}, 200, Phaser.Easing.Cubic.In, true).onComplete.add(function(){
-                obj.yogo.used = false
-                if(obj.yogo.tag == 0 || obj.yogo.tag == 2) 
-                    obj.yogo.setAnimation(["wait"], false)
-                else
-                    obj.yogo.setAnimation(["ready"], false)
-                //obj.yogo.setAnimation(["wait"], false)
-                obj.yogo = null
-            })
+            var slot = teamGroup.slots[i]
+            
+            if(!slot.check){
+                game.add.tween(slot.yogo).to({y: -100}, 200, Phaser.Easing.Cubic.In, true)
+                slot.yogo.setAlive(false)
+                slot.yogo.used = false
+                teamGroup.remove(slot.yogo)
+                pullGroup.add(slot.yogo)
+                slot.yogo = null
+            }
         }
     }
     
@@ -605,8 +610,8 @@ var yogoSelector = function(){
             turnOn(buttonsGroup.children[teamGroup.currentSelect])
             
             teamGroup.auxArray[teamGroup.teamPivot] = teamGroup.currentSelect
-            teamGroup.children[teamGroup.teamPivot].check = true
-            teamGroup.children[teamGroup.teamPivot].yogo.setAnimation(["select", "ready"], true)
+            teamGroup.slots[teamGroup.teamPivot].check = true
+            teamGroup.slots[teamGroup.teamPivot].yogo.setAnimation(["select", "ready"], true)
             teamGroup.marker = null
             if(teamGroup == alphaGroup)
                 var aux = teamGroup.auxArray.indexOf(-1) //index
