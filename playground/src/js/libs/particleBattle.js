@@ -11,7 +11,7 @@ var particleBattle = function () {
 		if (!emitter)
 			return
 
-		emitter.x = group.scale.x > 0 ? offsetX : offsetX * -1
+		emitter.x = offsetX//group.scale.x > 0 ? offsetX : offsetX * -1
 		emitter.y = offsetY
 		emitter.scale.x = group.scale.x
 		group.add(emitter)

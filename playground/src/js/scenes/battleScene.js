@@ -197,8 +197,8 @@ var battleScene = function() {
 		var pivotY, pivotX
 		for (var animationIndex = 0; animationIndex < animations.length; animationIndex++) {
 			var animationName = animations[animationIndex].name
-			pivotY = Math.floor(animationIndex / 10)
-			pivotX = animationIndex % 10
+			pivotY = Math.floor(animationIndex / 9)
+			pivotX = animationIndex % 9
 
 			var button = createButton(changeAnimation.bind(null, animationName))
 			button.x = pivotX * 200

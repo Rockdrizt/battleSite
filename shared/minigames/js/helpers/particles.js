@@ -341,10 +341,10 @@ var epicparticles = function(){
 		var g = c.g * 255
 		var b = c.b * 255
 
-		// if(emitter.frameCounter % 4 === 0) {
-		// 	var tint = Phaser.Color.getColor(r, g, b)
-		// 	particle.sprite.tint = tint
-		// }
+		if(emitter.frameCounter % 4 === 0) {
+			var tint = Phaser.Color.getColor(r, g, b)
+			particle.sprite.tint = tint
+		}
 
 		//particle.sprite.blendMode = PIXI.blendModes.MULTIPLY;
 
