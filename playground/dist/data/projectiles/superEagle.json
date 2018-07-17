@@ -53,12 +53,7 @@
       "index":"x",
       "copyFrom":"targetX"
     },
-    {
-      "id":"set",
-      "name":"transitionParams",
-      "index":"y",
-      "copyFrom":"targetY"
-    },
+   
     {
       "id":"set",
       "name":"transitionParams",

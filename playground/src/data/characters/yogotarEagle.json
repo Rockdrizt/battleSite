@@ -22,19 +22,19 @@
 			{
 				"id": "ultraEagle",
 				"attachment": "particle15",
-				"delay": 2000,
-				"multiplier": 1
-			},
-            {
-				"id": "ultraEagle",
-				"attachment": "particle15",
-				"delay": 2500,
-				"multiplier": 1
-			},
-            {
-				"id": "ultraEagle",
-				"attachment": "particle15",
 				"delay": 3000,
+				"multiplier": 1
+			},
+            {
+				"id": "ultraEagle",
+				"attachment": "particle15",
+				"delay": 3500,
+				"multiplier": 1
+			},
+            {
+				"id": "ultraEagle",
+				"attachment": "particle15",
+				"delay": 4000,
 				"multiplier": 1
 			}
 		]

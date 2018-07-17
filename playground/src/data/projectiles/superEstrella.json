@@ -51,7 +51,13 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":550
+      "value":400
+    },
+    {
+      "id":"set",
+      "name":"transitionParams",
+      "index":"delay",
+      "value":100
     },
     {
       "index":"to",

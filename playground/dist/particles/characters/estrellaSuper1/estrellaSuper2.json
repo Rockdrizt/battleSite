@@ -6,7 +6,7 @@
   "radialAcceleration" : 0,
   "yCoordFlipped" : -1,
   "emitterType" : 0,
-  "blendFuncSource" : 770,
+  "blendFuncSource" : 1,
   "finishColorVarianceAlpha" : 0,
   "rotationEnd" : 0,
   "startColorVarianceBlue" : 0,

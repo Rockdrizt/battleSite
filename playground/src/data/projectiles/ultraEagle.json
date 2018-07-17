@@ -1,8 +1,8 @@
 {
   "timing":{
-    "stop":3000,
+    "stop":900,
     "removal":5000,
-    "hit":2500
+    "hit":900
   },
   "particles":[
     "particles/characters/windUltra1/windUltra1.json",
@@ -16,7 +16,7 @@
       "file":"spines/Eagle/eagle_projectiles.json",
       "scales":["@0.5x"],
       "skin":"eagle_projectiles",
-      "animations":["idle_ultra"]
+      "animations":["idle_ultra","idle_ultra","idle_ultra"]
     }
   ],
   "impact":{
@@ -51,21 +51,14 @@
     {
       "id":"set",
       "name":"transitionParams",
-      "index":"y",
-      "copyFrom":"targetY"
-    },
-    {
-      "id":"set",
-      "name":"transitionParams",
       "index":"time",
-      "value":500
-        
+      "value":550 
     },
     {
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":1000
+      "value":150
     },
     {
       "index":"to",

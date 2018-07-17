@@ -1,20 +1,28 @@
 {
   "timing":{
-    "stop":600,
-    "removal":1700,
-    "hit":600
+    "stop":1800,
+    "removal":3700,
+    "hit":1800
   },
-    "particles":[
-    "particles/characters/normalAttackWater5/normalAttackWater9.json",
-    "particles/characters/normalAttackWater5/normalAttackWater10.json"
+  "spines":[
+    {
+      "file":"spines/Luna/luna_projectiles.json",
+      "scales":["@0.5x"],
+      "skin":"luna_projectiles",
+      "animations":["in_ultra","idle_ultra","out_ultra"]
+    }
   ],
+  
+    
   "impact":{
     "particles":[
-      "particles/characters/impactWater1/impactWater1.json",
-      "particles/characters/impactWater1/impactWater2.json",
-      "particles/characters/impactWater1/impactWater3.json"
+      "particles/characters/lunaUltra1/lunaUltra1.json",
+      "particles/characters/lunaUltra1/lunaUltra2.json",
+      "particles/characters/lunaUltra1/lunaUltra3.json",
+      "particles/characters/lunaUltra1/lunaUltra4.json",
+      "particles/characters/lunaUltra1/lunaUltra5.json"
     ],
-    "soundID":"tournamentImpactWater1"
+    "soundID":"tournamentFireExplosion4"
   },
   "onShoot":[
     {
@@ -44,20 +52,14 @@
     {
       "id":"set",
       "name":"transitionParams",
-      "index":"y",
-      "copyFrom":"targetY"
-    },
-    {
-      "id":"set",
-      "name":"transitionParams",
       "index":"time",
-      "value":400
+      "value":1750
     },
     {
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":100
+      "value":500
     },
     {
       "index":"to",

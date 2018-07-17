@@ -1,8 +1,8 @@
 {
   "timing":{
-    "stop":1000,
-    "removal":1700,
-    "hit":1000
+    "stop":1500,
+    "removal":2700,
+    "hit":1500
   },
   "spines":[
     {
@@ -61,7 +61,7 @@
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":600
+      "value":1000
     },
     {
       "index":"to",
