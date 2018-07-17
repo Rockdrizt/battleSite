@@ -172,13 +172,6 @@ normal1/flame_6
   orig: 205, 243
   offset: 0, 0
   index: -1
-normal1/grieta_fuego
-  rotate: true
-  xy: 1998, 1739
-  size: 307, 48
-  orig: 307, 48
-  offset: 0, 0
-  index: -1
 
 estrella_projectiles2.png
 size: 2048,2048

@@ -58,6 +58,6 @@
 		"shadowScaleX": 0.8,
 		"shadowScaleY": 1.1,
 		"cardFacing": "right",
-		"impactAttachment": "head"
+		"impactAttachment": "torso1"
 	}
 }

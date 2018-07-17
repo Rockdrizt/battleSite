@@ -5,7 +5,8 @@
     "hit":800
   },
   "particles":[
-    "particles/characters/normalAttackWater2/normalAttackWater3.json"
+    "particles/characters/normalAttackWater2/normalAttackWater3.json",
+    "particles/characters/normalAttackWater2/normalAttackWater4.json"
   ],
   "spines":[
     {
