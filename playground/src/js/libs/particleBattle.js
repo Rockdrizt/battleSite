@@ -14,9 +14,10 @@ var particleBattle = function () {
 		emitter.x = offsetX//group.scale.x > 0 ? offsetX : offsetX * -1
 		emitter.y = offsetY
 		emitter.scale.x = group.scale.x
-		group.add(emitter)
 		if (zindex === "back")
-			group.sendToBack(emitter)
+			group.add(emitter, false, 0)
+		else
+			group.add(emitter)
 
 		particles[particleName] = emitter
 	}

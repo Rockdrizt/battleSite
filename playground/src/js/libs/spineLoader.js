@@ -22,6 +22,10 @@ var spineLoader = function () {
 	function setAnimation(animations, loop, onComplete, args) {
 		var spineSkeleton = this
 		var entry
+
+		spineSkeleton.setToSetupPose()
+		spineSkeleton.updateTransform()
+
 		for (var index = 0; index < animations.length; index++) {
 			var animation = animations[index]
 			var isLoop = (index === animations.length - 1) && loop
@@ -39,7 +43,6 @@ var spineLoader = function () {
 			entry.onComplete = onComplete
 		}
 
-		//spineSkeleton.setToSetupPose()
 		return entry
 	}
 
