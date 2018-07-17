@@ -16,6 +16,8 @@
       "animations":["in_ultra", "idle_ultra"]
     }
   ],
+  
+    
   "impact":{
     "spines":[
       {

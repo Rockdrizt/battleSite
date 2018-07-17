@@ -1,28 +1,27 @@
 {
   "timing":{
-    "stop":800,
-    "removal":1700,
-    "hit":800
+    "stop":3000,
+    "removal":5000,
+    "hit":2500
   },
   "particles":[
-    "particles/characters/normalAttackWater2/normalAttackWater3.json"
+    "particles/characters/windUltra1/windUltra1.json",
+    "particles/characters/windUltra1/windUltra2.json",
+    "particles/characters/windUltra1/windUltra3.json",
+    "particles/characters/windUltra1/windUltra4.json",
+    "particles/characters/windUltra1/windUltra5.json"
   ],
   "spines":[
     {
-      "file":"spines/Estrella/estrella_projectiles.json",
+      "file":"spines/Eagle/eagle_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"estrella_projectiles",
-      "animations":["in_normal","idle_normal"]
+      "skin":"eagle_projectiles",
+      "animations":["idle_ultra"]
     }
   ],
   "impact":{
-    "particles":[
-      "particles/characters/impactWater6/impactWater15.json",
-      "particles/characters/impactWater6/impactWater16.json",
-      "particles/characters/impactWater6/impactWater17.json",
-      "particles/characters/impactWater6/impactWater18.json"
-    ],
-    "soundID":"tournamentImpactWater1"
+      
+    "soundID":"tournamentIceHit2"
   },
   "onShoot":[
     {
@@ -52,15 +51,22 @@
     {
       "id":"set",
       "name":"transitionParams",
+      "index":"y",
+      "copyFrom":"targetY"
+    },
+    {
+      "id":"set",
+      "name":"transitionParams",
       "index":"time",
-      "value":500    
+      "value":500
+        
     },
     {
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":300
-    }, 
+      "value":1000
+    },
     {
       "index":"to",
       "id":"execute",

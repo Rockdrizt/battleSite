@@ -4,35 +4,29 @@
     "removal":1700,
     "hit":600
   },
-  "particles":[
-    "particles/characters/normalProjectileFire1/normalProjectileFire1.json",
-    "particles/characters/normalProjectileFire1/normalProjectileFire2.json"
+    "particles":[
+    "particles/characters/windSuper1/windSuper1.json",
+    "particles/characters/windSuper1/windSuper2.json",
+    "particles/characters/windSuper1/windSuper3.json",
+    "particles/characters/windSuper1/windSuper4.json",
+    "particles/characters/windSuper1/windSuper5.json",
+    "particles/characters/windSuper1/windSuper6.json"
   ],
-  "spines":[
+     "spines":[
     {
-      "file":"spines/Dinamita/dinamita_projectiles.json",
+      "file":"spines/Eagle/eagle_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"dinamita1_projectiles",
-      "animations":["in_ultra", "idle_ultra"]
+      "skin":"eagle_projectiles",
+      "animations":["in_super", "idle_super", "out_super"]
     }
   ],
-  
-    
   "impact":{
-    "spines":[
-      {
-        "file":"spines/Dinamita/dinamita_projectiles.json",
-        "scales":["@0.5x"],
-        "skin":"dinamita1_projectiles",
-        "animations":["out_ultra"]
-      }
-    ],
     "particles":[
-      "particles/characters/explosionFire1/explosionFire1.json",
-      "particles/characters/explosionFire1/explosionFire2.json",
-      "particles/characters/explosionFire1/explosionFire3.json"
+      "particles/characters/impactWind6/impactWind18.json",
+      "particles/characters/impactWind6/impactWind19.json",
+      "particles/characters/impactWind6/impactWind20.json"
     ],
-    "soundID":"tournamentFireExplosion4"
+    "soundID":"tournamentWindImpact1"
   },
   "onShoot":[
     {

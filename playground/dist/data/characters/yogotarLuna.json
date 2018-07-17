@@ -1,9 +1,30 @@
 {
 	"category":"yogotar",
-	"attacks": {
+    "attacks": {
 		"normal": [
+			{
+				"id": "normalEarth",
+				"attachment": "particle12",
+				"delay": 500,
+				"multiplier": 1
+			}
 		],
-		"special": [
+		"super": [
+            {
+				"id": "superLuna",
+				"attachment": "particle13",
+				"delay": 600,
+				"multiplier": 1
+			}
+
+		],
+		"ultra":[
+			{
+				"id": "ultraDinamita",
+				"attachment": "particle8",
+				"delay": 1200,
+				"multiplier": 1
+			}
 		]
 	},
 	"directory": "spines/Luna/luna.json",

@@ -53,8 +53,7 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":500
-        
+      "value":500    
     },
     {
       "id":"set",
