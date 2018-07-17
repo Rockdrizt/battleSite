@@ -12,7 +12,7 @@
 		"super": [
             {
 				"id": "superEagle",
-				"attachment": "particle14",
+				"attachment": "particle7",
 				"delay": 800,
 				"multiplier": 1
 			}
