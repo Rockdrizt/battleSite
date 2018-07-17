@@ -132,7 +132,6 @@ var yogoSelector = function(){
     var pullGroup
     var alphaGroup
     var bravoGroup
-    var marker
     
     var chosenOne
     var tile
@@ -235,20 +234,21 @@ var yogoSelector = function(){
         sceneGroup.add(pullGroup)
         
         var aux = 0
+        var skinNum = 2
 
         for(var i = 0; i < assets.spines.length * 2; i++){
             
-            if(i > 0 && i % 2 == 0)
-                aux++
-            
             //var player = characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + "1", "wait")
-            var player = characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + "1", "")
+            var player = characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + skinNum, "")
             player.x = 0
             player.y = -100
             player.name = assets.spines[aux].name
             player.tag = aux
             player.used = false
             pullGroup.add(player)
+            
+            aux = i - aux
+            i % 2 ? skinNum = 2 : skinNum = 1
         }
     }
     
@@ -345,18 +345,18 @@ var yogoSelector = function(){
             
             var teamGroup
             team === 1 ? teamGroup = alphaGroup : teamGroup = bravoGroup
+            teamGroup.marker = btn.parent
             
             if(btn.parent.color === STATES.yellow){
                 if(teamGroup.teamPivot < 3){
                     
-                    teamGroup.marker = btn.parent
                     markYogotar(btn.parent, teamGroup)
                     
                     if(alphaGroup.marker == bravoGroup.marker){
-                        animateButton(btn.parent, STATES.bicolor, true)
+                        animateButton(btn.parent, STATES.bicolor)
                     }
                     else{
-                        animateButton(btn.parent, team, true)
+                        animateButton(btn.parent, team)
                         team === 1 ? changeColor(bravoGroup.marker, bravoGroup.color) : changeColor(alphaGroup.marker, alphaGroup.color)
                     }
                 }
@@ -365,18 +365,19 @@ var yogoSelector = function(){
                 }
             }
             else{
-                
+        
                 switch(btn.parent.color){
                         
                     case STATES.red:
                         if(team === STATES.red){
-                            animateButton(btn.parent, STATES.yellow, false)
+                            turnOff(btn.parent, STATES.yellow)
+                            animateButton(btn.parent, STATES.yellow)
                             removeCharacter(btn.parent, alphaGroup)
                         }
                         else{
                             if(bravoGroup.teamPivot < 3){
                                 markYogotar(btn.parent, bravoGroup)
-                                animateButton(btn.parent, STATES.bicolor, true)
+                                animateButton(btn.parent, STATES.bicolor)
                             }
                             else{
                                 btn.canClick = true
@@ -386,13 +387,14 @@ var yogoSelector = function(){
                     
                     case STATES.blue:
                         if(team === STATES.blue){
-                            animateButton(btn.parent, STATES.yellow, false)
+                            turnOff(btn.parent, STATES.yellow)
+                            animateButton(btn.parent, STATES.yellow)
                             removeCharacter(btn.parent, bravoGroup)
                         }
                         else{
                             if(alphaGroup.teamPivot < 3){
                                 markYogotar(btn.parent, alphaGroup)
-                                animateButton(btn.parent, STATES.bicolor, true)
+                                animateButton(btn.parent, STATES.bicolor)
                             }
                             else{
                                 btn.canClick = true
@@ -401,24 +403,24 @@ var yogoSelector = function(){
                     break
                     
                     case STATES.bicolor:
+                    
                         if(team === STATES.red){
                             btn.parent.color = STATES.blue
-                            animateButton(btn.parent, STATES.blue, true)
+                            animateButton(btn.parent, STATES.blue)
                             removeCharacter(btn.parent, alphaGroup)
                         }
                         else{
                             btn.parent.color = STATES.red
-                            animateButton(btn.parent, STATES.red, true)
+                            animateButton(btn.parent, STATES.red)
                             removeCharacter(btn.parent, bravoGroup)
                         }
                     break
                 }
             }
         }
-        //getReady()
     }
     
-    function animateButton(obj, color, turnOn){
+    function animateButton(obj, color){
         
         obj.token.loadTexture("atlas.yogoSelector", "token" + color)
         game.add.tween(obj.token.scale).to({x: 1.2, y:1.2}, 100, Phaser.Easing.linear, true, 0, 0, true).onComplete.add(function(){
@@ -426,7 +428,11 @@ var yogoSelector = function(){
         })
         game.add.tween(obj.yogotar.scale).to({x: 1.2, y:1.2}, 100, Phaser.Easing.linear, true, 0, 0, true)
         
-        if(turnOn){
+        if(obj.light.alpha == 1){
+            obj.light.loadTexture("atlas.yogoSelector", "light" + obj.color)
+        }
+        
+        /*if(turnOn){
             obj.light.loadTexture("atlas.yogoSelector", "light" + color)
             obj.light.alpha = 1
             game.add.tween(obj.light.scale).from({y:0}, 150, Phaser.Easing.linear, true)
@@ -434,7 +440,12 @@ var yogoSelector = function(){
         else{
             obj.light.alpha = 0
             obj.color = color
-        }
+        }*/
+    }
+    
+    function turnOff(obj, color){
+        obj.light.alpha = 0
+        obj.color = color
     }
     
     function changeColor(obj, color){
@@ -460,6 +471,7 @@ var yogoSelector = function(){
             var yogo = getYogotar(obj.token.tag)
 
             if(yogo){
+                teamGroup.teamPivot == 1 ? pullGroup.bringToTop(yogo) : pullGroup.sendToBack(yogo)
                 yogo.used = true
                 yogo.x = slot.x
                 yogo.y = slot.y
@@ -470,12 +482,12 @@ var yogoSelector = function(){
             }
         }
         else{
-            slot.yogo.used = false
             if(slot.yogo.tag == 0 || slot.yogo.tag == 2) 
                 slot.yogo.setAnimation(["wait"], false)
             else
                 slot.yogo.setAnimation(["ready"], false)
             game.add.tween(slot.yogo).to({y: -100}, 200, Phaser.Easing.Cubic.In, true)
+            slot.yogo.used = false
             slot.yogo = null
             markYogotar(obj, teamGroup)
         }
@@ -483,25 +495,17 @@ var yogoSelector = function(){
     
     function getYogotar(tag){
         
-        var list = []
+        var yogoNotUsed
         
         for(var i = 0; i < pullGroup.length; i++){
             
             var yogo = pullGroup.children[i]
-            if(yogo.tag == tag){
-                list.push(yogo)
+            if(yogo.tag == tag && !yogo.used){
+                yogo.setAnimation(["wait"], true)
+                yogoNotUsed = yogo
             }
         }
-        
-        for(var j = 0; j < list.length; j++){
-            
-            if(!list[j].used){
-                list[j].setAnimation(["wait"], true)
-                list[j].setSkinByName(list[j].name + (j+1))
-                pullGroup.bringToTop(list[j])
-                return list[j]
-            }
-        }
+        return yogoNotUsed
     }
     
     function removeCharacter(obj, teamGroup){
@@ -526,10 +530,10 @@ var yogoSelector = function(){
             
             game.add.tween(obj.yogo).to({y: -100}, 200, Phaser.Easing.Cubic.In, true).onComplete.add(function(){
                 obj.yogo.used = false
-                if(slot.yogo.tag == 0 || slot.yogo.tag == 2) 
-                    slot.yogo.setAnimation(["wait"], false)
+                if(obj.yogo.tag == 0 || obj.yogo.tag == 2) 
+                    obj.yogo.setAnimation(["wait"], false)
                 else
-                    slot.yogo.setAnimation(["ready"], false)
+                    obj.yogo.setAnimation(["ready"], false)
                 //obj.yogo.setAnimation(["wait"], false)
                 obj.yogo = null
             })
@@ -598,9 +602,12 @@ var yogoSelector = function(){
             game.add.tween(btn.scale).to({x: 0.5, y:0.5}, 100, Phaser.Easing.linear, true, 0, 0, true)
 
             buttonsGroup.children[teamGroup.currentSelect].color += teamGroup.color
+            turnOn(buttonsGroup.children[teamGroup.currentSelect])
+            
             teamGroup.auxArray[teamGroup.teamPivot] = teamGroup.currentSelect
             teamGroup.children[teamGroup.teamPivot].check = true
             teamGroup.children[teamGroup.teamPivot].yogo.setAnimation(["select", "ready"], true)
+            teamGroup.marker = null
             if(teamGroup == alphaGroup)
                 var aux = teamGroup.auxArray.indexOf(-1) //index
             else
@@ -613,6 +620,13 @@ var yogoSelector = function(){
                 game.time.events.add(2000, getReady)
             }
         }            
+    }
+    
+    function turnOn(btn){
+        
+        btn.light.loadTexture("atlas.yogoSelector", "light" + btn.color)
+        btn.light.alpha = 1
+        game.add.tween(btn.light.scale).from({y:0}, 150, Phaser.Easing.linear, true)
     }
     
     function animateSelector(){
@@ -651,9 +665,8 @@ var yogoSelector = function(){
             
             game.time.events.add(delay, function(){
                 buttonsGroup.setAll("token.canClick", true)
-                //getReady()
-                pressBtn(alphaGroup.marker.token, 1)
-                pressBtn(bravoGroup.marker.token, 2)
+                pressBtn(alphaGroup.marker.token, STATES.red)
+                pressBtn(bravoGroup.marker.token, STATES.blue)
             })
         })
     }    
@@ -784,6 +797,7 @@ var yogoSelector = function(){
                 aux = 1
         }
         
+        pullGroup.destroy()
         landing.onComplete.add(function(){
             game.add.tween(readyGroup.ready).to({alpha:0}, 300, Phaser.Easing.Cubic.Out, true)
             VS.alpha = 1 
