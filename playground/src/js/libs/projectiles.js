@@ -12,7 +12,7 @@ var epicProjectiles = function(){
 		if(projectile.particles) {
 			for (var particleIndex = 0; particleIndex < projectile.particles.length; particleIndex++) {
 				var particle = projectile.particles[particleIndex]
-				particle.remove()
+				particle.stop()
 			}
 		}
 
@@ -30,20 +30,6 @@ var epicProjectiles = function(){
 
 		var impactData = projectile.data.impact
 		if (impactData) {
-
-			var x = enemy.impactPoint.x
-			var y = enemy.impactPoint.y
-			if (impactData.forcePosition) {
-				if (impactData.forcePosition.x) {
-					x = impactData.forcePosition.x
-					y = impactData.forcePosition.y
-				}
-				else if (impactData.forcePosition.offsetX) {
-					//TODO mirroring x because direction facing
-					x = enemy.x + impactData.forcePosition.offsetX
-					y = enemy.y + impactData.forcePosition.offsetY
-				}
-			}
 
 			if (impactData.particles) {
 				var particleGroup = game.add.group()
@@ -97,6 +83,61 @@ var epicProjectiles = function(){
 
 	function setTarget(enemy) {
 		var self = this
+		var impactData = self.data.impact
+
+		if((impactData)&&(impactData.forcePosition)){
+			var x = enemy.impactPoint.x
+			var y = enemy.impactPoint.y
+			if (impactData.forcePosition.x) {
+				x = impactData.forcePosition.x
+				y = impactData.forcePosition.y
+			}
+			else if (impactData.forcePosition.offsetX) {
+				//TODO mirroring x because direction facing
+				x = enemy.x + impactData.forcePosition.offsetX
+				y = enemy.y + impactData.forcePosition.offsetY
+			}
+
+			enemy.impactPoint.x = x
+			enemy.impactPoint.y = y
+		}
+
+		if(self.data.spines){
+			var spines = self.data.spines
+			self.spines = []
+
+			for(var spineIndex = 0; spineIndex < spines.length; spineIndex++){
+				var spineData = spines[spineIndex]
+				var file = spineData.file
+				var spineSkeleton = file.substr(file.lastIndexOf('/') + 1);
+				var index = spineSkeleton.indexOf(".");
+
+				spineSkeleton = spineSkeleton.substring(0, index)
+				var spineGroup = spineLoader.createSpine(spineSkeleton, spineData.skin, "idle")
+				spineGroup.data = spineData
+
+				var onShootAnimations = spineData.animations
+				spineGroup.setAnimation(onShootAnimations, false)
+
+				self.add(spineGroup)
+				self.spines.push(spineGroup)
+			}
+		}
+
+		if(self.data.particles){
+			var particles = self.data.particles
+			self.particles = []
+
+			for(var particleIndex = 0; particleIndex < particles.length; particleIndex++){
+				var particleFile = particles[particleIndex]
+				var particleName = particleFile.substr(particleFile.lastIndexOf('/') + 1);
+				var index = particleName.indexOf(".");
+				particleName = particleName.substring(0, index)
+
+				var emitter = epicparticles.newEmitter(particleName, {group:self})
+				self.particles.push(emitter)
+			}
+		}
 
 		game.time.events.add(self.data.timing.removal, removeProjectile, self)
 		game.time.events.add(self.data.timing.stop, stopProjectile, self)
@@ -139,7 +180,7 @@ var epicProjectiles = function(){
 						particleGroup.x = data.x || 0
 
 					stage.add(particleGroup)
-				}, self, stageData)
+				}, stageData)
 			}
 		}
 
@@ -247,45 +288,6 @@ var epicProjectiles = function(){
 	return{
 		new:function (projectileData, options) {
 			var projectile = game.add.group()
-
-			if(projectileData.spines){
-				var spines = projectileData.spines
-				projectile.spines = []
-
-				for(var spineIndex = 0; spineIndex < spines.length; spineIndex++){
-					var spineData = spines[spineIndex]
-					var file = spineData.file
-					var spineSkeleton = file.substr(file.lastIndexOf('/') + 1);
-					var index = spineSkeleton.indexOf(".");
-
-					spineSkeleton = spineSkeleton.substring(0, index)
-					var spineGroup = spineLoader.createSpine(spineSkeleton, spineData.skin, "idle")
-					spineGroup.data = spineData
-
-					var onShootAnimations = spineData.animations
-					spineGroup.setAnimation(onShootAnimations, false)
-
-					projectile.add(spineGroup)
-					projectile.spines.push(spineGroup)
-				}
-			}
-
-			if(projectileData.particles){
-				var particles = projectileData.particles
-				projectile.particles = []
-
-				for(var particleIndex = 0; particleIndex < particles.length; particleIndex++){
-					var particleFile = particles[particleIndex]
-					var particleName = particleFile.substr(particleFile.lastIndexOf('/') + 1);
-					var index = particleName.indexOf(".");
-					particleName = particleName.substring(0, index)
-
-					var emitter = epicparticles.newEmitter(particleName)
-					projectile.add(emitter)
-
-					projectile.particles.push(emitter)
-				}
-			}
 
 			projectile.data = projectileData
 			projectile.setTarget = setTarget.bind(projectile)
