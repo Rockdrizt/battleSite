@@ -1,8 +1,8 @@
 {
   "timing":{
-    "stop":600,
-    "removal":1700,
-    "hit":600
+    "stop":1200,
+    "removal":2500,
+    "hit":1200
   },
   "spines":[
     {
@@ -14,11 +14,11 @@
   ],
   "impact":{
     "particles":[
-      "particles/characters/explosionFire1/explosionFire1.json",
-      "particles/characters/explosionFire1/explosionFire2.json",
-      "particles/characters/explosionFire1/explosionFire3.json"
+      "particles/characters/impactEarth3/impactEarth8.json",
+      "particles/characters/impactEarth3/impactEarth9.json",
+      "particles/characters/impactEarth3/impactEarth10.json"
     ],
-    "soundID":"tournamentFireExplosion1"
+    "soundID":"tournamentRockThrow1"
   },
   "onShoot":[
     {
@@ -48,14 +48,14 @@
     {
       "id":"set",
       "name":"transitionParams",
-      "index":"y",
-      "copyFrom":"targetY"
+      "index":"time",
+      "value":1000
     },
     {
       "id":"set",
       "name":"transitionParams",
-      "index":"time",
-      "value":550
+      "index":"delay",
+      "value":0
     },
     {
       "index":"to",

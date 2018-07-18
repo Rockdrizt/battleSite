@@ -5,24 +5,23 @@
 			{
 				"id": "normalEarth",
 				"attachment": "particle4",
-				"delay":0,
+				"delay":    0,
 				"multiplier": 1
 			}
 		],
 		"super": [
             {
-				"id": "superEagle",
+				"id": "superArthurius",
 				"attachment": "particle7",
-				"delay": 800,
+				"delay": 1000,
 				"multiplier": 1
 			}
-
 		],
 		"ultra":[
 			{
-				"id": "ultraEagle",
-				"attachment": "particle15",
-				"delay": 2000,
+				"id": "ultraArthurius",
+				"attachment": "particle12",
+				"delay": 1000,
 				"multiplier": 1
 			}
 		]
