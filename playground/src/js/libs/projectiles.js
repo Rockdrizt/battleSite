@@ -3,6 +3,13 @@ var epicProjectiles = function(){
 
 	function removeProjectile() {
 		var projectile = this
+		if(projectile.particles) {
+			for (var particleIndex = 0; particleIndex < projectile.particles.length; particleIndex++) {
+				var particle = projectile.particles[particleIndex]
+				particle.remove()
+			}
+		}
+
 		projectile.destroy()
 	}
 
@@ -92,17 +99,19 @@ var epicProjectiles = function(){
 		if((impactData)&&(impactData.forcePosition)){
 			var x = enemy.impactPoint.x
 			var y = enemy.impactPoint.y
+
 			if (impactData.forcePosition.x) {
 				x = impactData.forcePosition.x
 				y = impactData.forcePosition.y
 			}
 			else if (impactData.forcePosition.offsetX) {
-				//TODO mirroring x because direction facing
-				x = enemy.x + impactData.forcePosition.offsetX
-				y = enemy.y + impactData.forcePosition.offsetY
+				x = enemy.x + impactData.forcePosition.offsetX * self.scale.x
+				y = enemy.y + impactData.forcePosition.offsetY * self.scale.y
 			}
 			else if(impactData.forcePosition.attachment){
-
+				var slot = enemy.getSlotByAttachment(impactData.forcePosition.attachment)
+				x = enemy.x + slot.x * self.scale.x
+				y = enemy.y + slot.y * self.scale.y
 			}
 
 			enemy.prevPoint = {
@@ -157,7 +166,9 @@ var epicProjectiles = function(){
 		var params = {
 			enemy: enemy
 		}
-		game.time.events.add(self.data.timing.hit, hitEnemy, self, params)
+
+		if(self.hit)
+			game.time.events.add(self.data.timing.hit, hitEnemy, self, params)
 
 		if(self.data.onShoot)
 			scripts.run(self.data.onShoot, {self:self, target:enemy})
@@ -304,6 +315,7 @@ var epicProjectiles = function(){
 			projectile.setTarget = setTarget.bind(projectile)
 			projectile.element = options.element
 			projectile.type = options.type
+			projectile.hit = options.hit
 
 			return projectile
 		},

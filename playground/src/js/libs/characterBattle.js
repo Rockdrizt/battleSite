@@ -11,8 +11,8 @@ var characterBattle = function () {
 
 		var impactSlot = this.getSlotContainer(this.data.visuals.impactAttachment)
 		this.impactPoint = {
-			x:impactSlot.x + this.x,
-			y:impactSlot.y + this.y
+			x:impactSlot.x + this.x * this.scale.x,
+			y:impactSlot.y + this.y * this.scale.y
 		}
 	}
 
@@ -34,22 +34,23 @@ var characterBattle = function () {
 		for(var projectileIndex = 0; projectileIndex < attacks.length; projectileIndex++){
 			var projectileInfo = attacks[projectileIndex]
 
-			game.time.events.add(projectileInfo.delay, function () {
-				var projectileData = game.cache.getJSON(projectileInfo.id + "Data")
+			game.time.events.add(projectileInfo.delay, function (info) {
+				var projectileData = game.cache.getJSON(info.id + "Data")
 
 				var options = {
 					element:element,
-					type:type
+					type:type,
+					hit: typeof info.hit === "undefined" ? true : info.hit
 				}
 				var projectile = epicProjectiles.new(projectileData, options)
-				var slot = self.getSlotByAttachment(projectileInfo.attachment)
+				var slot = self.getSlotByAttachment(info.attachment)
 				projectile.x = self.x + slot.x * self.scale.x
 				projectile.y = self.y + slot.y * self.scale.y
 				projectile.scale.x *= self.scale.x
 				self.parent.add(projectile)
 
 				projectile.setTarget(enemy)
-			})
+			}, null, projectileInfo)
 		}
 
 	}

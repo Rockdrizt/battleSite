@@ -379,7 +379,7 @@ var epicparticles = function(){
 
 			if(emitter.follow){
 				emitter.sourcePosition.x = emitter.follow.x - emitter.x
-				emitter.sourcePosition.y = emitter.y - emitter.follow.y
+				emitter.sourcePosition.y = emitter.follow.y - emitter.y
 			}
 			console.log("source", emitter.sourcePosition)
 
