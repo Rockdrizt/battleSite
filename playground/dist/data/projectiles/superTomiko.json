@@ -1,8 +1,8 @@
 {
   "timing":{
-    "stop":1500,
-    "removal":2700,
-    "hit":1500
+    "stop":500,
+    "removal":1700,
+    "hit":500
   },
      "particles":[
       "particles/characters/windUltra1/windUltra1.json",
@@ -21,11 +21,10 @@
   ],
   "impact":{
     "particles":[
-      "particles/characters/lunaSuper1/lunaSuper1.json",
-      "particles/characters/lunaSuper1/lunaSuper2.json",
-      "particles/characters/lunaSuper1/lunaSuper3.json"
+      "particles/characters/impactWind5/impactWind16.json",
+      "particles/characters/impactWind5/impactWind17.json"
     ],
-    "soundID":"tournamentWindProjectile2"
+    "soundID":"tournamentImpactWind1"
   },
   "onShoot":[
     {
@@ -55,12 +54,6 @@
     {
       "id":"set",
       "name":"transitionParams",
-      "index":"y",
-      "copyFrom":"targetY"
-    },
-    {
-      "id":"set",
-      "name":"transitionParams",
       "index":"time",
       "value":400
     },
@@ -68,7 +61,7 @@
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":600
+      "value":200
     },
     {
       "index":"to",

@@ -16,12 +16,12 @@
       "file":"spines/Eagle/eagle_projectiles.json",
       "scales":["@0.5x"],
       "skin":"eagle_projectiles",
-      "animations":["idle_ultra","idle_ultra","idle_ultra"]
+      "animations":["idle_ultra","idle_ultra","idle_ultra","idle_ultra"]
     }
   ],
   "impact":{
       
-    "soundID":"tournamentIceHit2"
+    "soundID":"tournamentWindImpact1"
   },
   "onShoot":[
     {

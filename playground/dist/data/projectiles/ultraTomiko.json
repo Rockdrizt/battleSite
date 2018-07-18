@@ -1,19 +1,19 @@
 {
   "timing":{
-    "stop":900,
-    "removal":2000,
-    "hit":500
+    "stop":1000,
+    "removal":1900,
+    "hit":1000
   },
   "spines":[
     {
-      "file":"spines/Arthurius/arthurius_projectiles.json",
+      "file":"spines/Tomiko/tomiko_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"arthurius_projectiles",
-      "animations":["in_ultra", "idle_ultra"]
+      "skin":"tomiko_projectiles",
+      "animations":["in_ultra","idle_ultra","out_ultra"]
     }
   ],
   "impact":{
-    "soundID":"tournamentEarthImpact1"
+    "soundID":"tournamentImpactWind1"
   },
   "onShoot":[
     {
@@ -35,30 +35,28 @@
       "index":"y"
     },
     {
-      "id":"operation",
-      "operation":"+",
-      "storeReturn":"targetX",
-      "variable1":"targetX",
-      "value2":500
-    },
-    {
       "id":"set",
       "name":"transitionParams",
       "index":"x",
       "copyFrom":"targetX"
     },
+     {
+      "id":"set",
+      "name":"transitionParams",
+      "index":"y",
+      "copyFrom":"targetY"
+    },  
     {
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":900
-        
+      "value":600
     },
     {
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":0
+      "value":200
     },
     {
       "index":"to",

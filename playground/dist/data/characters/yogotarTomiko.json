@@ -2,8 +2,28 @@
 	"category":"yogotar",
 	"attacks": {
 		"normal": [
+			{
+				"id": "normalWind",
+				"attachment": "particle5",
+				"delay": 700,
+				"multiplier": 1
+			}
 		],
-		"special": [
+		"super": [
+            {
+				"id": "superTomiko",
+				"attachment": "particle7",
+				"delay": 600,
+				"multiplier": 1
+			}
+		],
+		"ultra":[
+			{
+				"id": "ultraTomiko",
+				"attachment": "particle4",
+				"delay": 1100,
+				"multiplier": 1
+			}
 		]
 	},
 	"directory": "spines/Tomiko/tomiko.json",
