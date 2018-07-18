@@ -32,7 +32,7 @@
   "absolutePosition" : false,
   "textureFileName" : "windDamage2.png",
   "startColorVarianceAlpha" : 0,
-  "maxParticles" : 2000,
+  "maxParticles" : 500,
   "finishColorVarianceGreen" : 0,
   "finishParticleSize" : 0,
   "duration" : 2,

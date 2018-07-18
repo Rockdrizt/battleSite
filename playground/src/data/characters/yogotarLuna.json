@@ -20,9 +20,9 @@
 		],
 		"ultra":[
 			{
-				"id": "ultraDinamita",
-				"attachment": "particle8",
-				"delay": 1200,
+				"id": "ultraLuna",
+				"attachment": "particle13",
+				"delay": 600,
 				"multiplier": 1
 			}
 		]

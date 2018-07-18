@@ -1,9 +1,30 @@
 {
 	"category":"yogotar",
-	"attacks": {
+    "attacks": {
 		"normal": [
+			{
+				"id": "normalEarth",
+				"attachment": "particle4",
+				"delay": 500,
+				"multiplier": 1
+			}
 		],
-		"special": [
+		"super": [
+            {
+				"id": "superEagle",
+				"attachment": "particle7",
+				"delay": 800,
+				"multiplier": 1
+			}
+
+		],
+		"ultra":[
+			{
+				"id": "ultraEagle",
+				"attachment": "particle15",
+				"delay": 2000,
+				"multiplier": 1
+			}
 		]
 	},
 	"directory": "spines/Arthurius/arthurius.json",
