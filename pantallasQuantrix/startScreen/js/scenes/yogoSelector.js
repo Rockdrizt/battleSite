@@ -452,11 +452,13 @@ var yogoSelector = function(){
     
     function changeColor(obj, color){
         
-        obj.token.loadTexture("atlas.yogoSelector", "token" + color)
-        if(color !== 0)
-            obj.light.loadTexture("atlas.yogoSelector", "light" + color)
-        else{
-            obj.light.alpha = 0
+        if(obj){
+            obj.token.loadTexture("atlas.yogoSelector", "token" + color)
+            if(color !== 0)
+                obj.light.loadTexture("atlas.yogoSelector", "light" + color)
+            else{
+                obj.light.alpha = 0
+            }
         }
     }
     
@@ -530,11 +532,11 @@ var yogoSelector = function(){
         
         sound.play("robotBeep")
         
-        for(var i = 0; i < 3; i++){
+        for(var i = 0; i < teamGroup.slots.length; i++){
             
             var slot = teamGroup.slots[i]
             
-            if(!slot.check){
+            if(slot.yogo !== null && !slot.check){
                 game.add.tween(slot.yogo).to({y: -100}, 200, Phaser.Easing.Cubic.In, true)
                 slot.yogo.setAlive(false)
                 slot.yogo.used = false
@@ -622,6 +624,8 @@ var yogoSelector = function(){
             
             if(alphaGroup.teamPivot == 3 && bravoGroup.teamPivot == 3){
                 buttonsGroup.setAll("token.canClick", false)
+                alphaGroup.setAll("setAlive", false)
+                bravoGroup.setAll("setAlive", false)
                 game.time.events.add(2000, getReady)
             }
         }            
@@ -676,8 +680,7 @@ var yogoSelector = function(){
         })
     }    
     
-    
-    //···············loading screen···············//
+    //···············ready screen···············//
     
     function createSplashArt(){
     

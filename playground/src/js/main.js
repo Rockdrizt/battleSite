@@ -84,7 +84,7 @@ function startGame(){
 
 		var teams = [
 			["yogotarDinamita", "yogotarEagle", "yogotarLuna"],
-			["yogotarEagle", "yogotarLuna", "yogotarEstrella"],
+			["yogotarEagle", "yogotarTomiko", "yogotarEstrella"],
 		
 		]
 

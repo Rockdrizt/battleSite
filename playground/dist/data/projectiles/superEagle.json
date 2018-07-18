@@ -1,8 +1,8 @@
 {
   "timing":{
-    "stop":600,
+    "stop":900,
     "removal":1700,
-    "hit":600
+    "hit":900
   },
     "particles":[
     "particles/characters/windSuper1/windSuper1.json",
@@ -56,14 +56,8 @@
     {
       "id":"set",
       "name":"transitionParams",
-      "index":"y",
-      "copyFrom":"targetY"
-    },
-    {
-      "id":"set",
-      "name":"transitionParams",
       "index":"time",
-      "value":550
+      "value":850
     },
     {
       "index":"to",
