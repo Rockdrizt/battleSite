@@ -229,6 +229,10 @@ var epicProjectiles = function(){
 			extractSpines(projectileDat.spines)
 		}
 
+		if(projectileDat.impact.spines){
+			extractSpines(projectileDat.spines)
+		}
+
 		if(projectileDat.impact.soundID){
 			extractSound(projectileDat.impact.soundID)
 		}
