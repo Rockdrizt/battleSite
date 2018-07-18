@@ -31,20 +31,6 @@ var epicProjectiles = function(){
 		var impactData = projectile.data.impact
 		if (impactData) {
 
-			var x = enemy.impactPoint.x
-			var y = enemy.impactPoint.y
-			if (impactData.forcePosition) {
-				if (impactData.forcePosition.x) {
-					x = impactData.forcePosition.x
-					y = impactData.forcePosition.y
-				}
-				else if (impactData.forcePosition.offsetX) {
-					//TODO mirroring x because direction facing
-					x = enemy.x + impactData.forcePosition.offsetX
-					y = enemy.y + impactData.forcePosition.offsetY
-				}
-			}
-
 			if (impactData.particles) {
 				var particleGroup = game.add.group()
 				for (var particleIndex = 0; particleIndex < impactData.particles.length; particleIndex++) {
@@ -97,6 +83,24 @@ var epicProjectiles = function(){
 
 	function setTarget(enemy) {
 		var self = this
+		var impactData = self.data.impact
+
+		if((impactData)&&(impactData.forcePosition)){
+			var x = enemy.impactPoint.x
+			var y = enemy.impactPoint.y
+			if (impactData.forcePosition.x) {
+				x = impactData.forcePosition.x
+				y = impactData.forcePosition.y
+			}
+			else if (impactData.forcePosition.offsetX) {
+				//TODO mirroring x because direction facing
+				x = enemy.x + impactData.forcePosition.offsetX
+				y = enemy.y + impactData.forcePosition.offsetY
+			}
+
+			enemy.impactPoint.x = x
+			enemy.impactPoint.y = y
+		}
 
 		if(self.data.spines){
 			var spines = self.data.spines
@@ -176,7 +180,7 @@ var epicProjectiles = function(){
 						particleGroup.x = data.x || 0
 
 					stage.add(particleGroup)
-				}, self, stageData)
+				}, stageData)
 			}
 		}
 

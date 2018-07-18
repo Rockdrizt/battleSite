@@ -2,7 +2,7 @@
   "timing":{
     "stop":900,
     "removal":2000,
-    "hit":900
+    "hit":500
   },
   "spines":[
     {
@@ -33,6 +33,13 @@
       "variable":"impactPoint",
       "name":"targetY",
       "index":"y"
+    },
+    {
+      "id":"operation",
+      "operation":"+",
+      "storeReturn":"targetX",
+      "variable1":"targetX",
+      "value2":500
     },
     {
       "id":"set",
