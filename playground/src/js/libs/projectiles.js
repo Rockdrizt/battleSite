@@ -30,6 +30,8 @@ var epicProjectiles = function(){
 
 		var impactData = projectile.data.impact
 		if (impactData) {
+			var x = enemy.impactPoint.x
+			var y = enemy.impactPoint.y
 
 			if (impactData.particles) {
 				var particleGroup = game.add.group()
@@ -78,6 +80,8 @@ var epicProjectiles = function(){
 				sound.play(impactData.soundID)
 		}
 
+		if(enemy.prevPoint)
+			enemy.impactPoint = enemy.prevPoint
 		enemy.takeDamage(projectile.type, projectile.element)
 	}
 
@@ -97,7 +101,14 @@ var epicProjectiles = function(){
 				x = enemy.x + impactData.forcePosition.offsetX
 				y = enemy.y + impactData.forcePosition.offsetY
 			}
+			else if(impactData.forcePosition.attachment){
 
+			}
+
+			enemy.prevPoint = {
+				x: enemy.impactPoint.x,
+				y: enemy.impactPoint.y
+			}
 			enemy.impactPoint.x = x
 			enemy.impactPoint.y = y
 		}
