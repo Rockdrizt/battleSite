@@ -2,11 +2,31 @@
 	"category":"yogotar",
 	"attacks": {
 		"normal": [
+			{
+				"id": "normalWater",
+				"attachment": "particle4",
+				"delay":    0,
+				"multiplier": 1
+			}
 		],
-		"special": [
+		"super": [
+            {
+				"id": "superArthurius",
+				"attachment": "particle7",
+				"delay": 1000,
+				"multiplier": 1
+			}
+		],
+		"ultra":[
+			{
+				"id": "ultraNao",
+				"attachment": "particle4",
+				"delay": 1200,
+				"multiplier": 1
+			}
 		]
 	},
-	"directory": "spines/Nao/nao.json",
+    "directory": "spines/Nao/nao.json",
 	"name": "Nao",
 	"spine": {
 		"options": {

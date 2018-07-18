@@ -29,7 +29,7 @@
   "sourcePositionVariancey" : 50,
   "startColorRed" : 1,
   "finishColorVarianceRed" : 0,
-  "absolutePosition" : true,
+  "absolutePosition" : false,
   "textureFileName" : "windNormal1.png",
   "startColorVarianceAlpha" : 0.2397959,
   "maxParticles" : 100,
