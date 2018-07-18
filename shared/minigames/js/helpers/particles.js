@@ -377,6 +377,12 @@ var epicparticles = function(){
 			var key = emitter.key
 			emitter.frameCounter++
 
+			if(emitter.follow){
+				emitter.sourcePosition.x = emitter.follow.x - emitter.x
+				emitter.sourcePosition.y = emitter.y - emitter.follow.y
+			}
+			console.log("source", emitter.sourcePosition)
+
 			if (emitter.active == true && emitter.emissionRate > 0) {
 				var rate = 1.0 / emitter.emissionRate
 
@@ -433,6 +439,7 @@ var epicparticles = function(){
 
 	function newEmitter(key, options){
 		// TODO implement options
+		options = options || {}
 		var emitter = game.add.group()
 
 		emitters.push(emitter)
@@ -530,6 +537,19 @@ var epicparticles = function(){
 		// Create particle pool
 		for (var i = 0; i < emitter.maxParticles; i++) {
 			emitter.particles[i] = newParticle(emitter)
+		}
+
+		var group = options.group
+
+		if(group) {
+			if (emitter.absolute) {
+				emitter.x = group.x
+				emitter.y = group.y
+				emitter.follow = group
+				group.parent.add(emitter)
+			} else {
+				group.add(emitter)
+			}
 		}
 
 		return emitter
