@@ -20,12 +20,7 @@
     }
   ],
   "impact":{
-    "particles":[
-      "particles/characters/lunaSuper1/lunaSuper1.json",
-      "particles/characters/lunaSuper1/lunaSuper2.json",
-      "particles/characters/lunaSuper1/lunaSuper3.json"
-    ],
-    "soundID":"tournamentWindProjectile2"
+    "soundID":"tournamentImpactWind1"
   },
   "onShoot":[
     {

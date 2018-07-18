@@ -1,27 +1,19 @@
 {
   "timing":{
-    "stop":900,
-    "removal":5000,
-    "hit":900
+    "stop":1000,
+    "removal":1900,
+    "hit":1000
   },
-  "particles":[
-    "particles/characters/windUltra1/windUltra1.json",
-    "particles/characters/windUltra1/windUltra2.json",
-    "particles/characters/windUltra1/windUltra3.json",
-    "particles/characters/windUltra1/windUltra4.json",
-    "particles/characters/windUltra1/windUltra5.json"
-  ],
   "spines":[
     {
-      "file":"spines/Eagle/eagle_projectiles.json",
+      "file":"spines/Tomiko/tomiko_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"eagle_projectiles",
-      "animations":["idle_ultra","idle_ultra","idle_ultra","idle_ultra"]
+      "skin":"tomiko_projectiles",
+      "animations":["in_ultra","idle_ultra","out_ultra"]
     }
   ],
   "impact":{
-      
-    "soundID":"tournamentWindImpact1"
+    "soundID":"tournamentImpactWind1"
   },
   "onShoot":[
     {
@@ -48,17 +40,23 @@
       "index":"x",
       "copyFrom":"targetX"
     },
+     {
+      "id":"set",
+      "name":"transitionParams",
+      "index":"y",
+      "copyFrom":"targetY"
+    },  
     {
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":550 
+      "value":600
     },
     {
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":150
+      "value":200
     },
     {
       "index":"to",
