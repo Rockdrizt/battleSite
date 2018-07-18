@@ -1,32 +1,24 @@
 {
   "timing":{
-    "stop":900,
+    "stop":600,
     "removal":1700,
-    "hit":900
+    "hit":600
   },
-    "particles":[
-    "particles/characters/windSuper1/windSuper1.json",
-    "particles/characters/windSuper1/windSuper2.json",
-    "particles/characters/windSuper1/windSuper3.json",
-    "particles/characters/windSuper1/windSuper4.json",
-    "particles/characters/windSuper1/windSuper5.json",
-    "particles/characters/windSuper1/windSuper6.json"
-  ],
-     "spines":[
+  "spines":[
     {
-      "file":"spines/Eagle/eagle_projectiles.json",
+      "file":"spines/Arthurius/arthurius_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"eagle_projectiles",
-      "animations":["in_super", "idle_super", "out_super"]
+      "skin":"arthurius_projectiles",
+      "animations":["idle_super","out_super"]
     }
   ],
   "impact":{
     "particles":[
-      "particles/characters/impactWind6/impactWind18.json",
-      "particles/characters/impactWind6/impactWind19.json",
-      "particles/characters/impactWind6/impactWind20.json"
+      "particles/characters/explosionFire1/explosionFire1.json",
+      "particles/characters/explosionFire1/explosionFire2.json",
+      "particles/characters/explosionFire1/explosionFire3.json"
     ],
-    "soundID":"tournamentWindImpact1"
+    "soundID":"tournamentFireExplosion1"
   },
   "onShoot":[
     {
@@ -56,8 +48,14 @@
     {
       "id":"set",
       "name":"transitionParams",
+      "index":"y",
+      "copyFrom":"targetY"
+    },
+    {
+      "id":"set",
+      "name":"transitionParams",
       "index":"time",
-      "value":850
+      "value":550
     },
     {
       "index":"to",
