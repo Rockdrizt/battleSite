@@ -311,6 +311,7 @@ var battleScene = function() {
 			groupPoint.characters = teamCharacters
 			groupPoint.impactPoint = {x:groupPoint.x, y:groupPoint.y}
 			groupPoint.takeDamage = takeGroupDamage.bind(groupPoint)
+			groupPoint.side = side.direction
 			teamCharacters.groupPoint = groupPoint
 
 			sceneGroup.add(groupPoint)
