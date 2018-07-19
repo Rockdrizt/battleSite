@@ -76,15 +76,30 @@ var battle = function(){
 		DOWN:{x:-70, y: 120, scale:{x:1, y:1}},
 	}
     
+    var DAMAGE_PERCENT = [
+        {normal: 0.1, super: 0.125, ultra: 0.167},
+        {normal: 0.0666, super: 0.083, ultra: 0.111}
+    ]
+    
     var ATTACKS = ["normal", "super", "ultra"]
 
 	var ORDER_SIDES = [SIDES.LEFT, SIDES.RIGHT]
 	var ORDER_POSITIONS = [POSITIONS.UP, POSITIONS.MID, POSITIONS.DOWN]
 	var CHARACTER_CENTER_OFFSET = {x:-200, y: -200}
     
-	var sceneGroup
+    var DAMAGE = DAMAGE_PERCENT[1]
+    var MAX_LIFE
+    
+    var teams
     var battleSong
+	var sceneGroup
+    var teamsBarGroup
+    var yogoGroup
+    var miniYogos = []
+    var lifeBars = []
+    
     var mainYogotorars
+    var mainSpine
     
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -95,6 +110,7 @@ var battle = function(){
         game.stage.backgroundColor = "#0D014D"
         loadSounds()
         mainYogotorars = []
+        miniYogos = [[],[]]
 	}
     
     function preload(){
@@ -108,7 +124,50 @@ var battle = function(){
         var background = sceneGroup.create(0, 0, "background")
         background.width = game.world.width
         background.height = game.world.height
+        
+        var rotateButton = createButton(rotateTeam.bind(null, 0), 0x00ff00)
+		rotateButton.x = game.world.centerX
+		rotateButton.y = game.world.height - 150
+		rotateButton.label.text = "rotate"
+        
+        var damageButom = createButton(dealDamage.bind(null, 0), 0xff00ff)
+		damageButom.x = game.world.centerX - 200
+		damageButom.y = game.world.height - 550
+		damageButom.label.text = "normal"
+        
+        var damageButom = createButton(dealDamage.bind(null, 0), 0xff00ff)
+		damageButom.x = game.world.centerX - 200
+		damageButom.y = game.world.height - 350
+		damageButom.label.text = "super"
+        
+        var damageButom = createButton(dealDamage.bind(null, 0), 0xff00ff)
+		damageButom.x = game.world.centerX - 200
+		damageButom.y = game.world.height - 150
+		damageButom.label.text = "ultra"
     }
+    
+    function createButton(callback, color) {
+		color = color || 0x000000
+
+		var buttonGroup = game.add.group()
+
+		var rectBg = game.add.graphics()
+		rectBg.beginFill(color)
+		rectBg.lineStyle(5, 0xffffff, 1)
+		rectBg.drawRect(0, 0, 200, 50)
+		rectBg.endFill()
+		buttonGroup.add(rectBg)
+
+		rectBg.inputEnabled = true
+		rectBg.events.onInputDown.add(callback)
+
+		var fontStyle = {font: "24px Arial", fontWeight: "bold", fill: "#ffffff", align: "center"}
+		var text = game.add.text(10, 10, "", fontStyle)
+		buttonGroup.add(text)
+		buttonGroup.label = text
+
+		return buttonGroup
+	}
 
 	function update(){
         
@@ -121,23 +180,86 @@ var battle = function(){
         teamsBarGroup = game.add.group()
         sceneGroup.add(teamsBarGroup)
         
-        var pivotX = 0.5
+        var tokenGroup = game.add.group()
+        
+        var listName = loadNames()
+        
+        var pivotX = 0.25
+        var index = 0
         
         for(var i = 0; i < 2; i++){
             
-            var lifeContainer = teamsBarGroup.create(game.world.centerX * pivotX, 180, "atlas.battle", "lifeContainer" + i)
-            lifeContainer.anchor.setTo(0.5)
-            lifeContainer
+            var side = ORDER_SIDES[i].scale.x
             
-            var text = game.add.bitmapText(0, -110, 'skwig', "Equipo Alpha", 75)
+            var lifeBox = teamsBarGroup.create(game.world.centerX * pivotX, 150, "atlas.battle", "lifeContainer" + i)
+            lifeBox.anchor.setTo(i, 0.5)
+            
+            var text = game.add.bitmapText(lifeBox.centerX, lifeBox.y - 100, 'skwig', "Equipo Alpha", 75)
             text.anchor.setTo(0.5)
-            lifeContainer.addChild(text)
-            lifeContainer.text = text
+            teamsBarGroup.add(text)
             
-            pivotX += 1
+            var life = teamsBarGroup.create(game.world.centerX * pivotX, lifeBox.y - 5, "atlas.battle", "lifeGauge")
+            life.anchor.setTo(0, 0.5)
+            life.scale.setTo(side, 1)
+            
+            lifeBars.push(life)
+            
+            var token = tokenGroup.create(lifeBox.x, lifeBox.y, "atlas.battle", "token" + i)
+            token.anchor.setTo(0.5)
+            token.scale.setTo(side, 1)
+            token.x -= 78 * side
+
+            var pic = game.add.sprite(0, - 10, "atlas.battle", listName[index])
+            pic.anchor.setTo(0.5)
+            pic.scale.setTo(0.8, 0.8)
+            token.addChild(pic)
+            
+            miniYogos[i].push(token)
+            index++
+            
+            for(var j = 0; j < 2; j++){
+                
+                var token = tokenGroup.create(lifeBox.x, lifeBox.y + 120, "atlas.battle", "token" + i)
+                token.anchor.setTo(0.5)
+                token.scale.setTo(0.75 * side, 0.75)
+                token.x -= 155 * j * side
+                
+                var pic = game.add.sprite(0, - 10, "atlas.battle", listName[index])
+                pic.anchor.setTo(0.5)
+                pic.scale.setTo(0.8, 0.8)
+                token.addChild(pic)
+                
+                miniYogos[i].push(token)
+                index++
+            }
+            
+            pivotX += 1.5
         }
-        text.x *= -1
+    
         text.setText("Equipo Bravo")
+        teamsBarGroup.add(tokenGroup)
+        teamsBarGroup.tokenGroup = tokenGroup
+        MAX_LIFE = -life.width
+    }
+    
+    function loadNames(){
+        
+        var nameList = []
+        
+        for(var i = 0; i < teams.length; i++){
+            for(var j = 0; j < teams[i].length; j++){
+                var character = teams[i][j].substr(7).toLowerCase()
+                nameList.push(character)
+            }
+        }
+        
+        for(var i = 0; i < 4; i+=3){
+            var aux = nameList[i]
+            nameList[i] = nameList[i+1]
+            nameList [i+1] = aux
+        }
+     
+        return nameList
     }
     
     function createTimer(){
@@ -196,9 +318,31 @@ var battle = function(){
 				mainYogotorars[teamIndex] = character
 		}
 
-		sceneGroup.sort('y', Phaser.Group.SORT_ASCENDING)
+		yogoGroup.sort('y', Phaser.Group.SORT_ASCENDING)
 		ORDER_POSITIONS = copyPositions
+        
+        rotateMinis(teamIndex)
 	}
+    
+    function rotateMinis(index){
+        
+        var minis = miniYogos[index]
+        var dir = ORDER_SIDES[index].scale.x
+        
+        for(var i = 0; i < minis.length; i++){
+            
+            var pic = minis[i]
+            var pos = i + 1 >= minis.length ? 0 : i + 1
+            var next = minis[pos]
+            var size = next.y < pic.y ? 1 : 0.75
+               
+            game.add.tween(pic).to({x: next.x, y: next.y}, 500, Phaser.Easing.linear, true)
+            game.add.tween(pic.scale).to({x: size * dir, y: size}, 490, Phaser.Easing.linear, true)
+            
+            if(size == 1)
+                teamsBarGroup.tokenGroup.sendToBack(pic)
+        }
+    }
     
     function takeGroupDamage(type, element) {
 		var team = this.characters
@@ -281,6 +425,7 @@ var battle = function(){
 
 			yogoGroup.add(groupPoint)
 		}
+        //createMenuAnimations()
 	}
     
     function selectYogotar(obj) {
@@ -315,6 +460,18 @@ var battle = function(){
 		rotateButton.y = (pivotY + 1) * 50
 		rotateButton.label.text = "rotate"
 	}
+    
+    function changeAnimation(name) {
+		mainSpine.setAnimation([name], true)
+	}
+    
+    function dealDamage(team){
+        
+        var life = lifeBars[team]
+        var damage = life.width - MAX_LIFE * DAMAGE.normal
+        
+        game.add.tween(life).to({width:damage}, 150, Phaser.Easing.linear, true)
+    }
 
 	return {
 		
@@ -336,8 +493,7 @@ var battle = function(){
             createTeamBars()
             createTimer()
             placeYogotars()
-            //battleSong = sound.play("battleSong", {loop:true, volume:0.6})
-            
+            //battleSong = sound.play("battleSong", {loop:true, volume:0.6})    
             
 		},
         setCharacter:setCharacter,

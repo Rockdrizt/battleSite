@@ -624,11 +624,14 @@ var yogoSelector = function(){
             
             if(alphaGroup.teamPivot == 3 && bravoGroup.teamPivot == 3){
                 buttonsGroup.setAll("token.canClick", false)
-                alphaGroup.setAll("setAlive", false)
-                bravoGroup.setAll("setAlive", false)
                 game.time.events.add(2000, getReady)
             }
         }            
+    }
+    
+    function setAliveSpine(obj, alive){
+        console.log(alive)
+        obj.setAlive(alive)
     }
     
     function turnOn(btn){
@@ -784,6 +787,8 @@ var yogoSelector = function(){
         })
         
         game.add.tween(sceneGroup).to({alpha: 0}, 500, Phaser.Easing.linear, true).onComplete.add(function(){
+            alphaGroup.forEach(setAliveSpine, this, false)
+            bravoGroup.forEach(setAliveSpine, this, false)
             createSplashArt()
             animateSplashArt()
         })
