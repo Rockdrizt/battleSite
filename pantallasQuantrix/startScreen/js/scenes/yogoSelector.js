@@ -17,7 +17,6 @@ var yogoSelector = function(){
 		}
 	}
     
-
 	assets = {
         atlases: [
             {   
@@ -57,11 +56,13 @@ var yogoSelector = function(){
             {	name: "cut",
 				file: soundsPath + "cut.mp3"},
             {	name: "gameSong",
-				file: soundsPath + "songs/weLoveElectricCars.mp3"},
+				file: "sounds/songs/party-pop.mp3",},
+				//file: "sounds/songs/electro.mp3"},
             {	name: "startSong",
 				file: soundsPath + "songs/battleLoop.mp3"},
 		],
         spritesheets: [
+            
         ],
         spines:[
             {

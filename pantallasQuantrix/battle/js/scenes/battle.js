@@ -54,6 +54,10 @@ var battle = function(){
                 name: "ya",
                 file: "images/battle/ya.png",
             },
+            {
+                name: "frame",
+                file: "images/battle/frame.png",
+            }
 		],
 		sounds: [
 		],
@@ -87,7 +91,8 @@ var battle = function(){
 	var ORDER_POSITIONS = [POSITIONS.UP, POSITIONS.MID, POSITIONS.DOWN]
 	var CHARACTER_CENTER_OFFSET = {x:-200, y: -200}
     
-    var DAMAGE = DAMAGE_PERCENT[1]
+    var QUESTIONS = {N_10: 0, N_15:1}
+    var DAMAGE = DAMAGE_PERCENT[QUESTIONS.N_10]
     var MAX_LIFE
     
     var teams
@@ -95,6 +100,7 @@ var battle = function(){
 	var sceneGroup
     var teamsBarGroup
     var yogoGroup
+    var specialAttack
     var miniYogos = []
     var lifeBars = []
     
@@ -130,17 +136,19 @@ var battle = function(){
 		rotateButton.y = game.world.height - 150
 		rotateButton.label.text = "rotate"
         
-        var damageButom = createButton(dealDamage.bind(null, 0), 0xff00ff)
+        var team = 0
+        
+        var damageButom = createButton(attackMove.bind(null, "normal"), 0xff00ff)
 		damageButom.x = game.world.centerX - 200
-		damageButom.y = game.world.height - 550
+		damageButom.y = game.world.height - 250
 		damageButom.label.text = "normal"
         
-        var damageButom = createButton(dealDamage.bind(null, 0), 0xff00ff)
+        var damageButom = createButton(attackMove.bind(null, "super"), 0xff00ff)
 		damageButom.x = game.world.centerX - 200
-		damageButom.y = game.world.height - 350
+		damageButom.y = game.world.height - 200
 		damageButom.label.text = "super"
         
-        var damageButom = createButton(dealDamage.bind(null, 0), 0xff00ff)
+        var damageButom = createButton(ultraMove, 0xff00ff)
 		damageButom.x = game.world.centerX - 200
 		damageButom.y = game.world.height - 150
 		damageButom.label.text = "ultra"
@@ -275,6 +283,65 @@ var battle = function(){
         timeToken.text = text
     }
     
+    function createSpecialAttack(){      
+         
+        var color = [0xffffff, 0x242A4D]
+        
+        var black = game.add.graphics()
+        black.beginFill(0x000000)
+        black.drawRect(0,0,game.world.width, game.world.height)
+        black.endFill()
+        black.alpha = 0
+        sceneGroup.add(black)
+        
+        specialAttack = game.add.group()
+        specialAttack.lines = []
+        specialAttack.black = black
+        sceneGroup.add(specialAttack)
+        
+        var frame = specialAttack.create(-10, game.world.centerY , "frame")
+        frame.anchor.setTo(0, 0.5)
+        specialAttack.frame = frame
+        
+        var poly = new Phaser.Polygon([new Phaser.Point(frame.x, frame.y + frame.height * 0.45), 
+                                       new Phaser.Point(frame.x, frame.y - frame.height * 0.5), 
+                                       new Phaser.Point(frame.x + frame.width - 120, frame.y - frame.height * 0.5), 
+                                       new Phaser.Point(frame.x + frame.width - 10, frame.y + frame.height * 0.45)])
+        
+        var mask = game.add.graphics(0, 0)
+        mask.beginFill(0xffffff) 
+        mask.drawPolygon(poly.points)
+        specialAttack.add(mask)
+
+        var offset = -frame.height * 0.45
+        
+        while(offset < frame.height * 0.48){
+            
+            var long = game.rnd.integerInRange(5, 8) * 100
+            var tall = game.rnd.integerInRange(1, 2) * 5
+            var timer = game.rnd.integerInRange(2, 4) * 100
+
+            var line = game.add.graphics()
+            line.beginFill(color[game.rnd.integerInRange(0, 1)])
+            line.drawRoundedRect(-long, offset, long, tall, tall * 0.5)
+            line.endFill()
+            line.mask = mask
+            frame.addChild(line)
+            specialAttack.lines.push(line)
+            
+            line.slide = game.add.tween(line).to({x: frame.width * 2}, timer, Phaser.Easing.linear, true)
+            line.slide.repeat(-1, game.rnd.integerInRange(2, 6) * 50)
+            line.slide.pause()
+            
+            offset += game.rnd.integerInRange(3, 10) * 5
+        }
+        
+        var yogo = specialAttack.create(frame.centerX, frame.y + frame.height * 0.48, "DinamitaSpecial")
+        yogo.anchor.setTo(0.5,1)
+        specialAttack.yogo = yogo
+        specialAttack.y = game.world.height
+    }
+    
     function rotateTeam(teamIndex){
         
 		var team = teams[teamIndex]
@@ -365,6 +432,15 @@ var battle = function(){
 		bootFiles.characters.push(charObj)
 	}
     
+    function pushSpecialArt(character){
+        
+        var charObj = {
+			name: character + "Special",
+			file: "images/battle/" + character + "Special.png",
+		}
+		assets.images.push(charObj)
+    }
+    
     function placeYogotars() {
         
         yogoGroup = game.add.group()
@@ -454,23 +530,65 @@ var battle = function(){
 			buttonAttack.y = (pivotY + 1) * 50
 			buttonAttack.label.text = ATTACKS[attackIndex]
 		}
-
-		var rotateButton = createButton(rotateTeam.bind(null, 0), 0xffff00)
-		rotateButton.x = attackIndex * 200
-		rotateButton.y = (pivotY + 1) * 50
-		rotateButton.label.text = "rotate"
 	}
     
     function changeAnimation(name) {
 		mainSpine.setAnimation([name], true)
 	}
     
-    function dealDamage(team){
-        
+    function dealDamage(team, percent){
+       
         var life = lifeBars[team]
-        var damage = life.width - MAX_LIFE * DAMAGE.normal
+        var damage = life.width - (MAX_LIFE * percent * ORDER_SIDES[team].scale.x)
         
-        game.add.tween(life).to({width:damage}, 150, Phaser.Easing.linear, true)
+        game.add.tween(life).to({width:damage}, 500, Phaser.Easing.Cubic.Out, true)
+    }
+    
+    function attackMove(type){
+        
+        var otherTeam = mainSpine.teamIndex == 0 ? 1 : 0
+        var target = type === "ultra" ? teams[otherTeam].groupPoint : mainYogotorars[otherTeam]
+        
+        if(type == "normal"){
+            var damage = DAMAGE.normal
+        }
+        else if(type == "super"){
+            var damage = DAMAGE.super
+        }
+        else{
+            var damage = DAMAGE.ultra
+        }
+        
+        mainSpine.attack(target, type)
+        game.time.events.add(3000, dealDamage, this, otherTeam, damage)
+    }
+    
+    function ultraMove(){
+        
+        var team = mainSpine.teamIndex
+        var side = ORDER_SIDES[team]
+        
+        specialAttack.scale.setTo(side.scale.x, 1)
+        specialAttack.y = 0
+        specialAttack.x = game.world.width * team
+        var spawnX = (specialAttack.frame.width + specialAttack.x) * side.direction
+
+        specialAttack.yogo.loadTexture(mainSpine.data.name + "Special")
+        specialAttack.lines.forEach(function(line){
+            line.slide.resume()
+        })
+        
+        game.add.tween(specialAttack.black).to({alpha:0.5}, 300, Phaser.Easing.Cubic.InOut, true)
+        game.add.tween(specialAttack.yogo).from({x:0}, 500, Phaser.Easing.Cubic.InOut, true, 300)
+        var specialMove = game.add.tween(specialAttack).from({x:spawnX}, 500, Phaser.Easing.Cubic.InOut, true, 200)
+        specialMove.repeat(1, 800)
+        specialMove.onComplete.add(function(){
+            specialAttack.lines.forEach(function(line){
+                line.slide.pause()
+                specialAttack.black.alpha = 0
+                attackMove("ultra")
+            })
+        })
     }
 
 	return {
@@ -493,6 +611,8 @@ var battle = function(){
             createTeamBars()
             createTimer()
             placeYogotars()
+            createSpecialAttack()
+            //createMenuAnimations()
             //battleSong = sound.play("battleSong", {loop:true, volume:0.6})    
             
 		},
@@ -505,6 +625,8 @@ var battle = function(){
 				for(var charIndex = 0; charIndex < team.length; charIndex++){
 					var character = team[charIndex]
 					setCharacter(character, teamIndex)
+                    var img = team[charIndex].substr(7)
+                    pushSpecialArt(img)
 				}
 			}
 		}
