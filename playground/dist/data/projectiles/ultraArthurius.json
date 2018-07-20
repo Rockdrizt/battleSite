@@ -1,7 +1,7 @@
 {
   "timing":{
-    "stop":900,
-    "removal":2000,
+    "stop":1400,
+    "removal":1500,
     "hit":500
   },
   "spines":[
@@ -35,11 +35,24 @@
       "index":"y"
     },
     {
+      "id":"get",
+      "variable":"target",
+      "name":"side",
+      "index":"side"
+    },
+    {
+      "id":"operation",
+      "operation":"*",
+      "storeReturn":"mulScale",
+      "value1":700,
+      "variable2":"side"
+    },
+    {
       "id":"operation",
       "operation":"+",
       "storeReturn":"targetX",
-      "variable1":"targetX",
-      "value2":500
+      "variable1":"mulScale",
+      "variable2":"targetX"
     },
     {
       "id":"set",
@@ -51,7 +64,7 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":1200
+      "value":1400
         
     },
     {

@@ -240,7 +240,7 @@ var yogoSelector = function(){
 
         for(var i = 0; i < assets.spines.length * 2; i++){
             
-            var player = spineLoader.createSpine(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait")//(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait")
+            var player = spineLoader.createSpine(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait", 0, 0, true)//(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait")
             player.x = 0
             player.y = -100
             player.name = assets.spines[aux].name
