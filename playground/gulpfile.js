@@ -22,7 +22,7 @@ var _TOURNAMENT = {
   SERVER : {
     PORT : 3004,
     BASE_DIR : "../",
-    START_PATH : "playground"
+    START_PATH : "playground/src/test.html"
   },
   FILE_WATCH : [
     '.html',
