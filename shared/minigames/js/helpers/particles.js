@@ -440,7 +440,6 @@ var epicparticles = function(){
 		// TODO implement options
 		options = options || {}
 		var emitter = game.add.group()
-        return emitter
 
 		emitters.push(emitter)
 

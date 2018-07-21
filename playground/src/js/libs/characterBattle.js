@@ -55,11 +55,11 @@ var characterBattle = function () {
 
 	}
 
-	function createCharacter(charName, position) {
+	function createCharacter(charName, skin, position) {
 		var characterData = game.cache.getJSON(charName + "Data")
 		var nameLowerCase = characterData.name.toLowerCase()
 
-		var character = spineLoader.createSpine(charName, nameLowerCase + "1", "idle_normal", 0, 0, true)
+		var character = spineLoader.createSpine(charName, skin, "idle_normal", 0, 0, true)
 		character.x = position.x; character.y = position.y
 		character.data = characterData
 
