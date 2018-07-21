@@ -17,7 +17,6 @@ var yogoSelector = function(){
 		}
 	}
     
-
 	assets = {
         atlases: [
             {   
@@ -62,6 +61,7 @@ var yogoSelector = function(){
 				file: soundsPath + "songs/battleLoop.mp3"},
 		],
         spritesheets: [
+  
         ],
         spines:[
             {
@@ -240,7 +240,7 @@ var yogoSelector = function(){
 
         for(var i = 0; i < assets.spines.length * 2; i++){
             
-            var player = spineLoader.createSpine(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait", 0, 0, true)//(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait")
+            var player = spineLoader.createSpine(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait", 0, 0, true)
             player.x = 0
             player.y = -100
             player.name = assets.spines[aux].name
@@ -250,7 +250,7 @@ var yogoSelector = function(){
             pullGroup.add(player)
             
             aux = i - aux
-            i % 2 ? skinNum = 1 : skinNum = 2
+            skinNum = i % 2 ? 1 : 2
         }
     }
     
@@ -283,7 +283,7 @@ var yogoSelector = function(){
         buttonsGroup = game.add.group()
         sceneGroup.add(buttonsGroup)
         
-        var pivotX = 0.3
+        var pivotX = 0.35
         var pivotY = 270
         var aux = 0
 
@@ -318,9 +318,9 @@ var yogoSelector = function(){
             subGroup.yogotar = yogotar
             
             if(i < 4)
-                aux == 1 ? pivotX += 0.6 : pivotX += 0.4
+                aux == 1 ? pivotX += 0.7 : pivotX += 0.3
             else
-                aux == 1 ? pivotX += 0.3 : pivotX += 0.35
+                aux == 1 ? pivotX += 0.4 : pivotX += 0.3
             
             aux++
             
@@ -359,7 +359,7 @@ var yogoSelector = function(){
                     }
                     else{
                         animateButton(btn.parent, team)
-                        team === 1 ? changeColor(bravoGroup.marker, bravoGroup.color) : changeColor(alphaGroup.marker, alphaGroup.color)
+                        changeColor()
                     }
                 }
                 else{
@@ -372,9 +372,10 @@ var yogoSelector = function(){
                         
                     case STATES.red:
                         if(team === STATES.red){
+                            removeCharacter(btn.parent, alphaGroup)
                             turnOff(btn.parent, STATES.yellow)
                             animateButton(btn.parent, STATES.yellow)
-                            removeCharacter(btn.parent, alphaGroup)
+                            changeColor()
                         }
                         else{
                             if(bravoGroup.teamPivot < 3){
@@ -389,9 +390,10 @@ var yogoSelector = function(){
                     
                     case STATES.blue:
                         if(team === STATES.blue){
+                            removeCharacter(btn.parent, bravoGroup)
                             turnOff(btn.parent, STATES.yellow)
                             animateButton(btn.parent, STATES.yellow)
-                            removeCharacter(btn.parent, bravoGroup)
+                            changeColor()
                         }
                         else{
                             if(alphaGroup.teamPivot < 3){
@@ -433,43 +435,38 @@ var yogoSelector = function(){
         if(obj.light.alpha == 1){
             obj.light.loadTexture("atlas.yogoSelector", "light" + obj.color)
         }
-        
-        /*if(turnOn){
-            obj.light.loadTexture("atlas.yogoSelector", "light" + color)
-            obj.light.alpha = 1
-            game.add.tween(obj.light.scale).from({y:0}, 150, Phaser.Easing.linear, true)
-        }
-        else{
-            obj.light.alpha = 0
-            obj.color = color
-        }*/
     }
     
     function turnOff(obj, color){
+        
         obj.light.alpha = 0
         obj.color = color
     }
     
-    function changeColor(obj, color){
+    function changeColor(){
         
-        if(obj){
-            obj.token.loadTexture("atlas.yogoSelector", "token" + color)
-            if(color !== 0)
-                obj.light.loadTexture("atlas.yogoSelector", "light" + color)
-            else{
-                obj.light.alpha = 0
-            }
+        if(bravoGroup.marker != null){
+            if(bravoGroup.marker.color == STATES.yellow)
+                bravoGroup.marker.token.loadTexture("atlas.yogoSelector", "token" + bravoGroup.color)
+            else
+                bravoGroup.marker.token.loadTexture("atlas.yogoSelector", "token" + STATES.bicolor)
+        }
+        
+        if(alphaGroup.marker != null){
+            if(alphaGroup.marker.color == STATES.yellow)
+                alphaGroup.marker.token.loadTexture("atlas.yogoSelector", "token" + alphaGroup.color)
+            else
+                alphaGroup.marker.token.loadTexture("atlas.yogoSelector", "token" + STATES.bicolor)
         }
     }
     
     function markYogotar(obj, teamGroup){
         
-        restoreAll()
-
         var slot = teamGroup.slots[teamGroup.teamPivot]
         
         if(slot.yogo == null){
             
+            restoreAll()
             teamGroup.currentSelect = obj.token.tag
         
             var yogo = getYogotar(obj.token.tag)
@@ -517,13 +514,12 @@ var yogoSelector = function(){
     }
     
     function removeCharacter(obj, teamGroup){
-       
-        restoreAll()
 
         var index = teamGroup.auxArray.indexOf(obj.token.tag)
         teamGroup.slots[index].check = false
         teamGroup.auxArray[index] = -1
         teamGroup.currentSelect = -1
+        teamGroup.marker = null
         
         if(teamGroup == alphaGroup)
             teamGroup.teamPivot = teamGroup.auxArray.indexOf(-1) //index
@@ -545,6 +541,8 @@ var yogoSelector = function(){
                 slot.yogo = null
             }
         }
+        
+        restoreAll()
     }
     
     function restoreAll(){
@@ -563,13 +561,6 @@ var yogoSelector = function(){
                     btn.light.loadTexture("atlas.yogoSelector", "light" + btn.color)
                 }
             }
-            
-            /*if(!alphaGroup.auxArray.includes(btn.token.tag)){
-                if(!bravoGroup.auxArray.includes(btn.token.tag)){
-                    btn.token.loadTexture("atlas.yogoSelector", "token0")
-                    btn.light.alpha = 0
-                }
-            }*/
         }
     }
     
@@ -630,7 +621,6 @@ var yogoSelector = function(){
     }
     
     function setAliveSpine(obj, alive){
-        console.log(alive)
         obj.setAlive(alive)
     }
     
@@ -844,7 +834,7 @@ var yogoSelector = function(){
 		name: "yogoSelector",
 		update: update,
         preload:preload,
-		render:function () {
+        render:function () {
 			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
 		},
 		create: function(event){
