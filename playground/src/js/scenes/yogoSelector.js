@@ -60,6 +60,22 @@ var yogoSelector = function(){
 				file: soundsPath + "songs/weLoveElectricCars.mp3"},
 			{	name: "startSong",
 				file: soundsPath + "songs/battleLoop.mp3"},
+            {	name: "tomiko",
+				file: "sounds/selectorNames/tomiko.mp3"},
+            {	name: "luna",
+				file: "sounds/selectorNames/luna.mp3"},
+            {	name: "nao",
+				file: "sounds/selectorNames/nao.mp3"},
+            {	name: "theffanie",
+				file: "sounds/selectorNames/theffanie.mp3"},
+            {	name: "eagle",
+				file: "sounds/selectorNames/eagle.mp3"},
+            {	name: "dinamita",
+				file: "sounds/selectorNames/dinamita.mp3"},
+            {	name: "arthurius",
+				file: "sounds/selectorNames/arthurius.mp3"},
+            {	name: "estrella",
+				file: "sounds/selectorNames/estrella.mp3"},
 		],
 		spritesheets: [
 		],
@@ -154,7 +170,7 @@ var yogoSelector = function(){
 	}
 
 	function initialize(){
-
+        
 		game.stage.backgroundColor = "#0D014D"
 		chosenOne = 1
 		playersSelected = []
@@ -375,6 +391,7 @@ var yogoSelector = function(){
 				}
 				else{
 					btn.canClick = true
+                    teamGroup.marker = null
 				}
 			}
 			else{
@@ -631,6 +648,8 @@ var yogoSelector = function(){
 			teamGroup.slots[teamGroup.teamPivot].check = true
 			teamGroup.slots[teamGroup.teamPivot].yogo.setAnimation(["select", "ready"], true)
 			teamGroup.marker = null
+            sound.play(assets.spines[teamGroup.currentSelect].name)
+                
 			if(teamGroup == alphaGroup)
 				var aux = teamGroup.auxArray.indexOf(-1) //index
 			else
@@ -920,9 +939,10 @@ var yogoSelector = function(){
 		loadingBar.bottomBar = loadingBottom
 		loadingBar.topBar = loadingTop
 
-		loadingBar.x = game.world.centerX - loadingBottom.width * 0.5
+		loadingBar.x = game.world.centerX
 		loadingBar.y = (game.world.centerY + 200)
 		loadingBar.alpha = 0
+        loadingBar.angle = -90
 
     }
 
@@ -943,6 +963,7 @@ var yogoSelector = function(){
 			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
 		},
 		create: function(event){
+            
 			sceneGroup = game.add.group()
 			sceneGroup.alpha = 0
 			createBackground()
