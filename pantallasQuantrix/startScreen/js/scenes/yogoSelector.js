@@ -188,6 +188,28 @@ var yogoSelector = function(){
         tile.tilePosition.x -= 0.4
         epicparticles.update()
     }
+    
+    function createPlatforms(){
+        
+        var platformGroup = game.add.group()
+        sceneGroup.add(platformGroup)
+        
+        var pivotX = 0.25
+        
+        for(var i = 0; i < 3; i++){
+            
+            var plat = platformGroup.create(game.world.centerX * pivotX, game.world.centerY + 50, "atlas.yogoSelector", "plat1")
+            plat.anchor.setTo(0.5)
+            
+            var plat = platformGroup.create(game.world.centerX * pivotX  + game.world.centerX, game.world.centerY + 50, "atlas.yogoSelector", "plat2")
+            plat.anchor.setTo(0.5)
+            
+            pivotX += 0.25
+        }
+        
+        platformGroup.children[2].y += 100
+        platformGroup.children[3].y += 100
+    }
 
     function createTeams(){
         
@@ -227,8 +249,8 @@ var yogoSelector = function(){
             
             pivotX += 0.25
         }
-        alphaGroup.slots[1].y += 120
-        bravoGroup.slots[1].y += 120
+        alphaGroup.slots[1].y += 100
+        bravoGroup.slots[1].y += 100
     }
     
     function createPullGroup(){
@@ -607,6 +629,7 @@ var yogoSelector = function(){
             teamGroup.slots[teamGroup.teamPivot].check = true
             teamGroup.slots[teamGroup.teamPivot].yogo.setAnimation(["select", "ready"], true)
             teamGroup.marker = null
+            showName(teamGroup.currentSelect)
             if(teamGroup == alphaGroup)
                 var aux = teamGroup.auxArray.indexOf(-1) //index
             else
@@ -619,6 +642,38 @@ var yogoSelector = function(){
                 game.time.events.add(2000, getReady)
             }
         }            
+    }
+    
+    function createYogoNames(){
+        
+        namesGroup = game.add.group()
+        sceneGroup.add(namesGroup)
+        
+        var light = namesGroup.create(game.world.centerX, game.world.centerY, "atlas.yogoSelector", "pinkLight")
+        light.alpha = 0
+        light.anchor.setTo(0.5)
+        namesGroup.light = light
+        
+        var yogoName = namesGroup.create(light.x, light.y, "atlas.yogoSelector", "name0")
+        yogoName.anchor.setTo(0.5)
+        yogoName.alpha = 0
+        namesGroup.yogoName = yogoName
+    }
+    
+    function showName(tag){
+        
+        namesGroup.light.alpha = 1
+        game.add.tween(namesGroup.light.scale).from({x: 0}, 100, Phaser.Easing.linear, true).onComplete.add(function(){
+            sound.play(assets.spines[tag].name)
+            namesGroup.yogoName.loadTexture("atlas.yogoSelector", "name" + tag)
+            namesGroup.yogoName.alpha = 1
+            game.add.tween(namesGroup.yogoName.scale).from({y:0}, 100, Phaser.Easing.linear, true).onComplete.add(function(){
+                game.time.events.add(1500, function(){
+                    namesGroup.light.alpha = 0
+                    namesGroup.yogoName.alpha = 0
+                })
+            })
+        })
     }
     
     function setAliveSpine(obj, alive){
@@ -846,9 +901,11 @@ var yogoSelector = function(){
             
             gameSong = sound.play("gameSong", {loop:true, volume:0.6})
         
+            createPlatforms()
             createTeams()
             createPullGroup()
             createTeamsBars()
+            createYogoNames()
             createButtons()
             createOk()
             animateSelector()

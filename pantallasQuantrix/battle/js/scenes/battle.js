@@ -706,9 +706,9 @@ var battle = function(){
         specialMove.onComplete.add(function(){
             specialAttack.lines.forEach(function(line){
                 line.slide.pause()
-                specialAttack.black.alpha = 0
-                attackMove("ultra")
             })
+            specialAttack.black.alpha = 0
+            attackMove("ultra")
         })
     }
 

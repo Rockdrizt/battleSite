@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.8.0</string>
+        <string>4.8.2</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -220,6 +220,110 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">name0.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>141,33,281,67</rect>
+                <key>scale9Paddings</key>
+                <rect>141,33,281,67</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">name1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>97,33,194,66</rect>
+                <key>scale9Paddings</key>
+                <rect>97,33,194,66</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">name2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>82,32,163,65</rect>
+                <key>scale9Paddings</key>
+                <rect>82,32,163,65</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">name3.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>172,31,343,62</rect>
+                <key>scale9Paddings</key>
+                <rect>172,31,343,62</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">name4.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>109,33,219,65</rect>
+                <key>scale9Paddings</key>
+                <rect>109,33,219,65</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">name5.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>173,30,345,61</rect>
+                <key>scale9Paddings</key>
+                <rect>173,30,345,61</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">name6.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>172,29,344,58</rect>
+                <key>scale9Paddings</key>
+                <rect>172,29,344,58</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">name7.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>173,33,347,65</rect>
+                <key>scale9Paddings</key>
+                <rect>173,33,347,65</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">pinkLight.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -230,6 +334,32 @@
                 <rect>417,22,834,44</rect>
                 <key>scale9Paddings</key>
                 <rect>417,22,834,44</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">plat1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>54,26,108,51</rect>
+                <key>scale9Paddings</key>
+                <rect>54,26,108,51</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">plat2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>54,25,108,51</rect>
+                <key>scale9Paddings</key>
+                <rect>54,25,108,51</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -440,6 +570,16 @@
             <filename>light3.png</filename>
             <filename>token3.png</filename>
             <filename>star.png</filename>
+            <filename>name0.png</filename>
+            <filename>name1.png</filename>
+            <filename>name2.png</filename>
+            <filename>name3.png</filename>
+            <filename>name4.png</filename>
+            <filename>name5.png</filename>
+            <filename>name6.png</filename>
+            <filename>name7.png</filename>
+            <filename>plat1.png</filename>
+            <filename>plat2.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
