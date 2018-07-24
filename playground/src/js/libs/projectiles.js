@@ -34,6 +34,7 @@ var epicProjectiles = function(){
 	function hitEnemy(options) {
 		var projectile = this
 		var enemy = options.enemy
+		var onImpact = options.onImpact
 
 		var impactData = projectile.data.impact
 		if (impactData) {
@@ -90,11 +91,16 @@ var epicProjectiles = function(){
 		if(enemy.prevPoint)
 			enemy.impactPoint = enemy.prevPoint
 		enemy.takeDamage(projectile.type, projectile.element)
+
+		if(typeof onImpact === "function")
+			onImpact()
 	}
 
-	function setTarget(enemy) {
+	function setTarget(enemy, options) {
 		var self = this
 		var impactData = self.data.impact
+		options = options || {}
+		var onImpact = options.onImpact
 
 		if((impactData)&&(impactData.forcePosition)){
 			var x = enemy.impactPoint.x
@@ -164,7 +170,8 @@ var epicProjectiles = function(){
 
 		//TODO: here goes the damage
 		var params = {
-			enemy: enemy
+			enemy: enemy,
+			onImpact: onImpact
 		}
 
 		if(self.hit)

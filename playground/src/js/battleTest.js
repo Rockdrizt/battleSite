@@ -28,7 +28,7 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				sceneloader.show("battleScene")
+				sceneloader.show("battle")
 	    	}
 
 			document.body.style.visibility = "visible"
@@ -101,13 +101,14 @@ function startGame(){
 			}
 		}
 
-		battleScene.setTeams(objTeams)
+		battle.setTeams(objTeams)
     }
 
     function create(){
 		console.log("createEpicBattle")
     	bootConfigFiles([
-			battleScene
+			battle,
+    		//battleScene
             //result,
     	])
     }

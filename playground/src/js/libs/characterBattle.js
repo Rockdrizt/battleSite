@@ -16,7 +16,7 @@ var characterBattle = function () {
 		}
 	}
 
-	function attack(enemy, type) {
+	function attack(enemy, type, onImpact) {
 		var self = this
 
 		var attackType = type || "normal"
@@ -49,7 +49,7 @@ var characterBattle = function () {
 				projectile.scale.x *= self.scale.x
 				self.parent.add(projectile)
 
-				projectile.setTarget(enemy)
+				projectile.setTarget(enemy, {onImpact : onImpact})
 			}, null, projectileInfo)
 		}
 

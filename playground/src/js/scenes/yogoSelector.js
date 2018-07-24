@@ -810,7 +810,7 @@ var yogoSelector = function(){
 		var fadeTween = game.add.tween(sceneGroup).to({alpha:0}, 1000, Phaser.Easing.Cubic.Out, true)
 		fadeTween.onComplete.add(function () {
 			bmd.destroy()
-			sceneloader.show("battleScene")
+			sceneloader.show("battle")
 		})
 	}
 

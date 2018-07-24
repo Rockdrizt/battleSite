@@ -30,12 +30,12 @@ var battleMain = function(){
 
 	function init(teams){
 
-		battleScene.setTeams(teams)
+		battle.setTeams(teams)
 	}
 
 	function create(){
 		bootConfigFiles([
-			battleScene
+			battle
 			//result,
 		])
 	}
