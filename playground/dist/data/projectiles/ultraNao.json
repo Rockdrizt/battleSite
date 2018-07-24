@@ -65,6 +65,7 @@
       "name":"transitionParams",
       "index":"time",
       "value":1600
+        
     },
     {
       "id":"set",

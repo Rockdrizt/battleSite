@@ -2,18 +2,27 @@
   "timing":{
     "stop":1000,
     "removal":1900,
-    "hit":1000
+    "hit":600
   },
   "spines":[
     {
       "file":"spines/Tomiko/tomiko_projectiles.json",
       "scales":["@0.5x"],
       "skin":"tomiko_projectiles",
-      "animations":["in_ultra","idle_ultra","out_ultra"]
+      "animations":["in_ultra","idle_ultra"]
     }
   ],
   "impact":{
+    "spines":[
+    {
+      "file":"spines/Tomiko/tomiko_projectiles.json",
+      "scales":["@0.5x"],
+      "skin":"tomiko_projectiles",
+      "animations":["out_ultra"]
+    }
+ ],
     "soundID":"tournamentImpactWind1"
+      
   },
   "onShoot":[
     {
@@ -50,13 +59,13 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":600
+      "value":450
     },
     {
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":200
+      "value":150
     },
     {
       "index":"to",
