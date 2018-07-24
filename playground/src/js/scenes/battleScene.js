@@ -267,7 +267,9 @@ var battleScene = function() {
 			var side = ORDER_SIDES[teamIndex]
 
 			for(var charIndex = 0; charIndex < teamCharacters.length; charIndex++){
-				var characterName = teamCharacters[charIndex]
+				var character = teamCharacters[charIndex]
+				var characterName = character.name
+				var skin = character.skin
 				var position = ORDER_POSITIONS[charIndex]
 				var xOffset = CHARACTER_CENTER_OFFSET.x * side.scale.x + position.x * side.scale.x
 
@@ -275,7 +277,7 @@ var battleScene = function() {
 					x : game.world.centerX * 0.5 * side.direction + xOffset,
 					y : CHARACTER_CENTER_OFFSET.y + game.world.centerY + position.y
 				}
-				var character = characterBattle.createCharacter(characterName, characterPos)
+				var character = characterBattle.createCharacter(characterName, skin, characterPos)
 				console.log("postion", character.position)
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
 				character.teamIndex = teamIndex
@@ -375,7 +377,7 @@ var battleScene = function() {
 
 				for(var charIndex = 0; charIndex < team.length; charIndex++){
 					var character = team[charIndex]
-					setCharacter(character, teamIndex)
+					setCharacter(character.name, teamIndex)
 				}
 			}
 		}

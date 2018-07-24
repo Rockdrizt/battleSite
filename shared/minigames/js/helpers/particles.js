@@ -381,7 +381,6 @@ var epicparticles = function(){
 				emitter.sourcePosition.x = emitter.follow.x - emitter.x
 				emitter.sourcePosition.y = emitter.follow.y - emitter.y
 			}
-			console.log("source", emitter.sourcePosition)
 
 			if (emitter.active == true && emitter.emissionRate > 0) {
 				var rate = 1.0 / emitter.emissionRate
