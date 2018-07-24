@@ -1,8 +1,8 @@
 {
   "timing":{
-    "stop":1500,
+    "stop":1600,
     "removal":2500,
-    "hit":1500
+    "hit":500
   },
   "spines":[
     {
@@ -35,6 +35,26 @@
       "index":"y"
     },
     {
+      "id":"get",
+      "variable":"target",
+      "name":"side",
+      "index":"side"
+    },
+    {
+      "id":"operation",
+      "operation":"*",
+      "storeReturn":"mulScale",
+      "value1":1500,
+      "variable2":"side"
+    },
+    {
+      "id":"operation",
+      "operation":"+",
+      "storeReturn":"targetX",
+      "variable1":"mulScale",
+      "variable2":"targetX"
+    },
+    {
       "id":"set",
       "name":"transitionParams",
       "index":"x",
@@ -43,20 +63,14 @@
     {
       "id":"set",
       "name":"transitionParams",
-      "index":"y",
-      "copyFrom":"targetY"
-    },
-    {
-      "id":"set",
-      "name":"transitionParams",
       "index":"time",
-      "value":550
+      "value":1600
     },
     {
       "id":"set",
       "name":"transitionParams",
-      "index":"dela",
-      "value":550
+      "index":"delay",
+      "value":0
     },
     {
       "index":"to",
