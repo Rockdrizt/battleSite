@@ -1,7 +1,7 @@
 {
   "timing":{
-    "stop":2000,
-    "removal":3700,
+    "stop":3000,
+    "removal":4000,
     "hit":2000
   },
   "spines":[
