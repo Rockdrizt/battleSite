@@ -1,20 +1,21 @@
 {
   "timing":{
     "stop":3000,
-    "removal":4000,
-    "hit":2000
+    "removal":3200,
+    "hit":2700
   },
   "spines":[
     {
       "file":"spines/Luna/luna_projectiles.json",
       "scales":["@0.5x"],
       "skin":"luna_projectiles",
-      "animations":["in_ultra","idle_ultra","out_ultra"]
+      "animations":["in_ultra","idle_ultra", "idle_ultra", "out_ultra"]
     }
   ],
   
     
   "impact":{
+  
     "particles":[
       "particles/characters/lunaUltra1/lunaUltra1.json",
       "particles/characters/lunaUltra1/lunaUltra2.json",
@@ -59,7 +60,7 @@
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":500
+      "value":800
     },
     {
       "index":"to",

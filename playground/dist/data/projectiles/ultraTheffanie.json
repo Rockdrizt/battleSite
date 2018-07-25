@@ -1,8 +1,8 @@
 {
   "timing":{
-    "stop":600,
-    "removal":1700,
-    "hit":600
+    "stop":1200,
+    "removal":2000,
+    "hit":1200
   },
   "particles":[
     "particles/characters/normalProjectileFire1/normalProjectileFire1.json",
@@ -69,7 +69,7 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":550
+      "value":1200
     },
     {
       "index":"to",
