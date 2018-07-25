@@ -200,7 +200,6 @@ var battle = function(){
     function createTeamBars(){
     
         var fontStyle = {font: "65px skwig", fontWeight: "bold", fill: "#FFFFFE", align: "center"}
-        var fontScore = {font: "70px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
         
         teamsBarGroup = game.add.group()
         sceneGroup.add(teamsBarGroup)
@@ -246,7 +245,7 @@ var battle = function(){
             teamScore.anchor.setTo(0.5)
             teamScore.scale.setTo(0.6)
             
-            var score = new Phaser.Text(sceneGroup.game, 0, 60, "0", fontScore)
+            var score = new Phaser.Text(sceneGroup.game, 0, 60, "0", fontStyle)
             score.anchor.setTo(0.5)
             score.scale.setTo(1.8)
             teamScore.addChild(score)

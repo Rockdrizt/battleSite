@@ -58,8 +58,6 @@ var yogoSelector = function(){
 				file: soundsPath + "cut.mp3"},
 			{	name: "gameSong",
 				file: soundsPath + "songs/weLoveElectricCars.mp3"},
-			{	name: "startSong",
-				file: soundsPath + "songs/battleLoop.mp3"},
             {	name: "tomiko",
 				file: "sounds/selectorNames/tomiko.mp3"},
             {	name: "luna",
@@ -646,26 +644,30 @@ var yogoSelector = function(){
 	}
 
 	function createOk(){
+        
+        inputsGroup = game.add.group()
+        sceneGroup.add(inputsGroup)
 
-		var ok = sceneGroup.create(game.world.centerX - 100, game.world.height - 300, "ok")
+		var ok = inputsGroup.create(game.world.centerX - 100, game.world.height - 300, "ok")
 		ok.anchor.setTo(0.5)
 		ok.tint = 0xff0000
 		ok.tag = 1
 		ok.inputEnabled = true
 		ok.events.onInputDown.add(clickOk,this)
 
-		var ok = sceneGroup.create(game.world.centerX + 100, game.world.height - 300, "ok")
+		var ok = inputsGroup.create(game.world.centerX + 100, game.world.height - 300, "ok")
 		ok.anchor.setTo(0.5)
 		ok.tint = 0x0000ff
 		ok.tag = 2
 		ok.inputEnabled = true
 		ok.events.onInputDown.add(clickOk,this)
 
-		var ok = sceneGroup.create(game.world.centerX, game.world.height - 300, "atlas.yogoSelector", "star")
+		var ok = inputsGroup.create(game.world.centerX, game.world.height - 300, "atlas.yogoSelector", "star")
 		ok.anchor.setTo(0.5)
 		ok.inputEnabled = true
-		ok.events.onInputDown.add(function(){
+		ok.events.onInputDown.add(function(btn){
 
+            game.add.tween(btn.scale).to({x: 1.2, y:1.2}, 100, Phaser.Easing.linear, true, 0, 0, true)
 			chosenOne === 1 ? chosenOne = 2 : chosenOne = 1
 
 		},this)
@@ -909,6 +911,7 @@ var yogoSelector = function(){
 		var teams = getTeams()
 
 		gameSong.stop()
+        inputsGroup.alpha = 0
 		readyGroup.emitter.alpha = 1
 		game.add.tween(readyGroup.pinkLight.scale).to({x: 1, y: 1}, 400, Phaser.Easing.Cubic.InOut, true, 0, 0, true).onComplete.add(function(){
 			readyGroup.ready.alpha = 1
