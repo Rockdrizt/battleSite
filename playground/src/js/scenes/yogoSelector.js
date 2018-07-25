@@ -144,6 +144,7 @@ var yogoSelector = function(){
 	var gameSong
 	var sceneGroup
 	var teamsBarGroup
+    var platformGroup
 	var buttonsGroup
 	var pullGroup
 	var alphaGroup
@@ -215,7 +216,7 @@ var yogoSelector = function(){
     
     function createPlatforms(){
         
-        var platformGroup = game.add.group()
+        platformGroup = game.add.group()
         selectorGroup.add(platformGroup)
         
         var pivotX = 0.25
@@ -739,7 +740,11 @@ var yogoSelector = function(){
 		},this)
 
 		buttonsGroup.forEach(function(btn){
-			game.add.tween(btn).from({y: -150}, game.rnd.integerInRange(700, 1000), Phaser.Easing.Bounce.Out, true, 1000)
+			game.add.tween(btn).from({y: -150}, game.rnd.integerInRange(700, 1000), Phaser.Easing.Bounce.Out, true)
+		},this)
+        
+        platformGroup.forEach(function(plat){
+			game.add.tween(plat).from({y: game.world.height + 150}, game.rnd.integerInRange(700, 1000), Phaser.Easing.Bounce.Out, true, 1000)
 		},this)
 
 		game.time.events.add(1800, function(){
@@ -831,8 +836,8 @@ var yogoSelector = function(){
 		loadingGroup.add(readyGroup)
 
 		var pinkLight = readyGroup.create(game.world.centerX, game.world.centerY, "atlas.yogoSelector", "pinkLight")
-		pinkLight.alpha = 0
 		pinkLight.anchor.setTo(0.5)
+		pinkLight.scale.setTo(0)
 		readyGroup.pinkLight = pinkLight
 
 		var emitter = epicparticles.newEmitter("horizontalLine")
@@ -904,15 +909,14 @@ var yogoSelector = function(){
 		var teams = getTeams()
 
 		gameSong.stop()
-		readyGroup.pinkLight.alpha = 1
 		readyGroup.emitter.alpha = 1
-		game.add.tween(readyGroup.pinkLight.scale).from({x: 0}, 100, Phaser.Easing.linear, true).onComplete.add(function(){
+		game.add.tween(readyGroup.pinkLight.scale).to({x: 1, y: 1}, 400, Phaser.Easing.Cubic.InOut, true, 0, 0, true).onComplete.add(function(){
 			readyGroup.ready.alpha = 1
 			sound.play("swordSmash")
 			game.add.tween(readyGroup.ready.scale).from({x: 0, y:0}, 200, Phaser.Easing.linear, true).onComplete.add(function () {
 				battleMain.init(teams)
 				battleMain.create()
-				game.add.tween(loadingBar).to({alpha:1}, 500, Phaser.Easing.Cubic.Out, true)
+				//game.add.tween(loadingBar).to({alpha:1}, 500, Phaser.Easing.Cubic.Out, true)
 				game.time.events.add(6000, function () {
 					timerFlag = true
 					if(barCompleteFlag){
@@ -922,10 +926,10 @@ var yogoSelector = function(){
 			})
 		})
 
+        createSplashArt()
 		game.add.tween(selectorGroup).to({alpha: 0}, 500, Phaser.Easing.linear, true).onComplete.add(function(){
 			alphaGroup.forEach(setAliveSpine, this, false)
 			bravoGroup.forEach(setAliveSpine, this, false)
-			createSplashArt()
 			animateSplashArt()
 		})
 	}
@@ -948,12 +952,14 @@ var yogoSelector = function(){
 
 		pullGroup.destroy()
 		landing.onComplete.add(function(){
-			game.add.tween(readyGroup.ready).to({alpha:0}, 300, Phaser.Easing.Cubic.Out, true)
-			VS.alpha = 1
-			game.add.tween(VS.scale).from({x: 10, y: 10}, 400, Phaser.Easing.Cubic.Out, true)
-			game.add.tween(VS).to({x: VS.x + 10}, 500, function (k) {
-				return shake(k, 45, 100)
-			}, true, 500, -1)
+			game.add.tween(readyGroup.ready).to({alpha:0}, 300, Phaser.Easing.Cubic.Out, true, 500).onComplete.add(function(){
+              
+                VS.alpha = 1
+                game.add.tween(VS.scale).from({x: 10, y: 10}, 400, Phaser.Easing.Cubic.Out, true)
+                game.add.tween(VS).to({x: VS.x + 10}, 500, function (k) {
+                    return shake(k, 45, 100)
+                }, true, 500, -1)
+            })
 		})
 	}
 

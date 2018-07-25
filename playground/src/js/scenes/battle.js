@@ -158,6 +158,13 @@ var battle = function(){
 		damageButom.x = game.world.centerX - 200
 		damageButom.y = game.world.height - 150
 		damageButom.label.text = "ultra"
+        
+        var rect = game.add.graphics()
+        rect.beginFill(0x242A4D)
+        rect.drawRect(0, 0, game.world.width, 150)
+        rect.endFill()
+        rect.alpha = 0.5
+        sceneGroup.add(rect)
     }
     
     function createButton(callback, color) {
@@ -209,7 +216,7 @@ var battle = function(){
             var lifeBox = teamsBarGroup.create(game.world.centerX * pivotX, 150, "atlas.battle", "lifeContainer" + i)
             lifeBox.anchor.setTo(i, 0.5)
             
-            var text = game.add.bitmapText(lifeBox.x, lifeBox.y - 100, 'skwig', "Equipo Alpha", 75)
+            var text = game.add.bitmapText(lifeBox.x, lifeBox.y - 120, 'skwig', "Equipo Alpha", 75)
             text.anchor.setTo(i,0.5)
             teamsBarGroup.add(text)
             
