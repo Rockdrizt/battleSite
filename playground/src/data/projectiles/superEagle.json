@@ -1,13 +1,10 @@
 {
   "timing":{
-    "stop":2900,
-    "removal":3700,
-    "hit":2900
+    "stop":1000,
+    "removal":1500,
+    "hit":1000
   },
     "particles":[
-    "particles/characters/windSuper1/windSuper1.json",
-    "particles/characters/windSuper1/windSuper2.json",
-    "particles/characters/windSuper1/windSuper3.json",
     "particles/characters/windSuper1/windSuper4.json",
     "particles/characters/windSuper1/windSuper5.json",
     "particles/characters/windSuper1/windSuper6.json"
@@ -57,7 +54,7 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":2850
+      "value":1000
     },
     {
       "index":"to",

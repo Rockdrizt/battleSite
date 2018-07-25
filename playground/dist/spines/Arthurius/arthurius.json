@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "jNOGwMC5X+YP0sCvcCqE/+SHi7s", "spine": "3.2.01", "width": 253, "height": 394.16, "images": "" },
+"skeleton": { "hash": "6irvO1IDO05HWlHuqi8vBeKMF5Q", "spine": "3.2.01", "width": 494.02, "height": 540.93, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "cog", "parent": "root", "x": -11.71, "y": 34.69, "color": "000000ff" },
@@ -67,11 +67,11 @@
 	{ "name": "yogo_ice_back", "bone": "influence_bone" },
 	{ "name": "arm2", "bone": "arm2", "attachment": "arm2_a" },
 	{ "name": "forearm2", "bone": "forearm2", "attachment": "forearm2_a" },
-	{ "name": "hand2", "bone": "hand2", "attachment": "hand2_a" },
+	{ "name": "hand2", "bone": "hand2", "attachment": "hand2_d" },
 	{ "name": "flag", "bone": "hand2" },
 	{ "name": "leg2", "bone": "leg2", "attachment": "leg2_b" },
 	{ "name": "shin2", "bone": "shin2", "attachment": "shin2_a" },
-	{ "name": "foot2", "bone": "foot2", "attachment": "foot2_a" },
+	{ "name": "foot2", "bone": "foot2", "attachment": "foot2_e" },
 	{ "name": "leg1", "bone": "leg1", "attachment": "leg1_a" },
 	{ "name": "shin1", "bone": "shin1", "attachment": "shin1_a" },
 	{ "name": "foot1", "bone": "foot1", "attachment": "foot1_a" },
@@ -81,9 +81,8 @@
 	{ "name": "hand1", "bone": "hand1", "attachment": "hand1_a" },
 	{ "name": "forearm1", "bone": "forearm1", "attachment": "forearm1_a" },
 	{ "name": "head", "bone": "head", "attachment": "head" },
-	{ "name": "mouth", "bone": "head", "attachment": "mouth_a6" },
-	{ "name": "eyes", "bone": "head", "attachment": "eyes_d1" },
-	{ "name": "particle2", "bone": "forearm1" },
+	{ "name": "mouth", "bone": "head", "attachment": "mouth_a1" },
+	{ "name": "eyes", "bone": "head", "attachment": "eyes_d2" },
 	{ "name": "yogo_ice_front", "bone": "influence_bone" },
 	{ "name": "cloud_l", "bone": "particles_foot_bone" },
 	{ "name": "cloud_r", "bone": "particles_foot_bone" },
@@ -95,7 +94,19 @@
 	{ "name": "shield", "bone": "shield" },
 	{ "name": "shield_hit", "bone": "influence_bone" },
 	{ "name": "glow_shield", "bone": "shield_ultra" },
-	{ "name": "shield_ultra", "bone": "shield_ultra" }
+	{ "name": "shield_ultra", "bone": "shield_ultra" },
+	{ "name": "particle1", "bone": "head", "attachment": "particle1" },
+	{ "name": "particle2", "bone": "hand1", "attachment": "particle2" },
+	{ "name": "particle3", "bone": "torso", "attachment": "particle3" },
+	{ "name": "particle4", "bone": "hand2", "attachment": "particle4" },
+	{ "name": "particle5", "bone": "foot1", "attachment": "particle5" },
+	{ "name": "particle6", "bone": "foot2", "attachment": "particle6" },
+	{ "name": "particle7", "bone": "root", "attachment": "particle7" },
+	{ "name": "particle12", "bone": "root", "attachment": "particle12" },
+	{ "name": "particle11", "bone": "influence_bone", "attachment": "particle11" },
+	{ "name": "particle8", "bone": "torso", "attachment": "particle8" },
+	{ "name": "particle9", "bone": "head", "attachment": "particle9" },
+	{ "name": "particle10", "bone": "head", "attachment": "particle10" }
 ],
 "skins": {
 	"default": {},
@@ -390,8 +401,41 @@
 			"mouth_d8": { "name": "normal/mouth_d8", "x": -7.02, "y": -41.14, "rotation": -90, "width": 69, "height": 36 },
 			"mouth_d9": { "name": "normal/mouth_d9", "x": -6.42, "y": -45.99, "rotation": -90, "width": 40, "height": 46 }
 		},
+		"particle1": {
+			"particle1": { "name": "normal/particle", "x": 177.86, "y": -13.14, "rotation": -180, "width": 216, "height": 144 }
+		},
+		"particle10": {
+			"particle10": { "name": "normal/particle", "x": 75.77, "y": -98.48, "rotation": 179.99, "width": 216, "height": 144 }
+		},
+		"particle11": {
+			"particle11": { "name": "normal/particle", "x": 121.45, "y": -21.76, "rotation": -180, "width": 216, "height": 144 }
+		},
+		"particle12": {
+			"particle12": { "name": "normal/particle", "x": 238.53, "y": 1.87, "rotation": -90, "width": 216, "height": 144 }
+		},
 		"particle2": {
-			"particle": { "name": "normal/particle", "x": 51.93, "y": -3.75, "rotation": 79.72, "width": 216, "height": 144 }
+			"particle2": { "name": "normal/particle", "x": 17.28, "y": -3.29, "rotation": -14.7, "width": 216, "height": 144 }
+		},
+		"particle3": {
+			"particle3": { "name": "normal/particle", "x": -9.86, "y": 17.21, "rotation": 179.99, "width": 216, "height": 144 }
+		},
+		"particle4": {
+			"particle4": { "name": "normal/particle", "x": 13.18, "y": -2.72, "rotation": -42, "width": 216, "height": 144 }
+		},
+		"particle5": {
+			"particle5": { "name": "normal/particle", "x": -4.55, "y": 7.72, "rotation": 0.24, "width": 216, "height": 144 }
+		},
+		"particle6": {
+			"particle6": { "name": "normal/particle", "x": 1.38, "y": 2.49, "rotation": -0.25, "width": 216, "height": 144 }
+		},
+		"particle7": {
+			"particle7": { "name": "normal/particle", "x": -1.41, "y": -0.27, "rotation": -90, "width": 216, "height": 144 }
+		},
+		"particle8": {
+			"particle8": { "name": "normal/particle", "x": 37.76, "y": -10.29, "rotation": -90, "width": 216, "height": 144 }
+		},
+		"particle9": {
+			"particle9": { "name": "normal/particle", "x": 75.77, "y": 99.44, "rotation": 179.99, "width": 216, "height": 144 }
 		},
 		"shield": {
 			"shield_a": { "name": "normal1/shield_a", "x": 40.34, "rotation": -90, "width": 153, "height": 225 },
@@ -755,9 +799,6 @@
 			"mouth_d8": { "name": "normal2/mouth_d8", "x": -7.02, "y": -41.14, "rotation": -90, "width": 69, "height": 36 },
 			"mouth_d9": { "name": "normal2/mouth_d9", "x": -6.42, "y": -45.99, "rotation": -90, "width": 40, "height": 46 }
 		},
-		"particle2": {
-			"particle": { "name": "normal2/particle", "x": 51.93, "y": -3.75, "rotation": 79.72, "width": 216, "height": 144 }
-		},
 		"shield": {
 			"shield_a": { "name": "normal1/shield_a", "x": 40.34, "rotation": -90, "width": 153, "height": 225 },
 			"shield_b": { "name": "normal1/shield_b", "x": 40.37, "rotation": -90, "width": 129, "height": 225 },
@@ -829,6 +870,64 @@
 			"yogo_ice_front": { "name": "normal1/yogo_ice_front", "x": 182.31, "y": 5.24, "rotation": -89.99, "width": 302, "height": 454 }
 		}
 	}
+},
+"events": {
+	"PLAY:tournamentBullAttack1": {},
+	"PLAY:tournamentEarthQuake2": {},
+	"PLAY:tournamentFireBurn1": {},
+	"PLAY:tournamentFootStep2": {},
+	"PLAY:tournamentHitGround2": {},
+	"PLAY:tournamentHitGround3": {},
+	"PLAY:tournamentIceDamage1": {},
+	"PLAY:tournamentJumpGround1": {},
+	"PLAY:tournamentLandGround1": {},
+	"PLAY:tournamentMagicAttack2": {},
+	"PLAY:tournamentRockSmash1": {},
+	"PLAY:tournamentScifiTeleport1": {},
+	"PLAY:tournamentShieldSmash2": {},
+	"PLAY:tournamentShieldSmash4": {},
+	"PLAY:tournamentSwoosh2": {},
+	"PLAY:tournamentSwoosh3": {},
+	"PLAY:tournamentSwordDraw1": {},
+	"PLAY:tournamentWindDamage1": {},
+	"SPAWN:particle10:anxiousDrops1": {},
+	"SPAWN:particle11:scifiTeleport1": {},
+	"SPAWN:particle11:scifiTeleport2": { "string": "scifiTeleport1/scifiTeleport1.json" },
+	"SPAWN:particle11:scifiTeleport3": { "string": "scifiTeleport1/scifiTeleport1.json" },
+	"SPAWN:particle11:scifiTeleport4": {},
+	"SPAWN:particle11:scifiTeleport5": { "string": "scifiTeleport2/scifiTeleport4.json" },
+	"SPAWN:particle11:scifiTeleport6": { "string": "scifiTeleport2/scifiTeleport4.json" },
+	"SPAWN:particle1:superHit1": {},
+	"SPAWN:particle1:superHit2": { "string": "superHit1/superHit1.json" },
+	"SPAWN:particle6:dustFloor1": {},
+	"SPAWN:particle6:dustFloor2": { "string": "dustFloor1/dustFloor1.json" },
+	"SPAWN:particle8:fireAshes1": {},
+	"SPAWN:particle8:fireDamage1": {},
+	"SPAWN:particle8:fireDamage2": { "string": "fireDamage1/fireDamage1.json" },
+	"SPAWN:particle9:anxiousDrops2": { "string": "anxiousDrops1/anxiousDrops1.json" },
+	"STAGESPAWN:self:-200:0:front:dustFloor1": {},
+	"STAGESPAWN:self:-200:0:front:dustFloor2": { "string": "dustFloor1/dustFloor1.json" },
+	"STAGESPAWN:self:-50:-120:front:iceDamage1": {},
+	"STAGESPAWN:self:-50:-120:front:iceDamage2": { "string": "iceDamage1/iceDamage1.json" },
+	"STAGESPAWN:self:0:-300:back:thinkImpatient2": {},
+	"STAGESPAWN:self:0:0:back:landingHalo1": {},
+	"STAGESPAWN:self:0:0:front:dustFloor1": {},
+	"STAGESPAWN:self:0:0:front:dustFloor2": { "string": "dustFloor1/dustFloor1.json" },
+	"STAGESPAWN:self:0:0:front:landingSmoke1": { "string": "landingSmoke1/landingSmoke1.json" },
+	"STAGESPAWN:self:0:0:front:landingSmoke2": { "string": "landingSmoke1/landingSmoke1.json" },
+	"STAGESPAWN:self:0:0:front:landingSmoke3": { "string": "landingSmoke1/landingSmoke1.json" },
+	"STAGESPAWN:self:0:0:front:windDamage1": {},
+	"STAGESPAWN:self:0:0:front:windDamage2": { "string": "windDamage1/windDamage1.json" },
+	"STAGESPAWN:self:0:0:front:windDamage3": { "string": "windDamage1/windDamage1.json" },
+	"STAGESPAWN:self:0:0:front:windDamage4": { "string": "windDamage1/windDamage1.json" },
+	"STAGESPAWN:self:125:0:front:shieldSmash4": {},
+	"STAGESPAWN:self:125:0:front:shieldSmash5": { "string": "shieldSmash2/shieldSmash4.json" },
+	"STAGESPAWN:self:125:0:front:shieldSmash6": { "string": "shieldSmash2/shieldSmash4.json" },
+	"STAGESPAWN:self:20:15:front:shieldSmash1": {},
+	"STAGESPAWN:self:20:15:front:shieldSmash2": { "string": "shieldSmash1/shieldSmash1.json" },
+	"STAGESPAWN:self:20:15:front:shieldSmash3": { "string": "shieldSmash1/shieldSmash1.json" },
+	"STAGESPAWN:self:50:0:front:dustFloor1": {},
+	"STAGESPAWN:self:50:0:front:dustFloor2": { "string": "dustFloor1/dustFloor1.json" }
 },
 "animations": {
 	"answer_bad": {
@@ -1053,16 +1152,6 @@
 				"attachment": [
 					{ "time": 0, "name": "mouth_a6" },
 					{ "time": 1.5333, "name": "mouth_a6" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1.5333, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.5333, "name": null }
 				]
 			},
 			"shield": {
@@ -2133,16 +2222,6 @@
 				"attachment": [
 					{ "time": 0, "name": "mouth_b1" },
 					{ "time": 2, "name": "mouth_b1" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 2, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 2, "name": null }
 				]
 			},
 			"shield": {
@@ -3224,17 +3303,6 @@
 					{ "time": 1.1333, "name": "mouth_a6" }
 				]
 			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1.1333, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 0.4666, "name": "particle" },
-					{ "time": 1.1333, "name": null }
-				]
-			},
 			"shield": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -3833,6 +3901,17 @@
 				]
 			},
 			{ "time": 1.1333 }
+		],
+		"events": [
+			{ "time": 0.2, "name": "PLAY:tournamentScifiTeleport1" },
+			{ "time": 0.3333, "name": "SPAWN:particle11:scifiTeleport4", "string": "scifiTeleport2/scifiTeleport4.json" },
+			{ "time": 0.3333, "name": "SPAWN:particle11:scifiTeleport5", "string": "scifiTeleport2/scifiTeleport5.json" },
+			{ "time": 0.3333, "name": "SPAWN:particle11:scifiTeleport6", "string": "scifiTeleport2/scifiTeleport6.json" },
+			{ "time": 0.4666, "name": "PLAY:tournamentLandGround1" },
+			{ "time": 0.4666, "name": "STAGESPAWN:self:0:0:back:landingHalo1", "string": "landingSmoke1/landingHalo1.json" },
+			{ "time": 0.4666, "name": "STAGESPAWN:self:0:0:front:landingSmoke1" },
+			{ "time": 0.4666, "name": "STAGESPAWN:self:0:0:front:landingSmoke2", "string": "landingSmoke1/landingSmoke2.json" },
+			{ "time": 0.4666, "name": "STAGESPAWN:self:0:0:front:landingSmoke3", "string": "landingSmoke1/landingSmoke3.json" }
 		]
 	},
 	"appear_delta": {
@@ -4083,17 +4162,6 @@
 					{ "time": 0.4, "name": "mouth_c2" },
 					{ "time": 0.8333, "name": "mouth_a6" },
 					{ "time": 1.1333, "name": "mouth_a6" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1.1333, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 0.4, "name": "particle" },
-					{ "time": 1.1333, "name": null }
 				]
 			},
 			"shield": {
@@ -4698,6 +4766,17 @@
 				]
 			},
 			{ "time": 1.1333 }
+		],
+		"events": [
+			{ "time": 0.2, "name": "PLAY:tournamentScifiTeleport1" },
+			{ "time": 0.2666, "name": "SPAWN:particle11:scifiTeleport1", "string": "scifiTeleport1/scifiTeleport1.json" },
+			{ "time": 0.2666, "name": "SPAWN:particle11:scifiTeleport2", "string": "scifiTeleport1/scifiTeleport2.json" },
+			{ "time": 0.2666, "name": "SPAWN:particle11:scifiTeleport3", "string": "scifiTeleport1/scifiTeleport3.json" },
+			{ "time": 0.4, "name": "PLAY:tournamentLandGround1" },
+			{ "time": 0.4, "name": "STAGESPAWN:self:0:0:back:landingHalo1", "string": "landingSmoke1/landingHalo1.json" },
+			{ "time": 0.4, "name": "STAGESPAWN:self:0:0:front:landingSmoke1" },
+			{ "time": 0.4, "name": "STAGESPAWN:self:0:0:front:landingSmoke2", "string": "landingSmoke1/landingSmoke2.json" },
+			{ "time": 0.4, "name": "STAGESPAWN:self:0:0:front:landingSmoke3", "string": "landingSmoke1/landingSmoke3.json" }
 		]
 	},
 	"attack_normal": {
@@ -4928,16 +5007,6 @@
 					{ "time": 0.2666, "name": "mouth_b2" },
 					{ "time": 0.8, "name": "mouth_a2" },
 					{ "time": 1, "name": "mouth_a6" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1, "name": null }
 				]
 			},
 			"shield": {
@@ -5622,6 +5691,12 @@
 				]
 			},
 			{ "time": 1 }
+		],
+		"events": [
+			{ "time": 0.3333, "name": "PLAY:tournamentSwoosh2" },
+			{ "time": 0.4666, "name": "PLAY:tournamentFootStep2" },
+			{ "time": 0.4666, "name": "SPAWN:particle6:dustFloor1", "string": "dustFloor1/dustFloor1.json" },
+			{ "time": 0.4666, "name": "SPAWN:particle6:dustFloor2", "string": "dustFloor1/dustFloor2.json" }
 		]
 	},
 	"attack_super": {
@@ -5887,16 +5962,6 @@
 					{ "time": 1.1666, "name": "mouth_a3" },
 					{ "time": 1.5, "name": "mouth_a2" },
 					{ "time": 1.6666, "name": "mouth_a6" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1.6666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.6666, "name": null }
 				]
 			},
 			"shield": {
@@ -7002,7 +7067,7 @@
 			{
 				"time": 0,
 				"offsets": [
-					{ "slot": "shield", "offset": -27 }
+					{ "slot": "shield", "offset": -26 }
 				]
 			},
 			{
@@ -7011,7 +7076,7 @@
 					{ "slot": "arm1", "offset": 4 },
 					{ "slot": "hand1", "offset": 4 },
 					{ "slot": "forearm1", "offset": 4 },
-					{ "slot": "shield", "offset": -27 }
+					{ "slot": "shield", "offset": -26 }
 				]
 			},
 			{
@@ -7028,15 +7093,26 @@
 			{
 				"time": 0.8666,
 				"offsets": [
-					{ "slot": "shield_hit", "offset": -31 }
+					{ "slot": "shield_hit", "offset": -30 }
 				]
 			},
 			{
 				"time": 1.6666,
 				"offsets": [
-					{ "slot": "shield_hit", "offset": -31 }
+					{ "slot": "shield_hit", "offset": -30 }
 				]
 			}
+		],
+		"events": [
+			{ "time": 0.1666, "name": "PLAY:tournamentJumpGround1" },
+			{ "time": 0.1666, "name": "STAGESPAWN:self:0:0:front:dustFloor1", "string": "dustFloor1/dustFloor1.json" },
+			{ "time": 0.1666, "name": "STAGESPAWN:self:0:0:front:dustFloor2", "string": "dustFloor1/dustFloor2.json" },
+			{ "time": 0.5, "name": "PLAY:tournamentSwoosh3" },
+			{ "time": 0.8333, "name": "PLAY:tournamentShieldSmash4" },
+			{ "time": 0.8666, "name": "PLAY:tournamentEarthQuake2" },
+			{ "time": 0.8666, "name": "STAGESPAWN:self:20:15:front:shieldSmash1", "string": "shieldSmash1/shieldSmash1.json" },
+			{ "time": 0.8666, "name": "STAGESPAWN:self:20:15:front:shieldSmash2", "string": "shieldSmash1/shieldSmash2.json" },
+			{ "time": 0.8666, "name": "STAGESPAWN:self:20:15:front:shieldSmash3", "string": "shieldSmash1/shieldSmash3.json" }
 		]
 	},
 	"attack_ultra": {
@@ -8408,10 +8484,14 @@
 				"offsets": [
 					{ "slot": "hand1", "offset": 3 },
 					{ "slot": "forearm1", "offset": 3 },
-					{ "slot": "shield", "offset": -9 }
+					{ "slot": "shield", "offset": -8 }
 				]
 			},
 			{ "time": 2.0666 }
+		],
+		"events": [
+			{ "time": 1.0666, "name": "PLAY:tournamentShieldSmash2" },
+			{ "time": 1.4, "name": "PLAY:tournamentBullAttack1" }
 		]
 	},
 	"gg": {
@@ -8636,16 +8716,6 @@
 				"attachment": [
 					{ "time": 0, "name": "mouth_a6" },
 					{ "time": 4, "name": "mouth_a6" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 4, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": "particle" },
-					{ "time": 4, "name": "particle" }
 				]
 			},
 			"shield": {
@@ -9713,16 +9783,6 @@
 					{ "time": 0.6666, "name": "mouth_a6" }
 				]
 			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 0.6666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 0.6666, "name": null }
-				]
-			},
 			"shield": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -10664,16 +10724,6 @@
 					{ "time": 1.5, "name": "mouth_c1" },
 					{ "time": 2.2, "name": "mouth_a2" },
 					{ "time": 2.6, "name": "mouth_a6" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 2.6, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 2.6, "name": null }
 				]
 			},
 			"shield": {
@@ -11690,6 +11740,14 @@
 				]
 			},
 			{ "time": 2.6 }
+		],
+		"events": [
+			{ "time": 0.0333, "name": "SPAWN:particle1:superHit1", "string": "superHit1/superHit1.json" },
+			{ "time": 0.0333, "name": "SPAWN:particle1:superHit2", "string": "superHit1/superHit2.json" },
+			{ "time": 0.3333, "name": "PLAY:tournamentHitGround3" },
+			{ "time": 0.3333, "name": "STAGESPAWN:self:-200:0:front:dustFloor1", "string": "dustFloor1/dustFloor1.json" },
+			{ "time": 0.3333, "name": "STAGESPAWN:self:-200:0:front:dustFloor2", "string": "dustFloor1/dustFloor2.json" },
+			{ "time": 1.6666, "name": "PLAY:tournamentJumpGround1" }
 		]
 	},
 	"hit_ultra_earth": {
@@ -11950,16 +12008,6 @@
 					{ "time": 2.9333, "name": "mouth_a3" },
 					{ "time": 3.0666, "name": "mouth_a2" },
 					{ "time": 3.3333, "name": "mouth_a6" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 3.3333, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": "particle" },
-					{ "time": 3.3333, "name": null }
 				]
 			},
 			"shield": {
@@ -13643,6 +13691,11 @@
 				]
 			},
 			{ "time": 3.3333 }
+		],
+		"events": [
+			{ "time": 1.5, "name": "PLAY:tournamentHitGround2" },
+			{ "time": 1.5, "name": "STAGESPAWN:self:50:0:front:dustFloor1", "string": "dustFloor1/dustFloor1.json" },
+			{ "time": 1.5, "name": "STAGESPAWN:self:50:0:front:dustFloor2", "string": "dustFloor1/dustFloor2.json" }
 		]
 	},
 	"hit_ultra_fire": {
@@ -14149,16 +14202,6 @@
 					{ "time": 1.5666, "name": "mouth_b4" },
 					{ "time": 3.1333, "name": "mouth_a6" },
 					{ "time": 3.6666, "name": "mouth_a6" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 3.6666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 3.6666, "name": null }
 				]
 			},
 			"shield": {
@@ -15217,6 +15260,15 @@
 		"drawOrder": [
 			{ "time": 0 },
 			{ "time": 3.6666 }
+		],
+		"events": [
+			{ "time": 0.1666, "name": "PLAY:tournamentFireBurn1" },
+			{ "time": 0.1666, "name": "SPAWN:particle8:fireDamage1", "string": "fireDamage1/fireDamage1.json" },
+			{ "time": 0.1666, "name": "SPAWN:particle8:fireDamage2", "string": "fireDamage1/fireDamage2.json" },
+			{ "time": 1, "name": "PLAY:tournamentFootStep2" },
+			{ "time": 1, "name": "SPAWN:particle6:dustFloor1", "string": "dustFloor1/dustFloor1.json" },
+			{ "time": 1, "name": "SPAWN:particle6:dustFloor2", "string": "dustFloor1/dustFloor2.json" },
+			{ "time": 2.3333, "name": "SPAWN:particle8:fireAshes1", "string": "fireAshes1/fireAshes1.json" }
 		]
 	},
 	"hit_ultra_water": {
@@ -15630,27 +15682,6 @@
 					{ "time": 1.9, "name": "mouth_b5" },
 					{ "time": 2.6333, "name": "mouth_a1" },
 					{ "time": 2.6666, "name": "mouth_a6" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{
-						"time": 0.2333,
-						"color": "ffffffff",
-						"curve": [ 0.25, 0, 0.75, 1 ]
-					},
-					{ "time": 0.6, "color": "44fbffff", "curve": "stepped" },
-					{
-						"time": 1.7666,
-						"color": "44fbffff",
-						"curve": [ 0.608, 0, 0.836, 0.92 ]
-					},
-					{ "time": 2.6666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 2.6666, "name": null }
 				]
 			},
 			"shield": {
@@ -16810,18 +16841,23 @@
 			{
 				"time": 0.2,
 				"offsets": [
-					{ "slot": "hand1", "offset": 4 },
-					{ "slot": "forearm1", "offset": 4 }
+					{ "slot": "hand1", "offset": 3 },
+					{ "slot": "forearm1", "offset": 3 }
 				]
 			},
 			{
 				"time": 0.6,
 				"offsets": [
-					{ "slot": "hand1", "offset": 4 },
-					{ "slot": "forearm1", "offset": 4 }
+					{ "slot": "hand1", "offset": 3 },
+					{ "slot": "forearm1", "offset": 3 }
 				]
 			},
 			{ "time": 2.6666 }
+		],
+		"events": [
+			{ "time": 0.0333, "name": "PLAY:tournamentIceDamage1" },
+			{ "time": 0.0333, "name": "STAGESPAWN:self:-50:-120:front:iceDamage1", "string": "iceDamage1/iceDamage1.json" },
+			{ "time": 0.0333, "name": "STAGESPAWN:self:-50:-120:front:iceDamage2", "string": "iceDamage1/iceDamage2.json" }
 		]
 	},
 	"hit_ultra_wind": {
@@ -17067,16 +17103,6 @@
 					{ "time": 2.2, "name": "mouth_a4" },
 					{ "time": 3.4666, "name": "mouth_c1" },
 					{ "time": 4.1666, "name": "mouth_a6" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 4.1666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 4.1666, "name": null }
 				]
 			},
 			"shield": {
@@ -18738,6 +18764,16 @@
 				]
 			},
 			{ "time": 4.1666 }
+		],
+		"events": [
+			{ "time": 0.0333, "name": "PLAY:tournamentWindDamage1" },
+			{ "time": 0.0333, "name": "STAGESPAWN:self:0:0:front:windDamage1", "string": "windDamage1/windDamage1.json" },
+			{ "time": 0.0333, "name": "STAGESPAWN:self:0:0:front:windDamage2", "string": "windDamage1/windDamage2.json" },
+			{ "time": 0.0333, "name": "STAGESPAWN:self:0:0:front:windDamage3", "string": "windDamage1/windDamage3.json" },
+			{ "time": 0.0333, "name": "STAGESPAWN:self:0:0:front:windDamage4", "string": "windDamage1/windDamage4.json" },
+			{ "time": 2.6666, "name": "PLAY:tournamentHitGround3" },
+			{ "time": 2.6666, "name": "STAGESPAWN:self:0:0:front:dustFloor1", "string": "dustFloor1/dustFloor1.json" },
+			{ "time": 2.6666, "name": "STAGESPAWN:self:0:0:front:dustFloor2", "string": "dustFloor1/dustFloor2.json" }
 		]
 	},
 	"idle_anxious": {
@@ -18962,16 +18998,6 @@
 				"attachment": [
 					{ "time": 0, "name": "mouth_b4" },
 					{ "time": 1.3333, "name": "mouth_b4" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1.3333, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.3333, "name": null }
 				]
 			},
 			"shield": {
@@ -20138,10 +20164,14 @@
 			{
 				"time": 1.3333,
 				"offsets": [
-					{ "slot": "hand1", "offset": 5 },
-					{ "slot": "forearm1", "offset": 5 }
+					{ "slot": "hand1", "offset": 4 },
+					{ "slot": "forearm1", "offset": 4 }
 				]
 			}
+		],
+		"events": [
+			{ "time": 0.0333, "name": "SPAWN:particle10:anxiousDrops1", "string": "anxiousDrops1/anxiousDrops1.json" },
+			{ "time": 0.0333, "name": "SPAWN:particle9:anxiousDrops2", "string": "anxiousDrops1/anxiousDrops2.json" }
 		]
 	},
 	"idle_impatient": {
@@ -20365,16 +20395,6 @@
 				"attachment": [
 					{ "time": 0, "name": "mouth_a5" },
 					{ "time": 1.3333, "name": "mouth_a5" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1.3333, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.3333, "name": null }
 				]
 			},
 			"shield": {
@@ -20941,10 +20961,13 @@
 			{
 				"time": 1.3333,
 				"offsets": [
-					{ "slot": "hand1", "offset": 5 },
-					{ "slot": "forearm1", "offset": 5 }
+					{ "slot": "hand1", "offset": 4 },
+					{ "slot": "forearm1", "offset": 4 }
 				]
 			}
+		],
+		"events": [
+			{ "time": 0.0333, "name": "STAGESPAWN:self:0:-300:back:thinkImpatient2", "string": "thinkImpatient2/thinkImpatient2.json" }
 		]
 	},
 	"idle_normal": {
@@ -21169,16 +21192,6 @@
 				"attachment": [
 					{ "time": 0, "name": "mouth_a6" },
 					{ "time": 2, "name": "mouth_a2" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 2, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 2, "name": null }
 				]
 			},
 			"shield": {
@@ -22166,16 +22179,6 @@
 					{ "time": 0.6666, "name": "mouth_b1" }
 				]
 			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 0.6666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": "particle" },
-					{ "time": 0.6666, "name": "particle" }
-				]
-			},
 			"shield": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -22918,16 +22921,6 @@
 					{ "time": 0.6666, "name": "mouth_b1" }
 				]
 			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 0.6666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": "particle" },
-					{ "time": 0.6666, "name": "particle" }
-				]
-			},
 			"shield": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -23580,8 +23573,8 @@
 			{
 				"time": 0,
 				"offsets": [
-					{ "slot": "hand1", "offset": 7 },
-					{ "slot": "forearm1", "offset": 7 }
+					{ "slot": "hand1", "offset": 6 },
+					{ "slot": "forearm1", "offset": 6 }
 				]
 			},
 			{ "time": 0.6666 }
@@ -23813,16 +23806,6 @@
 					{ "time": 0.2333, "name": "mouth_a7" },
 					{ "time": 0.8333, "name": "mouth_a1" },
 					{ "time": 1.3333, "name": "mouth_b1" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1.3333, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.3333, "name": "particle" }
 				]
 			},
 			"shield": {
@@ -24670,10 +24653,13 @@
 			{
 				"time": 0.3666,
 				"offsets": [
-					{ "slot": "shield", "offset": -17 }
+					{ "slot": "shield", "offset": -16 }
 				]
 			},
 			{ "time": 1.3333 }
+		],
+		"events": [
+			{ "time": 0.1666, "name": "PLAY:tournamentSwordDraw1" }
 		]
 	},
 	"support_yog2": {
@@ -24902,16 +24888,6 @@
 					{ "time": 0.9, "name": "mouth_c3" },
 					{ "time": 1.5666, "name": "mouth_b1" },
 					{ "time": 2.6666, "name": "mouth_b1" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 2.6666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": "particle" },
-					{ "time": 2.6666, "name": "particle" }
 				]
 			},
 			"shield": {
@@ -26051,16 +26027,6 @@
 					{ "time": 0.8, "name": "mouth_b1" }
 				]
 			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 0.8, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": "particle" },
-					{ "time": 0.8, "name": "particle" }
-				]
-			},
 			"shield": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -26705,6 +26671,10 @@
 					{ "slot": "forearm1", "offset": 3 }
 				]
 			}
+		],
+		"events": [
+			{ "time": 0.1333, "name": "PLAY:tournamentJumpGround1" },
+			{ "time": 0.7666, "name": "PLAY:tournamentLandGround1" }
 		]
 	},
 	"wait": {
@@ -26929,16 +26899,6 @@
 				"attachment": [
 					{ "time": 0, "name": "mouth_a6" },
 					{ "time": 2.0666, "name": "mouth_a6" }
-				]
-			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 2.0666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 2.0666, "name": null }
 				]
 			},
 			"shield": {
@@ -27913,16 +27873,6 @@
 					{ "time": 2.6666, "name": "mouth_d1" }
 				]
 			},
-			"particle2": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 2.6666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": "particle" },
-					{ "time": 2.6666, "name": "particle" }
-				]
-			},
 			"shield": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -28840,15 +28790,15 @@
 			{
 				"time": 0,
 				"offsets": [
-					{ "slot": "hand1", "offset": 5 },
-					{ "slot": "forearm1", "offset": 5 }
+					{ "slot": "hand1", "offset": 4 },
+					{ "slot": "forearm1", "offset": 4 }
 				]
 			},
 			{
 				"time": 2.6666,
 				"offsets": [
-					{ "slot": "hand1", "offset": 5 },
-					{ "slot": "forearm1", "offset": 5 }
+					{ "slot": "hand1", "offset": 4 },
+					{ "slot": "forearm1", "offset": 4 }
 				]
 			}
 		]

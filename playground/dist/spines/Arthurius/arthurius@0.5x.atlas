@@ -1557,13 +1557,6 @@ normal/particle
   orig: 108, 72
   offset: 0, 0
   index: -1
-normal2/particle
-  rotate: false
-  xy: 1835, 337
-  size: 108, 72
-  orig: 108, 72
-  offset: 0, 0
-  index: -1
 normal/shin1_b
   rotate: false
   xy: 1620, 135
