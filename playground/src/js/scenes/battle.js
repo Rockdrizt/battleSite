@@ -72,6 +72,9 @@ var battle = function(){
         particles: [
 		]
     }
+
+    var TEAM_NAMES = ["alpha", "delta"]
+	var DELAY_APPEAR = 800
     
     var SIDES = {
 		LEFT:{direction: -1, scale:{x:1}},
@@ -436,17 +439,21 @@ var battle = function(){
         questionGroup.options.setAll("inputEnabled", false)
         questionGroup.alpha = 0
         
-        questionGroup.setQuiestion = setQuestion.bind(questionGroup)
+        questionGroup.setQuestion = setQuestion.bind(questionGroup)
         
         
-        var questionBtn = createButton(questionGroup.setQuiestion.bind(questionGroup), 0x00ffff)
+        var questionBtn = createButton(function(){
+			game.add.tween(specialAttack.black).to({alpha:0.5}, 300, Phaser.Easing.Cubic.InOut, true)
+        	questionGroup.setQuestion()
+			}, 0x00ffff
+		)
 		questionBtn.x = game.world.centerX
 		questionBtn.y = game.world.height - 250
 		questionBtn.label.text = "questionBtn"
     }
     
     function setQuestion(question, image, options){
-        
+
         //this.question.setText(question)
         this.question.alpha = 0
         //this.image.loadTexture("atlas.battle", image)
@@ -568,7 +575,18 @@ var battle = function(){
 		}
 		assets.images.push(charObj)
     }
-    
+
+    function createAppear(character, teamIndex, charIndex) {
+		character.alpha = 0
+		var teamName = TEAM_NAMES[teamIndex]
+		var teamTime = teamIndex * DELAY_APPEAR * teams[teamIndex].length
+		var appearTime = DELAY_APPEAR * charIndex
+		game.time.events.add(teamTime + appearTime, function (animation) {
+			this.alpha = 1
+			this.setAnimation([animation, "answer_good"], true)
+		}, character, "appear_" + teamName)
+	}
+
     function placeYogotars() {
         
         yogoGroup = game.add.group()
@@ -596,7 +614,9 @@ var battle = function(){
 				console.log("postion", character.position)
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
 				character.teamIndex = teamIndex
+				character.alpha = 0
 				yogoGroup.add(character)
+				createAppear(character, teamIndex, charIndex)
 
 				var rect = game.add.graphics()
 				rect.beginFill(0xffffff)
@@ -629,6 +649,7 @@ var battle = function(){
 			groupPoint.impactPoint = {x:groupPoint.x, y:groupPoint.y}
 			groupPoint.takeDamage = takeGroupDamage.bind(groupPoint)
 			groupPoint.side = side.direction
+			groupPoint.alpha = 0
 			teamCharacters.groupPoint = groupPoint
 
 			yogoGroup.add(groupPoint)
