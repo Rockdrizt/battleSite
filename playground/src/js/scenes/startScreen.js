@@ -18,7 +18,7 @@ var startScreen = function(){
 	}
     
 
-	assets = {
+	var assets = {
         atlases: [
             {   
                 name: "atlas.startScreen",
@@ -65,6 +65,8 @@ var startScreen = function(){
             },
 		],
 		sounds: [
+            {	name: "startSong",
+				file: soundsPath + "songs/battleLoop.mp3"},
 		],
         spritesheets: [
             

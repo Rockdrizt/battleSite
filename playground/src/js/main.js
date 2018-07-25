@@ -28,7 +28,8 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				sceneloader.show("battleScene")
+				//sceneloader.show("yogoSelector")
+				sceneloader.show("startScreen")
 	    	}
 
 			document.body.style.visibility = "visible"
@@ -88,13 +89,15 @@ function startGame(){
 		
 		]
 
-		battleScene.setTeams(teams)
+		//battleScene.setTeams(teams)
     }
 
     function create(){
 		console.log("createEpicBattle")
     	bootConfigFiles([
-			battleScene
+			//battleScene,
+            yogoSelector,
+            startScreen
             //result,
     	])
     }
