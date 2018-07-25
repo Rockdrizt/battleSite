@@ -109,6 +109,7 @@ var battle = function(){
     var yogoGroup
     var questionGroup
     var specialAttack
+    var blackMask
     var miniYogos = []
     var lifeBars = []
     var scoreRound = []
@@ -140,6 +141,13 @@ var battle = function(){
         background.width = game.world.width
         background.height = game.world.height
         
+        blackMask = game.add.graphics()
+        blackMask.beginFill(0x000000)
+        blackMask.drawRect(0,0,game.world.width, game.world.height)
+        blackMask.endFill()
+        blackMask.alpha = 0
+        sceneGroup.add(blackMask)
+        
         var rotateButton = createButton(rotateTeam.bind(null, 0), 0x00ff00)
 		rotateButton.x = game.world.centerX
 		rotateButton.y = game.world.height - 150
@@ -161,6 +169,11 @@ var battle = function(){
 		damageButom.x = game.world.centerX - 200
 		damageButom.y = game.world.height - 150
 		damageButom.label.text = "ultra"
+        
+        var returnBtn = createButton(returnCamera, 0xff0033)
+		returnBtn.x = game.world.centerX 
+		returnBtn.y = game.world.height - 200
+		returnBtn.label.text = "zoom out"
         
         var rect = game.add.graphics()
         rect.beginFill(0x242A4D)
@@ -202,6 +215,8 @@ var battle = function(){
         var fontStyle = {font: "65px skwig", fontWeight: "bold", fill: "#FFFFFE", align: "center"}
         
         teamsBarGroup = game.add.group()
+        teamsBarGroup.fixedToCamera = true
+        teamsBarGroup.cameraOffset.setTo(0, 0)
         sceneGroup.add(teamsBarGroup)
         
         var tokenGroup = game.add.group()
@@ -302,7 +317,7 @@ var battle = function(){
         
         var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#444444", align: "center"}
         
-        var timeToken = sceneGroup.create(game.world.centerX, 150, "atlas.battle", "timeToken")
+        var timeToken = teamsBarGroup.create(game.world.centerX, 150, "atlas.battle", "timeToken")
         timeToken.anchor.setTo(0.5)
         
         var text = new Phaser.Text(sceneGroup.game, 0, -5, "3:00", fontStyle)
@@ -315,16 +330,8 @@ var battle = function(){
          
         var color = [0xffffff, 0x242A4D]
         
-        var black = game.add.graphics()
-        black.beginFill(0x000000)
-        black.drawRect(0,0,game.world.width, game.world.height)
-        black.endFill()
-        black.alpha = 0
-        sceneGroup.add(black)
-        
         specialAttack = game.add.group()
         specialAttack.lines = []
-        specialAttack.black = black
         sceneGroup.add(specialAttack)
         
         var frame = specialAttack.create(-10, game.world.centerY , "frame")
@@ -407,6 +414,7 @@ var battle = function(){
                 game.add.tween(btn.scale).to({x: 0.8, y:0.8}, 100, Phaser.Easing.linear, true, 0, 0, true).onComplete.add(function(){
                     questionGroup.options.setAll("inputEnabled", false)
                     game.add.tween(questionGroup).to({alpha:0}, 500, Phaser.Easing.linear, true)
+                    game.add.tween(blackMask).to({alpha:0}, 500, Phaser.Easing.linear, true)
                 })
             },this)
             
@@ -442,7 +450,7 @@ var battle = function(){
         
         
         var questionBtn = createButton(function(){
-			game.add.tween(specialAttack.black).to({alpha:0.5}, 300, Phaser.Easing.Cubic.InOut, true)
+			game.add.tween(blackMask).to({alpha:0.5}, 300, Phaser.Easing.Cubic.InOut, true)
         	questionGroup.setQuestion()
 			}, 0x00ffff
 		)
@@ -703,16 +711,19 @@ var battle = function(){
         
         if(type == "normal"){
             var damage = DAMAGE.normal
+            zoomCamera(1.4, 2000, {x: game.world.centerX * 0.4, y:game.world.centerY + 100}) 
+            game.time.events.add(2000, returnCamera)
         }
         else if(type == "super"){
             var damage = DAMAGE.super
+            zoomCamera(1.4, 2000, {x: game.world.centerX * 0.4, y:game.world.centerY + 100}) 
+            game.time.events.add(3000, returnCamera)
         }
         else{
             var damage = DAMAGE.ultra
         }
         
         mainSpine.attack(target, type, dealDamage.bind(null, otherTeam, damage))
-        //game.time.events.add(3000, dealDamage, this, otherTeam, damage)
     }
     
     function ultraMove(){
@@ -730,7 +741,7 @@ var battle = function(){
             line.slide.resume()
         })
         
-        game.add.tween(specialAttack.black).to({alpha:0.5}, 300, Phaser.Easing.Cubic.InOut, true)
+        game.add.tween(blackMask).to({alpha:0.5}, 300, Phaser.Easing.Cubic.InOut, true)
         game.add.tween(specialAttack.yogo).from({x:0}, 500, Phaser.Easing.Cubic.InOut, true, 300)
         var specialMove = game.add.tween(specialAttack).from({x:spawnX}, 500, Phaser.Easing.Cubic.InOut, true, 200)
         specialMove.repeat(1, 800)
@@ -738,10 +749,38 @@ var battle = function(){
             specialAttack.lines.forEach(function(line){
                 line.slide.pause()
             })
-			specialAttack.black.alpha = 0
+			blackMask.alpha = 0
 			attackMove("ultra")
         })
     }
+    
+    function zoomCamera(zoom, delay, pos) {
+         
+        var scaleTween = game.add.tween(game.camera.scale).to({x:zoom, y:zoom}, delay, Phaser.Easing.Cubic.Out, true)
+        game.add.tween(game.camera).to({x:pos.x, y:pos.y}, delay, Phaser.Easing.Cubic.Out, true)
+        game.add.tween(blackMask).to({alpha:0.3}, 500, Phaser.Easing.Cubic.Out, true)
+		
+        var toScale1 = 1/zoom
+		var actualScale = teamsBarGroup.scale.x
+        
+		scaleTween.onUpdateCallback(function () {
+			if(toScale1 < actualScale) {
+				teamsBarGroup.scale.x = Phaser.Math.clamp(1 / game.camera.scale.x, toScale1, actualScale)
+				teamsBarGroup.scale.y = Phaser.Math.clamp(1 / game.camera.scale.y, toScale1, actualScale)
+
+			}else{
+				teamsBarGroup.scale.x = Phaser.Math.clamp(1/ game.camera.scale.x, actualScale, toScale1)
+				teamsBarGroup.scale.y = Phaser.Math.clamp(1/ game.camera.scale.y, actualScale, toScale1)
+			}
+		})
+	}
+    
+    function returnCamera() {
+		game.camera.follow(null)
+    	game.add.tween(game.camera).to({x:0, y:0}, 1000, Phaser.Easing.Cubic.Out, true)
+		zoomCamera(1, 1000, {x:0, y:0})
+		game.add.tween(blackMask).to({alpha:0}, 500, Phaser.Easing.Cubic.Out, true)
+	}
 
 	return {
 		
@@ -766,7 +805,8 @@ var battle = function(){
             createSpecialAttack()
             createQuestionOverlay()
             //createMenuAnimations()
-            //battleSong = sound.play("battleSong", {loop:true, volume:0.6})    
+            //battleSong = sound.play("battleSong", {loop:true, volume:0.6}) 
+            sceneGroup.bringToTop(teamsBarGroup)
             
 		},
         setCharacter:setCharacter,
