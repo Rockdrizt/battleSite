@@ -28,7 +28,7 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				//sceneloader.show("startScreen")
+				//sceneloader.show("yogoSelector")
 				sceneloader.show("battle")
 	    	}
 

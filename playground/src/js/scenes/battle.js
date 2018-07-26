@@ -181,15 +181,6 @@ var battle = function(){
         rect.endFill()
         rect.alpha = 0.5
         sceneGroup.add(rect)
-        
-        var questionBtn = createButton(function(){
-			game.add.tween(blackMask).to({alpha:0.5}, 300, Phaser.Easing.Cubic.InOut, true)
-        	questionGroup.setQuestion()
-			}, 0x00ffff
-		)
-		questionBtn.x = game.world.centerX
-		questionBtn.y = game.world.height - 250
-		questionBtn.label.text = "questionBtn"
     }
     
     function createButton(callback, color) {
@@ -379,8 +370,7 @@ var battle = function(){
             
             offset += game.rnd.integerInRange(3, 10) * 5
         }
-        
-        var yogo = specialAttack.create(frame.centerX, frame.y + frame.height * 0.48, mainSpine.data.name + "Special")
+        var yogo = specialAttack.create(frame.centerX, frame.y + frame.height * 0.48, "DinamitaSpecial")
         yogo.anchor.setTo(0.5,1)
         specialAttack.yogo = yogo
         specialAttack.y = game.world.height
@@ -456,6 +446,16 @@ var battle = function(){
         questionGroup.alpha = 0
         
         questionGroup.setQuestion = setQuestion.bind(questionGroup)
+        
+        
+        var questionBtn = createButton(function(){
+			game.add.tween(blackMask).to({alpha:0.5}, 300, Phaser.Easing.Cubic.InOut, true)
+        	questionGroup.setQuestion()
+			}, 0x00ffff
+		)
+		questionBtn.x = game.world.centerX
+		questionBtn.y = game.world.height - 250
+		questionBtn.label.text = "questionBtn"
     }
     
     function setQuestion(question, image, options){
@@ -701,8 +701,6 @@ var battle = function(){
         var damage = life.width - (MAX_LIFE * percent * ORDER_SIDES[team].scale.x)
         
         game.add.tween(life).to({width:damage}, 500, Phaser.Easing.Cubic.Out, true)
-        //returnCamera()
-        game.time.events.add(2000, returnCamera)
     }
     
     function attackMove(type){
@@ -712,16 +710,18 @@ var battle = function(){
         
         if(type == "normal"){
             var damage = DAMAGE.normal
-            //zoomCamera(1.4, 2000, {x: game.world.centerX * 0.4, y:game.world.centerY + 100}) 
+            zoomCamera(1.4, 2000, {x: game.world.centerX * 0.4, y:game.world.centerY + 100}) 
+            game.time.events.add(2000, returnCamera)
         }
         else if(type == "super"){
             var damage = DAMAGE.super
-            //zoomCamera(1.4, 2000, {x: game.world.centerX * 0.4, y:game.world.centerY + 100}) 
+            zoomCamera(1.4, 2000, {x: game.world.centerX * 0.4, y:game.world.centerY + 100}) 
+            game.time.events.add(3000, returnCamera)
         }
         else{
             var damage = DAMAGE.ultra
         }
-        zoomCamera(1.4, 2000, {x: game.world.centerX * 0.4, y:game.world.centerY + 100}) 
+
         mainSpine.attack(target, type, dealDamage.bind(null, otherTeam, damage))
     }
     
@@ -800,11 +800,11 @@ var battle = function(){
             createTeamBars()
             createTimer()
             placeYogotars()
-            sceneGroup.bringToTop(teamsBarGroup)
             createSpecialAttack()
             createQuestionOverlay()
             //createMenuAnimations()
-            //battleSong = sound.play("battleSong", {loop:true, volume:0.6}) 
+            //battleSong = sound.play("battleSong", {loop:true, volume:0.6})
+            sceneGroup.bringToTop(teamsBarGroup)
             
 		},
         setCharacter:setCharacter,

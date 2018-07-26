@@ -6,11 +6,15 @@ var reward = function(){
     
     var localizationData = {
 		"EN":{
-            "howTo":"How to Play?"
+            "howTo":"How to Play?",
+            "moves":"Moves left",
+			"stop":"Stop!"
 		},
 
 		"ES":{
-            "howTo":"¿Cómo jugar?"
+            "moves":"Movimientos extra",
+            "howTo":"¿Cómo jugar?",
+            "stop":"¡Detener!"
 		}
 	}
     
@@ -51,13 +55,7 @@ var reward = function(){
 		],
 		sounds: [],
         spritesheets: [],
-        spines:[
-            {
-                name:"dinamita",
-                file:"images/spines/dinamita/dinamita.json",
-                scales: ["@0.5x"]
-            },
-        ]
+        spines:[]
     }
     
      //////////////////
@@ -77,10 +75,6 @@ var reward = function(){
     var lightColocation;                    //Reference of position's light in x
     var lightColocationY;                   //Reference of position's light in y
     var light;                              //Array of lights
-    var winnerColocationX;
-    var winnerColocationY;
-    var winnerScale;
-    var scaleOrder;
     
      //////////////////
     // Principal flow
@@ -96,16 +90,12 @@ var reward = function(){
         loseColocationX = game.width - 550;
         squareLoser = [];
         closeSquare = [];
-        //indexWinner = 0;
+        indexWinner = 0;
         title = [];
         textTitle = ["Tiempo: 25 min", "Aciertos: 29"];
-        lightColocation = [360,550,1150,1350];
+        lightColocation = [350,550,1150,1350];
         lightColocationY = [335,235,235,335]
         light = [];
-        winnerColocationX = [450,860,1280];
-        winnerColocationY = [680,735,680];
-        winnerScale = [0.85,1,0.8];
-        scaleOrder = [-1,1,1];
 
         loadSounds();
 	}
@@ -189,7 +179,6 @@ var reward = function(){
             squareLoser.push(game.add.sprite(game.width + 300, loseColocation,"atlas.reward","ventanaFondo"));
             sceneGroup.add(squareLoser[i]);
             closeSquare.push(game.add.sprite(game.width + 300 - 2, loseColocation + squareLoser[i].height - 5,"atlas.reward","ventanaFrente"));
-            createSpineL(180,260,"dinamita",0.65*scaleOrder[i],0.65,squareLoser[i]);
             loseColocation += squareLoser[i].height + 10;
          }
 
@@ -206,7 +195,7 @@ var reward = function(){
         var nameWin = game.add.sprite(-500, 50,"atlas.reward", namePlayer);
         sceneGroup.add(nameWin);
 
-        var tweenNameWin = game.add.tween(nameWin).to({ x: 0 }, 1500, Phaser.Easing.Bounce.Out, true, 0, 0);
+        var tweenNameWin = game.add.tween(nameWin).to({ x: 0 }, 1000, Phaser.Easing.Bounce.Out, true, 0, 0);
         var tweenLigth;
         tweenNameWin.onComplete.add(function(){
             for (var y = 0; y < 4; y++) {
@@ -215,8 +204,9 @@ var reward = function(){
             tweenLigth.onComplete.add(function(){
                 game.add.tween(cupGray).to({ alpha: 0 }, 1000, Phaser.Easing.Linear.Out, true, 0, 0);
                 tweenCup = game.add.tween(cup).to({ blendMode: PIXI.blendModes.NORMAL }, 2000, Phaser.Easing.Linear.Out, true, 0, 0);
-                game.add.tween(brainWin).to({ alpha: 1 }, 300, Phaser.Easing.Bounce.InOut, true, 0, 0);
+                game.add.tween(brainWin).to({ alpha: 1 }, 300, Phaser.Easing.Bounce.InOut, true, 0, 6);
                 tweenCup.onComplete.add(function(){
+                    game.add.tween(brainWin).to({ y: -35 }, 2000, Phaser.Easing.Sinusoidal.InOut, true, 0, -1,true, 2000);
                     loseColocation = 150;
                     for(var j=0; j<3; j++){
                         game.add.tween(squareLoser[j]).to({ x: loseColocationX, y: loseColocation }, 3000, Phaser.Easing.Sinusoidal.Out, true, 0, 0);
@@ -224,14 +214,10 @@ var reward = function(){
                         loseColocationX += 50;
                         loseColocation += squareLoser[j].height + 10;
                     }
-                    game.time.events.add(Phaser.Timer.SECOND * 15, showInformation, this);
+                    game.time.events.add(Phaser.Timer.SECOND * 6, showInformation, this);
                 });
             });
         });
-        for(var m=0; m<3; m++){
-            createSpine(winnerColocationX[m],winnerColocationY[m],"dinamita",winnerScale[m]*scaleOrder[m], winnerScale[m]);
-        }
-        
     }
 
     //Show the last information about game
@@ -243,37 +229,6 @@ var reward = function(){
         for(var l=0; l<2; l++){
             game.add.tween(title[l]).to({ x: (game.width - 650)+(100*l) }, 3000, Phaser.Easing.Exponential.Out, true, 0, 0);
         }
-    }
-
-     //Funcion para cargar el spine (opcional)
-    function createSpine(x,y,name,scalex,scaley) {
-
-        var playerYogotarSpine = game.add.spine(0,0,name);
-        playerYogotarSpine.x = x;
-        playerYogotarSpine.y = y;
-        playerYogotarSpine.scale.setTo(scalex,scaley);
-        playerYogotarSpine.setSkinByName(name);
-        playerYogotarSpine.setAnimationByName(0,"win", true);
-        sceneGroup.add(playerYogotarSpine);
-
-    }
-
-    function createSpineL(x,y,name,scalex,scaley,addParent) {
-
-        var playerYogotarSpine = game.add.spine(0,0,name);
-        playerYogotarSpine.x = x;
-        playerYogotarSpine.y = y;
-        playerYogotarSpine.scale.setTo(-scalex,scaley);
-        playerYogotarSpine.setSkinByName(name);
-        playerYogotarSpine.setAnimationByName(0,"gg", true);
-        addParent.addChild(playerYogotarSpine);
-
-        var mask = game.add.graphics(0, 0);
-        mask.beginFill(0xffffff);
-        mask.drawRect(0, 0, addParent.width, addParent.height);
-        addParent.mask = mask;
-        addParent.addChild(mask);
-
     }
     
     //////////////////
