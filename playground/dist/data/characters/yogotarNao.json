@@ -20,7 +20,7 @@
 		"ultra":[
 			{
 				"id": "ultraNao",
-				"attachment": "particle4",
+				"attachment": "particle12",
 				"delay": 1200,
 				"multiplier": 1
 			}

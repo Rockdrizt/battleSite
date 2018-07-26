@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "HnQwkRae2NDXNtWdoKZMBC3ekqo", "spine": "3.2.01", "width": 561, "height": 767.57, "images": "" },
+"skeleton": { "hash": "syoBLhJeLYSjndBqf+znQDF5Hzk", "spine": "3.2.01", "width": 561, "height": 767.57, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "attack_bone", "parent": "root", "rotation": 89.99, "color": "000000ff" },
@@ -25,7 +25,7 @@
 		"inheritScale": false,
 		"color": "000000ff"
 	},
-	{ "name": "1/6", "parent": "attack_bone1", "length": 169.2, "rotation": 32.94, "x": 362.4, "y": 111.56, "inheritScale": false }
+	{ "name": "1/6", "parent": "attack_bone1", "length": 169.2, "rotation": 32.94, "x": 362.42, "y": 111.52, "inheritScale": false }
 ],
 "slots": [
 	{ "name": "wind_ball", "bone": "attack_bone" },
@@ -54,10 +54,12 @@
 			"1/4": { "name": "normal1/4", "x": 109.9, "y": -9.37, "rotation": -89.99, "width": 193, "height": 242 }
 		},
 		"1/5": {
-			"1/5": { "name": "normal1/5", "x": 83.58, "y": 0.93, "rotation": -120.96, "width": 344, "height": 246 }
+			"1/5": { "name": "normal1/5", "x": 83.58, "y": 0.93, "rotation": -120.96, "width": 344, "height": 246 },
+			"2_5": { "name": "normal1/2_5", "x": 83.57, "y": 0.93, "rotation": -120.96, "width": 369, "height": 281 }
 		},
 		"1/6": {
-			"1/6": { "name": "normal1/6", "x": 126.15, "y": 30.52, "rotation": -122.94, "width": 562, "height": 379 }
+			"1/6": { "name": "normal1/6", "x": 126.15, "y": 30.52, "rotation": -122.94, "width": 562, "height": 379 },
+			"2_6": { "name": "normal1/2_6", "x": 126.15, "y": 30.53, "rotation": -122.94, "width": 508, "height": 404 }
 		},
 		"down": {
 			"normal1/wind1_down_ultra": { "x": 23.87, "y": -8.44, "rotation": -89.99, "width": 385, "height": 110 },
@@ -81,6 +83,9 @@
 			"normal1/wind_ball5": { "y": 2.79, "rotation": -89.99, "width": 513, "height": 346 }
 		}
 	}
+},
+"events": {
+	"PLAY:tournamentWindRise1": {}
 },
 "animations": {
 	"idle_normal": {
@@ -368,6 +373,17 @@
 				],
 				"attachment": [
 					{ "time": 0, "name": "1/5" },
+					{ "time": 0.1, "name": "2_5" },
+					{ "time": 0.1666, "name": "1/5" },
+					{ "time": 0.2666, "name": "2_5" },
+					{ "time": 0.3333, "name": "1/5" },
+					{ "time": 0.4333, "name": "2_5" },
+					{ "time": 0.5, "name": "1/5" },
+					{ "time": 0.6, "name": "2_5" },
+					{ "time": 0.6666, "name": "1/5" },
+					{ "time": 0.7666, "name": "2_5" },
+					{ "time": 0.8333, "name": "1/5" },
+					{ "time": 0.9333, "name": "2_5" },
 					{ "time": 1, "name": "1/5" }
 				]
 			},
@@ -378,6 +394,17 @@
 				],
 				"attachment": [
 					{ "time": 0, "name": "1/6" },
+					{ "time": 0.1, "name": "2_6" },
+					{ "time": 0.1666, "name": "1/6" },
+					{ "time": 0.2666, "name": "2_6" },
+					{ "time": 0.3333, "name": "1/6" },
+					{ "time": 0.4333, "name": "2_6" },
+					{ "time": 0.5, "name": "1/6" },
+					{ "time": 0.6, "name": "2_6" },
+					{ "time": 0.6666, "name": "1/6" },
+					{ "time": 0.7666, "name": "2_6" },
+					{ "time": 0.8333, "name": "1/6" },
+					{ "time": 0.9333, "name": "2_6" },
 					{ "time": 1, "name": "1/6" }
 				]
 			},
@@ -653,6 +680,9 @@
 		"drawOrder": [
 			{ "time": 0 },
 			{ "time": 1 }
+		],
+		"events": [
+			{ "time": 0, "name": "PLAY:tournamentWindRise1" }
 		]
 	},
 	"idle_ultra": {
