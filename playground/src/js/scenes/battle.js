@@ -370,7 +370,6 @@ var battle = function(){
             
             offset += game.rnd.integerInRange(3, 10) * 5
         }
-        
         var yogo = specialAttack.create(frame.centerX, frame.y + frame.height * 0.48, "DinamitaSpecial")
         yogo.anchor.setTo(0.5,1)
         specialAttack.yogo = yogo
@@ -722,7 +721,7 @@ var battle = function(){
         else{
             var damage = DAMAGE.ultra
         }
-        
+
         mainSpine.attack(target, type, dealDamage.bind(null, otherTeam, damage))
     }
     
@@ -777,7 +776,6 @@ var battle = function(){
     
     function returnCamera() {
 		game.camera.follow(null)
-    	game.add.tween(game.camera).to({x:0, y:0}, 1000, Phaser.Easing.Cubic.Out, true)
 		zoomCamera(1, 1000, {x:0, y:0})
 		game.add.tween(blackMask).to({alpha:0}, 500, Phaser.Easing.Cubic.Out, true)
 	}
@@ -805,7 +803,7 @@ var battle = function(){
             createSpecialAttack()
             createQuestionOverlay()
             //createMenuAnimations()
-            //battleSong = sound.play("battleSong", {loop:true, volume:0.6}) 
+            //battleSong = sound.play("battleSong", {loop:true, volume:0.6})
             sceneGroup.bringToTop(teamsBarGroup)
             
 		},
