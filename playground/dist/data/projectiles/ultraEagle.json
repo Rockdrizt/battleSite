@@ -1,7 +1,7 @@
 {
   "timing":{
     "stop":900,
-    "removal":1500,
+    "removal":2000,
     "hit":900
   },
   "particles":[
@@ -51,13 +51,13 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":450 
+      "value":550 
     },
     {
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":100
+      "value":150
     },
     {
       "index":"to",
