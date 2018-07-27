@@ -26,7 +26,7 @@ var epicProjectiles = function(){
 		if(projectile.spines){
 			for(var spineIndex = 0; spineIndex < projectile.spines.length; spineIndex++){
 				var spine = projectile.spines[spineIndex]
-				spine.remove()
+				spine.destroy()
 			}
 		}
 	}

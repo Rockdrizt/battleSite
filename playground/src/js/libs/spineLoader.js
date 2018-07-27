@@ -26,6 +26,7 @@ var spineLoader = function () {
 			var particle = particles[key]
 			particle.remove()
 		}
+		this.particles = {}
 	}
 
 	function drawParticle(character, group, offsetX, offsetY, zindex, particleName) {
@@ -185,9 +186,9 @@ var spineLoader = function () {
 	}
 
 	function createSpine(skeleton, skin, idleAnimation, x, y, unlike) {
-		if(spines[skeleton]) {
-			return spines[skeleton]
-		}
+		// if(spines[skeleton]) {
+		// 	return spines[skeleton]
+		// }
 
 		idleAnimation = idleAnimation || "idle"
 		var spineGroup = game.add.group()
@@ -246,8 +247,8 @@ var spineLoader = function () {
 
 		spineGroup.remove = removeSpine.bind(spineGroup)
 
-		if(!unlike)
-			spines[skeleton] = spineGroup
+		// if(!unlike)
+		// 	spines[skeleton] = spineGroup
 
 		return spineGroup
 	}

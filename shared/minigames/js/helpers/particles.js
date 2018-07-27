@@ -77,7 +77,6 @@ var epicparticles = function(){
 			timeToLive: 0
 		}
 
-
 	}
 
 	function init(gameObject){
@@ -364,8 +363,12 @@ var epicparticles = function(){
 	}
 
 	function removeEmitter(emitter){
+		if(typeof emitter == "undefined")
+			return
+
+		emitter.particleCount = 0
 		emitter.destroy()
-		emitters.splice(emitters.indexOf(emitter), 1)
+		//emitters.splice(emitter.index, 1)
 	}
 
 	function update(){ // Called on every frame
@@ -415,6 +418,7 @@ var epicparticles = function(){
 
 					if (emitter.particleCount <= 0){
 						removeEmitter(emitter)
+						emitters.splice(i, 1)
 						return
 					}
 				}
@@ -440,7 +444,6 @@ var epicparticles = function(){
 		// TODO implement options
 		options = options || {}
 		var emitter = game.add.group()
-
 		emitters.push(emitter)
 
 		var data = game.cache.getJSON(key)
