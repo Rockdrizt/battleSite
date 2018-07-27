@@ -3,17 +3,17 @@
 	"attacks": {
 		"normal": [
 			{
-				"id": "normalWater",
-				"attachment": "particle4",
-				"delay":    0,
+				"id": "normalNao",
+				"attachment": "particle5",
+				"delay":    660,
 				"multiplier": 1
 			}
 		],
 		"super": [
             {
-				"id": "superArthurius",
-				"attachment": "particle7",
-				"delay": 1000,
+				"id": "superNao",
+				"attachment": "particle3",
+				"delay": 200,
 				"multiplier": 1
 			}
 		],

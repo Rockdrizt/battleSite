@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "+DqsRI22ilgyar//3TU+EH9LsTw", "spine": "3.2.01", "width": 0, "height": 0, "images": "" },
+"skeleton": { "hash": "PEjMR9/+N9Q8sIpjiKEPNdYzmxo", "spine": "3.2.01", "width": 323.81, "height": 199.24, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "super_attack", "parent": "root" },
@@ -28,7 +28,9 @@
 	{ "name": "dragon_tail7", "parent": "cog_dragon_body_7", "length": 304.24, "rotation": -27.9, "x": 269.1, "y": 0.6 }
 ],
 "slots": [
+	{ "name": "particle3", "bone": "cog_dragon_head", "attachment": "particle3" },
 	{ "name": "waterball_bola", "bone": "bone_water" },
+	{ "name": "particle2", "bone": "super_attack", "attachment": "particle2" },
 	{ "name": "fidget", "bone": "bone_water" },
 	{ "name": "fidget_center", "bone": "super_attack" },
 	{ "name": "fidget_center2", "bone": "bone_water" },
@@ -51,7 +53,8 @@
 	{ "name": "dragon_ultra_ear", "bone": "dragon_ear" },
 	{ "name": "dragon_ultra_jaw", "bone": "dragon_jaw" },
 	{ "name": "dragon_ultra_jaw_hair", "bone": "dragon_jaw_hair" },
-	{ "name": "dragon_ultra_eyebrow", "bone": "dragon_eyebrow" }
+	{ "name": "dragon_ultra_eyebrow", "bone": "dragon_eyebrow" },
+	{ "name": "particle1", "bone": "cog_dragon_head", "attachment": "particle1" }
 ],
 "skins": {
 	"default": {},
@@ -129,10 +132,26 @@
 		"fidget_center2": {
 			"nao_fidget_center": { "name": "normal1/nao_fidget_center", "x": 2.18, "rotation": -5.03, "width": 92, "height": 92 }
 		},
+		"particle1": {
+			"particle1": { "name": "normal/particle", "x": -0.57, "y": -0.18, "rotation": -15.16, "width": 104, "height": 104 }
+		},
+		"particle2": {
+			"particle2": { "name": "normal/particle", "width": 104, "height": 104 }
+		},
+		"particle3": {
+			"particle3": { "name": "normal/particle", "x": 75.88, "y": -43.88, "rotation": -15.16, "width": 104, "height": 104 }
+		},
 		"waterball_bola": {
 			"waterball_bola1": { "name": "normal1/water_ball1", "x": 0.35, "y": 0.25, "rotation": -90, "width": 274, "height": 273 }
 		}
 	}
+},
+"events": {
+	"PLAY:tournamentSpinningWeapon1": {},
+	"SPAWN:particle1:iceDamage1": { "string": "iceDamage1/iceDamage1.json" },
+	"SPAWN:particle1:iceDamage2": { "string": "iceDamage1/iceDamage2.json" },
+	"SPAWN:particle2:windSuper7": { "string": "windSuper1/windSuper1.json" },
+	"SPAWN:particle3:dragonPlasma1": { "string": "dragonPlasma1/dragonPlasma1.json" }
 },
 "animations": {
 	"idle_normal": {
@@ -172,6 +191,24 @@
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
 					{ "time": 0.2333, "color": "ffffffff" }
 				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.2333, "name": null }
+				]
+			},
+			"dragon_ultra_body5": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.2333, "name": null }
+				]
+			},
+			"dragon_ultra_body6": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.2333, "name": null }
+				]
+			},
+			"dragon_ultra_body7": {
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 0.2333, "name": null }
@@ -272,6 +309,24 @@
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
 					{ "time": 0.2333, "color": "ffffffff" }
 				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.2333, "name": null }
+				]
+			},
+			"dragon_ultra_tail5": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.2333, "name": null }
+				]
+			},
+			"dragon_ultra_tail6": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.2333, "name": null }
+				]
+			},
+			"dragon_ultra_tail7": {
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 0.2333, "name": null }
@@ -586,6 +641,9 @@
 		"drawOrder": [
 			{ "time": 0 },
 			{ "time": 0.2333 }
+		],
+		"events": [
+			{ "time": 0, "name": "SPAWN:particle2:windSuper7", "string": "windSuper1/windSuper7.json" }
 		]
 	},
 	"idle_super": {
@@ -625,6 +683,24 @@
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
 					{ "time": 0.2, "color": "ffffffff" }
 				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.2, "name": null }
+				]
+			},
+			"dragon_ultra_body5": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.2, "name": null }
+				]
+			},
+			"dragon_ultra_body6": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.2, "name": null }
+				]
+			},
+			"dragon_ultra_body7": {
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 0.2, "name": null }
@@ -725,6 +801,24 @@
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
 					{ "time": 0.2, "color": "ffffffff" }
 				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.2, "name": null }
+				]
+			},
+			"dragon_ultra_tail5": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.2, "name": null }
+				]
+			},
+			"dragon_ultra_tail6": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.2, "name": null }
+				]
+			},
+			"dragon_ultra_tail7": {
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 0.2, "name": null }
@@ -1028,6 +1122,10 @@
 		"drawOrder": [
 			{ "time": 0 },
 			{ "time": 0.2 }
+		],
+		"events": [
+			{ "time": 0.0333, "name": "PLAY:tournamentSpinningWeapon1" },
+			{ "time": 0.0333, "name": "SPAWN:particle2:windSuper7", "string": "windSuper1/windSuper7.json" }
 		]
 	},
 	"idle_ultra": {
@@ -2161,6 +2259,11 @@
 		"drawOrder": [
 			{ "time": 0 },
 			{ "time": 0.8333 }
+		],
+		"events": [
+			{ "time": 0, "name": "SPAWN:particle3:dragonPlasma1" },
+			{ "time": 0.0333, "name": "SPAWN:particle1:iceDamage1" },
+			{ "time": 0.0333, "name": "SPAWN:particle1:iceDamage2" }
 		]
 	},
 	"in_normal": {
@@ -2200,6 +2303,24 @@
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
 					{ "time": 0.4666, "color": "ffffffff" }
 				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.4666, "name": null }
+				]
+			},
+			"dragon_ultra_body5": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.4666, "name": null }
+				]
+			},
+			"dragon_ultra_body6": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.4666, "name": null }
+				]
+			},
+			"dragon_ultra_body7": {
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 0.4666, "name": null }
@@ -2300,6 +2421,24 @@
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
 					{ "time": 0.4666, "color": "ffffffff" }
 				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.4666, "name": null }
+				]
+			},
+			"dragon_ultra_tail5": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.4666, "name": null }
+				]
+			},
+			"dragon_ultra_tail6": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.4666, "name": null }
+				]
+			},
+			"dragon_ultra_tail7": {
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 0.4666, "name": null }
@@ -2650,6 +2789,24 @@
 					{ "time": 0.3, "name": null }
 				]
 			},
+			"dragon_ultra_body5": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3, "name": null }
+				]
+			},
+			"dragon_ultra_body6": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3, "name": null }
+				]
+			},
+			"dragon_ultra_body7": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3, "name": null }
+				]
+			},
 			"dragon_ultra_ear": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -2745,6 +2902,24 @@
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
 					{ "time": 0.3, "color": "ffffffff" }
 				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3, "name": null }
+				]
+			},
+			"dragon_ultra_tail5": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3, "name": null }
+				]
+			},
+			"dragon_ultra_tail6": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.3, "name": null }
+				]
+			},
+			"dragon_ultra_tail7": {
 				"attachment": [
 					{ "time": 0, "name": null },
 					{ "time": 0.3, "name": null }

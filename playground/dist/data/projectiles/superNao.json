@@ -1,24 +1,26 @@
 {
   "timing":{
-    "stop":1600,
-    "removal":2500,
+    "stop":500,
+    "removal":1700,
     "hit":500
   },
+     "particles":[
+    ],
   "spines":[
     {
       "file":"spines/Nao/nao_projectiles.json",
       "scales":["@0.5x"],
       "skin":"nao_projectiles",
-      "animations":["idle_ultra"]
+      "animations":["in_super","idle_super"]
     }
   ],
-   "sounds":[
-       {
-          "soundID":"tournamentDragonRoar1"       
-       }
-  ],
   "impact":{
-    "soundID":"tournamentFireExplosion4"
+    "particles":[
+      "particles/characters/impactWater1/impactWater1.json",
+      "particles/characters/impactWater1/impactWater2.json",
+      "particles/characters/impactWater1/impactWater3.json"
+    ],
+    "soundID":"tournamentImpactWater1"
   },
   "onShoot":[
     {
@@ -40,26 +42,6 @@
       "index":"y"
     },
     {
-      "id":"get",
-      "variable":"target",
-      "name":"side",
-      "index":"side"
-    },
-    {
-      "id":"operation",
-      "operation":"*",
-      "storeReturn":"mulScale",
-      "value1":1500,
-      "variable2":"side"
-    },
-    {
-      "id":"operation",
-      "operation":"+",
-      "storeReturn":"targetX",
-      "variable1":"mulScale",
-      "variable2":"targetX"
-    },
-    {
       "id":"set",
       "name":"transitionParams",
       "index":"x",
@@ -69,14 +51,13 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":1600
-        
+      "value":400
     },
-    {
+      {
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":0
+      "value":200
     },
     {
       "index":"to",

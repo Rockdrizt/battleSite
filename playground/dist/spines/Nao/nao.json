@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "5inVoWjIdw47WmhRJ7SkYCl6C78", "spine": "3.2.01", "width": 0, "height": 0, "images": "" },
+"skeleton": { "hash": "PWgNdvD6cMRYicUEper+394p148", "spine": "3.2.01", "width": 1409.2, "height": 918.4, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "cog", "parent": "root", "y": 35.59, "color": "000000ff" },
@@ -493,7 +493,7 @@
 			"particle11": { "name": "normal/particle", "x": 210, "y": -0.51, "rotation": 179.99, "width": 104, "height": 104 }
 		},
 		"particle12": {
-			"particle12": { "name": "normal/particle", "x": -981.69, "y": 450, "rotation": -90, "width": 104, "height": 104 }
+			"particle12": { "name": "normal/particle", "x": -981.7, "y": 74, "rotation": -90, "width": 104, "height": 104 }
 		},
 		"particle2": {
 			"particle2": { "name": "normal/particle", "x": 19.04, "y": -7.64, "rotation": -14.7, "width": 104, "height": 104 }
