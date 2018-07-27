@@ -133,7 +133,7 @@ var spineLoader = function () {
 				}
 			}
 
-			if (slotIndex) {
+			if (typeof slotIndex === "number") {
 				return this.slotContainers[slotIndex]
 			}
 		}.bind(spineSkeleton)
@@ -147,7 +147,7 @@ var spineLoader = function () {
 				}
 			}
 
-			if (slotIndex) {
+			if (typeof slotIndex === "number") {
 				return this.slotContainers[slotIndex]
 			}
 		}.bind(spineSkeleton)

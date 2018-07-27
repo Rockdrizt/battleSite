@@ -306,6 +306,13 @@ var epicProjectiles = function(){
 		if(projectileDat.impact.soundID){
 			extractSound(projectileDat.impact.soundID)
 		}
+
+		if(projectileDat.sounds){
+			for(var soundIndex = 0; soundIndex < projectileDat.sounds.length; soundIndex++){
+				var soundObj = projectileDat.sounds[soundIndex]
+				extractSound(soundObj.soundID)
+			}
+		}
 	}
 
 	function loadProjectileData(id, currentLoader, loadingFiles, scene) {
