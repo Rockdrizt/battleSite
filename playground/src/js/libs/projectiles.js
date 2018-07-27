@@ -213,7 +213,7 @@ var epicProjectiles = function(){
 			}
 		}
 
-		if ((self.data.sounds) && (self.data.sounds > 0)){
+		if ((self.data.sounds) && (self.data.sounds.length > 0)){
 			for (var index = 0; index < self.data.sounds.length; index++){
 				var dataSound = self.data.sounds[index]
 
