@@ -12,6 +12,11 @@
       "animations":["idle_ultra"]
     }
   ],
+   "sounds":[
+       {
+          "soundID":"tournamentDragonRoar1"       
+       }
+  ],
   "impact":{
     "soundID":"tournamentFireExplosion4"
   },
