@@ -213,6 +213,7 @@ var battle = function(){
     function createTeamBars(){
     
         var fontStyle = {font: "65px skwig", fontWeight: "bold", fill: "#FFFFFE", align: "center"}
+        var fontScore = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
         
         teamsBarGroup = game.add.group()
         teamsBarGroup.fixedToCamera = true
@@ -260,9 +261,9 @@ var battle = function(){
             teamScore.anchor.setTo(0.5)
             teamScore.scale.setTo(0.6)
             
-            var score = new Phaser.Text(sceneGroup.game, 0, 60, "0", fontStyle)
+            var score = new Phaser.Text(sceneGroup.game, 0, 60, "99", fontScore)
             score.anchor.setTo(0.5)
-            score.scale.setTo(1.8)
+            score.scale.setTo(1.5)
             teamScore.addChild(score)
             teamScore.text = score
             
@@ -315,7 +316,7 @@ var battle = function(){
     
     function createTimer(){
         
-        var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#444444", align: "center"}
+        var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#000066", align: "center"}
         
         var timeToken = teamsBarGroup.create(game.world.centerX, 150, "atlas.battle", "timeToken")
         timeToken.anchor.setTo(0.5)
@@ -370,7 +371,7 @@ var battle = function(){
             
             offset += game.rnd.integerInRange(3, 10) * 5
         }
-        var yogo = specialAttack.create(frame.centerX, frame.y + frame.height * 0.48, "DinamitaSpecial")
+        var yogo = specialAttack.create(frame.centerX, frame.y + frame.height * 0.48, mainSpine.data.name + "Special")
         yogo.anchor.setTo(0.5,1)
         specialAttack.yogo = yogo
         specialAttack.y = game.world.height
@@ -380,6 +381,13 @@ var battle = function(){
         
         questionGroup = game.add.group()
         sceneGroup.add(questionGroup)
+        
+        var black = game.add.graphics()
+        black.beginFill(0x000000)
+        black.drawRect(0,0,game.world.width, game.world.height)
+        black.endFill()
+        black.alpha = 0.5
+        questionGroup.add(black)
         
         var board = questionGroup.create(game.world.centerX + 50, game.world.height - 20, "questionBoard")
         board.anchor.setTo(0.5, 1)
@@ -413,7 +421,6 @@ var battle = function(){
                 game.add.tween(btn.scale).to({x: 0.8, y:0.8}, 100, Phaser.Easing.linear, true, 0, 0, true).onComplete.add(function(){
                     questionGroup.options.setAll("inputEnabled", false)
                     game.add.tween(questionGroup).to({alpha:0}, 500, Phaser.Easing.linear, true)
-                    game.add.tween(blackMask).to({alpha:0}, 500, Phaser.Easing.linear, true)
                 })
             },this)
             
@@ -445,12 +452,11 @@ var battle = function(){
         questionGroup.options.setAll("inputEnabled", false)
         questionGroup.alpha = 0
         
-        questionGroup.setQuestion = setQuestion.bind(questionGroup)
-        
+        //questionGroup.setQuestion = setQuestion()
         
         var questionBtn = createButton(function(){
-			game.add.tween(blackMask).to({alpha:0.5}, 300, Phaser.Easing.Cubic.InOut, true)
-        	questionGroup.setQuestion()
+        	//questionGroup.setQuestion()
+            setQuestion()
 			}, 0x00ffff
 		)
 		questionBtn.x = game.world.centerX
@@ -460,16 +466,16 @@ var battle = function(){
     
     function setQuestion(question, image, options){
 
-        //this.question.setText(question)
-        this.question.alpha = 0
-        //this.image.loadTexture("atlas.battle", image)
-        this.image.alpha = 0
-        for(var i = 0; i < this.options.length; i++){
-            //this.options.children[i].info.setText(options[i])
-            this.options.children[i].alpha = 0
+        //questionGroup.question.setText(question)
+        questionGroup.question.alpha = 0
+        //questionGroup.image.loadTexture("atlas.battle", image)
+        questionGroup.image.alpha = 0
+        for(var i = 0; i < questionGroup.options.length; i++){
+            //questionGroup.options.children[i].info.setText(options[i])
+            questionGroup.options.children[i].alpha = 0
         }
         
-        game.add.tween(this).to({alpha:1}, 500, Phaser.Easing.linear, true).onComplete.add(function(){
+        game.add.tween(questionGroup).to({alpha:1}, 500, Phaser.Easing.linear, true).onComplete.add(function(){
             questionGroup.image.alpha = 1
             game.add.tween(questionGroup.image.scale).to({x:1.5, y:1.5}, 100, Phaser.Easing.linear, true, 0, 0, true)
             game.add.tween(questionGroup.question).to({alpha:1}, 400, Phaser.Easing.linear, true, 300)
@@ -800,11 +806,11 @@ var battle = function(){
             createTeamBars()
             createTimer()
             placeYogotars()
+            sceneGroup.bringToTop(teamsBarGroup)
             createSpecialAttack()
             createQuestionOverlay()
             //createMenuAnimations()
             //battleSong = sound.play("battleSong", {loop:true, volume:0.6})
-            sceneGroup.bringToTop(teamsBarGroup)
             
 		},
         setCharacter:setCharacter,

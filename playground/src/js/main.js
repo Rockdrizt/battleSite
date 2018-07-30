@@ -28,8 +28,8 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				//sceneloader.show("yogoSelector")
-				sceneloader.show("battle")
+				sceneloader.show("yogoSelector")
+				//sceneloader.show("battle")
 	    	}
 
 			document.body.style.visibility = "visible"

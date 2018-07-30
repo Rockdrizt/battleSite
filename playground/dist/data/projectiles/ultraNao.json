@@ -12,6 +12,12 @@
       "animations":["idle_ultra"]
     }
   ],
+  "sounds":[
+    {
+      "soundID":"tournamentDragonRoar1",
+      "delay":0
+    }
+  ],
   "impact":{
     "soundID":"tournamentFireExplosion4"
   },
@@ -65,7 +71,7 @@
       "name":"transitionParams",
       "index":"time",
       "value":1600
-        
+
     },
     {
       "id":"set",

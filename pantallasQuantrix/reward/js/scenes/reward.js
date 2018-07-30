@@ -5,21 +5,16 @@ var imagePath = "images/reward/";
 var reward = function(){
     
     var localizationData = {
-		"EN":{
-            "howTo":"How to Play?",
-            "moves":"Moves left",
-			"stop":"Stop!"
-		},
+        "EN":{
+            "howTo":"How to Play?"
+        },
 
-		"ES":{
-            "moves":"Movimientos extra",
-            "howTo":"¿Cómo jugar?",
-            "stop":"¡Detener!"
-		}
-	}
-    
+        "ES":{
+            "howTo":"¿Cómo jugar?"
+        }
+    }
 
-	assets = {
+    var assets = {
         atlases: [
             {   
                 name: "atlas.reward",
@@ -31,74 +26,107 @@ var reward = function(){
             {
                 name: "tile",
                 file: imagePath + "bgTile.png",
-            },
-            {
-                name: "blueCup",
-                file: imagePath + "copaAzul.png",
-            },
-            {
-                name: "pinkCup",
-                file: imagePath + "copRosa.png",
-            },
-            {
-                name: "blueBrain",
-                file: imagePath + "brainAzul.png",
-            },
-            {
-                name: "pinkBrain",
-                file: imagePath +"brainRosa.png",
-            },
-            {
-                name: "grayCup",
-                file: imagePath +"copa_Gris.png",
             }
-		],
-		sounds: [],
-        spritesheets: [],
-        spines:[]
+        ],
+        sounds: [
+            {
+                name: "song",
+                file: soundsPath + "winBattle1.mp3"
+            },
+            {
+                name: "cheers",
+                file: soundsPath + "cheers.mp3"
+            },
+            {
+                name: "gold",
+                file: soundsPath + "goldShine.mp3"
+            },
+            {
+                name: "bright",
+                file: soundsPath + "brightTransition.mp3"
+            },
+            {
+                name: "sword",
+                file: soundsPath + "swordSmash.mp3"
+            },
+            {
+                name: "music",
+                file: soundsPath + "/songs/weLoveElectricCars.mp3"
+            }
+        ],
+        spines:[
+            {
+                name:"coup",
+                file:"images/spines/brain/Pantalla de victoria.json"
+            }
+        ],
+        particles: [
+            {
+                name: "brain_particles",
+                file: "particles/brain_particles/sphere_ligths1.json",
+                texture: "sphere_ligths1.png"
+            },
+            {
+                name: "brain_particlesB",
+                file: "particles/brain_particles/Ligth_Brain.json",
+                texture: "Ligth_Brain.png"
+            },
+            {
+                name: "confetti",
+                file: "particles/confetti/Conffeti_win.json",
+                texture: "Conffeti_win.png"
+            }
+        ]
     }
     
      //////////////////
     // Variables
     //////////////////
     //General variables
-	var sceneGroup;                         //General group of all scene
+    var sceneGroup;                         //General group of all scene
     var tile;                               //Reference of tile background
     //Own variables
+    var COUPOFFSETX = 820;                  //Offset to collocate the coup in X
     var loseColocation;                     //Position to colocate the window of players in y
     var loseColocationX;                    //Position to colocate the window of player in x
-    var indexWinner;                        //Id of winner team
+    var indexWinner;                        //Id of winner team (0: Blue, 1: Pink)
     var squareLoser;                        //Reference at squares of losers
     var closeSquare;                        //Reference at a line of squares
     var title;                              //Reference of title's information
     var textTitle;                          //Reference of text
-    var lightColocation;                    //Reference of position's light in x
-    var lightColocationY;                   //Reference of position's light in y
-    var light;                              //Array of lights
+    var winnerColocationX;                  //Arrays in X winners
+    var winnerColocationY;                  //Arrays in Y winners
+    var winnerScale;                        //Scale for any winner
+    var scaleOrder;                         //Direction of any winner or loser
+    var players;                            //Array of characters
+    var coupSpine;                          //Reference of coup
+    var brainGroup;                         //Reference of group to put particles in brain
+    var brainGroupBack;                     //Reference of group to put particles in brainBack
     
      //////////////////
     // Principal flow
     //////////////////
     //To load all sounds
-	function loadSounds(){
-		sound.decode(assets.sounds);
-	}
+    function loadSounds(){
+        sound.decode(assets.sounds);
+    }
 
     //To start some variables and start flow
-	function initialize(){
+    function initialize(){
         game.stage.backgroundColor = "#ffffff";
         loseColocationX = game.width - 550;
         squareLoser = [];
         closeSquare = [];
-        indexWinner = 0;
+        //indexWinner = 0;   //*****Change this to set the winners
         title = [];
         textTitle = ["Tiempo: 25 min", "Aciertos: 29"];
-        lightColocation = [350,550,1150,1350];
-        lightColocationY = [335,235,235,335]
-        light = [];
+        winnerColocationX = [420,860,1280];
+        winnerColocationY = [680,735,680];
+        winnerScale = [0.85,1,0.8];
+        scaleOrder = [-1,1,1];
 
         loadSounds();
-	}
+    }
     
     //Load or change configurations
     function preload(){
@@ -106,9 +134,10 @@ var reward = function(){
     }
 
     //Complete GamePlay update
-	function update(){
+    function update(){
         tile.tilePosition.x -= 0.4;
         tile.tilePosition.y -= 0.4;
+        epicparticles.update();
     }
 
     //////////////////
@@ -137,48 +166,76 @@ var reward = function(){
         sceneGroup.add(tile);
     }
 
+    //Create spines in scene
+    function createSpineScenary(){
+        brainGroupBack = game.add.group();
+        sceneGroup.add(brainGroupBack);
+
+        coupSpine = game.add.spine(0,0,"coup");
+        coupSpine.x = COUPOFFSETX;
+        coupSpine.y = game.height - coupSpine.height/2 - 25;
+        coupSpine.scale.setTo(0.95,0.95);
+        if(indexWinner == 0){
+            coupSpine.setSkinByName("alfa");
+        }else{
+            coupSpine.setSkinByName("bravo");
+        }
+        coupSpine.setAnimationByName(0,"idle", false);
+        coupSpine.addAnimationByName(0, "win", false);
+        coupSpine.addAnimationByName(0, "winstill", true);
+        sceneGroup.add(coupSpine);
+    }
+
+    //Create particles and sounds in scene
+    function createParticles(){
+
+        game.time.events.add(1500,function(){
+            sound.play("gold");
+        },this);
+
+        game.time.events.add(2000,function(){
+            sound.play("bright");
+            createEmitterParticles("brain_particles", coupSpine.x + 3, coupSpine.y - 500,brainGroup);
+            createEmitterParticles("brain_particlesB",coupSpine.x -10,coupSpine.y - 620,brainGroupBack);
+        },this);
+
+        game.time.events.add(3000,function(){
+            sound.play("song");
+            createEmitterParticles("confetti",game.world.centerX,0,null);
+            sound.play("cheers");
+            sound.play("music", {loop:true, volume:0.4});
+        },this);
+
+    }
+
+    //Creator of particles emitter
+    function createEmitterParticles(name, x, y, group){
+        var prefabParticles = epicparticles.newEmitter(name);
+        prefabParticles.x = x;
+        prefabParticles.y = y;
+        if(group!=null){
+            group.add(prefabParticles);
+        }
+    }
+
     //Create elements for the screen
     function createScenary(){
-        var cupPlayer;
         var namePlayer;
-        var brainPlayer;
-        var tweenCup;
-        var sferaPlayer;
         if(indexWinner == 0){
-            cupPlayer = "blueCup";
             namePlayer = "equipoAzul";
-            brainPlayer = "blueBrain";
-            sferaPlayer = "esferaAzul";
         }else{
-            cupPlayer = "pinkCup";
             namePlayer = "equipoRosa";
-            brainPlayer = "pinkBrain"
-            sferaPlayer = "esferaRosa";
         }
-        console.log("Entre");
-        var cup = game.add.sprite(50, game.height/2 - 350, cupPlayer);
-        cup.blendMode = PIXI.blendModes.MULTIPLY;
-        sceneGroup.add(cup);
 
-        var cupGray = game.add.sprite(50, game.height/2 - 350, "grayCup");
-        sceneGroup.add(cupGray);
-
-        var brainWin = game.add.sprite(cup.x + 450, game.height/2 - 600, brainPlayer);
-        brainWin.alpha = 0;
-        sceneGroup.add(brainWin);
-
-        for (var y = 0; y < 4; y++) {
-            light.push(game.add.sprite(lightColocation[y], lightColocationY[y],"atlas.reward", sferaPlayer));
-            light[y].anchor.setTo(0.5,0.5);
-            light[y].scale.setTo(0,0);
-            sceneGroup.add(light[y]);
-        }
+        brainGroup = game.add.group();
+        sceneGroup.add(brainGroup);
 
         loseColocation = game.height;
         for(var i=0; i<3; i++){
             squareLoser.push(game.add.sprite(game.width + 300, loseColocation,"atlas.reward","ventanaFondo"));
             sceneGroup.add(squareLoser[i]);
             closeSquare.push(game.add.sprite(game.width + 300 - 2, loseColocation + squareLoser[i].height - 5,"atlas.reward","ventanaFrente"));
+            createSpineLoser(180,260,players[1][i],0.65*scaleOrder[i],0.65,squareLoser[i],game.rnd.integerInRange(1, 2));
             loseColocation += squareLoser[i].height + 10;
          }
 
@@ -195,29 +252,25 @@ var reward = function(){
         var nameWin = game.add.sprite(-500, 50,"atlas.reward", namePlayer);
         sceneGroup.add(nameWin);
 
-        var tweenNameWin = game.add.tween(nameWin).to({ x: 0 }, 1000, Phaser.Easing.Bounce.Out, true, 0, 0);
-        var tweenLigth;
-        tweenNameWin.onComplete.add(function(){
-            for (var y = 0; y < 4; y++) {
-                tweenLigth = game.add.tween(light[y].scale).to({ x: 1, y: 1 }, 1000, Phaser.Easing.Linear.Out, true, 0, 0);
-            }
-            tweenLigth.onComplete.add(function(){
-                game.add.tween(cupGray).to({ alpha: 0 }, 1000, Phaser.Easing.Linear.Out, true, 0, 0);
-                tweenCup = game.add.tween(cup).to({ blendMode: PIXI.blendModes.NORMAL }, 2000, Phaser.Easing.Linear.Out, true, 0, 0);
-                game.add.tween(brainWin).to({ alpha: 1 }, 300, Phaser.Easing.Bounce.InOut, true, 0, 6);
-                tweenCup.onComplete.add(function(){
-                    game.add.tween(brainWin).to({ y: -35 }, 2000, Phaser.Easing.Sinusoidal.InOut, true, 0, -1,true, 2000);
-                    loseColocation = 150;
-                    for(var j=0; j<3; j++){
-                        game.add.tween(squareLoser[j]).to({ x: loseColocationX, y: loseColocation }, 3000, Phaser.Easing.Sinusoidal.Out, true, 0, 0);
-                        game.add.tween(closeSquare[j]).to({ x: loseColocationX - 2, y: loseColocation + squareLoser[j].height - 5 }, 3000, Phaser.Easing.Sinusoidal.Out, true, 0, 0);
-                        loseColocationX += 50;
-                        loseColocation += squareLoser[j].height + 10;
-                    }
-                    game.time.events.add(Phaser.Timer.SECOND * 6, showInformation, this);
-                });
-            });
-        });
+        var tweenNameWin = game.add.tween(nameWin).to({ x: 0 }, 1500, Phaser.Easing.Bounce.Out, true, 0, 0);
+        tweenNameWin.onComplete.add(addLosersTween);
+
+        for(var m=0; m<3; m++){
+            createSpineWinner(winnerColocationX[m],winnerColocationY[m],players[0][m],winnerScale[m]*scaleOrder[m], winnerScale[m], game.rnd.integerInRange(1, 2));
+        }
+        
+    }
+
+    //Appear losers in their squares with animation
+    function addLosersTween(){
+        loseColocation = 150;
+        for(var j=0; j<3; j++){
+            game.add.tween(squareLoser[j]).to({ x: loseColocationX, y: loseColocation }, 5000, Phaser.Easing.Sinusoidal.Out, true, 0, 0);
+            game.add.tween(closeSquare[j]).to({ x: loseColocationX - 2, y: loseColocation + squareLoser[j].height - 5 }, 5000, Phaser.Easing.Sinusoidal.Out, true, 0, 0);
+            loseColocationX += 50;
+            loseColocation += squareLoser[j].height + 10;
+        }
+        game.time.events.add(Phaser.Timer.SECOND * 16, showInformation, this);
     }
 
     //Show the last information about game
@@ -226,26 +279,100 @@ var reward = function(){
             game.add.tween(squareLoser[k]).to({ x: squareLoser[k].x+600, y: squareLoser[k].y+250 }, 3000, Phaser.Easing.Exponential.Out, true, 0, 0);
             game.add.tween(closeSquare[k]).to({ x: closeSquare[k].x+600, y: closeSquare[k].y+250 }, 3000, Phaser.Easing.Exponential.Out, true, 0, 0);
         }
+        sound.play("sword");
         for(var l=0; l<2; l++){
             game.add.tween(title[l]).to({ x: (game.width - 650)+(100*l) }, 3000, Phaser.Easing.Exponential.Out, true, 0, 0);
         }
+        sound.play("cheers");
+    }
+
+    //Load all winner characters in scene
+    function createSpineWinner(x,y,name,scalex,scaley, skinNum) {
+
+        var appear;
+
+        if(indexWinner == 0){
+            appear = "appear_delta";
+        }else{
+            appear = "appear_alpha";
+        }
+
+        var winnerSpine = loadSpineCharacter(x, y, name, scalex, scaley,name + skinNum, 0);
+        sceneGroup.add(winnerSpine);
+
+        game.time.events.add(game.rnd.integerInRange(2000,3000),function(){
+                winnerSpine.setAnimation([appear,"win"], true);
+                winnerSpine.alpha=1;
+        },this);
+
+    }
+
+    //Load all lossers in scene
+    function createSpineLoser(x,y,name,scalex,scaley,addParent, skinNum) {
+
+        var loserSpine = loadSpineCharacter(x, y, name, -scalex, scaley,name + skinNum, 1);
+        loserSpine.setAnimation(["gg"], true);
+        addParent.addChild(loserSpine);
+
+        var mask = game.add.graphics(0, 0);
+        mask.beginFill(0xffffff);
+        mask.drawRect(0, 0, addParent.width, addParent.height);
+        addParent.mask = mask;
+        addParent.addChild(mask);
+
+    }
+
+    //Load spine of an character in scene
+    function loadSpineCharacter(x, y, name, scaleX, scaleY,skin, alpha){
+        var playerYogotarSpine = characterBattle.createCharacter(name, skin);
+        playerYogotarSpine.alpha = alpha;
+        playerYogotarSpine.x = x;
+        playerYogotarSpine.y = y;
+        playerYogotarSpine.scale.setTo(scaleX,scaleY);
+
+        return playerYogotarSpine;
+    }
+
+    //Load each character to use in assets
+    function setCharacter(character, teamIndex) {
+        var charObj = {
+            name: character,
+            file: "images/spines/"+character+"/"+character+"Win.json",
+            scales: ["@0.5x"],
+            teamNum:teamIndex
+        }
+        assets.spines.push(charObj)
     }
     
     //////////////////
     // Return all game, configurations and creations
     //////////////////
-	return {
-		assets: assets,
-		name: "reward",
-		update: update,
+    return {
+        assets: assets,
+        name: "reward",
+        update: update,
         preload:preload,
-		create: function(event){
+        create: function(event){
             
-			sceneGroup = game.add.group();
-			
-			createBackground();	
+            sceneGroup = game.add.group();
+            
+            createBackground(); 
             initialize();
+            createSpineScenary();
             createScenary();
-		}
-	}
+            createParticles();
+        },
+        setCharacter:setCharacter,
+        setTeams: function (myTeams) {
+            for(var teamIndex = 0; teamIndex < myTeams.length; teamIndex++){
+                players = myTeams;
+                var team = myTeams[teamIndex]
+
+                for(var charIndex = 0; charIndex < team.length; charIndex++){
+                    var character = team[charIndex];
+                    setCharacter(character, teamIndex);
+                }
+            }
+        }
+    }
 }()

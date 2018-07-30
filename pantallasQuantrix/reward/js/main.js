@@ -41,15 +41,23 @@ function startGame(){
         game.time.advancedTiming = true
         game.stage.disableVisibilityChange = true;        
 
-        game.plugins.add(Fabrique.Plugins.Spine);
+        game.plugins.add(PhaserSpine.SpinePlugin);
+        epicparticles.init(game);
         
-        var language = "EN"
+        var language = "EN";
 
-        localization.setLanguage(language)
+        localization.setLanguage(language);
 
-        window.minigame.game = window.game
-    	sceneloader.init(game)
-    	sound.init(game)
+        window.minigame.game = window.game;
+    	sceneloader.init(game);
+    	sound.init(game);
+
+        var teams = [
+            ["dinamita", "theffanie", "luna"],
+            ["eagle", "nao", "estrella"],
+        ];
+        reward.setTeams(teams);
+
     }
 
     function create(){

@@ -208,21 +208,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">esferaAzul.png</key>
-            <key type="filename">esferaGris.png</key>
-            <key type="filename">esferaRosa.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>29,29,58,58</rect>
-                <key>scale9Paddings</key>
-                <rect>29,29,58,58</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">ventanaFondo.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -257,9 +242,6 @@
             <filename>equipoRosa.png</filename>
             <filename>ventanaFondo.png</filename>
             <filename>ventanaFrente.png</filename>
-            <filename>esferaAzul.png</filename>
-            <filename>esferaGris.png</filename>
-            <filename>esferaRosa.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

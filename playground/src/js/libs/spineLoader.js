@@ -17,6 +17,95 @@ var spineLoader = function () {
 
 	function removeSpine() {
 		pullGroup.add(this)
+
+		var particles = this.particles
+		if(!particles)
+			return
+
+		for(var key in particles){
+			var particle = particles[key]
+			particle.remove()
+		}
+		this.particles = {}
+	}
+
+	function drawParticle(character, group, offsetX, offsetY, zindex, particleName) {
+		character.particles = character.particles || {}
+		var particles = character.particles
+
+		if((particles[particleName])&&(particles[particleName].duration < 0)) {
+			return
+		}
+
+		var emitter = epicparticles.newEmitter(particleName)
+		if (!emitter)
+			return
+
+		emitter.x = offsetX//group.scale.x > 0 ? offsetX : offsetX * -1
+		emitter.y = offsetY
+		emitter.scale.x = group.scale.x
+		if (zindex === "back")
+			group.add(emitter, false, 0)
+		else
+			group.add(emitter)
+
+		particles[particleName] = emitter
+	}
+
+	function drawParticleCharacter(character, params) {
+		var attachmentName = params[0]
+		var particleName = params[1]
+		character.particles = character.particles || {}
+		var particles = character.particles
+
+		if((particles[particleName])&&(particles[particleName].duration < 0)) {
+			return
+		}
+
+		var slot = character.getSlotByAttachment(attachmentName)
+		if(typeof slot === "undefined"){
+			console.warn(attachmentName + " attachment not found")
+			return
+		}
+
+		var emitter = epicparticles.newEmitter(particleName)
+		if (!emitter)
+			return
+
+		if(emitter.absolute) {
+			emitter.x = character.scale.x > 0 ? slot.x : slot.x * -1
+			emitter.y = slot.y
+			console.log("cord", slot.x, slot.y)
+			character.add(emitter)
+		}
+		else {
+			slot.add(emitter)
+		}
+		emitter.scale.x = character.scale.x
+
+		particles[particleName] = emitter
+		console.log(emitter.duration)
+	}
+
+	function removeParticleCharacter(character, params) {
+		var attachmentName = params[0]
+		var particleName = params[1]
+
+		//var slot = character.getSlotByAttachment(attachmentName)
+		var emitter = character.particles[particleName]
+		if(!emitter)
+			return
+
+		emitter.remove()
+	}
+
+	function removeParticle(character, particleName) {
+		var emitter = character.particles[particleName]
+		if(!emitter)
+			return
+
+		emitter.remove()
+		delete character.particles[particleName]
 	}
 
 	function setAnimation(animations, loop, onComplete, args) {
@@ -72,7 +161,7 @@ var spineLoader = function () {
 		}
 		if (functionData.name === "SPAWN") {
 			// console.log(functionData.param)
-			particleBattle.drawParticleCharacter(spineGroup, functionData.params)
+			drawParticleCharacter(spineGroup, functionData.params)
 		}
 		if (functionData.name === "STAGESPAWN") {
 			// console.log(functionData.param)
@@ -83,23 +172,23 @@ var spineLoader = function () {
 			var particleName = functionData.params[4]
 			var zIndex = functionData.params[3]
 
-			particleBattle.drawParticle(group, offsetX, offsetY, zIndex, particleName)
+			drawParticle(spineGroup, group, offsetX, offsetY, zIndex, particleName)
 		}
 		if (functionData.name === "DESPAWN") {
 			// console.log(functionData.param)
-			particleBattle.removeParticleCharacter(spineGroup, functionData.params)
+			removeParticleCharacter(spineGroup, functionData.params)
 		}
 		if (functionData.name === "STAGEDESPAWN") {
 			// console.log(functionData.param)
-			particleBattle.removeParticle(functionData.params)
+			removeParticle(spineGroup, functionData.params)
 		}
 
 	}
 
 	function createSpine(skeleton, skin, idleAnimation, x, y, unlike) {
-		if(spines[skeleton]) {
-			return spines[skeleton]
-		}
+		// if(spines[skeleton]) {
+		// 	return spines[skeleton]
+		// }
 
 		idleAnimation = idleAnimation || "idle"
 		var spineGroup = game.add.group()
@@ -133,7 +222,7 @@ var spineLoader = function () {
 				}
 			}
 
-			if (slotIndex) {
+			if (typeof slotIndex === "number") {
 				return this.slotContainers[slotIndex]
 			}
 		}.bind(spineSkeleton)
@@ -147,7 +236,7 @@ var spineLoader = function () {
 				}
 			}
 
-			if (slotIndex) {
+			if (typeof slotIndex === "number") {
 				return this.slotContainers[slotIndex]
 			}
 		}.bind(spineSkeleton)
@@ -158,8 +247,8 @@ var spineLoader = function () {
 
 		spineGroup.remove = removeSpine.bind(spineGroup)
 
-		if(!unlike)
-			spines[skeleton] = spineGroup
+		// if(!unlike)
+		// 	spines[skeleton] = spineGroup
 
 		return spineGroup
 	}

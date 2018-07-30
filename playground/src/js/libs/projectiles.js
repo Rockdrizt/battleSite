@@ -26,7 +26,7 @@ var epicProjectiles = function(){
 		if(projectile.spines){
 			for(var spineIndex = 0; spineIndex < projectile.spines.length; spineIndex++){
 				var spine = projectile.spines[spineIndex]
-				spine.remove()
+				spine.destroy()
 			}
 		}
 	}
@@ -213,7 +213,7 @@ var epicProjectiles = function(){
 			}
 		}
 
-		if ((self.data.sounds) && (self.data.sounds > 0)){
+		if ((self.data.sounds) && (self.data.sounds.length > 0)){
 			for (var index = 0; index < self.data.sounds.length; index++){
 				var dataSound = self.data.sounds[index]
 
@@ -305,6 +305,13 @@ var epicProjectiles = function(){
 
 		if(projectileDat.impact.soundID){
 			extractSound(projectileDat.impact.soundID)
+		}
+
+		if(projectileDat.sounds){
+			for(var soundIndex = 0; soundIndex < projectileDat.sounds.length; soundIndex++){
+				var soundObj = projectileDat.sounds[soundIndex]
+				extractSound(soundObj.soundID)
+			}
 		}
 	}
 
