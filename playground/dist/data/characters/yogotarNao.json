@@ -19,8 +19,8 @@
 		],
 		"ultra":[
 			{
-				"id": "ultraArthurius",
-				"attachment": "particle12",
+				"id": "ultraNao",
+				"attachment": "particle4",
 				"delay": 1200,
 				"multiplier": 1
 			}
