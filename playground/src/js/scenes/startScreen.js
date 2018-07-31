@@ -282,6 +282,7 @@ var startScreen = function(){
             
 			sceneGroup = game.add.group()
 			
+            
             initialize()
             
             startSong = sound.play("startSong", {loop:true, volume:0.6})
