@@ -97,9 +97,9 @@ function startGame(){
 		console.log("createEpicBattle")
     	bootConfigFiles([
 			//battleScene,
-            battle,
+            startScreen,
             yogoSelector,
-            startScreen
+            battle,
             //result,
     	])
     }
