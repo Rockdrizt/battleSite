@@ -20,9 +20,9 @@
 		],
 		"ultra":[
 			{
-				"id": "ultraDinamita",
-				"attachment": "particle8",
-				"delay": 1200,
+				"id": "ultraTheffanie",
+				"attachment": "particle11",
+				"delay": 2300,
 				"multiplier": 1
 			}
 		]
@@ -45,6 +45,6 @@
 		"shadowScaleX": 0.8,
 		"shadowScaleY": 1.1,
 		"cardFacing": "right",
-		"impactAttachment": "head"
+		"impactAttachment": "torso1"
 	}
 }

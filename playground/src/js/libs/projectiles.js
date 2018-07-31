@@ -26,7 +26,7 @@ var epicProjectiles = function(){
 		if(projectile.spines){
 			for(var spineIndex = 0; spineIndex < projectile.spines.length; spineIndex++){
 				var spine = projectile.spines[spineIndex]
-				spine.remove()
+				spine.destroy()
 			}
 		}
 	}
@@ -34,6 +34,7 @@ var epicProjectiles = function(){
 	function hitEnemy(options) {
 		var projectile = this
 		var enemy = options.enemy
+		var onImpact = options.onImpact
 
 		var impactData = projectile.data.impact
 		if (impactData) {
@@ -90,11 +91,16 @@ var epicProjectiles = function(){
 		if(enemy.prevPoint)
 			enemy.impactPoint = enemy.prevPoint
 		enemy.takeDamage(projectile.type, projectile.element)
+
+		if(typeof onImpact === "function")
+			onImpact()
 	}
 
-	function setTarget(enemy) {
+	function setTarget(enemy, options) {
 		var self = this
 		var impactData = self.data.impact
+		options = options || {}
+		var onImpact = options.onImpact
 
 		if((impactData)&&(impactData.forcePosition)){
 			var x = enemy.impactPoint.x
@@ -137,7 +143,7 @@ var epicProjectiles = function(){
 				spineGroup.data = spineData
 
 				var onShootAnimations = spineData.animations
-				spineGroup.setAnimation(onShootAnimations, false)
+				spineGroup.setAnimation(onShootAnimations, true)
 
 				self.add(spineGroup)
 				self.spines.push(spineGroup)
@@ -164,7 +170,8 @@ var epicProjectiles = function(){
 
 		//TODO: here goes the damage
 		var params = {
-			enemy: enemy
+			enemy: enemy,
+			onImpact: onImpact
 		}
 
 		if(self.hit)
@@ -206,7 +213,7 @@ var epicProjectiles = function(){
 			}
 		}
 
-		if ((self.data.sounds) && (self.data.sounds > 0)){
+		if ((self.data.sounds) && (self.data.sounds.length > 0)){
 			for (var index = 0; index < self.data.sounds.length; index++){
 				var dataSound = self.data.sounds[index]
 
@@ -298,6 +305,13 @@ var epicProjectiles = function(){
 
 		if(projectileDat.impact.soundID){
 			extractSound(projectileDat.impact.soundID)
+		}
+
+		if(projectileDat.sounds){
+			for(var soundIndex = 0; soundIndex < projectileDat.sounds.length; soundIndex++){
+				var soundObj = projectileDat.sounds[soundIndex]
+				extractSound(soundObj.soundID)
+			}
 		}
 	}
 

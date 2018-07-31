@@ -7,3 +7,6 @@ firebase2/functions/node_modules/
 firebase2/node_modules/
 *.DS_Store
 playground/node_modules/
+playground/dist/spines/Theffanie/theffanieSelector@0.5x.png
+playground/dist/spines/Theffanie/theffanieSelector@0.5x.atlas
+playground/dist/spines/Theffanie/theffanieSelector.json

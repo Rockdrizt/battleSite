@@ -230,10 +230,6 @@ var startScreen = function(){
                      
                     game.add.tween(logosGroup.playBtn).to({x:game.world.centerX + 270}, 500, Phaser.Easing.Cubic.In, true).onComplete.add(function(){
                         
-                        /*var emitter = epicparticles.newEmitter("hexagonLigth")
-                        emitter.x = logosGroup.playBtn.x
-                        emitter.y = logosGroup.playBtn.y*/
-                        
                         emitter = epicparticles.newEmitter("bubbles")
                         emitter.x = logosGroup.playBtn.x
                         emitter.y = logosGroup.playBtn.y

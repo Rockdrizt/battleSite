@@ -353,6 +353,7 @@
 "tournamentHandFan1":"sounds/characters/handFan1.mp3",
 "tournamentHandFan2":"sounds/characters/handFan2.mp3",
 "tournamentFireProjectile9":"sounds/characters/fireProjectile9.mp3",
-"tournamentWaterHit4":"sounds/characters/waterHit4.mp3"
-
+"tournamentWaterHit4":"sounds/characters/waterHit4.mp3",
+"tournamentDragonRoar1":"sounds/characters/dragonRoar1.mp3"
+    
 }

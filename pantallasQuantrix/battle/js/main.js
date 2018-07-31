@@ -28,7 +28,9 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				sceneloader.show("battle")
+				//sceneloader.show("battle")
+				sceneloader.show("result")
+                
 	    	}
 
 			document.body.style.visibility = "visible"
@@ -83,18 +85,25 @@ function startGame(){
     	sound.init(game)
 
 		var teams = [
-			["yogotarDinamita", "yogotarEstrella", "yogotarLuna"],
+			["yogotarDinamita", "yogotarTheffanie", "yogotarLuna"],
 			["yogotarEagle", "yogotarDinamita", "yogotarEstrella"],
+		
+		]
+        
+        var winners = [
+			["dinamita", "theffanie", "luna"],
+			["eagle", "nao", "estrella"],
 		
 		]
 
 		battle.setTeams(teams)
+		result.setTeams(winners)
     }
 
     function create(){
     	bootConfigFiles([
-			battle
-            //result,
+			battle,
+            result
     	])
     }
 }
