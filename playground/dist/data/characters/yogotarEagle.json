@@ -12,7 +12,7 @@
 		"super": [
             {
 				"id": "superEagle",
-				"attachment": "particle7",
+				"attachment": "particle12",
 				"delay": 500,
 				"multiplier": 1
 			}
@@ -21,21 +21,31 @@
 		"ultra":[
 			{
 				"id": "ultraEagle",
-				"attachment": "particle15",
-				"delay": 3000,
+				"attachment": "particle13",
+				"delay": 2500,
 				"multiplier": 1
 			},
             {
 				"id": "ultraEagle",
+<<<<<<< HEAD
 				"attachment": "particle15",
 				"delay": 3500,
+=======
+				"attachment": "particle13",
+				"delay": 3000,
+>>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
 				"multiplier": 1,
 				"hit":false
 			},
             {
 				"id": "ultraEagle",
+<<<<<<< HEAD
 				"attachment": "particle15",
 				"delay": 4000,
+=======
+				"attachment": "particle13",
+				"delay": 3500,
+>>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
 				"multiplier": 1,
 				"hit":false
 			}

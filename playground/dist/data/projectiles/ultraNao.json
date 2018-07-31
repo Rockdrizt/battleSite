@@ -1,8 +1,14 @@
 {
   "timing":{
+<<<<<<< HEAD
     "stop":1500,
     "removal":2500,
     "hit":1500
+=======
+    "stop":1600,
+    "removal":2500,
+    "hit":500
+>>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
   },
   "spines":[
     {
@@ -12,6 +18,15 @@
       "animations":["idle_ultra"]
     }
   ],
+<<<<<<< HEAD
+=======
+  "sounds":[
+    {
+      "soundID":"tournamentDragonRoar1",
+      "delay":0
+    }
+  ],
+>>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
   "impact":{
     "soundID":"tournamentFireExplosion4"
   },
@@ -35,28 +50,64 @@
       "index":"y"
     },
     {
+<<<<<<< HEAD
       "id":"set",
       "name":"transitionParams",
       "index":"x",
       "copyFrom":"targetX"
+=======
+      "id":"get",
+      "variable":"target",
+      "name":"side",
+      "index":"side"
+    },
+    {
+      "id":"operation",
+      "operation":"*",
+      "storeReturn":"mulScale",
+      "value1":1500,
+      "variable2":"side"
+    },
+    {
+      "id":"operation",
+      "operation":"+",
+      "storeReturn":"targetX",
+      "variable1":"mulScale",
+      "variable2":"targetX"
+>>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
     },
     {
       "id":"set",
       "name":"transitionParams",
+<<<<<<< HEAD
       "index":"y",
       "copyFrom":"targetY"
+=======
+      "index":"x",
+      "copyFrom":"targetX"
+>>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
     },
     {
       "id":"set",
       "name":"transitionParams",
       "index":"time",
+<<<<<<< HEAD
       "value":550
+=======
+      "value":1600
+
+>>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
     },
     {
       "id":"set",
       "name":"transitionParams",
+<<<<<<< HEAD
       "index":"dela",
       "value":550
+=======
+      "index":"delay",
+      "value":0
+>>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
     },
     {
       "index":"to",

@@ -3,24 +3,28 @@
 	"attacks": {
 		"normal": [
 			{
-				"id": "normalWater",
-				"attachment": "particle4",
-				"delay":    0,
+				"id": "normalNao",
+				"attachment": "particle5",
+				"delay":    660,
 				"multiplier": 1
 			}
 		],
 		"super": [
             {
-				"id": "superArthurius",
-				"attachment": "particle7",
-				"delay": 1000,
+				"id": "superNao",
+				"attachment": "particle3",
+				"delay": 200,
 				"multiplier": 1
 			}
 		],
 		"ultra":[
 			{
 				"id": "ultraNao",
+<<<<<<< HEAD
 				"attachment": "particle4",
+=======
+				"attachment": "particle12",
+>>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
 				"delay": 1200,
 				"multiplier": 1
 			}

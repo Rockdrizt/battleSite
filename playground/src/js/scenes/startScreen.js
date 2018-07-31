@@ -67,6 +67,17 @@ var startScreen = function(){
 		sounds: [
             {	name: "startSong",
 				file: soundsPath + "songs/battleLoop.mp3"},
+<<<<<<< HEAD
+=======
+            {	name: "swipe",
+				file: soundsPath + "swipe.mp3"},
+            {	name: "pop",
+                file: soundsPath + "pop.mp3"},
+            {	name: "brightTransition",
+                file: soundsPath + "brightTransition.mp3"},
+            {	name: "cut",
+                file: soundsPath + "cut.mp3"},
+>>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
 		],
         spritesheets: [
             

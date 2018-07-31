@@ -28,7 +28,8 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				sceneloader.show("battleScene")
+				sceneloader.show("startScreen")
+				//sceneloader.show("battle")
 	    	}
 
 			document.body.style.visibility = "visible"
@@ -83,18 +84,28 @@ function startGame(){
     	sound.init(game)
 
 		var teams = [
+<<<<<<< HEAD
 			["yogotarEagle", "yogotarEgle", "yogotarEagle"],
 			["yogotarEagle", "yogotarEagle", "yogotarEagle"],
 		
+=======
+
+			[{name:"yogotarEagle", skin:"eagle1"}, {name:"yogotarNao", skin:"nao2"}, {name:"yogotarTomiko", skin:"tomiko1"}],
+			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarArthurius", skin:"arthurius1"}, {name:"yogotarEstrella", skin:"estrella1"}],
+>>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
 		]
 
-		battleScene.setTeams(teams)
+		//battleScene.setTeams(teams)
+		battle.setTeams(teams)
     }
 
     function create(){
 		console.log("createEpicBattle")
     	bootConfigFiles([
-			battleScene
+			//battleScene,
+            startScreen,
+            yogoSelector,
+            battle,
             //result,
     	])
     }
