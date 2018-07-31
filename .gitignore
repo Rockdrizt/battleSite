@@ -7,3 +7,4 @@ firebase2/functions/node_modules/
 firebase2/node_modules/
 *.DS_Store
 playground/node_modules/
+node_modules/
