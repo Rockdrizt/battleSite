@@ -1,0 +1,585 @@
+html{
+    height: 100%;
+}
+
+body{
+    position: absolute;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background: #18167a;
+    overflow: hidden;
+    background:url("../images/stars01.png"), linear-gradient(to bottom, rgb(89,0,128) 0%,rgb(73,132,204)  100%);
+
+    background-repeat: repeat;
+    background-position: center;
+}
+
+#bgGradient{
+    
+    position: fixed;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    margin:0;
+    background-position:center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.1;
+}
+
+
+#logo{
+    width: 100%;
+    margin: 5% 0;
+    margin-bottom: 1%;
+}
+
+.logoTour{
+    padding: 3vw;
+    width: 100%;
+    max-width: 900px !important;
+    width: 80%;
+}
+
+.object-left{
+    
+    background-image: url("../images/tower-left.png");
+    transform: scale(1.5);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    bottom: 25%;
+    left: -15%;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: contain;
+}
+
+.object-right{
+    
+    background-image: url("../images/tower-right.png");
+    transform: scale(1.5);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    bottom: 25%;
+    right: -15%;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: contain;
+}
+
+.object-center{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    position: absolute;
+    bottom: 1%;
+    justify-content: space-around;
+}
+
+.yogo-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+        margin-top: 1vh;
+}
+
+.yogo-nao{
+    
+    background-image: url("../images/nao.png");
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: contain;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 30%;
+}
+
+.yogo-estrella{
+    
+    background-image: url("../images/estrella.png");
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    right: 30%;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: contain;
+}
+
+.yogo-oona,
+.yogo-arturius{
+
+    text-align: center;
+    bottom: 0%;
+}
+
+.yogo-oona img,
+.yogo-arturius img{
+   height: 20vh;
+}
+
+.yogotar{
+    position: absolute;
+    width: 50%;
+    top: 20%;
+    transform: scale(1.5);
+}
+
+.yogotar img{
+    width: 100%;
+    max-width: 250px;
+}
+
+.container{
+    position: absolute;
+    width: 100% !important;
+    height: 100% !important;
+    left:0%;
+    margin:0% !important;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.menuBtn {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    border-style: none;
+    display:inline-block;
+    position: relative;
+    cursor:pointer;
+    width: 100%;
+    text-align: center;
+}
+
+.green-btn{
+    background-image: url("../images/greenButton.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: transparent;
+    border-style: none;
+        padding-top: 2vh;
+    cursor: pointer;
+    color:#FFF;
+    font-size: 7vw;
+    
+    width: 40%;
+    z-index: 10;
+    text-align: center;
+}
+
+.pink-btn{
+    background-image: url("../images/pinkButton.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: transparent;
+    border-style: none;
+    cursor: pointer;
+    color:#FFF;
+    font-size: 8vw;
+    
+    padding-top: 2vh;
+    width: 40%;
+    z-index: 10;
+    text-align: center;
+}
+
+.red-btn{
+    background-image: url("../images/redButton.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: transparent;
+    border-style: none;
+    cursor: pointer;
+    color:#FFF;
+    font-size: 8vw;
+    padding-top: 2vh;
+    width: 40%;
+    z-index: 10;
+    text-align: center;
+}
+
+
+.carousel-container {
+    height: 55% !important;
+    margin-bottom: 20%;
+}
+
+
+
+.carousel-container ul {}
+
+.carousel-container ul li {
+    /* transition: width .5s, height .5s, top .5s, left .5s;
+        -webkit-transition: width .5s, height .5s, top .5s, left .5s;
+        */
+    border: none;
+}
+
+.carousel-container ul li img {}
+
+.selection-container{
+    display: flex;
+    margin: 30% 5%;
+    align-items: center;
+    justify-content: center;
+}
+
+.right{
+    cursor: pointer;
+    width: 20%;
+    position: relative !important;
+    z-index: 10;
+}
+
+.left {
+    cursor: pointer;
+    transform: scaleX(-1);
+    width: 20%;
+    position: relative !important;
+    z-index: 11;
+}
+
+.prevButtonGallery{
+    transform: scale(-1,1)
+}
+
+
+.font-luckiest{
+    font-family: 'Luckiest Guy', cursive !important;
+    color: white;
+    text-align: center;
+}
+
+.containerMainText{
+    width: 90%;
+    margin: 0 auto;
+    background-color: #ccedff;;
+    padding: 2vh;
+    border-radius: 2vw;
+}
+
+#mainText h1{
+    color:#491f9f;
+    font-size: 4vh
+}
+
+@font-face{
+	font-family: 'VAGRounded';
+	src: url('../fonts/VAGRoundedStd-Bold.otf');
+}
+
+#mainText p{
+    color:#326a97;
+    font-size: 2.5vh;
+    font-family: "VAGRounded";
+}
+
+.lock .planetImage{
+    filter: brightness(100%) ;
+
+}
+
+.lock span{
+    position: absolute;
+    z-index: 1;  
+}
+.active .lock span{
+    position: absolute;
+    z-index: 1; 
+    
+}
+
+
+@media screen and (orientation: portrait) {
+    
+    #portrait {
+        display: block;
+    }
+
+    #landscape {
+        display: none;
+    }
+    
+    @media only screen 
+        and (min-device-width: 768px) 
+        and (max-device-width: 1024px) 
+        and (-webkit-min-device-pixel-ratio: 2) {
+            
+          
+            .banner-selection{
+                background-size: 100% 100%;
+                font-size: 8vw;
+            }
+            
+            
+            .active{
+                transform: scale(2.5);
+                top: 40vh !important;
+            }
+    }
+}
+
+.createGame,
+.joinGame{
+    transform: scale(0);
+}
+
+
+/*----- Landscape mode -----*/
+
+/*LANDSCAPE IPHONE X*/
+
+/* Landscape */
+@media only screen 
+  and (min-device-width: 375px) 
+  and (max-device-width: 812px) 
+  and (-webkit-min-device-pixel-ratio: 3)
+    and (orientation: landscape) { 
+
+    .banner-selection{
+        font-size: 4vw;
+    }
+        
+
+        
+    .active{
+        transform: scale(1.3) !important;
+        top: 20vh !important;
+    }
+        
+        
+
+}
+
+@media screen and (orientation : landscape){
+    
+            
+    
+    .menuPlanets{
+        height: 10%;
+        background-repeat: no-repeat !important;
+        background-size: 85% 100% !important;
+    }
+    
+    .banner-selection p{
+    font-size: 2.5em !important; 
+        margin-top: 2% !important;
+        }  
+    
+    .nextButtonGallery,
+.prevButtonGallery{
+    height: 100% !important;
+    max-height: 180px;
+}
+    
+    #portrait {
+        display: none;
+    }
+
+    #landscape {
+        display: block;
+    }
+    
+    #logo{
+        margin: 0.5vw 0;
+    }
+    
+    .logoTour {
+        width: 40%;
+        padding: 1vw;
+        padding-bottom: 0;
+    }
+
+    .yogo-container{
+        position: absolute;
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .yogo-oona,
+    .yogo-arturius{
+       width: 25%;
+    }
+    
+    .yogo-arturius img{
+        height: 26vh;
+    }
+    
+    .yogo-oona{
+        transform: translateX(-10%);
+    }
+    
+    .yogo-oona img{
+        height: 25vh;
+    }
+
+    .object-center{
+        margin: 2% 0;
+        width: 70%;
+        margin-top: 0.5vw;
+        margin-left: 15%;
+        justify-content: center;
+    }
+
+    .green-btn,
+    .pink-btn,
+    .red-btn{
+        padding: 1vw;
+        padding-top: 2vw;
+        margin: 0; 
+        font-size: 5vw;
+        width: 30%;
+    }
+
+    .green-btn, 
+    .pink-btn,
+    .red-btn {
+        padding-top: 1vw;
+        padding-bottom: 0;
+    }
+    
+    .carousel-container {
+        height: 65% !important;
+        margin-bottom: 0;
+    }
+
+    .banner{
+        font-size: 6vw;
+        padding-top: 3%;
+        margin: 7% 15%;
+        margin-bottom: 3%;
+    }
+    
+    .selection-container{
+        margin: -5% 10%;
+    }
+
+    .left,
+    .right {
+        width: 15%;
+    }
+    
+    .right{
+       
+        right: 10%;
+    }
+
+    .left {
+        
+        left: 10%;
+    }
+
+    .banner-selection{
+        font-size: 1em !important; 
+    }
+    
+    .containerMainText {
+        width: 55%;
+    }
+    
+    #mainText h1{
+        font-size: 7vh
+    }
+    #mainText p{
+        font-size: 3.5vh
+    }
+    
+    .lock span{
+        margin-left: 0;
+        margin-top:0;
+         transform: scale(1);
+    }
+    
+    @media only screen 
+        and (min-device-width: 768px) 
+        and (max-device-width: 920px) 
+        and (-webkit-min-device-pixel-ratio: 2) {
+            
+            .banner-selection{
+            }
+            
+            .active{
+                transform: scale(2) !important;
+                top: 50vh !important;
+            }
+            
+            .logoTour{
+               width: 50%;
+                padding: 2vw;
+            }
+            
+            .containerMainText{
+               margin-top: 4vh;
+                width: 50%;
+            }
+            
+            .yogo-container{
+                margin-top: 10vh;
+            }
+            
+            .yogo-oona{
+                    transform: translate(-5%,-25%);
+            }
+            
+            .yogo-oona img{
+                height: 30vh;
+            }
+            
+            .yogo-arturius{
+                    transform: translate(-5%,-25%);
+            }
+            
+            .yogo-arturius img{
+                height: 33vh;
+            }
+    }
+}
+
+.menuPlanets{
+    position: relative;
+    background-image: url(../images/selectionTitle.png);
+    background-size: cover;
+    background-repeat: repeat-x;
+    background-position: top center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+}
+
+.planets{
+    position: relative;
+    height: 50vh;
+}
+
+.planets img{
+    height: 90%;
+}
+.nextButtonGallery,
+.prevButtonGallery{
+    height: 100%;
+    max-height: 180px;
+}
+.nextButtonGallery img,
+.prevButtonGallery img{
+    height: 100%;
+}
+
+.banner-selection p {
+    margin: 0%;
+    line-height: 2;
+    font-size: 4vh;
+}
+    
+
+
+

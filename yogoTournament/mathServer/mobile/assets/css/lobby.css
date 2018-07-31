@@ -1,0 +1,258 @@
+
+
+.banner{
+    margin: 0 1%;
+}
+
+.pin-container{
+    width: 100%;
+    align-items: center;
+    text-align: center;
+}
+
+.pin-title{
+    background-image: url("../images/titlePin.png");
+    background-repeat: no-repeat;
+    background-size: 90% 100%;
+    padding-top: 2vw;
+    background-position: center;
+    text-align: center;
+    margin: 0% 5%;
+    font-size: 5vh;
+}
+
+
+
+.warning{
+    padding: 0 10%;
+}
+
+.warning img{
+    transform: scale(3);
+}
+
+.pin-body{
+    align-items: center;
+    background-color: #53986e;
+    text-align: center;
+    margin: 0 10%;
+}
+
+.pin-style{
+    background-color: white;
+    padding-top: 2vh;
+    font-size: 4vh;
+    color: #006837;
+    margin: 0% 10%;
+    transform: translateY(10%);
+    border-radius: 5vh;
+}
+
+.share-style{
+    font-size: 3vh;
+    margin: 5%;
+    margin-bottom: 0;
+    /*color: #184831;*/
+}
+
+.share-style p{
+    font-size: 4vh;
+    margin-top: 2vh;
+}
+
+
+.yogo-container{
+    /*margin-top: 25%;*/
+    font-size: 3vh;
+}
+
+.yogotarImg{
+    display: block;
+}
+
+@media screen and (orientation: portrait) {
+
+    #portrait {
+        display: block;
+    }
+
+    #landscape {
+        display: none;
+    }
+
+    .yogotarImg{
+        align-items: center;
+        max-height: 22vh;
+        height: 22vh;
+        /*vertical-align: middle;*/
+    }
+
+    .yogotarImg img{
+        /* height: inherit; */
+        max-height: inherit;
+        max-width: 100%;
+        /* vertical-align: middle; */
+    }
+}
+
+
+/*-----Landscape-----*/
+
+@media screen and (orientation : landscape){
+
+    #portrait {
+        display: none;
+    }
+
+    #landscape {
+        display: block;
+    }
+
+    .pin-title{
+        padding-top: 0.5vw;
+        font-size: 7vh;
+        margin: 0 22%;
+    }
+
+    .pin-body{
+        margin: 0 25%;
+    }
+
+    .pin-style{
+        padding-top: 2vw;
+        font-size: 8vh;
+    }
+
+    .share-style{
+        font-size: 5vh;
+    }
+    
+    .share-style p{
+        font-size: 6vh;
+    }
+
+    .warning img {
+        transform: scale(1);
+    }
+
+    .yogo-container{
+        font-size: 2vh;
+    }
+
+    .yogo1{
+        width: 25%;
+    }
+    .yogo2 {
+        width: 20%;
+    }
+
+    .yogo1,
+    .yogo2{
+        transform: translateX(0);
+    }
+
+    /*.yogotarImg img{*/
+    /*width: 101%;*/
+    /*}*/
+    .yogotarImg{
+        min-height: 40vh;
+        align-items: center;
+    }
+
+    .yogotarImg img{
+        width: 101%;
+    }
+    
+    .yogotarImg{
+        display: inline-flex;
+    }
+
+}
+
+
+.yogo2 .yogotarImg{
+    transform: scaleX(-1);
+}
+
+
+
+.yogotarLogo img{
+    width: 65%;
+    opacity: 0;
+}
+
+.yogotarNickname {
+    font-size: 4vw;
+}
+
+.startButton{
+    opacity: 0.5;
+}
+
+/* Landscape IPAD*/
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: landscape) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+      
+      .pin-style{
+          padding-top: 4vh;
+          font-size: 8vh;
+      }
+      
+      .yogo1,
+        .yogo2 {
+            width: 25%;
+        }
+
+}
+
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (orientation: portrait) 
+    and (-webkit-min-device-pixel-ratio: 1) {
+        
+        .pin-style{
+          padding-top: 2vh;
+          font-size: 4vh;
+      }
+        
+}
+
+
+
+      /* Landscape IPAD PRO*/
+@media only screen 
+  and (min-device-width: 1366px) 
+  and (max-device-width: 1366px) 
+  and (orientation: portrait) 
+    and (-webkit-min-device-pixel-ratio: 2) {
+        
+      .pin-style{
+          padding-top: 2vh;
+          font-size: 4vh;
+      }
+}
+
+@media only screen 
+  and (min-device-width: 1366px) 
+  and (max-device-width: 1366px) 
+  and (orientation: landscape) 
+    and (-webkit-min-device-pixel-ratio: 2) {
+        
+        .pin-style{
+          padding-top: 4vh;
+          font-size: 8vh;
+      }
+        .yogo1,
+    .yogo2 {
+        width: 25%;
+    }
+
+}
+
+
+
+

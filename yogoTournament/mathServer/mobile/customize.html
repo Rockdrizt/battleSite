@@ -1,0 +1,244 @@
+<!doctype html>
+<html>
+<head>
+    <title class="languageTitle">Yogome tournament</title>
+    <meta name="viewport" content="width = 1050, user-scalable = no" />
+    <meta charset="UTF-8">   
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/dificulty.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/customize.css" />
+    <!-- Jquery   -->
+    <script src="assets/js/lib/jquery.min.js" ></script>
+    <!--  Bootstrap 3.0  -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy" rel="stylesheet">
+    
+    <script type="text/javascript" src="assets/js/lib/greensock/TweenMax.min.js"></script>
+    <script type="text/javascript" src="assets/js/lib/iscroll-probe.js"></script>
+
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    
+</head>
+    
+<body>
+     
+    <section id="bgGradient"></section>
+    
+    <section id="portrait">
+        
+        <div class="container font-luckiest">
+
+            <div class="banner">CUSTOMIZE</div>
+
+            <div class="menu-container">
+
+                <div>
+                    <div class="condition-header">TIME</div>
+
+                    <div class="condition-body">
+
+                        <div class="less-time col-xs-3"></div>
+
+                            <div class="time-image col-xs-6">
+                                <p class="time">3:00</p>
+                            </div>
+
+                        <div class="more-time col-xs-3"></div>
+                    </div>
+                    <div style="font-size: 4vw" class="minutes">minutes</div>
+
+                </div>
+
+                <div>
+                    <div class="condition-header">ROUNDS</div>
+
+                    <div class="condition-body">
+                        
+                        <div class="less-rounds col-xs-3"></div>
+                
+                        <div class="round-image col-xs-6">
+                            <p class="round">∞</p>
+                        </div>
+
+                        <div class="more-rounds col-xs-3"></div>
+
+                    </div>
+                    <div style="font-size: 4vw" class="battles">battles</div>
+
+                </div>
+                
+            </div>
+
+            <div class="object-center">
+
+                <button class="red-btn" type="button" onclick="window.location.href='selectDifficult.html'">BACK</button>
+
+                <button class="green-btn" type="button" onclick="gotoLobby()">CREATE</button>
+
+            </div>
+
+        </div>
+
+    </section>
+    
+    <section id="landscape">
+        
+        <div class="container font-luckiest">
+
+            <div class="banner">CUSTOMIZE</div>
+            
+            <div class="menu-container" style="display: flex; justify-content: center;">
+
+                <div class="col-xs-6">
+                    <div class="condition-header">TIME</div>
+
+                    <div class="condition-body">
+
+                        <div class="less-time col-xs-3"></div>
+
+                            <div class="time-image col-xs-6">
+                                <p class="time">3:00</p>
+                            </div>
+
+                        <div class="more-time col-xs-3"></div>
+                    </div>
+                    <div style="font-size: 3vw" class="minutes">minutes</div>
+
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="condition-header">ROUNDS</div>
+
+                    <div class="condition-body">
+                        
+                        <div class="less-rounds col-xs-3"></div>
+                
+                        <div class="round-image col-xs-6">
+                            <p class="round">∞</p>
+                        </div>
+
+                        <div class="more-rounds col-xs-3"></div>
+
+                    </div>
+                    <div style="font-size: 3vw" class="battles">battles</div>
+
+                </div>
+                
+            </div>
+
+            
+
+            <div class="object-center">
+
+                <button class="red-btn" type="button" onclick="window.location.href='selectDifficult.html'">BACK</button>
+
+                <button class="green-btn" type="button" style="font-size: 3.5vw;" onclick="gotoLobby()">CREATE</button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+<script>
+    
+    var round = 0
+    var time = 3
+    var popSound = new Audio('sounds/pop.mp3');
+
+    $(".less-rounds").click(function(){
+        popSound.play();
+        TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
+        if(round > 0){
+            round--
+            $(".round").text(round);
+        }
+        else{
+            round = 10
+            $(".battles").text('battles');
+             $(".round").text(round);
+        }
+        if(round === 0){
+            $(".battles").text('battles');
+            $(".round").text("∞");
+        }
+        if(round === 1){
+            $(".battles").text('battle');
+            $(".round").text(round);
+        }
+       
+    });
+
+    $(".more-rounds").click(function(){
+        popSound.play();
+        TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
+        if(round < 10){
+            round++
+            $(".battles").text('battles');
+            $(".round").text(round);
+        }
+        else{ 
+            round = 0
+            $(".battles").text('battles');
+            $(".round").text("∞");
+        }
+        
+         if(round == 1) { 
+            
+            $(".battles").text('battle');
+            $(".round").text(round);
+        }
+        
+    });
+
+    
+    $(".less-time").click(function(){
+        popSound.play();
+        TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
+        if(time > 1){
+            time--
+        }
+        else{
+            time = 10
+            $(".minutes").text('minutes');
+        }
+        if(time === 1){
+            $(".minutes").text('minute');
+        }
+        $(".time").text(time + ':00');
+    });
+
+    $(".more-time").click(function(){
+        popSound.play();
+        TweenMax.fromTo($(this),0.3,{scale:1.5},{scale:1});
+        if(time < 10){
+            time++
+            $(".minutes").text('minutes');
+        }
+        else{
+            time = 1
+            $(".minutes").text('minute');
+        }
+        $(".time").text(time + ':00');
+    });
+
+    function gotoLobby() {
+		parent.battleTime = time * 60000
+        parent.maxRounds = round
+		window.location.href='lobby.html'
+	}
+
+</script>
+    
+</body>       
+</html>
+
+
+        
+    
+
+
+
+
