@@ -311,7 +311,7 @@ var yogoSelector = function(){
 
 		for(var i = 0; i < 2; i++){
 
-			var img = teamsBarGroup.create(game.world.width * i, 30, "atlas.yogoSelector", "teamBar" + i)
+			var img = teamsBarGroup.create(game.world.width * i, 30, "atlas.yogoSelector", "teamBar" + (i+1))
 			img.anchor.setTo(i, 0)
 			img.scale.setTo(0.8)
 
