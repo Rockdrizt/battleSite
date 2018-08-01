@@ -150,10 +150,13 @@ var battle = function(){
         blackMask.alpha = 0
         sceneGroup.add(blackMask)
         
+        btngroup= game.add.group()
+        
         var rotateButton = createButton(rotateTeam.bind(null, 0), 0x00ff00)
 		rotateButton.x = game.world.centerX
 		rotateButton.y = game.world.height - 150
 		rotateButton.label.text = "rotate"
+        btngroup.add(rotateButton)
         
         var team = 0
         
@@ -161,26 +164,31 @@ var battle = function(){
 		damageButom.x = game.world.centerX - 200
 		damageButom.y = game.world.height - 250
 		damageButom.label.text = "normal"
+        btngroup.add(damageButom)
         
         var damageButom = createButton(attackMove.bind(null, "super"), 0xff00ff)
 		damageButom.x = game.world.centerX - 200
 		damageButom.y = game.world.height - 200
 		damageButom.label.text = "super"
+        btngroup.add(damageButom)
         
         var damageButom = createButton(ultraMove, 0xff00ff)
 		damageButom.x = game.world.centerX - 200
 		damageButom.y = game.world.height - 150
 		damageButom.label.text = "ultra"
+        btngroup.add(damageButom)
         
         var returnBtn = createButton(returnCamera, 0xff0033)
 		returnBtn.x = game.world.centerX 
 		returnBtn.y = game.world.height - 200
 		returnBtn.label.text = "zoom out"
+        btngroup.add(returnBtn)
         
         var win = createButton(setWinteam, 0xffaa33)
 		win.x = game.world.centerX - 200
 		win.y = game.world.height - 100
 		win.label.text = "winner"
+        btngroup.add(win)
         
         var rect = game.add.graphics()
         rect.beginFill(0x242A4D)
@@ -469,6 +477,7 @@ var battle = function(){
 		questionBtn.x = game.world.centerX
 		questionBtn.y = game.world.height - 250
 		questionBtn.label.text = "questionBtn"
+        btngroup.add(questionBtn)
     }
     
     function setQuestion(question, image, options){
@@ -631,8 +640,6 @@ var battle = function(){
 				}
 				var character = characterBattle.createCharacter(characterName, skin, characterPos)
 				console.log("postion", character.position)
-                character.setAnimation(["support_yog2"], false)
-                character.setAnimation(["support_yog3"], false)
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
 				character.teamIndex = teamIndex
 				character.alpha = 0
@@ -683,23 +690,21 @@ var battle = function(){
         
         var color = COLORS[index]
         var yogoteam = teams[index]
-        var slotName = ["cheer_flag", "cheer_glove"]
-        var animations = ["support_yog2", "support_yog3"]
-        
-        var i = 0
-        
-       
-        
+        var names = ["cheer_flag", "cheer_glove"]
+        var animations = ["support_yog2", "ready", "support_yog3"]
+
         for(var i = 0; i < yogoteam.length; i++){
             
             var subGroup = yogoteam[i]
             
-            if(subGroup != mainSpine){
-                console.log(animations[i])
-                subGroup.setAnimation(["support_yog2"], true)
-                var slot = getSpineSlot(subGroup.children[0], "cheer_flag")
+            subGroup.setAnimation([animations[i]], true)
+            
+            for(var j = 0; j < names.length; j++){
+                subGroup.children[0].setTint(color)
+                var slot = getSpineSlot(subGroup.children[0], names[j])
                 if(slot){
-                    slot.children[0].tint = color
+                    console.log(slot.currentSprite)
+                    //slot.currentSprite.tint = color
                 }
             }
         }
@@ -756,8 +761,14 @@ var battle = function(){
        
         var life = lifeBars[team]
         var damage = life.width - (MAX_LIFE * percent * ORDER_SIDES[team].scale.x)
+        var index = team == 0 ? 1 : 0
+        var otherTeam = teams[index] 
         
-        game.add.tween(life).to({width:damage}, 500, Phaser.Easing.Cubic.Out, true)
+        game.add.tween(life).to({width:damage}, 500, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
+            otherTeam.forEach(function(member){
+                member.setAnimation(["idle_normal"], true)
+            })
+        })
     }
     
     function attackMove(type){
@@ -787,7 +798,7 @@ var battle = function(){
         var team = mainSpine.teamIndex
         var side = ORDER_SIDES[team]
         
-        setTeamColors(team)
+        //setTeamColors(team)
         
         specialAttack.scale.setTo(side.scale.x, 1)
         specialAttack.y = 0
@@ -869,9 +880,8 @@ var battle = function(){
             createTimer()
             createSpecialAttack()
             createQuestionOverlay()
-            createMenuAnimations()
+            //createMenuAnimations()
             //battleSong = sound.play("battleSong", {loop:true, volume:0.6})
-            
 		},
         setCharacter:setCharacter,
         setTeams: function (myTeams) {

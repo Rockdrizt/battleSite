@@ -210,7 +210,7 @@ var startScreen = function(){
     
     function startAnimation(){
         
-        var delay = 500
+        var delay = 1000
         var lastTween
         
         for(var i = 0; i < 4; i++){
