@@ -175,6 +175,11 @@ var battle = function(){
 		returnBtn.y = game.world.height - 200
 		returnBtn.label.text = "zoom out"
         
+        var win = createButton(setWinteam, 0xffaa33)
+		win.x = game.world.centerX - 200
+		win.y = game.world.height - 100
+		win.label.text = "winner"
+        
         var rect = game.add.graphics()
         rect.beginFill(0x242A4D)
         rect.drawRect(0, 0, game.world.width, 150)
@@ -222,7 +227,7 @@ var battle = function(){
         
         var tokenGroup = game.add.group()
         
-        var listName = loadNames()
+        listName = loadNames()
         
         var pivotX = 0.25
         var index = 0
@@ -627,6 +632,8 @@ var battle = function(){
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
 				character.teamIndex = teamIndex
 				character.alpha = 0
+                character.name = characterName
+                character.skin = skin
 				yogoGroup.add(character)
 				createAppear(character, teamIndex, charIndex)
 
@@ -666,7 +673,6 @@ var battle = function(){
 
 			yogoGroup.add(groupPoint)
 		}
-        //createMenuAnimations()
 	}
     
     function selectYogotar(obj) {
@@ -688,13 +694,13 @@ var battle = function(){
 			button.label.text = animationName
 		}
 
-		for(var attackIndex = 0; attackIndex < ATTACKS.length; attackIndex++){
+		/*for(var attackIndex = 0; attackIndex < ATTACKS.length; attackIndex++){
 			var buttonAttack = createButton(attack, 0xff0000)
 			buttonAttack.tag = ATTACKS[attackIndex]
 			buttonAttack.x = attackIndex * 200
 			buttonAttack.y = (pivotY + 1) * 50
 			buttonAttack.label.text = ATTACKS[attackIndex]
-		}
+		}*/
 	}
     
     function changeAnimation(name) {
@@ -785,6 +791,32 @@ var battle = function(){
 		zoomCamera(1, 1000, {x:0, y:0})
 		game.add.tween(blackMask).to({alpha:0}, 500, Phaser.Easing.Cubic.Out, true)
 	}
+    
+    function setWinteam(){
+        
+        var rewardList = [[], []]
+        
+        for(var i = 0; i < teams.length; i++){
+            for(var j = 0; j < teams[i].length; j++){
+                
+                var obj = {
+                    name : teams[i][j].name.substr(7).toLowerCase(),
+                    skin : teams[i][j].skin
+                }
+                rewardList[i].push(obj)
+            }
+        }
+        
+        battleMain.initResults(rewardList, game.rnd.integerInRange(0, 1))
+        //battleMain.create()
+        showResults()
+    }
+    
+    function showResults() {
+		game.add.tween(sceneGroup).to({alpha:0}, 1000, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
+			sceneloader.show("reward")
+		})
+	}
 
 	return {
 		
@@ -803,13 +835,12 @@ var battle = function(){
             
             initialize()
             createBackground()	
+            placeYogotars()
             createTeamBars()
             createTimer()
-            placeYogotars()
-            sceneGroup.bringToTop(teamsBarGroup)
             createSpecialAttack()
             createQuestionOverlay()
-            //createMenuAnimations()
+            createMenuAnimations()
             //battleSong = sound.play("battleSong", {loop:true, volume:0.6})
             
 		},
@@ -823,6 +854,7 @@ var battle = function(){
 					var character = team[charIndex]
 					setCharacter(character.name, teamIndex)
                     var img = team[charIndex].name.substr(7)
+                    console.log(img)
                     pushSpecialArt(img)
 				}
 			}
