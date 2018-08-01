@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.8.3</string>
+        <string>4.8.2</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -389,6 +389,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">teamBar0.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>208,35,415,69</rect>
+                <key>scale9Paddings</key>
+                <rect>208,35,415,69</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">teamBar1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -399,19 +412,6 @@
                 <rect>200,36,401,72</rect>
                 <key>scale9Paddings</key>
                 <rect>200,36,401,72</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">teamBar2.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>194,36,387,72</rect>
-                <key>scale9Paddings</key>
-                <rect>194,36,387,72</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -550,6 +550,7 @@
         </map>
         <key>fileList</key>
         <array>
+            <filename>teamBar0.png</filename>
             <filename>teamBar1.png</filename>
             <filename>token1.png</filename>
             <filename>token0.png</filename>
@@ -579,7 +580,6 @@
             <filename>name7.png</filename>
             <filename>plat1.png</filename>
             <filename>plat2.png</filename>
-            <filename>teamBar2.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
