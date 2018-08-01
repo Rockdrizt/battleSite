@@ -112,7 +112,7 @@ function startGame(){
             //yogoSelector,
             battle,
             //result,
-            reward
+            //reward
     	])
     }
 }

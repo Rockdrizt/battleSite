@@ -102,6 +102,8 @@ var battle = function(){
     var DAMAGE = DAMAGE_PERCENT[QUESTIONS.N_10]
     var MAX_LIFE
     
+    var COLORS = ["#FC1E79", "#00D8FF"]
+    
     var teams
     var battleSong
 	var sceneGroup
@@ -379,7 +381,7 @@ var battle = function(){
         var yogo = specialAttack.create(frame.centerX, frame.y + frame.height * 0.48, mainSpine.data.name + "Special")
         yogo.anchor.setTo(0.5,1)
         specialAttack.yogo = yogo
-        specialAttack.y = game.world.height
+        specialAttack.y = game.world.height + 100
     }
     
     function createQuestionOverlay(){
@@ -629,6 +631,8 @@ var battle = function(){
 				}
 				var character = characterBattle.createCharacter(characterName, skin, characterPos)
 				console.log("postion", character.position)
+                character.setAnimation(["support_yog2"], false)
+                character.setAnimation(["support_yog3"], false)
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
 				character.teamIndex = teamIndex
 				character.alpha = 0
@@ -672,6 +676,47 @@ var battle = function(){
 			teamCharacters.groupPoint = groupPoint
 
 			yogoGroup.add(groupPoint)
+		}
+	}
+    
+    function setTeamColors(index){
+        
+        var color = COLORS[index]
+        var yogoteam = teams[index]
+        var slotName = ["cheer_flag", "cheer_glove"]
+        var animations = ["support_yog2", "support_yog3"]
+        
+        var i = 0
+        
+       
+        
+        for(var i = 0; i < yogoteam.length; i++){
+            
+            var subGroup = yogoteam[i]
+            
+            if(subGroup != mainSpine){
+                console.log(animations[i])
+                subGroup.setAnimation(["support_yog2"], true)
+                var slot = getSpineSlot(subGroup.children[0], "cheer_flag")
+                if(slot){
+                    slot.children[0].tint = color
+                }
+            }
+        }
+    }
+    
+    function getSpineSlot(spine, slotName){
+		
+		var slotIndex
+		for(var index = 0, n = spine.skeletonData.slots.length; index < n; index++){
+			var slotData = spine.skeletonData.slots[index]
+			if(slotData.name === slotName){
+				slotIndex = index
+			}
+		}
+
+		if (slotIndex){
+			return spine.slotContainers[slotIndex]
 		}
 	}
     
@@ -742,6 +787,8 @@ var battle = function(){
         var team = mainSpine.teamIndex
         var side = ORDER_SIDES[team]
         
+        setTeamColors(team)
+        
         specialAttack.scale.setTo(side.scale.x, 1)
         specialAttack.y = 0
         specialAttack.x = game.world.width * team
@@ -794,29 +841,11 @@ var battle = function(){
     
     function setWinteam(){
         
-        var rewardList = [[], []]
-        
-        for(var i = 0; i < teams.length; i++){
-            for(var j = 0; j < teams[i].length; j++){
-                
-                var obj = {
-                    name : teams[i][j].name.substr(7).toLowerCase(),
-                    skin : teams[i][j].skin
-                }
-                rewardList[i].push(obj)
-            }
-        }
-        
-        battleMain.initResults(rewardList, game.rnd.integerInRange(0, 1))
-        //battleMain.create()
-        showResults()
-    }
-    
-    function showResults() {
-		game.add.tween(sceneGroup).to({alpha:0}, 1000, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
+        battleMain.initWinerTeam(game.rnd.integerInRange(0, 1))
+        game.add.tween(sceneGroup).to({alpha:0}, 1000, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
 			sceneloader.show("reward")
 		})
-	}
+    }
 
 	return {
 		
