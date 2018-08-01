@@ -1,7 +1,11 @@
 {
   "timing":{
     "stop":900,
+<<<<<<< HEAD
+    "removal":2000,
+=======
     "removal":1500,
+>>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
     "hit":900
   },
   "particles":[

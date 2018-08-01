@@ -28,7 +28,7 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				sceneloader.show("yogoSelector")
+				sceneloader.show("startScreen")
 				//sceneloader.show("battle")
 	    	}
 
@@ -84,9 +84,10 @@ function startGame(){
     	sound.init(game)
 
 		var teams = [
-
+            
 			[{name:"yogotarEagle", skin:"eagle1"}, {name:"yogotarNao", skin:"nao2"}, {name:"yogotarTomiko", skin:"tomiko1"}],
 			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarArthurius", skin:"arthurius1"}, {name:"yogotarEstrella", skin:"estrella1"}],
+
 		]
 
 		//battleScene.setTeams(teams)
@@ -97,9 +98,9 @@ function startGame(){
 		console.log("createEpicBattle")
     	bootConfigFiles([
 			//battleScene,
-            battle,
+            startScreen,
             yogoSelector,
-            startScreen
+            battle,
             //result,
     	])
     }
