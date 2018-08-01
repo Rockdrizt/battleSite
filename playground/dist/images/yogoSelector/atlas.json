@@ -129,7 +129,11 @@
 	"sourceSize": {"w":64,"h":64}
 },
 {
+<<<<<<< HEAD
+	"filename": "teamBar1",
+=======
 	"filename": "teamBar0",
+>>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
 	"frame": {"x":1,"y":73,"w":798,"h":138},
 	"rotated": false,
 	"trimmed": true,
@@ -137,7 +141,11 @@
 	"sourceSize": {"w":802,"h":138}
 },
 {
+<<<<<<< HEAD
+	"filename": "teamBar2",
+=======
 	"filename": "teamBar1",
+>>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
 	"frame": {"x":1,"y":213,"w":767,"h":144},
 	"rotated": false,
 	"trimmed": true,
@@ -247,6 +255,10 @@
 	"format": "RGBA8888",
 	"size": {"w":1999,"h":1011},
 	"scale": "1",
+<<<<<<< HEAD
+	"smartupdate": "$TexturePacker:SmartUpdate:6602b44cb14676f1b5738653bce78ae9:8b44d963d78372c236c71c09e92657ca:cbce6b53f0f49e0bf15173c25c41f876$"
+=======
 	"smartupdate": "$TexturePacker:SmartUpdate:e25b30c5dd45ec000f6afe2c5d672050:8b44d963d78372c236c71c09e92657ca:cbce6b53f0f49e0bf15173c25c41f876$"
+>>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
 }
 }

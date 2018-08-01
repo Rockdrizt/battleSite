@@ -67,6 +67,14 @@ var startScreen = function(){
 		sounds: [
             {	name: "startSong",
 				file: soundsPath + "songs/battleLoop.mp3"},
+            {	name: "swipe",
+				file: soundsPath + "swipe.mp3"},
+            {	name: "pop",
+                file: soundsPath + "pop.mp3"},
+            {	name: "brightTransition",
+                file: soundsPath + "brightTransition.mp3"},
+            {	name: "cut",
+                file: soundsPath + "cut.mp3"},
 		],
         spritesheets: [
             
@@ -274,6 +282,7 @@ var startScreen = function(){
             
 			sceneGroup = game.add.group()
 			
+            
             initialize()
             
             startSong = sound.play("startSong", {loop:true, volume:0.6})
