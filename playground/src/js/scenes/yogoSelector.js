@@ -917,7 +917,7 @@ var yogoSelector = function(){
             }
         }
         
-        battleMain.initResults(rewardList)
+        //battleMain.initResults(rewardList)
     }
 
 	function getReady(){

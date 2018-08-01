@@ -30,11 +30,12 @@ var battleMain = function(){
 
 	function init(teams){
 		battle.setTeams(teams)
+		reward.setTeams(teams)
 	}
     
-    function initResults(teams){
-        reward.setTeams(teams)
-    }
+    // function initResults(teams){
+    //     reward.setTeams(teams)
+    // }
     
     function initWinerTeam(win){
         reward.setWinner(win)
@@ -49,7 +50,6 @@ var battleMain = function(){
 
 	return{
 		init:init,
-        initResults: initResults,
         initWinerTeam: initWinerTeam,
         create:create,
 	}
