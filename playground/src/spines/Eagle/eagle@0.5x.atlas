@@ -1124,7 +1124,14 @@ normal1/appear_9
   orig: 376, 376
   offset: 0, 0
   index: -1
-normal1/big_hand
+normal1/cheer_flag
+  rotate: false
+  xy: 1699, 522
+  size: 110, 128
+  orig: 110, 128
+  offset: 0, 0
+  index: -1
+normal1/cheer_glove
   rotate: true
   xy: 520, 2
   size: 94, 128
@@ -1192,13 +1199,6 @@ normal1/fire_head3
   xy: 1507, 236
   size: 11, 39
   orig: 11, 39
-  offset: 0, 0
-  index: -1
-normal1/flag
-  rotate: false
-  xy: 1699, 522
-  size: 110, 128
-  orig: 110, 128
   offset: 0, 0
   index: -1
 normal1/floor_dust_wind

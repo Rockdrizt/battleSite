@@ -858,7 +858,7 @@ normal1/appear_9
   orig: 376, 376
   offset: 0, 0
   index: -1
-normal1/big_hand
+normal1/cheer_glove
   rotate: false
   xy: 1038, 28
   size: 94, 128
@@ -2089,7 +2089,7 @@ normal/torso2
   orig: 61, 26
   offset: 0, 0
   index: -1
-normal1/flag
+normal1/cheer_flag
   rotate: false
   xy: 212, 31
   size: 110, 128
