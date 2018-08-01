@@ -1,7 +1,7 @@
 {
   "timing":{
     "stop":1600,
-    "removal":2500,
+    "removal":1700,
     "hit":500
   },
   "spines":[
@@ -9,7 +9,7 @@
       "file":"spines/Nao/nao_projectiles.json",
       "scales":["@0.5x"],
       "skin":"nao_projectiles",
-      "animations":["idle_ultra"]
+      "animations":["in_ultra","idle_ultra"]
     }
   ],
   "sounds":[
