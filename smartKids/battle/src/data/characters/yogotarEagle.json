@@ -1,0 +1,64 @@
+{
+	"category":"yogotar",
+    "attacks": {
+		"normal": [
+			{
+				"id": "normalWind",
+				"attachment": "particle4",
+				"delay": 500,
+				"multiplier": 1
+			}
+		],
+		"super": [
+            {
+				"id": "superEagle",
+				"attachment": "particle12",
+				"delay": 500,
+				"multiplier": 1
+			}
+
+		],
+		"ultra":[
+			{
+				"id": "ultraEagle",
+				"attachment": "particle13",
+				"delay": 2500,
+				"multiplier": 1
+			},
+            {
+				"id": "ultraEagle",
+				"attachment": "particle13",
+				"delay": 3000,
+				"multiplier": 1,
+				"hit":false
+			},
+            {
+				"id": "ultraEagle",
+				"attachment": "particle13",
+				"delay": 3500,
+				"multiplier": 1,
+				"hit":false
+			}
+		]
+	},
+	"directory": "spines/Eagle/eagle.json",
+	"name": "Eagle",
+	"spine": {
+		"options": {
+			"scale": 0.85,
+			"events": [],
+			"animationSpeed": 10,
+			"useAtlas":"spines/characters/eagle/skeleton.atlas"
+		}
+	},
+	"stats": {
+		"health": 80,
+		"element": "wind"
+	},
+	"visuals": {
+		"shadowScaleX": 0.6,
+		"shadowScaleY": 1.1,
+		"cardFacing": "right",
+		"impactAttachment": "torso1"
+	}
+}
