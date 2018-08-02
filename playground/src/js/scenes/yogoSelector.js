@@ -901,6 +901,24 @@ var yogoSelector = function(){
 
 		return teams
 	}
+    
+    function setWinTeam(teams){
+        
+        var rewardList = [[], []]
+        
+        for(var i = 0; i < teams.length; i++){
+            for(var j = 0; j < teams[i].length; j++){
+                
+                var obj = {
+                    name : teams[i][j].name.substr(7).toLowerCase(),
+                    skin : teams[i][j].skin
+                }
+                rewardList[i].push(obj)
+            }
+        }
+        
+        //battleMain.initResults(rewardList)
+    }
 
 	function getReady(){
 
@@ -918,6 +936,7 @@ var yogoSelector = function(){
 			sound.play("swordSmash")
 			game.add.tween(readyGroup.ready.scale).from({x: 0, y:0}, 200, Phaser.Easing.linear, true).onComplete.add(function () {
 				battleMain.init(teams)
+                setWinTeam(teams)
 				battleMain.create()
 				//game.add.tween(loadingBar).to({alpha:1}, 500, Phaser.Easing.Cubic.Out, true)
 				game.time.events.add(6000, function () {

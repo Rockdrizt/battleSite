@@ -15,7 +15,7 @@ function startGame(){
 
 	    	function onCompleteSceneLoading(){
 				//sceneloader.show("startScreen")
-				sceneloader.show("yogoSelector")
+				sceneloader.show("teamSelector")
 	    	}
 
 	      	sceneloader.preload(sceneList, {onLoadFile: onLoadFile, onComplete: onCompleteSceneLoading})
@@ -28,7 +28,7 @@ function startGame(){
 
     function init(){
 
-        var fullWidth = 1024
+        var fullWidth = 720
         var fullHeight = 1080
 
         var ratio = document.body.clientWidth / document.body.clientHeight
@@ -63,11 +63,26 @@ function startGame(){
         window.minigame.game = window.game
     	sceneloader.init(game)
     	sound.init(game)
+        
+//        var config = {
+//            name: "Alpha Team",
+//            side: 1,
+//            states: {yellow: 0, color: 1},
+//        }
+        
+        var config = {
+            name: "Bravo Team",
+            side: -1,
+            states: {yellow: 0, color: 2},
+        }
+        
+        teamSelector.setConfig(config)
     }
 
     function create(){
 
     	preloadScenes([
+            teamSelector,
             startScreen,
             yogoSelector
     	])

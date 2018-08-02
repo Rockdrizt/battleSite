@@ -228,6 +228,13 @@ explocion/e_00031
   orig: 400, 245
   offset: 0, 0
   index: -1
+normal/particle
+  rotate: false
+  xy: 1957, 1002
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: -1
 normal1/rock1
   rotate: false
   xy: 368, 7
