@@ -100,6 +100,7 @@ var startScreen = function(){
     var yogoGroup
     var logosGroup
     var startSong
+    var playBtn
     
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -186,12 +187,7 @@ var startScreen = function(){
         board.anchor.setTo(0, 0.5)
         logosGroup.board = board
         
-        var playBtn = logosGroup.create(game.world.centerX - 300, game.world.centerY + 130, "atlas.startScreen", "playBtn")
-        playBtn.anchor.setTo(0.5)
-        playBtn.canClick = true
-        playBtn.inputEnabled = true
-        playBtn.events.onInputDown.add(initGame, this)
-        logosGroup.playBtn = playBtn
+        createOkBtn()
         
         var televisa = logosGroup.create(game.world.centerX, game.world.height - 50, "atlas.startScreen", "televisa")
         televisa.anchor.setTo(0.5, 1)
@@ -206,6 +202,56 @@ var startScreen = function(){
         logosGroup.add(mask)
         logosGroup.boardMask = mask        
         board.mask = mask
+    }
+    
+    function createOkBtn(){
+        
+        playBtn = game.add.group()
+        playBtn.x = game.world.centerX - 300
+        playBtn.y = game.world.centerY + 130
+        logosGroup.add(playBtn)
+        logosGroup.playBtn = playBtn
+        
+        var offBtn = playBtn.create(0, 0, "atlas.startScreen", "playBtn")
+        offBtn.anchor.setTo(0.5)
+        offBtn.canClick = true
+        offBtn.inputEnabled = true
+        offBtn.events.onInputOver.add(function(btn){
+            if(btn.canClick){
+                btn.alpha = 0
+                btn.parent.over.alpha = 1
+            }
+        }, this)
+        offBtn.events.onInputOut.add(function(btn){
+            if(btn.canClick){
+                btn.alpha = 1
+                btn.parent.over.alpha = 0
+            }
+        }, this)
+        offBtn.events.onInputDown.add(function(btn){
+            if(btn.canClick){
+                btn.canClick = false
+                playBtn.setAll("alpha", 0)
+                playBtn.onBtn.alpha = 1
+            }
+        }, this)
+        offBtn.events.onInputUp.add(function(btn){
+            sound.play("pop")
+            playBtn.setAll("alpha", 0)
+            playBtn.off.alpha = 1
+            game.time.events.add(100, initGame)
+        }, this)
+        playBtn.off = offBtn
+        
+        var overBtn = playBtn.create(0, - 40, "atlas.startScreen", "playBtnOver")
+        overBtn.anchor.setTo(0.5)
+        overBtn.alpha = 0
+        playBtn.over = overBtn
+        
+        var onBtn = playBtn.create(0, 0, "atlas.startScreen", "playBtnDown")
+        onBtn.anchor.setTo(0.5)
+        onBtn.alpha = 0
+        playBtn.onBtn = onBtn
     }
     
     function startAnimation(){
@@ -257,17 +303,10 @@ var startScreen = function(){
         })
     }
     
-    function initGame(btn){
+    function initGame(){
         
-        if(btn.canClick){
-            
-            btn.canClick = false
-            sound.play("pop")
-            game.add.tween(btn.scale).to({x: 1.2, y:1.2}, 100, Phaser.Easing.linear, true, 0, 0, true).onComplete.add(function(){
-                sceneloader.show("yogoSelector")
-                startSong.stop()
-            })
-        }
+        sceneloader.show("yogoSelector")
+        startSong.stop()
     }
     
 	return {
