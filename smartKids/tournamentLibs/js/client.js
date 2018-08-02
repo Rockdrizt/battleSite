@@ -5,12 +5,12 @@ var gameContainer
 // var language = null
 
 var config = {
-	apiKey: "AIzaSyBELTimQUqywzRlJTpIA2HZ8RTp9r_QF2E",
-	authDomain: "mathtournament-175416.firebaseapp.com",
-	databaseURL: "https://mathtournament-175416.firebaseio.com",
-	projectId: "mathtournament-175416",
-	storageBucket: "mathtournament-175416.appspot.com",
-	messagingSenderId: "973021572842"
+	apiKey: "AIzaSyBoWfejeRBD9UvH7DVp--Y4L9sd3vpQHtg",
+	authDomain: "smartkidstournament.firebaseapp.com",
+	databaseURL: "https://smartkidstournament.firebaseio.com",
+	projectId: "smartkidstournament",
+	storageBucket: "smartkidstournament.appspot.com",
+	messagingSenderId: "908563126935"
 };
 firebase.initializeApp(config);
 var database = firebase.database();
@@ -74,13 +74,13 @@ function Client(){
 	}
 
 	function initialize(idGame, player, val){
-		var p1 = val.p1;
-		var p2 = val.p2;
-		if(!p1){
-			setfb(self.refIdGame.child("p1"), player)//self.refIdGame.child("p1").set(player);
+		var t1 = val.t1;
+		var t2 = val.t2;
+		if(!t1){
+			setfb(self.refIdGame.child("t1"), player)//self.refIdGame.child("t1").set(player);
 			self.numPlayer = 1;
-		}else if(!p2){
-			setfb(self.refIdGame.child("p2"), player)//self.refIdGame.child("p2").set(player);
+		}else if(!t2){
+			setfb(self.refIdGame.child("t2"), player)//self.refIdGame.child("t2").set(player);
 			self.numPlayer = 2;
 			console.log("SET PLAYER 2")
 		}else{
@@ -173,7 +173,7 @@ function Client(){
 		//Reportando la salida del juego
 		window.onbeforeunload = function(){
 			if(self.numPlayer!=null)
-				setfb(self.refIdGame.child("p" + self.numPlayer), false)//self.refIdGame.child("p"+self.numPlayer).set(false);
+				setfb(self.refIdGame.child("t" + self.numPlayer), false)//self.refIdGame.child("t"+self.numPlayer).set(false);
 		};
 	};
 
@@ -189,15 +189,15 @@ function Client(){
 				time: time,
 				value: value
 			}
-			setfb(self.refIdGame.child("p" + self.numPlayer + "answer"), answer)
-			//self.refIdGame.child("p"+self.numPlayer+"answer").set(answer);
+			setfb(self.refIdGame.child("t" + self.numPlayer + "answer"), answer)
+			//self.refIdGame.child("t"+self.numPlayer+"answer").set(answer);
 		}
 	};
 	
 	this.setReady = function (value) {
-		self.player.ready = value
-		setfb(self.refIdGame.child("p" + self.numPlayer + "/ready"), value)
-		//self.refIdGame.child("p"+self.numPlayer+"/ready").set(value);
+		self.tlayer.ready = value
+		setfb(self.refIdGame.child("t" + self.numPlayer + "/ready"), value)
+		//self.refIdGame.child("t"+self.numPlayer+"/ready").set(value);
 	}
 }
 

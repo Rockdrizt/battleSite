@@ -17,12 +17,12 @@ var language = null
 
 // Initialize Firebase
 var config = {
-	apiKey: "AIzaSyBELTimQUqywzRlJTpIA2HZ8RTp9r_QF2E",
-	authDomain: "mathtournament-175416.firebaseapp.com",
-	databaseURL: "https://mathtournament-175416.firebaseio.com",
-	projectId: "mathtournament-175416",
-	storageBucket: "mathtournament-175416.appspot.com",
-	messagingSenderId: "973021572842"
+	apiKey: "AIzaSyBoWfejeRBD9UvH7DVp--Y4L9sd3vpQHtg",
+	authDomain: "smartkidstournament.firebaseapp.com",
+	databaseURL: "https://smartkidstournament.firebaseio.com",
+	projectId: "smartkidstournament",
+	storageBucket: "smartkidstournament.appspot.com",
+	messagingSenderId: "908563126935"
 };
 firebase.initializeApp(config);
 var database = firebase.database();
@@ -60,8 +60,8 @@ function Server(){
 	 */
 	self.events = {};
 	self.currentData = null;
-	self.p1Ready = false;
-	self.p2Ready = false;
+	self.t1Ready = false;
+	self.t2Ready = false;
 	self.startGame = false
 	self.rulesSet = false
 	self.battleTime = 60000
@@ -170,12 +170,12 @@ function Server(){
 	}
 
 	var checkWinner = function(){
-		if(valores.p1.life<=0){
-			self.fireEvent('onGameEnds',[{ numPlayer: 2, playerWinner: valores.p2 }]);
+		if(valores.t1.life<=0){
+			self.fireEvent('onGameEnds',[{ numPlayer: 2, playerWinner: valores.t2 }]);
 			return true;
 		}
-		if(valores.p2.life<=0){
-			self.fireEvent('onGameEnds',[{ numPlayer: 1, playerWinner: valores.p1 }]);
+		if(valores.t2.life<=0){
+			self.fireEvent('onGameEnds',[{ numPlayer: 1, playerWinner: valores.t1 }]);
 			return true;
 		}
 		return false;
@@ -199,35 +199,35 @@ function Server(){
 
 	var checkResults= function(){
 		// console.log("checkResultsTriggered")
-		if(valores.p1answer === null){
+		if(valores.t1answer === null){
 			return;
 		}
-		var p1Time = valores.p1answer.time;
-		var p1Value =valores.p1answer.value;
+		var t1Time = valores.t1answer.time;
+		var t1Value =valores.t1answer.value;
 
-		var p2Time = valores.p2answer.time;
-		var p2Value = valores.p2answer.value;
+		var t2Time = valores.t2answer.time;
+		var t2Value = valores.t2answer.value;
 
 		var playerWinner =  null;
 		var timeDifference = null;
 
 		var damage =checkDamage();
 
-		console.log(correctAnswer, p1Value, p2Value, "answers")
-		if(p1Value === p2Value && p1Value === correctAnswer){
-			timeDifference = Math.abs(p1Time - p2Time)
+		console.log(correctAnswer, t1Value, t2Value, "answers")
+		if(t1Value === t2Value && t1Value === correctAnswer){
+			timeDifference = Math.abs(t1Time - t2Time)
 			// console.log(timeDifference)
-			if(p1Time < p2Time){
+			if(t1Time < t2Time){
 				valores.winner = 1
 			}else{
 				valores.winner = 2
 			}
 		}else{
 			switch(correctAnswer){
-				case p1Value:
+				case t1Value:
 					valores.winner = 1
 					break;
-				case p2Value:
+				case t2Value:
 					valores.winner = 2
 					break;
 				default:
@@ -236,32 +236,32 @@ function Server(){
 		}
 
 		if(valores.winner === 1 && (typeQuestion === 1 || typeQuestion === 2) ){
-			valores.p2.life+=damage;
-			setfb(refIdGame.child("p2/life"), valores.p2.life)//refIdGame.child("p2/life").set(valores.p2.life);
+			valores.t2.life+=damage;
+			setfb(refIdGame.child("t2/life"), valores.t2.life)//refIdGame.child("t2/life").set(valores.t2.life);
 		}else if(valores.winner === 2 && typeQuestion === 3 ){
-			valores.p2.life+=damage;
-			setfb(refIdGame.child("p2/life"), valores.p2.life)//refIdGame.child("p2/life").set(valores.p2.life);
+			valores.t2.life+=damage;
+			setfb(refIdGame.child("t2/life"), valores.t2.life)//refIdGame.child("t2/life").set(valores.t2.life);
 		}else {
-			valores.p1.life+=damage;
-			setfb(refIdGame.child("p1/life"), valores.p1.life)//refIdGame.child("p1/life").set(valores.p1.life);
+			valores.t1.life+=damage;
+			setfb(refIdGame.child("t1/life"), valores.t1.life)//refIdGame.child("t1/life").set(valores.t1.life);
 		}
 		var actualDate = firebase.database.ServerValue.TIMESTAMP
 		// console.log(actualDate)
 		var answers = {
-			p1:valores.p1answer,
-			p2:valores.p2answer
+			t1:valores.t1answer,
+			t2:valores.t2answer
 		}
 		var data = { numPlayer: valores.winner, timeDifference: timeDifference, answers:answers, date:actualDate }
 		setfb(refIdGame.child("winner"), data)//refIdGame.child("winner").set(data);
 		self.fireEvent('onTurnEnds',[data]);
 
-		// valores.p1answer=false;
-		// valores.p2answer=false;
+		// valores.t1answer=false;
+		// valores.t2answer=false;
 		// refIdGame.set(valores);
 
 		if(checkWinner()){
-			valores.p1answer=false;
-			valores.p2answer=false;
+			valores.t1answer=false;
+			valores.t2answer=false;
 			valores.winner=false;
 			valores.possibleAnswers = [];
 		}
@@ -283,8 +283,8 @@ function Server(){
 		}
 
 		valores.possibleAnswers = shuffleArray(possibleAnswers);
-		valores.p1answer = false;
-		valores.p2answer = false;
+		valores.t1answer = false;
+		valores.t2answer = false;
 
 		operation.date = firebase.database.ServerValue.TIMESTAMP
 		valores.data = operation;
@@ -308,8 +308,8 @@ function Server(){
 		self.maxRounds = typeof params.maxRounds !== "undefined" ? params.maxRounds : self.maxRounds
 
 		self.events = {};
-		self.p1Ready = false;
-		self.p2Ready = false;
+		self.t1Ready = false;
+		self.t2Ready = false;
 		console.log(self.events)
 		var numPerOperations = Math.round(battleTime / 60000) * 3
 		self.numberOperation = numPerOperations
@@ -323,11 +323,11 @@ function Server(){
 			var serverReady = false;
 			valores = {
 				rules:rules,
-				p1: false,
-				p2: false,
+				t1: false,
+				t2: false,
 				winner :false,
-				p1answer : false,
-				p2answer : false,
+				t1answer : false,
+				t2answer : false,
 				possibleAnswers: [],
 				data:false,
 				gameReady:false,
@@ -343,16 +343,16 @@ function Server(){
 			if(!currentId) {
 				if(onStart) onStart()
 
-				var refP1 = database.ref(id_game + "/p1");
-				refP1.on('value', function (snapshot) {
+				var refT1 = database.ref(id_game + "/t1");
+				refT1.on('value', function (snapshot) {
 					if (serverReady) {
 						if (!snapshot.val()) {
-							self.fireEvent('onPlayerDisconnect', [{numPlayer: 1, playerWinner: valores.p1}]);
-						} else if (!valores.p1) {
-							var p1 = snapshot.toJSON();
-							valores.p1 = p1;
-							self.fireEvent('onInitPlayer', [{numPlayer: 1, player: valores.p1}]);
-							if (valores.p2) {
+							self.fireEvent('onPlayerDisconnect', [{numPlayer: 1, playerWinner: valores.t1}]);
+						} else if (!valores.t1) {
+							var t1 = snapshot.toJSON();
+							valores.t1 = t1;
+							self.fireEvent('onInitPlayer', [{numPlayer: 1, player: valores.t1}]);
+							if (valores.t2) {
 								self.currentData = valores
 								self.fireEvent('onPlayersReady', [valores]);
 							}
@@ -361,16 +361,16 @@ function Server(){
 
 				});
 
-				var refP2 = database.ref(id_game + "/p2");
-				refP2.on('value', function (snapshot) {
+				var reft2 = database.ref(id_game + "/t2");
+				reft2.on('value', function (snapshot) {
 					if (serverReady) {
 						if (!snapshot.val()) {
-							self.fireEvent('onPlayerDisconnect', [{numPlayer: 2, playerWinner: valores.p2}]);
-						} else if (!valores.p2) {
-							var p2 = snapshot.toJSON();
-							valores.p2 = p2;
-							self.fireEvent('onInitPlayer', [{numPlayer: 2, player: valores.p2}]);
-							if (valores.p1) {
+							self.fireEvent('onPlayerDisconnect', [{numPlayer: 2, playerWinner: valores.t2}]);
+						} else if (!valores.t2) {
+							var t2 = snapshot.toJSON();
+							valores.t2 = t2;
+							self.fireEvent('onInitPlayer', [{numPlayer: 2, player: valores.t2}]);
+							if (valores.t1) {
 								self.currentData = valores
 								self.fireEvent('onPlayersReady', [valores]);
 							}
@@ -378,14 +378,14 @@ function Server(){
 					}
 				});
 
-				var readyP1 = database.ref(id_game + "/p1/ready");
-				readyP1.on('value', function (snapshot) {
+				var readyt1 = database.ref(id_game + "/t1/ready");
+				readyt1.on('value', function (snapshot) {
 					if (serverReady) {
 						var ready = snapshot.val()
 						// console.log(ready)
 						if (ready) {
-							self.p1Ready = true;
-							if (self.p2Ready) {
+							self.t1Ready = true;
+							if (self.t2Ready) {
 								console.log("START GAME INIT")
 								self.startGame()
 							}
@@ -393,36 +393,36 @@ function Server(){
 					}
 				});
 
-				var readyP2 = database.ref(id_game + "/p2/ready");
-				readyP2.on('value', function (snapshot) {
+				var readyt2 = database.ref(id_game + "/t2/ready");
+				readyt2.on('value', function (snapshot) {
 					if (serverReady) {
 						var ready = snapshot.val()
 						// console.log(ready)
 						if (ready) {
-							self.p2Ready = true;
-							if (self.p1Ready) {
+							self.t2Ready = true;
+							if (self.t1Ready) {
 								self.startGame()
 							}
 						}
 					}
 				});
 
-				var p1answer = database.ref(id_game + "/p1answer");
-				p1answer.on('value', function (snapshot) {
-					var p1answer = snapshot.toJSON();
-					valores.p1answer = p1answer;
-					console.log("answer", p1answer)
-					if (valores.p2answer) {
+				var t1answer = database.ref(id_game + "/t1answer");
+				t1answer.on('value', function (snapshot) {
+					var t1answer = snapshot.toJSON();
+					valores.t1answer = t1answer;
+					console.log("answer", t1answer)
+					if (valores.t2answer) {
 						checkResults();
 					}
 				});
 
-				var p2answer = database.ref(id_game + "/p2answer");
-				p2answer.on('value', function (snapshot) {
-					var p2answer = snapshot.toJSON();
-					valores.p2answer = p2answer;
-					console.log("answer", p1answer)
-					if (valores.p1answer) {
+				var t2answer = database.ref(id_game + "/t2answer");
+				t2answer.on('value', function (snapshot) {
+					var t2answer = snapshot.toJSON();
+					valores.t2answer = t2answer;
+					console.log("answer", t1answer)
+					if (valores.t1answer) {
 						checkResults();
 					}
 				});
@@ -448,10 +448,10 @@ function Server(){
 		var actualDate = date.getTime()
 		location = location || "toHome"
 
-		valores.p1answer =false;
-		valores.p2answer =false;
-		valores.p1.life =INITIAL_LIFE;
-		valores.p2.life =INITIAL_LIFE;
+		valores.t1answer =false;
+		valores.t2answer =false;
+		valores.t1.life =INITIAL_LIFE;
+		valores.t2.life =INITIAL_LIFE;
 		valores.winner =false;
 		valores.possibleAnswers = [];
 		valores.time = self.battleTime;
