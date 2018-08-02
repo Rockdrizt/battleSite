@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "lH67WpNbtnT4/t+N0qmDK9fc80M", "spine": "3.2.01", "width": 585.25, "height": 453.52, "images": "" },
+"skeleton": { "hash": "27JeuOD+VRbj/HQrhwZplEjIkoE", "spine": "3.2.01", "width": 675.34, "height": 528.02, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "cog", "parent": "root", "x": -21.24, "y": 35.59, "color": "000000ff" },
@@ -105,17 +105,17 @@
 	{ "name": "feather4", "bone": "feather_sm", "attachment": "feather1" },
 	{ "name": "feather5", "bone": "feather_me", "attachment": "feather2" },
 	{ "name": "feather6", "bone": "feather_l", "attachment": "feather3" },
-	{ "name": "feather1", "bone": "feather_s" },
-	{ "name": "feather2", "bone": "feather_m" },
-	{ "name": "feather3", "bone": "feather_b" },
-	{ "name": "wing", "bone": "wing" },
-	{ "name": "wing2", "bone": "wing2" },
+	{ "name": "feather1", "bone": "feather_s", "attachment": "feather1" },
+	{ "name": "feather2", "bone": "feather_m", "attachment": "feather2" },
+	{ "name": "feather3", "bone": "feather_b", "attachment": "feather3" },
+	{ "name": "wing", "bone": "wing", "attachment": "wing" },
+	{ "name": "wing2", "bone": "wing2", "attachment": "wing" },
 	{ "name": "arm2", "bone": "arm2", "attachment": "arm2_a" },
 	{ "name": "forearm2", "bone": "forearm2", "attachment": "forearm2_a" },
 	{ "name": "gun", "bone": "gun" },
 	{ "name": "hand2", "bone": "hand2", "attachment": "hand2_a" },
 	{ "name": "particle4", "bone": "hand2", "attachment": "particle4" },
-	{ "name": "cheer_flag", "bone": "hand2" },
+	{ "name": "cheer_flag", "bone": "hand2", "attachment": "cheer_flag" },
 	{ "name": "leg2", "bone": "leg2", "attachment": "leg2_a" },
 	{ "name": "shin2", "bone": "shin2", "attachment": "shin2_a" },
 	{ "name": "foot2", "bone": "foot2", "attachment": "foot2_a" },
@@ -129,12 +129,12 @@
 	{ "name": "torso2", "bone": "torso" },
 	{ "name": "arm1", "bone": "arm1", "attachment": "arm1_a" },
 	{ "name": "particle2", "bone": "hand1", "attachment": "particle2" },
-	{ "name": "cheer_glove", "bone": "hand1" },
-	{ "name": "hand1", "bone": "hand1", "attachment": "hand1_a" },
+	{ "name": "cheer_glove", "bone": "hand1", "attachment": "cheer_glove" },
+	{ "name": "hand1", "bone": "hand1" },
 	{ "name": "forearm1", "bone": "forearm1", "attachment": "forearm1_a" },
 	{ "name": "head", "bone": "head", "attachment": "head" },
 	{ "name": "mouth", "bone": "head", "attachment": "mouth_a1" },
-	{ "name": "eyes", "bone": "head", "attachment": "eyes_d2" },
+	{ "name": "eyes", "bone": "head", "attachment": "eyes_h5" },
 	{ "name": "faceshield", "bone": "head", "attachment": "faceshield" },
 	{ "name": "antenna", "bone": "antenna", "attachment": "antenna" },
 	{ "name": "yogo_ice_front", "bone": "influence_bone" },
@@ -31798,10 +31798,10 @@
 				"offsets": [
 					{ "slot": "forearm2", "offset": 10 },
 					{ "slot": "hand2", "offset": 9 },
-					{ "slot": "cheer_flag", "offset": 29 },
-					{ "slot": "cheer_glove", "offset": 4 },
-					{ "slot": "hand1", "offset": 16 },
-					{ "slot": "forearm1", "offset": 16 }
+					{ "slot": "cheer_flag", "offset": 28 },
+					{ "slot": "cheer_glove", "offset": 18 },
+					{ "slot": "hand1", "offset": 15 },
+					{ "slot": "forearm1", "offset": 15 }
 				]
 			},
 			{
@@ -31809,10 +31809,10 @@
 				"offsets": [
 					{ "slot": "forearm2", "offset": 10 },
 					{ "slot": "hand2", "offset": 9 },
-					{ "slot": "cheer_flag", "offset": 29 },
-					{ "slot": "cheer_glove", "offset": 4 },
-					{ "slot": "hand1", "offset": 16 },
-					{ "slot": "forearm1", "offset": 16 }
+					{ "slot": "cheer_flag", "offset": 28 },
+					{ "slot": "cheer_glove", "offset": 18 },
+					{ "slot": "hand1", "offset": 15 },
+					{ "slot": "forearm1", "offset": 15 }
 				]
 			}
 		]
@@ -32910,7 +32910,15 @@
 			}
 		},
 		"drawOrder": [
-			{ "time": 0 },
+			{
+				"time": 0,
+				"offsets": [
+					{ "slot": "wing", "offset": 4 },
+					{ "slot": "wing2", "offset": 4 },
+					{ "slot": "gun", "offset": 2 },
+					{ "slot": "particle4", "offset": 1 }
+				]
+			},
 			{
 				"time": 0.2666,
 				"offsets": [
@@ -32920,7 +32928,15 @@
 					{ "slot": "forearm1", "offset": 5 }
 				]
 			},
-			{ "time": 0.8 }
+			{
+				"time": 0.8,
+				"offsets": [
+					{ "slot": "wing", "offset": 4 },
+					{ "slot": "wing2", "offset": 4 },
+					{ "slot": "gun", "offset": 2 },
+					{ "slot": "particle4", "offset": 1 }
+				]
+			}
 		]
 	},
 	"wait": {
