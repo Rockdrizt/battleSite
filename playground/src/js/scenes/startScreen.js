@@ -187,6 +187,25 @@ var startScreen = function(){
         board.anchor.setTo(0, 0.5)
         logosGroup.board = board
         
+        createOkBtn()
+        
+        var televisa = logosGroup.create(game.world.centerX, game.world.height - 50, "atlas.startScreen", "televisa")
+        televisa.anchor.setTo(0.5, 1)
+        logosGroup.televisa = televisa
+        
+        logosGroup.setAll("alpha", 0)
+        playBtn.inputEnabled = false
+        
+        var mask = game.add.graphics(board.x, board.y - board.height * 0.5)
+        mask.beginFill(0xFF33ff)
+        mask.drawRect(0, 0, board.width, board.height)
+        logosGroup.add(mask)
+        logosGroup.boardMask = mask        
+        board.mask = mask
+    }
+    
+    function createOkBtn(){
+        
         playBtn = game.add.group()
         playBtn.x = game.world.centerX - 300
         playBtn.y = game.world.centerY + 130
@@ -233,20 +252,6 @@ var startScreen = function(){
         onBtn.anchor.setTo(0.5)
         onBtn.alpha = 0
         playBtn.onBtn = onBtn
-        
-        var televisa = logosGroup.create(game.world.centerX, game.world.height - 50, "atlas.startScreen", "televisa")
-        televisa.anchor.setTo(0.5, 1)
-        logosGroup.televisa = televisa
-        
-        logosGroup.setAll("alpha", 0)
-        playBtn.inputEnabled = false
-        
-        var mask = game.add.graphics(board.x, board.y - board.height * 0.5)
-        mask.beginFill(0xFF33ff)
-        mask.drawRect(0, 0, board.width, board.height)
-        logosGroup.add(mask)
-        logosGroup.boardMask = mask        
-        board.mask = mask
     }
     
     function startAnimation(){
