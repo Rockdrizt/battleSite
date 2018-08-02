@@ -40,7 +40,7 @@
   "finishColorRed" : 0.9999163,
   "gravityx" : 0,
   "maxRadiusVariance" : 0,
-  "finishParticleSizeVariance" : 450,
+  "finishParticleSizeVariance" : 200,
   "gravityy" : -0,
   "rotationEndVariance" : 720,
   "startColorBlue" : 0.7264456,
