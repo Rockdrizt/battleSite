@@ -324,6 +324,33 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">okOff.png</key>
+            <key type="filename">okOn.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>55,71,109,141</rect>
+                <key>scale9Paddings</key>
+                <rect>55,71,109,141</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">okOver.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>62,90,123,180</rect>
+                <key>scale9Paddings</key>
+                <rect>62,90,123,180</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">pinkLight.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -580,6 +607,9 @@
             <filename>plat1.png</filename>
             <filename>plat2.png</filename>
             <filename>teamBar2.png</filename>
+            <filename>okOff.png</filename>
+            <filename>okOn.png</filename>
+            <filename>okOver.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -134,7 +134,7 @@ var battle = function(){
     function preload(){
 		
         game.stage.disableVisibilityChange = false
-        game.load.bitmapFont('skwig', 'images/fonts/font.png', 'images/fonts/font.fnt')
+        game.load.bitmapFont('skwig', 'fonts/font.png', 'fonts/font.fnt')
     }
     
 	function createBackground(){
@@ -806,36 +806,21 @@ var battle = function(){
                 
                 for(var k = 0; k < names.length; k++){
                     
-                    var slot = getSpineSlot(yogo.children[0], names[k])
-                    var sprite = slot.children[0]
-                    
-                    if(sprite !== undefined){
-                        sprite.tint = 0xff0000
+                    var slot = yogo.getSlotContainer(names[k])
+					if(!slot)
+						continue;
+					slot.tint = 0xff0000
+					//slot.children[0].tint = 0xff0000
                         //sprite.scale.setTo(5)
                         //sprite.loadTexture("atlas.battle", "nao")
                         //sprite.alpha = 0.5
                         //sprite.angle = 200
-                    }
-                    yogo.children[0].updateTransform()
+
+                    yogo.spine.updateTransform()
                 }
             }
         }
     }
-    
-    function getSpineSlot(spine, slotName){
-		
-		var slotIndex
-		for(var index = 0, n = spine.skeletonData.slots.length; index < n; index++){
-			var slotData = spine.skeletonData.slots[index]
-			if(slotData.name === slotName){
-				slotIndex = index
-			}
-		}
-
-		if (slotIndex){
-			return spine.slotContainers[slotIndex]
-		}
-	}
     
     function zoomCamera(zoom, delay, pos) {
          

@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.8.0</string>
+        <string>4.8.3</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -208,6 +208,7 @@
                 <false/>
             </struct>
             <key type="filename">playBtn.png</key>
+            <key type="filename">playBtnDown.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -217,6 +218,19 @@
                 <rect>55,71,109,141</rect>
                 <key>scale9Paddings</key>
                 <rect>55,71,109,141</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">playBtnOver.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>62,90,123,180</rect>
+                <key>scale9Paddings</key>
+                <rect>62,90,123,180</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -240,6 +254,8 @@
             <filename>cuantrix.png</filename>
             <filename>playBtn.png</filename>
             <filename>board.png</filename>
+            <filename>playBtnDown.png</filename>
+            <filename>playBtnOver.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
