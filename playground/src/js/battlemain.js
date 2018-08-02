@@ -29,26 +29,29 @@ var battleMain = function(){
 	}
 
 	function init(teams){
-
 		battle.setTeams(teams)
+		reward.setTeams(teams)
 	}
     
-    function initResults(teams, winner){
-        reward.setTeams(teams)
-        reward.setWinner(winner)
+    // function initResults(teams){
+    //     reward.setTeams(teams)
+    // }
+    
+    function initWinerTeam(win){
+        reward.setWinner(win)
     }
 
 	function create(){
 		bootConfigFiles([
 			battle,
-			//reward,
+			reward,
 		])
 	}
 
 	return{
 		init:init,
-		create:create,
-        initResults: initResults
+        initWinerTeam: initWinerTeam,
+        create:create,
 	}
 }()
 

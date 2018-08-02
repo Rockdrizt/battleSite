@@ -348,15 +348,6 @@ var reward = function(){
     }
 
     //Load each character to use in assets
-    function setCharacter(character, teamIndex) {
-        var charObj = {
-            name: character.name,
-            file: "spines/reward/"+character.name+"/"+character.name+"Win.json",
-            scales: ["@0.5x"],
-            teamNum:teamIndex
-        }
-        assets.spines.push(charObj)
-    }
     
     //////////////////
     // Return all game, configurations and creations
@@ -376,18 +367,8 @@ var reward = function(){
             createScenary();
             createParticles();
         },
-        setCharacter:setCharacter,
         setTeams: function (myTeams) {
-            
-            for(var teamIndex = 0; teamIndex < myTeams.length; teamIndex++){
-                players = myTeams;
-                var team = myTeams[teamIndex]
-
-                for(var charIndex = 0; charIndex < team.length; charIndex++){
-                    var character = team[charIndex];
-                    setCharacter(character, teamIndex);
-                }
-            }
+			players = myTeams;
         },
         setWinner: function(winner){
             INDEX_WINNER = winner
