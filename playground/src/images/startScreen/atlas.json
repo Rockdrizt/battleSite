@@ -2,12 +2,11 @@
 
 {
 	"filename": "board",
-	"frame": {"x":1,"y":424,"w":572,"h":149},
+	"frame": {"x":748,"y":361,"w":572,"h":149},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":0,"y":4,"w":572,"h":149},
-	"sourceSize": {"w":572,"h":153},
-	"pivot": {"x":0.5,"y":0.5}
+	"sourceSize": {"w":572,"h":153}
 },
 {
 	"filename": "cuantrix",
@@ -15,34 +14,47 @@
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":745,"h":421},
-	"sourceSize": {"w":745,"h":421},
-	"pivot": {"x":0.5,"y":0.5}
+	"sourceSize": {"w":745,"h":421}
 },
 {
 	"filename": "playBtn",
-	"frame": {"x":748,"y":1,"w":215,"h":275},
+	"frame": {"x":996,"y":1,"w":215,"h":275},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":1,"y":8,"w":215,"h":275},
-	"sourceSize": {"w":218,"h":283},
-	"pivot": {"x":0.5,"y":0.5}
+	"sourceSize": {"w":218,"h":283}
+},
+{
+	"filename": "playBtnDown",
+	"frame": {"x":1213,"y":1,"w":215,"h":233},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":2,"y":50,"w":215,"h":233},
+	"sourceSize": {"w":218,"h":283}
+},
+{
+	"filename": "playBtnOver",
+	"frame": {"x":748,"y":1,"w":246,"h":358},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":2,"w":246,"h":358},
+	"sourceSize": {"w":246,"h":360}
 },
 {
 	"filename": "televisa",
-	"frame": {"x":748,"y":278,"w":168,"h":135},
+	"frame": {"x":1322,"y":236,"w":168,"h":135},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":168,"h":135},
-	"sourceSize": {"w":168,"h":135},
-	"pivot": {"x":0.5,"y":0.5}
+	"sourceSize": {"w":168,"h":135}
 }],
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "atlas.png",
 	"format": "RGBA8888",
-	"size": {"w":964,"h":574},
+	"size": {"w":1491,"h":511},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:26608f9c41fdd2f5bb532f3063f0656d:10e0e8db4d9c9e77c95d6e0aeceaff3c:cbce6b53f0f49e0bf15173c25c41f876$"
+	"smartupdate": "$TexturePacker:SmartUpdate:016fd564989246ed8bbc4b65adc16c3a:59b00aaa359c9699dfbfac5ad3222679:cbce6b53f0f49e0bf15173c25c41f876$"
 }
 }

@@ -134,7 +134,7 @@ var battle = function(){
     function preload(){
 		
         game.stage.disableVisibilityChange = false
-        game.load.bitmapFont('skwig', 'images/fonts/font.png', 'images/fonts/font.fnt')
+        game.load.bitmapFont('skwig', 'fonts/font.png', 'fonts/font.fnt')
     }
     
 	function createBackground(){
