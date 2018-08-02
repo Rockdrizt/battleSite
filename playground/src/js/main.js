@@ -115,5 +115,19 @@ function startGame(){
     }
 }
 
-startGame()
+var wfconfig = {
+
+	active: function() {
+		console.log("font loaded");
+        startGame()
+	},
+
+	google: {
+		families: ['Luckiest Guy']
+	}
+
+};
+WebFont.load(wfconfig);
+
+//startGame()
 
