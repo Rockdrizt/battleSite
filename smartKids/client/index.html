@@ -73,10 +73,10 @@
 //		}
 	}
 
-	function onPlayersReady(event) {
+	function onTeamsReady(event) {
 		cliente.removeEventListener('onClientInit', onClientInit);
 		cliente.removeEventListener('onGameFull', onGameFull);
-		cliente.removeEventListener('showPossibleAnswers', onPlayersReady);
+		cliente.removeEventListener('showPossibleAnswers', onTeamsReady);
 //		window.open("https://play.yogome.com/epicweb/minigames/mathClient/operations.html", "_self")
 		window.open("../yogoTournament/mathClient/operations.html", "_self")
 	}
@@ -120,15 +120,17 @@
 		if($("#idGame").val() != "" && $("#nickname").val() != ""){
 			magicSound.play();
 			var idGame = document.getElementById("idGame").value;
-			var player = {
-				nickname: document.getElementById("nickname").value,
-				avatar: selectYogotarName,
-				life: 100,
+			var team = {
+				players: [
+					{nickname: "yogome", avatar: false, skin:false},
+					{nickname: "yogome", avatar: false, skin:false},
+					{nickname: "yogome", avatar: false, skin:false}
+				],
 				ready:false
 			}
 			cliente.addEventListener('onClientInit', onClientInit);
 			cliente.addEventListener('onGameFull', onGameFull);
-			cliente.startGame = onPlayersReady
+			cliente.startGame = onTeamsReady
 			cliente.start(player, idGame, onError);
 			//div_resultado.innerText = "Player: "+cliente.numPlayer + "Ready!";
 			$("#infoContainer").css("height",'0');

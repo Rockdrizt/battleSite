@@ -17,12 +17,12 @@ var language = null
 
 // Initialize Firebase
 var config = {
-	apiKey: "AIzaSyBoWfejeRBD9UvH7DVp--Y4L9sd3vpQHtg",
-	authDomain: "smartkidstournament.firebaseapp.com",
-	databaseURL: "https://smartkidstournament.firebaseio.com",
-	projectId: "smartkidstournament",
-	storageBucket: "smartkidstournament.appspot.com",
-	messagingSenderId: "908563126935"
+	apiKey: "AIzaSyDSKraaLJOVdFvExqI9q5i-PfUl1k9h3GQ",
+	authDomain: "smartkidstournament-ce44b.firebaseapp.com",
+	databaseURL: "https://smartkidstournament-ce44b.firebaseio.com",
+	projectId: "smartkidstournament-ce44b",
+	storageBucket: "smartkidstournament-ce44b.appspot.com",
+	messagingSenderId: "745841805113"
 };
 firebase.initializeApp(config);
 var database = firebase.database();
@@ -171,11 +171,11 @@ function Server(){
 
 	var checkWinner = function(){
 		if(valores.t1.life<=0){
-			self.fireEvent('onGameEnds',[{ numPlayer: 2, playerWinner: valores.t2 }]);
+			self.fireEvent('onGameEnds',[{ numTeam: 2, teamWinner: valores.t2 }]);
 			return true;
 		}
 		if(valores.t2.life<=0){
-			self.fireEvent('onGameEnds',[{ numPlayer: 1, playerWinner: valores.t1 }]);
+			self.fireEvent('onGameEnds',[{ numTeam: 1, teamWinner: valores.t1 }]);
 			return true;
 		}
 		return false;
@@ -208,7 +208,7 @@ function Server(){
 		var t2Time = valores.t2answer.time;
 		var t2Value = valores.t2answer.value;
 
-		var playerWinner =  null;
+		var teamWinner =  null;
 		var timeDifference = null;
 
 		var damage =checkDamage();
@@ -251,7 +251,7 @@ function Server(){
 			t1:valores.t1answer,
 			t2:valores.t2answer
 		}
-		var data = { numPlayer: valores.winner, timeDifference: timeDifference, answers:answers, date:actualDate }
+		var data = { numTeam: valores.winner, timeDifference: timeDifference, answers:answers, date:actualDate }
 		setfb(refIdGame.child("winner"), data)//refIdGame.child("winner").set(data);
 		self.fireEvent('onTurnEnds',[data]);
 
@@ -347,32 +347,32 @@ function Server(){
 				refT1.on('value', function (snapshot) {
 					if (serverReady) {
 						if (!snapshot.val()) {
-							self.fireEvent('onPlayerDisconnect', [{numPlayer: 1, playerWinner: valores.t1}]);
+							self.fireEvent('onTeamDisconnect', [{numTeam: 1, teamWinner: valores.t1}]);
 						} else if (!valores.t1) {
 							var t1 = snapshot.toJSON();
 							valores.t1 = t1;
-							self.fireEvent('onInitPlayer', [{numPlayer: 1, player: valores.t1}]);
+							self.fireEvent('onInitTeam', [{numTeam: 1, team: valores.t1}]);
 							if (valores.t2) {
 								self.currentData = valores
-								self.fireEvent('onPlayersReady', [valores]);
+								self.fireEvent('onTeamsReady', [valores]);
 							}
 						}
 					}
 
 				});
 
-				var reft2 = database.ref(id_game + "/t2");
-				reft2.on('value', function (snapshot) {
+				var refT2 = database.ref(id_game + "/t2");
+				refT2.on('value', function (snapshot) {
 					if (serverReady) {
 						if (!snapshot.val()) {
-							self.fireEvent('onPlayerDisconnect', [{numPlayer: 2, playerWinner: valores.t2}]);
+							self.fireEvent('onTeamDisconnect', [{numTeam: 2, teamWinner: valores.t2}]);
 						} else if (!valores.t2) {
 							var t2 = snapshot.toJSON();
 							valores.t2 = t2;
-							self.fireEvent('onInitPlayer', [{numPlayer: 2, player: valores.t2}]);
+							self.fireEvent('onInitTeam', [{numTeam: 2, team: valores.t2}]);
 							if (valores.t1) {
 								self.currentData = valores
-								self.fireEvent('onPlayersReady', [valores]);
+								self.fireEvent('onTeamsReady', [valores]);
 							}
 						}
 					}
@@ -468,8 +468,8 @@ function Server(){
 
 	}
 
-	this.setGameEnded = function (numPlayerWinner) {
-		var data = {winner:numPlayerWinner}
+	this.setGameEnded = function (numTeamWinner) {
+		var data = {winner:numTeamWinner}
 		setfb(refIdGame.child("gameEnded"), data)//refIdGame.child("gameEnded").set(data);
 	}
 

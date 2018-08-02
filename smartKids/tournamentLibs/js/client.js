@@ -1,16 +1,16 @@
 // var src = "https://play.yogome.com/epicweb/minigames/mathClient/index.html"
-var src = "../yogoTournament/mathClient/index.html"
+var src = "../client/index.html"
 var gameFrame
 var gameContainer
 // var language = null
 
 var config = {
-	apiKey: "AIzaSyBoWfejeRBD9UvH7DVp--Y4L9sd3vpQHtg",
-	authDomain: "smartkidstournament.firebaseapp.com",
-	databaseURL: "https://smartkidstournament.firebaseio.com",
-	projectId: "smartkidstournament",
-	storageBucket: "smartkidstournament.appspot.com",
-	messagingSenderId: "908563126935"
+	apiKey: "AIzaSyDSKraaLJOVdFvExqI9q5i-PfUl1k9h3GQ",
+	authDomain: "smartkidstournament-ce44b.firebaseapp.com",
+	databaseURL: "https://smartkidstournament-ce44b.firebaseio.com",
+	projectId: "smartkidstournament-ce44b",
+	storageBucket: "smartkidstournament-ce44b.appspot.com",
+	messagingSenderId: "745841805113"
 };
 firebase.initializeApp(config);
 var database = firebase.database();
@@ -57,7 +57,7 @@ function Client(){
 	/**End Events*/
 
 	this.id_game = null;
-	this.numPlayer =null;
+	this.numTeam =null;
 	this.gameEnded = false
 	this.queueToInsert = -1;
 	this.refIdGame= null;
@@ -73,16 +73,16 @@ function Client(){
 		})
 	}
 
-	function initialize(idGame, player, val){
+	function initialize(idGame, team, val){
 		var t1 = val.t1;
 		var t2 = val.t2;
 		if(!t1){
-			setfb(self.refIdGame.child("t1"), player)//self.refIdGame.child("t1").set(player);
-			self.numPlayer = 1;
+			setfb(self.refIdGame.child("t1"), team)//self.refIdGame.child("t1").set(team);
+			self.numTeam = 1;
 		}else if(!t2){
-			setfb(self.refIdGame.child("t2"), player)//self.refIdGame.child("t2").set(player);
-			self.numPlayer = 2;
-			console.log("SET PLAYER 2")
+			setfb(self.refIdGame.child("t2"), team)//self.refIdGame.child("t2").set(player);
+			self.numTeam = 2;
+			console.log("SET TEAM 2")
 		}else{
 			self.id_game = null;
 			self.refIdGame= null;
@@ -153,16 +153,16 @@ function Client(){
 	 * @summary Starts the client
 	 * @param {type} idGame Code of the game
 	 */
-	this.start =function(player, idGame, onError){
+	this.start =function(team, idGame, onError){
 		// self.events = {};
 		console.log(self.events)
-		self.player = player
+		self.team = team
 		self.refIdGame= database.ref(idGame);
 
 		self.refIdGame.once('value').then(function(snapshot) {
 			var val = snapshot.val()
 			if(val){
-				initialize(idGame, player, val)
+				initialize(idGame, team, val)
 			}else{
 				onError()
 			}
@@ -172,8 +172,8 @@ function Client(){
 
 		//Reportando la salida del juego
 		window.onbeforeunload = function(){
-			if(self.numPlayer!=null)
-				setfb(self.refIdGame.child("t" + self.numPlayer), false)//self.refIdGame.child("t"+self.numPlayer).set(false);
+			if(self.numTeam!=null)
+				setfb(self.refIdGame.child("t" + self.numTeam), false)//self.refIdGame.child("t"+self.numTeam).set(false);
 		};
 	};
 
@@ -183,21 +183,21 @@ function Client(){
 	 * @param {type} getCode function to get de code of the button
 	 */
 	this.buttonOnClick = function(value, time){
-		if(self.numPlayer != null){
+		if(self.numTeam != null){
 
 			var answer = {
 				time: time,
 				value: value
 			}
-			setfb(self.refIdGame.child("t" + self.numPlayer + "answer"), answer)
-			//self.refIdGame.child("t"+self.numPlayer+"answer").set(answer);
+			setfb(self.refIdGame.child("t" + self.numTeam + "answer"), answer)
+			//self.refIdGame.child("t"+self.numTeam+"answer").set(answer);
 		}
 	};
 	
 	this.setReady = function (value) {
 		self.tlayer.ready = value
-		setfb(self.refIdGame.child("t" + self.numPlayer + "/ready"), value)
-		//self.refIdGame.child("t"+self.numPlayer+"/ready").set(value);
+		setfb(self.refIdGame.child("t" + self.numTeam + "/ready"), value)
+		//self.refIdGame.child("t"+self.numTeam+"/ready").set(value);
 	}
 }
 
