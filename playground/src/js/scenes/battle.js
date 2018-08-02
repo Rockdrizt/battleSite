@@ -686,45 +686,6 @@ var battle = function(){
 		}
 	}
     
-    function setTeamColors(index){
-        
-        var color = COLORS[index]
-        var yogoteam = teams[index]
-        var names = ["cheer_flag", "cheer_glove"]
-        var animations = ["support_yog2", "ready", "support_yog3"]
-
-        for(var i = 0; i < yogoteam.length; i++){
-            
-            var subGroup = yogoteam[i]
-            
-            subGroup.setAnimation([animations[i]], true)
-            
-            for(var j = 0; j < names.length; j++){
-                subGroup.children[0].setTint(color)
-                var slot = getSpineSlot(subGroup.children[0], names[j])
-                if(slot){
-                    console.log(slot.currentSprite)
-                    //slot.currentSprite.tint = color
-                }
-            }
-        }
-    }
-    
-    function getSpineSlot(spine, slotName){
-		
-		var slotIndex
-		for(var index = 0, n = spine.skeletonData.slots.length; index < n; index++){
-			var slotData = spine.skeletonData.slots[index]
-			if(slotData.name === slotName){
-				slotIndex = index
-			}
-		}
-
-		if (slotIndex){
-			return spine.slotContainers[slotIndex]
-		}
-	}
-    
     function selectYogotar(obj) {
 		mainSpine = obj.parent
 	}
@@ -798,7 +759,7 @@ var battle = function(){
         var team = mainSpine.teamIndex
         var side = ORDER_SIDES[team]
         
-        //setTeamColors(team)
+        supportAnimation(team)
         
         specialAttack.scale.setTo(side.scale.x, 1)
         specialAttack.y = 0
@@ -822,6 +783,59 @@ var battle = function(){
 			attackMove("ultra")
         })
     }
+    
+    function supportAnimation(index){
+        
+        var subteam = teams[index]
+        var aux = 2
+        
+        var color = COLORS[index]
+        var names = ["cheer_flag", "cheer_glove"]
+
+        for(var i = 0; i < subteam.length; i++){
+            
+            var yogo = subteam[i]
+            
+            if(yogo == mainSpine){
+                yogo.setAnimation(["ready"], true)
+            }
+            else{
+                yogo.setAnimation(["support_yog" + aux], false)
+                yogo.setAnimation(["support_yog" + aux], true)
+                aux++
+                
+                for(var k = 0; k < names.length; k++){
+                    
+                    var slot = getSpineSlot(yogo.children[0], names[k])
+                    var sprite = slot.children[0]
+                    
+                    if(sprite !== undefined){
+                        sprite.tint = 0xff0000
+                        //sprite.scale.setTo(5)
+                        //sprite.loadTexture("atlas.battle", "nao")
+                        //sprite.alpha = 0.5
+                        //sprite.angle = 200
+                    }
+                    yogo.children[0].updateTransform()
+                }
+            }
+        }
+    }
+    
+    function getSpineSlot(spine, slotName){
+		
+		var slotIndex
+		for(var index = 0, n = spine.skeletonData.slots.length; index < n; index++){
+			var slotData = spine.skeletonData.slots[index]
+			if(slotData.name === slotName){
+				slotIndex = index
+			}
+		}
+
+		if (slotIndex){
+			return spine.slotContainers[slotIndex]
+		}
+	}
     
     function zoomCamera(zoom, delay, pos) {
          

@@ -28,8 +28,8 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				sceneloader.show("startScreen")
-				//sceneloader.show("battle")
+				//sceneloader.show("startScreen")
+				sceneloader.show("battle")
 	    	}
 
 			document.body.style.visibility = "visible"
@@ -83,25 +83,34 @@ function startGame(){
 		spineLoader.init()
     	sound.init(game)
 
-		var teams = [
+//		var teams = [
+//            
+//			[{name:"yogotarEagle", skin:"eagle1"}, {name:"yogotarNao", skin:"nao2"}, {name:"yogotarTomiko", skin:"tomiko1"}],
+//			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarArthurius", skin:"arthurius1"}, {name:"yogotarEstrella", skin:"estrella1"}],
+//
+//		]
+
+        var teams = [
             
-			[{name:"yogotarEagle", skin:"eagle1"}, {name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarEagle", skin:"eagle1"}],
-			[{name:"yogotarTomiko", skin:"tomiko2"}, {name:"yogotarArthurius", skin:"arthurius1"}, {name:"yogotarEstrella", skin:"estrella1"}],
-
-		]
-
+//            [{name:"dinamita", skin:"dinamita1"}, {name:"theffanie", skin:"theffanie2"}, {name:"luna", skin:"luna1"}],
+//			[{name:"eagle", skin:"eagle2"}, {name:"nao", skin:"nao1"}, {name:"estrella", skin:"estrella1"}],
+            
+            [{name:"yogotarDinamita", skin:"dinamita1"}, {name:"yogotarTheffanie", skin:"theffanie2"}, {name:"yogotarLuna", skin:"luna1"}],
+			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarNao", skin:"nao1"}, {name:"yogotarEstrella", skin:"estrella1"}],
+            
+        ];
 		//battleScene.setTeams(teams)
 		battle.setTeams(teams)
+        //reward.setTeams(teams)
+        //reward.setWinner(1)
     }
 
     function create(){
 		console.log("createEpicBattle")
     	bootConfigFiles([
-			//battleScene,
-            startScreen,
-            yogoSelector,
+            //startScreen,
+            //yogoSelector,
             battle,
-            //result,
     	])
     }
 }
