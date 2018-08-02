@@ -28,8 +28,8 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				sceneloader.show("startScreen")
-				//sceneloader.show("battle")
+				//sceneloader.show("startScreen")
+				sceneloader.show("battle")
 	    	}
 
 			document.body.style.visibility = "visible"
@@ -100,7 +100,7 @@ function startGame(){
             
         ];
 		//battleScene.setTeams(teams)
-		//battle.setTeams(teams)
+		battle.setTeams(teams)
         //reward.setTeams(teams)
         //reward.setWinner(1)
     }
@@ -108,11 +108,9 @@ function startGame(){
     function create(){
 		console.log("createEpicBattle")
     	bootConfigFiles([
-            startScreen,
-            yogoSelector,
-            //battle,
-            //result,
-            //reward
+            //startScreen,
+            //yogoSelector,
+            battle,
     	])
     }
 }
