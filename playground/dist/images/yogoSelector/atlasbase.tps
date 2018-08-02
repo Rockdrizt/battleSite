@@ -4,11 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-<<<<<<< HEAD
         <string>4.8.3</string>
-=======
-        <string>4.8.2</string>
->>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -393,18 +389,13 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-<<<<<<< HEAD
             <key type="filename">teamBar1.png</key>
-=======
-            <key type="filename">teamBar0.png</key>
->>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-<<<<<<< HEAD
                 <rect>200,36,401,72</rect>
                 <key>scale9Paddings</key>
                 <rect>200,36,401,72</rect>
@@ -412,30 +403,15 @@
                 <false/>
             </struct>
             <key type="filename">teamBar2.png</key>
-=======
-                <rect>208,35,415,69</rect>
-                <key>scale9Paddings</key>
-                <rect>208,35,415,69</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">teamBar1.png</key>
->>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-<<<<<<< HEAD
                 <rect>194,36,387,72</rect>
                 <key>scale9Paddings</key>
                 <rect>194,36,387,72</rect>
-=======
-                <rect>200,36,401,72</rect>
-                <key>scale9Paddings</key>
-                <rect>200,36,401,72</rect>
->>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -574,10 +550,6 @@
         </map>
         <key>fileList</key>
         <array>
-<<<<<<< HEAD
-=======
-            <filename>teamBar0.png</filename>
->>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
             <filename>teamBar1.png</filename>
             <filename>token1.png</filename>
             <filename>token0.png</filename>
@@ -607,10 +579,7 @@
             <filename>name7.png</filename>
             <filename>plat1.png</filename>
             <filename>plat2.png</filename>
-<<<<<<< HEAD
             <filename>teamBar2.png</filename>
-=======
->>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
         </array>
         <key>ignoreFileList</key>
         <array/>
