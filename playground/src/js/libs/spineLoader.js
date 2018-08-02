@@ -232,13 +232,10 @@ var spineLoader = function () {
 			for (var index = 0, n = this.skeletonData.slots.length; index < n; index++) {
 				var slotData = this.skeletonData.slots[index]
 				if (slotData.attachmentName === attachmentName) {
-					slotIndex = index
+					return this.slotContainers[index]
 				}
 			}
 
-			if (typeof slotIndex === "number") {
-				return this.slotContainers[slotIndex]
-			}
 		}.bind(spineSkeleton)
 
 		spineSkeleton.onEvent.add(playEvent.bind(spineGroup))
