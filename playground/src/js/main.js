@@ -85,8 +85,8 @@ function startGame(){
 
 		var teams = [
             
-			[{name:"yogotarEagle", skin:"eagle1"}, {name:"yogotarNao", skin:"nao2"}, {name:"yogotarTomiko", skin:"tomiko1"}],
-			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarArthurius", skin:"arthurius1"}, {name:"yogotarEstrella", skin:"estrella1"}],
+			[{name:"yogotarEagle", skin:"eagle1"}, {name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarEagle", skin:"eagle1"}],
+			[{name:"yogotarTomiko", skin:"tomiko2"}, {name:"yogotarArthurius", skin:"arthurius1"}, {name:"yogotarEstrella", skin:"estrella1"}],
 
 		]
 

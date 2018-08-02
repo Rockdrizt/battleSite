@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "PWgNdvD6cMRYicUEper+394p148", "spine": "3.2.01", "width": 1409.2, "height": 918.4, "images": "" },
+"skeleton": { "hash": "EDqbUUnaaFz20FaALGLQYV2w4rk", "spine": "3.2.01", "width": 1409.2, "height": 918.4, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "cog", "parent": "root", "y": 35.59, "color": "000000ff" },
@@ -25823,6 +25823,10 @@
 					{ "slot": "forearm1", "offset": 8 }
 				]
 			}
+		],
+		"events": [
+			{ "time": 2.4666, "name": "PLAY:tournamentSwoosh1" },
+			{ "time": 2.9666, "name": "PLAY:tournamentSwoosh1" }
 		]
 	},
 	"ready": {
