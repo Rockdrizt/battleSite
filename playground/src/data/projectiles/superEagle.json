@@ -5,9 +5,10 @@
     "hit":1000
   },
     "particles":[
-    "particles/characters/windSuper1/windSuper4.json",
-    "particles/characters/windSuper1/windSuper5.json",
-    "particles/characters/windSuper1/windSuper6.json"
+    "particles/characters/windSuper1/windSuper1.json",    
+    "particles/characters/windSuper1/windSuper2.json",
+    "particles/characters/windSuper1/windSuper3.json",
+    "particles/characters/windSuper1/windSuper4.json"
   ],
      "spines":[
     {
