@@ -102,6 +102,8 @@ var battle = function(){
     var DAMAGE = DAMAGE_PERCENT[QUESTIONS.N_10]
     var MAX_LIFE
     
+    var COLORS = ["#FC1E79", "#00D8FF"]
+    
     var teams
     var battleSong
 	var sceneGroup
@@ -132,7 +134,7 @@ var battle = function(){
     function preload(){
 		
         game.stage.disableVisibilityChange = false
-        game.load.bitmapFont('skwig', 'images/fonts/font.png', 'images/fonts/font.fnt')
+        game.load.bitmapFont('skwig', 'fonts/font.png', 'fonts/font.fnt')
     }
     
 	function createBackground(){
@@ -148,10 +150,13 @@ var battle = function(){
         blackMask.alpha = 0
         sceneGroup.add(blackMask)
         
+        btngroup= game.add.group()
+        
         var rotateButton = createButton(rotateTeam.bind(null, 0), 0x00ff00)
 		rotateButton.x = game.world.centerX
 		rotateButton.y = game.world.height - 150
 		rotateButton.label.text = "rotate"
+        btngroup.add(rotateButton)
         
         var team = 0
         
@@ -159,21 +164,31 @@ var battle = function(){
 		damageButom.x = game.world.centerX - 200
 		damageButom.y = game.world.height - 250
 		damageButom.label.text = "normal"
+        btngroup.add(damageButom)
         
         var damageButom = createButton(attackMove.bind(null, "super"), 0xff00ff)
 		damageButom.x = game.world.centerX - 200
 		damageButom.y = game.world.height - 200
 		damageButom.label.text = "super"
+        btngroup.add(damageButom)
         
         var damageButom = createButton(ultraMove, 0xff00ff)
 		damageButom.x = game.world.centerX - 200
 		damageButom.y = game.world.height - 150
 		damageButom.label.text = "ultra"
+        btngroup.add(damageButom)
         
         var returnBtn = createButton(returnCamera, 0xff0033)
 		returnBtn.x = game.world.centerX 
 		returnBtn.y = game.world.height - 200
 		returnBtn.label.text = "zoom out"
+        btngroup.add(returnBtn)
+        
+        var win = createButton(setWinteam, 0xffaa33)
+		win.x = game.world.centerX - 200
+		win.y = game.world.height - 100
+		win.label.text = "winner"
+        btngroup.add(win)
         
         var rect = game.add.graphics()
         rect.beginFill(0x242A4D)
@@ -222,7 +237,7 @@ var battle = function(){
         
         var tokenGroup = game.add.group()
         
-        var listName = loadNames()
+        listName = loadNames()
         
         var pivotX = 0.25
         var index = 0
@@ -374,7 +389,7 @@ var battle = function(){
         var yogo = specialAttack.create(frame.centerX, frame.y + frame.height * 0.48, mainSpine.data.name + "Special")
         yogo.anchor.setTo(0.5,1)
         specialAttack.yogo = yogo
-        specialAttack.y = game.world.height
+        specialAttack.y = game.world.height + 100
     }
     
     function createQuestionOverlay(){
@@ -462,6 +477,7 @@ var battle = function(){
 		questionBtn.x = game.world.centerX
 		questionBtn.y = game.world.height - 250
 		questionBtn.label.text = "questionBtn"
+        btngroup.add(questionBtn)
     }
     
     function setQuestion(question, image, options){
@@ -627,6 +643,8 @@ var battle = function(){
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
 				character.teamIndex = teamIndex
 				character.alpha = 0
+                character.name = characterName
+                character.skin = skin
 				yogoGroup.add(character)
 				createAppear(character, teamIndex, charIndex)
 
@@ -666,7 +684,6 @@ var battle = function(){
 
 			yogoGroup.add(groupPoint)
 		}
-        //createMenuAnimations()
 	}
     
     function selectYogotar(obj) {
@@ -688,13 +705,13 @@ var battle = function(){
 			button.label.text = animationName
 		}
 
-		for(var attackIndex = 0; attackIndex < ATTACKS.length; attackIndex++){
+		/*for(var attackIndex = 0; attackIndex < ATTACKS.length; attackIndex++){
 			var buttonAttack = createButton(attack, 0xff0000)
 			buttonAttack.tag = ATTACKS[attackIndex]
 			buttonAttack.x = attackIndex * 200
 			buttonAttack.y = (pivotY + 1) * 50
 			buttonAttack.label.text = ATTACKS[attackIndex]
-		}
+		}*/
 	}
     
     function changeAnimation(name) {
@@ -705,8 +722,14 @@ var battle = function(){
        
         var life = lifeBars[team]
         var damage = life.width - (MAX_LIFE * percent * ORDER_SIDES[team].scale.x)
+        var index = team == 0 ? 1 : 0
+        var otherTeam = teams[index] 
         
-        game.add.tween(life).to({width:damage}, 500, Phaser.Easing.Cubic.Out, true)
+        game.add.tween(life).to({width:damage}, 500, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
+            otherTeam.forEach(function(member){
+                member.setAnimation(["idle_normal"], true)
+            })
+        })
     }
     
     function attackMove(type){
@@ -736,6 +759,8 @@ var battle = function(){
         var team = mainSpine.teamIndex
         var side = ORDER_SIDES[team]
         
+        supportAnimation(team)
+        
         specialAttack.scale.setTo(side.scale.x, 1)
         specialAttack.y = 0
         specialAttack.x = game.world.width * team
@@ -757,6 +782,44 @@ var battle = function(){
 			blackMask.alpha = 0
 			attackMove("ultra")
         })
+    }
+    
+    function supportAnimation(index){
+        
+        var subteam = teams[index]
+        var aux = 2
+        
+        var color = COLORS[index]
+        var names = ["cheer_flag", "cheer_glove"]
+
+        for(var i = 0; i < subteam.length; i++){
+            
+            var yogo = subteam[i]
+            
+            if(yogo == mainSpine){
+                yogo.setAnimation(["ready"], true)
+            }
+            else{
+                yogo.setAnimation(["support_yog" + aux], false)
+                yogo.setAnimation(["support_yog" + aux], true)
+                aux++
+                
+                for(var k = 0; k < names.length; k++){
+                    
+                    var slot = yogo.getSlotContainer(names[k])
+					if(!slot)
+						continue;
+					slot.tint = 0xff0000
+					//slot.children[0].tint = 0xff0000
+                        //sprite.scale.setTo(5)
+                        //sprite.loadTexture("atlas.battle", "nao")
+                        //sprite.alpha = 0.5
+                        //sprite.angle = 200
+
+                    yogo.spine.updateTransform()
+                }
+            }
+        }
     }
     
     function zoomCamera(zoom, delay, pos) {
@@ -785,6 +848,14 @@ var battle = function(){
 		zoomCamera(1, 1000, {x:0, y:0})
 		game.add.tween(blackMask).to({alpha:0}, 500, Phaser.Easing.Cubic.Out, true)
 	}
+    
+    function setWinteam(){
+        
+        battleMain.initWinerTeam(game.rnd.integerInRange(0, 1))
+        game.add.tween(sceneGroup).to({alpha:0}, 1000, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
+			sceneloader.show("reward")
+		})
+    }
 
 	return {
 		
@@ -803,15 +874,13 @@ var battle = function(){
             
             initialize()
             createBackground()	
+            placeYogotars()
             createTeamBars()
             createTimer()
-            placeYogotars()
-            sceneGroup.bringToTop(teamsBarGroup)
             createSpecialAttack()
             createQuestionOverlay()
             //createMenuAnimations()
             //battleSong = sound.play("battleSong", {loop:true, volume:0.6})
-            
 		},
         setCharacter:setCharacter,
         setTeams: function (myTeams) {
@@ -823,6 +892,7 @@ var battle = function(){
 					var character = team[charIndex]
 					setCharacter(character.name, teamIndex)
                     var img = team[charIndex].name.substr(7)
+                    console.log(img)
                     pushSpecialArt(img)
 				}
 			}

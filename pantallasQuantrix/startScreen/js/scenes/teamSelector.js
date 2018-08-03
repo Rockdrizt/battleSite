@@ -34,10 +34,6 @@ var teamSelector = function(){
             {
                 name: "tile",
                 file: "images/yogoSelector/bgTile.png",
-            },
-            {
-                name: "ok",
-                file: "images/yogoSelector/ok.png",
             }
 		],
 		sounds: [
@@ -136,6 +132,7 @@ var teamSelector = function(){
     var platformGroup
     var teamGroup
     var pullGroup
+    var okGroup
     
     var teamBar
     var buttonsGroup
@@ -478,18 +475,59 @@ var teamSelector = function(){
     
     function createOk(){
         
-        var ok = sceneGroup.create(game.world.centerX - 100, game.world.centerY + 100, "ok")
-        ok.anchor.setTo(0.5)
-        ok.inputEnabled = true
-        ok.events.onInputDown.add(clickOk,this)
+        okGroup = game.add.group()
+        okGroup.x = game.world.centerX + 100 * -SIDE
+        okGroup.y = game.world.centerY + 120
+        okGroup.alpha = 0
+        okGroup.canClick = false
+        sceneGroup.add(okGroup)
+        
+        var okOff = okGroup.create(0, 0, "atlas.yogoSelector", "okOff")
+        okOff.anchor.setTo(0.5)
+        okOff.inputEnabled = true
+        okOff.events.onInputOver.add(function(btn){
+            if(okGroup.canClick){
+                okGroup.setAll("alpha", 0)
+                btn.parent.over.alpha = 1
+            }
+        }, this)
+        okOff.events.onInputOut.add(function(btn){
+            if(okGroup.canClick){
+                okGroup.setAll("alpha", 0)
+                btn.alpha = 1
+            }
+        }, this)
+        okOff.events.onInputDown.add(function(btn){
+            if(okGroup.canClick && teamGroup.currentSelect !== -1){
+                okGroup.canClick = false
+                sound.play("pop")
+                okGroup.setAll("alpha", 0)
+                okGroup.onBtn.alpha = 1
+                clickOk()
+            }
+        }, this)
+        okOff.events.onInputUp.add(function(btn){
+            okGroup.setAll("alpha", 0)
+            okGroup.off.alpha = 1
+        }, this)
+        okGroup.off = okOff
+        
+        var overBtn = okGroup.create(0, - 40, "atlas.yogoSelector", "okOver")
+        overBtn.anchor.setTo(0.5)
+        overBtn.alpha = 0
+        okGroup.over = overBtn
+        
+        var onBtn = okGroup.create(0, 0, "atlas.yogoSelector", "okOn")
+        onBtn.anchor.setTo(0.5)
+        onBtn.alpha = 0
+        okGroup.onBtn = onBtn
     }
     
-    function clickOk(btn){
+    function clickOk(){
             
         if(teamGroup.currentSelect !== -1 && teamGroup.teamPivot < 3 && !teamGroup.auxArray.includes(teamGroup.currentSelect)){
 
-            game.add.tween(btn.scale).to({x: 0.5, y:0.5}, 100, Phaser.Easing.linear, true, 0, 0, true)
-
+            okGroup.canClick = false
             buttonsGroup.children[teamGroup.currentSelect].color = STATES.color
             turnOn(buttonsGroup.children[teamGroup.currentSelect])
             
@@ -498,6 +536,7 @@ var teamSelector = function(){
             teamGroup.slots[teamGroup.teamPivot].yogo.setAnimation(["select", "ready"], true)
             teamGroup.marker = null
             showName(teamGroup.currentSelect)
+            teamGroup.currentSelect = -1
             if(teamGroup.side == 1)
                 var aux = teamGroup.auxArray.indexOf(-1) //index
             else
@@ -507,6 +546,7 @@ var teamSelector = function(){
             
             if(teamGroup.teamPivot == 3){
                 buttonsGroup.setAll("token.canClick", false)
+                okGroup.canClick = false
                 game.time.events.add(2000, getReady)
             }
         }            
@@ -517,9 +557,9 @@ var teamSelector = function(){
         namesGroup = game.add.group()
         sceneGroup.add(namesGroup)
         
-        var light = namesGroup.create(game.world.centerX + 320, game.world.height - 200, "atlas.yogoSelector", "pinkLight")
-        light.alpha = 0
+        var light = namesGroup.create(game.world.centerX + 320 * SIDE, game.world.height - 200, "atlas.yogoSelector", "pinkLight")
         light.anchor.setTo(0.5)
+        light.scale.setTo(0)
         namesGroup.light = light
         
         var yogoName = namesGroup.create(light.x, light.y, "atlas.yogoSelector", "name0")
@@ -530,18 +570,14 @@ var teamSelector = function(){
     
     function showName(tag){
         
-        namesGroup.light.alpha = 1
-        game.add.tween(namesGroup.light.scale).from({x: 0}, 100, Phaser.Easing.linear, true).onComplete.add(function(){
-            sound.play(assets.spines[tag].name)
-            namesGroup.yogoName.loadTexture("atlas.yogoSelector", "name" + tag)
-            namesGroup.yogoName.alpha = 1
-            game.add.tween(namesGroup.yogoName.scale).from({y:0}, 100, Phaser.Easing.linear, true).onComplete.add(function(){
-                game.time.events.add(1500, function(){
-                    namesGroup.light.alpha = 0
-                    namesGroup.yogoName.alpha = 0
-                })
-            })
-        })
+        game.add.tween(namesGroup.light.scale).to({x: 1, y: 1}, 400, Phaser.Easing.linear, true, 0, 0, true)
+        sound.play(assets.spines[tag].name)
+        namesGroup.yogoName.loadTexture("atlas.yogoSelector", "name" + tag)
+        namesGroup.yogoName.alpha = 1
+
+        var fadeOut = game.add.tween(namesGroup.yogoName).to({alpha:0}, 400, Phaser.Easing.linear, false, 1000)
+        fadeOut.onComplete.add(function(){okGroup.canClick = true})
+        game.add.tween(namesGroup.yogoName.scale).from({y:0}, 100, Phaser.Easing.linear, true, 200).chain(fadeOut)    
     }
     
     function setAliveSpine(obj, alive){
@@ -589,9 +625,10 @@ var teamSelector = function(){
                 delay += 300
             }
             
-            game.time.events.add(delay, function(){
+            game.add.tween(okGroup).to({alpha: 1}, 300, Phaser.Easing.linear, true, delay).onComplete.add(function(){
                 buttonsGroup.setAll("token.canClick", true)
                 pressBtn(teamGroup.marker.token, STATES.color)
+                okGroup.canClick = true
             })
         })
     }    

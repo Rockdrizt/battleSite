@@ -3099,7 +3099,10 @@ var PhaserSpine;
                     }
                     slot.currentSprite.blendMode = slot.blendMode;
                     if (!this.globalTint) {
-                        slot.currentSprite.tint = slot.currentSprite.tint = parseInt(Phaser.Color.componentToHex(255 * slot.r).substring(0, 2) + Phaser.Color.componentToHex(255 * slot.g).substring(0, 2) + Phaser.Color.componentToHex(255 * slot.b).substring(0, 2), 16);
+                    	if(!slotContainer.tint)
+                        	slot.currentSprite.tint = slot.currentSprite.tint = parseInt(Phaser.Color.componentToHex(255 * slot.r).substring(0, 2) + Phaser.Color.componentToHex(255 * slot.g).substring(0, 2) + Phaser.Color.componentToHex(255 * slot.b).substring(0, 2), 16);
+                    	else
+                    		slot.currentSprite.tint = slotContainer.tint
                     }
                 }
                 else if (type === spine.AttachmentType.weightedmesh || type === spine.AttachmentType.weightedlinkedmesh) {

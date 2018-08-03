@@ -131,7 +131,7 @@
 			cliente.addEventListener('onClientInit', onClientInit);
 			cliente.addEventListener('onGameFull', onGameFull);
 			cliente.startGame = onTeamsReady
-			cliente.start(player, idGame, onError);
+			cliente.start(team, idGame, onError);
 			//div_resultado.innerText = "Player: "+cliente.numPlayer + "Ready!";
 			$("#infoContainer").css("height",'0');
 			$("#infoContainer").css("visibility",'hidden');

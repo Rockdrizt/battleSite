@@ -438,14 +438,15 @@
 	function showYogotar(event) {
 
 		console.log("showYogotar")
-		var numPlayer = event.numPlayer, player = event.player
+		var numPlayer = event.numTeam, player = event.team
         //TODO: player.avatar or player.team for team plays (right now the test is for teams)
         //TODO: player.avatar is hardcoded now
         player.avatar = "eagle"
+        var teamName = numPlayer === 1 ? "alpha" : "bravo"
 		$("#player" + numPlayer).find("img").attr("src", 'img/yogotars/' + player.avatar +'.png')
 		$("#NameYogotarplayer" + numPlayer).find("img").attr("src", 'img/names/name_' + player.avatar +'.png')
 		$("#NameYogotarplayer" + numPlayer).css("opacity", 1)
-		$("#playerName" + numPlayer).html(player.nickname)
+		$("#playerName" + numPlayer).html(teamName)
 
 	}
 
@@ -460,8 +461,8 @@
 	$("#StartButton").click(function(){
         
 		if(gameReady) {
-			server.removeEventListener('onPlayersReady', onPlayersReady);
-			server.removeEventListener('onInitPlayer', showYogotar);
+			server.removeEventListener('onTeamsReady', onPlayersReady);
+			server.removeEventListener('onInitTeam', showYogotar);
 			window.open("battle.html", "_self")
 		}
         magicSound.play();
@@ -603,8 +604,8 @@
 		}
 
 		server.start(currentID, onStart, {battleTime:battleTime, rules:customRules, maxRounds:counterRound});
-		server.addEventListener("onInitPlayer", showYogotar);
-		server.addEventListener('onPlayersReady', onPlayersReady);
+		server.addEventListener("onInitTeam", showYogotar);
+		server.addEventListener('onTeamsReady', onPlayersReady);
 		magicSound.play();
 	}
 

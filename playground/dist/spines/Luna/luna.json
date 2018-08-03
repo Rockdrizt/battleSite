@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "n5/Gtqu6v0KGuKnuoRYRpQL68CU", "spine": "3.2.01", "width": 551.38, "height": 468.22, "images": "" },
+"skeleton": { "hash": "XW2Hg8TqMurRKXxzaasLc091rQw", "spine": "3.2.01", "width": 386.13, "height": 442.23, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "cog", "parent": "root", "x": -21.24, "y": 35.6, "color": "000000ff" },
@@ -91,7 +91,7 @@
 	{ "name": "arm2", "bone": "arm2", "attachment": "arm2" },
 	{ "name": "forearm2", "bone": "forearm2", "attachment": "forearm2_a" },
 	{ "name": "hand2", "bone": "hand2", "attachment": "hand2_a" },
-	{ "name": "flag", "bone": "hand2", "attachment": "flag" },
+	{ "name": "cheer_flag", "bone": "hand2" },
 	{ "name": "leg2", "bone": "leg2", "attachment": "leg2_a" },
 	{ "name": "shin2", "bone": "shin2", "attachment": "shin2" },
 	{ "name": "foot2", "bone": "foot2", "attachment": "foot2_a" },
@@ -102,7 +102,8 @@
 	{ "name": "torso1", "bone": "torso", "attachment": "torso1" },
 	{ "name": "torso2", "bone": "torso", "attachment": "torso2" },
 	{ "name": "arm1", "bone": "arm1", "attachment": "arm1_a" },
-	{ "name": "hand1", "bone": "hand1", "attachment": "hand1_a" },
+	{ "name": "cheer_glove", "bone": "hand1" },
+	{ "name": "hand1", "bone": "hand1" },
 	{ "name": "forearm1", "bone": "forearm1", "attachment": "forearm1_a" },
 	{ "name": "head", "bone": "head", "attachment": "head" },
 	{ "name": "mouth", "bone": "head" },
@@ -290,6 +291,12 @@
 			"arm2": { "name": "normal/arm2_a", "x": 28.86, "y": 4.17, "rotation": 80.96, "width": 36, "height": 53 },
 			"arm3": { "name": "normal/arm2_a", "x": 23.96, "y": 1.23, "scaleX": -1, "rotation": 109.63, "width": 36, "height": 53 }
 		},
+		"cheer_flag": {
+			"cheer_flag": { "name": "normal1/cheer_flag", "x": 94.43, "y": 121.37, "rotation": 12.01, "width": 220, "height": 256 }
+		},
+		"cheer_glove": {
+			"cheer_glove": { "name": "normal1/cheer_glove", "x": 89.42, "y": 1.92, "rotation": -91.43, "width": 188, "height": 256 }
+		},
 		"cloud_l": {
 			"ice_cloud1": { "name": "normal1/ice_cloud1", "x": -118.41, "y": 8.87, "width": 54, "height": 22 },
 			"ice_cloud2": { "name": "normal1/ice_cloud2", "x": -118.41, "y": 11.23, "width": 76, "height": 28 },
@@ -331,9 +338,6 @@
 		"faceshield": {
 			"faceshield": { "name": "normal/faceshield", "x": 61.98, "y": -17.76, "rotation": -90, "width": 202, "height": 178 }
 		},
-		"flag": {
-			"flag": { "name": "normal1/flag", "x": 94.43, "y": 121.37, "rotation": 12.01, "width": 220, "height": 256 }
-		},
 		"foot1": {
 			"foot1_a": { "name": "normal/foot1_a", "x": 0.76, "y": 9.19, "rotation": 88.45, "width": 60, "height": 16 },
 			"foot1_a_i": { "name": "normal/foot1_a", "x": 0.76, "y": 9.19, "rotation": 88.45, "width": 60, "height": 16 },
@@ -367,8 +371,7 @@
 			"hand1_f": { "name": "normal/hand1_f", "x": 10.72, "y": 4.2, "rotation": 83.54, "width": 57, "height": 31 },
 			"hand1_g": { "name": "normal/hand1_g", "x": 12.82, "y": 1.36, "rotation": 92.58, "width": 51, "height": 33 },
 			"hand1_h": { "name": "normal/hand1_h", "x": 15.41, "y": -1.85, "rotation": 83.54, "width": 44, "height": 54 },
-			"hand1_i": { "name": "normal/hand1_i", "x": 19.18, "y": -4.28, "rotation": 83.54, "width": 55, "height": 46 },
-			"bighand_red": { "name": "normal1/big_hand", "x": 89.42, "y": 1.92, "rotation": -91.43, "width": 188, "height": 256 }
+			"hand1_i": { "name": "normal/hand1_i", "x": 19.18, "y": -4.28, "rotation": 83.54, "width": 55, "height": 46 }
 		},
 		"hand2": {
 			"hand2_a": { "name": "normal/hand2_a", "x": 14.15, "y": 1.29, "rotation": 53.27, "width": 44, "height": 28 },
@@ -709,6 +712,12 @@
 			"arm2": { "name": "normal2/arm2_a", "x": 28.86, "y": 4.17, "rotation": 80.96, "width": 36, "height": 53 },
 			"arm3": { "name": "normal2/arm2_a", "x": 23.96, "y": 1.23, "scaleX": -1, "rotation": 109.63, "width": 36, "height": 53 }
 		},
+		"cheer_flag": {
+			"cheer_flag": { "name": "normal1/cheer_flag", "x": 94.43, "y": 121.37, "rotation": 12.01, "width": 220, "height": 256 }
+		},
+		"cheer_glove": {
+			"cheer_glove": { "name": "normal1/cheer_glove", "x": 89.42, "y": 1.92, "rotation": -91.43, "width": 188, "height": 256 }
+		},
 		"cloud_l": {
 			"ice_cloud1": { "name": "normal1/ice_cloud1", "x": -118.41, "y": 8.87, "width": 54, "height": 22 },
 			"ice_cloud2": { "name": "normal1/ice_cloud2", "x": -118.41, "y": 11.23, "width": 76, "height": 28 },
@@ -750,9 +759,6 @@
 		"faceshield": {
 			"faceshield": { "name": "normal2/faceshield", "x": 61.98, "y": -17.76, "rotation": -90, "width": 216, "height": 144 }
 		},
-		"flag": {
-			"flag": { "name": "normal1/flag", "x": 94.43, "y": 121.37, "rotation": 12.01, "width": 220, "height": 256 }
-		},
 		"foot1": {
 			"foot1_a": { "name": "normal2/foot1_a", "x": 0.76, "y": 9.19, "rotation": 88.45, "width": 60, "height": 16 },
 			"foot1_a_i": { "name": "normal2/foot1_a", "x": 0.76, "y": 9.19, "rotation": 88.45, "width": 60, "height": 16 },
@@ -778,7 +784,6 @@
 			"forearm2_a": { "name": "normal2/forearm2_a", "x": 22.83, "y": 2.7, "rotation": 55.94, "width": 53, "height": 55 }
 		},
 		"hand1": {
-			"bighand_red": { "name": "normal1/big_hand", "x": 89.42, "y": 1.92, "rotation": -91.43, "width": 188, "height": 256 },
 			"hand1_a": { "name": "normal2/hand1_a", "x": 12.42, "y": 0.94, "rotation": 83.54, "width": 54, "height": 43 },
 			"hand1_b": { "name": "normal2/hand1_b", "x": 13.12, "y": -1.59, "rotation": 83.54, "width": 49, "height": 49 },
 			"hand1_c": { "name": "normal2/hand1_c", "x": 15.64, "y": -1.87, "rotation": 83.54, "width": 50, "height": 53 },
@@ -1081,6 +1086,26 @@
 					{ "time": 1, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -1119,16 +1144,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 1, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1, "name": null }
 				]
 			},
 			"foot1": {
@@ -2068,6 +2083,26 @@
 					{ "time": 0.5, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.5, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.5, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.5, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.5, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -2106,16 +2141,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 0.5, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 0.5, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 0.5, "name": null }
 				]
 			},
 			"foot1": {
@@ -2998,6 +3023,26 @@
 					{ "time": 1.1333, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1.1333, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.1333, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1.1333, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.1333, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -3039,16 +3084,6 @@
 					{ "time": 0, "name": null },
 					{ "time": 0.4666, "name": "faceshield" },
 					{ "time": 1.1333, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1.1333, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.1333, "name": null }
 				]
 			},
 			"foot1": {
@@ -4032,6 +4067,26 @@
 					{ "time": 1.1333, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1.1333, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.1333, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1.1333, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.1333, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -4073,16 +4128,6 @@
 					{ "time": 0, "name": null },
 					{ "time": 0.4, "name": "faceshield" },
 					{ "time": 1.1333, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1.1333, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.1333, "name": null }
 				]
 			},
 			"foot1": {
@@ -5046,6 +5091,26 @@
 					{ "time": 1.1, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1.1, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.1, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1.1, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.1, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -5088,16 +5153,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 1.1, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1.1, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.1, "name": null }
 				]
 			},
 			"foot1": {
@@ -6214,6 +6269,26 @@
 					{ "time": 1.5, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1.5, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.5, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1.5, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.5, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -6256,16 +6331,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 1.5, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1.5, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.5, "name": null }
 				]
 			},
 			"foot1": {
@@ -7646,6 +7711,26 @@
 					{ "time": 2.3333, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2.3333, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 2.3333, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2.3333, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 2.3333, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -7689,16 +7774,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 2.3333, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 2.3333, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 2.3333, "name": null }
 				]
 			},
 			"foot1": {
@@ -9234,6 +9309,26 @@
 					{ "time": 2, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 2, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 2, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -9274,16 +9369,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 2, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 2, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 2, "name": null }
 				]
 			},
 			"foot1": {
@@ -10521,6 +10606,26 @@
 					{ "time": 0.7666, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.7666, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.7666, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.7666, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.7666, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -10562,16 +10667,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 0.7666, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 0.7666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 0.7666, "name": null }
 				]
 			},
 			"foot1": {
@@ -11702,6 +11797,26 @@
 					{ "time": 2.1333, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2.1333, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 2.1333, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2.1333, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 2.1333, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -11743,16 +11858,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 2.1333, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 2.1333, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 2.1333, "name": null }
 				]
 			},
 			"foot1": {
@@ -13189,6 +13294,26 @@
 					{ "time": 3.4, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 3.4, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 3.4, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 3.4, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 3.4, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -13232,16 +13357,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 3.4, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 3.4, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 3.4, "name": null }
 				]
 			},
 			"foot1": {
@@ -14895,6 +15010,26 @@
 					{ "time": 3, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 3, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 3, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 3, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 3, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -14948,16 +15083,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 3, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 3, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 3, "name": null }
 				]
 			},
 			"foot1": {
@@ -16949,6 +17074,35 @@
 					{ "time": 2.5666, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{
+						"time": 0,
+						"color": "ffffffff",
+						"curve": [ 0.242, 0, 0.655, 0.62 ]
+					},
+					{
+						"time": 1.8,
+						"color": "78efffff",
+						"curve": [ 0.726, 0, 0.906, 0.8 ]
+					},
+					{ "time": 2.5666, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 2.5666, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2.5666, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 2.5666, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -17035,25 +17189,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 2.5666, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{
-						"time": 0,
-						"color": "ffffffff",
-						"curve": [ 0.242, 0, 0.655, 0.62 ]
-					},
-					{
-						"time": 1.8,
-						"color": "78efffff",
-						"curve": [ 0.726, 0, 0.906, 0.8 ]
-					},
-					{ "time": 2.5666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 2.5666, "name": null }
 				]
 			},
 			"foot1": {
@@ -18809,6 +18944,26 @@
 					{ "time": 3.8333, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 3.8333, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 3.8333, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 3.8333, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 3.8333, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -18866,16 +19021,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 3.8333, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 3.8333, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 3.8333, "name": null }
 				]
 			},
 			"foot1": {
@@ -21002,6 +21147,26 @@
 					{ "time": 1.5, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1.5, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.5, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1.5, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.5, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -21042,16 +21207,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 1.5, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1.5, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.5, "name": null }
 				]
 			},
 			"foot1": {
@@ -22161,6 +22316,25 @@
 					{ "time": 1.6666, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1.6666, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.6666, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 1.6666, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.6666, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -22203,16 +22377,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 1.6666, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1.6666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.6666, "name": null }
 				]
 			},
 			"foot1": {
@@ -23441,6 +23605,26 @@
 					{ "time": 1.9333, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1.9333, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.9333, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1.9333, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.9333, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -23485,16 +23669,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 1.9333, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1.9333, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.9333, "name": null }
 				]
 			},
 			"foot1": {
@@ -24812,6 +24986,26 @@
 					{ "time": 2, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 2, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 2, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -24852,16 +25046,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 2, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 2, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 2, "name": null }
 				]
 			},
 			"foot1": {
@@ -26122,6 +26306,25 @@
 					{ "time": 0.6666, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.6666, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.6666, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0.6666, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.6666, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -26162,16 +26365,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 0.6666, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 0.6666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 0.6666, "name": null }
 				]
 			},
 			"foot1": {
@@ -27190,6 +27383,26 @@
 					{ "time": 1.1666, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1.1666, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.1666, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 1.1666, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 1.1666, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -27235,16 +27448,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 1.1666, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 1.1666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 1.1666, "name": null }
 				]
 			},
 			"foot1": {
@@ -28447,6 +28650,22 @@
 					{ "time": 2.6666, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 2.6666, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 2.6666, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"attachment": [
+					{ "time": 0, "name": "cheer_glove" },
+					{ "time": 2.6666, "name": "cheer_glove" }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -28489,16 +28708,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 2.6666, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 2.6666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 2.6666, "name": null }
 				]
 			},
 			"foot1": {
@@ -28545,10 +28754,6 @@
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
 					{ "time": 2.6666, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": "bighand_red" },
-					{ "time": 2.6666, "name": "bighand_red" }
 				]
 			},
 			"hand2": {
@@ -29779,7 +29984,8 @@
 				"offsets": [
 					{ "slot": "forearm2", "offset": 6 },
 					{ "slot": "hand2", "offset": 6 },
-					{ "slot": "flag", "offset": 35 },
+					{ "slot": "cheer_flag", "offset": 35 },
+					{ "slot": "cheer_glove", "offset": 4 },
 					{ "slot": "hand1", "offset": 25 },
 					{ "slot": "forearm1", "offset": 25 }
 				]
@@ -29789,6 +29995,7 @@
 				"offsets": [
 					{ "slot": "forearm2", "offset": 7 },
 					{ "slot": "hand2", "offset": 7 },
+					{ "slot": "cheer_glove", "offset": 5 },
 					{ "slot": "hand1", "offset": 5 },
 					{ "slot": "forearm1", "offset": 5 }
 				]
@@ -29847,6 +30054,26 @@
 					{ "time": 0.8, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.8, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "cheer_flag" },
+					{ "time": 0.8, "name": "cheer_flag" }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 0.8, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.8, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -29885,16 +30112,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 0.8, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 0.8, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": "flag" },
-					{ "time": 0.8, "name": "flag" }
 				]
 			},
 			"foot1": {
@@ -30915,6 +31132,26 @@
 					{ "time": 4, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 4, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 4, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 4, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 4, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -30957,16 +31194,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 4, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 4, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 4, "name": null }
 				]
 			},
 			"foot1": {
@@ -32232,6 +32459,22 @@
 					{ "time": 4, "name": "arm2" }
 				]
 			},
+			"cheer_flag": {
+				"color": [
+					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
+					{ "time": 4, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 4, "name": null }
+				]
+			},
+			"cheer_glove": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 4, "name": null }
+				]
+			},
 			"cloud_l": {
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
@@ -32275,16 +32518,6 @@
 				"attachment": [
 					{ "time": 0, "name": "faceshield" },
 					{ "time": 4, "name": "faceshield" }
-				]
-			},
-			"flag": {
-				"color": [
-					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
-					{ "time": 4, "color": "ffffffff" }
-				],
-				"attachment": [
-					{ "time": 0, "name": null },
-					{ "time": 4, "name": null }
 				]
 			},
 			"foot1": {

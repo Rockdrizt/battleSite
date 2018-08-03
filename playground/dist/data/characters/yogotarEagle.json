@@ -22,30 +22,20 @@
 			{
 				"id": "ultraEagle",
 				"attachment": "particle13",
-				"delay": 2500,
+				"delay": 3500,
 				"multiplier": 1
 			},
             {
 				"id": "ultraEagle",
-<<<<<<< HEAD
-				"attachment": "particle15",
-				"delay": 3500,
-=======
 				"attachment": "particle13",
-				"delay": 3000,
->>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
+				"delay": 4000,
 				"multiplier": 1,
 				"hit":false
 			},
             {
 				"id": "ultraEagle",
-<<<<<<< HEAD
-				"attachment": "particle15",
-				"delay": 4000,
-=======
 				"attachment": "particle13",
-				"delay": 3500,
->>>>>>> 77ce159c9c112d688b6937caf58e19b6ce93bc0c
+				"delay": 4500,
 				"multiplier": 1,
 				"hit":false
 			}
