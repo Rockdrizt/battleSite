@@ -1,5 +1,5 @@
 
-pantalla de victoria.png
+pantalla_victoria.png
 size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
@@ -131,7 +131,7 @@ normal1/sphere_c
   offset: 0, 0
   index: -1
 
-pantalla de victoria2.png
+pantalla_victoria2.png
 size: 2048,1024
 format: RGBA8888
 filter: Linear,Linear
