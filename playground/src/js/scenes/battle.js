@@ -102,7 +102,7 @@ var battle = function(){
     var DAMAGE = DAMAGE_PERCENT[QUESTIONS.N_10]
     var MAX_LIFE
     
-    var COLORS = ["#FC1E79", "#00D8FF"]
+    var COLORS = [0xFC1E79, 0x00D8FF]
     
     var teams
     var battleSong
@@ -336,7 +336,7 @@ var battle = function(){
         var timeToken = teamsBarGroup.create(game.world.centerX, 150, "atlas.battle", "timeToken")
         timeToken.anchor.setTo(0.5)
         
-        var text = new Phaser.Text(sceneGroup.game, 0, -5, "3:00", fontStyle)
+        var text = new Phaser.Text(sceneGroup.game, 0, -10, "3:00", fontStyle)
         text.anchor.setTo(0.5)
         timeToken.addChild(text)
         timeToken.text = text
@@ -800,7 +800,6 @@ var battle = function(){
                 yogo.setAnimation(["ready"], true)
             }
             else{
-                yogo.setAnimation(["support_yog" + aux], false)
                 yogo.setAnimation(["support_yog" + aux], true)
                 aux++
                 
@@ -809,13 +808,7 @@ var battle = function(){
                     var slot = yogo.getSlotContainer(names[k])
 					if(!slot)
 						continue;
-					slot.tint = 0xff0000
-					//slot.children[0].tint = 0xff0000
-                        //sprite.scale.setTo(5)
-                        //sprite.loadTexture("atlas.battle", "nao")
-                        //sprite.alpha = 0.5
-                        //sprite.angle = 200
-
+					slot.tint = color
                     yogo.spine.updateTransform()
                 }
             }
