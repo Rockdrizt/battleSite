@@ -1,39 +1,36 @@
 {"frames": [
 
 {
-	"filename": "loading_bottom",
-	"frame": {"x":1,"y":448,"w":313,"h":10},
+	"filename": "pinkLight",
+	"frame": {"x":1,"y":1,"w":1668,"h":70},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":2,"y":0,"w":313,"h":10},
-	"sourceSize": {"w":317,"h":10},
-	"pivot": {"x":0.5,"y":0.5}
+	"spriteSourceSize": {"x":0,"y":9,"w":1668,"h":70},
+	"sourceSize": {"w":1668,"h":88}
 },
 {
-	"filename": "loading_top",
-	"frame": {"x":1,"y":424,"w":512,"h":22},
+	"filename": "spiner",
+	"frame": {"x":1671,"y":1,"w":314,"h":309},
 	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":512,"h":22},
-	"sourceSize": {"w":512,"h":22},
-	"pivot": {"x":0.5,"y":0.5}
+	"trimmed": true,
+	"spriteSourceSize": {"x":27,"y":28,"w":314,"h":309},
+	"sourceSize": {"w":368,"h":363}
 },
 {
-	"filename": "logo",
-	"frame": {"x":1,"y":1,"w":745,"h":421},
+	"filename": "star",
+	"frame": {"x":1,"y":73,"w":64,"h":64},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":745,"h":421},
-	"sourceSize": {"w":745,"h":421},
-	"pivot": {"x":0.5,"y":0.5}
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
 }],
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "atlas.png",
 	"format": "RGBA8888",
-	"size": {"w":747,"h":459},
+	"size": {"w":1986,"h":311},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:8fe312b157d4590d0e80a2deb867a375:9a222224db4a4c343308f69089171a3c:cbce6b53f0f49e0bf15173c25c41f876$"
+	"smartupdate": "$TexturePacker:SmartUpdate:695b33fb05f671d73ee3d264c06255a5:b79c3c27d9cd0448915e13eaa5b87a84:cbce6b53f0f49e0bf15173c25c41f876$"
 }
 }

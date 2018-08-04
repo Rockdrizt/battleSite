@@ -57,7 +57,7 @@ var reward = function(){
         spines:[
             {
                 name:"coup",
-                file:"spines/reward/brain/Pantalla de victoria.json"
+                file:"spines/reward/brain/pantalla_victoria.json"
             }
         ],
         jsons: [

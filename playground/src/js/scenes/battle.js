@@ -61,6 +61,10 @@ var battle = function(){
             {
                 name: "questionBoard",
                 file: "images/battle/questionBoard.png",
+            },
+            {
+                name: "pinkLight",
+                file: "images/yogoSelector/pinkLight.png",
             }
 		],
 		sounds: [
@@ -395,6 +399,7 @@ var battle = function(){
     function createQuestionOverlay(){
         
         questionGroup = game.add.group()
+        questionGroup.boxes = []
         sceneGroup.add(questionGroup)
         
         var black = game.add.graphics()
@@ -404,73 +409,82 @@ var battle = function(){
         black.alpha = 0.5
         questionGroup.add(black)
         
-        var board = questionGroup.create(game.world.centerX + 50, game.world.height - 20, "questionBoard")
-        board.anchor.setTo(0.5, 1)
+        var board = questionGroup.create(180, game.world.height - 20, "questionBoard")
+        board.anchor.setTo(0, 1)
+        questionGroup.boxes[1] = board
         
-        var box = questionGroup.create(board.centerX - 130, board.y - board.height + 5, "atlas.battle", "questionBox")
-        box.anchor.setTo(0.5, 1)
+        var box = questionGroup.create(board.width + 30, board.y - board.height + 2, "atlas.battle", "questionBox")
+        box.anchor.setTo(1, 1)
+        questionGroup.boxes[0] = box
         
         var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "left", wordWrap: true, wordWrapWidth: box.width - 180}
         
         var text = new Phaser.Text(sceneGroup.game, box.centerX + 70, box.centerY, "", fontStyle)
         text.anchor.setTo(0.5)
+        text.alpha = 0
         questionGroup.add(text)
         
-        var container = questionGroup.create(board.centerX - 110, board.centerY - board.height * 0.2, "atlas.battle", "questionImage")
-        container.anchor.setTo(0.5)
+        var container = questionGroup.create(box.x - 40, board.centerY - board.height * 0.2, "atlas.battle", "questionImage")
+        container.anchor.setTo(1, 0.5)
+        questionGroup.boxes[2] = container
         
-        var img = questionGroup.create(0, 0, "atlas.battle", "dazzle")
+        var img = questionGroup.create(-container.width * 0.5, 0, "atlas.battle", "dazzle")
         img.anchor.setTo(0.5)
+        img.scale.setTo(0)
         container.addChild(img)
         
         var options = game.add.group()
         questionGroup.add(options)
         var pivotX = 0.5
         
-        for(var i = 0; i < 4; i++){
-            
-            var btn = options.create(board.centerX * pivotX, board.centerY + board.height * 0.17, "atlas.battle", "questionBtn")
-            btn.anchor.setTo(0.5)
-            btn.inputEnabled = true
-            btn.events.onInputDown.add(function(btn){
-                game.add.tween(btn.scale).to({x: 0.8, y:0.8}, 100, Phaser.Easing.linear, true, 0, 0, true).onComplete.add(function(){
-                    questionGroup.options.setAll("inputEnabled", false)
-                    game.add.tween(questionGroup).to({alpha:0}, 500, Phaser.Easing.linear, true)
-                })
-            },this)
-            
-            var letter = new Phaser.Text(sceneGroup.game, -btn.width * 0.30, -5, "A", fontStyle)
-            letter.anchor.setTo(0.5)
-            btn.addChild(letter)
-            btn.letter = letter
-            
-            var info = new Phaser.Text(sceneGroup.game, 0, 0, "info", fontStyle)
-            info.anchor.setTo(0,0.5)
-            btn.addChild(info)
-            btn.info = info
-            
-            pivotX += 0.3
-            
-            if(i % 2 != 0){
-                btn.y += 150
+            for(var i = 0; i < 4; i++){
+
+                var btn = options.create(board.centerX * pivotX, board.centerY + board.height * 0.17, "atlas.battle", "questionBtn")
+                btn.anchor.setTo(0.5)
+                btn.alpha = 0
+                btn.inputEnabled = true
+                btn.events.onInputDown.add(setAnswer,this)
+
+                var letter = new Phaser.Text(sceneGroup.game, -btn.width * 0.30, -5, "A", fontStyle)
+                letter.anchor.setTo(0.5)
+                btn.addChild(letter)
+                btn.letter = letter
+
+                var info = new Phaser.Text(sceneGroup.game, 0, 0, "info", fontStyle)
+                info.anchor.setTo(0,0.5)
+                btn.addChild(info)
+                btn.info = info
+
+                pivotX += 0.3
+
+                if(i % 2 != 0){
+                    btn.y += 150
+                }
+                btn.spawn = {x: btn.x, y: btn.y}
             }
-        }
+
+            options.children[1].letter.setText("B")
+            options.children[2].letter.setText("C")
+            options.children[3].letter.setText("D")
+
+            questionGroup.question = text
+            questionGroup.question.setText("Lorem ipsum dolor sit amet consectetur adipiscing elit egestas, mollis nisi habitant felis venenatis scelerisque vulputate, taciti class curae dui nibh nullam blandit.")
+            questionGroup.image = img
+            questionGroup.options = options
+            questionGroup.options.setAll("inputEnabled", false)
+
+            questionGroup.boxes.forEach(function(box){
+                box.scale.setTo(0,1)
+            })
         
-        options.children[1].letter.setText("B")
-        options.children[2].letter.setText("C")
-        options.children[3].letter.setText("D")
+        var light = questionGroup.create(300,300, "pinkLight")
+        light.anchor.setTo(0.5)
+        light.scale.setTo(0)
+        questionGroup.light = light
         
-        questionGroup.question = text
-        questionGroup.question.setText("Aqui va la pregunta Aqui va la preguntaAqui va la pregunta Aqui va la pregunta Aqui va la pregunta Aqui va la pregunta Aqui va la pregunta")
-        questionGroup.image = img
-        questionGroup.options = options
-        questionGroup.options.setAll("inputEnabled", false)
         questionGroup.alpha = 0
         
-        //questionGroup.setQuestion = setQuestion()
-        
         var questionBtn = createButton(function(){
-        	//questionGroup.setQuestion()
             setQuestion()
 			}, 0x00ffff
 		)
@@ -482,27 +496,67 @@ var battle = function(){
     
     function setQuestion(question, image, options){
 
-        //questionGroup.question.setText(question)
-        questionGroup.question.alpha = 0
-        //questionGroup.image.loadTexture("atlas.battle", image)
-        questionGroup.image.alpha = 0
-        for(var i = 0; i < questionGroup.options.length; i++){
-            //questionGroup.options.children[i].info.setText(options[i])
-            questionGroup.options.children[i].alpha = 0
-        }
+        var delay = 0
+        var last
         
-        game.add.tween(questionGroup).to({alpha:1}, 500, Phaser.Easing.linear, true).onComplete.add(function(){
-            questionGroup.image.alpha = 1
-            game.add.tween(questionGroup.image.scale).to({x:1.5, y:1.5}, 100, Phaser.Easing.linear, true, 0, 0, true)
-            game.add.tween(questionGroup.question).to({alpha:1}, 400, Phaser.Easing.linear, true, 300)
-            var delay = 200
+        //questionGroup.question.setText(question)
+        //questionGroup.image.loadTexture("atlas.battle", image)
+        
+        /*for(var i = 0; i < questionGroup.options.length; i++){
+            questionGroup.options.children[i].info.setText(options[i])
+        }*/
+        questionGroup.alpha = 1
+        
+        questionGroup.boxes.forEach(function(box){
+            last = game.add.tween(box.scale).to({x: 1}, 250, Phaser.Easing.Cubic.Out, true, delay)
+            delay += 300
+        }) 
+        
+        questionGroup.options.forEach(function(opt){
+            game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay).onComplete.add(function(){
+                opt.inputEnabled = true
+            })
+            delay += 200
+        })
+        
+        last.onComplete.add(function(){
+            game.add.tween(questionGroup.question).to({alpha:1}, 300, Phaser.Easing.linear, true, 1000)
+            game.add.tween(questionGroup.image.scale).to({x:1, y:1}, 300, Phaser.Easing.Cubic.InOut, true, 1000)
+        })
+    }
+    
+    function setAnswer(btn){
+        
+        questionGroup.options.setAll("inputEnabled", false)
+        
+        questionGroup.options.forEach(function(opt){
+            if(opt != btn){
+                game.add.tween(opt).to({alpha:0}, 300, Phaser.Easing.linear, true)
+            }
+        })
+        
+        questionGroup.light.x = btn.x - 100
+        questionGroup.light.y = btn.y
+        var shine = game.add.tween(questionGroup.light.scale).to({x: 0.5, y:0.5}, 300, Phaser.Easing.Cubic.Out, true, 0, 0, true)
+        
+        var newY = questionGroup.boxes[1].y - 180
+        var choise = game.add.tween(btn).to({x: game.world.centerX, y:newY}, 500, Phaser.Easing.Cubic.Out, false)
+                 
+        var fadeOut = game.add.tween(questionGroup).to({alpha:0}, 500, Phaser.Easing.linear, false, 1000)
+        fadeOut.onComplete.add(function(){
+            questionGroup.image.scale.setTo(0)
+            questionGroup.question.alpha = 0
             questionGroup.options.forEach(function(opt){
-                opt.alpha = 1
-                game.add.tween(opt).from({x: game.world.width + 300}, delay += 200, Phaser.Easing.Cubic.Out, true, 800).onComplete.add(function(){
-                    opt.inputEnabled = true
-                })
+                opt.alpha = 0
+                opt.x = opt.spawn.x
+                opt.y = opt.spawn.y
+            })
+            questionGroup.boxes.forEach(function(box){
+                box.scale.setTo(0, 1)
             })
         })
+        shine.chain(choise)    
+        choise.chain(fadeOut)
     }
     
     function rotateTeam(teamIndex){
@@ -845,9 +899,18 @@ var battle = function(){
     function setWinteam(){
         
         battleMain.initWinerTeam(game.rnd.integerInRange(0, 1))
-        game.add.tween(sceneGroup).to({alpha:0}, 1000, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
+        game.add.tween(white).to({alpha:1}, 300, Phaser.Easing.Cubic.In, true).onComplete.add(function(){
 			sceneloader.show("reward")
 		})
+    }
+    
+    function createWhite(){
+        
+        white = game.add.graphics()
+        white.beginFill(0xffffff)
+        white.drawRect(0, 0, game.world.width, game.world.height)
+        white.endFill()
+        white.alpha = 0
     }
 
 	return {
@@ -864,7 +927,6 @@ var battle = function(){
             
             sceneGroup = game.add.group()
 
-            
             initialize()
             createBackground()	
             placeYogotars()
@@ -874,6 +936,8 @@ var battle = function(){
             createQuestionOverlay()
             //createMenuAnimations()
             //battleSong = sound.play("battleSong", {loop:true, volume:0.6})
+            createWhite()
+            game.add.tween(sceneGroup).from({alpha:0},500, Phaser.Easing.Cubic.Out,true)
 		},
         setCharacter:setCharacter,
         setTeams: function (myTeams) {

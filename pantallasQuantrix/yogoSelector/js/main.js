@@ -14,7 +14,7 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				sceneloader.show("yogoSelector")
+				sceneloader.show("preloaderIntro")
 	    	}
 
 	      	sceneloader.preload(sceneList, {onLoadFile: onLoadFile, onComplete: onCompleteSceneLoading})
@@ -67,7 +67,8 @@ function startGame(){
     function create(){
 
     	preloadScenes([
-            yogoSelector
+            yogoSelector,
+            preloaderIntro
     	])
     }
 }

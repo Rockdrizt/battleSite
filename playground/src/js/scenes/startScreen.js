@@ -204,6 +204,15 @@ var startScreen = function(){
         board.mask = mask
     }
     
+    function createWhite(){
+        
+        white = game.add.graphics()
+        white.beginFill(0xffffff)
+        white.drawRect(0, 0, game.world.width, game.world.height)
+        white.endFill()
+        white.alpha = 0
+    }
+    
     function createOkBtn(){
         
         playBtn = game.add.group()
@@ -279,6 +288,8 @@ var startScreen = function(){
                 logosGroup.playBtn.alpha = 1
                 game.add.tween(logosGroup.playBtn.scale).from({x:0, y: 0}, 200, Phaser.Easing.linear, true).onComplete.add(function(){
                     
+                    game.add.tween(white).to({alpha:0.6}, 100, Phaser.Easing.Cubic.In, true, 0, 0, true)
+                    
                     var emitter = epicparticles.newEmitter("hexagonLigth")
                     emitter.x = logosGroup.playBtn.x
                     emitter.y = logosGroup.playBtn.y
@@ -305,8 +316,10 @@ var startScreen = function(){
     
     function initGame(){
         
-        sceneloader.show("yogoSelector")
-        startSong.stop()
+        game.add.tween(sceneGroup).to({alpha: 0}, 200, Phaser.Easing.linear, true).onComplete.add(function(){
+            startSong.stop()
+            sceneloader.show("yogoSelector")
+        })
     }
     
 	return {
@@ -328,6 +341,7 @@ var startScreen = function(){
             
             createYogotars()
             createLogos()
+            createWhite()
             startAnimation()
 		}
 	}

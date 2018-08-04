@@ -28,8 +28,8 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				sceneloader.show("startScreen")
-				//sceneloader.show("battle")
+				//sceneloader.show("startScreen")
+				sceneloader.show("battle")
 	    	}
 
 			document.body.style.visibility = "visible"
@@ -108,9 +108,9 @@ function startGame(){
     function create(){
 		console.log("createEpicBattle")
     	bootConfigFiles([
-            startScreen,
-            yogoSelector,
-            //battle,
+//            startScreen,
+//            yogoSelector,
+            battle,
     	])
     }
 }

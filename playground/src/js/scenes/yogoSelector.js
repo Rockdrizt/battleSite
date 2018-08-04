@@ -147,7 +147,6 @@ var yogoSelector = function(){
 	var pullGroup
 	var alphaGroup
 	var bravoGroup
-    var loadingBar
 	var barCompleteFlag
 	var timerFlag
 
@@ -853,6 +852,11 @@ var yogoSelector = function(){
 		ready.alpha = 0
 		ready.anchor.setTo(0.5)
 		readyGroup.ready = ready
+        
+        var spiner = readyGroup.create(game.world.centerX, game.world.centerY, 'logoAtlas', 'spiner')
+        spiner.anchor.setTo(0.5)
+        spiner.alpha = 0
+        readyGroup.spiner = spiner
 
 		VS = readyGroup.create(game.world.centerX, game.world.centerY, "atlas.loading", "vs")
 		VS.anchor.setTo(0.5)
@@ -868,7 +872,9 @@ var yogoSelector = function(){
 	}
 
 	function showBattle() {
-		var fadeTween = game.add.tween(sceneGroup).to({alpha:0}, 1000, Phaser.Easing.Cubic.Out, true)
+        
+        game.add.tween(white).to({alpha:1}, 400, Phaser.Easing.Cubic.Out, true)
+		var fadeTween = game.add.tween(sceneGroup).to({alpha:0}, 400, Phaser.Easing.Cubic.Out, true)
 		fadeTween.onComplete.add(function () {
 			bmd.destroy()
 			sceneloader.show("battle")
@@ -901,24 +907,6 @@ var yogoSelector = function(){
 
 		return teams
 	}
-    
-    function setWinTeam(teams){
-        
-        var rewardList = [[], []]
-        
-        for(var i = 0; i < teams.length; i++){
-            for(var j = 0; j < teams[i].length; j++){
-                
-                var obj = {
-                    name : teams[i][j].name.substr(7).toLowerCase(),
-                    skin : teams[i][j].skin
-                }
-                rewardList[i].push(obj)
-            }
-        }
-        
-        //battleMain.initResults(rewardList)
-    }
 
 	function getReady(){
 
@@ -936,9 +924,7 @@ var yogoSelector = function(){
 			sound.play("swordSmash")
 			game.add.tween(readyGroup.ready.scale).from({x: 0, y:0}, 200, Phaser.Easing.linear, true).onComplete.add(function () {
 				battleMain.init(teams)
-                setWinTeam(teams)
 				battleMain.create()
-				//game.add.tween(loadingBar).to({alpha:1}, 500, Phaser.Easing.Cubic.Out, true)
 				game.time.events.add(6000, function () {
 					timerFlag = true
 					if(barCompleteFlag){
@@ -949,7 +935,7 @@ var yogoSelector = function(){
 		})
 
         createSplashArt()
-		game.add.tween(selectorGroup).to({alpha: 0}, 500, Phaser.Easing.linear, true).onComplete.add(function(){
+		game.add.tween(selectorGroup).to({alpha: 0}, 300, Phaser.Easing.linear, true).onComplete.add(function(){
 			alphaGroup.forEach(setAliveSpine, this, false)
 			bravoGroup.forEach(setAliveSpine, this, false)
 			animateSplashArt()
@@ -975,7 +961,8 @@ var yogoSelector = function(){
 		pullGroup.destroy()
 		landing.onComplete.add(function(){
 			game.add.tween(readyGroup.ready).to({alpha:0}, 300, Phaser.Easing.Cubic.Out, true, 500).onComplete.add(function(){
-              
+                readyGroup.spiner.alpha = 1
+                game.add.tween(readyGroup.spiner).to({angle: -360}, 2000, Phaser.Easing.linear, true).repeat(-1)
                 VS.alpha = 1
                 game.add.tween(VS.scale).from({x: 10, y: 10}, 400, Phaser.Easing.Cubic.Out, true)
                 game.add.tween(VS).to({x: VS.x + 10}, 500, function (k) {
@@ -984,48 +971,14 @@ var yogoSelector = function(){
             })
 		})
 	}
-
-	function setCharacter(character) {
-
-		var charObj = {
-			name: character,
-			file: "images/spines/" + character + "/" + character + "Selector.json",
-			scales: ["@0.5x"]
-		}
-		assets.spines.push(charObj)
-	}
-
-	function updateLoadingBar(loadedFiles, totalFiles) {
-
-		if (loadingBar) {
-		    var loadingStep = loadingBar.width / totalFiles
-			loadingBar.topBar.width = loadingStep * loadedFiles
-
-		}
-	}
-
-	function createLoadingBar(){
-		loadingBar = game.add.group()
-		loadingGroup.add(loadingBar)
-
-		var loadingBottom = loadingBar.create(0, 0, 'logoAtlas', 'loading_bottom')
-		loadingBottom.anchor.setTo(0, 0.5)
-		loadingBottom.scale.setTo(1, 1.5)
-
-		var loadingTop = loadingBar.create(0, 0, 'logoAtlas', 'loading_top')
-		loadingTop.anchor.y = 0.5
-		loadingTop.scale.setTo(1.2, 1)
-
-		loadingBottom.width = loadingTop.width
-
-		loadingBar.bottomBar = loadingBottom
-		loadingBar.topBar = loadingTop
-
-		loadingBar.x = game.world.centerX
-		loadingBar.y = (game.world.centerY + 200)
-		loadingBar.alpha = 0
-        loadingBar.angle = -90
-
+    
+    function createWhite(){
+        
+        white = game.add.graphics()
+        white.beginFill(0xffffff)
+        white.drawRect(0, 0, game.world.width, game.world.height)
+        white.endFill()
+        white.alpha = 0
     }
 
 	return {
@@ -1034,7 +987,6 @@ var yogoSelector = function(){
 		name: "yogoSelector",
 		update: update,
 		preload:preload,
-        updateLoadingBar:updateLoadingBar,
 		showBattle:function () {
 			barCompleteFlag = true
 			if(timerFlag){
@@ -1068,7 +1020,7 @@ var yogoSelector = function(){
 			animateSelector()
 
 			createReady()
-            createLoadingBar()
+            createWhite()
 
 			game.add.tween(sceneGroup).to({alpha:1}, 500, Phaser.Easing.Cubic.Out, true)
 		}
