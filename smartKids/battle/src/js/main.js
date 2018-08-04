@@ -29,6 +29,7 @@ function startGame(){
 
 	    	function onCompleteSceneLoading(){
 				sceneloader.show("startScreen")
+				server.setGameReady(true)
 				//sceneloader.show("battle")
 	    	}
 
