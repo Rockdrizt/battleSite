@@ -1,6 +1,14 @@
 {"frames": [
 
 {
+	"filename": "dot",
+	"frame": {"x":1,"y":73,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+{
 	"filename": "pinkLight",
 	"frame": {"x":1,"y":1,"w":1668,"h":70},
 	"rotated": false,
@@ -15,14 +23,6 @@
 	"trimmed": true,
 	"spriteSourceSize": {"x":27,"y":28,"w":314,"h":309},
 	"sourceSize": {"w":368,"h":363}
-},
-{
-	"filename": "star",
-	"frame": {"x":1,"y":73,"w":64,"h":64},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
-	"sourceSize": {"w":64,"h":64}
 }],
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
@@ -31,6 +31,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1986,"h":311},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:695b33fb05f671d73ee3d264c06255a5:b79c3c27d9cd0448915e13eaa5b87a84:cbce6b53f0f49e0bf15173c25c41f876$"
+	"smartupdate": "$TexturePacker:SmartUpdate:f204dc5d980a107c597bab701432b25b:c07756bfbb30080eda0f97129f29c869:cbce6b53f0f49e0bf15173c25c41f876$"
 }
 }

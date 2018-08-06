@@ -28,8 +28,11 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				sceneloader.show("startScreen")
+				//sceneloader.show("startScreen")
 				//sceneloader.show("battle")
+                var loaderScene = sceneloader.getScene("preloaderIntro")
+                
+                loaderScene.onComplete("startScreen")
 	    	}
 
 			document.body.style.visibility = "visible"
