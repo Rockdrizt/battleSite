@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "X4MROOROmVK9FWPUW4REEA8RMZk", "spine": "3.2.01", "width": 494.02, "height": 540.93, "images": "" },
+"skeleton": { "hash": "Y6H2v5whHvv0TuwtToj/ntdVIsI", "spine": "3.2.01", "width": 494.02, "height": 540.93, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "cog", "parent": "root", "x": -11.71, "y": 34.69, "color": "000000ff" },
@@ -26000,15 +26000,21 @@
 			{
 				"time": 0,
 				"offsets": [
-					{ "slot": "cheer_glove", "offset": 5 },
-					{ "slot": "hand1", "offset": 3 }
+					{ "slot": "cheer_glove", "offset": 17 },
+					{ "slot": "hand1", "offset": 0 },
+					{ "slot": "head", "offset": 11 },
+					{ "slot": "mouth", "offset": 11 },
+					{ "slot": "eyes", "offset": 11 }
 				]
 			},
 			{
 				"time": 2.6666,
 				"offsets": [
-					{ "slot": "cheer_glove", "offset": 5 },
-					{ "slot": "hand1", "offset": 3 }
+					{ "slot": "cheer_glove", "offset": 17 },
+					{ "slot": "hand1", "offset": 0 },
+					{ "slot": "head", "offset": 11 },
+					{ "slot": "mouth", "offset": 11 },
+					{ "slot": "eyes", "offset": 11 }
 				]
 			}
 		]
@@ -26868,21 +26874,28 @@
 			}
 		},
 		"drawOrder": [
-			{ "time": 0 },
 			{
-				"time": 0.1,
+				"time": 0,
 				"offsets": [
-					{ "slot": "arm1", "offset": 3 },
-					{ "slot": "hand1", "offset": 3 },
-					{ "slot": "forearm1", "offset": 3 }
+					{ "slot": "shield_d", "offset": 4 },
+					{ "slot": "windhit", "offset": 4 },
+					{ "slot": "yogo_ice_back", "offset": 4 },
+					{ "slot": "arm1", "offset": 15 },
+					{ "slot": "cheer_glove", "offset": 15 },
+					{ "slot": "hand1", "offset": 15 },
+					{ "slot": "forearm1", "offset": 15 }
 				]
 			},
 			{
 				"time": 0.8,
 				"offsets": [
-					{ "slot": "arm1", "offset": 3 },
-					{ "slot": "hand1", "offset": 3 },
-					{ "slot": "forearm1", "offset": 3 }
+					{ "slot": "shield_d", "offset": 4 },
+					{ "slot": "windhit", "offset": 4 },
+					{ "slot": "yogo_ice_back", "offset": 4 },
+					{ "slot": "arm1", "offset": 15 },
+					{ "slot": "cheer_glove", "offset": 15 },
+					{ "slot": "hand1", "offset": 15 },
+					{ "slot": "forearm1", "offset": 15 }
 				]
 			}
 		],

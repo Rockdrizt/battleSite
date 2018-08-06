@@ -1,8 +1,8 @@
 {
   "timing":{
-    "stop":900,
+    "stop":800,
     "removal":1500,
-    "hit":900
+    "hit":800
   },
   "particles":[
     "particles/characters/windUltra1/windUltra1.json",
