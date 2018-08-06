@@ -850,13 +850,6 @@ var yogoSelector = function(){
 		pinkLight.scale.setTo(0)
 		readyGroup.pinkLight = pinkLight
 
-		var emitter = epicparticles.newEmitter("horizontalLine")
-		emitter.x = game.world.centerX
-		emitter.y = game.world.centerY
-		emitter.alpha = 0
-		readyGroup.add(emitter)
-		readyGroup.emitter = emitter
-
 		var ready = readyGroup.create(game.world.centerX, game.world.centerY, "atlas.yogoSelector", "ready")
 		ready.alpha = 0
 		ready.anchor.setTo(0.5)
@@ -922,12 +915,18 @@ var yogoSelector = function(){
 		var dots = epicparticles.newEmitter("particlesHorizontal")
 		dots.x = game.world.centerX
 		dots.y = game.world.centerY
+        readyGroup.addAt(dots,0)
+        
+        var emitter = epicparticles.newEmitter("horizontalLine")
+		emitter.x = game.world.centerX
+		emitter.y = game.world.centerY
+		readyGroup.addAt(emitter,0)
 
 		var teams = getTeams()
 
 		gameSong.stop()
         inputsGroup.alpha = 0
-		readyGroup.emitter.alpha = 1
+
 		game.add.tween(readyGroup.pinkLight.scale).to({x: 1, y: 1}, 400, Phaser.Easing.Cubic.InOut, true, 0, 0, true).onComplete.add(function(){
 			readyGroup.ready.alpha = 1
 			sound.play("swordSmash")
