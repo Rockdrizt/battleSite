@@ -355,6 +355,7 @@
 "tournamentFireProjectile9":"sounds/characters/fireProjectile9.mp3",
 "tournamentWaterHit4":"sounds/characters/waterHit4.mp3" ,
 "tournamentDragonRoar1":"sounds/characters/dragonRoar1.mp3",
-"tournamentMechanicalWings1":"sounds/characters/mechanicalWings1.mp3"
+"tournamentMechanicalWings1":"sounds/characters/mechanicalWings1.mp3",
+"tournamentRocksLift2":"sounds/characters/rocksLift2.mp3"    
     
 }
