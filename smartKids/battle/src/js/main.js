@@ -28,8 +28,10 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				sceneloader.show("startScreen")
 				server.setGameReady(true)
+				server.startGame = function () {
+					sceneloader.show("yogoSelector")
+				}
 				//sceneloader.show("battle")
 	    	}
 

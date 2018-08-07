@@ -14,7 +14,10 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				//sceneloader.show("startScreen")
+				var cliente = parent.cliente
+				if(cliente)
+					cliente.setReady(true)
+
 				sceneloader.show("teamSelector")
 	    	}
 
@@ -69,14 +72,6 @@ function startGame(){
 //            side: 1,
 //            states: {yellow: 0, color: 1},
 //        }
-        
-        var config = {
-            name: "Bravo Team",
-            side: -1,
-            states: {yellow: 0, color: 2},
-        }
-        
-        teamSelector.setConfig(config)
     }
 
     function create(){

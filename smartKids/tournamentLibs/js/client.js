@@ -195,7 +195,7 @@ function Client(){
 	};
 	
 	this.setReady = function (value) {
-		self.tlayer.ready = value
+		self.team.ready = value
 		setfb(self.refIdGame.child("t" + self.numTeam + "/ready"), value)
 		//self.refIdGame.child("t"+self.numTeam+"/ready").set(value);
 	}
