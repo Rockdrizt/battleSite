@@ -28,8 +28,10 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				sceneloader.show("startScreen")
-				//sceneloader.show("battle")
+                var loaderScene = sceneloader.getScene("preloaderIntro")
+                
+                loaderScene.onComplete("startScreen")
+                //sceneloader.show("startScreen")
 	    	}
 
 			document.body.style.visibility = "visible"
@@ -100,7 +102,7 @@ function startGame(){
             
         ];
 		//battleScene.setTeams(teams)
-		battle.setTeams(teams)
+		//battle.setTeams(teams)
         //reward.setTeams(teams)
         //reward.setWinner(1)
     }

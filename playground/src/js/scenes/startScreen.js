@@ -137,6 +137,7 @@ var startScreen = function(){
         tile.anchor.setTo(0.5)
         tile.tint = 0x0099AA
         tile.angle = 45
+        tile.alpha = 0
         //sceneGroup.add(tile)
     }
 
@@ -268,6 +269,8 @@ var startScreen = function(){
         var delay = 1000
         var lastTween
         
+        game.add.tween(tile).to({alpha: 1}, 500, Phaser.Easing.linear, true)
+        
         for(var i = 0; i < 4; i++){
             
             lastTween = game.add.tween(yogoGroup.children[i]).from({x: - 250}, 200, Phaser.Easing.Cubic.Out, true, delay)
@@ -278,45 +281,38 @@ var startScreen = function(){
         
         lastTween.onComplete.add(function(){
             
-            logosGroup.cuantrix.alpha = 1
-            var logo1 = game.add.tween(logosGroup.cuantrix.scale).from({x:0, y:0}, 300, Phaser.Easing.Cubic.In, true)
-            sound.play("swipe")
-            var logo2 = game.add.tween(logosGroup.televisa).to({alpha:1}, 500, Phaser.Easing.Cubic.In, false)
-            
-            logo2.onComplete.add(function(){
+            logosGroup.playBtn.alpha = 1
+            game.add.tween(logosGroup.playBtn.scale).from({x:0, y: 0}, 200, Phaser.Easing.linear, true).onComplete.add(function(){
+
+                game.add.tween(white).to({alpha:1}, 100, Phaser.Easing.Cubic.In, true, 0, 0, true).onComplete.add(function(){
+                    logosGroup.cuantrix.alpha = 1
+                    logosGroup.televisa.alpha = 1
                 
-                logosGroup.playBtn.alpha = 1
-                game.add.tween(logosGroup.playBtn.scale).from({x:0, y: 0}, 200, Phaser.Easing.linear, true).onComplete.add(function(){
-                    
-                    game.add.tween(white).to({alpha:0.6}, 100, Phaser.Easing.Cubic.In, true, 0, 0, true)
-                    
                     var emitter = epicparticles.newEmitter("hexagonLigth")
                     emitter.x = logosGroup.playBtn.x
                     emitter.y = logosGroup.playBtn.y
                     game.add.tween(emitter).to({x:game.world.centerX + 270}, 500, Phaser.Easing.Cubic.In, true)
-                     
+
                     game.add.tween(logosGroup.playBtn).to({x:game.world.centerX + 270}, 500, Phaser.Easing.Cubic.In, true).onComplete.add(function(){
-                        
+
                         emitter = epicparticles.newEmitter("bubbles")
                         emitter.x = logosGroup.playBtn.x
                         emitter.y = logosGroup.playBtn.y
-                        
+
                         logosGroup.playBtn.inputEnabled = true
                     })
-                    
+
                     logosGroup.board.alpha = 1
                     sound.play("brightTransition")
                     game.add.tween(logosGroup.boardMask.scale).from({x: 0}, 500, Phaser.Easing.Cubic.In, true)
                 })
             })
-            
-            logo1.chain(logo2)
         })
     }
     
     function initGame(){
         
-        game.add.tween(sceneGroup).to({alpha: 0}, 200, Phaser.Easing.linear, true).onComplete.add(function(){
+        game.add.tween(sceneGroup).to({alpha: 0}, 200, Phaser.Easing.Cubic.In, true).onComplete.add(function(){
             startSong.stop()
             sceneloader.show("yogoSelector")
         })

@@ -6,16 +6,12 @@ var preloaderIntro = function(){
 				json: "images/preload/atlas.json",
 				image: "images/preload/atlas.png"
 			}],
-		images: [            
-
-        ],
-		sounds: [
-
-		]
+		
 	}
 
     var spiner
     var pinkLight
+    var sceneGroup
     
 	return {
 		assets: assets,
@@ -26,17 +22,21 @@ var preloaderIntro = function(){
                 var loadingAmount = loadedFiles / totalFiles
                 var total = loadingAmount.toFixed(2).substr(2)
                 spiner.text.setText(total)
-                
-                if(loadingAmount >= 0.5 && pinkLight.show){
-                    pinkLight.show = false
-                    game.add.tween(pinkLight.scale).to({x: 1, y: 1}, 250, Phaser.Easing.Cubic.In, true, 0, 0, true)
-                }
             }
 		},
+        onComplete: function(scene){
+            
+            spiner.text.setText(100)
+            
+            var shutDown = game.add.tween(sceneGroup).to({alpha: 0}, 200, Phaser.Easing.Cubic.In, false)
+            shutDown.onComplete.add(function(){
+                sceneloader.show(scene)
+            })
+            
+            game.add.tween(pinkLight.scale).to({x: 1, y: 1}, 250, Phaser.Easing.Cubic.In, true, 0, 0, true).chain(shutDown)
+        },
 
 		create: function(event){
-
-			var sceneGroup = game.add.group()
             
             var bmd = game.add.bitmapData(game.world.width, game.world.height)
             var back = bmd.addToWorld()
@@ -50,25 +50,24 @@ var preloaderIntro = function(){
                 bmd.rect(0, y, bmd.width, y + 1, Phaser.Color.getWebRGB(color))
                 y += 2
             }
-            sceneGroup.add(back)
             
-            var particle = game.add.emitter(game.world.centerX, game.world.centerY - 100, 100);
-            particle.makeParticles("logoAtlas", "star");
-            particle.minParticleSpeed.setTo(-200, -50);
-            particle.maxParticleSpeed.setTo(200, 300);
-            particle.minParticleScale = 0.5;
-            particle.maxParticleScale = 1;
-            particle.gravity = 100;
-            particle.angularDrag = 30;
-            particle.setAlpha(1, 0, 1000, Phaser.Easing.Cubic.In)
-            particle.width = 500
+            sceneGroup = game.add.group()
+            
+            var particle = game.add.emitter(game.world.centerX, game.world.centerY, 100);
+            particle.makeParticles("logoAtlas", "dot");
+            particle.minParticleSpeed.setTo(-200, -200);
+            particle.maxParticleSpeed.setTo(200, 200);
+            particle.minParticleScale = 1;
+            particle.maxParticleScale = 2;
+            particle.setAlpha(0.35, 0, 1000, Phaser.Easing.Cubic.In)
+            particle.width = 800
             sceneGroup.add(particle)
-            particle.start(false, 5000, 20, 100)
+            particle.start(false, 3000, 50, 0)
             
-            pinkLight = sceneGroup.create(game.world.centerX, game.world.centerY, "logoAtlas", "pinkLight")
+            pinkLight = sceneGroup.create(game.world.centerX, game.world.centerY, "logoAtlas", "pink")
             pinkLight.anchor.setTo(0.5)
             pinkLight.scale.setTo(0)
-            pinkLight.show = true
+            pinkLight.part = particle
 
             spiner = sceneGroup.create(game.world.centerX, game.world.centerY, 'logoAtlas', 'spiner')
 			spiner.anchor.setTo(0.5)
