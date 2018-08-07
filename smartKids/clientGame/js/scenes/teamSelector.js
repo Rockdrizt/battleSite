@@ -121,18 +121,19 @@ var teamSelector = function(){
 			}
 		]
 	}
-	var TEAMS = [
-		{
+	var TEAMS = {
+		1: {
 			name: "Alpha Team",
 			side: 1,
 			states: {yellow: 0, color: 1},
 		},
-	    {
+		2: {
 			name: "Bravo Team",
 			side: -1,
 			states: {yellow: 0, color: 2},
 		},
-	]
+	}
+
     var DEFAULT_NUMTEAM = 1
 
 	var states
