@@ -72,6 +72,10 @@ var battle = function(){
         spritesheets: [
         ],
         spines:[
+            {
+				name:"background",
+				file:"spines/background/Background2.json",
+			}
 		],
         particles: [
 		]
@@ -119,6 +123,7 @@ var battle = function(){
     var miniYogos = []
     var lifeBars = []
     var scoreRound = []
+    var usedQuestions = []
     
     var mainYogotorars
     var mainSpine
@@ -133,6 +138,9 @@ var battle = function(){
         loadSounds()
         mainYogotorars = []
         miniYogos = [[],[]]
+        
+        riddles.loadQuestions()
+        usedQuestions = []
 	}
     
     function preload(){
@@ -143,9 +151,12 @@ var battle = function(){
     
 	function createBackground(){
         
-        var background = sceneGroup.create(0, 0, "background")
-        background.width = game.world.width
-        background.height = game.world.height
+//        var background = sceneGroup.create(0, 0, "background")
+//        background.width = game.world.width
+//        background.height = game.world.height
+        
+        var background = spineLoader.createSpine("background", "normal", "idle", game.world.centerX, game.world.centerY, true)
+        sceneGroup.add(background)
         
         blackMask = game.add.graphics()
         blackMask.beginFill(0x000000)
@@ -161,8 +172,6 @@ var battle = function(){
 		rotateButton.y = game.world.height - 150
 		rotateButton.label.text = "rotate"
         btngroup.add(rotateButton)
-        
-        var team = 0
         
         var damageButom = createButton(attackMove.bind(null, "normal"), 0xff00ff)
 		damageButom.x = game.world.centerX - 200
@@ -193,6 +202,12 @@ var battle = function(){
 		win.y = game.world.height - 100
 		win.label.text = "winner"
         btngroup.add(win)
+        
+        var quest = createButton(getQuestion, 0x00ffff)
+		quest.x = game.world.centerX
+		quest.y = game.world.height - 100
+		quest.label.text = "questions"
+        btngroup.add(quest)
         
         var rect = game.add.graphics()
         rect.beginFill(0x242A4D)
@@ -431,6 +446,7 @@ var battle = function(){
         var img = questionGroup.create(-container.width * 0.5, 0, "atlas.battle", "dazzle")
         img.anchor.setTo(0.5)
         img.scale.setTo(0)
+        img.key = ""
         container.addChild(img)
         
         var options = game.add.group()
@@ -442,8 +458,9 @@ var battle = function(){
                 var btn = options.create(board.centerX * pivotX, board.centerY + board.height * 0.17, "atlas.battle", "questionBtn")
                 btn.anchor.setTo(0.5)
                 btn.alpha = 0
+                btn.correct = false
                 btn.inputEnabled = true
-                btn.events.onInputDown.add(setAnswer,this)
+                btn.events.onInputDown.add(hideQuestionOverlay,this)
 
                 var letter = new Phaser.Text(sceneGroup.game, -btn.width * 0.30, -5, "A", fontStyle)
                 letter.anchor.setTo(0.5)
@@ -452,6 +469,7 @@ var battle = function(){
 
                 var info = new Phaser.Text(sceneGroup.game, 0, 0, "info", fontStyle)
                 info.anchor.setTo(0,0.5)
+                info.setTextBounds(-80, 0, btn.width, btn.height)
                 btn.addChild(info)
                 btn.info = info
 
@@ -467,15 +485,13 @@ var battle = function(){
             options.children[2].letter.setText("C")
             options.children[3].letter.setText("D")
 
-            questionGroup.question = text
-            questionGroup.question.setText("Lorem ipsum dolor sit amet consectetur adipiscing elit egestas, mollis nisi habitant felis venenatis scelerisque vulputate, taciti class curae dui nibh nullam blandit.")
-            questionGroup.image = img
-            questionGroup.options = options
-            questionGroup.options.setAll("inputEnabled", false)
-
-            questionGroup.boxes.forEach(function(box){
-                box.scale.setTo(0,1)
-            })
+        questionGroup.question = text
+        questionGroup.image = img
+        questionGroup.options = options
+        questionGroup.options.setAll("inputEnabled", false)
+        questionGroup.boxes.forEach(function(box){
+            box.scale.setTo(0,1)
+        })
         
         var light = questionGroup.create(300,300, "pinkLight")
         light.anchor.setTo(0.5)
@@ -483,80 +499,6 @@ var battle = function(){
         questionGroup.light = light
         
         questionGroup.alpha = 0
-        
-        var questionBtn = createButton(function(){
-            setQuestion()
-			}, 0x00ffff
-		)
-		questionBtn.x = game.world.centerX
-		questionBtn.y = game.world.height - 250
-		questionBtn.label.text = "questionBtn"
-        btngroup.add(questionBtn)
-    }
-    
-    function setQuestion(question, image, options){
-
-        var delay = 0
-        var last
-        
-        //questionGroup.question.setText(question)
-        //questionGroup.image.loadTexture("atlas.battle", image)
-        
-        /*for(var i = 0; i < questionGroup.options.length; i++){
-            questionGroup.options.children[i].info.setText(options[i])
-        }*/
-        questionGroup.alpha = 1
-        
-        questionGroup.boxes.forEach(function(box){
-            last = game.add.tween(box.scale).to({x: 1}, 250, Phaser.Easing.Cubic.Out, true, delay)
-            delay += 300
-        }) 
-        
-        questionGroup.options.forEach(function(opt){
-            game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay).onComplete.add(function(){
-                opt.inputEnabled = true
-            })
-            delay += 200
-        })
-        
-        last.onComplete.add(function(){
-            game.add.tween(questionGroup.question).to({alpha:1}, 300, Phaser.Easing.linear, true, 1000)
-            game.add.tween(questionGroup.image.scale).to({x:1, y:1}, 300, Phaser.Easing.Cubic.InOut, true, 1000)
-        })
-    }
-    
-    function setAnswer(btn){
-        
-        questionGroup.options.setAll("inputEnabled", false)
-        
-        questionGroup.options.forEach(function(opt){
-            if(opt != btn){
-                game.add.tween(opt).to({alpha:0}, 300, Phaser.Easing.linear, true)
-            }
-        })
-        
-        questionGroup.light.x = btn.x - 100
-        questionGroup.light.y = btn.y
-        var shine = game.add.tween(questionGroup.light.scale).to({x: 0.5, y:0.5}, 300, Phaser.Easing.Cubic.Out, true, 0, 0, true)
-        
-        var newY = questionGroup.boxes[1].y - 180
-        var choise = game.add.tween(btn).to({x: game.world.centerX, y:newY}, 500, Phaser.Easing.Cubic.Out, false)
-                 
-        var fadeOut = game.add.tween(questionGroup).to({alpha:0}, 500, Phaser.Easing.linear, false, 1000)
-        fadeOut.onComplete.add(function(){
-            questionGroup.image.scale.setTo(0)
-            questionGroup.question.alpha = 0
-            questionGroup.options.forEach(function(opt){
-                opt.alpha = 0
-                opt.x = opt.spawn.x
-                opt.y = opt.spawn.y
-            })
-            questionGroup.boxes.forEach(function(box){
-                box.scale.setTo(0, 1)
-            })
-        })
-        shine.chain(choise)    
-        choise.chain(fadeOut)
     }
     
     function rotateTeam(teamIndex){
@@ -911,6 +853,120 @@ var battle = function(){
         white.drawRect(0, 0, game.world.width, game.world.height)
         white.endFill()
         white.alpha = 0
+    }
+    
+    function getQuestion(){
+        
+        var newQuestion = riddles.selectQuestion(usedQuestions)
+        
+        if(newQuestion == -1){
+            usedQuestions = []
+            getQuestion()
+        }
+        else{
+            usedQuestions.push(newQuestion.index)
+            game.load.image(newQuestion.image, newQuestion.src + ".jpg")
+            //game.load.onLoadComplete.add(setQuestion, this, null, newQuestion)
+            game.load.onLoadComplete.add(function(){
+                setQuestion(newQuestion)
+            }, this)
+            game.load.start()
+        }
+    }
+    
+    function setQuestion(riddle){
+
+        var delay = 0
+        var last
+        
+        questionGroup.question.setText(riddle.question)
+        questionGroup.image.loadTexture(riddle.image)
+        questionGroup.image.key = riddle.image
+        
+        Phaser.ArrayUtils.shuffle(riddle.answers)
+        
+        for(var i = 0; i < riddle.answers.length; i++){
+        
+            var opt = questionGroup.options.children[i]
+            opt.info.setText(riddle.answers[i].text)
+            opt.correct = riddle.answers[i].correct
+        }
+        
+        questionGroup.alpha = 1
+        
+        questionGroup.boxes.forEach(function(box){
+            last = game.add.tween(box.scale).to({x: 1}, 400, Phaser.Easing.Cubic.Out, true, delay)
+            delay += 400
+        }) 
+        
+        questionGroup.options.forEach(function(opt){
+            game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay).onComplete.add(function(){
+                opt.inputEnabled = true
+            })
+            delay += 200
+        })
+        
+        last.onComplete.add(function(){
+            game.add.tween(questionGroup.question).to({alpha:1}, 300, Phaser.Easing.linear, true, 1000)
+            game.add.tween(questionGroup.image.scale).to({x:1, y:1}, 300, Phaser.Easing.Cubic.InOut, true, 1000)
+        })
+    }
+    
+    function hideQuestionOverlay(btn){
+        
+        questionGroup.options.setAll("inputEnabled", false)
+        
+        questionGroup.options.forEach(function(opt){
+            if(opt != btn){
+                game.add.tween(opt).to({alpha:0}, 300, Phaser.Easing.linear, true)
+            }
+        })
+        
+        questionGroup.light.x = btn.x - 100
+        questionGroup.light.y = btn.y
+        var shine = game.add.tween(questionGroup.light.scale).to({x: 0.5, y:0.5}, 300, Phaser.Easing.Cubic.Out, true, 0, 0, true)
+        
+        var newY = questionGroup.boxes[1].y - 180
+        var choise = game.add.tween(btn).to({x: game.world.centerX, y:newY}, 500, Phaser.Easing.Cubic.Out, false)
+                 
+        var fadeOut = game.add.tween(questionGroup).to({alpha:0}, 500, Phaser.Easing.linear, false, 1000)
+        fadeOut.onComplete.add(function(){
+            questionGroup.image.scale.setTo(0)
+            questionGroup.question.alpha = 0
+            questionGroup.options.forEach(function(opt){
+                opt.alpha = 0
+                opt.x = opt.spawn.x
+                opt.y = opt.spawn.y
+            })
+            questionGroup.boxes.forEach(function(box){
+                box.scale.setTo(0, 1)
+            })
+        })
+        shine.chain(choise)    
+        choise.chain(fadeOut)
+        
+        removeImage(questionGroup.image.key)
+        setAnswer(btn.correct)
+    }
+    
+    function removeImage(image){
+        //console.log(game.cache.checkImageKey(image))
+        if(game.cache.checkImageKey(image)){
+            console.log(image)
+            game.cache.removeImage(image,false)
+        }
+        //console.log(game.cache.checkImageKey(image))
+    }
+    
+    function setAnswer(ans){
+        
+        console.log(ans)
+        if(ans){
+            
+        }
+        else{
+            
+        }
     }
 
 	return {
