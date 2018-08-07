@@ -194,7 +194,7 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">pinkLight.png</key>
+            <key type="filename">pink.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
@@ -224,8 +224,8 @@
         <key>fileList</key>
         <array>
             <filename>spiner.png</filename>
-            <filename>pinkLight.png</filename>
             <filename>dot.png</filename>
+            <filename>pink.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

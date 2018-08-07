@@ -800,10 +800,10 @@ var yogoSelector = function(){
 			var container = game.add.sprite(0, 100 * aux, "atlas.loading", "container" + aux)
 			var splash = game.add.sprite(0, offsetY, "atlas.loading", assets.spines[images[i]].name)
 
-			var bmd = game.make.bitmapData(splash.width, container.height + 100)
-			bmd.alphaMask(splash, container)
+			var splashMask = game.make.bitmapData(splash.width, container.height + 100)
+			splashMask.alphaMask(splash, container)
 
-			var splashArt = game.add.image(game.world.centerX * pivotX, game.world.height * aux, bmd)
+			var splashArt = game.add.image(game.world.centerX * pivotX, game.world.height * aux, splashMask)
 			splashArt.anchor.setTo(0.5, aux)
 			splashArt.scale.setTo(0.9)
 			splashArt.alpha = 0
@@ -878,7 +878,7 @@ var yogoSelector = function(){
         game.add.tween(white).to({alpha:1}, 400, Phaser.Easing.Cubic.Out, true)
 		var fadeTween = game.add.tween(sceneGroup).to({alpha:0}, 400, Phaser.Easing.Cubic.Out, true)
 		fadeTween.onComplete.add(function () {
-			bmd.destroy()
+			//bmd.destroy()
 			sceneloader.show("battle")
 		})
 	}

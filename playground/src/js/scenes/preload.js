@@ -6,12 +6,7 @@ var preloaderIntro = function(){
 				json: "images/preload/atlas.json",
 				image: "images/preload/atlas.png"
 			}],
-		images: [            
-
-        ],
-		sounds: [
-
-		]
+		
 	}
 
     var spiner
@@ -69,7 +64,7 @@ var preloaderIntro = function(){
             sceneGroup.add(particle)
             particle.start(false, 3000, 50, 0)
             
-            pinkLight = sceneGroup.create(game.world.centerX, game.world.centerY, "logoAtlas", "pinkLight")
+            pinkLight = sceneGroup.create(game.world.centerX, game.world.centerY, "logoAtlas", "pink")
             pinkLight.anchor.setTo(0.5)
             pinkLight.scale.setTo(0)
             pinkLight.part = particle

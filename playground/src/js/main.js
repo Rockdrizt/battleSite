@@ -31,7 +31,7 @@ function startGame(){
                 var loaderScene = sceneloader.getScene("preloaderIntro")
                 
                 loaderScene.onComplete("startScreen")
-                //sceneloader.show("battle")
+                //sceneloader.show("startScreen")
 	    	}
 
 			document.body.style.visibility = "visible"
