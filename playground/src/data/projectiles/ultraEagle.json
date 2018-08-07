@@ -1,8 +1,8 @@
 {
   "timing":{
-    "stop":650,
+    "stop":550,
     "removal":1500,
-    "hit":650
+    "hit":550
   },
   "particles":[
     "particles/characters/windUltra1/windUltra1.json",
@@ -19,7 +19,7 @@
       "animations":["idle_ultra","idle_ultra","idle_ultra","idle_ultra"]
     }
   ],
-  "impact":{
+  "impact":{  
     "soundID":"tournamentWindImpact1"
   },
   "onShoot":[
@@ -41,6 +41,26 @@
       "name":"targetY",
       "index":"y"
     },
+     {
+      "id":"get",
+      "variable":"target",
+      "name":"side",
+      "index":"side"
+    },
+    {
+      "id":"operation",
+      "operation":"*",
+      "storeReturn":"mulScale",
+      "value1":550,
+      "variable2":"side"
+    },
+    {
+      "id":"operation",
+      "operation":"+",
+      "storeReturn":"targetX",
+      "variable1":"mulScale",
+      "variable2":"targetX"
+    },  
     {
       "id":"set",
       "name":"transitionParams",
@@ -51,7 +71,7 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":400 
+      "value":600 
     },
     {
       "id":"set",
