@@ -147,7 +147,6 @@ var yogoSelector = function(){
 	var pullGroup
 	var alphaGroup
 	var bravoGroup
-    var loadingBar
 	var barCompleteFlag
 	var timerFlag
 
@@ -185,9 +184,9 @@ var yogoSelector = function(){
 	function createBackground(){
 
 		bmd = game.add.bitmapData(game.world.width, game.world.height)
-		//sceneGroup.add(bmd)
+		
 		var back = bmd.addToWorld()
-		sceneGroup.add(back)
+		//sceneGroup.add(back)
 
 		var y = 0
 
@@ -203,7 +202,8 @@ var yogoSelector = function(){
 		tile.anchor.setTo(0.5)
 		tile.tint = 0x0099AA
 		tile.angle = 45
-		sceneGroup.add(tile)
+        tile.alpha = 0
+		//sceneGroup.add(tile)
 	}
 
 	function update(){
@@ -393,8 +393,8 @@ var yogoSelector = function(){
         selectorGroup.add(namesGroup)
         
         var light = namesGroup.create(game.world.centerX, game.world.centerY, "atlas.yogoSelector", "pinkLight")
-        light.alpha = 0
         light.anchor.setTo(0.5)
+        light.scale.setTo(0)
         namesGroup.light = light
         
         var yogoName = namesGroup.create(light.x, light.y, "atlas.yogoSelector", "name0")
@@ -707,18 +707,13 @@ var yogoSelector = function(){
     
     function showName(tag){
         
-        namesGroup.light.alpha = 1
-        game.add.tween(namesGroup.light.scale).from({x: 0}, 100, Phaser.Easing.linear, true).onComplete.add(function(){
-            sound.play(assets.spines[tag].name)
-            namesGroup.yogoName.loadTexture("atlas.yogoSelector", "name" + tag)
-            namesGroup.yogoName.alpha = 1
-            game.add.tween(namesGroup.yogoName.scale).from({y:0}, 100, Phaser.Easing.linear, true).onComplete.add(function(){
-                game.time.events.add(1500, function(){
-                    namesGroup.light.alpha = 0
-                    namesGroup.yogoName.alpha = 0
-                })
-            })
-        })
+        game.add.tween(namesGroup.light.scale).to({x: 1, y: 1}, 200, Phaser.Easing.linear, true, 0, 0, true)
+        sound.play(assets.spines[tag].name)
+        namesGroup.yogoName.loadTexture("atlas.yogoSelector", "name" + tag)
+        namesGroup.yogoName.alpha = 1
+
+        var fadeOut = game.add.tween(namesGroup.yogoName).to({alpha:0}, 400, Phaser.Easing.linear, false, 500)
+        game.add.tween(namesGroup.yogoName.scale).from({y:0}, 100, Phaser.Easing.linear, true, 200).chain(fadeOut)    
     }
 
 	function setAliveSpine(obj, alive){
@@ -735,6 +730,7 @@ var yogoSelector = function(){
 
 	function animateSelector(){
 
+        sceneGroup.alpha = 1
 		teamsBarGroup.forEach(function(bar){
 			game.add.tween(bar.scale).from({x: 0}, 500, Phaser.Easing.Cubic.Out, true, 500).onComplete.add(function(){
 				game.add.tween(bar.text).to({alpha: 1}, 500, Phaser.Easing.Cubic.Out, true, 1000)
@@ -787,7 +783,10 @@ var yogoSelector = function(){
 		var aux = 1
 		var pivotS = 1
 		var offsetY = 400
-
+        var txtX = 90
+        var txtY = -0.5
+        var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
+        
 		var images = []
 
 		for(var x = 0; x < alphaGroup.auxArray.length; x++){
@@ -796,25 +795,32 @@ var yogoSelector = function(){
 			images[x + 3] = bravoGroup.auxArray[x]
 		}
 
-		//images[0] = 0
-
 		for(var i = 0; i < 6; i++){
 
 			var container = game.add.sprite(0, 100 * aux, "atlas.loading", "container" + aux)
 			var splash = game.add.sprite(0, offsetY, "atlas.loading", assets.spines[images[i]].name)
 
-			var bmd = game.make.bitmapData(splash.width, container.height + 100)
-			bmd.alphaMask(splash, container)
+			var splashMask = game.make.bitmapData(splash.width, container.height + 100)
+			splashMask.alphaMask(splash, container)
 
-			var splashArt = game.add.image(game.world.centerX * pivotX, game.world.height * aux, bmd)
+			var splashArt = game.add.image(game.world.centerX * pivotX, game.world.height * aux, splashMask)
 			splashArt.anchor.setTo(0.5, aux)
 			splashArt.scale.setTo(0.9)
 			splashArt.alpha = 0
 			splashArtGroup.add(splashArt)
+            
+            var text = new Phaser.Text(sceneGroup.game, txtX, splashArt.height * txtY, assets.spines[images[i]].name.toUpperCase(), fontStyle)
+            text.anchor.setTo(0, 0.5)
+            text.stroke = "#751375"
+            text.strokeThickness = 20
+            text.angle = -90
+            splashArt.addChild(text)
 
 			if(i === 2){
 				aux = 0
 				offsetY = 150
+                txtX = -80
+                txtY = 0.37
 			}
 
 			i === 2 ? pivotX += 0.5 : pivotX += 0.25
@@ -822,6 +828,8 @@ var yogoSelector = function(){
 			if(pivotS === i){
 				pivotS += 2
 				splashArt.scale.setTo(-0.9, 0.9)
+                text.scale.setTo(1, -1)
+                text.x *= -1
 			}
 
 			container.destroy()
@@ -842,17 +850,15 @@ var yogoSelector = function(){
 		pinkLight.scale.setTo(0)
 		readyGroup.pinkLight = pinkLight
 
-		var emitter = epicparticles.newEmitter("horizontalLine")
-		emitter.x = game.world.centerX
-		emitter.y = game.world.centerY
-		emitter.alpha = 0
-		readyGroup.add(emitter)
-		readyGroup.emitter = emitter
-
 		var ready = readyGroup.create(game.world.centerX, game.world.centerY, "atlas.yogoSelector", "ready")
 		ready.alpha = 0
 		ready.anchor.setTo(0.5)
 		readyGroup.ready = ready
+        
+        var spiner = readyGroup.create(game.world.centerX, game.world.centerY, 'logoAtlas', 'spiner')
+        spiner.anchor.setTo(0.5)
+        spiner.alpha = 0
+        readyGroup.spiner = spiner
 
 		VS = readyGroup.create(game.world.centerX, game.world.centerY, "atlas.loading", "vs")
 		VS.anchor.setTo(0.5)
@@ -868,9 +874,11 @@ var yogoSelector = function(){
 	}
 
 	function showBattle() {
-		var fadeTween = game.add.tween(sceneGroup).to({alpha:0}, 1000, Phaser.Easing.Cubic.Out, true)
+        
+        game.add.tween(white).to({alpha:1}, 400, Phaser.Easing.Cubic.Out, true)
+		var fadeTween = game.add.tween(sceneGroup).to({alpha:0}, 400, Phaser.Easing.Cubic.Out, true)
 		fadeTween.onComplete.add(function () {
-			bmd.destroy()
+			//bmd.destroy()
 			sceneloader.show("battle")
 		})
 	}
@@ -901,44 +909,30 @@ var yogoSelector = function(){
 
 		return teams
 	}
-    
-    function setWinTeam(teams){
-        
-        var rewardList = [[], []]
-        
-        for(var i = 0; i < teams.length; i++){
-            for(var j = 0; j < teams[i].length; j++){
-                
-                var obj = {
-                    name : teams[i][j].name.substr(7).toLowerCase(),
-                    skin : teams[i][j].skin
-                }
-                rewardList[i].push(obj)
-            }
-        }
-        
-        //battleMain.initResults(rewardList)
-    }
 
 	function getReady(){
 
 		var dots = epicparticles.newEmitter("particlesHorizontal")
 		dots.x = game.world.centerX
 		dots.y = game.world.centerY
+        readyGroup.addAt(dots,0)
+        
+        var emitter = epicparticles.newEmitter("horizontalLine")
+		emitter.x = game.world.centerX
+		emitter.y = game.world.centerY
+		readyGroup.addAt(emitter,0)
 
 		var teams = getTeams()
 
 		gameSong.stop()
         inputsGroup.alpha = 0
-		readyGroup.emitter.alpha = 1
+
 		game.add.tween(readyGroup.pinkLight.scale).to({x: 1, y: 1}, 400, Phaser.Easing.Cubic.InOut, true, 0, 0, true).onComplete.add(function(){
 			readyGroup.ready.alpha = 1
 			sound.play("swordSmash")
 			game.add.tween(readyGroup.ready.scale).from({x: 0, y:0}, 200, Phaser.Easing.linear, true).onComplete.add(function () {
 				battleMain.init(teams)
-                setWinTeam(teams)
 				battleMain.create()
-				//game.add.tween(loadingBar).to({alpha:1}, 500, Phaser.Easing.Cubic.Out, true)
 				game.time.events.add(6000, function () {
 					timerFlag = true
 					if(barCompleteFlag){
@@ -949,7 +943,7 @@ var yogoSelector = function(){
 		})
 
         createSplashArt()
-		game.add.tween(selectorGroup).to({alpha: 0}, 500, Phaser.Easing.linear, true).onComplete.add(function(){
+		game.add.tween(selectorGroup).to({alpha: 0}, 300, Phaser.Easing.linear, true).onComplete.add(function(){
 			alphaGroup.forEach(setAliveSpine, this, false)
 			bravoGroup.forEach(setAliveSpine, this, false)
 			animateSplashArt()
@@ -975,7 +969,8 @@ var yogoSelector = function(){
 		pullGroup.destroy()
 		landing.onComplete.add(function(){
 			game.add.tween(readyGroup.ready).to({alpha:0}, 300, Phaser.Easing.Cubic.Out, true, 500).onComplete.add(function(){
-              
+                readyGroup.spiner.alpha = 1
+                game.add.tween(readyGroup.spiner).to({angle: -360}, 2000, Phaser.Easing.linear, true).repeat(-1)
                 VS.alpha = 1
                 game.add.tween(VS.scale).from({x: 10, y: 10}, 400, Phaser.Easing.Cubic.Out, true)
                 game.add.tween(VS).to({x: VS.x + 10}, 500, function (k) {
@@ -984,48 +979,14 @@ var yogoSelector = function(){
             })
 		})
 	}
-
-	function setCharacter(character) {
-
-		var charObj = {
-			name: character,
-			file: "images/spines/" + character + "/" + character + "Selector.json",
-			scales: ["@0.5x"]
-		}
-		assets.spines.push(charObj)
-	}
-
-	function updateLoadingBar(loadedFiles, totalFiles) {
-
-		if (loadingBar) {
-		    var loadingStep = loadingBar.width / totalFiles
-			loadingBar.topBar.width = loadingStep * loadedFiles
-
-		}
-	}
-
-	function createLoadingBar(){
-		loadingBar = game.add.group()
-		loadingGroup.add(loadingBar)
-
-		var loadingBottom = loadingBar.create(0, 0, 'logoAtlas', 'loading_bottom')
-		loadingBottom.anchor.setTo(0, 0.5)
-		loadingBottom.scale.setTo(1, 1.5)
-
-		var loadingTop = loadingBar.create(0, 0, 'logoAtlas', 'loading_top')
-		loadingTop.anchor.y = 0.5
-		loadingTop.scale.setTo(1.2, 1)
-
-		loadingBottom.width = loadingTop.width
-
-		loadingBar.bottomBar = loadingBottom
-		loadingBar.topBar = loadingTop
-
-		loadingBar.x = game.world.centerX
-		loadingBar.y = (game.world.centerY + 200)
-		loadingBar.alpha = 0
-        loadingBar.angle = -90
-
+    
+    function createWhite(){
+        
+        white = game.add.graphics()
+        white.beginFill(0xffffff)
+        white.drawRect(0, 0, game.world.width, game.world.height)
+        white.endFill()
+        white.alpha = 0
     }
 
 	return {
@@ -1034,7 +995,6 @@ var yogoSelector = function(){
 		name: "yogoSelector",
 		update: update,
 		preload:preload,
-        updateLoadingBar:updateLoadingBar,
 		showBattle:function () {
 			barCompleteFlag = true
 			if(timerFlag){
@@ -1046,9 +1006,11 @@ var yogoSelector = function(){
 		},
 		create: function(event){
             
+            createBackground()
+            
 			sceneGroup = game.add.group()
 			sceneGroup.alpha = 0
-			createBackground()
+
 			selectorGroup = game.add.group()
 			sceneGroup.add(selectorGroup)
 			loadingGroup = game.add.group()
@@ -1065,12 +1027,11 @@ var yogoSelector = function(){
             createYogoNames()
 			createButtons()
 			createOk()
-			animateSelector()
+            
+			game.add.tween(tile).to({alpha:1}, 1000, Phaser.Easing.Cubic.Out, true).onComplete.add(animateSelector)
 
 			createReady()
-            createLoadingBar()
-
-			game.add.tween(sceneGroup).to({alpha:1}, 500, Phaser.Easing.Cubic.Out, true)
+            createWhite()
 		}
 	}
 }()

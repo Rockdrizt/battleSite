@@ -15,11 +15,12 @@ var battleMain = function(){
 		function onLoadFile(event){
 
 			//var loaderScene = sceneloader.getScene("yogoSelector")
-			yogoSelector.updateLoadingBar(event.totalLoaded, event.totalFiles)
+			//yogoSelector.updateLoadingBar(event.totalLoaded, event.totalFiles)
 		}
 
 		function onCompleteSceneLoading(){
 			yogoSelector.showBattle()
+            //sceneloader.show("battle")
 			//sceneloader.show("battleScene")
 		}
 
@@ -33,9 +34,6 @@ var battleMain = function(){
 		reward.setTeams(teams)
 	}
     
-    // function initResults(teams){
-    //     reward.setTeams(teams)
-    // }
     
     function initWinerTeam(win){
         reward.setWinner(win)

@@ -57,7 +57,7 @@ var reward = function(){
         spines:[
             {
                 name:"coup",
-                file:"images/spines/brain/Pantalla de victoria.json"
+                file:"images/spines/brain/pantalla_victoria.json"
             }
         ],
         particles: [

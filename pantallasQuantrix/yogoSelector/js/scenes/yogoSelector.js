@@ -656,6 +656,10 @@ var yogoSelector = function(){
         var aux = 1
         var pivotS = 1
         var offsetY = 400
+        var txtX = 90
+        var txtY = -0.5
+        
+        var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
         
         var images = []
         
@@ -665,7 +669,7 @@ var yogoSelector = function(){
             images[x + 3] = bravoGroup.auxArray[x]
         }
         
-        //images[0] = 0
+        images = [1,2,3,1,2,6] 
         
         for(var i = 0; i < 6; i++){
             
@@ -681,9 +685,18 @@ var yogoSelector = function(){
             splashArt.alpha = 0
             splashArtGroup.add(splashArt)
             
+            var text = new Phaser.Text(sceneGroup.game, txtX, splashArt.height * txtY, assets.spines[images[i]].name.toUpperCase(), fontStyle)
+            text.anchor.setTo(0, 0.5)
+            text.stroke = "#751375"
+            text.strokeThickness = 20
+            text.angle = -90
+            splashArt.addChild(text)
+            
             if(i === 2){
                 aux = 0
                 offsetY = 150
+                txtX = -80
+                txtY = 0.37
             }
            
             i === 2 ? pivotX += 0.5 : pivotX += 0.25
@@ -691,6 +704,8 @@ var yogoSelector = function(){
             if(pivotS === i){
                 pivotS += 2
                 splashArt.scale.setTo(-0.9, 0.9)
+                text.scale.setTo(1, -1)
+                text.x *= -1
             }
             
             container.destroy()
@@ -825,6 +840,7 @@ var yogoSelector = function(){
             animateSelector()
             
             createReady()
+            getReady()
 		}
 	}
 }()

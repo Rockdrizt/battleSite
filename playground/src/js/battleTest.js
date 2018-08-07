@@ -83,7 +83,7 @@ function startGame(){
     	sound.init(game)
 
 		var teams = [
-			["yogotarEagle", "yogotarTomiko", "yogotarTomiko"],
+			["yogotarEagle", "yogotarNao", "yogotarTomiko"],
 			["yogotarEagle", "yogotarLuna", "yogotarEstrella"],
 		
 		]
@@ -114,5 +114,19 @@ function startGame(){
     }
 }
 
-startGame()
+var wfconfig = {
+
+	active: function() {
+		console.log("font loaded");
+        startGame()
+	},
+    custom: {
+        families: [ 'VAGRounded' ],
+        urls:['../../shared/minigames/css/custom_fonts.css']
+    },
+};
+WebFont.load(wfconfig);
+
+
+//startGame()
 

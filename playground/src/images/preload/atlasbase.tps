@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.8.0</string>
+        <string>4.8.3</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -181,51 +181,51 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">loading_bottom.png</key>
+            <key type="filename">dot.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>79,3,159,5</rect>
+                <rect>16,16,32,32</rect>
                 <key>scale9Paddings</key>
-                <rect>79,3,159,5</rect>
+                <rect>16,16,32,32</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">loading_top.png</key>
+            <key type="filename">pink.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>128,6,256,11</rect>
+                <rect>417,22,834,44</rect>
                 <key>scale9Paddings</key>
-                <rect>128,6,256,11</rect>
+                <rect>417,22,834,44</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">logo.png</key>
+            <key type="filename">spiner.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>186,105,373,211</rect>
+                <rect>92,91,184,181</rect>
                 <key>scale9Paddings</key>
-                <rect>186,105,373,211</rect>
+                <rect>92,91,184,181</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>logo.png</filename>
-            <filename>loading_bottom.png</filename>
-            <filename>loading_top.png</filename>
+            <filename>spiner.png</filename>
+            <filename>dot.png</filename>
+            <filename>pink.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

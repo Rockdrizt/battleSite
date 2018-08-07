@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "LIDiDCdDvZwzYr1PTkyPk0E19xk", "spine": "3.2.01", "width": 838.92, "height": 1161.46, "images": "" },
+"skeleton": { "hash": "U2kSIf4hz0EzgXQDMGJOBvzFnz0", "spine": "3.2.01", "width": 844.73, "height": 1243.1, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "cog", "parent": "root", "x": -21.24, "y": 35.6, "color": "000000ff" },
@@ -72,24 +72,24 @@
 	{ "name": "ponytail3", "bone": "tail", "attachment": "ponytail" },
 	{ "name": "arm2", "bone": "arm2", "attachment": "arm2_a" },
 	{ "name": "forearm2", "bone": "forearm2", "attachment": "forearm2_a" },
-	{ "name": "hand2", "bone": "hand2", "attachment": "hand2_h" },
+	{ "name": "hand2", "bone": "hand2", "attachment": "hand2_d" },
 	{ "name": "fire_hand", "bone": "fire" },
-	{ "name": "flag", "bone": "hand2", "attachment": "flag" },
-	{ "name": "leg2", "bone": "leg2", "attachment": "leg2_b" },
+	{ "name": "flag", "bone": "hand2" },
+	{ "name": "leg2", "bone": "leg2", "attachment": "leg2_a" },
 	{ "name": "shin2", "bone": "shin2", "attachment": "shin2_a" },
 	{ "name": "foot2", "bone": "foot2", "attachment": "foot2_a" },
-	{ "name": "leg1", "bone": "leg1", "attachment": "leg1_b" },
+	{ "name": "leg1", "bone": "leg1", "attachment": "leg1_a" },
 	{ "name": "shin1", "bone": "shin1", "attachment": "shin1_a" },
-	{ "name": "foot1", "bone": "foot1", "attachment": "foot1_d" },
+	{ "name": "foot1", "bone": "foot1", "attachment": "foot1_a" },
 	{ "name": "torso1", "bone": "torso", "attachment": "torso1" },
 	{ "name": "torso2_back", "bone": "torso", "attachment": "torso2" },
 	{ "name": "arm1", "bone": "arm1", "attachment": "arm1_a" },
-	{ "name": "cheer_glove", "bone": "hand1" },
+	{ "name": "cheer_glove", "bone": "hand1", "attachment": "cheer_glove" },
 	{ "name": "hand1", "bone": "hand1" },
 	{ "name": "forearm1", "bone": "forearm1", "attachment": "forearm1_a" },
 	{ "name": "head", "bone": "head", "attachment": "head" },
-	{ "name": "mouth", "bone": "head", "attachment": "mouth_a2" },
-	{ "name": "eyes", "bone": "head", "attachment": "eyes_d1" },
+	{ "name": "mouth", "bone": "head", "attachment": "mouth_c3" },
+	{ "name": "eyes", "bone": "head", "attachment": "eyes_e1" },
 	{ "name": "antenna", "bone": "antenna", "attachment": "antenna" },
 	{ "name": "yogo_ice_front", "bone": "influence_bone" },
 	{ "name": "cloud_l", "bone": "particles_foot_bone" },
@@ -26481,6 +26481,10 @@
 				"color": [
 					{ "time": 0, "color": "ffffffff", "curve": "stepped" },
 					{ "time": 0.8333, "color": "ffffffff" }
+				],
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.8333, "name": null }
 				]
 			},
 			"flag": {
@@ -28599,10 +28603,11 @@
 			{
 				"time": 0,
 				"offsets": [
-					{ "slot": "forearm2", "offset": 8 },
-					{ "slot": "hand2", "offset": 8 },
+					{ "slot": "arm2", "offset": 7 },
+					{ "slot": "forearm2", "offset": 7 },
+					{ "slot": "hand2", "offset": 7 },
 					{ "slot": "flag", "offset": 20 },
-					{ "slot": "cheer_glove", "offset": 14 },
+					{ "slot": "cheer_glove", "offset": 19 },
 					{ "slot": "hand1", "offset": 12 },
 					{ "slot": "forearm1", "offset": 10 }
 				]
@@ -28610,11 +28615,13 @@
 			{
 				"time": 2.6666,
 				"offsets": [
-					{ "slot": "forearm2", "offset": 9 },
-					{ "slot": "hand2", "offset": 9 },
-					{ "slot": "cheer_glove", "offset": 6 },
-					{ "slot": "hand1", "offset": 3 },
-					{ "slot": "forearm1", "offset": 3 }
+					{ "slot": "arm2", "offset": 7 },
+					{ "slot": "forearm2", "offset": 7 },
+					{ "slot": "hand2", "offset": 7 },
+					{ "slot": "flag", "offset": 20 },
+					{ "slot": "cheer_glove", "offset": 19 },
+					{ "slot": "hand1", "offset": 12 },
+					{ "slot": "forearm1", "offset": 10 }
 				]
 			}
 		]
@@ -29566,14 +29573,10 @@
 			{
 				"time": 0,
 				"offsets": [
-					{ "slot": "arm1", "offset": 4 },
-					{ "slot": "hand1", "offset": 4 },
-					{ "slot": "forearm1", "offset": 4 }
-				]
-			},
-			{
-				"time": 0.3,
-				"offsets": [
+					{ "slot": "arm2", "offset": 7 },
+					{ "slot": "forearm2", "offset": 7 },
+					{ "slot": "hand2", "offset": 7 },
+					{ "slot": "flag", "offset": 6 },
 					{ "slot": "arm1", "offset": 4 },
 					{ "slot": "hand1", "offset": 4 },
 					{ "slot": "forearm1", "offset": 4 }
@@ -29582,6 +29585,10 @@
 			{
 				"time": 0.8,
 				"offsets": [
+					{ "slot": "arm2", "offset": 7 },
+					{ "slot": "forearm2", "offset": 7 },
+					{ "slot": "hand2", "offset": 7 },
+					{ "slot": "flag", "offset": 6 },
 					{ "slot": "arm1", "offset": 4 },
 					{ "slot": "hand1", "offset": 4 },
 					{ "slot": "forearm1", "offset": 4 }

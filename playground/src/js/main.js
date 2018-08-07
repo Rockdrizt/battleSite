@@ -28,8 +28,10 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				sceneloader.show("startScreen")
-				//sceneloader.show("battle")
+                var loaderScene = sceneloader.getScene("preloaderIntro")
+                
+                loaderScene.onComplete("startScreen")
+                //sceneloader.show("startScreen")
 	    	}
 
 			document.body.style.visibility = "visible"
@@ -95,12 +97,12 @@ function startGame(){
 //            [{name:"dinamita", skin:"dinamita1"}, {name:"theffanie", skin:"theffanie2"}, {name:"luna", skin:"luna1"}],
 //			[{name:"eagle", skin:"eagle2"}, {name:"nao", skin:"nao1"}, {name:"estrella", skin:"estrella1"}],
             
-            [{name:"yogotarDinamita", skin:"dinamita1"}, {name:"yogotarTheffanie", skin:"theffanie2"}, {name:"yogotarLuna", skin:"luna1"}],
-			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarNao", skin:"nao1"}, {name:"yogotarEstrella", skin:"estrella1"}],
+            [{name:"yogotarNao", skin:"nao1"}, {name:"yogotarTheffanie", skin:"theffanie2"}, {name:"yogotarLuna", skin:"luna1"}],
+			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarNao", skin:"nao2"}, {name:"yogotarEstrella", skin:"estrella1"}],
             
         ];
 		//battleScene.setTeams(teams)
-		battle.setTeams(teams)
+		//battle.setTeams(teams)
         //reward.setTeams(teams)
         //reward.setWinner(1)
     }
@@ -121,11 +123,10 @@ var wfconfig = {
 		console.log("font loaded");
         startGame()
 	},
-
-	google: {
-		families: ['Luckiest Guy']
-	}
-
+    custom: {
+        families: [ 'VAGRounded' ],
+        urls:['../../shared/minigames/css/custom_fonts.css']
+    },
 };
 WebFont.load(wfconfig);
 

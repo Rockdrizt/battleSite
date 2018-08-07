@@ -270,7 +270,7 @@ var teamSelector = function(){
         buttonsGroup = game.add.group()
         sceneGroup.add(buttonsGroup)
 
-        var pivotX = SIDE < 0 ? game.world.centerX * 1.45 : game.world.centerX * 0.25
+        var pivotX = SIDE < 0 ? game.world.centerX * 1.53 : game.world.centerX * 0.18
         var pivotY = 320
         var aux = 0
         var scale = SIDE
@@ -308,9 +308,9 @@ var teamSelector = function(){
             if(i % 2){
                 pivotY += 180
                 if(SIDE > 0)
-                    pivotX = aux % 2 ? game.world.centerX * 0.25 : game.world.centerX * 0.4
+                    pivotX = aux % 2 ? game.world.centerX * 0.18 : game.world.centerX * 0.33
                 else
-                    pivotX = aux % 2 ? game.world.centerX * 1.45 : game.world.centerX * 1.3
+                    pivotX = aux % 2 ? game.world.centerX * 1.53 : game.world.centerX * 1.39
                 aux++
                 scale *= -1
             }
@@ -476,8 +476,8 @@ var teamSelector = function(){
     function createOk(){
         
         okGroup = game.add.group()
-        okGroup.x = game.world.centerX + 100 * -SIDE
-        okGroup.y = game.world.centerY + 120
+        okGroup.x = game.world.centerX + 120 * -SIDE
+        okGroup.y = game.world.centerY + 130
         okGroup.alpha = 0
         okGroup.canClick = false
         sceneGroup.add(okGroup)
@@ -512,7 +512,7 @@ var teamSelector = function(){
         }, this)
         okGroup.off = okOff
         
-        var overBtn = okGroup.create(0, - 40, "atlas.yogoSelector", "okOver")
+        var overBtn = okGroup.create(0, -40, "atlas.yogoSelector", "okOver")
         overBtn.anchor.setTo(0.5)
         overBtn.alpha = 0
         okGroup.over = overBtn
@@ -521,6 +521,8 @@ var teamSelector = function(){
         onBtn.anchor.setTo(0.5)
         onBtn.alpha = 0
         okGroup.onBtn = onBtn
+        
+        sceneGroup.bringToTop(teamGroup)
     }
     
     function clickOk(){

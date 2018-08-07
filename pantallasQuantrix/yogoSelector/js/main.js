@@ -67,7 +67,8 @@ function startGame(){
     function create(){
 
     	preloadScenes([
-            yogoSelector
+            yogoSelector,
+            preloaderIntro
     	])
     }
 }
