@@ -6,31 +6,37 @@ var preloaderIntro = function(){
 				json: "images/preload/atlas.json",
 				image: "images/preload/atlas.png"
 			}],
-		images: [            
-            { 
-                name:'logo',
-                file: "images/preload/bgTile.png"}
-        ],
-		sounds: [
-
-		],
+		
 	}
 
-	var loadingBar = null
-
+    var spiner
+    var pinkLight
+    var sceneGroup
+    
 	return {
 		assets: assets,
 		name: "preloaderIntro",
 		updateLoadingBar: function(loadedFiles, totalFiles){
-			if(loadingBar){
-				var loadingStep = loadingBar.width / totalFiles
-				loadingBar.topBar.width = loadingStep * loadedFiles
-			}
+			
+            if(spiner){
+                var loadingAmount = loadedFiles / totalFiles
+                var total = loadingAmount.toFixed(2).substr(2)
+                spiner.text.setText(total)
+            }
 		},
+        onComplete: function(scene){
+            
+            spiner.text.setText(100)
+            
+            var shutDown = game.add.tween(sceneGroup).to({alpha: 0}, 200, Phaser.Easing.Cubic.In, false)
+            shutDown.onComplete.add(function(){
+                sceneloader.show(scene)
+            })
+            
+            game.add.tween(pinkLight.scale).to({x: 1, y: 1}, 250, Phaser.Easing.Cubic.In, true, 0, 0, true).chain(shutDown)
+        },
 
 		create: function(event){
-
-			var sceneGroup = game.add.group()
             
             var bmd = game.add.bitmapData(game.world.width, game.world.height)
             var back = bmd.addToWorld()
@@ -44,34 +50,37 @@ var preloaderIntro = function(){
                 bmd.rect(0, y, bmd.width, y + 1, Phaser.Color.getWebRGB(color))
                 y += 2
             }
-            sceneGroup.add(back)
-
-			var logo = sceneGroup.create(game.world.centerX, game.world.centerY - 100, 'logoAtlas', 'logo')
-			logo.anchor.setTo(0.5)
-            logo.scale.setTo(0)
-            game.add.tween(logo.scale).to({x:1,y:1},400, Phaser.Easing.Back.Out,true)
-
-			var loadingGroup = new Phaser.Group(game)
-			sceneGroup.add(loadingGroup)
-
-			var loadingBottom = loadingGroup.create(0, 0, 'logoAtlas', 'loading_bottom')
-			loadingBottom.anchor.setTo(0, 0.5)
-			loadingBottom.scale.setTo(1, 1.5)
-
-			var loadingTop = loadingGroup.create(0, 0, 'logoAtlas', 'loading_top')
-			loadingTop.anchor.y = 0.5
-			loadingTop.scale.setTo(1.2, 1)
             
-            loadingBottom.width = loadingTop.width
+            sceneGroup = game.add.group()
+            
+            var particle = game.add.emitter(game.world.centerX, game.world.centerY, 100);
+            particle.makeParticles("logoAtlas", "dot");
+            particle.minParticleSpeed.setTo(-200, -200);
+            particle.maxParticleSpeed.setTo(200, 200);
+            particle.minParticleScale = 1;
+            particle.maxParticleScale = 2;
+            particle.setAlpha(0.35, 0, 1000, Phaser.Easing.Cubic.In)
+            particle.width = 800
+            sceneGroup.add(particle)
+            particle.start(false, 3000, 50, 0)
+            
+            pinkLight = sceneGroup.create(game.world.centerX, game.world.centerY, "logoAtlas", "pink")
+            pinkLight.anchor.setTo(0.5)
+            pinkLight.scale.setTo(0)
+            pinkLight.part = particle
 
-			loadingGroup.bottomBar = loadingBottom
-			loadingGroup.topBar = loadingTop
-
-			loadingGroup.x = game.world.centerX - loadingBottom.width * 0.5
-			loadingGroup.y = (game.world.centerY + 200) 
-
-			loadingBar = loadingGroup
-			loadingBar.topBar.width = 0
+            spiner = sceneGroup.create(game.world.centerX, game.world.centerY, 'logoAtlas', 'spiner')
+			spiner.anchor.setTo(0.5)
+            
+            var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
+            
+            var text = new Phaser.Text(sceneGroup.game, spiner.x, spiner.y, "0", fontStyle)
+            text.anchor.setTo(0.5)
+            sceneGroup.add(text)
+            spiner.text = text
+            
+            var spin = game.add.tween(spiner).to({angle: -360}, 2000, Phaser.Easing.linear, true)
+            spin.repeat(-1)
 		},
 	}
 }()

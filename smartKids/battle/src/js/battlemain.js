@@ -15,11 +15,12 @@ var battleMain = function(){
 		function onLoadFile(event){
 
 			//var loaderScene = sceneloader.getScene("yogoSelector")
-			yogoSelector.updateLoadingBar(event.totalLoaded, event.totalFiles)
+			//yogoSelector.updateLoadingBar(event.totalLoaded, event.totalFiles)
 		}
 
 		function onCompleteSceneLoading(){
 			yogoSelector.showBattle()
+            //sceneloader.show("battle")
 			//sceneloader.show("battleScene")
 		}
 
@@ -29,20 +30,26 @@ var battleMain = function(){
 	}
 
 	function init(teams){
-
 		battle.setTeams(teams)
+		reward.setTeams(teams)
 	}
+    
+    
+    function initWinerTeam(win){
+        reward.setWinner(win)
+    }
 
 	function create(){
 		bootConfigFiles([
-			battle
-			//result,
+			battle,
+			reward,
 		])
 	}
 
 	return{
 		init:init,
-		create:create
+        initWinerTeam: initWinerTeam,
+        create:create,
 	}
 }()
 

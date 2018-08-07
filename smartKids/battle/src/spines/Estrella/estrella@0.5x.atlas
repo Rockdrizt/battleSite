@@ -4,7 +4,7 @@ size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-normal/arm2_a
+normal/arm2
   rotate: false
   xy: 2023, 1102
   size: 18, 26
@@ -1319,7 +1319,7 @@ size: 2048,512
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-normal/arm1_a
+normal/arm1
   rotate: false
   xy: 381, 106
   size: 24, 30

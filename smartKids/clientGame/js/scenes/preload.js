@@ -8,8 +8,11 @@ var preloaderIntro = function(){
 			}],
 		images: [            
             { 
-                name:'logo',
-                file: "images/preload/bgTile.png"}
+                name:'tile',
+                file: "images/preload/bgTile.png"},
+            { 
+                name:'spiner',
+                file: "images/preload/spiner.png"}
         ],
 		sounds: [
 
@@ -17,15 +20,17 @@ var preloaderIntro = function(){
 	}
 
 	var loadingBar = null
+    var spiner
 
 	return {
 		assets: assets,
 		name: "preloaderIntro",
 		updateLoadingBar: function(loadedFiles, totalFiles){
-			if(loadingBar){
-				var loadingStep = loadingBar.width / totalFiles
-				loadingBar.topBar.width = loadingStep * loadedFiles
-			}
+			
+            if(spiner){
+                var loadingAmount = loadedFiles / totalFiles
+                spiner.text.setText(loadingAmount.toPrecision() * 100)
+            }
 		},
 
 		create: function(event){
@@ -45,33 +50,25 @@ var preloaderIntro = function(){
                 y += 2
             }
             sceneGroup.add(back)
-
-			var logo = sceneGroup.create(game.world.centerX, game.world.centerY - 100, 'logoAtlas', 'logo')
-			logo.anchor.setTo(0.5)
-            logo.scale.setTo(0)
-            game.add.tween(logo.scale).to({x:1,y:1},400, Phaser.Easing.Back.Out,true)
-
-			var loadingGroup = new Phaser.Group(game)
-			sceneGroup.add(loadingGroup)
-
-			var loadingBottom = loadingGroup.create(0, 0, 'logoAtlas', 'loading_bottom')
-			loadingBottom.anchor.setTo(0, 0.5)
-			loadingBottom.scale.setTo(1, 1.5)
-
-			var loadingTop = loadingGroup.create(0, 0, 'logoAtlas', 'loading_top')
-			loadingTop.anchor.y = 0.5
-			loadingTop.scale.setTo(1.2, 1)
             
-            loadingBottom.width = loadingTop.width
+            var tile = game.add.tileSprite(game.world.centerX, game.world.centerY, game.world.width + 150, game.world.width + 180, "tile")
+            tile.anchor.setTo(0.5)
+            tile.tint = 0x0099AA
+            tile.angle = 45
+            sceneGroup.add(tile)
 
-			loadingGroup.bottomBar = loadingBottom
-			loadingGroup.topBar = loadingTop
-
-			loadingGroup.x = game.world.centerX - loadingBottom.width * 0.5
-			loadingGroup.y = (game.world.centerY + 200) 
-
-			loadingBar = loadingGroup
-			loadingBar.topBar.width = 0
+            spiner = sceneGroup.create(game.world.centerX, game.world.centerY, 'logoAtlas', 'spiner')
+			spiner.anchor.setTo(0.5)
+            
+            var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
+            
+            var text = new Phaser.Text(sceneGroup.game, spiner.x, spiner.y, "0", fontStyle)
+            text.anchor.setTo(0.5)
+            sceneGroup.add(text)
+            spiner.text = text
+            
+            var spin = game.add.tween(spiner).to({angle: -360}, 1000, Phaser.Easing.linear, true)
+            spin.repeat(-1)
 		},
 	}
 }()

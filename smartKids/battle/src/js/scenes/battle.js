@@ -61,6 +61,10 @@ var battle = function(){
             {
                 name: "questionBoard",
                 file: "images/battle/questionBoard.png",
+            },
+            {
+                name: "pinkLight",
+                file: "images/yogoSelector/pinkLight.png",
             }
 		],
 		sounds: [
@@ -102,6 +106,8 @@ var battle = function(){
     var DAMAGE = DAMAGE_PERCENT[QUESTIONS.N_10]
     var MAX_LIFE
     
+    var COLORS = [0xFC1E79, 0x00D8FF]
+    
     var teams
     var battleSong
 	var sceneGroup
@@ -132,7 +138,7 @@ var battle = function(){
     function preload(){
 		
         game.stage.disableVisibilityChange = false
-        game.load.bitmapFont('skwig', 'images/fonts/font.png', 'images/fonts/font.fnt')
+        game.load.bitmapFont('skwig', 'fonts/font.png', 'fonts/font.fnt')
     }
     
 	function createBackground(){
@@ -148,10 +154,13 @@ var battle = function(){
         blackMask.alpha = 0
         sceneGroup.add(blackMask)
         
+        btngroup= game.add.group()
+        
         var rotateButton = createButton(rotateTeam.bind(null, 0), 0x00ff00)
 		rotateButton.x = game.world.centerX
 		rotateButton.y = game.world.height - 150
 		rotateButton.label.text = "rotate"
+        btngroup.add(rotateButton)
         
         var team = 0
         
@@ -159,21 +168,31 @@ var battle = function(){
 		damageButom.x = game.world.centerX - 200
 		damageButom.y = game.world.height - 250
 		damageButom.label.text = "normal"
+        btngroup.add(damageButom)
         
         var damageButom = createButton(attackMove.bind(null, "super"), 0xff00ff)
 		damageButom.x = game.world.centerX - 200
 		damageButom.y = game.world.height - 200
 		damageButom.label.text = "super"
+        btngroup.add(damageButom)
         
         var damageButom = createButton(ultraMove, 0xff00ff)
 		damageButom.x = game.world.centerX - 200
 		damageButom.y = game.world.height - 150
 		damageButom.label.text = "ultra"
+        btngroup.add(damageButom)
         
         var returnBtn = createButton(returnCamera, 0xff0033)
 		returnBtn.x = game.world.centerX 
 		returnBtn.y = game.world.height - 200
 		returnBtn.label.text = "zoom out"
+        btngroup.add(returnBtn)
+        
+        var win = createButton(setWinteam, 0xffaa33)
+		win.x = game.world.centerX - 200
+		win.y = game.world.height - 100
+		win.label.text = "winner"
+        btngroup.add(win)
         
         var rect = game.add.graphics()
         rect.beginFill(0x242A4D)
@@ -222,7 +241,7 @@ var battle = function(){
         
         var tokenGroup = game.add.group()
         
-        var listName = loadNames()
+        listName = loadNames()
         
         var pivotX = 0.25
         var index = 0
@@ -321,7 +340,7 @@ var battle = function(){
         var timeToken = teamsBarGroup.create(game.world.centerX, 150, "atlas.battle", "timeToken")
         timeToken.anchor.setTo(0.5)
         
-        var text = new Phaser.Text(sceneGroup.game, 0, -5, "3:00", fontStyle)
+        var text = new Phaser.Text(sceneGroup.game, 0, -10, "3:00", fontStyle)
         text.anchor.setTo(0.5)
         timeToken.addChild(text)
         timeToken.text = text
@@ -374,12 +393,13 @@ var battle = function(){
         var yogo = specialAttack.create(frame.centerX, frame.y + frame.height * 0.48, mainSpine.data.name + "Special")
         yogo.anchor.setTo(0.5,1)
         specialAttack.yogo = yogo
-        specialAttack.y = game.world.height
+        specialAttack.y = game.world.height + 100
     }
     
     function createQuestionOverlay(){
         
         questionGroup = game.add.group()
+        questionGroup.boxes = []
         sceneGroup.add(questionGroup)
         
         var black = game.add.graphics()
@@ -389,104 +409,154 @@ var battle = function(){
         black.alpha = 0.5
         questionGroup.add(black)
         
-        var board = questionGroup.create(game.world.centerX + 50, game.world.height - 20, "questionBoard")
-        board.anchor.setTo(0.5, 1)
+        var board = questionGroup.create(180, game.world.height - 20, "questionBoard")
+        board.anchor.setTo(0, 1)
+        questionGroup.boxes[1] = board
         
-        var box = questionGroup.create(board.centerX - 130, board.y - board.height + 5, "atlas.battle", "questionBox")
-        box.anchor.setTo(0.5, 1)
+        var box = questionGroup.create(board.width + 30, board.y - board.height + 2, "atlas.battle", "questionBox")
+        box.anchor.setTo(1, 1)
+        questionGroup.boxes[0] = box
         
         var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "left", wordWrap: true, wordWrapWidth: box.width - 180}
         
         var text = new Phaser.Text(sceneGroup.game, box.centerX + 70, box.centerY, "", fontStyle)
         text.anchor.setTo(0.5)
+        text.alpha = 0
         questionGroup.add(text)
         
-        var container = questionGroup.create(board.centerX - 110, board.centerY - board.height * 0.2, "atlas.battle", "questionImage")
-        container.anchor.setTo(0.5)
+        var container = questionGroup.create(box.x - 40, board.centerY - board.height * 0.2, "atlas.battle", "questionImage")
+        container.anchor.setTo(1, 0.5)
+        questionGroup.boxes[2] = container
         
-        var img = questionGroup.create(0, 0, "atlas.battle", "dazzle")
+        var img = questionGroup.create(-container.width * 0.5, 0, "atlas.battle", "dazzle")
         img.anchor.setTo(0.5)
+        img.scale.setTo(0)
         container.addChild(img)
         
         var options = game.add.group()
         questionGroup.add(options)
         var pivotX = 0.5
         
-        for(var i = 0; i < 4; i++){
-            
-            var btn = options.create(board.centerX * pivotX, board.centerY + board.height * 0.17, "atlas.battle", "questionBtn")
-            btn.anchor.setTo(0.5)
-            btn.inputEnabled = true
-            btn.events.onInputDown.add(function(btn){
-                game.add.tween(btn.scale).to({x: 0.8, y:0.8}, 100, Phaser.Easing.linear, true, 0, 0, true).onComplete.add(function(){
-                    questionGroup.options.setAll("inputEnabled", false)
-                    game.add.tween(questionGroup).to({alpha:0}, 500, Phaser.Easing.linear, true)
-                })
-            },this)
-            
-            var letter = new Phaser.Text(sceneGroup.game, -btn.width * 0.30, -5, "A", fontStyle)
-            letter.anchor.setTo(0.5)
-            btn.addChild(letter)
-            btn.letter = letter
-            
-            var info = new Phaser.Text(sceneGroup.game, 0, 0, "info", fontStyle)
-            info.anchor.setTo(0,0.5)
-            btn.addChild(info)
-            btn.info = info
-            
-            pivotX += 0.3
-            
-            if(i % 2 != 0){
-                btn.y += 150
+            for(var i = 0; i < 4; i++){
+
+                var btn = options.create(board.centerX * pivotX, board.centerY + board.height * 0.17, "atlas.battle", "questionBtn")
+                btn.anchor.setTo(0.5)
+                btn.alpha = 0
+                btn.inputEnabled = true
+                btn.events.onInputDown.add(setAnswer,this)
+
+                var letter = new Phaser.Text(sceneGroup.game, -btn.width * 0.30, -5, "A", fontStyle)
+                letter.anchor.setTo(0.5)
+                btn.addChild(letter)
+                btn.letter = letter
+
+                var info = new Phaser.Text(sceneGroup.game, 0, 0, "info", fontStyle)
+                info.anchor.setTo(0,0.5)
+                btn.addChild(info)
+                btn.info = info
+
+                pivotX += 0.3
+
+                if(i % 2 != 0){
+                    btn.y += 150
+                }
+                btn.spawn = {x: btn.x, y: btn.y}
             }
-        }
+
+            options.children[1].letter.setText("B")
+            options.children[2].letter.setText("C")
+            options.children[3].letter.setText("D")
+
+            questionGroup.question = text
+            questionGroup.question.setText("Lorem ipsum dolor sit amet consectetur adipiscing elit egestas, mollis nisi habitant felis venenatis scelerisque vulputate, taciti class curae dui nibh nullam blandit.")
+            questionGroup.image = img
+            questionGroup.options = options
+            questionGroup.options.setAll("inputEnabled", false)
+
+            questionGroup.boxes.forEach(function(box){
+                box.scale.setTo(0,1)
+            })
         
-        options.children[1].letter.setText("B")
-        options.children[2].letter.setText("C")
-        options.children[3].letter.setText("D")
+        var light = questionGroup.create(300,300, "pinkLight")
+        light.anchor.setTo(0.5)
+        light.scale.setTo(0)
+        questionGroup.light = light
         
-        questionGroup.question = text
-        questionGroup.question.setText("Aqui va la pregunta Aqui va la preguntaAqui va la pregunta Aqui va la pregunta Aqui va la pregunta Aqui va la pregunta Aqui va la pregunta")
-        questionGroup.image = img
-        questionGroup.options = options
-        questionGroup.options.setAll("inputEnabled", false)
         questionGroup.alpha = 0
         
-        //questionGroup.setQuestion = setQuestion()
-        
         var questionBtn = createButton(function(){
-        	//questionGroup.setQuestion()
             setQuestion()
 			}, 0x00ffff
 		)
 		questionBtn.x = game.world.centerX
 		questionBtn.y = game.world.height - 250
 		questionBtn.label.text = "questionBtn"
+        btngroup.add(questionBtn)
     }
     
     function setQuestion(question, image, options){
 
-        //questionGroup.question.setText(question)
-        questionGroup.question.alpha = 0
-        //questionGroup.image.loadTexture("atlas.battle", image)
-        questionGroup.image.alpha = 0
-        for(var i = 0; i < questionGroup.options.length; i++){
-            //questionGroup.options.children[i].info.setText(options[i])
-            questionGroup.options.children[i].alpha = 0
-        }
+        var delay = 0
+        var last
         
-        game.add.tween(questionGroup).to({alpha:1}, 500, Phaser.Easing.linear, true).onComplete.add(function(){
-            questionGroup.image.alpha = 1
-            game.add.tween(questionGroup.image.scale).to({x:1.5, y:1.5}, 100, Phaser.Easing.linear, true, 0, 0, true)
-            game.add.tween(questionGroup.question).to({alpha:1}, 400, Phaser.Easing.linear, true, 300)
-            var delay = 200
+        //questionGroup.question.setText(question)
+        //questionGroup.image.loadTexture("atlas.battle", image)
+        
+        /*for(var i = 0; i < questionGroup.options.length; i++){
+            questionGroup.options.children[i].info.setText(options[i])
+        }*/
+        questionGroup.alpha = 1
+        
+        questionGroup.boxes.forEach(function(box){
+            last = game.add.tween(box.scale).to({x: 1}, 250, Phaser.Easing.Cubic.Out, true, delay)
+            delay += 300
+        }) 
+        
+        questionGroup.options.forEach(function(opt){
+            game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay).onComplete.add(function(){
+                opt.inputEnabled = true
+            })
+            delay += 200
+        })
+        
+        last.onComplete.add(function(){
+            game.add.tween(questionGroup.question).to({alpha:1}, 300, Phaser.Easing.linear, true, 1000)
+            game.add.tween(questionGroup.image.scale).to({x:1, y:1}, 300, Phaser.Easing.Cubic.InOut, true, 1000)
+        })
+    }
+    
+    function setAnswer(btn){
+        
+        questionGroup.options.setAll("inputEnabled", false)
+        
+        questionGroup.options.forEach(function(opt){
+            if(opt != btn){
+                game.add.tween(opt).to({alpha:0}, 300, Phaser.Easing.linear, true)
+            }
+        })
+        
+        questionGroup.light.x = btn.x - 100
+        questionGroup.light.y = btn.y
+        var shine = game.add.tween(questionGroup.light.scale).to({x: 0.5, y:0.5}, 300, Phaser.Easing.Cubic.Out, true, 0, 0, true)
+        
+        var newY = questionGroup.boxes[1].y - 180
+        var choise = game.add.tween(btn).to({x: game.world.centerX, y:newY}, 500, Phaser.Easing.Cubic.Out, false)
+                 
+        var fadeOut = game.add.tween(questionGroup).to({alpha:0}, 500, Phaser.Easing.linear, false, 1000)
+        fadeOut.onComplete.add(function(){
+            questionGroup.image.scale.setTo(0)
+            questionGroup.question.alpha = 0
             questionGroup.options.forEach(function(opt){
-                opt.alpha = 1
-                game.add.tween(opt).from({x: game.world.width + 300}, delay += 200, Phaser.Easing.Cubic.Out, true, 800).onComplete.add(function(){
-                    opt.inputEnabled = true
-                })
+                opt.alpha = 0
+                opt.x = opt.spawn.x
+                opt.y = opt.spawn.y
+            })
+            questionGroup.boxes.forEach(function(box){
+                box.scale.setTo(0, 1)
             })
         })
+        shine.chain(choise)    
+        choise.chain(fadeOut)
     }
     
     function rotateTeam(teamIndex){
@@ -627,6 +697,8 @@ var battle = function(){
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
 				character.teamIndex = teamIndex
 				character.alpha = 0
+                character.name = characterName
+                character.skin = skin
 				yogoGroup.add(character)
 				createAppear(character, teamIndex, charIndex)
 
@@ -666,7 +738,6 @@ var battle = function(){
 
 			yogoGroup.add(groupPoint)
 		}
-        //createMenuAnimations()
 	}
     
     function selectYogotar(obj) {
@@ -688,13 +759,13 @@ var battle = function(){
 			button.label.text = animationName
 		}
 
-		for(var attackIndex = 0; attackIndex < ATTACKS.length; attackIndex++){
+		/*for(var attackIndex = 0; attackIndex < ATTACKS.length; attackIndex++){
 			var buttonAttack = createButton(attack, 0xff0000)
 			buttonAttack.tag = ATTACKS[attackIndex]
 			buttonAttack.x = attackIndex * 200
 			buttonAttack.y = (pivotY + 1) * 50
 			buttonAttack.label.text = ATTACKS[attackIndex]
-		}
+		}*/
 	}
     
     function changeAnimation(name) {
@@ -705,8 +776,14 @@ var battle = function(){
        
         var life = lifeBars[team]
         var damage = life.width - (MAX_LIFE * percent * ORDER_SIDES[team].scale.x)
+        var index = team == 0 ? 1 : 0
+        var otherTeam = teams[index] 
         
-        game.add.tween(life).to({width:damage}, 500, Phaser.Easing.Cubic.Out, true)
+        game.add.tween(life).to({width:damage}, 500, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
+            otherTeam.forEach(function(member){
+                member.setAnimation(["idle_normal"], true)
+            })
+        })
     }
     
     function attackMove(type){
@@ -736,6 +813,8 @@ var battle = function(){
         var team = mainSpine.teamIndex
         var side = ORDER_SIDES[team]
         
+        supportAnimation(team)
+        
         specialAttack.scale.setTo(side.scale.x, 1)
         specialAttack.y = 0
         specialAttack.x = game.world.width * team
@@ -757,6 +836,37 @@ var battle = function(){
 			blackMask.alpha = 0
 			attackMove("ultra")
         })
+    }
+    
+    function supportAnimation(index){
+        
+        var subteam = teams[index]
+        var aux = 2
+        
+        var color = COLORS[index]
+        var names = ["cheer_flag", "cheer_glove"]
+
+        for(var i = 0; i < subteam.length; i++){
+            
+            var yogo = subteam[i]
+            
+            if(yogo == mainSpine){
+                yogo.setAnimation(["ready"], true)
+            }
+            else{
+                yogo.setAnimation(["support_yog" + aux], true)
+                aux++
+                
+                for(var k = 0; k < names.length; k++){
+                    
+                    var slot = yogo.getSlotContainer(names[k])
+					if(!slot)
+						continue;
+					slot.tint = color
+                    yogo.spine.updateTransform()
+                }
+            }
+        }
     }
     
     function zoomCamera(zoom, delay, pos) {
@@ -785,6 +895,23 @@ var battle = function(){
 		zoomCamera(1, 1000, {x:0, y:0})
 		game.add.tween(blackMask).to({alpha:0}, 500, Phaser.Easing.Cubic.Out, true)
 	}
+    
+    function setWinteam(){
+        
+        battleMain.initWinerTeam(game.rnd.integerInRange(0, 1))
+        game.add.tween(white).to({alpha:1}, 300, Phaser.Easing.Cubic.In, true).onComplete.add(function(){
+			sceneloader.show("reward")
+		})
+    }
+    
+    function createWhite(){
+        
+        white = game.add.graphics()
+        white.beginFill(0xffffff)
+        white.drawRect(0, 0, game.world.width, game.world.height)
+        white.endFill()
+        white.alpha = 0
+    }
 
 	return {
 		
@@ -800,18 +927,17 @@ var battle = function(){
             
             sceneGroup = game.add.group()
 
-            
             initialize()
             createBackground()	
+            placeYogotars()
             createTeamBars()
             createTimer()
-            placeYogotars()
-            sceneGroup.bringToTop(teamsBarGroup)
             createSpecialAttack()
             createQuestionOverlay()
             //createMenuAnimations()
             //battleSong = sound.play("battleSong", {loop:true, volume:0.6})
-            
+            createWhite()
+            game.add.tween(sceneGroup).from({alpha:0},500, Phaser.Easing.Cubic.Out,true)
 		},
         setCharacter:setCharacter,
         setTeams: function (myTeams) {
@@ -823,6 +949,7 @@ var battle = function(){
 					var character = team[charIndex]
 					setCharacter(character.name, teamIndex)
                     var img = team[charIndex].name.substr(7)
+                    console.log(img)
                     pushSpecialArt(img)
 				}
 			}
