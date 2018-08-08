@@ -154,6 +154,7 @@ var yogoSelector = function(){
 	var tile
 	var STATES = {yellow: 0, red: 1, blue: 2, bicolor: 3}
 	var SIDE = {left: 1, rigth: -1}
+	var NUM_PLAYERS_EACH = 3
 
 	var loadingGroup
 	var splashArtGroup
@@ -162,6 +163,8 @@ var yogoSelector = function(){
 	var playersSelected
 	var VS
 	var bmd
+	var buttonsList
+	var platforms
 
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -172,6 +175,12 @@ var yogoSelector = function(){
 		game.stage.backgroundColor = "#0D014D"
 		chosenOne = 1
 		playersSelected = []
+		buttonsList = []
+		platforms = []
+		for(var pIndex = 0; pIndex < NUM_PLAYERS_EACH; pIndex++){
+			platforms[pIndex] = []
+		}
+
 		loadSounds()
 	}
 
@@ -223,9 +232,11 @@ var yogoSelector = function(){
             
             var plat = platformGroup.create(game.world.centerX * pivotX, game.world.centerY + 50, "atlas.yogoSelector", "plat1")
             plat.anchor.setTo(0.5)
+			platforms[0].push(plat)
             
             var plat = platformGroup.create(game.world.centerX * pivotX  + game.world.centerX, game.world.centerY + 50, "atlas.yogoSelector", "plat2")
             plat.anchor.setTo(0.5)
+			platforms[1].push(plat)
             
             pivotX += 0.25
         }
@@ -326,6 +337,13 @@ var yogoSelector = function(){
 		text.setText("Equipo Bravo")
 	}
 
+	/*NOTES:
+		function could be a little bit shorter but is ok
+		positions are hardcoded, what happen if you have more of 8 positions?
+		8 need to be a constant named NUM_YOGOTARS
+		not a big issue because probably with more yogotars is going to change positions
+		if that is the case you should use positions as constants as well
+	*/
 	function createButtons(){
 
 		buttonsGroup = game.add.group()
@@ -377,6 +395,8 @@ var yogoSelector = function(){
 				pivotX = 0.5
 				aux = 0
 			}
+
+			buttonsList.push(buttonsGroup)
 		}
 
 		buttonsGroup.children[0].yogotar.x -= 30
@@ -404,7 +424,6 @@ var yogoSelector = function(){
     }
 
 	function pressBtn(btn, team){
-
 		if(btn.canClick){
 
 			btn.canClick = false
@@ -1032,6 +1051,8 @@ var yogoSelector = function(){
 
 			createReady()
             createWhite()
+
+			server.addEventListener("onPlayersChange", )
 		}
 	}
 }()

@@ -28,11 +28,14 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				server.setGameReady(true)
-				server.startGame = function () {
-					sceneloader.show("yogoSelector")
+				if (server) {
+					server.setGameReady(true)
+					server.startGame = function () {
+						sceneloader.show("yogoSelector")
+					}
 				}
-				//sceneloader.show("battle")
+				else
+					sceneloader.show("yogoSelector")
 	    	}
 
 			document.body.style.visibility = "visible"
@@ -103,7 +106,7 @@ function startGame(){
 			//battleScene,
             startScreen,
             yogoSelector,
-            battle,
+            //battle,
             //result,
     	])
     }

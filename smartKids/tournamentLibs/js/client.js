@@ -199,6 +199,10 @@ function Client(){
 		setfb(self.refIdGame.child("t" + self.numTeam + "/ready"), value)
 		//self.refIdGame.child("t"+self.numTeam+"/ready").set(value);
 	}
+
+	this.selectYogotar = function (players) {
+		setfb(self.refIdGame.child("t" + self.numTeam + "/players"), players)
+	}
 }
 
 function loadGame(){
