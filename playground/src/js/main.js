@@ -28,10 +28,19 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-                var loaderScene = sceneloader.getScene("preloaderIntro")
-                
-                //loaderScene.onComplete("startScreen")
-                sceneloader.show("battle")
+				if (server) {
+					server.setGameReady(true)
+					server.startGame = function () {
+						sceneloader.show("yogoSelector")
+					}
+				}
+				else {
+					sceneloader.show("yogoSelector")
+					var loaderScene = sceneloader.getScene("preloaderIntro")
+
+					//loaderScene.onComplete("startScreen")
+					sceneloader.show("battle")
+				}
 	    	}
 
 			document.body.style.visibility = "visible"
