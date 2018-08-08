@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "dot",
+	"frame": {"x":1,"y":73,"w":64,"h":64},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":64,"h":64},
+	"sourceSize": {"w":64,"h":64}
+},
+{
+	"filename": "pink",
+	"frame": {"x":1,"y":1,"w":1668,"h":70},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":0,"y":9,"w":1668,"h":70},
+	"sourceSize": {"w":1668,"h":88}
+},
+{
+	"filename": "spiner",
+	"frame": {"x":1671,"y":1,"w":314,"h":309},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":27,"y":28,"w":314,"h":309},
+	"sourceSize": {"w":368,"h":363}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "atlas.png",
+	"format": "RGBA8888",
+	"size": {"w":1986,"h":311},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:23aa5ea1398995e8c3bb5203e6afd921:c07756bfbb30080eda0f97129f29c869:cbce6b53f0f49e0bf15173c25c41f876$"
+}
+}
