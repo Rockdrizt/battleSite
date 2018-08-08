@@ -66,11 +66,11 @@ var scripts = function () {
 				if (instruction.parameters) {
 					for (var indexParam = 0; indexParam < instruction.parameters.length; indexParam++) {
 						var sumParam = instruction.useSelf ? 1 : 0
-						params[indexParam + sumParam] = variables[instruction.parameters[indexParam]]
+						params[indexParam + sumParam] = variables[instruction.parameters[indexParam]] || instruction.parameters[indexParam]
 					}
 				}
 
-				if (_G[instruction.variable]) {
+				if ((_G[instruction.variable]) && (instruction.variable !== "self")) {
 					if (instruction.index)
 						variables[storeReturnID] = _G[instruction.variable][instruction.index].apply(null, params)
 					else

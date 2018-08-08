@@ -177,6 +177,14 @@ var epicProjectiles = function(){
 		if(self.hit)
 			game.time.events.add(self.data.timing.hit, hitEnemy, self, params)
 
+		self.toRotate = self.scale.x > 0 ?
+			Math.atan2(enemy.y - self.y, enemy.x - self.x) :
+			Math.atan2(self.y - enemy.y, self.x - enemy.x)
+
+		self.rotate = function (time, delay) {
+			game.add.tween(this).to({rotation:this.toRotate}, time, Phaser.Easing.Cubic.Out, true, delay)
+		}.bind(self)
+
 		if(self.data.onShoot)
 			scripts.run(self.data.onShoot, {self:self, target:enemy})
 
@@ -223,7 +231,7 @@ var epicProjectiles = function(){
 			}
 		}
 
-		//return projectile
+
 	}
 
 	function extractSound(soundID) {

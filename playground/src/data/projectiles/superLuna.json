@@ -71,6 +71,12 @@
       "id":"execute",
       "variable":"transition",
       "parameters":["self","transitionParams"]
+    },
+    {
+      "index":"rotate",
+      "id":"execute",
+      "variable":"self",
+      "parameters":[1000,1000]
     }
   ]
 }
