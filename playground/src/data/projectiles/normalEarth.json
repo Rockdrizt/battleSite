@@ -13,7 +13,7 @@
     }
   ],
   "impact":{
-    "particles":[
+    "particles":[ 
       "particles/characters/impactEarth7/impactEarth23.json",
       "particles/characters/impactEarth7/impactEarth24.json",
       "particles/characters/impactEarth7/impactEarth25.json",

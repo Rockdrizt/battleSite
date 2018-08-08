@@ -1,8 +1,8 @@
 {
   "timing":{
-    "stop":2000,
+    "stop":1500,
     "removal":2700,
-    "hit":2000
+    "hit":1500
     },
     "soundID":"tournamentSwoosh6",
     
@@ -58,13 +58,13 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":800
+      "value":500
     },
       {
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":1300
+      "value":1000
     },
     {
       "index":"to",
