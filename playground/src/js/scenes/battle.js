@@ -83,6 +83,7 @@ var battle = function(){
 
     var TEAM_NAMES = ["alpha", "delta"]
 	var DELAY_APPEAR = 800
+	var YOGOTARS_PER_TEAM = 3
     
     var SIDES = {
 		LEFT:{direction: -1, scale:{x:1}},
@@ -124,6 +125,7 @@ var battle = function(){
     var lifeBars = []
     var scoreRound = []
     var usedQuestions = []
+	var layers
     
     var mainYogotorars
     var mainSpine
@@ -511,13 +513,14 @@ var battle = function(){
 			obj.setAnimation(["idle_normal"], true)
 			obj.scale.x = obj.prevScale
 			obj.updatePosition()
+			layers[obj.index].add(obj)
 		}
 
 		for (var playerIndex = 0; playerIndex < team.length; playerIndex++) {
 			var character = team[playerIndex]
 
-			var playerPos = playerIndex - 1 < 0 ? ORDER_POSITIONS.length - 1 : playerIndex - 1
-			var newPosition = ORDER_POSITIONS[playerPos]
+			var newPlayerIndex = playerIndex - 1 < 0 ? ORDER_POSITIONS.length - 1 : playerIndex - 1
+			var newPosition = ORDER_POSITIONS[newPlayerIndex]
 			copyPositions[playerIndex] = newPosition
 
 			var xOffset = CHARACTER_CENTER_OFFSET.x * side.scale.x + newPosition.x * side.scale.x
@@ -536,12 +539,14 @@ var battle = function(){
 				toScaleX *= -1
 			}
 
+			character.index = newPlayerIndex
 			game.add.tween(character.scale).to({x:toScaleX, y:newPosition.scale.y}, 490, null, true)
 			var moveTween = game.add.tween(character).to({x:characterPos.x, y:characterPos.y}, 500, null, true)
 			moveTween.onComplete.add(returnNormal)
 
-			if(ORDER_POSITIONS[playerPos] === POSITIONS.MID)
+			if(ORDER_POSITIONS[newPlayerIndex] === POSITIONS.MID)
 				mainYogotorars[teamIndex] = character
+
 		}
 
 		yogoGroup.sort('y', Phaser.Group.SORT_ASCENDING)
@@ -618,6 +623,13 @@ var battle = function(){
         yogoGroup.y = game.world.centerY
         sceneGroup.add(yogoGroup)
 
+		layers = []
+		for(var lIndex = 0; lIndex < YOGOTARS_PER_TEAM; lIndex++){
+			var layer = game.add.group()
+			yogoGroup.add(layer)
+			layers.push(layer)
+		}
+
 		for(var teamIndex = 0; teamIndex < teams.length; teamIndex++){
 			var teamCharacters = teams[teamIndex]
 			var side = ORDER_SIDES[teamIndex]
@@ -641,7 +653,7 @@ var battle = function(){
 				character.alpha = 0
                 character.name = characterName
                 character.skin = skin
-				yogoGroup.add(character)
+				layers[charIndex].add(character)
 				createAppear(character, teamIndex, charIndex)
 
 				var rect = game.add.graphics()
@@ -993,6 +1005,7 @@ var battle = function(){
             //createMenuAnimations()
             //battleSong = sound.play("battleSong", {loop:true, volume:0.6})
             createWhite()
+
             game.add.tween(sceneGroup).from({alpha:0},500, Phaser.Easing.Cubic.Out,true)
 		},
         setCharacter:setCharacter,
