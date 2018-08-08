@@ -32,7 +32,7 @@
   "absolutePosition" : true,
   "textureFileName" : "lunaSuper4.png",
   "startColorVarianceAlpha" : 0.1303125023841858,
-  "maxParticles" : 400,
+  "maxParticles" : 200,
   "finishColorVarianceGreen" : 0,
   "finishParticleSize" : 0,
   "duration" : 0.15,
