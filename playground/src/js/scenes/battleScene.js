@@ -93,6 +93,7 @@ var battleScene = function() {
 	var ORDER_SIDES = [SIDES.LEFT, SIDES.RIGHT]
 	var ORDER_POSITIONS = [POSITIONS.UP, POSITIONS.MID, POSITIONS.DOWN]
 	var CHARACTER_CENTER_OFFSET = {x:-200, y: -200}
+	var YOGOTARS_PER_TEAM = 3
 
 	var sceneGroup
 	var clickLatch
@@ -101,6 +102,7 @@ var battleScene = function() {
 	var mainSpine
 	var mainYogotorars
 	var attackCounter
+	var layers
 
 	function loadSounds() {
 
@@ -281,7 +283,7 @@ var battleScene = function() {
 				console.log("postion", character.position)
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
 				character.teamIndex = teamIndex
-				sceneGroup.add(character)
+				layers[charIndex].add(character)
 
 				var rect = game.add.graphics()
 				rect.beginFill(0xffffff)
@@ -315,6 +317,7 @@ var battleScene = function() {
 			groupPoint.takeDamage = takeGroupDamage.bind(groupPoint)
 			groupPoint.side = side.direction
 			teamCharacters.groupPoint = groupPoint
+			groupPoint.alpha = 0
 
 			sceneGroup.add(groupPoint)
 
@@ -361,6 +364,13 @@ var battleScene = function() {
 			stage.anchor.setTo(0.5, 0.5)
 
 			initialize()
+
+			layers = []
+			for(var lIndex = 0; lIndex < YOGOTARS_PER_TEAM; lIndex++){
+				var layer = game.add.group()
+				sceneGroup.add(layer)
+				layers.push(layer)
+			}
 
 			placeYogotars()
 
