@@ -16,3 +16,10 @@ playground/dist/battle/spines/Luna/luna.json
 playground/dist/js/script.min.js
 playground/src/battle/js/test.js
 playground/dist/battle/js/test.js
+playground/dist/battle/data/projectiles/superLuna2.json
+playground/dist/battle/data/projectiles/superLuna1.json
+playground/dist/battle/data/projectiles/superLuna2.json
+playground/dist/battle/data/projectiles/superLuna3.json
+playground/dist/battle/spines/Luna/luna.json
+playground/dist/battle/spines/Luna/luna_projectiles.json
+playground/dist/js/script.min.js
