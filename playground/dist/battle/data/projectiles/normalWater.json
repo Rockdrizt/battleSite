@@ -18,10 +18,9 @@
   ],
   "impact":{
     "particles":[
-      "particles/characters/impactWater6/impactWater15.json",
-      "particles/characters/impactWater6/impactWater16.json",
-      "particles/characters/impactWater6/impactWater17.json",
-      "particles/characters/impactWater6/impactWater18.json"
+      "particles/characters/impactWater8/impactWater21.json",
+      "particles/characters/impactWater8/impactWater22.json",
+      "particles/characters/impactWater8/impactWater23.json"
     ],
     "soundID":"tournamentImpactWater1"
   },

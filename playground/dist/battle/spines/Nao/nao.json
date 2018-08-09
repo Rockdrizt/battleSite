@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "DZ+KRr0b3FfxycalvZAZOaqv/MI", "spine": "3.2.01", "width": 1409.2, "height": 918.4, "images": "" },
+"skeleton": { "hash": "j1sZClrDIip8o0rR0EGCdpuUJ5g", "spine": "3.2.01", "width": 1409.2, "height": 918.4, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "cog", "parent": "root", "y": 35.59, "color": "000000ff" },
@@ -5328,9 +5328,9 @@
 					{ "time": 1.5333, "color": "ffffffff" }
 				],
 				"attachment": [
-					{ "time": 0, "name": "eyes_e1" },
+					{ "time": 0, "name": "eyes_d4" },
 					{ "time": 0.4, "name": "eyes_d4" },
-					{ "time": 1.5333, "name": "eyes_e1" }
+					{ "time": 1.5333, "name": "eyes_d4" }
 				]
 			},
 			"faceshield": {
@@ -27865,11 +27865,8 @@
 					{ "time": 0.5333, "x": 2.55, "y": 1.82 }
 				],
 				"scale": [
-					{ "time": 0, "x": 1.156, "y": 1, "curve": "stepped" },
-					{ "time": 0.1, "x": 1, "y": 1, "curve": "stepped" },
-					{ "time": 0.3333, "x": 1.002, "y": 1, "curve": "stepped" },
-					{ "time": 0.4333, "x": 0.957, "y": 1, "curve": "stepped" },
-					{ "time": 0.5333, "x": 1.156, "y": 1 }
+					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.5333, "x": 1, "y": 1 }
 				]
 			},
 			"forearm1": {
@@ -28064,13 +28061,8 @@
 					{ "time": 0.5333, "x": -7.14, "y": 5.42 }
 				],
 				"scale": [
-					{ "time": 0, "x": 1.794, "y": 1 },
-					{ "time": 0.0666, "x": 1.563, "y": 1 },
-					{ "time": 0.1, "x": 1.291, "y": 1 },
-					{ "time": 0.2666, "x": 1.194, "y": 1 },
-					{ "time": 0.3333, "x": 1.1, "y": 0.934 },
-					{ "time": 0.3666, "x": 1.254, "y": 1 },
-					{ "time": 0.5333, "x": 1.794, "y": 1 }
+					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.5333, "x": 1, "y": 1 }
 				]
 			},
 			"shin2": {
@@ -28097,15 +28089,8 @@
 					{ "time": 0.5333, "x": -3.88, "y": 0.41 }
 				],
 				"scale": [
-					{ "time": 0, "x": 1.64, "y": 1 },
-					{ "time": 0.0666, "x": 1.329, "y": 1 },
-					{ "time": 0.1, "x": 1.424, "y": 0.985 },
-					{ "time": 0.1666, "x": 1.213, "y": 0.942 },
-					{ "time": 0.2666, "x": 1.203, "y": 1 },
-					{ "time": 0.3333, "x": 1.376, "y": 0.942 },
-					{ "time": 0.3666, "x": 1.464, "y": 0.942 },
-					{ "time": 0.4333, "x": 1.347, "y": 0.942 },
-					{ "time": 0.5333, "x": 1.64, "y": 1 }
+					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 0.5333, "x": 1, "y": 1 }
 				]
 			},
 			"torso": {

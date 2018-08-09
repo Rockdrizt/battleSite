@@ -4,7 +4,7 @@
     "removal":2700,
     "hit":1400
     },
-    "soundID":"tournamentSwoosh6",
+    "soundID":"tournamentRockWoosh1",
     
   "spines":[
     {
@@ -19,7 +19,10 @@
     "particles":[
       "particles/characters/lunaSuper1/lunaSuper1.json",
       "particles/characters/lunaSuper1/lunaSuper2.json",
-      "particles/characters/lunaSuper1/lunaSuper3.json"
+      "particles/characters/lunaSuper1/lunaSuper3.json",
+      "particles/characters/lunaSuper1/lunaSuper5.json",
+      "particles/characters/lunaSuper1/lunaSuper6.json"
+                
     ],
     "soundID":"tournamentRockSmash1"
   },
