@@ -1,8 +1,8 @@
 {
   "timing":{
-    "stop":1500,
+    "stop":1400,
     "removal":2700,
-    "hit":1500
+    "hit":1400
     },
     "soundID":"tournamentSwoosh6",
     
@@ -11,7 +11,7 @@
       "file":"spines/Luna/luna_projectiles.json",
       "scales":["@0.5x"],
       "skin":"luna_projectiles",
-      "animations":["in_super", "idle_super", "idle_super"]
+      "animations":["in_super1", "idle_super1", "idle_super1"]
     }
   ],
     
@@ -58,7 +58,7 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":500
+      "value":400
     },
       {
       "id":"set",
@@ -76,7 +76,7 @@
       "index":"rotate",
       "id":"execute",
       "variable":"self",
-      "parameters":[1000,1000]
+      "parameters":[500,1000]
     }
   ]
 }
