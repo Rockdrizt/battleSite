@@ -73,8 +73,20 @@ var battle = function(){
         ],
         spines:[
             {
-				name:"background",
-				file:"spines/background/Background2.json",
+				name:"cubes",
+				file:"spines/background/cube/cubes.json",
+			},
+            {
+				name:"energy_cylinder",
+				file:"spines/background/energy_cylinder/energy_cylinder.json",
+			},
+            {
+				name:"triangle",
+				file:"spines/background/triangle/triangle.json",
+			},
+            {
+				name:"floor",
+				file:"spines/background/floor/floor.json",
 			}
 		],
         particles: [
@@ -153,12 +165,24 @@ var battle = function(){
     
 	function createBackground(){
         
-//        var background = sceneGroup.create(0, 0, "background")
-//        background.width = game.world.width
-//        background.height = game.world.height
+        var background = sceneGroup.create(0, 0, "background")
+        background.width = game.world.width
+        background.height = game.world.height
         
-        var background = spineLoader.createSpine("background", "normal", "idle", game.world.centerX, game.world.centerY, true)
-        sceneGroup.add(background)
+//        var background = spineLoader.createSpine("background", "normal", "idle", game.world.centerX, game.world.centerY, true)
+//        sceneGroup.add(background)
+        
+        var cubes = spineLoader.createSpine("cubes", "normal", "idle", game.world.centerX, game.world.centerY, true)
+        sceneGroup.add(cubes)
+        
+        var cylinder = spineLoader.createSpine("energy_cylinder", "normal", "idle", game.world.centerX, game.world.centerY, true)
+        sceneGroup.add(cylinder)
+        
+        var triangle = spineLoader.createSpine("triangle", "normal", "idle", game.world.centerX, game.world.centerY, true)
+        sceneGroup.add(triangle)
+        
+        var floor = spineLoader.createSpine("floor", "normal", "idle", game.world.centerX, game.world.centerY, true)
+        sceneGroup.add(floor)
         
         blackMask = game.add.graphics()
         blackMask.beginFill(0x000000)
