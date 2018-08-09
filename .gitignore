@@ -8,3 +8,11 @@ firebase2/node_modules/
 *.DS_Store
 playground/node_modules/
 node_modules/
+playground/dist/battle/js/test.js
+playground/dist/js/script.min.js
+playground/dist/battle/spines/Luna/luna.json
+playground/src/battle/js/test.js
+playground/dist/battle/spines/Luna/luna.json
+playground/dist/js/script.min.js
+playground/src/battle/js/test.js
+playground/dist/battle/js/test.js
