@@ -513,7 +513,11 @@ var battle = function(){
 			obj.setAnimation(["idle_normal"], true)
 			obj.scale.x = obj.prevScale
 			obj.updatePosition()
-			//layers[obj.index].add(obj)
+
+			if(obj.index < team.length - 1)
+			layers[obj.index].add(obj)
+
+			team[obj.index] = obj
 		}
 
 		for (var playerIndex = 0; playerIndex < team.length; playerIndex++) {
@@ -547,10 +551,15 @@ var battle = function(){
 			if(ORDER_POSITIONS[newPlayerIndex] === POSITIONS.MID)
 				mainYogotorars[teamIndex] = character
 
+			if(newPlayerIndex === team.length - 1) {
+				layers[newPlayerIndex].add(character)
+				layers[newPlayerIndex].sendToBack(character)
+			}
+
 		}
 
 		yogoGroup.sort('y', Phaser.Group.SORT_ASCENDING)
-		ORDER_POSITIONS = copyPositions
+		//ORDER_POSITIONS = copyPositions
         
         rotateMinis(teamIndex)
 	}
@@ -653,6 +662,7 @@ var battle = function(){
 				character.alpha = 0
                 character.name = characterName
                 character.skin = skin
+				character.index = charIndex
 				layers[charIndex].add(character)
 				createAppear(character, teamIndex, charIndex)
 

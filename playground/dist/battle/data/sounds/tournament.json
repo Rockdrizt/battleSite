@@ -363,6 +363,9 @@
 "tournamentMassiveExplosion1":"sounds/characters/massiveExplosion1.mp3",
 "tournamentMassiveSwoosh1":"sounds/characters/massiveSwoosh1.mp3",
 "tournamentScifiSparks1":"sounds/characters/scifiSparks1.mp3",
-"tournamentScifiSpawn1":"sounds/characters/scifiSpawn1.mp3"    
+"tournamentScifiSpawn1":"sounds/characters/scifiSpawn1.mp3",
+"tournamentRockWoosh1":"sounds/characters/rockWoosh1.mp3",
+"tournamentRockWoosh2":"sounds/characters/rockWoosh2.mp3",
+"tournamentRockWoosh3":"sounds/characters/rockWoosh3.mp3"    
     
 }
