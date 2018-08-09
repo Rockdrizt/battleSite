@@ -11,7 +11,7 @@
   "rotationEnd" : 0,
   "startColorVarianceBlue" : 0,
   "rotatePerSecondVariance" : 0,
-  "particleLifespan" : 0.5,
+  "particleLifespan" : 0.2,
   "minRadius" : 0,
   "configName" : "normalAttackWater9",
   "tangentialAcceleration" : -50,
@@ -49,7 +49,7 @@
   "radialAccelVariance" : 0,
   "textureImageData" : "",
   "tangentialAccelVariance" : -101.5625,
-  "particleLifespanVariance" : 0.5,
+  "particleLifespanVariance" : 0.1,
   "angleVariance" : -360,
   "angle" : -0,
   "maxRadius" : 100

@@ -1,17 +1,17 @@
 {
   "timing":{
-    "stop":1500,
+    "stop":1400,
     "removal":2700,
-    "hit":1500
+    "hit":1400
     },
-    "soundID":"tournamentSwoosh6",
+    "soundID":"tournamentRockWoosh1",
     
   "spines":[
     {
       "file":"spines/Luna/luna_projectiles.json",
       "scales":["@0.5x"],
       "skin":"luna_projectiles",
-      "animations":["in_super", "idle_super", "idle_super"]
+      "animations":["in_super1", "idle_super1", "idle_super1"]
     }
   ],
     
@@ -19,7 +19,10 @@
     "particles":[
       "particles/characters/lunaSuper1/lunaSuper1.json",
       "particles/characters/lunaSuper1/lunaSuper2.json",
-      "particles/characters/lunaSuper1/lunaSuper3.json"
+      "particles/characters/lunaSuper1/lunaSuper3.json",
+      "particles/characters/lunaSuper1/lunaSuper5.json",
+      "particles/characters/lunaSuper1/lunaSuper6.json"
+                
     ],
     "soundID":"tournamentRockSmash1"
   },
@@ -58,7 +61,7 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":500
+      "value":400
     },
       {
       "id":"set",
@@ -76,7 +79,7 @@
       "index":"rotate",
       "id":"execute",
       "variable":"self",
-      "parameters":[1000,1000]
+      "parameters":[500,1000]
     }
   ]
 }

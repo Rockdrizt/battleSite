@@ -11,10 +11,24 @@
 		],
 		"super": [
             {
-				"id": "superLuna",
-				"attachment": "particle11",
-				"delay": 600,
+				"id": "superLuna1",
+				"attachment": "particle13",
+				"delay": 700,
+				"multiplier": 1,
+                "hit": false
+			},
+            {
+				"id": "superLuna2",
+				"attachment": "particle14",
+				"delay": 700,
 				"multiplier": 1
+			},
+            {
+				"id": "superLuna3",
+				"attachment": "particle15",
+				"delay": 700,
+				"multiplier": 1,
+                "hit": false
 			}
 
 		],
