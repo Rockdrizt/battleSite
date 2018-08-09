@@ -14,7 +14,8 @@
 				"id": "superEstrella",
 				"attachment": "particle4",
 				"delay": 1000,
-				"multiplier": 1
+				"multiplier": 1,
+                "hit": false
 			},
              {
 				"id": "superEstrella",
@@ -26,7 +27,8 @@
 				"id": "superEstrella",
 				"attachment": "particle4",
 				"delay": 1400,
-				"multiplier": 1
+				"multiplier": 1,
+                "hit": false 
 			}
 
 		],

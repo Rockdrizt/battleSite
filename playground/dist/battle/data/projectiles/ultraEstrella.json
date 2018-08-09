@@ -28,6 +28,7 @@
       "particles/characters/estrellaSuper1/estrellaSuper5.json",
       "particles/characters/estrellaSuper1/estrellaSuper6.json"
     ],
+    "forcePosition":{"offsetX":0,"offsetY":-200},  
     "soundID":"tournamentIceHit2"
   },
   "onShoot":[
