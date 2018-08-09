@@ -22,7 +22,7 @@ var _TOURNAMENT = {
   SERVER : {
     PORT : 3004,
     BASE_DIR : "../",
-    START_PATH : "playground/src/test.html"
+    START_PATH : "playground/src/battle/test.html"
   },
   FILE_WATCH : [
     '.html',
@@ -33,10 +33,10 @@ var _TOURNAMENT = {
     JS : true,
     JS_SINGLE : true,
     JS_SINGLE_SCRIPTS : [
-        "src/js/main.js",
-        "src/js/scenes/battleScene.js",
-        "src/js/scenes/preload.js",
-        "src/js/libs/spineLoader.js"
+        "src/battle/js/main.js",
+        "src/battle/js/scenes/battleScene.js",
+        "src/battle/js/scenes/preload.js",
+        "src/battle/js/libs/spineLoader.js"
     ],
     CSS : true
   },
@@ -83,8 +83,8 @@ var _TOURNAMENT = {
     ]
   },
   BASE_CONFIG: {
-    FOLDERS : "dist src/css src/js src/images",
-    FILES : ["src/index.html", "src/js/main.js", "src/css/index.css"]
+    FOLDERS : "dist src/battle/css src/battle/js src/battle/images",
+    FILES : ["src/battle/index.html", "src/battle/js/main.js", "src/battle/css/index.css"]
   },
   DEPENDENCIES : {
     OBFUSCATE : {

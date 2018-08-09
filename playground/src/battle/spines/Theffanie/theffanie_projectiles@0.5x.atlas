@@ -1,0 +1,403 @@
+
+theffanie_projectiles.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fenix/fenix_00000
+  rotate: true
+  xy: 1008, 354
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+fenix/fenix_00001
+  rotate: true
+  xy: 1511, 921
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+fenix/fenix_00002
+  rotate: true
+  xy: 1510, 354
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_1
+  rotate: false
+  xy: 2, 1473
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_2
+  rotate: false
+  xy: 2, 906
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_3
+  rotate: false
+  xy: 505, 1473
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_4
+  rotate: false
+  xy: 2, 339
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_5
+  rotate: false
+  xy: 505, 906
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_6
+  rotate: false
+  xy: 1008, 1473
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_7
+  rotate: false
+  xy: 505, 339
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_8
+  rotate: false
+  xy: 1008, 906
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_9
+  rotate: false
+  xy: 1511, 1473
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/fireball_halo1
+  rotate: true
+  xy: 2, 26
+  size: 59, 98
+  orig: 59, 98
+  offset: 0, 0
+  index: -1
+normal1/fireball_halo2
+  rotate: true
+  xy: 102, 26
+  size: 59, 98
+  orig: 59, 98
+  offset: 0, 0
+  index: -1
+normal1/fireball_halo3
+  rotate: true
+  xy: 202, 26
+  size: 59, 98
+  orig: 59, 98
+  offset: 0, 0
+  index: -1
+normal1/fireball_halo4
+  rotate: true
+  xy: 302, 26
+  size: 59, 98
+  orig: 59, 98
+  offset: 0, 0
+  index: -1
+proyect/proyectile_00000
+  rotate: false
+  xy: 2, 87
+  size: 350, 250
+  orig: 350, 250
+  offset: 0, 0
+  index: -1
+proyect/proyectile_00001
+  rotate: false
+  xy: 354, 87
+  size: 350, 250
+  orig: 350, 250
+  offset: 0, 0
+  index: -1
+proyect/proyectile_00002
+  rotate: false
+  xy: 706, 87
+  size: 350, 250
+  orig: 350, 250
+  offset: 0, 0
+  index: -1
+proyect/proyectile_00003
+  rotate: false
+  xy: 1058, 102
+  size: 350, 250
+  orig: 350, 250
+  offset: 0, 0
+  index: -1
+proyect/proyectile_00004
+  rotate: false
+  xy: 1410, 102
+  size: 350, 250
+  orig: 350, 250
+  offset: 0, 0
+  index: -1
+proyect/proyectile_00005
+  rotate: true
+  xy: 1762, 2
+  size: 350, 250
+  orig: 350, 250
+  offset: 0, 0
+  index: -1
+
+theffanie_projectiles2.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fenix/fenix_00003
+  rotate: false
+  xy: 2, 1516
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+fenix/fenix_00004
+  rotate: false
+  xy: 2, 1014
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+fenix/fenix_00005
+  rotate: false
+  xy: 554, 1516
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+fenix/fenix_00006
+  rotate: false
+  xy: 2, 512
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+fenix/fenix_00007
+  rotate: false
+  xy: 554, 1014
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+fenix/fenix_00008
+  rotate: false
+  xy: 1106, 1516
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+fenix/fenix_00009
+  rotate: false
+  xy: 2, 10
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+fenix/fenix_00010
+  rotate: false
+  xy: 554, 512
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+fenix/fenix_00011
+  rotate: false
+  xy: 1106, 1014
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+fenix/fenix_00012
+  rotate: false
+  xy: 554, 10
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+fenix/fenix_00013
+  rotate: false
+  xy: 1106, 512
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+fenix/fenix_00014
+  rotate: false
+  xy: 1106, 10
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+proyect/proyectile_00006
+  rotate: false
+  xy: 1658, 1766
+  size: 350, 250
+  orig: 350, 250
+  offset: 0, 0
+  index: -1
+proyect/proyectile_00007
+  rotate: false
+  xy: 1658, 1514
+  size: 350, 250
+  orig: 350, 250
+  offset: 0, 0
+  index: -1
+proyect/proyectile_00008
+  rotate: false
+  xy: 1658, 1262
+  size: 350, 250
+  orig: 350, 250
+  offset: 0, 0
+  index: -1
+proyect/proyectile_00009
+  rotate: false
+  xy: 1658, 1010
+  size: 350, 250
+  orig: 350, 250
+  offset: 0, 0
+  index: -1
+proyect/proyectile_00010
+  rotate: false
+  xy: 1658, 758
+  size: 350, 250
+  orig: 350, 250
+  offset: 0, 0
+  index: -1
+proyect/proyectile_00011
+  rotate: false
+  xy: 1658, 506
+  size: 350, 250
+  orig: 350, 250
+  offset: 0, 0
+  index: -1
+proyect/proyectile_00012
+  rotate: false
+  xy: 1658, 254
+  size: 350, 250
+  orig: 350, 250
+  offset: 0, 0
+  index: -1
+proyect/proyectile_00013
+  rotate: false
+  xy: 1658, 2
+  size: 350, 250
+  orig: 350, 250
+  offset: 0, 0
+  index: -1
+
+theffanie_projectiles3.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fenix/fenix_00015
+  rotate: false
+  xy: 2, 504
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+fenix/fenix_00016
+  rotate: false
+  xy: 2, 2
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+fenix/fenix_00017
+  rotate: false
+  xy: 554, 504
+  size: 550, 500
+  orig: 550, 500
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola1
+  rotate: false
+  xy: 1106, 853
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola2
+  rotate: false
+  xy: 554, 99
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola3
+  rotate: false
+  xy: 906, 351
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola4
+  rotate: false
+  xy: 1106, 700
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola5
+  rotate: false
+  xy: 1265, 853
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola6
+  rotate: false
+  xy: 713, 99
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola7
+  rotate: false
+  xy: 1106, 547
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola8
+  rotate: false
+  xy: 1265, 700
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola9
+  rotate: false
+  xy: 1424, 853
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+proyect/proyectile_00014
+  rotate: false
+  xy: 554, 252
+  size: 350, 250
+  orig: 350, 250
+  offset: 0, 0
+  index: -1
