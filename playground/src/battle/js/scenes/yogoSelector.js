@@ -601,7 +601,10 @@ var yogoSelector = function(){
 
 	function removeCharacter(obj, teamGroup){
 
-		var index = teamGroup.auxArray.indexOf(obj.token.tag)
+		var index = teamGroup.auxArray.indexOf(obj.tag)
+		if(index < 0)
+			return
+
 		teamGroup.slots[index].check = false
 		teamGroup.auxArray[index] = -1
 		teamGroup.currentSelect = -1
@@ -1012,9 +1015,13 @@ var yogoSelector = function(){
 			var yogotar = player.avatar
 			var slot = teamGroup.slots[pIndex]
 
-			if((slot.yogo)&&(slot.yogo.name)&&(!yogotar)){
+			if((slot.yogo)&&(slot.yogo.name !== yogotar)){
 				removeCharacter(tokens[slot.yogo.name], teamGroup)
-			}else if(yogotar){
+				if(yogotar){
+					pressBtn(tokens[yogotar], numTeam)
+					clickOk(numTeam)
+				}
+			}else if(!slot.yogo && yogotar){
 				pressBtn(tokens[yogotar], numTeam)
 				clickOk(numTeam)
 			}
@@ -1065,18 +1072,18 @@ var yogoSelector = function(){
 			createReady()
             createWhite()
 
-			//server.addEventListener("onPlayersChange", )
-			game.time.events.add(6000, function () {
-				var data = {
-					numTeam:1,
-					players:[
-						{avatar:"eagle"},
-						{avatar:false},
-						{avatar:false}
-					]
-				}
-				onPlayersChange(data)
-			})
+			server.addEventListener("onPlayersChange", onPlayersChange)
+			// game.time.events.add(6000, function () {
+			// 	var data = {
+			// 		numTeam:1,
+			// 		players:[
+			// 			{avatar:"eagle"},
+			// 			{avatar:false},
+			// 			{avatar:false}
+			// 		]
+			// 	}
+			// 	onPlayersChange(data)
+			// })
 		}
 	}
 }()
