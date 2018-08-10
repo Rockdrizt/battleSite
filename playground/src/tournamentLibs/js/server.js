@@ -381,21 +381,24 @@ function Server(){
 				var selectt1 = database.ref(id_game + "/t1/players");
 				selectt1.on('value', function (snapshot) {
 					var players = snapshot.val()
-					players.numTeam = 1
 					// console.log(ready)
 					if (players) {
-						self.fireEvent('onPlayersChange', [players]);
+						var objReturn = {
+							numTeam : 1,
+							players : players
+						}
+						self.fireEvent('onPlayersChange', [objReturn]);
 					}
 				});
 
 				var selectt2 = database.ref(id_game + "/t2/players");
 				selectt2.on('value', function (snapshot) {
 					var players = snapshot.val()
-					players.numTeam = 2
-					// console.log(ready)
-					if (players) {
-						self.fireEvent('onPlayersChange', [players]);
+					var objReturn = {
+						numTeam : 2,
+						players : players
 					}
+					self.fireEvent('onPlayersChange', [objReturn]);
 				});
 
 				var readyt1 = database.ref(id_game + "/t1/ready");

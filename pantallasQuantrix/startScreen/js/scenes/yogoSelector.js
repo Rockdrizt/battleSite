@@ -17,7 +17,7 @@ var yogoSelector = function(){
 		}
 	}
     
-	assets = {
+	var assets = {
         atlases: [
             {   
                 name: "atlas.yogoSelector",

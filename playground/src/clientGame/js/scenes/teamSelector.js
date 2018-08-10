@@ -17,6 +17,20 @@ var teamSelector = function(){
 		}
 	}
 
+	var localizationData = {
+		"EN":{
+			"howTo":"How to Play?",
+			"moves":"Moves left",
+			"stop":"Stop!"
+		},
+
+		"ES":{
+			"moves":"Movimientos extra",
+			"howTo":"¿Cómo jugar?",
+			"stop":"¡Detener!"
+		}
+	}
+
 	var assets = {
 		atlases: [
 			{
@@ -121,6 +135,7 @@ var teamSelector = function(){
 			}
 		]
 	}
+
 	var TEAMS = {
 		1: {
 			name: "Alpha Team",
@@ -156,6 +171,7 @@ var teamSelector = function(){
 	var loadingGroup
 	var splashArtGroup
 	var readyGroup
+    var cliente
 
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -165,7 +181,7 @@ var teamSelector = function(){
 
 		game.stage.backgroundColor = "#0D014D"
 
-        var cliente = parent.cliente || {}
+        cliente = parent.cliente || {}
         var numTeam = cliente.numTeam || DEFAULT_NUMTEAM
         var config = TEAMS[numTeam]
 
@@ -546,9 +562,16 @@ var teamSelector = function(){
 	}
 	
 	function getTeam() {
+		var players = []
 		for(var playerIndex = 0; playerIndex < teamGroup.slots.length; playerIndex++){
 			var player = teamGroup.slots[playerIndex]
+			var playerObj = {
+				avatar:player.yogo ? player.yogo.name : false
+			}
+			players.push(playerObj)
 		}
+
+		return players
 	}
 
 	function clickOk(){
@@ -573,7 +596,7 @@ var teamSelector = function(){
 			aux === -1 ? teamGroup.teamPivot = 3 : teamGroup.teamPivot = aux
 			
 			var teamPlayers = getTeam()
-			cliente.selectYogotar()
+			cliente.selectYogotar(teamPlayers)
 
 			if(teamGroup.teamPivot == 3){
 				buttonsGroup.setAll("token.canClick", false)
