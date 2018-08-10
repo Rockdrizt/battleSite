@@ -5,7 +5,7 @@
 			{
 				"id": "normalWind",
 				"attachment": "particle5",
-				"delay": 700,
+				"delay": 780,
 				"multiplier": 1
 			}
 		],

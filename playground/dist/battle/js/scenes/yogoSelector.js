@@ -163,8 +163,7 @@ var yogoSelector = function(){
 	var playersSelected
 	var VS
 	var bmd
-	var buttonsList
-	var platforms
+	var tokens
 
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -175,11 +174,7 @@ var yogoSelector = function(){
 		game.stage.backgroundColor = "#0D014D"
 		chosenOne = 1
 		playersSelected = []
-		buttonsList = []
-		platforms = []
-		for(var pIndex = 0; pIndex < NUM_PLAYERS_EACH; pIndex++){
-			platforms[pIndex] = []
-		}
+		tokens = {}
 
 		loadSounds()
 	}
@@ -232,11 +227,9 @@ var yogoSelector = function(){
             
             var plat = platformGroup.create(game.world.centerX * pivotX, game.world.centerY + 50, "atlas.yogoSelector", "plat1")
             plat.anchor.setTo(0.5)
-			platforms[0].push(plat)
             
             var plat = platformGroup.create(game.world.centerX * pivotX  + game.world.centerX, game.world.centerY + 50, "atlas.yogoSelector", "plat2")
             plat.anchor.setTo(0.5)
-			platforms[1].push(plat)
             
             pivotX += 0.25
         }
@@ -396,7 +389,8 @@ var yogoSelector = function(){
 				aux = 0
 			}
 
-			buttonsList.push(buttonsGroup)
+			var yogotarName = assets.spines[i].name
+			tokens[yogotarName] = token
 		}
 
 		buttonsGroup.children[0].yogotar.x -= 30
@@ -601,7 +595,7 @@ var yogoSelector = function(){
 		}
 
 		yogoNotUsed.setAlive(true)
-		yogoNotUsed.setAnimation(["wait"], true)
+		//yogoNotUsed.setAnimation(["wait"], true)
 		return yogoNotUsed
 	}
 
@@ -692,14 +686,14 @@ var yogoSelector = function(){
 		},this)
 	}
 
-	function clickOk(btn){
+	function clickOk(numTeam){
 
 		var teamGroup
-		btn.tag === 1 ? teamGroup = alphaGroup : teamGroup = bravoGroup
+		numTeam === 1 ? teamGroup = alphaGroup : teamGroup = bravoGroup
 
 		if(teamGroup.currentSelect !== -1 && teamGroup.teamPivot < 3 && !teamGroup.auxArray.includes(teamGroup.currentSelect)){
 
-			game.add.tween(btn.scale).to({x: 0.5, y:0.5}, 100, Phaser.Easing.linear, true, 0, 0, true)
+			//game.add.tween(btn.scale).to({x: 0.5, y:0.5}, 100, Phaser.Easing.linear, true, 0, 0, true)
 
 			buttonsGroup.children[teamGroup.currentSelect].color += teamGroup.color
 			turnOn(buttonsGroup.children[teamGroup.currentSelect])
@@ -1008,6 +1002,25 @@ var yogoSelector = function(){
         white.alpha = 0
     }
 
+    function onPlayersChange(data){
+		var numTeam = data.numTeam
+		var players = data.players
+		var teamGroup = numTeam == 1 ? alphaGroup : bravoGroup
+
+		for(var pIndex = 0; pIndex < players.length; pIndex++){
+			var player = players[pIndex]
+			var yogotar = player.avatar
+			var slot = teamGroup.slots[pIndex]
+
+			if((slot.yogo)&&(slot.yogo.name)&&(!yogotar)){
+				removeCharacter(tokens[slot.yogo.name], teamGroup)
+			}else if(yogotar){
+				pressBtn(tokens[yogotar], numTeam)
+				clickOk(numTeam)
+			}
+		}
+	}
+
 	return {
 
 		assets: assets,
@@ -1052,7 +1065,18 @@ var yogoSelector = function(){
 			createReady()
             createWhite()
 
-			server.addEventListener("onPlayersChange", )
+			//server.addEventListener("onPlayersChange", )
+			game.time.events.add(6000, function () {
+				var data = {
+					numTeam:1,
+					players:[
+						{avatar:"eagle"},
+						{avatar:false},
+						{avatar:false}
+					]
+				}
+				onPlayersChange(data)
+			})
 		}
 	}
 }()
