@@ -4,6 +4,11 @@
     "removal":1700,
     "hit":500
   },
+  "particles":[
+      "particles/characters/dragonPlasma1/dragonPlasma1.json",
+      "particles/characters/dragonPlasma1/dragonPlasma2.json",
+      "particles/characters/dragonPlasma1/dragonPlasma3.json"
+    ],
   "spines":[
     {
       "file":"spines/Nao/nao_projectiles.json",
