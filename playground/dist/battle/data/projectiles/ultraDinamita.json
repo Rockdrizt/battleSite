@@ -13,7 +13,7 @@
       "file":"spines/Dinamita/dinamita_projectiles.json",
       "scales":["@0.5x"],
       "skin":"dinamita1_projectiles",
-      "animations":["in_ultra", "idle_ultra","idle_ultra","idle_ultra"]
+      "animations":["in_ultra", "idle_ultra"]
     }
   ],
   
