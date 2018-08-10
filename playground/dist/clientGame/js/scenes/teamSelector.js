@@ -544,6 +544,12 @@ var teamSelector = function(){
 		onBtn.alpha = 0
 		okGroup.onBtn = onBtn
 	}
+	
+	function getTeam() {
+		for(var playerIndex = 0; playerIndex < teamGroup.slots.length; playerIndex++){
+			var player = teamGroup.slots[playerIndex]
+		}
+	}
 
 	function clickOk(){
 
@@ -565,6 +571,9 @@ var teamSelector = function(){
 				var aux = teamGroup.auxArray.lastIndexOf(-1) //index
 
 			aux === -1 ? teamGroup.teamPivot = 3 : teamGroup.teamPivot = aux
+			
+			var teamPlayers = getTeam()
+			cliente.selectYogotar()
 
 			if(teamGroup.teamPivot == 3){
 				buttonsGroup.setAll("token.canClick", false)

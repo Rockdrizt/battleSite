@@ -4,10 +4,7 @@
     "removal":1700,
     "hit":600
   },
-  "particles":[
-    "particles/characters/normalProjectileFire1/normalProjectileFire1.json",
-    "particles/characters/normalProjectileFire1/normalProjectileFire2.json"
-  ],
+
   "spines":[
     {
       "file":"spines/Dinamita/dinamita_projectiles.json",

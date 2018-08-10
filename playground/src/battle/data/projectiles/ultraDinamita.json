@@ -1,19 +1,19 @@
 {
   "timing":{
-    "stop":600,
-    "removal":1700,
-    "hit":600
+    "stop":650,
+    "removal":1000,
+    "hit":650
   },
-  "particles":[
-    "particles/characters/normalProjectileFire1/normalProjectileFire1.json",
-    "particles/characters/normalProjectileFire1/normalProjectileFire2.json"
-  ],
+ "particles":[
+      "particles/characters/dinamitaUltra1/dinamitaUltra2.json",
+      "particles/characters/dinamitaUltra1/dinamitaUltra1.json"
+    ],
   "spines":[
     {
       "file":"spines/Dinamita/dinamita_projectiles.json",
       "scales":["@0.5x"],
       "skin":"dinamita1_projectiles",
-      "animations":["in_ultra", "idle_ultra"]
+      "animations":["in_ultra", "idle_ultra","idle_ultra","idle_ultra"]
     }
   ],
   
@@ -69,7 +69,7 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":550
+      "value":650
     },
     {
       "index":"to",
