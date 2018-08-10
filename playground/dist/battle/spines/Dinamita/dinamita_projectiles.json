@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "3gLY3Yz/bIe691quAgc97ZnPJjk", "spine": "3.2.01", "width": 349.19, "height": 311.14, "images": "" },
+"skeleton": { "hash": "7e/BQK4SDDnQOaI96A2tFqxGmV0", "spine": "3.2.01", "width": 349.19, "height": 311.14, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "bone_special_attack", "parent": "root" },
@@ -803,8 +803,8 @@
 			},
 			"cog_ultrabomb": {
 				"rotate": [
-					{ "time": 0, "angle": 13.49, "curve": "stepped" },
-					{ "time": 0.4, "angle": 13.49 }
+					{ "time": 0, "angle": 2.73, "curve": "stepped" },
+					{ "time": 0.4, "angle": 2.73 }
 				],
 				"translate": [
 					{
@@ -830,10 +830,6 @@
 		"drawOrder": [
 			{ "time": 0 },
 			{ "time": 0.4 }
-		],
-		"events": [
-			{ "time": 0, "name": "SPAWN:particle1:dinamitaUltra1", "string": "dinamitaUltra1/dinamitaUltra1.json" },
-			{ "time": 0, "name": "SPAWN:particle2:dinamitaUltra2", "string": "dinamitaUltra1/dinamitaUltra2.json" }
 		]
 	},
 	"in_normal": {
@@ -1872,8 +1868,8 @@
 			},
 			"cog_ultrabomb": {
 				"rotate": [
-					{ "time": 0, "angle": 13.49, "curve": "stepped" },
-					{ "time": 1.1333, "angle": 13.49 }
+					{ "time": 0, "angle": 2.73, "curve": "stepped" },
+					{ "time": 1.1333, "angle": 2.73 }
 				],
 				"translate": [
 					{ "time": 0, "x": -98.85, "y": -434.53 },
