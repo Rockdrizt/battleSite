@@ -35,11 +35,11 @@ function startGame(){
 					}
 				}
 				else {
-					sceneloader.show("yogoSelector")
+					//sceneloader.show("yogoSelector")
 					var loaderScene = sceneloader.getScene("preloaderIntro")
 
 					//loaderScene.onComplete("startScreen")
-					sceneloader.show("battle")
+					sceneloader.show("yogoSelector")
 				}
 	    	}
 
@@ -120,8 +120,8 @@ function startGame(){
 		console.log("createEpicBattle")
     	bootConfigFiles([
             //startScreen,
-            //yogoSelector,
-            battle,
+            yogoSelector,
+            //battle,
     	])
     }
 }

@@ -367,6 +367,8 @@
 "tournamentRockWoosh1":"sounds/characters/rockWoosh1.mp3",
 "tournamentRockWoosh2":"sounds/characters/rockWoosh2.mp3",
 "tournamentRockWoosh3":"sounds/characters/rockWoosh3.mp3",
-"tournamentDeepWater1":"sounds/characters/deepWater1.mp3"
+"tournamentDeepWater1":"sounds/characters/deepWater1.mp3",
+"tournamentWindTwister1":"sounds/characters/windTwister1.mp3",
+"tournamentWindImpact2":"sounds/characters/windImpact2.mp3"    
     
 }
