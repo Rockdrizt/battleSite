@@ -12,7 +12,7 @@
         "super": [
             {
 				"id": "superTheffanie",
-				"attachment": "particle4",
+				"attachment": "particle13",
 				"delay": 1350,
 				"multiplier": 1
 			}
@@ -22,7 +22,7 @@
 			{
 				"id": "ultraTheffanie",
 				"attachment": "particle11",
-				"delay": 2300,
+				"delay": 2200,
 				"multiplier": 1
 			}
 		]

@@ -21,8 +21,9 @@
   ],
   "impact":{
     "particles":[
-      "particles/characters/impactWind5/impactWind16.json",
-      "particles/characters/impactWind5/impactWind17.json"
+      "particles/characters/impactWind8/impactWind26.json",
+      "particles/characters/impactWind8/impactWind27.json",
+      "particles/characters/impactWind8/impactWind28.json"    
     ],
     "soundID":"tournamentImpactWind1"
   },

@@ -4,6 +4,13 @@ size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+normal/particle
+  rotate: false
+  xy: 682, 29
+  size: 108, 72
+  orig: 108, 72
+  offset: 0, 0
+  index: -1
 normal1/dinamita_efecto_ultra_1
   rotate: false
   xy: 2, 1481
@@ -152,8 +159,8 @@ normal1/fireball_halo3
   offset: 0, 0
   index: -1
 normal1/fireball_halo4
-  rotate: false
-  xy: 682, 3
+  rotate: true
+  xy: 792, 42
   size: 59, 98
   orig: 59, 98
   offset: 0, 0

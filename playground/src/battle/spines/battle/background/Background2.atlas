@@ -1,0 +1,321 @@
+
+Background2.png
+size: 4096,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Capa_13
+  rotate: false
+  xy: 2154, 743
+  size: 42, 35
+  orig: 42, 35
+  offset: 0, 0
+  index: -1
+Capa_14
+  rotate: true
+  xy: 1595, 90
+  size: 101, 94
+  orig: 101, 94
+  offset: 0, 0
+  index: -1
+Capa_15
+  rotate: false
+  xy: 2455, 933
+  size: 97, 93
+  orig: 97, 93
+  offset: 0, 0
+  index: -1
+Capa_16
+  rotate: false
+  xy: 1682, 270
+  size: 250, 131
+  orig: 250, 131
+  offset: 0, 0
+  index: -1
+Capa_17
+  rotate: false
+  xy: 2222, 834
+  size: 113, 107
+  orig: 113, 107
+  offset: 0, 0
+  index: -1
+Capa_18
+  rotate: false
+  xy: 2, 403
+  size: 1981, 375
+  orig: 1981, 375
+  offset: 0, 0
+  index: -1
+Capa_19
+  rotate: false
+  xy: 2222, 943
+  size: 231, 404
+  orig: 231, 404
+  offset: 0, 0
+  index: -1
+base
+  rotate: true
+  xy: 2782, 1650
+  size: 117, 43
+  orig: 117, 43
+  offset: 0, 0
+  index: -1
+cube
+  rotate: false
+  xy: 2, 2
+  size: 420, 189
+  orig: 420, 189
+  offset: 0, 0
+  index: -1
+fondo
+  rotate: false
+  xy: 2, 780
+  size: 2218, 1258
+  orig: 2218, 1258
+  offset: 0, 0
+  index: -1
+ligth
+  rotate: false
+  xy: 1985, 544
+  size: 167, 234
+  orig: 167, 234
+  offset: 0, 0
+  index: -1
+ligth2
+  rotate: false
+  xy: 2455, 1232
+  size: 263, 115
+  orig: 263, 115
+  offset: 0, 0
+  index: -1
+particle
+  rotate: false
+  xy: 1934, 384
+  size: 17, 17
+  orig: 17, 17
+  offset: 0, 0
+  index: -1
+particle_sphere
+  rotate: false
+  xy: 2853, 1776
+  size: 53, 52
+  orig: 53, 52
+  offset: 0, 0
+  index: -1
+portal
+  rotate: false
+  xy: 3973, 1901
+  size: 117, 137
+  orig: 117, 137
+  offset: 0, 0
+  index: -1
+secuencia/0000
+  rotate: false
+  xy: 1985, 442
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia/0002
+  rotate: false
+  xy: 2455, 1130
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia/0004
+  rotate: false
+  xy: 677, 91
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia/0006
+  rotate: false
+  xy: 2337, 841
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia/0008
+  rotate: false
+  xy: 2455, 1028
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia/0010
+  rotate: false
+  xy: 2557, 1130
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia/0012
+  rotate: false
+  xy: 779, 91
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia/0014
+  rotate: false
+  xy: 2557, 1028
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia/0016
+  rotate: false
+  xy: 881, 91
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia/0018
+  rotate: false
+  xy: 983, 91
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia/0020
+  rotate: false
+  xy: 1085, 91
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia/0022
+  rotate: false
+  xy: 1187, 91
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia/0024
+  rotate: false
+  xy: 1289, 91
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia/0026
+  rotate: false
+  xy: 1391, 91
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia/0028
+  rotate: false
+  xy: 1493, 91
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia2/sec_00000
+  rotate: false
+  xy: 2, 193
+  size: 558, 208
+  orig: 558, 208
+  offset: 0, 0
+  index: -1
+secuencia2/sec_00002
+  rotate: false
+  xy: 2222, 1559
+  size: 558, 208
+  orig: 558, 208
+  offset: 0, 0
+  index: -1
+secuencia2/sec_00022
+  rotate: false
+  xy: 2222, 1559
+  size: 558, 208
+  orig: 558, 208
+  offset: 0, 0
+  index: -1
+secuencia2/sec_00004
+  rotate: false
+  xy: 2853, 1830
+  size: 558, 208
+  orig: 558, 208
+  offset: 0, 0
+  index: -1
+secuencia2/sec_00020
+  rotate: false
+  xy: 2853, 1830
+  size: 558, 208
+  orig: 558, 208
+  offset: 0, 0
+  index: -1
+secuencia2/sec_00006
+  rotate: false
+  xy: 562, 193
+  size: 558, 208
+  orig: 558, 208
+  offset: 0, 0
+  index: -1
+secuencia2/sec_00018
+  rotate: false
+  xy: 562, 193
+  size: 558, 208
+  orig: 558, 208
+  offset: 0, 0
+  index: -1
+secuencia2/sec_00008
+  rotate: false
+  xy: 2222, 1349
+  size: 558, 208
+  orig: 558, 208
+  offset: 0, 0
+  index: -1
+secuencia2/sec_00016
+  rotate: false
+  xy: 2222, 1349
+  size: 558, 208
+  orig: 558, 208
+  offset: 0, 0
+  index: -1
+secuencia2/sec_00010
+  rotate: false
+  xy: 3413, 1830
+  size: 558, 208
+  orig: 558, 208
+  offset: 0, 0
+  index: -1
+secuencia2/sec_00014
+  rotate: false
+  xy: 3413, 1830
+  size: 558, 208
+  orig: 558, 208
+  offset: 0, 0
+  index: -1
+secuencia2/sec_00012
+  rotate: false
+  xy: 1122, 193
+  size: 558, 208
+  orig: 558, 208
+  offset: 0, 0
+  index: -1
+sphere_1
+  rotate: false
+  xy: 1682, 194
+  size: 74, 74
+  orig: 74, 74
+  offset: 0, 0
+  index: -1
+tube
+  rotate: false
+  xy: 2222, 1769
+  size: 629, 269
+  orig: 629, 269
+  offset: 0, 0
+  index: -1
+tube_2
+  rotate: false
+  xy: 424, 75
+  size: 251, 116
+  orig: 251, 116
+  offset: 0, 0
+  index: -1

@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "eqn7pJZjNlqWlKNuzTM2LMt7lsA", "spine": "3.2.01", "width": 797.92, "height": 842.64, "images": "" },
+"skeleton": { "hash": "ufQCqmjnZgOJa0fAAWskPBHWuyw", "spine": "3.2.01", "width": 797.92, "height": 836.97, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "cog", "parent": "root", "x": -21.24, "y": 35.59, "color": "000000ff" },
@@ -32618,10 +32618,10 @@
 				"offsets": [
 					{ "slot": "forearm2", "offset": 10 },
 					{ "slot": "hand2", "offset": 9 },
-					{ "slot": "cheer_flag", "offset": 29 },
+					{ "slot": "cheer_flag", "offset": 32 },
 					{ "slot": "cheer_glove", "offset": 4 },
-					{ "slot": "hand1", "offset": 16 },
-					{ "slot": "forearm1", "offset": 16 }
+					{ "slot": "hand1", "offset": 15 },
+					{ "slot": "forearm1", "offset": 15 }
 				]
 			},
 			{
@@ -32629,10 +32629,10 @@
 				"offsets": [
 					{ "slot": "forearm2", "offset": 10 },
 					{ "slot": "hand2", "offset": 9 },
-					{ "slot": "cheer_flag", "offset": 29 },
+					{ "slot": "cheer_flag", "offset": 32 },
 					{ "slot": "cheer_glove", "offset": 4 },
-					{ "slot": "hand1", "offset": 16 },
-					{ "slot": "forearm1", "offset": 16 }
+					{ "slot": "hand1", "offset": 15 },
+					{ "slot": "forearm1", "offset": 15 }
 				]
 			}
 		]
@@ -33730,17 +33730,22 @@
 			}
 		},
 		"drawOrder": [
-			{ "time": 0 },
 			{
-				"time": 0.2666,
+				"time": 0,
 				"offsets": [
-					{ "slot": "gun", "offset": 3 },
-					{ "slot": "arm1", "offset": 5 },
-					{ "slot": "hand1", "offset": 5 },
-					{ "slot": "forearm1", "offset": 5 }
+					{ "slot": "arm1", "offset": 18 },
+					{ "slot": "hand1", "offset": 16 },
+					{ "slot": "forearm1", "offset": 16 }
 				]
 			},
-			{ "time": 0.8 }
+			{
+				"time": 0.8,
+				"offsets": [
+					{ "slot": "arm1", "offset": 18 },
+					{ "slot": "hand1", "offset": 16 },
+					{ "slot": "forearm1", "offset": 16 }
+				]
+			}
 		]
 	},
 	"wait": {

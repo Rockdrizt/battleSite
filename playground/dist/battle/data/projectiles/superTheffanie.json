@@ -48,15 +48,15 @@
     {
       "id":"set",
       "name":"transitionParams",
-      "index":"y",
-      "copyFrom":"targetY"
+      "index":"time",
+      "value":500
     },
     {
       "id":"set",
       "name":"transitionParams",
-      "index":"time",
-      "value":550
-    },
+      "index":"delay",
+      "value":50
+    },     
     {
       "index":"to",
       "id":"execute",

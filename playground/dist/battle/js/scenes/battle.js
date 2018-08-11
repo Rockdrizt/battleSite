@@ -39,20 +39,30 @@ var battle = function(){
                 name: "atlas.battle",
                 json: "images/battle/atlas.json",
                 image: "images/battle/atlas.png",
+            },
+            {   
+                name: "atlas.question",
+                json: "images/questionOverlay/atlas.json",
+                image: "images/questionOverlay/atlas.png",
+            },
+            {   
+                name: "atlas.answers",
+                json: "images/answers/atlas.json",
+                image: "images/answers/atlas.png",
             }
         ],
         images: [
             {
-                name: "background",
-                file: "images/battle/background.png",
+                name: "back",
+                file: "images/battle/back.png",
             },
             {
                 name: "listos",
-                file: "images/battle/listos.png",
+                file: "images/questionOverlay/listos.png",
             },
             {
                 name: "ya",
-                file: "images/battle/ya.png",
+                file: "images/questionOverlay/ya.png",
             },
             {
                 name: "frame",
@@ -60,11 +70,15 @@ var battle = function(){
             },
             {
                 name: "questionBoard",
-                file: "images/battle/questionBoard.png",
+                file: "images/questionOverlay/questionBoard.png",
             },
             {
                 name: "pinkLight",
                 file: "images/yogoSelector/pinkLight.png",
+            },
+            {
+                name: "pipes",
+                file: "images/battle/pipes.png",
             }
 		],
 		sounds: [
@@ -74,7 +88,23 @@ var battle = function(){
         spines:[
             {
 				name:"background",
-				file:"spines/background/Background2.json",
+				file:"spines/battle/background/Background2.json",
+			},
+            {
+				name:"cubes",
+				file:"spines/battle/cubes/cubes.json",
+			},
+            {
+				name:"cylinder",
+				file:"spines/battle/energy_cylinder/energy_cylinder.json",
+			},
+            {
+				name:"floor",
+				file:"spines/battle/floor/floor.json",
+			},
+            {
+				name:"triangles",
+				file:"spines/battle/triangle/triangle.json",
 			}
 		],
         particles: [
@@ -119,13 +149,16 @@ var battle = function(){
     var teamsBarGroup
     var yogoGroup
     var questionGroup
+    var listosYaGroup
     var specialAttack
     var blackMask
     var miniYogos = []
     var lifeBars = []
-    var scoreRound = []
+    var scoreBoards = []
     var usedQuestions = []
+    var playerAnswers = []
 	var layers
+    var attackTxt
     
     var mainYogotorars
     var mainSpine
@@ -142,6 +175,7 @@ var battle = function(){
         miniYogos = [[],[]]
         
         riddles.loadQuestions()
+        operationGenerator.setConfiguration()
         usedQuestions = []
 	}
     
@@ -153,12 +187,26 @@ var battle = function(){
     
 	function createBackground(){
         
-//        var background = sceneGroup.create(0, 0, "background")
-//        background.width = game.world.width
-//        background.height = game.world.height
+        var back = sceneGroup.create(0, 0, "back")
+        back.width = game.world.width
+        back.height = game.world.height
         
-        var background = spineLoader.createSpine("background", "normal", "idle", game.world.centerX, game.world.centerY, true)
-        sceneGroup.add(background)
+//        var background = spineLoader.createSpine("background", "normal", "idle", game.world.centerX, game.world.centerY, true)
+//        sceneGroup.add(background)
+        
+        var pipes = sceneGroup.create(-60, -150, "pipes")
+        
+        var cubes = spineLoader.createSpine("cubes", "normal", "idle", game.world.centerX - 30, game.world.centerY - 110, true)
+        sceneGroup.add(cubes)
+        
+        var triangles = spineLoader.createSpine("triangles", "normal", "idle", 380, game.world.centerY - 80, true)
+        sceneGroup.add(triangles)
+        
+        var floor = spineLoader.createSpine("floor", "normal", "idle", game.world.centerX - 10, game.world.centerY + 20, true)
+        sceneGroup.add(floor)
+        
+        var cylinder = spineLoader.createSpine("cylinder", "normal", "idle", game.world.centerX - 330, game.world.centerY - 30, true)
+        sceneGroup.add(cylinder)
         
         blackMask = game.add.graphics()
         blackMask.beginFill(0x000000)
@@ -166,6 +214,16 @@ var battle = function(){
         blackMask.endFill()
         blackMask.alpha = 0
         sceneGroup.add(blackMask)
+        
+        var rect = game.add.graphics()
+        rect.beginFill(0x242A4D)
+        rect.drawRect(0, 0, game.world.width, 150)
+        rect.endFill()
+        rect.alpha = 0.5
+        sceneGroup.add(rect)
+    }
+    
+    function menubuttons(){
         
         btngroup= game.add.group()
         
@@ -175,13 +233,13 @@ var battle = function(){
 		rotateButton.label.text = "rotate"
         btngroup.add(rotateButton)
         
-        var damageButom = createButton(attackMove.bind(null, "normal"), 0xff00ff)
+        var damageButom = createButton(attackMove.bind(null, "normal", 1), 0xff00ff)
 		damageButom.x = game.world.centerX - 200
 		damageButom.y = game.world.height - 250
 		damageButom.label.text = "normal"
         btngroup.add(damageButom)
         
-        var damageButom = createButton(attackMove.bind(null, "super"), 0xff00ff)
+        var damageButom = createButton(attackMove.bind(null, "super", 1), 0xff00ff)
 		damageButom.x = game.world.centerX - 200
 		damageButom.y = game.world.height - 200
 		damageButom.label.text = "super"
@@ -205,18 +263,12 @@ var battle = function(){
 		win.label.text = "winner"
         btngroup.add(win)
         
-        var quest = createButton(getQuestion, 0x00ffff)
+        //var quest = createButton(getQuestion, 0x00ffff)
+        var quest = createButton(getOperation, 0x00ffff)
 		quest.x = game.world.centerX
 		quest.y = game.world.height - 100
 		quest.label.text = "questions"
         btngroup.add(quest)
-        
-        var rect = game.add.graphics()
-        rect.beginFill(0x242A4D)
-        rect.drawRect(0, 0, game.world.width, 150)
-        rect.endFill()
-        rect.alpha = 0.5
-        sceneGroup.add(rect)
     }
     
     function createButton(callback, color) {
@@ -296,14 +348,15 @@ var battle = function(){
             var teamScore = teamsBarGroup.create(token.x, token.y * 2.5, "atlas.battle", "score"+i)
             teamScore.anchor.setTo(0.5)
             teamScore.scale.setTo(0.6)
+            teamScore.points = 0
             
-            var score = new Phaser.Text(sceneGroup.game, 0, 60, "99", fontScore)
+            var score = new Phaser.Text(sceneGroup.game, 0, 60, "0", fontScore)
             score.anchor.setTo(0.5)
             score.scale.setTo(1.5)
             teamScore.addChild(score)
             teamScore.text = score
             
-            scoreRound.push(teamScore)
+            scoreBoards.push(teamScore)
             
             for(var j = 0; j < 2; j++){
                 
@@ -430,7 +483,7 @@ var battle = function(){
         board.anchor.setTo(0, 1)
         questionGroup.boxes[1] = board
         
-        var box = questionGroup.create(board.width + 30, board.y - board.height + 2, "atlas.battle", "questionBox")
+        var box = questionGroup.create(board.width + 30, board.y - board.height + 2, "atlas.question", "questionBox")
         box.anchor.setTo(1, 1)
         questionGroup.boxes[0] = box
         
@@ -441,15 +494,22 @@ var battle = function(){
         text.alpha = 0
         questionGroup.add(text)
         
-        var container = questionGroup.create(box.x - 40, board.centerY - board.height * 0.2, "atlas.battle", "questionImage")
+        var container = questionGroup.create(box.x - 40, board.centerY - board.height * 0.2, "atlas.question", "questionImage")
         container.anchor.setTo(1, 0.5)
+        questionGroup.container = container
         questionGroup.boxes[2] = container
         
-        var img = questionGroup.create(-container.width * 0.5, 0, "atlas.battle", "dazzle")
+        var img = questionGroup.create(-container.width * 0.5, 0, "ya")
         img.anchor.setTo(0.5)
         img.scale.setTo(0)
+        img.alpha = 0
         img.key = ""
         container.addChild(img)
+        
+        var light = questionGroup.create(0,0, "pinkLight")
+        light.anchor.setTo(0.5)
+        light.scale.setTo(0)
+        questionGroup.light = light
         
         var options = game.add.group()
         questionGroup.add(options)
@@ -457,7 +517,7 @@ var battle = function(){
         
             for(var i = 0; i < 4; i++){
 
-                var btn = options.create(board.centerX * pivotX, board.centerY + board.height * 0.17, "atlas.battle", "questionBtn")
+                var btn = options.create(board.centerX * pivotX, board.centerY + board.height * 0.17, "atlas.question", "questionBtn")
                 btn.anchor.setTo(0.5)
                 btn.alpha = 0
                 btn.correct = false
@@ -469,9 +529,10 @@ var battle = function(){
                 btn.addChild(letter)
                 btn.letter = letter
 
-                var info = new Phaser.Text(sceneGroup.game, 0, 0, "info", fontStyle)
-                info.anchor.setTo(0,0.5)
-                info.setTextBounds(-80, 0, btn.width, btn.height)
+                var info = new Phaser.Text(sceneGroup.game, 0, 0, "", fontStyle)
+                info.anchor.setTo(0.5)
+                info.wordWrapWidth = btn.width
+                info.align = "center"
                 btn.addChild(info)
                 btn.info = info
 
@@ -495,12 +556,111 @@ var battle = function(){
             box.scale.setTo(0,1)
         })
         
-        var light = questionGroup.create(300,300, "pinkLight")
-        light.anchor.setTo(0.5)
-        light.scale.setTo(0)
-        questionGroup.light = light
-        
         questionGroup.alpha = 0
+    }
+    
+    function createScores(){
+        
+        var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#000066", align: "center"}
+        var pivotX = 0.7
+        
+        for(var i = 0; i < 2; i++){
+        
+            var side = ORDER_SIDES[i]
+
+            var teamScore = game.add.group()
+            teamScore.x = game.world.centerX * pivotX
+            teamScore.y = game.world.centerY - 130
+            teamScore.time = 0
+            sceneGroup.add(teamScore)
+            playerAnswers.push(teamScore)
+            
+            var timeDif = new Phaser.Text(sceneGroup.game, 50 * side.direction, -70, "-2 sec", fontStyle)
+            timeDif.anchor.setTo(0.5)
+            timeDif.fill = "#ffff54"
+            timeDif.fontSize = 45
+            timeDif.stroke = "#000066"
+            timeDif.strokeThickness = 10
+            timeDif.alpha = 0
+            teamScore.add(timeDif)
+            teamScore.diference = timeDif
+
+            var timeCont = teamScore.create(0, 0, "atlas.answers", "timeCont")
+            timeCont.anchor.setTo(0.5)
+            timeCont.scale.setTo(side.direction, 1)
+            
+            var timeTxt = new Phaser.Text(sceneGroup.game, 50 * side.direction, 7, "0:00", fontStyle)
+            timeTxt.anchor.setTo(0.5)
+            timeTxt.alpha = 0
+            teamScore.add(timeTxt)
+            teamScore.timeTxt = timeTxt
+
+            var stock = teamScore.create(200 * side.direction, 0, "atlas.answers", "stock")
+            stock.anchor.setTo(0.5)
+            teamScore.stock = stock
+            
+            var bg = teamScore.create(0, 80, "atlas.answers", "containerBG")
+            bg.anchor.setTo(0.5)
+            
+            var bar = game.add.sprite(110 * side.direction, 0, "atlas.answers", "fillBar")
+            bar.anchor.setTo(i, 0.5)
+            bg.addChild(bar)
+            teamScore.bar = bar
+            
+            var shine = game.add.sprite(0, 0, "atlas.answers", "shineBar")
+            shine.anchor.setTo(0.5)
+            shine.alpha = 0
+            bg.addChild(shine)
+            teamScore.shine = shine
+            
+            var container = game.add.sprite(0, 0, "atlas.answers", "container" + i)
+            container.anchor.setTo(0.5)
+            bg.addChild(container)
+            
+            var particle = game.add.emitter(0, 50, 20);
+            particle.makeParticles("atlas.answers", "bubblePart");
+            particle.gravity = -150;
+            particle.setAlpha(1, 0, 1000, Phaser.Easing.Cubic.In)
+            particle.width = bg.width
+            particle.start(false, 1000, 250, 0)
+            particle.on = false
+            teamScore.add(particle)
+            teamScore.parts = particle
+
+            pivotX = 1.3
+            teamScore.alpha = 0
+        }
+        
+        attackTxt = new Phaser.Text(sceneGroup.game, teamScore.x, teamScore.y, "NORMAL", fontStyle)
+        attackTxt.anchor.setTo(0.5)
+        attackTxt.fill = "#ffff54"
+        attackTxt.fontSize = 80
+        attackTxt.fontStyle = "italic"
+        attackTxt.alpha = 0
+        sceneGroup.add(attackTxt)
+        
+        var black = game.add.graphics()
+        black.beginFill(0x000000, 0.5)
+        black.drawRect(-playerAnswers[0].x, -playerAnswers[0].y,game.world.width, game.world.height)
+        black.endFill()
+        playerAnswers[0].addChildAt(black,0)
+    }
+    
+    function createListosYa(){
+        
+        listosYaGroup = game.add.group()
+        sceneGroup.add(listosYaGroup)
+        
+        var listos = listosYaGroup.create(game.world.centerX, -150, "listos")
+        listos.anchor.setTo(0.5)
+        //listos.alpha = 0
+        listosYaGroup.listos = listos
+        
+        var ya = listosYaGroup.create(game.world.centerX, game.world.centerY, "ya")
+        ya.anchor.setTo(0.5)
+        ya.scale.setTo(0)
+        //ya.alpha = 0
+        listosYaGroup.ya = ya
     }
     
     function rotateTeam(teamIndex){
@@ -750,9 +910,11 @@ var battle = function(){
         })
     }
     
-    function attackMove(type){
+    function attackMove(type, index){
         
-        var otherTeam = mainSpine.teamIndex == 0 ? 1 : 0
+        var yogotar = mainYogotorars[index]
+        console.log(index)
+        var otherTeam = index == 0 ? 1 : 0
         var target = type === "ultra" ? teams[otherTeam].groupPoint : mainYogotorars[otherTeam]
         
         if(type == "normal"){
@@ -769,36 +931,39 @@ var battle = function(){
             var damage = DAMAGE.ultra
         }
 
-        mainSpine.attack(target, type, dealDamage.bind(null, otherTeam, damage))
+        yogotar.attack(target, type, dealDamage.bind(null, otherTeam, damage))
     }
     
-    function ultraMove(){
+    function ultraMove(index){
         
-        var team = mainSpine.teamIndex
-        var side = ORDER_SIDES[team]
+        var yogotar = mainYogotorars[index]
+        var side = ORDER_SIDES[index]
         
-        supportAnimation(team)
+        supportAnimation(index)
         
-        specialAttack.scale.setTo(side.scale.x, 1)
-        specialAttack.y = 0
-        specialAttack.x = game.world.width * team
-        var spawnX = (specialAttack.frame.width + specialAttack.x) * side.direction
+        game.time.events.add(2000, function(){
+            
+            specialAttack.scale.setTo(side.scale.x, 1)
+            specialAttack.y = 0
+            specialAttack.x = game.world.width * index
+            var spawnX = (specialAttack.frame.width + specialAttack.x) * side.direction
 
-        specialAttack.yogo.loadTexture(mainSpine.data.name + "Special")
-        specialAttack.lines.forEach(function(line){
-            line.slide.resume()
-        })
-        
-        game.add.tween(blackMask).to({alpha:0.5}, 300, Phaser.Easing.Cubic.InOut, true)
-        game.add.tween(specialAttack.yogo).from({x:0}, 500, Phaser.Easing.Cubic.InOut, true, 300)
-        var specialMove = game.add.tween(specialAttack).from({x:spawnX}, 500, Phaser.Easing.Cubic.InOut, true, 200)
-        specialMove.repeat(1, 800)
-        specialMove.onComplete.add(function(){
+            specialAttack.yogo.loadTexture(yogotar.data.name + "Special")
             specialAttack.lines.forEach(function(line){
-                line.slide.pause()
+                line.slide.resume()
             })
-			blackMask.alpha = 0
-			attackMove("ultra")
+            
+            game.add.tween(blackMask).to({alpha:0.5}, 300, Phaser.Easing.Cubic.InOut, true)
+            game.add.tween(specialAttack.yogo).from({x:0}, 500, Phaser.Easing.Cubic.InOut, true, 300)
+            var specialMove = game.add.tween(specialAttack).from({x:spawnX}, 500, Phaser.Easing.Cubic.InOut, true, 200)
+            specialMove.repeat(1, 800)
+            specialMove.onComplete.add(function(){
+                specialAttack.lines.forEach(function(line){
+                    line.slide.pause()
+                })
+                blackMask.alpha = 0
+                attackMove("ultra", index)
+            })
         })
     }
     
@@ -814,7 +979,7 @@ var battle = function(){
             
             var yogo = subteam[i]
             
-            if(yogo == mainSpine){
+            if(yogo == mainYogotorars[index]){
                 yogo.setAnimation(["ready"], true)
             }
             else{
@@ -877,44 +1042,43 @@ var battle = function(){
         white.alpha = 0
     }
     
-    function getQuestion(){
+    function getOperation(){
         
-        var newQuestion = riddles.selectQuestion(usedQuestions)
+        var ope = operationGenerator.generate()
+        var question = ope.operand1 + " " + ope.operator + " " + ope.operand2
+        var correctAnswer = ope.correctAnswer
+        var possibleAnswers = [correctAnswer]
+		var negativeOrPositive = Math.round(Math.random()) * 2 - 1;
+        var scaleImg = fixImage(1)
+        console.log(scaleImg)
         
-        if(newQuestion == -1){
-            usedQuestions = []
-            getQuestion()
-        }
-        else{
-            usedQuestions.push(newQuestion.index)
-            game.load.image(newQuestion.image, newQuestion.src + ".jpg")
-            //game.load.onLoadComplete.add(setQuestion, this, null, newQuestion)
-            game.load.onLoadComplete.add(function(){
-                setQuestion(newQuestion)
-            }, this)
-            game.load.start()
-        }
-    }
-    
-    function setQuestion(riddle){
-
-        var delay = 0
-        var last
+		for(var i = 0; i < 3; i++){
+            
+			var diff = Math.floor(correctAnswer / 10) > 1 ? game.rnd.integerInRange(5, 10) : game.rnd.integerInRange(1, 5)
+            
+			negativeOrPositive = negativeOrPositive * -1
+			var n = correctAnswer + diff * negativeOrPositive
+			possibleAnswers.push(n)
+		}
         
-        questionGroup.question.setText(riddle.question)
-        questionGroup.image.loadTexture(riddle.image)
-        questionGroup.image.key = riddle.image
+        Phaser.ArrayUtils.shuffle(possibleAnswers)
+        questionGroup.question.setText(question)
         
-        Phaser.ArrayUtils.shuffle(riddle.answers)
-        
-        for(var i = 0; i < riddle.answers.length; i++){
+        for(var i = 0; i < possibleAnswers.length; i++){
         
             var opt = questionGroup.options.children[i]
-            opt.info.setText(riddle.answers[i].text)
-            opt.correct = riddle.answers[i].correct
+            opt.info.setText(possibleAnswers[i])
+            
+            if(correctAnswer === possibleAnswers[i])
+                opt.correct = true
+            else
+                opt.correct = false
         }
         
-        questionGroup.alpha = 1
+        var delay = 200
+        var last
+        
+        game.add.tween(questionGroup).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
         
         questionGroup.boxes.forEach(function(box){
             last = game.add.tween(box.scale).to({x: 1}, 400, Phaser.Easing.Cubic.Out, true, delay)
@@ -928,10 +1092,92 @@ var battle = function(){
             delay += 200
         })
         
-        last.onComplete.add(function(){
-            game.add.tween(questionGroup.question).to({alpha:1}, 300, Phaser.Easing.linear, true, 1000)
-            game.add.tween(questionGroup.image.scale).to({x:1, y:1}, 300, Phaser.Easing.Cubic.InOut, true, 1000)
+        delay += 200
+        game.add.tween(questionGroup.question).to({alpha:1}, 300, Phaser.Easing.linear, true, delay)
+        game.add.tween(questionGroup.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
+    }
+    
+    function getQuestion(){
+        
+        var newQuestion = riddles.selectQuestion(usedQuestions)
+        
+        if(newQuestion == -1){
+            usedQuestions = []
+            getQuestion()
+        }
+        else{
+            usedQuestions.push(newQuestion.index)
+            game.load.image(newQuestion.image, newQuestion.src + ".jpg")
+            //game.load.onLoadComplete.add(setQuestion, this, null, newQuestion)
+            game.load.onLoadComplete.add(function(){
+                warning(function(){setQuestion(newQuestion)})
+            }, this)
+            game.load.start()
+        }
+    }
+    
+    function warning(callBack){
+        
+        var first = game.add.tween(listosYaGroup.listos).to({y: game.world.centerY}, 200, Phaser.Easing.Cubic.Out, true)
+        first.yoyo(true, 700)
+        
+        var second = game.add.tween(listosYaGroup.ya.scale).to({x: 1,y: 1}, 400, Phaser.Easing.Elastic.Out, false)
+        var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 300)
+        secondOut.onComplete.add(callBack)
+        
+        first.chain(second)
+        second.chain(secondOut)
+    }
+    
+    function setQuestion(riddle){
+
+        var delay = 200
+        var last
+        
+        questionGroup.question.setText(riddle.question)
+        questionGroup.image.loadTexture(riddle.image)
+        var scaleImg = fixImage(1)
+        questionGroup.image.key = riddle.image
+        
+        Phaser.ArrayUtils.shuffle(riddle.answers)
+        
+        for(var i = 0; i < riddle.answers.length; i++){
+        
+            var opt = questionGroup.options.children[i]
+            opt.info.setText(riddle.answers[i].text)
+            opt.correct = riddle.answers[i].correct
+        }
+        
+        game.add.tween(questionGroup).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
+        
+        questionGroup.boxes.forEach(function(box){
+            last = game.add.tween(box.scale).to({x: 1}, 400, Phaser.Easing.Cubic.Out, true, delay)
+            delay += 400
+        }) 
+        
+        questionGroup.options.forEach(function(opt){
+            game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay).onComplete.add(function(){
+                opt.inputEnabled = true
+            })
+            delay += 200
         })
+        
+        delay += 200
+        game.add.tween(questionGroup.question).to({alpha:1}, 300, Phaser.Easing.linear, true, delay)
+        game.add.tween(questionGroup.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
+    }
+    
+    function fixImage(scale){
+        
+        questionGroup.image.scale.setTo(scale)
+        if(questionGroup.image.height > questionGroup.container.height){
+            return fixImage(scale - 0.1)
+        }
+        else{
+            questionGroup.image.scale.setTo(0)
+            questionGroup.image.alpha = 1
+            return scale
+        }
     }
     
     function hideQuestionOverlay(btn){
@@ -951,9 +1197,12 @@ var battle = function(){
         var newY = questionGroup.boxes[1].y - 180
         var choise = game.add.tween(btn).to({x: game.world.centerX, y:newY}, 500, Phaser.Easing.Cubic.Out, false)
                  
+        playerAnswers[0].alpha = 1
+        playerAnswers[1].alpha = 1
         var fadeOut = game.add.tween(questionGroup).to({alpha:0}, 500, Phaser.Easing.linear, false, 1000)
         fadeOut.onComplete.add(function(){
             questionGroup.image.scale.setTo(0)
+            questionGroup.image.alpha = 0
             questionGroup.question.alpha = 0
             questionGroup.options.forEach(function(opt){
                 opt.alpha = 0
@@ -963,12 +1212,13 @@ var battle = function(){
             questionGroup.boxes.forEach(function(box){
                 box.scale.setTo(0, 1)
             })
+            
+            game.time.events.add(1000, checkAnswer)
         })
         shine.chain(choise)    
         choise.chain(fadeOut)
         
         removeImage(questionGroup.image.key)
-        setAnswer(btn.correct)
     }
     
     function removeImage(image){
@@ -980,15 +1230,144 @@ var battle = function(){
         //console.log(game.cache.checkImageKey(image))
     }
     
-    function setAnswer(ans){
-        
-        console.log(ans)
-        if(ans){
+    function checkAnswer(){
             
+        var MAX_TIME = 180000 //3 min
+        var P1 = {ans: true,
+                  time: 50000 //2 min 30 seg
+                 }
+        var P2 = {ans: true,
+                  time: 60000 //1 min 30 seg
+                 }
+        var events = [P1, P2]
+        var diference = convertTime(Math.abs(P1.time - P2.time))
+        
+        for(var i = 0; i < playerAnswers.length; i++){
+            
+            var newScale = convertScale(events[i].time)
+            var ansTime = convertTime(events[i].time)
+            
+            var score = playerAnswers[i]
+            score.alpha = 1
+            score.timeTxt.setText(ansTime)
+            score.diference.setText("+" + diference)
+            score.stock.loadTexture("atlas.answers", "ans" + events[i].ans)
+            score.time = events[i].time
+            
+            var correct = game.add.tween(score.stock.scale).to({x:1.3, y:1.3}, 200, Phaser.Easing.Cubic.Out, true, 0, 0, true)
+            var sizeBar = game.add.tween(score.bar.scale).to({x: newScale}, 400, Phaser.Easing.Cubic.Out, false)
+            var showTime = game.add.tween(score.timeTxt).to({alpha: 1}, 200, Phaser.Easing.Cubic.Out, false)
+            
+            correct.chain(sizeBar)
+            sizeBar.chain(showTime)
+        }
+        
+        if(P1.ans && !P2.ans){
+            
+            setWiner(playerAnswers[0])
+            setLoser(playerAnswers[1], 1)
+        }
+        else if(!P1.ans && P2.ans){
+            
+            setWiner(playerAnswers[1])
+            setLoser(playerAnswers[0], -1)
+        }
+        else if(P1.ans && P2.ans){
+            
+            if(P1.time < P2.time){
+                setWiner(playerAnswers[0], true)
+                setLoser(playerAnswers[1], 1) 
+            }
+            else{
+                setWiner(playerAnswers[1], true)
+                setLoser(playerAnswers[0], -1)
+            }
         }
         else{
-            
+            setLoser(playerAnswers[0], -1)
+            setLoser(playerAnswers[1], 1)
         }
+    }
+    
+    function selectAttackType(time){
+        
+        if(time > 0 && time <= 60000){
+            return "ultra"
+        }
+        else if(time > 60000 && time <= 120000){
+            return "super"
+        }
+        else{
+            return "normal"
+        }
+    }
+    
+    function setWiner(results, tie){
+        
+        if(tie) results.diference.alpha = 1
+        
+        var attack = selectAttackType(results.time)
+        attackTxt.setText(attack.toUpperCase() + " ")
+
+        var fadeOut = game.add.tween(results).to({alpha: 0}, 400, Phaser.Easing.Cubic.Out, false, 1000)
+        results.parts.on = true
+        var showShine = game.add.tween(results.shine.scale).from({y:0}, 400, Phaser.Easing.Cubic.Out, false, 500)
+        game.add.tween(results.diference).from({y: 30}, 400, Phaser.Easing.Cubic.Out, true, 1500).chain(showShine)
+        showShine.chain(fadeOut)
+        
+        showShine.onStart.add(function(){
+            results.shine.alpha = 1
+        })
+        fadeOut.onComplete.add(function(){
+            
+            attackTxt.x = results.x
+            attackTxt.y = results.y
+            attackTxt.alpha = 1
+            game.add.tween(attackTxt).to({alpha: 0}, 400, Phaser.Easing.Cubic.Out, true, 1000).onComplete.add(function(){
+                var index = playerAnswers.indexOf(results)
+                scoreBoards[index].points++
+                scoreBoards[index].text.setText(scoreBoards[index].points)
+                attack == "ultra" ? ultraMove(index) : attackMove(attack, index)
+            })
+        })
+    }
+    
+    function setLoser(results, side){
+        
+        var fadeOut = game.add.tween(results).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, false)
+        fadeOut.onComplete.add(restartResults)
+        game.add.tween(results).to({angle: 50 * side}, 1000, Phaser.Easing.Bounce.Out, true, 2000).chain(fadeOut)
+    }
+    
+    function restartResults(){
+        
+        for(var i = 0; i < playerAnswers.length; i++){
+            
+            var results = playerAnswers[i]
+            results.stock.loadTexture("atlas.answers", "stock")
+            results.angle = 0
+            results.diference.alpha = 0
+            results.timeTxt.alpha = 0
+            results.time = 0
+            results.bar.scale.setTo(1)
+            results.shine.alpha = 0
+            results.parts.on = false
+        }
+    }
+    
+    function convertScale(time){
+        
+        var MAX_TIME = 180000
+        
+        return 1 - time/MAX_TIME
+    }
+    
+    function convertTime(time) {
+        
+      var min = Math.floor(time / 60000)
+      var sec = ((time % 60000) / 1000).toFixed(0)
+      
+      return min + ":" + (sec < 10 ? '0' : '') + sec
     }
 
 	return {
@@ -1011,8 +1390,11 @@ var battle = function(){
             createTeamBars()
             createTimer()
             createSpecialAttack()
+            createScores()
             createQuestionOverlay()
+            createListosYa()
             //createMenuAnimations()
+            menubuttons()
             //battleSong = sound.play("battleSong", {loop:true, volume:0.6})
             createWhite()
 
