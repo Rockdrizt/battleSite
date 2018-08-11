@@ -84,11 +84,11 @@ function startGame(){
 
 		var teams = [
 <<<<<<< HEAD
-			["yogotarDinamita", "yogotarEagle", "yogotarLuna"],
-			["yogotarLuna", "yogotarLuna", "yogotarLuna"],
+			["yogotarDinamita", "yogotarDinamita", "yogotarDinamita"],
+			["yogotarDinamita", "yogotarDinamita", "yogotarDinamita"],
 =======
-			["yogotarTomiko", "yogotarNao", "yogotarTomiko"],
-			["yogotarTomiko", "yogotarNao", "yogotarTomiko"],
+			["yogotarTomiko", "yogotarTomiko", "yogotarTomiko"],
+			["yogotarTomiko", "yogotarTomiko", "yogotarTomiko"],
 >>>>>>> 702a18786419b2797a19229f613a681d4fc0f075
 		
 		]
