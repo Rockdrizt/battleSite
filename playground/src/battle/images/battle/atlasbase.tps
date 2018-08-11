@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.8.1</string>
+        <string>4.8.3</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -363,45 +363,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">questionBox.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>414,61,829,123</rect>
-                <key>scale9Paddings</key>
-                <rect>414,61,829,123</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">questionBtn.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>116,50,233,99</rect>
-                <key>scale9Paddings</key>
-                <rect>116,50,233,99</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
-            <key type="filename">questionImage.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>382,96,763,193</rect>
-                <key>scale9Paddings</key>
-                <rect>382,96,763,193</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">razzle.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -519,9 +480,6 @@
             <filename>oona.png</filename>
             <filename>paz.png</filename>
             <filename>razzle.png</filename>
-            <filename>questionBtn.png</filename>
-            <filename>questionBox.png</filename>
-            <filename>questionImage.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

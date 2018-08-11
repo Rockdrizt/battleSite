@@ -5,8 +5,9 @@
     "hit":1000
   },
   "particles":[
-    "particles/characters/normalProjectileFire1/normalProjectileFire1.json",
-    "particles/characters/normalProjectileFire1/normalProjectileFire2.json"
+    "particles/characters/specialAttackFire15/specialAttackFire58.json",
+    "particles/characters/specialAttackFire15/specialAttackFire59.json",
+    "particles/characters/specialAttackFire15/specialAttackFire60.json"  
   ],
     
   "spines":[
@@ -14,15 +15,17 @@
         "file":"spines/Theffanie/theffanie_projectiles.json",
         "scales":["@0.5x"],
         "skin":"theffanie_projectiles",
-        "animations":["idle_ultra   "]
-    }  
-    ],
+        "animations":["idle_ultra"]
+    }
+      
+  ],
     
     "sounds":[
     {
       "soundID":"tournamentEagleScream1",
       "delay":100
     },
+        
      {
       "soundID":"tournamentBirdWings2",
       "delay":0
