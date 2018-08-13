@@ -181,7 +181,7 @@ var yogoSelector = function(){
 
 	function preload(){
 
-		game.stage.disableVisibilityChange = false
+		game.stage.disableVisibilityChange = true
 		game.load.bitmapFont('skwig', 'fonts/font.png', 'fonts/font.fnt')
 	}
 
@@ -1023,6 +1023,8 @@ var yogoSelector = function(){
 				}
 			}else if(!slot.yogo && yogotar){
 				pressBtn(tokens[yogotar], numTeam)
+				clickOk(numTeam)
+			}else if(!slot.check && yogotar){
 				clickOk(numTeam)
 			}
 		}
