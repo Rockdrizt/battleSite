@@ -84,11 +84,9 @@ function startGame(){
 
 		var teams = [
 
-			["yogotarDinamita", "yogotarDinamita", "yogotarDinamita"],
-			["yogotarDinamita", "yogotarDinamita", "yogotarDinamita"],
+			["yogotarArthurius", "yogotarArthurius", "yogotarArthurius"],
+			["yogotarTheffanie", "yogotarTheffanie", "yogotarTheffanie"],
 
-
-		
 		]
 		var objTeams = []
 

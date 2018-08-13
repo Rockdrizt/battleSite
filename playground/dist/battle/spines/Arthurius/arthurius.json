@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "wqJiP/0O1UPL23LzQaGiaT8/v0w", "spine": "3.2.01", "width": 511.94, "height": 690, "images": "" },
+"skeleton": { "hash": "s+QyGn00MNmDf2S2hqMMsq3NNZI", "spine": "3.2.01", "width": 454.02, "height": 429.17, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "cog", "parent": "root", "x": -11.71, "y": 34.69, "color": "000000ff" },
@@ -57,7 +57,6 @@
 	},
 	{ "name": "head", "parent": "torso", "length": 142.51, "x": 93.26, "y": 0.33, "inheritScale": false },
 	{ "name": "influence_bone", "parent": "cog", "length": 59.51, "rotation": 89.99, "x": -0.5, "y": -37.91, "color": "000000ff" },
-	{ "name": "particle12", "parent": "root", "x": 238 },
 	{ "name": "particles_foot_bone", "parent": "body", "x": 0.44, "y": -47.75, "color": "fff200ff" },
 	{ "name": "shield", "parent": "forearm2", "length": 55.87, "rotation": 141.11, "x": 38.05, "y": -13.63, "color": "17ed00ff" },
 	{ "name": "shield_ultra", "parent": "cog", "length": 128.52, "rotation": 90, "x": 178.15, "y": -42.51, "color": "17ed00ff" }
@@ -96,7 +95,7 @@
 	{ "name": "shield", "bone": "shield" },
 	{ "name": "shield_hit", "bone": "influence_bone" },
 	{ "name": "glow_shield", "bone": "shield_ultra" },
-	{ "name": "shield_ultra", "bone": "shield_ultra", "attachment": "shield_ultra/shield_ultra_0_00000" },
+	{ "name": "shield_ultra", "bone": "shield_ultra" },
 	{ "name": "particle1", "bone": "head", "attachment": "particle1" },
 	{ "name": "particle2", "bone": "hand1", "attachment": "particle2" },
 	{ "name": "particle3", "bone": "torso", "attachment": "particle3" },
@@ -104,8 +103,7 @@
 	{ "name": "particle5", "bone": "foot1", "attachment": "particle5" },
 	{ "name": "particle6", "bone": "foot2", "attachment": "particle6" },
 	{ "name": "particle7", "bone": "root", "attachment": "particle7" },
-	{ "name": "particle12", "bone": "particle12", "attachment": "particle12" },
-	{ "name": "particle13", "bone": "shield_ultra", "attachment": "particle13" },
+	{ "name": "particle12", "bone": "root", "attachment": "particle12" },
 	{ "name": "particle11", "bone": "influence_bone", "attachment": "particle11" },
 	{ "name": "particle8", "bone": "torso", "attachment": "particle8" },
 	{ "name": "particle9", "bone": "head", "attachment": "particle9" },
@@ -416,10 +414,7 @@
 			"particle11": { "name": "normal/particle", "x": 121.45, "y": -21.76, "rotation": -180, "width": 104, "height": 104 }
 		},
 		"particle12": {
-			"particle12": { "name": "normal/particle", "x": 0.53, "y": 1.87, "rotation": -90, "width": 104, "height": 104 }
-		},
-		"particle13": {
-			"particle13": { "name": "normal/particle", "x": 278.35, "y": -1.48, "rotation": 179.99, "width": 104, "height": 104 }
+			"particle12": { "name": "normal/particle", "x": 238.53, "y": 1.87, "rotation": -90, "width": 104, "height": 104 }
 		},
 		"particle2": {
 			"particle2": { "name": "normal/particle", "x": 17.28, "y": -3.29, "rotation": -14.7, "width": 104, "height": 104 }
@@ -907,8 +902,6 @@
 	"SPAWN:particle11:scifiTeleport4": {},
 	"SPAWN:particle11:scifiTeleport5": { "string": "scifiTeleport2/scifiTeleport4.json" },
 	"SPAWN:particle11:scifiTeleport6": { "string": "scifiTeleport2/scifiTeleport4.json" },
-	"SPAWN:particle12:arthuriusUltra2": { "string": "arthuriusUltra1/arthuriusUltra1.json" },
-	"SPAWN:particle13:arthuriusUltra1": {},
 	"SPAWN:particle1:superHit1": {},
 	"SPAWN:particle1:superHit2": { "string": "superHit1/superHit1.json" },
 	"SPAWN:particle6:dustFloor1": {},
@@ -8646,20 +8639,6 @@
 					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
 					{ "time": 2.0666, "x": 1, "y": 1 }
 				]
-			},
-			"particle12": {
-				"rotate": [
-					{ "time": 0, "angle": 0, "curve": "stepped" },
-					{ "time": 2.0666, "angle": 0 }
-				],
-				"translate": [
-					{ "time": 0, "x": -58.92, "y": 0, "curve": "stepped" },
-					{ "time": 2.0666, "x": -58.92, "y": 0 }
-				],
-				"scale": [
-					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
-					{ "time": 2.0666, "x": 1, "y": 1 }
-				]
 			}
 		},
 		"drawOrder": [
@@ -8687,8 +8666,6 @@
 			{ "time": 2.0666 }
 		],
 		"events": [
-			{ "time": 1, "name": "SPAWN:particle12:arthuriusUltra2", "string": "arthuriusUltra1/arthuriusUltra2.json" },
-			{ "time": 1, "name": "SPAWN:particle13:arthuriusUltra1", "string": "arthuriusUltra1/arthuriusUltra1.json" },
 			{ "time": 1.0666, "name": "PLAY:tournamentShieldSmash2" },
 			{ "time": 1.4, "name": "PLAY:tournamentBullAttack1" }
 		]

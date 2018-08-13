@@ -4,7 +4,7 @@
 		"normal": [
 			{
 				"id": "normalEarth",
-				"attachment": "particle12",
+				"attachment": "particle4",
 				"delay":    0,
 				"multiplier": 1
 			}

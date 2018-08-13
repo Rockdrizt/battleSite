@@ -116,7 +116,7 @@ function Client(){
 
 			self.refIdGame.child('gameReady').on('value', function(snapshot) {
 				var gameReady = snapshot.val();
-				if(gameReady){
+				if(gameReady && startGame){
 					self.startGame()
 				}
 			});
@@ -153,7 +153,7 @@ function Client(){
 	 * @summary Starts the client
 	 * @param {type} idGame Code of the game
 	 */
-	this.start =function(team, idGame, onError){
+	this.start =function(team, idGame, callback, onError){
 		// self.events = {};
 		console.log(self.events)
 		self.team = team
@@ -163,6 +163,7 @@ function Client(){
 			var val = snapshot.val()
 			if(val){
 				initialize(idGame, team, val)
+				if(callback) callback
 			}else{
 				onError()
 			}
@@ -220,8 +221,10 @@ function loadGame(){
 
 window.onload =  function(){
 	gameContainer = document.getElementById("game-container")
-	loadGame()
-	cliente = new Client();
+	if(gameContainer){
+		loadGame()
+		cliente = new Client();
+	}
 }
 
 // window.addEventListener("resize", loadGame);
