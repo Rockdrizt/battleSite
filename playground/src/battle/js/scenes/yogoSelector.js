@@ -1074,7 +1074,8 @@ var yogoSelector = function(){
 			createReady()
             createWhite()
 
-			server.addEventListener("onPlayersChange", onPlayersChange)
+			if(server)
+				server.addEventListener("onPlayersChange", onPlayersChange)
 			// game.time.events.add(6000, function () {
 			// 	var data = {
 			// 		numTeam:1,

@@ -114,6 +114,9 @@ function startGame(){
 		battle.setTeams(teams)
         //reward.setTeams(teams)
         //reward.setWinner(1)
+		//TODO: this a test
+		server = new Server()
+		server.start("000000")
     }
 
     function create(){
