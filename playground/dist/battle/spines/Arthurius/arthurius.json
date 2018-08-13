@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "rhE/3BSAKUIzxmr/6cvbD6B17Tg", "spine": "3.2.01", "width": 480.83, "height": 690, "images": "" },
+"skeleton": { "hash": "ZZANEr9tJvvCPT4YWX+9IcAciSw", "spine": "3.2.01", "width": 480.83, "height": 690, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "cog", "parent": "root", "x": -11.71, "y": 34.69, "color": "000000ff" },
@@ -416,7 +416,7 @@
 			"particle11": { "name": "normal/particle", "x": 121.45, "y": -21.76, "rotation": -180, "width": 104, "height": 104 }
 		},
 		"particle12": {
-			"particle12": { "name": "normal/particle", "x": 0.53, "y": 1.87, "width": 104, "height": 104 }
+			"particle12": { "name": "normal/particle", "x": 0.53, "width": 104, "height": 104 }
 		},
 		"particle13": {
 			"particle13": { "name": "normal/particle", "x": 263.01, "y": -39.14, "rotation": -90, "width": 104, "height": 104 }
@@ -892,7 +892,6 @@
 	"PLAY:tournamentBullAttack2": {},
 	"PLAY:tournamentBullAttack3": {},
 	"PLAY:tournamentEarthQuake2": {},
-	"PLAY:tournamentFireBurn1": {},
 	"PLAY:tournamentFootStep2": {},
 	"PLAY:tournamentHitGround2": {},
 	"PLAY:tournamentHitGround3": {},
@@ -901,6 +900,7 @@
 	"PLAY:tournamentLandGround1": {},
 	"PLAY:tournamentMagicAttack2": {},
 	"PLAY:tournamentRockSmash1": {},
+	"PLAY:tournamentRocksLift2": {},
 	"PLAY:tournamentScifiTeleport1": {},
 	"PLAY:tournamentShieldSmash2": {},
 	"PLAY:tournamentShieldSmash4": {},
@@ -917,11 +917,12 @@
 	"SPAWN:particle11:scifiTeleport5": { "string": "scifiTeleport2/scifiTeleport4.json" },
 	"SPAWN:particle11:scifiTeleport6": { "string": "scifiTeleport2/scifiTeleport4.json" },
 	"SPAWN:particle12:arthuriusUltra2": { "string": "arthuriusUltra1/arthuriusUltra1.json" },
+	"SPAWN:particle12:normalChargeEarth49": { "string": "dustFloor1/dustFloor1.json" },
+	"SPAWN:particle12:normalChargeEarth50": {},
 	"SPAWN:particle13:arthuriusUltra1": { "string": "arthuriusUltra1/arthuriusUltra2.json" },
 	"SPAWN:particle1:superHit1": {},
 	"SPAWN:particle1:superHit2": { "string": "superHit1/superHit1.json" },
 	"SPAWN:particle6:dustFloor1": {},
-	"SPAWN:particle6:dustFloor2": { "string": "dustFloor1/dustFloor1.json" },
 	"SPAWN:particle8:fireAshes1": {},
 	"SPAWN:particle8:fireDamage1": {},
 	"SPAWN:particle8:fireDamage2": { "string": "fireDamage1/fireDamage1.json" },
@@ -5912,7 +5913,7 @@
 					{ "time": 0, "angle": 0 }
 				],
 				"translate": [
-					{ "time": 0, "x": -113.36, "y": 0 }
+					{ "time": 0, "x": 1.69, "y": 0 }
 				],
 				"scale": [
 					{ "time": 0, "x": 1, "y": 1 }
@@ -5931,10 +5932,12 @@
 			{ "time": 1 }
 		],
 		"events": [
+			{ "time": 0, "name": "PLAY:tournamentRocksLift2" },
+			{ "time": 0.1333, "name": "SPAWN:particle12:normalChargeEarth49", "string": "normalChargeEarth16/normalChargeEarth49.json" },
+			{ "time": 0.1333, "name": "SPAWN:particle12:normalChargeEarth50", "string": "normalChargeEarth16/normalChargeEarth50.json" },
 			{ "time": 0.3333, "name": "PLAY:tournamentSwoosh2" },
 			{ "time": 0.4666, "name": "PLAY:tournamentFootStep2" },
-			{ "time": 0.4666, "name": "SPAWN:particle6:dustFloor1", "string": "dustFloor1/dustFloor1.json" },
-			{ "time": 0.4666, "name": "SPAWN:particle6:dustFloor2", "string": "dustFloor1/dustFloor2.json" }
+			{ "time": 0.4666, "name": "SPAWN:particle6:dustFloor1", "string": "dustFloor1/dustFloor1.json" }
 		]
 	},
 	"attack_super": {
@@ -15572,12 +15575,12 @@
 			{ "time": 3.6666 }
 		],
 		"events": [
-			{ "time": 0.1666, "name": "PLAY:tournamentFireBurn1" },
+			{ "time": 0.1666, "name": "PLAY:tournamentRocksLift2" },
 			{ "time": 0.1666, "name": "SPAWN:particle8:fireDamage1", "string": "fireDamage1/fireDamage1.json" },
 			{ "time": 0.1666, "name": "SPAWN:particle8:fireDamage2", "string": "fireDamage1/fireDamage2.json" },
 			{ "time": 1, "name": "PLAY:tournamentFootStep2" },
+			{ "time": 1, "name": "SPAWN:particle12:normalChargeEarth49", "string": "dustFloor1/dustFloor2.json" },
 			{ "time": 1, "name": "SPAWN:particle6:dustFloor1", "string": "dustFloor1/dustFloor1.json" },
-			{ "time": 1, "name": "SPAWN:particle6:dustFloor2", "string": "dustFloor1/dustFloor2.json" },
 			{ "time": 2.3333, "name": "SPAWN:particle8:fireAshes1", "string": "fireAshes1/fireAshes1.json" }
 		]
 	},
