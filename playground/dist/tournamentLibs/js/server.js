@@ -340,7 +340,7 @@ function Server(){
 			refIdGame = database.ref(id_game);
 			setfb(refIdGame, valores)//refIdGame.set(valores);
 
-			if(!currentId) {
+			if((!currentId)||("000000")) {
 				if(onStart) onStart()
 
 				var refT1 = database.ref(id_game + "/t1");
@@ -453,7 +453,24 @@ function Server(){
 				//Borrando los datos al abandonar la partida
 				window.onbeforeunload = function () {
 					// if(!id_game.includes("egs"))
-					refIdGame.remove();
+					if(id === "000000"){
+						valores.t1answer =false;
+						valores.t2answer =false;
+						valores.t1.life =INITIAL_LIFE;
+						valores.t2.life =INITIAL_LIFE;
+						valores.winner =false;
+						valores.possibleAnswers = [];
+						valores.time = self.battleTime;
+						valores.maxRounds = self.maxRounds;
+						valores.rules = self.rules
+						valores.data = false;
+						valores.gameEnded = false;
+						valores.gameReady = false
+						valores.timeOut = false
+					}
+					else {
+						refIdGame.remove();
+					}
 					// else
 					// 	self.retry();
 				};
@@ -516,8 +533,10 @@ function loadGame(){
 
 window.onload =  function(){
 	gameContainer = document.getElementById("game-container")
-	loadGame()
-	server = new Server();
+	if(gameContainer){
+		loadGame()
+		server = new Server();
+	}
 	// cliente = new Client();
 }
 

@@ -1,6 +1,11 @@
 window.minigame = window.minigame || {}
 
 function startGame(){
+	if(window.game) {
+		location.reload()
+		return
+	}
+
 	window.game = new Phaser.Game(document.body.clientWidth, document.body.clientHeight, Phaser.CANVAS, null, {init: init, create: create }, true, true);
 	document.body.style.visibility = "hidden"
 
@@ -66,6 +71,8 @@ function startGame(){
 		window.minigame.game = window.game
 		sceneloader.init(game)
 		sound.init(game)
+
+		//server test
 	}
 
 	function create(){
@@ -75,5 +82,20 @@ function startGame(){
 		])
 	}
 }
-startGame()
+
+(function () {
+	var team = {
+		players: [
+			{nickname: "yogome", avatar: false, skin:false},
+			{nickname: "yogome", avatar: false, skin:false},
+			{nickname: "yogome", avatar: false, skin:false}
+		],
+		ready:true
+	}
+
+	//TODO: this is just testing remove on prod
+	cliente = new Client();
+	cliente.start(team, "000000")
+	cliente.startGame = startGame
+})()
 //minigame.orientation.init(startGame)

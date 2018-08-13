@@ -39,7 +39,7 @@ function startGame(){
 					var loaderScene = sceneloader.getScene("preloaderIntro")
 
 					//loaderScene.onComplete("startScreen")
-					sceneloader.show("battle")
+					sceneloader.show("yogoSelector")
 				}
 	    	}
 
@@ -112,16 +112,16 @@ function startGame(){
         ];
 		//battleScene.setTeams(teams)
 		battle.setTeams(teams)
-        reward.setTeams(teams)
-        reward.setWinner(1)
+        //reward.setTeams(teams)
+        //reward.setWinner(1)
     }
 
     function create(){
 		console.log("createEpicBattle")
     	bootConfigFiles([
             //startScreen,
-            //yogoSelector,
-            battle,
+            yogoSelector,
+            //battle,
     	])
     }
 }
