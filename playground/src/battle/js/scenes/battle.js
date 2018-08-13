@@ -231,8 +231,8 @@ var battle = function(){
 		win.label.text = "winner"
         btngroup.add(win)
         
-        //var quest = createButton(getQuestion, 0x00ffff)
-        var quest = createButton(getOperation, 0x00ffff)
+        var quest = createButton(getQuestion, 0x00ffff)
+        //var quest = createButton(getOperation, 0x00ffff)
 		quest.x = game.world.centerX
 		quest.y = game.world.height - 100
 		quest.label.text = "questions"
@@ -318,15 +318,9 @@ var battle = function(){
     
     function createQuestionOverlay(){
         
-        questionGroup = battleField.createQuestionOverlay()
-        sceneGroup.add(questionGroup)
+        questionGroup = riddles.createQuestionOverlay(hideQuestionOverlay)
         questionGroup.alpha = 0
-        
-        questionGroup.options.forEach(function(btn){
-             btn.inputEnabled = true
-            btn.events.onInputDown.add(hideQuestionOverlay,this)
-        })
-        questionGroup.options.setAll("inputEnabled", false)
+        sceneGroup.add(questionGroup)
     }
     
     function createScores(){
@@ -364,7 +358,7 @@ var battle = function(){
 
 		function returnNormal(obj) {
 			obj.setAnimation(["idle_normal"], true)
-			obj.scale.x = obj.prevScale
+			obj.scale.x = obj.prevScale * side.scale.x
 			obj.updatePosition()
 
 			if(obj.index < team.length - 1)
@@ -391,13 +385,23 @@ var battle = function(){
 
 			character.prevScale = newPosition.scale.x
 			var toScaleX = newPosition.scale.x //facing direction
-			if(character.x > characterPos.x) { //check facing direction
-				character.scale.x *= -1
-				toScaleX *= -1
-			}
-
+            
+            if(teamIndex == 0){
+                if(character.x > characterPos.x) { //check facing direction
+                    character.scale.x *= -1
+                    toScaleX *= -1
+                }
+            }
+            else{
+                if(character.x < characterPos.x) { //check facing direction
+                    character.scale.x *= -1
+                    toScaleX *= -1
+                }
+            }
+            
 			character.index = newPlayerIndex
-			game.add.tween(character.scale).to({x:toScaleX, y:newPosition.scale.y}, 490, null, true)
+            //character.scale.setTo(toScaleX, newPosition.scale.y)
+			game.add.tween(character.scale).to({x:toScaleX * side.scale.x, y:newPosition.scale.y}, 490, null, true)
 			var moveTween = game.add.tween(character).to({x:characterPos.x, y:characterPos.y}, 500, null, true)
 			moveTween.onComplete.add(returnNormal)
 
@@ -743,7 +747,6 @@ var battle = function(){
         var possibleAnswers = [correctAnswer]
 		var negativeOrPositive = Math.round(Math.random()) * 2 - 1;
         var scaleImg = fixImage(1)
-        console.log(scaleImg)
         
 		for(var i = 0; i < 3; i++){
             
@@ -792,59 +795,32 @@ var battle = function(){
     
     function getQuestion(){
         
-        var newQuestion = riddles.selectQuestion(usedQuestions)
-        
-        if(newQuestion == -1){
-            usedQuestions = []
-            getQuestion()
-        }
-        else{
-            usedQuestions.push(newQuestion.index)
-            game.load.image(newQuestion.image, newQuestion.src + ".jpg")
-            //game.load.onLoadComplete.add(setQuestion, this, null, newQuestion)
-            game.load.onLoadComplete.add(function(){
-                warning(function(){setQuestion(newQuestion)})
-            }, this)
-            game.load.start()
-        }
+        riddles.selectQuestion(questionGroup)
+        riddles.onLoadComplete(questionGroup, setReadyGo)
     }
     
-    function warning(callBack){
+    function setReadyGo(){
         
         var first = game.add.tween(listosYaGroup.listos).to({y: game.world.centerY}, 200, Phaser.Easing.Cubic.Out, true)
         first.yoyo(true, 700)
         
         var second = game.add.tween(listosYaGroup.ya.scale).to({x: 1,y: 1}, 400, Phaser.Easing.Elastic.Out, false)
         var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 300)
-        secondOut.onComplete.add(callBack)
+        secondOut.onComplete.add(setQuestion)
         
         first.chain(second)
         second.chain(secondOut)
     }
     
-    function setQuestion(riddle){
+    function setQuestion(){
 
         var delay = 200
-        var last
-        
-        questionGroup.question.setText(riddle.question)
-        questionGroup.image.loadTexture(riddle.image)
         var scaleImg = fixImage(1)
-        questionGroup.image.key = riddle.image
-        
-        Phaser.ArrayUtils.shuffle(riddle.answers)
-        
-        for(var i = 0; i < riddle.answers.length; i++){
-        
-            var opt = questionGroup.options.children[i]
-            opt.info.setText(riddle.answers[i].text)
-            opt.correct = riddle.answers[i].correct
-        }
         
         game.add.tween(questionGroup).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
         
         questionGroup.boxes.forEach(function(box){
-            last = game.add.tween(box.scale).to({x: 1}, 400, Phaser.Easing.Cubic.Out, true, delay)
+            game.add.tween(box.scale).to({x: 1}, 400, Phaser.Easing.Cubic.Out, true, delay)
             delay += 400
         }) 
         
@@ -1008,8 +984,8 @@ var battle = function(){
         showShine.chain(fadeOut)
         
         showShine.onStart.add(function(){
-            results.parts.start(true, 1000, null, 20)
-            results.shine.alpha = 1
+            results.parts.start(true, 1000, null, 50)
+            results.shine.alpha = 0.5
         })
         fadeOut.onComplete.add(function(){
             
