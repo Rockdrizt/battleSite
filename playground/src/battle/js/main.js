@@ -28,19 +28,19 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				if (server) {
-					server.setGameReady(true)
-					server.startGame = function () {
-						sceneloader.show("yogoSelector")
-					}
-				}
-				else {
-					
-					//var loaderScene = sceneloader.getScene("preloaderIntro")
+				// if (server) {
+				// 	server.setGameReady(true)
+				// 	server.startGame = function () {
+				// 		sceneloader.show("yogoSelector")
+				// 	}
+				// }
+				// else {
+					//sceneloader.show("yogoSelector")
+					var loaderScene = sceneloader.getScene("preloaderIntro")
+
 					//loaderScene.onComplete("startScreen")
-                    
 					sceneloader.show("battle")
-				}
+				// }
 	    	}
 
 			document.body.style.visibility = "visible"
@@ -114,6 +114,7 @@ function startGame(){
 		battle.setTeams(teams)
         //reward.setTeams(teams)
         //reward.setWinner(1)
+		server = new Server()
     }
 
     function create(){
