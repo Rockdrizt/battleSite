@@ -1,7 +1,13 @@
 
 var riddles = function(){
     
-    var questions = [
+    var questions
+    var usedQuestions
+    var newQuestion
+    
+    function initialize(){
+        
+        questions = [
         /*{
             question: `Eagle tiene dos amigos, Nao y Oona. ¿Cuántos dedos en pies y manos tienen los tres amigos en total?`,
             src: "images/questions/imagen.png",
@@ -11,11 +17,11 @@ var riddles = function(){
             grade: 1,
         }*/
     ]
-    var usedQuestions = []
-    var newQuestion
-    //var questionGroup
+        usedQuestions = []
+        loadQuestions()
+    }
     
-    function createQuestionOverlay(callback){
+    function createQuestionOverlay(){
         
         var questionGroup = game.add.group()
         questionGroup.boxes = []
@@ -34,7 +40,7 @@ var riddles = function(){
         var box = questionGroup.create(board.width + 30, board.y - board.height + 2, "atlas.question", "questionBox")
         box.anchor.setTo(1, 1)
         questionGroup.boxes[0] = box
-        
+      
         var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "left", wordWrap: true, wordWrapWidth: box.width - 180}
         
         var text = new Phaser.Text(questionGroup.game, box.centerX + 70, box.centerY, "", fontStyle)
@@ -62,49 +68,64 @@ var riddles = function(){
         var options = game.add.group()
         questionGroup.add(options)
         var pivotX = 0.5
+        var opt = ["A", "C", "B", "D"]
+        
+        questionGroup.hideQuestion = hideQuestionOverlay.bind(questionGroup)
         
         for(var i = 0; i < 4; i++){
-
-            var btn = options.create(board.centerX * pivotX, board.centerY + board.height * 0.17, "atlas.question", "questionBtn")
-            btn.anchor.setTo(0.5)
-            btn.alpha = 0
-            btn.correct = false
-            btn.inputEnabled = true
-            btn.events.onInputDown.add(callback,this)
-
-            var letter = new Phaser.Text(questionGroup.game, -btn.width * 0.30, -5, "A", fontStyle)
-            letter.anchor.setTo(0.5)
-            btn.addChild(letter)
-            btn.letter = letter
-
-            var info = new Phaser.Text(questionGroup.game, 0, 0, "", fontStyle)
-            info.anchor.setTo(0.5)
-            info.wordWrapWidth = btn.width
-            info.align = "center"
-            btn.addChild(info)
-            btn.info = info
-
+      
+            var btn = createButtons(board.centerX * pivotX, board.centerY + board.height * 0.17, opt[i], options)
+            
             pivotX += 0.3
 
             if(i % 2 != 0){
                 btn.y += 150
             }
+            
             btn.spawn = {x: btn.x, y: btn.y}
+            btn.inputEnabled = true
+            btn.events.onInputDown.add(questionGroup.hideQuestion)
+            options.add(btn)
         }
-
-        options.children[1].letter.setText("B")
-        options.children[2].letter.setText("C")
-        options.children[3].letter.setText("D")
 
         questionGroup.question = text
         questionGroup.image = img
         questionGroup.options = options
         questionGroup.options.setAll("inputEnabled", false)
         questionGroup.boxes.forEach(function(box){
-            box.scale.setTo(0,1)
+            box.scale.setTo(0, 1)
         })
         
+        
+        questionGroup.setQuestion = setQuestion.bind(questionGroup)
+        questionGroup.fixImage = fixImage.bind(questionGroup)
+        questionGroup.removeImage = removeImage.bind(questionGroup)
+        
+        
         return questionGroup
+    }
+    
+    function createButtons(x, y, opt, group){
+        
+        var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center", wordWrap: true}
+        
+        var btn = game.add.sprite(x, y, "atlas.question", "questionBtn")
+        btn.anchor.setTo(0.5)
+        btn.alpha = 0
+        btn.correct = false
+
+        var letter = new Phaser.Text(group.game, -btn.width * 0.30, -5, opt, fontStyle)
+        letter.anchor.setTo(0.5)
+        btn.addChild(letter)
+        btn.letter = letter
+
+        var info = new Phaser.Text(group.game, 0, 0, "", fontStyle)
+        info.anchor.setTo(0.5)
+        info.wordWrapWidth = btn.width
+        btn.addChild(info)
+        btn.info = info
+        
+        return btn
     }
     
     function loadQuestions(){
@@ -153,33 +174,121 @@ var riddles = function(){
         }
     }
     
-    function onLoadComplete(questionGroup, callback){
-        
-        game.load.image(newQuestion.image, newQuestion.src + ".jpg")
-        game.load.onLoadComplete.add(function(){
-            
-            questionGroup.question.setText(newQuestion.question)
-            questionGroup.image.loadTexture(newQuestion.image)
-            questionGroup.image.key = newQuestion.image
+    function setQuestion(riddle){
 
-            Phaser.ArrayUtils.shuffle(newQuestion.answers)
+		var delay = 200
 
-            for(var i = 0; i < newQuestion.answers.length; i++){
+		this.question.setText(riddle.question)
 
-                var opt = questionGroup.options.children[i]
-                opt.info.setText(newQuestion.answers[i].text)
-                opt.correct = newQuestion.answers[i].correct
+		if(riddle.image) {
+			this.image.loadTexture(riddle.image)
+			var scaleImg = this.fixImage(1)
+			this.image.key = riddle.image
+		}
+
+		for(var i = 0; i < riddle.answers.length; i++){
+
+			var opt = this.options.children[i]
+			opt.info.text = riddle.answers[i]
+			opt.correct = riddle.answers[i] == riddle.correctAnswer
+		}
+
+		game.add.tween(this).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
+
+		this.boxes.forEach(function(box){
+			game.add.tween(box.scale).to({x: 1}, 400, Phaser.Easing.Cubic.Out, true, delay)
+			delay += 400
+		})
+
+		this.options.forEach(function(opt){
+			game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay).onComplete.add(function(){
+				opt.inputEnabled = true
+			})
+			delay += 200
+		})
+
+		delay += 200
+		game.add.tween(this.question).to({alpha:1}, 300, Phaser.Easing.linear, true, delay)
+		if(riddle.image)
+            game.add.tween(this.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
+	}
+    
+    function fixImage(scale){
+
+		this.image.scale.setTo(scale)
+		if(this.image.height > this.container.height){
+			return fixImage(scale - 0.1)
+		}
+		else{
+			this.image.scale.setTo(0)
+			this.image.alpha = 1
+			return scale
+		}
+	}
+    
+    function hideQuestionOverlay(btn){
+
+        this.options.setAll("inputEnabled", false)
+
+        this.options.forEach(function(opt){
+            if(opt != btn){
+                game.add.tween(opt).to({alpha:0}, 300, Phaser.Easing.linear, true)
+            }
+        })
+
+        this.light.x = btn.x - 100
+        this.light.y = btn.y
+        var shine = game.add.tween(this.light.scale).to({x: 0.5, y:0.5}, 300, Phaser.Easing.Cubic.Out, true, 0, 0, true)
+
+        var newY = this.boxes[1].y - 180
+        var choise = game.add.tween(btn).to({x: game.world.centerX, y:newY}, 500, Phaser.Easing.Cubic.Out, false)
+
+        var fadeOut = game.add.tween(this).to({alpha:0}, 500, Phaser.Easing.linear, false, 1000)
+        var group = this
+        fadeOut.onComplete.add(function(){
+            group.question.alpha = 0
+            group.options.forEach(function(opt){
+                opt.alpha = 0
+                opt.x = opt.spawn.x
+                opt.y = opt.spawn.y
+            })
+            group.boxes.forEach(function(box){
+                box.scale.setTo(0, 1)
+            }) 
+            if(group.image){
+                group.image.scale.setTo(0)
+                group.image.alpha = 0
             }
             
-            callback()
+            game.time.events.add(1000, group.checkAnswer)
         })
+        shine.chain(choise)
+        choise.chain(fadeOut)
+
+        this.removeImage()
+    }
+    
+    function removeImage(){
+		//console.log(game.cache.checkImageKey(image))
+        var image = this.image.key
+		if(game.cache.checkImageKey(image)){
+			console.log(image)
+			game.cache.removeImage(image, false)
+		}
+		//console.log(game.cache.checkImageKey(image))
+	}
+    
+    function onLoadComplete(callback){
+        
+        game.load.image(newQuestion.image, newQuestion.src + ".jpg")
+        game.load.onLoadComplete.add(callback)
         game.load.start()
     }
     
     return{
-        loadQuestions:loadQuestions,
-        selectQuestion:selectQuestion,
-        onLoadComplete:onLoadComplete,
+        initialize:initialize,
+        //selectQuestion:selectQuestion,
+        //onLoadComplete:onLoadComplete,
         createQuestionOverlay:createQuestionOverlay
     }
     

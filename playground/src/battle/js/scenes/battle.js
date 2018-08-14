@@ -175,7 +175,7 @@ var battle = function(){
 		mainYogotorars = []
 		miniYogos = [[],[]]
 
-		riddles.loadQuestions()
+		  riddles.initialize()
 		operationGenerator.setConfiguration()
 		usedQuestions = []
 	}
@@ -232,7 +232,7 @@ var battle = function(){
 		win.label.text = "winner"
         btngroup.add(win)
 
-        var quest = createButton(getQuestion, 0x00ffff)
+        var quest = createButton(setReadyGo, 0x00ffff)
         //var quest = createButton(getOperation, 0x00ffff)
 		quest.x = game.world.centerX
 		quest.y = game.world.height - 100
@@ -319,7 +319,8 @@ var battle = function(){
 
     function createQuestionOverlay(){
 
-        questionGroup = riddles.createQuestionOverlay(hideQuestionOverlay)
+        questionGroup = riddles.createQuestionOverlay()
+        questionGroup.checkAnswer = checkAnswer
         questionGroup.alpha = 0
         sceneGroup.add(questionGroup)
     }
@@ -740,68 +741,6 @@ var battle = function(){
 		white.alpha = 0
 	}
 
-	function setQuestion(riddle){
-
-		var delay = 200
-		var last
-
-		questionGroup.question.setText(riddle.question)
-
-		if(riddle.image) {
-			questionGroup.image.loadTexture(riddle.image)
-			var scaleImg = fixImage(1)
-			questionGroup.image.key = riddle.image
-		}
-
-		for(var i = 0; i < riddle.answers.length; i++){
-
-			var opt = questionGroup.options.children[i]
-			opt.info.text = riddle.answers[i]
-			opt.correct = riddle.answers[i] == riddle.correctAnswer
-		}
-
-		game.add.tween(questionGroup).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
-
-		questionGroup.boxes.forEach(function(box){
-			last = game.add.tween(box.scale).to({x: 1}, 400, Phaser.Easing.Cubic.Out, true, delay)
-			delay += 400
-		})
-
-		questionGroup.options.forEach(function(opt){
-			game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay).onComplete.add(function(){
-				opt.inputEnabled = true
-			})
-			delay += 200
-		})
-
-		delay += 200
-		game.add.tween(questionGroup.question).to({alpha:1}, 300, Phaser.Easing.linear, true, delay)
-		if(riddle.image)
-		game.add.tween(questionGroup.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
-	}
-
-	function fixImage(scale){
-
-		questionGroup.image.scale.setTo(scale)
-		if(questionGroup.image.height > questionGroup.container.height){
-			return fixImage(scale - 0.1)
-		}
-		else{
-			questionGroup.image.scale.setTo(0)
-			questionGroup.image.alpha = 1
-			return scale
-		}
-	}
-
-	function removeImage(image){
-		//console.log(game.cache.checkImageKey(image))
-		if(game.cache.checkImageKey(image)){
-			console.log(image)
-			game.cache.removeImage(image,false)
-		}
-		//console.log(game.cache.checkImageKey(image))
-	}
-
 	function checkAnswer(){
 
 		var MAX_TIME = 180000 //3 min
@@ -942,11 +881,11 @@ var battle = function(){
 		return min + ":" + (sec < 10 ? '0' : '') + sec
 	}
 
-    function getQuestion(){
-
-        riddles.selectQuestion(questionGroup)
-        riddles.onLoadComplete(questionGroup, setReadyGo)
-    }
+//    function getQuestion(){
+//
+//        riddles.selectQuestion(questionGroup)
+//        riddles.onLoadComplete(questionGroup, setReadyGo)
+//    }
 
     function setReadyGo(){
 
@@ -956,214 +895,11 @@ var battle = function(){
         var second = game.add.tween(listosYaGroup.ya.scale).to({x: 1,y: 1}, 400, Phaser.Easing.Elastic.Out, false)
         var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 300)
         secondOut.onComplete.add(function(){
-        	setQuestion(server.generateQuestion())
+        	questionGroup.setQuestion(server.generateQuestion())
 		})
 
         first.chain(second)
         second.chain(secondOut)
-    }
-
-    function fixImage(scale){
-
-        questionGroup.image.scale.setTo(scale)
-        if(questionGroup.image.height > questionGroup.container.height){
-            return fixImage(scale - 0.1)
-        }
-        else{
-            questionGroup.image.scale.setTo(0)
-            questionGroup.image.alpha = 1
-            return scale
-        }
-    }
-
-    function hideQuestionOverlay(btn){
-
-        questionGroup.options.setAll("inputEnabled", false)
-
-        questionGroup.options.forEach(function(opt){
-            if(opt != btn){
-                game.add.tween(opt).to({alpha:0}, 300, Phaser.Easing.linear, true)
-            }
-        })
-
-        questionGroup.light.x = btn.x - 100
-        questionGroup.light.y = btn.y
-        var shine = game.add.tween(questionGroup.light.scale).to({x: 0.5, y:0.5}, 300, Phaser.Easing.Cubic.Out, true, 0, 0, true)
-
-        var newY = questionGroup.boxes[1].y - 180
-        var choise = game.add.tween(btn).to({x: game.world.centerX, y:newY}, 500, Phaser.Easing.Cubic.Out, false)
-
-        playerAnswers[0].alpha = 1
-        playerAnswers[1].alpha = 1
-        var fadeOut = game.add.tween(questionGroup).to({alpha:0}, 500, Phaser.Easing.linear, false, 1000)
-        fadeOut.onComplete.add(function(){
-            questionGroup.image.scale.setTo(0)
-            questionGroup.image.alpha = 0
-            questionGroup.question.alpha = 0
-            questionGroup.options.forEach(function(opt){
-                opt.alpha = 0
-                opt.x = opt.spawn.x
-                opt.y = opt.spawn.y
-            })
-            questionGroup.boxes.forEach(function(box){
-                box.scale.setTo(0, 1)
-            })
-
-            game.time.events.add(1000, checkAnswer)
-        })
-        shine.chain(choise)
-        choise.chain(fadeOut)
-
-        removeImage(questionGroup.image.key)
-    }
-
-    function removeImage(image){
-        //console.log(game.cache.checkImageKey(image))
-        if(game.cache.checkImageKey(image)){
-            console.log(image)
-            game.cache.removeImage(image,false)
-        }
-        //console.log(game.cache.checkImageKey(image))
-    }
-
-    function checkAnswer(){
-
-        var MAX_TIME = 180000 //3 min
-        var P1 = {ans: true,
-                  time: 50000 //2 min 30 seg
-                 }
-        var P2 = {ans: true,
-                  time: 60000 //1 min 30 seg
-                 }
-        var events = [P1, P2]
-        var diference = convertTime(Math.abs(P1.time - P2.time))
-
-        for(var i = 0; i < playerAnswers.length; i++){
-
-            var newScale = convertScale(events[i].time)
-            var ansTime = convertTime(events[i].time)
-
-            var score = playerAnswers[i]
-            score.alpha = 1
-            score.timeTxt.setText(ansTime)
-            score.diference.setText("+" + diference)
-            score.stock.loadTexture("atlas.answers", "ans" + events[i].ans)
-            score.time = events[i].time
-
-            var correct = game.add.tween(score.stock.scale).to({x:1.3, y:1.3}, 200, Phaser.Easing.Cubic.Out, true, 0, 0, true)
-            var sizeBar = game.add.tween(score.bar.scale).to({x: newScale}, 400, Phaser.Easing.Cubic.Out, false)
-            var showTime = game.add.tween(score.timeTxt).to({alpha: 1}, 200, Phaser.Easing.Cubic.Out, false)
-
-            correct.chain(sizeBar)
-            sizeBar.chain(showTime)
-        }
-
-        if(P1.ans && !P2.ans){
-
-            setWiner(playerAnswers[0])
-            setLoser(playerAnswers[1], 1)
-        }
-        else if(!P1.ans && P2.ans){
-
-            setWiner(playerAnswers[1])
-            setLoser(playerAnswers[0], -1)
-        }
-        else if(P1.ans && P2.ans){
-
-            if(P1.time < P2.time){
-                setWiner(playerAnswers[0], true)
-                setLoser(playerAnswers[1], 1)
-            }
-            else{
-                setWiner(playerAnswers[1], true)
-                setLoser(playerAnswers[0], -1)
-            }
-        }
-        else{
-            setLoser(playerAnswers[0], -1)
-            setLoser(playerAnswers[1], 1)
-        }
-    }
-
-    function selectAttackType(time){
-
-        if(time > 0 && time <= 60000){
-            return "ultra"
-        }
-        else if(time > 60000 && time <= 120000){
-            return "super"
-        }
-        else{
-            return "normal"
-        }
-    }
-
-    function setWiner(results, tie){
-
-        if(tie) results.diference.alpha = 1
-
-        var attack = selectAttackType(results.time)
-        attackTxt.setText(attack.toUpperCase() + " ")
-
-        var fadeOut = game.add.tween(results).to({alpha: 0}, 400, Phaser.Easing.Cubic.Out, false, 1000)
-        var showShine = game.add.tween(results.shine.scale).from({y:0}, 400, Phaser.Easing.Cubic.Out, false, 500)
-        game.add.tween(results.diference).from({y: 30}, 400, Phaser.Easing.Cubic.Out, true, 1500).chain(showShine)
-        showShine.chain(fadeOut)
-
-        showShine.onStart.add(function(){
-            results.parts.start(true, 1000, null, 50)
-            results.shine.alpha = 0.5
-        })
-        fadeOut.onComplete.add(function(){
-
-            attackTxt.x = results.x
-            attackTxt.y = results.y
-            attackTxt.alpha = 1
-            game.add.tween(attackTxt).to({alpha: 0}, 400, Phaser.Easing.Cubic.Out, true, 1000).onComplete.add(function(){
-                var index = playerAnswers.indexOf(results)
-                scoreBoards[index].points++
-                scoreBoards[index].text.setText(scoreBoards[index].points)
-                attack == "ultra" ? ultraMove(index) : attackMove(attack, index)
-            })
-        })
-    }
-
-    function setLoser(results, side){
-
-        var fadeOut = game.add.tween(results).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, false)
-        fadeOut.onComplete.add(restartResults)
-        game.add.tween(results).to({angle: 50 * side}, 1000, Phaser.Easing.Bounce.Out, true, 2000).chain(fadeOut)
-    }
-
-    function restartResults(){
-
-        for(var i = 0; i < playerAnswers.length; i++){
-
-            var results = playerAnswers[i]
-            results.stock.loadTexture("atlas.answers", "stock")
-            results.angle = 0
-            results.diference.alpha = 0
-            results.timeTxt.alpha = 0
-            results.time = 0
-            results.bar.scale.setTo(1)
-            results.shine.alpha = 0
-            //results.parts.on = false
-        }
-    }
-
-    function convertScale(time){
-
-        var MAX_TIME = 180000
-
-        return 1 - time/MAX_TIME
-    }
-
-    function convertTime(time) {
-
-      var min = Math.floor(time / 60000)
-      var sec = ((time % 60000) / 1000).toFixed(0)
-
-      return min + ":" + (sec < 10 ? '0' : '') + sec
     }
 
 	return {
