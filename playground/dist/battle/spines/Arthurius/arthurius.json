@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "s+QyGn00MNmDf2S2hqMMsq3NNZI", "spine": "3.2.01", "width": 454.02, "height": 429.17, "images": "" },
+"skeleton": { "hash": "ZZANEr9tJvvCPT4YWX+9IcAciSw", "spine": "3.2.01", "width": 480.83, "height": 690, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "cog", "parent": "root", "x": -11.71, "y": 34.69, "color": "000000ff" },
@@ -57,6 +57,7 @@
 	},
 	{ "name": "head", "parent": "torso", "length": 142.51, "x": 93.26, "y": 0.33, "inheritScale": false },
 	{ "name": "influence_bone", "parent": "cog", "length": 59.51, "rotation": 89.99, "x": -0.5, "y": -37.91, "color": "000000ff" },
+	{ "name": "particle12", "parent": "root", "x": 238 },
 	{ "name": "particles_foot_bone", "parent": "body", "x": 0.44, "y": -47.75, "color": "fff200ff" },
 	{ "name": "shield", "parent": "forearm2", "length": 55.87, "rotation": 141.11, "x": 38.05, "y": -13.63, "color": "17ed00ff" },
 	{ "name": "shield_ultra", "parent": "cog", "length": 128.52, "rotation": 90, "x": 178.15, "y": -42.51, "color": "17ed00ff" }
@@ -95,7 +96,7 @@
 	{ "name": "shield", "bone": "shield" },
 	{ "name": "shield_hit", "bone": "influence_bone" },
 	{ "name": "glow_shield", "bone": "shield_ultra" },
-	{ "name": "shield_ultra", "bone": "shield_ultra" },
+	{ "name": "shield_ultra", "bone": "shield_ultra", "attachment": "shield_ultra/shield_ultra_0_00000" },
 	{ "name": "particle1", "bone": "head", "attachment": "particle1" },
 	{ "name": "particle2", "bone": "hand1", "attachment": "particle2" },
 	{ "name": "particle3", "bone": "torso", "attachment": "particle3" },
@@ -103,7 +104,8 @@
 	{ "name": "particle5", "bone": "foot1", "attachment": "particle5" },
 	{ "name": "particle6", "bone": "foot2", "attachment": "particle6" },
 	{ "name": "particle7", "bone": "root", "attachment": "particle7" },
-	{ "name": "particle12", "bone": "root", "attachment": "particle12" },
+	{ "name": "particle12", "bone": "particle12", "attachment": "particle12" },
+	{ "name": "particle13", "bone": "shield_ultra", "attachment": "particle13" },
 	{ "name": "particle11", "bone": "influence_bone", "attachment": "particle11" },
 	{ "name": "particle8", "bone": "torso", "attachment": "particle8" },
 	{ "name": "particle9", "bone": "head", "attachment": "particle9" },
@@ -414,7 +416,10 @@
 			"particle11": { "name": "normal/particle", "x": 121.45, "y": -21.76, "rotation": -180, "width": 104, "height": 104 }
 		},
 		"particle12": {
-			"particle12": { "name": "normal/particle", "x": 238.53, "y": 1.87, "rotation": -90, "width": 104, "height": 104 }
+			"particle12": { "name": "normal/particle", "x": 0.53, "width": 104, "height": 104 }
+		},
+		"particle13": {
+			"particle13": { "name": "normal/particle", "x": 263.01, "y": -39.14, "rotation": -90, "width": 104, "height": 104 }
 		},
 		"particle2": {
 			"particle2": { "name": "normal/particle", "x": 17.28, "y": -3.29, "rotation": -14.7, "width": 104, "height": 104 }
@@ -804,6 +809,12 @@
 			"mouth_d8": { "name": "normal2/mouth_d8", "x": -7.02, "y": -41.14, "rotation": -90, "width": 69, "height": 36 },
 			"mouth_d9": { "name": "normal2/mouth_d9", "x": -6.42, "y": -45.99, "rotation": -90, "width": 40, "height": 46 }
 		},
+		"particle12": {
+			"particle12": { "name": "normal/particle", "width": 104, "height": 104 }
+		},
+		"particle13": {
+			"particle13": { "name": "normal/particle", "x": 260.53, "y": -27.4, "rotation": -90, "width": 104, "height": 104 }
+		},
 		"shield": {
 			"shield_a": { "name": "normal1/shield_a", "x": 40.34, "rotation": -90, "width": 153, "height": 225 },
 			"shield_b": { "name": "normal1/shield_b", "x": 40.37, "rotation": -90, "width": 129, "height": 225 },
@@ -878,8 +889,9 @@
 },
 "events": {
 	"PLAY:tournamentBullAttack1": {},
+	"PLAY:tournamentBullAttack2": {},
+	"PLAY:tournamentBullAttack3": {},
 	"PLAY:tournamentEarthQuake2": {},
-	"PLAY:tournamentFireBurn1": {},
 	"PLAY:tournamentFootStep2": {},
 	"PLAY:tournamentHitGround2": {},
 	"PLAY:tournamentHitGround3": {},
@@ -888,6 +900,7 @@
 	"PLAY:tournamentLandGround1": {},
 	"PLAY:tournamentMagicAttack2": {},
 	"PLAY:tournamentRockSmash1": {},
+	"PLAY:tournamentRocksLift2": {},
 	"PLAY:tournamentScifiTeleport1": {},
 	"PLAY:tournamentShieldSmash2": {},
 	"PLAY:tournamentShieldSmash4": {},
@@ -895,6 +908,7 @@
 	"PLAY:tournamentSwoosh3": {},
 	"PLAY:tournamentSwordDraw1": {},
 	"PLAY:tournamentWindDamage1": {},
+	"PLAY:tournamentWindRise1": {},
 	"SPAWN:particle10:anxiousDrops1": {},
 	"SPAWN:particle11:scifiTeleport1": {},
 	"SPAWN:particle11:scifiTeleport2": { "string": "scifiTeleport1/scifiTeleport1.json" },
@@ -902,10 +916,13 @@
 	"SPAWN:particle11:scifiTeleport4": {},
 	"SPAWN:particle11:scifiTeleport5": { "string": "scifiTeleport2/scifiTeleport4.json" },
 	"SPAWN:particle11:scifiTeleport6": { "string": "scifiTeleport2/scifiTeleport4.json" },
+	"SPAWN:particle12:arthuriusUltra2": { "string": "arthuriusUltra1/arthuriusUltra1.json" },
+	"SPAWN:particle12:normalChargeEarth49": { "string": "dustFloor1/dustFloor1.json" },
+	"SPAWN:particle12:normalChargeEarth50": {},
+	"SPAWN:particle13:arthuriusUltra1": { "string": "arthuriusUltra1/arthuriusUltra2.json" },
 	"SPAWN:particle1:superHit1": {},
 	"SPAWN:particle1:superHit2": { "string": "superHit1/superHit1.json" },
 	"SPAWN:particle6:dustFloor1": {},
-	"SPAWN:particle6:dustFloor2": { "string": "dustFloor1/dustFloor1.json" },
 	"SPAWN:particle8:fireAshes1": {},
 	"SPAWN:particle8:fireDamage1": {},
 	"SPAWN:particle8:fireDamage2": { "string": "fireDamage1/fireDamage1.json" },
@@ -1984,6 +2001,17 @@
 				]
 			},
 			"clavicle1": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			},
+			"particle12": {
 				"rotate": [
 					{ "time": 0, "angle": 0 }
 				],
@@ -3159,6 +3187,17 @@
 				"scale": [
 					{ "time": 0, "x": 1, "y": 1 }
 				]
+			},
+			"particle12": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
 			}
 		},
 		"drawOrder": [
@@ -4024,6 +4063,28 @@
 				"scale": [
 					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
 					{ "time": 1.1333, "x": 1, "y": 1 }
+				]
+			},
+			"shield_ultra": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			},
+			"particle12": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
 				]
 			}
 		},
@@ -4891,6 +4952,17 @@
 				]
 			},
 			"shield_ultra": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			},
+			"particle12": {
 				"rotate": [
 					{ "time": 0, "angle": 0 }
 				],
@@ -5835,6 +5907,17 @@
 				"scale": [
 					{ "time": 0, "x": 1, "y": 1 }
 				]
+			},
+			"particle12": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 1.69, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
 			}
 		},
 		"drawOrder": [
@@ -5849,10 +5932,12 @@
 			{ "time": 1 }
 		],
 		"events": [
+			{ "time": 0, "name": "PLAY:tournamentRocksLift2" },
+			{ "time": 0.1333, "name": "SPAWN:particle12:normalChargeEarth49", "string": "normalChargeEarth16/normalChargeEarth49.json" },
+			{ "time": 0.1333, "name": "SPAWN:particle12:normalChargeEarth50", "string": "normalChargeEarth16/normalChargeEarth50.json" },
 			{ "time": 0.3333, "name": "PLAY:tournamentSwoosh2" },
 			{ "time": 0.4666, "name": "PLAY:tournamentFootStep2" },
-			{ "time": 0.4666, "name": "SPAWN:particle6:dustFloor1", "string": "dustFloor1/dustFloor1.json" },
-			{ "time": 0.4666, "name": "SPAWN:particle6:dustFloor2", "string": "dustFloor1/dustFloor2.json" }
+			{ "time": 0.4666, "name": "SPAWN:particle6:dustFloor1", "string": "dustFloor1/dustFloor1.json" }
 		]
 	},
 	"attack_super": {
@@ -8639,6 +8724,20 @@
 					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
 					{ "time": 2.0666, "x": 1, "y": 1 }
 				]
+			},
+			"particle12": {
+				"rotate": [
+					{ "time": 0, "angle": 0, "curve": "stepped" },
+					{ "time": 2.0666, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": -58.92, "y": 0, "curve": "stepped" },
+					{ "time": 2.0666, "x": -58.92, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 2.0666, "x": 1, "y": 1 }
+				]
 			}
 		},
 		"drawOrder": [
@@ -8666,7 +8765,10 @@
 			{ "time": 2.0666 }
 		],
 		"events": [
+			{ "time": 0.5333, "name": "PLAY:tournamentWindRise1" },
+			{ "time": 1, "name": "SPAWN:particle13:arthuriusUltra1", "string": "arthuriusUltra1/arthuriusUltra1.json" },
 			{ "time": 1.0666, "name": "PLAY:tournamentShieldSmash2" },
+			{ "time": 1.1, "name": "SPAWN:particle12:arthuriusUltra2", "string": "arthuriusUltra1/arthuriusUltra2.json" },
 			{ "time": 1.4, "name": "PLAY:tournamentBullAttack1" }
 		]
 	},
@@ -14769,16 +14871,13 @@
 			},
 			"cog": {
 				"rotate": [
-					{ "time": 0, "angle": 0, "curve": "stepped" },
-					{ "time": 3.6666, "angle": 0 }
+					{ "time": 0, "angle": 0 }
 				],
 				"translate": [
-					{ "time": 0, "x": 11.3, "y": 0, "curve": "stepped" },
-					{ "time": 3.6666, "x": 11.3, "y": 0 }
+					{ "time": 0, "x": 11.3, "y": 0 }
 				],
 				"scale": [
-					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
-					{ "time": 3.6666, "x": 1, "y": 1 }
+					{ "time": 0, "x": 1, "y": 1 }
 				]
 			},
 			"shin2": {
@@ -15153,16 +15252,13 @@
 			},
 			"body": {
 				"rotate": [
-					{ "time": 0, "angle": 0, "curve": "stepped" },
-					{ "time": 3.6666, "angle": 0 }
+					{ "time": 0, "angle": 0 }
 				],
 				"translate": [
-					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
-					{ "time": 3.6666, "x": 0, "y": 0 }
+					{ "time": 0, "x": 0, "y": 0 }
 				],
 				"scale": [
-					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
-					{ "time": 3.6666, "x": 1, "y": 1 }
+					{ "time": 0, "x": 1, "y": 1 }
 				]
 			},
 			"head": {
@@ -15311,16 +15407,13 @@
 			},
 			"clavicle1": {
 				"rotate": [
-					{ "time": 0, "angle": 13.06, "curve": "stepped" },
-					{ "time": 3.6666, "angle": 13.06 }
+					{ "time": 0, "angle": 13.06 }
 				],
 				"translate": [
-					{ "time": 0, "x": 11.51, "y": -24.73, "curve": "stepped" },
-					{ "time": 3.6666, "x": 11.51, "y": -24.73 }
+					{ "time": 0, "x": 11.51, "y": -24.73 }
 				],
 				"scale": [
-					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
-					{ "time": 3.6666, "x": 1, "y": 1 }
+					{ "time": 0, "x": 1, "y": 1 }
 				]
 			},
 			"hand1": {
@@ -15369,16 +15462,13 @@
 			},
 			"root": {
 				"rotate": [
-					{ "time": 0, "angle": 0, "curve": "stepped" },
-					{ "time": 3.6666, "angle": 0 }
+					{ "time": 0, "angle": 0 }
 				],
 				"translate": [
-					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
-					{ "time": 3.6666, "x": 0, "y": 0 }
+					{ "time": 0, "x": 0, "y": 0 }
 				],
 				"scale": [
-					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
-					{ "time": 3.6666, "x": 1, "y": 1 }
+					{ "time": 0, "x": 1, "y": 1 }
 				]
 			},
 			"foot2": {
@@ -15467,6 +15557,17 @@
 				"scale": [
 					{ "time": 0, "x": 1, "y": 1 }
 				]
+			},
+			"particle12": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
 			}
 		},
 		"drawOrder": [
@@ -15474,12 +15575,12 @@
 			{ "time": 3.6666 }
 		],
 		"events": [
-			{ "time": 0.1666, "name": "PLAY:tournamentFireBurn1" },
+			{ "time": 0.1666, "name": "PLAY:tournamentRocksLift2" },
 			{ "time": 0.1666, "name": "SPAWN:particle8:fireDamage1", "string": "fireDamage1/fireDamage1.json" },
 			{ "time": 0.1666, "name": "SPAWN:particle8:fireDamage2", "string": "fireDamage1/fireDamage2.json" },
 			{ "time": 1, "name": "PLAY:tournamentFootStep2" },
+			{ "time": 1, "name": "SPAWN:particle12:normalChargeEarth49", "string": "dustFloor1/dustFloor2.json" },
 			{ "time": 1, "name": "SPAWN:particle6:dustFloor1", "string": "dustFloor1/dustFloor1.json" },
-			{ "time": 1, "name": "SPAWN:particle6:dustFloor2", "string": "dustFloor1/dustFloor2.json" },
 			{ "time": 2.3333, "name": "SPAWN:particle8:fireAshes1", "string": "fireAshes1/fireAshes1.json" }
 		]
 	},
@@ -17047,6 +17148,17 @@
 				]
 			},
 			"shield_ultra": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			},
+			"particle12": {
 				"rotate": [
 					{ "time": 0, "angle": 0 }
 				],
@@ -18973,6 +19085,17 @@
 				"scale": [
 					{ "time": 0, "x": 1, "y": 1 }
 				]
+			},
+			"particle12": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
 			}
 		},
 		"drawOrder": [
@@ -20398,6 +20521,17 @@
 				"scale": [
 					{ "time": 0, "x": 1, "y": 1 }
 				]
+			},
+			"particle12": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
 			}
 		},
 		"drawOrder": [
@@ -21191,6 +21325,17 @@
 				]
 			},
 			"shield_ultra": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			},
+			"particle12": {
 				"rotate": [
 					{ "time": 0, "angle": 0 }
 				],
@@ -22203,6 +22348,17 @@
 				]
 			},
 			"shield_ultra": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 }
+				]
+			},
+			"particle12": {
 				"rotate": [
 					{ "time": 0, "angle": 0 }
 				],

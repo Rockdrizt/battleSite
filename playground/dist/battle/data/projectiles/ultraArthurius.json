@@ -1,9 +1,12 @@
 {
   "timing":{
     "stop":1400,
-    "removal":1500,
+    "removal":2500,
     "hit":500
   },
+   "particles":[
+    "particles/characters/arthuriusUltra1/arthuriusUltra3.json"
+  ],
   "spines":[
     {
       "file":"spines/Arthurius/arthurius_projectiles.json",
@@ -11,6 +14,7 @@
       "skin":"arthurius_projectiles",
       "animations":["in_ultra", "idle_ultra"]
     }
+
   ],
   "impact":{
     "soundID":"tournamentEarthImpact1"

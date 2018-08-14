@@ -27,7 +27,6 @@ var config = {
 firebase.initializeApp(config);
 var database = firebase.database();
 var MAX_OPERAND_VALUE = 500;
-var NUMBER_OF_FAKE_ANSWERS = 2;
 var INITIAL_LIFE = 100;
 var DAMAGE_BY_HIT = 20;
 var HEALTH_BY_HIT = 20;
@@ -54,6 +53,8 @@ var cleanArray = function(arr){
  */
 // function Server(inLevel){
 function Server(){
+
+	var NUMBER_OF_FAKE_ANSWERS = 3;
 
 	var self = this;
 	/** Events
@@ -282,22 +283,41 @@ function Server(){
 			possibleAnswers.push(n);
 		}
 
-		valores.possibleAnswers = shuffleArray(possibleAnswers);
+		possibleAnswers = shuffleArray(possibleAnswers);
+
+		var question
+		if(operation.operator === "/"){
+			question = operation.operand1 + " ÷ " + operation.operand2 + " = " + operation.result
+		}else{
+			question = operation.operand1 + " " + operation.operator + " " + operation.operand2 + " = " + operation.result
+		}
+
+		//TODO: correctAnswer only in server side
+		var questionData = {
+			question : question,
+			answers : possibleAnswers,
+			correctAnswer : correctAnswer
+		}
+
+		return questionData
+	}
+	this.generateQuestion = generateQuestion;
+
+	//TODO: generate question is not a server function
+	this.sendQuestion = function () {
+		var questionData = generateQuestion()
+
+		valores.possibleAnswers = questionData.answers
 		valores.t1answer = false;
 		valores.t2answer = false;
 
-		operation.date = firebase.database.ServerValue.TIMESTAMP
-		valores.data = operation;
+		questionData.date = firebase.database.ServerValue.TIMESTAMP
+		valores.data = questionData;
 
-		var questionData = {
-			operation : operation,
-			possibleAnswers : possibleAnswers
-		}
-		setfb(refIdGame.child("data"), valores.data)//refIdGame.child("data").set(valores.data);
-		setfb(refIdGame.child("possibleAnswers"), valores.possibleAnswers)//refIdGame.child("possibleAnswers").set(valores.possibleAnswers);
-		self.fireEvent('afterGenerateQuestion',[operation]);
+		setfb(refIdGame.child("data"), questionData)//refIdGame.child("data").set(valores.data);
+		//TODO: showPossibleAnswers deprected check client events to avoid conflicts.
+		self.fireEvent('afterGenerateQuestion',[questionData]);
 	}
-	this.generateQuestion = generateQuestion;
 
 	/**
 	 * @summary Starts the server
