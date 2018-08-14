@@ -175,7 +175,7 @@ var battle = function(){
 		mainYogotorars = []
 		miniYogos = [[],[]]
 
-		  riddles.initialize()
+        riddles.initialize()
 		operationGenerator.setConfiguration()
 		usedQuestions = []
 	}
@@ -820,7 +820,7 @@ var battle = function(){
 		var attack = selectAttackType(results.time)
 		attackTxt.setText(attack.toUpperCase() + " ")
 
-		var fadeOut = game.add.tween(results).to({alpha: 0}, 400, Phaser.Easing.Cubic.Out, false, 1000)
+		var fadeOut = game.add.tween(results).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, false, 1000)
 		var showShine = game.add.tween(results.shine.scale).from({y:0}, 400, Phaser.Easing.Cubic.Out, false, 500)
 		game.add.tween(results.diference).from({y: 30}, 400, Phaser.Easing.Cubic.Out, true, 1500).chain(showShine)
 		showShine.chain(fadeOut)
@@ -845,7 +845,7 @@ var battle = function(){
 
 	function setLoser(results, side){
 
-		var fadeOut = game.add.tween(results).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, false)
+		var fadeOut = game.add.tween(results).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, false, 1000)
 		fadeOut.onComplete.add(restartResults)
 		game.add.tween(results).to({angle: 50 * side}, 1000, Phaser.Easing.Bounce.Out, true, 2000).chain(fadeOut)
 	}
@@ -880,12 +880,6 @@ var battle = function(){
 
 		return min + ":" + (sec < 10 ? '0' : '') + sec
 	}
-
-//    function getQuestion(){
-//
-//        riddles.selectQuestion(questionGroup)
-//        riddles.onLoadComplete(questionGroup, setReadyGo)
-//    }
 
     function setReadyGo(){
 

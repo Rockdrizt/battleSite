@@ -33,12 +33,14 @@ var riddles = function(){
         black.alpha = 0.5
         questionGroup.add(black)
         
-        var board = questionGroup.create(180, game.world.height - 20, "questionBoard")
+        var board = questionGroup.create(game.world.centerX, game.world.height - 20, "questionBoard")
         board.anchor.setTo(0, 1)
+        board.x -= board.width * 0.47
         questionGroup.boxes[1] = board
         
-        var box = questionGroup.create(board.width + 30, board.y - board.height + 2, "atlas.question", "questionBox")
+        var box = questionGroup.create(board.centerX, board.y - board.height + 2, "atlas.question", "questionBox")
         box.anchor.setTo(1, 1)
+        box.x += box.width * 0.42
         questionGroup.boxes[0] = box
       
         var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "left", wordWrap: true, wordWrapWidth: box.width - 180}
@@ -48,8 +50,9 @@ var riddles = function(){
         text.alpha = 0
         questionGroup.add(text)
         
-        var container = questionGroup.create(box.x - 40, board.centerY - board.height * 0.2, "atlas.question", "questionImage")
+        var container = questionGroup.create(board.centerX, board.centerY - board.height * 0.2, "atlas.question", "questionImage")
         container.anchor.setTo(1, 0.5)
+        container.x += container.width * 0.43
         questionGroup.container = container
         questionGroup.boxes[2] = container
         
@@ -96,11 +99,9 @@ var riddles = function(){
             box.scale.setTo(0, 1)
         })
         
-        
         questionGroup.setQuestion = setQuestion.bind(questionGroup)
         questionGroup.fixImage = fixImage.bind(questionGroup)
         questionGroup.removeImage = removeImage.bind(questionGroup)
-        
         
         return questionGroup
     }
@@ -260,7 +261,8 @@ var riddles = function(){
                 group.image.alpha = 0
             }
             
-            game.time.events.add(1000, group.checkAnswer)
+            group.checkAnswer()
+            //game.time.events.add(1000, group.checkAnswer)
         })
         shine.chain(choise)
         choise.chain(fadeOut)
