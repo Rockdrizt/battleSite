@@ -288,6 +288,11 @@ function Server(){
 
 		operation.date = firebase.database.ServerValue.TIMESTAMP
 		valores.data = operation;
+
+		var questionData = {
+			operation : operation,
+			possibleAnswers : possibleAnswers
+		}
 		setfb(refIdGame.child("data"), valores.data)//refIdGame.child("data").set(valores.data);
 		setfb(refIdGame.child("possibleAnswers"), valores.possibleAnswers)//refIdGame.child("possibleAnswers").set(valores.possibleAnswers);
 		self.fireEvent('afterGenerateQuestion',[operation]);
