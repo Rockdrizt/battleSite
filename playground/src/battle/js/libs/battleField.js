@@ -220,6 +220,7 @@ var battleField = function(){
             teamScore.x = game.world.centerX * pivotX
             teamScore.y = game.world.centerY - 130
             teamScore.time = 0
+            teamScore.direction = side.direction
             group.add(teamScore)
             playerAnswers.push(teamScore)
             

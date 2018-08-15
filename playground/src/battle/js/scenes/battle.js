@@ -182,7 +182,7 @@ var battle = function(){
 
 	function preload(){
 
-		game.stage.disableVisibilityChange = false
+		game.stage.disableVisibilityChange = true
 		game.load.bitmapFont('skwig', 'fonts/font.png', 'fonts/font.fnt')
 	}
 
@@ -741,13 +741,18 @@ var battle = function(){
 		white.alpha = 0
 	}
 
-	function checkAnswer(){
+	function checkAnswer(event){
+		event = event || {}
+		var answers = event.answers || {}
+		var numPlayer = event.numPlayer || 1
+		var playerWin, playerLose
+		var tie
 
 		var MAX_TIME = 180000 //3 min
-		var P1 = {ans: true,
+		var P1 = answers.p1 || {value: true,
 			time: 50000 //2 min 30 seg
 		}
-		var P2 = {ans: true,
+		var P2 = answers.p2 ||{value: true,
 			time: 60000 //1 min 30 seg
 		}
 		var events = [P1, P2]
@@ -762,7 +767,7 @@ var battle = function(){
 			score.alpha = 1
 			score.timeTxt.setText(ansTime)
 			score.diference.setText("+" + diference)
-			score.stock.loadTexture("atlas.answers", "ans" + events[i].ans)
+			score.stock.loadTexture("atlas.answers", "ans" + events[i].value)
 			score.time = events[i].time
 
 			var correct = game.add.tween(score.stock.scale).to({x:1.3, y:1.3}, 200, Phaser.Easing.Cubic.Out, true, 0, 0, true)
@@ -773,31 +778,19 @@ var battle = function(){
 			sizeBar.chain(showTime)
 		}
 
-		if(P1.ans && !P2.ans){
+		if(numPlayer === 1){
+			playerWin = playerAnswers[0]
+			playerLose = playerAnswers[1]
+		}
+		else if(numPlayer === 2) {
+			playerWin = playerAnswers[1]
+			playerLose = playerAnswers[0]
+		}
 
-			setWiner(playerAnswers[0])
-			setLoser(playerAnswers[1], 1)
-		}
-		else if(!P1.ans && P2.ans){
+		tie = P1.value == P2.value
+		setWiner(playerWin, tie)
+		setLoser(playerLose)
 
-			setWiner(playerAnswers[1])
-			setLoser(playerAnswers[0], -1)
-		}
-		else if(P1.ans && P2.ans){
-
-			if(P1.time < P2.time){
-				setWiner(playerAnswers[0], true)
-				setLoser(playerAnswers[1], 1)
-			}
-			else{
-				setWiner(playerAnswers[1], true)
-				setLoser(playerAnswers[0], -1)
-			}
-		}
-		else{
-			setLoser(playerAnswers[0], -1)
-			setLoser(playerAnswers[1], 1)
-		}
 	}
 
 	function selectAttackType(time){
@@ -843,11 +836,11 @@ var battle = function(){
 		})
 	}
 
-	function setLoser(results, side){
+	function setLoser(results){
 
 		var fadeOut = game.add.tween(results).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, false)
 		fadeOut.onComplete.add(restartResults)
-		game.add.tween(results).to({angle: 50 * side}, 1000, Phaser.Easing.Bounce.Out, true, 2000).chain(fadeOut)
+		game.add.tween(results).to({angle: 50 * results.direction}, 1000, Phaser.Easing.Bounce.Out, true, 2000).chain(fadeOut)
 	}
 
 	function restartResults(){
@@ -895,7 +888,8 @@ var battle = function(){
         var second = game.add.tween(listosYaGroup.ya.scale).to({x: 1,y: 1}, 400, Phaser.Easing.Elastic.Out, false)
         var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 300)
         secondOut.onComplete.add(function(){
-        	questionGroup.setQuestion(server.generateQuestion())
+        	//questionGroup.setQuestion(server.generateQuestion())
+			server.sendQuestion()
 		})
 
         first.chain(second)
@@ -928,6 +922,13 @@ var battle = function(){
 			menubuttons()
 			//battleSong = sound.play("battleSong", {loop:true, volume:0.6})
 			createWhite()
+
+			if(server){
+				server.removeEventListener('afterGenerateQuestion', questionGroup.setQuestion);
+				server.removeEventListener('onTurnEnds', checkAnswer);
+				server.addEventListener('afterGenerateQuestion', questionGroup.setQuestion);
+				server.addEventListener('onTurnEnds', checkAnswer);
+			}
 
 			game.add.tween(sceneGroup).from({alpha:0},500, Phaser.Easing.Cubic.Out,true)
 		},

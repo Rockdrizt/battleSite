@@ -88,20 +88,12 @@ function Client(){
 			self.refIdGame= null;
 			self.fireEvent('onGameFull',[]);
 		}
-		if((idGame!==null)&&(!self.id_game)){
+		if(((idGame!==null)&&(!self.id_game))||(idGame === "000000")){
 			self.id_game = idGame;
 			self.refIdGame.child("data").on('value', function(snapshot) {
 				var data = snapshot.val();
 				self.currentData = data
 				self.fireEvent('showEquation',[data]);
-			});
-
-			self.refIdGame.child('possibleAnswers').on('value', function(snapshot) {
-				var possibleAnswers = snapshot.val();
-				if(possibleAnswers !== null){
-					self.currentOptions = possibleAnswers
-					self.fireEvent('showPossibleAnswers',[possibleAnswers]);
-				}
 			});
 
 			self.refIdGame.child('winner').on('value', function(snapshot) {
@@ -163,7 +155,7 @@ function Client(){
 			var val = snapshot.val()
 			if(val){
 				initialize(idGame, team, val)
-				if(callback) callback
+				if(callback) callback()
 			}else{
 				onError()
 			}

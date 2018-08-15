@@ -28,19 +28,19 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				if (server) {
-					server.setGameReady(true)
-					server.startGame = function () {
-						sceneloader.show("yogoSelector")
-					}
-				}
-				else {
+				// if (server) {
+				// 	server.setGameReady(true)
+				// 	server.startGame = function () {
+				// 		sceneloader.show("yogoSelector")
+				// 	}
+				// }
+				// else {
 					//sceneloader.show("yogoSelector")
 					var loaderScene = sceneloader.getScene("preloaderIntro")
 
 					//loaderScene.onComplete("startScreen")
-					sceneloader.show("yogoSelector")
-				}
+					sceneloader.show("battle")
+				// }
 	    	}
 
 			document.body.style.visibility = "visible"
@@ -123,8 +123,8 @@ function startGame(){
 		console.log("createEpicBattle")
     	bootConfigFiles([
             //startScreen,
-            yogoSelector,
-            //battle,
+            //yogoSelector,
+            battle,
     	])
     }
 }
