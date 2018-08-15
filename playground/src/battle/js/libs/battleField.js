@@ -205,25 +205,24 @@ var battleField = function(){
         return listosYaGroup
     }
     
-    function createScores(SIDES, group){
+    function createScores(SIDES, pos){
         
         var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#000066", align: "center"}
-        var pivotX = 0.7
-        
-        var playerAnswers = []
+       
+        var answersGroup = game.add.group()
+        answersGroup.x = game.world.centerX
+        answersGroup.y = game.world.centerY - 130
         
         for(var i = 0; i < 2; i++){
         
             var side = SIDES[i]
 
             var teamScore = game.add.group()
-            teamScore.x = game.world.centerX * pivotX
-            teamScore.y = game.world.centerY - 130
+            teamScore.x = pos[i].x
             teamScore.time = 0
-            group.add(teamScore)
-            playerAnswers.push(teamScore)
+            answersGroup.add(teamScore)
             
-            var timeDif = new Phaser.Text(group.game, 50 * side.direction, -70, "-2 sec", fontStyle)
+            var timeDif = new Phaser.Text(teamScore.game, 50 * side.direction, -70, "-2 sec", fontStyle)
             timeDif.anchor.setTo(0.5)
             timeDif.fill = "#ffff54"
             timeDif.fontSize = 45
@@ -237,7 +236,7 @@ var battleField = function(){
             timeCont.anchor.setTo(0.5)
             timeCont.scale.setTo(side.direction, 1)
             
-            var timeTxt = new Phaser.Text(group.game, 50 * side.direction, 7, "0:00", fontStyle)
+            var timeTxt = new Phaser.Text(teamScore.game, 50 * side.direction, 7, "0:00", fontStyle)
             timeTxt.anchor.setTo(0.5)
             timeTxt.alpha = 0
             teamScore.add(timeTxt)
@@ -272,12 +271,9 @@ var battleField = function(){
             particle.width = bg.width
             teamScore.add(particle)
             teamScore.parts = particle
-
-            pivotX = 1.3
-            teamScore.alpha = 0
         }
         
-        return playerAnswers
+        return answersGroup
     }
     
     return{
