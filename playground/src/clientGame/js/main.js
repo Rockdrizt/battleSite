@@ -79,6 +79,7 @@ function startGame(){
 
 		preloadScenes([
 			teamSelector,
+			questions
 		])
 	}
 }
@@ -95,7 +96,7 @@ function startGame(){
 
 	//TODO: this is just testing remove on prod
 	cliente = new Client();
-	cliente.start(team, "000000")
-	cliente.startGame = startGame
+	cliente.start(team, "000000", startGame)
+	//cliente.startGame = startGame
 })()
 //minigame.orientation.init(startGame)
