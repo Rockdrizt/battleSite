@@ -125,6 +125,9 @@
     transform: scaleX(-1);
     filter: drop-shadow(5px 5px 0 #65d5fb) drop-shadow(-5px -5px 0 #65d5fb) drop-shadow(-5px 5px 0 #65d5fb) drop-shadow(5px -5px 0 #65d5fb); }
 
+.item--create .item__avatar {
+  margin: 0; }
+
 /**************************************
  ********* Media Queries **************
  **************************************/
@@ -248,6 +251,10 @@
       font-size: 20px;
       font-family: 'VAGRounded Thin', sans-serif;
       padding-top: 10px; }
+  .item__textbox--create p {
+    padding: 0;
+    padding-bottom: 30px;
+    line-height: 1.5; }
 
 /**************************************
  ********* Media Queries **************
@@ -307,12 +314,11 @@
       .item__buttons .item__btn p:hover + span {
         background-image: url(../img/mathturnament-onboarding-play-btn-down.png); }
       .item__buttons .item__btn p::before {
+        content: '';
         background-size: cover;
         background-repeat: no-repeat;
-        transform: scaleX(-1);
         position: absolute;
         top: 0;
-        width: 200px;
         height: 100%;
         z-index: -1; }
     .item__buttons .item__btn span {
@@ -332,19 +338,11 @@
     right: 105px;
     padding-right: 10px; }
     .item__btn--back p::before {
-      content: '';
       background-image: url(../img/mathtournament-onboarding-alfa-team.png);
       right: -10px;
-      background-size: cover;
+      width: 190px;
       background-position: top right;
-      background-repeat: no-repeat;
-      transform: scaleX(-1);
-      position: absolute;
-      top: 0;
-      right: -10px;
-      width: 200px;
-      height: 60px;
-      z-index: -1; }
+      transform: scaleX(-1); }
   .item__btn--back span {
     transform: scaleX(-1); }
 
@@ -355,19 +353,11 @@
     left: 105px;
     padding-left: 10px; }
     .item__btn--start p::before {
-      content: '';
       background-image: url(../img/mathturnament-onboarding-bravo-team.png);
       left: -10px;
-      background-size: cover;
       background-position: top left;
-      background-repeat: no-repeat;
-      transform: scaleX(-1);
-      position: absolute;
-      top: 0;
-      left: -10px;
-      width: 200px;
-      height: 60px;
-      z-index: -1; }
+      width: 220px;
+      transform: scale(-1); }
 
 /**************************************
  ********* Media Queries **************

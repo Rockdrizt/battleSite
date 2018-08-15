@@ -23,12 +23,12 @@
       }
 
       &::before {
+        content: '';
         background-size: cover;
         background-repeat: no-repeat;
-        transform: scaleX(-1);
+        // transform: scaleX(-1);
         position: absolute;
         top: 0;
-        width: 200px;
         height: 100%;
         z-index: -1;
       }
@@ -58,19 +58,11 @@
     padding-right: 10px;
 
     &::before {
-      content: '';
       background-image: url(../img/mathtournament-onboarding-alfa-team.png);
       right: -10px;
-      background-size: cover;
+      width: 190px;
       background-position: top right;
-      background-repeat: no-repeat;
       transform: scaleX(-1);
-      position: absolute;
-      top: 0;
-      right: -10px;
-      width: 200px;
-      height: 60px;
-      z-index: -1;
     }
   }
 
@@ -88,19 +80,11 @@
     padding-left: 10px;
 
     &::before {
-      content: '';
       background-image: url(../img/mathturnament-onboarding-bravo-team.png);
       left: -10px;
-      background-size: cover;
       background-position: top left;
-      background-repeat: no-repeat;
-      transform: scaleX(-1);
-      position: absolute;
-      top: 0;
-      left: -10px;
-      width: 200px;
-      height: 60px;
-      z-index: -1;
+      width: 220px;
+      transform: scale(-1);
     }
   }
 }
