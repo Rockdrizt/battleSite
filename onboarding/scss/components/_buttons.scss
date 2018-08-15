@@ -1,9 +1,9 @@
-.container__item__buttons {
+.item__buttons {
   position: relative;
   max-width: 300px;
   margin: 0 auto;
 
-  .container__item__btn {
+  .item__btn {
     position: relative;
     display: inline-block;
 
@@ -49,7 +49,7 @@
   }
 }
 
-.container__item__btn--back {
+.item__btn--back {
   margin: 0;
   float: left;
 
@@ -79,7 +79,7 @@
   }
 }
 
-.container__item__btn--start {
+.item__btn--start {
   margin: 0;
   float: right;
 
@@ -110,8 +110,8 @@
  **************************************/
 
 @media only screen and (max-width: 992px) {
-  .container__item__buttons {
-    .container__item__btn {
+  .item__buttons {
+    .item__btn {
       p {
         font-size: 20px;
         line-height: 40px;
@@ -129,7 +129,7 @@
       }
     }
 
-    .container__item__btn--back {
+    .item__btn--back {
       p {
         right: 60px;
         padding-right: 10px;
@@ -140,7 +140,7 @@
       }
     }
 
-    .container__item__btn--start {
+    .item__btn--start {
       p {
         left: 60px;
         padding-left: 10px;
@@ -154,8 +154,8 @@
 }
 
 @media only screen and (max-width: 644px) {
-  .container__item__buttons {
-    .container__item__btn {
+  .item__buttons {
+    .item__btn {
       p {
         line-height: 30px;
         top: 20px;
@@ -172,13 +172,13 @@
       }
     }
 
-    .container__item__btn--back {
+    .item__btn--back {
       p {
         right: 50px;
       }
     }
 
-    .container__item__btn--start {
+    .item__btn--start {
       p {
         left: 50px;
       }

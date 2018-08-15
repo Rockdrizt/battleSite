@@ -1,4 +1,4 @@
-.container__item__pin {
+.item__textbox {
   top: 150px;
   background-image: linear-gradient(90deg, #da6d8c, #f1a76f);
   border-radius: 10px;
@@ -42,9 +42,9 @@
  **************************************/
 
 @media only screen and (max-width: 992px) {
-  .container__item--middle {
+  .item--middle {
     top: -10px;
-    .container__item__pin {
+    .item__textbox {
       &__container {
         padding: 10px;
         h3 {
@@ -63,9 +63,9 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .container__item--middle {
+  .item--middle {
     top: -35px;
-    .container__item__pin {
+    .item__textbox {
       &__container {
         padding: 7px;
         h3 {
@@ -86,8 +86,8 @@
 }
 
 @media only screen and (max-width: 644px) {
-  .container__item--middle {
-    .container__item__pin {
+  .item--middle {
+    .item__textbox {
       padding: 7px;
       top: 85px;
       h3 {

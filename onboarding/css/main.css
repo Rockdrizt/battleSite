@@ -65,63 +65,63 @@
   .main .bubbles-down {
     animation: none; } }
 
-.container__item {
+.item {
   display: inline-block;
   position: relative;
   width: 25%; }
-  .container__item__header {
+  .item__header {
     width: 400%;
     line-height: 75px;
     font-size: 45px;
     text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
     position: absolute; }
-    .container__item__header span {
+    .item__header span {
       background-repeat: no-repeat;
       background-size: contain;
       height: 100%;
       width: 100%;
       position: absolute;
       z-index: -1; }
-  .container__item__avatar {
+  .item__avatar {
     margin-top: 115px; }
-    .container__item__avatar img {
+    .item__avatar img {
       width: 100%; }
 
-.container__item--left {
+.item--left {
   float: left;
   left: 50px; }
-  .container__item--left .container__item__header {
+  .item--left .item__header {
     background-color: #f3246d;
     right: 10%;
     text-align: right; }
-    .container__item--left .container__item__header span {
+    .item--left .item__header span {
       background-image: url(../img/mathtournament-onboarding-alfa-team.png);
       background-position: top right;
       right: -20%; }
-  .container__item--left img {
+  .item--left img {
     transform: scaleX(-1);
     filter: drop-shadow(5px 5px 0 #ff65a5) drop-shadow(-5px -5px 0 #ff65a5) drop-shadow(-5px 5px 0 #ff65a5) drop-shadow(5px -5px 0 #ff65a5); }
 
-.container__item--middle .container__item__pin {
+.item--middle .item__textbox {
   position: absolute;
   top: 90px;
   width: 100%; }
 
-.container__item--middle .container__item__buttons {
+.item--middle .item__buttons {
   top: 330px; }
 
-.container__item--right {
+.item--right {
   float: right;
   right: 50px; }
-  .container__item--right .container__item__header {
+  .item--right .item__header {
     background-color: #24d5f9;
     left: 10%;
     text-align: left; }
-    .container__item--right .container__item__header span {
+    .item--right .item__header span {
       background-image: url(../img/mathturnament-onboarding-bravo-team.png);
       background-position: top left;
       left: -20%; }
-  .container__item--right img {
+  .item--right img {
     transform: scaleX(-1);
     filter: drop-shadow(5px 5px 0 #65d5fb) drop-shadow(-5px -5px 0 #65d5fb) drop-shadow(-5px 5px 0 #65d5fb) drop-shadow(5px -5px 0 #65d5fb); }
 
@@ -129,34 +129,34 @@
  ********* Media Queries **************
  **************************************/
 @media only screen and (max-width: 992px) {
-  .container__item__header {
+  .item__header {
     line-height: 55px;
     font-size: 35px; }
-  .container__item__avatar {
+  .item__avatar {
     margin-top: 85px; } }
 
 @media only screen and (max-width: 768px) {
-  .container__item__header {
+  .item__header {
     line-height: 45px;
     font-size: 30px; } }
 
 @media only screen and (max-width: 644px) {
-  .container__item__header {
+  .item__header {
     font-size: 25px;
     line-height: 35px; }
-  .container__item__avatar {
+  .item__avatar {
     margin-top: 60px; }
-  .container__item--left {
+  .item--left {
     left: 25px; }
-    .container__item--left img {
+    .item--left img {
       filter: drop-shadow(3px 3px 0 #ff65a5) drop-shadow(-3px -3px 0 #ff65a5) drop-shadow(-3px 3px 0 #ff65a5) drop-shadow(3px -3px 0 #ff65a5); }
-  .container__item--right {
+  .item--right {
     right: 25px; }
-    .container__item--right .container__item__header {
+    .item--right .item__header {
       left: 0; }
-      .container__item--right .container__item__header span {
+      .item--right .item__header span {
         left: -17%; }
-    .container__item--right img {
+    .item--right img {
       filter: drop-shadow(3px 3px 0 #24d5f9) drop-shadow(-3px -3px 0 #24d5f9) drop-shadow(-3px 3px 0 #24d5f9) drop-shadow(3px -3px 0 #24d5f9); } }
 
 .header {
@@ -219,23 +219,23 @@
       position: absolute;
       left: -20px; } }
 
-.container__item__pin {
+.item__textbox {
   top: 150px;
   background-image: linear-gradient(90deg, #da6d8c, #f1a76f);
   border-radius: 10px;
   padding: 10px;
   max-width: 300px;
   margin: 0 auto; }
-  .container__item__pin__container {
+  .item__textbox__container {
     width: 100%;
     border-radius: 10px;
     background: #f9f4ee;
     padding: 20px; }
-    .container__item__pin__container h3 {
+    .item__textbox__container h3 {
       color: #070634;
       font-size: 35px;
       padding: 10px; }
-    .container__item__pin__container .pin {
+    .item__textbox__container .pin {
       font-size: 30px;
       text-align: center;
       width: 100%;
@@ -243,7 +243,7 @@
       background-color: #252a4b;
       border-radius: 5px;
       padding-top: 5px; }
-    .container__item__pin__container p {
+    .item__textbox__container p {
       color: #070634;
       font-size: 20px;
       font-family: 'VAGRounded Thin', sans-serif;
@@ -253,60 +253,60 @@
  ********* Media Queries **************
  **************************************/
 @media only screen and (max-width: 992px) {
-  .container__item--middle {
+  .item--middle {
     top: -10px; }
-    .container__item--middle .container__item__pin__container {
+    .item--middle .item__textbox__container {
       padding: 10px; }
-      .container__item--middle .container__item__pin__container h3 {
+      .item--middle .item__textbox__container h3 {
         font-size: 30px;
         padding-top: 0; }
-      .container__item--middle .container__item__pin__container .pin {
+      .item--middle .item__textbox__container .pin {
         font-size: 25px; }
-      .container__item--middle .container__item__pin__container p {
+      .item--middle .item__textbox__container p {
         font-size: 16px; } }
 
 @media only screen and (max-width: 768px) {
-  .container__item--middle {
+  .item--middle {
     top: -35px; }
-    .container__item--middle .container__item__pin__container {
+    .item--middle .item__textbox__container {
       padding: 7px; }
-      .container__item--middle .container__item__pin__container h3 {
+      .item--middle .item__textbox__container h3 {
         font-size: 25px;
         padding-top: 0; }
-      .container__item--middle .container__item__pin__container .pin {
+      .item--middle .item__textbox__container .pin {
         font-size: 20px; }
-      .container__item--middle .container__item__pin__container p {
+      .item--middle .item__textbox__container p {
         font-size: 16px;
         padding-left: 5px;
         padding-right: 5px; } }
 
 @media only screen and (max-width: 644px) {
-  .container__item--middle .container__item__pin {
+  .item--middle .item__textbox {
     padding: 7px;
     top: 85px; }
-    .container__item--middle .container__item__pin h3 {
+    .item--middle .item__textbox h3 {
       padding: 0;
       font-size: 20px; } }
 
-.container__item__buttons {
+.item__buttons {
   position: relative;
   max-width: 300px;
   margin: 0 auto; }
-  .container__item__buttons .container__item__btn {
+  .item__buttons .item__btn {
     position: relative;
     display: inline-block; }
-    .container__item__buttons .container__item__btn p,
-    .container__item__buttons .container__item__btn span {
+    .item__buttons .item__btn p,
+    .item__buttons .item__btn span {
       cursor: pointer; }
-    .container__item__buttons .container__item__btn p {
+    .item__buttons .item__btn p {
       position: absolute;
       font-size: 30px;
       line-height: 60px;
       text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
       top: 50px; }
-      .container__item__buttons .container__item__btn p:hover + span {
+      .item__buttons .item__btn p:hover + span {
         background-image: url(../img/mathturnament-onboarding-play-btn-down.png); }
-      .container__item__buttons .container__item__btn p::before {
+      .item__buttons .item__btn p::before {
         background-size: cover;
         background-repeat: no-repeat;
         transform: scaleX(-1);
@@ -315,23 +315,23 @@
         width: 200px;
         height: 100%;
         z-index: -1; }
-    .container__item__buttons .container__item__btn span {
+    .item__buttons .item__btn span {
       display: inline-block;
       background-size: contain;
       background-image: url(../img/mathturnament-onboarding-play-btn.png);
       background-repeat: no-repeat;
       width: 110px;
       height: 145px; }
-      .container__item__buttons .container__item__btn span:hover {
+      .item__buttons .item__btn span:hover {
         background-image: url(../img/mathturnament-onboarding-play-btn-down.png); }
 
-.container__item__btn--back {
+.item__btn--back {
   margin: 0;
   float: left; }
-  .container__item__btn--back p {
+  .item__btn--back p {
     right: 105px;
     padding-right: 10px; }
-    .container__item__btn--back p::before {
+    .item__btn--back p::before {
       content: '';
       background-image: url(../img/mathtournament-onboarding-alfa-team.png);
       right: -10px;
@@ -345,16 +345,16 @@
       width: 200px;
       height: 60px;
       z-index: -1; }
-  .container__item__btn--back span {
+  .item__btn--back span {
     transform: scaleX(-1); }
 
-.container__item__btn--start {
+.item__btn--start {
   margin: 0;
   float: right; }
-  .container__item__btn--start p {
+  .item__btn--start p {
     left: 105px;
     padding-left: 10px; }
-    .container__item__btn--start p::before {
+    .item__btn--start p::before {
       content: '';
       background-image: url(../img/mathturnament-onboarding-bravo-team.png);
       left: -10px;
@@ -373,43 +373,43 @@
  ********* Media Queries **************
  **************************************/
 @media only screen and (max-width: 992px) {
-  .container__item__buttons .container__item__btn p {
+  .item__buttons .item__btn p {
     font-size: 20px;
     line-height: 40px;
     top: 25px; }
-    .container__item__buttons .container__item__btn p::before {
+    .item__buttons .item__btn p::before {
       width: 150px;
       height: 40px; }
-  .container__item__buttons .container__item__btn span {
+  .item__buttons .item__btn span {
     width: 60px;
     height: 80px; }
-  .container__item__buttons .container__item__btn--back p {
+  .item__buttons .item__btn--back p {
     right: 60px;
     padding-right: 10px; }
-    .container__item__buttons .container__item__btn--back p::before {
+    .item__buttons .item__btn--back p::before {
       right: -20px; }
-  .container__item__buttons .container__item__btn--start p {
+  .item__buttons .item__btn--start p {
     left: 60px;
     padding-left: 10px; }
-    .container__item__buttons .container__item__btn--start p::before {
+    .item__buttons .item__btn--start p::before {
       left: -20px; } }
 
 @media only screen and (max-width: 644px) {
-  .container__item__buttons .container__item__btn p {
+  .item__buttons .item__btn p {
     line-height: 30px;
     top: 20px; }
-    .container__item__buttons .container__item__btn p::before {
+    .item__buttons .item__btn p::before {
       width: 130px;
       height: 30px; }
-  .container__item__buttons .container__item__btn span {
+  .item__buttons .item__btn span {
     width: 50px;
     height: 70px; }
-  .container__item__buttons .container__item__btn--back p {
+  .item__buttons .item__btn--back p {
     right: 50px; }
-  .container__item__buttons .container__item__btn--start p {
+  .item__buttons .item__btn--start p {
     left: 50px; } }
 
-.container__item__logo div {
+.item__logo div {
   width: 500px;
   height: 250px;
   margin: 0 auto; }
@@ -418,36 +418,36 @@
  ********* Media Queries **************
  **************************************/
 @media only screen and (max-width: 992px) and (orientation: landscape) {
-  .container__item__logo div {
+  .item__logo div {
     width: 500px;
     height: 100px;
     margin: 0 auto; } }
 
 @media only screen and (max-width: 644px) and (orientation: portrait) {
-  .container__item__logo div {
+  .item__logo div {
     width: 500px;
     height: 150px;
     margin: 0 auto; }
-  .container__item--middle {
+  .item--middle {
     min-width: 250px; }
-  .container__item__buttons {
+  .item__buttons {
     min-width: 130px; } }
 
 /**************************************
  ********* Media Queries **************
  **************************************/
 @media only screen and (max-width: 992px) {
-  .container__item--middle .container__item__buttons {
+  .item--middle .item__buttons {
     top: 270px; } }
 
 @media only screen and (max-width: 768px) {
-  .container__item--middle {
+  .item--middle {
     max-width: 250px; }
-    .container__item--middle .container__item__buttons {
+    .item--middle .item__buttons {
       top: 260px; } }
 
 @media only screen and (max-width: 644px) {
-  .container__item--middle {
+  .item--middle {
     width: 35%; }
-    .container__item--middle .container__item__buttons {
+    .item--middle .item__buttons {
       top: 230px; } }
