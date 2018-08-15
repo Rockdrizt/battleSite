@@ -151,13 +151,13 @@ var battle = function(){
 	var yogoGroup
 	var questionGroup
 	var listosYaGroup
+    var answersGroup
 	var specialAttack
 	var blackMask
 	var miniYogos = []
 	var lifeBars = []
 	var scoreBoards = []
 	var usedQuestions = []
-	var playerAnswers = []
 	var layers
 	var attackTxt
 
@@ -329,21 +329,28 @@ var battle = function(){
 
         var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#000066", align: "center"}
 
-        playerAnswers = battleField.createScores(ORDER_SIDES, sceneGroup)
+        var scoresGroup = game.add.group()
+        scoresGroup.x = game.world.centerX
+        scoresGroup.y = game.world.centerY
+        scoresGroup.alpha = 0
+        sceneGroup.add(scoresGroup)
+        
+        var black = game.add.graphics()
+        black.beginFill(0x000000, 0.5)
+        black.drawRect(-game.world.centerX, -game.world.centerY, game.world.width, game.world.height)
+        black.endFill()
+        scoresGroup.add(black)
+        
+        answersGroup = battleField.createScores(ORDER_SIDES, mainYogotorars)
+        scoresGroup.add(answersGroup)
 
-        attackTxt = new Phaser.Text(sceneGroup.game, playerAnswers[0].x, playerAnswers[0].y, "NORMAL", fontStyle)
+        attackTxt = new Phaser.Text(sceneGroup.game, 0, 0, "NORMAL", fontStyle)
         attackTxt.anchor.setTo(0.5)
         attackTxt.fill = "#ffff54"
         attackTxt.fontSize = 80
         attackTxt.fontStyle = "italic"
         attackTxt.alpha = 0
         sceneGroup.add(attackTxt)
-
-        var black = game.add.graphics()
-        black.beginFill(0x000000, 0.5)
-        black.drawRect(-playerAnswers[0].x, -playerAnswers[0].y,game.world.width, game.world.height)
-        black.endFill()
-        playerAnswers[0].addChildAt(black,0)
     }
 
     function createListosYa(){
@@ -742,6 +749,7 @@ var battle = function(){
 	}
 
 	function checkAnswer(event){
+        
 		event = event || {}
 		var answers = event.answers || {}
 		var numPlayer = event.numPlayer || 1
@@ -757,41 +765,62 @@ var battle = function(){
 		}
 		var events = [P1, P2]
 		var diference = convertTime(Math.abs(P1.time - P2.time))
+        
+        game.add.tween(answersGroup.parent).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
+        swapYogotars(answersGroup.parent)
 
-		for(var i = 0; i < playerAnswers.length; i++){
+		for(var i = 0; i < answersGroup.length; i++){
 
 			var newScale = convertScale(events[i].time)
 			var ansTime = convertTime(events[i].time)
 
-			var score = playerAnswers[i]
-			score.alpha = 1
+			var score = answersGroup.children[i]
 			score.timeTxt.setText(ansTime)
 			score.diference.setText("+" + diference)
-			score.stock.loadTexture("atlas.answers", "ans" + events[i].value)
 			score.time = events[i].time
+            changeTexture(score, events[i].value)
 
-			var correct = game.add.tween(score.stock.scale).to({x:1.3, y:1.3}, 200, Phaser.Easing.Cubic.Out, true, 0, 0, true)
+			var correct = game.add.tween(score.stock.scale).to({x:1.3, y:1.3}, 200, Phaser.Easing.Cubic.Out, true, 1000, 0, true)
 			var sizeBar = game.add.tween(score.bar.scale).to({x: newScale}, 400, Phaser.Easing.Cubic.Out, false)
 			var showTime = game.add.tween(score.timeTxt).to({alpha: 1}, 200, Phaser.Easing.Cubic.Out, false)
 
 			correct.chain(sizeBar)
 			sizeBar.chain(showTime)
 		}
+        
+        var leftAns = answersGroup.children[0]
+        var rigthAns = answersGroup.children[1]
 
 		if(numPlayer === 1){
-			playerWin = playerAnswers[0]
-			playerLose = playerAnswers[1]
+			playerWin = leftAns
+			playerLose = rigthAns
 		}
 		else if(numPlayer === 2) {
-			playerWin = playerAnswers[1]
-			playerLose = playerAnswers[0]
+			playerWin = rigthAns
+			playerLose = leftAns
 		}
 
 		tie = P1.value == P2.value
 		setWiner(playerWin, tie)
 		setLoser(playerLose)
-
 	}
+    
+    function changeTexture(score, name){
+        
+        game.time.events.add(1000, function(){
+            score.stock.loadTexture("atlas.answers", "ans" + name)
+        })
+    }
+    
+    function swapYogotars(newParent){
+        
+        for(var i = 0; i < mainYogotorars.length; i++){
+            
+            var yogo = mainYogotorars[i]
+            yogo.parent.remove(yogo)
+            newParent.add(yogo)
+        }
+    }
 
 	function selectAttackType(time){
 
@@ -810,44 +839,48 @@ var battle = function(){
 
 		if(tie) results.diference.alpha = 1
 
-		var attack = selectAttackType(results.time)
-		attackTxt.setText(attack.toUpperCase() + " ")
-
-		var fadeOut = game.add.tween(results).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, false, 1000)
 		var showShine = game.add.tween(results.shine.scale).from({y:0}, 400, Phaser.Easing.Cubic.Out, false, 500)
-		game.add.tween(results.diference).from({y: 30}, 400, Phaser.Easing.Cubic.Out, true, 1500).chain(showShine)
-		showShine.chain(fadeOut)
-
 		showShine.onStart.add(function(){
-			results.parts.start(true, 1000, null, 20)
+			results.particles.start(true, 1000, null, 20)
 			results.shine.alpha = 1
+            showAttackTxt(results)
 		})
-		fadeOut.onComplete.add(function(){
-
-			attackTxt.x = results.x
-			attackTxt.y = results.y
-			attackTxt.alpha = 1
-			game.add.tween(attackTxt).to({alpha: 0}, 400, Phaser.Easing.Cubic.Out, true, 1000).onComplete.add(function(){
-				var index = playerAnswers.indexOf(results)
-				scoreBoards[index].points++
-				scoreBoards[index].text.setText(scoreBoards[index].points)
-				attack == "ultra" ? ultraMove(index) : attackMove(attack, index)
-			})
-		})
+        game.add.tween(results.diference).from({y: 30}, 400, Phaser.Easing.Cubic.Out, true, 1500).chain(showShine)
 	}
 
 	function setLoser(results){
 
-		var fadeOut = game.add.tween(results).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, false, 1000)
+		var fadeOut = game.add.tween(results.parent.parent).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, false, 1000)
+        fadeOut.onStart.add(function(){
+            swapYogotars(layers[1])
+        })
 		fadeOut.onComplete.add(restartResults)
 		game.add.tween(results).to({angle: 50 * results.direction}, 1000, Phaser.Easing.Bounce.Out, true, 2000).chain(fadeOut)
 	}
+    
+    function showAttackTxt(winer){
+        
+        var attack = selectAttackType(winer.time)
+        var index = answersGroup.getChildIndex(winer)
+        
+        attackTxt.x = winer.x
+        attackTxt.y = winer.y
+        attackTxt.setText(attack.toUpperCase() + " ")
+        
+        var fadeIn = game.add.tween(attackTxt).to({alpha: 1}, 400, Phaser.Easing.Cubic.Out, true)
+        fadeIn.yoyo(true, 1000)
+        fadeIn.onComplete.add(function(){
+            scoreBoards[index].points++
+            scoreBoards[index].text.setText(scoreBoards[index].points)
+            attack == "ultra" ? ultraMove(index) : attackMove(attack, index)
+        })
+    }
 
 	function restartResults(){
 
-		for(var i = 0; i < playerAnswers.length; i++){
+		for(var i = 0; i < answersGroup.length; i++){
 
-			var results = playerAnswers[i]
+			var results = answersGroup.children[i]
 			results.stock.loadTexture("atlas.answers", "stock")
 			results.angle = 0
 			results.diference.alpha = 0
@@ -855,7 +888,6 @@ var battle = function(){
 			results.time = 0
 			results.bar.scale.setTo(1)
 			results.shine.alpha = 0
-			//results.parts.on = false
 		}
 	}
 
@@ -882,8 +914,8 @@ var battle = function(){
         var second = game.add.tween(listosYaGroup.ya.scale).to({x: 1,y: 1}, 400, Phaser.Easing.Elastic.Out, false)
         var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 300)
         secondOut.onComplete.add(function(){
-        	//questionGroup.setQuestion(server.generateQuestion())
-			server.sendQuestion()
+        	questionGroup.setQuestion(server.generateQuestion())
+			//server.sendQuestion()
 		})
 
         first.chain(second)

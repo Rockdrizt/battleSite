@@ -262,7 +262,6 @@ var riddles = function(){
             }
             
             group.checkAnswer()
-            //game.time.events.add(1000, group.checkAnswer)
         })
         shine.chain(choise)
         choise.chain(fadeOut)
