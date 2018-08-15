@@ -542,6 +542,13 @@ var battle = function(){
 				character.add(rect)
 				rect.inputEnabled = true
 				rect.events.onInputDown.add(selectYogotar)
+                
+                var shadow = game.add.graphics()
+                shadow.beginFill(0x000000)
+                shadow.drawEllipse(0, 0, 110, 30)
+                shadow.endFill()
+                shadow.alpha = 0.3
+                character.addAt(shadow, 0)
 
 				teams[teamIndex][charIndex] = character
 
