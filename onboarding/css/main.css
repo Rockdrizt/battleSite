@@ -26,7 +26,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url(../../img/mathturnament-onboarding-bg-tile.png); }
+    background-image: url(../img/mathturnament-onboarding-bg-tile.png); }
   .main .bubbles-up {
     animation: slide-up 10s forwards; }
   .main .bubbles-down {
@@ -95,7 +95,7 @@
     right: 10%;
     text-align: right; }
     .container__item--left .container__item__header span {
-      background-image: url(../../img/mathtournament-onboarding-alfa-team.png);
+      background-image: url(../img/mathtournament-onboarding-alfa-team.png);
       background-position: top right;
       right: -20%; }
   .container__item--left img {
@@ -118,7 +118,7 @@
     left: 10%;
     text-align: left; }
     .container__item--right .container__item__header span {
-      background-image: url(../../img/mathturnament-onboarding-bravo-team.png);
+      background-image: url(../img/mathturnament-onboarding-bravo-team.png);
       background-position: top left;
       left: -20%; }
   .container__item--right img {
@@ -305,7 +305,7 @@
       text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
       top: 50px; }
       .container__item__buttons .container__item__btn p:hover + span {
-        background-image: url(../../img/mathturnament-onboarding-play-btn-down.png); }
+        background-image: url(../img/mathturnament-onboarding-play-btn-down.png); }
       .container__item__buttons .container__item__btn p::before {
         background-size: cover;
         background-repeat: no-repeat;
@@ -318,12 +318,12 @@
     .container__item__buttons .container__item__btn span {
       display: inline-block;
       background-size: contain;
-      background-image: url(../../img/mathturnament-onboarding-play-btn.png);
+      background-image: url(../img/mathturnament-onboarding-play-btn.png);
       background-repeat: no-repeat;
       width: 110px;
       height: 145px; }
       .container__item__buttons .container__item__btn span:hover {
-        background-image: url(../../img/mathturnament-onboarding-play-btn-down.png); }
+        background-image: url(../img/mathturnament-onboarding-play-btn-down.png); }
 
 .container__item__btn--back {
   margin: 0;
@@ -333,7 +333,7 @@
     padding-right: 10px; }
     .container__item__btn--back p::before {
       content: '';
-      background-image: url(../../img/mathtournament-onboarding-alfa-team.png);
+      background-image: url(../img/mathtournament-onboarding-alfa-team.png);
       right: -10px;
       background-size: cover;
       background-position: top right;
@@ -356,7 +356,7 @@
     padding-left: 10px; }
     .container__item__btn--start p::before {
       content: '';
-      background-image: url(../../img/mathturnament-onboarding-bravo-team.png);
+      background-image: url(../img/mathturnament-onboarding-bravo-team.png);
       left: -10px;
       background-size: cover;
       background-position: top left;
