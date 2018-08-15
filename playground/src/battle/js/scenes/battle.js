@@ -1,5 +1,5 @@
 
-var soundsPath = "../../shared/minigames/sounds/"
+var soundsPath = "../../../shared/minigames/sounds/"
 
 var battle = function(){
 
@@ -766,8 +766,8 @@ var battle = function(){
 		var events = [P1, P2]
 		var diference = convertTime(Math.abs(P1.time - P2.time))
         
-        game.add.tween(answersGroup.parent).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
-        swapYogotars(answersGroup.parent)
+        game.add.tween(answersGroup.parent).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true).onComplete.add(swapYogotars, null, answersGroup.parent)
+        //swapYogotars(answersGroup.parent)
 
 		for(var i = 0; i < answersGroup.length; i++){
 
@@ -818,7 +818,7 @@ var battle = function(){
             
             var yogo = mainYogotorars[i]
             yogo.parent.remove(yogo)
-            newParent.add(yogo)
+            newParent.length > 0 ? newParent.addAt(yogo, 1) : newParent.add(yogo)
         }
     }
 
