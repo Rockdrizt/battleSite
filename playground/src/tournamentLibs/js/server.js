@@ -252,7 +252,13 @@ function Server(){
 			t1:valores.t1answer,
 			t2:valores.t2answer
 		}
-		var data = { numTeam: valores.winner, timeDifference: timeDifference, answers:answers, date:actualDate }
+		var data = {
+			numTeam: valores.winner,
+			timeDifference: timeDifference,
+			answers:answers,
+			date:actualDate,
+			correctAnswer:correctAnswer,
+		}
 		setfb(refIdGame.child("winner"), data)//refIdGame.child("winner").set(data);
 		self.fireEvent('onTurnEnds',[data]);
 

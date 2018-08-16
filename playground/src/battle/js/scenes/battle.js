@@ -798,7 +798,8 @@ var battle = function(){
 			score.timeTxt.setText(ansTime)
 			score.diference.setText("+" + diference)
 			score.time = events[i].time
-            changeTexture(score, events[i].value)
+			var isCorrect = events[i].value == event.correctAnswer
+            changeTexture(score, isCorrect)
 
 			var correct = game.add.tween(score.stock.scale).to({x:1.3, y:1.3}, 200, Phaser.Easing.Cubic.Out, true, 1000, 0, true)
 			var sizeBar = game.add.tween(score.bar.scale).to({x: newScale}, 400, Phaser.Easing.Cubic.Out, false)
