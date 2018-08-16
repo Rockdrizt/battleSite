@@ -238,13 +238,13 @@ function Server(){
 
 		if(valores.winner === 1 && (typeQuestion === 1 || typeQuestion === 2) ){
 			valores.t2.life+=damage;
-			setfb(refIdGame.child("t2/life"), valores.t2.life)//refIdGame.child("t2/life").set(valores.t2.life);
+			//setfb(refIdGame.child("t2/life"), valores.t2.life)//refIdGame.child("t2/life").set(valores.t2.life);
 		}else if(valores.winner === 2 && typeQuestion === 3 ){
 			valores.t2.life+=damage;
-			setfb(refIdGame.child("t2/life"), valores.t2.life)//refIdGame.child("t2/life").set(valores.t2.life);
+			//setfb(refIdGame.child("t2/life"), valores.t2.life)//refIdGame.child("t2/life").set(valores.t2.life);
 		}else {
 			valores.t1.life+=damage;
-			setfb(refIdGame.child("t1/life"), valores.t1.life)//refIdGame.child("t1/life").set(valores.t1.life);
+			//setfb(refIdGame.child("t1/life"), valores.t1.life)//refIdGame.child("t1/life").set(valores.t1.life);
 		}
 		var actualDate = firebase.database.ServerValue.TIMESTAMP
 		// console.log(actualDate)
@@ -435,7 +435,7 @@ function Server(){
 							self.t1Ready = true;
 							if (self.t2Ready) {
 								console.log("START GAME INIT")
-								self.startGame()
+								if(self.startGame) self.startGame()
 							}
 						}
 					}
@@ -449,7 +449,7 @@ function Server(){
 						if (ready) {
 							self.t2Ready = true;
 							if (self.t1Ready) {
-								self.startGame()
+								if(self.startGame) self.startGame()
 							}
 						}
 					}

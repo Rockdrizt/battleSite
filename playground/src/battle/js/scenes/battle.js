@@ -320,7 +320,13 @@ var battle = function(){
     function createQuestionOverlay(){
 
         questionGroup = riddles.createQuestionOverlay()
-        questionGroup.checkAnswer = checkAnswer
+        questionGroup.callback = function (event) {
+			questionGroup.hide()
+        	game.time.events.add(2000, function () {
+				console.log(event)
+				checkAnswer()
+			})
+		}
         questionGroup.alpha = 0
         sceneGroup.add(questionGroup)
     }
@@ -748,23 +754,30 @@ var battle = function(){
 		white.alpha = 0
 	}
 
+	function showFeedback(event){
+		questionGroup.hide()
+		game.time.events.add(2000, function () {
+			checkAnswer(event)
+		})
+	}
+
 	function checkAnswer(event){
         
 		event = event || {}
 		var answers = event.answers || {}
-		var numPlayer = event.numPlayer || 1
+		var numTeam = event.numTeam || 1
 		var playerWin, playerLose
 		var tie
 
 		var MAX_TIME = 180000 //3 min
-		var P1 = answers.p1 || {value: true,
+		var t1 = answers.t1 || {value: true,
 			time: 50000 //2 min 30 seg
 		}
-		var P2 = answers.p2 ||{value: true,
+		var t2 = answers.t2 ||{value: true,
 			time: 60000 //1 min 30 seg
 		}
-		var events = [P1, P2]
-		var diference = convertTime(Math.abs(P1.time - P2.time))
+		var events = [t1, t2]
+		var diference = convertTime(Math.abs(t1.time - t2.time))
         
         game.add.tween(answersGroup.parent).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
         swapYogotars(answersGroup.parent)
@@ -791,16 +804,16 @@ var battle = function(){
         var leftAns = answersGroup.children[0]
         var rigthAns = answersGroup.children[1]
 
-		if(numPlayer === 1){
+		if(numTeam === 1){
 			playerWin = leftAns
 			playerLose = rigthAns
 		}
-		else if(numPlayer === 2) {
+		else if(numTeam === 2) {
 			playerWin = rigthAns
 			playerLose = leftAns
 		}
 
-		tie = P1.value == P2.value
+		tie = t1.value == t2.value
 		setWiner(playerWin, tie)
 		setLoser(playerLose)
 	}
@@ -914,8 +927,8 @@ var battle = function(){
         var second = game.add.tween(listosYaGroup.ya.scale).to({x: 1,y: 1}, 400, Phaser.Easing.Elastic.Out, false)
         var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 300)
         secondOut.onComplete.add(function(){
-        	questionGroup.setQuestion(server.generateQuestion())
-			//server.sendQuestion()
+        	//questionGroup.setQuestion(server.generateQuestion())
+			server.sendQuestion()
 		})
 
         first.chain(second)
@@ -951,9 +964,9 @@ var battle = function(){
 
 			if(server){
 				server.removeEventListener('afterGenerateQuestion', questionGroup.setQuestion);
-				server.removeEventListener('onTurnEnds', checkAnswer);
+				server.removeEventListener('onTurnEnds', showFeedback);
 				server.addEventListener('afterGenerateQuestion', questionGroup.setQuestion);
-				server.addEventListener('onTurnEnds', checkAnswer);
+				server.addEventListener('onTurnEnds', showFeedback);
 			}
 
 			game.add.tween(sceneGroup).from({alpha:0},500, Phaser.Easing.Cubic.Out,true)

@@ -92,8 +92,10 @@ function Client(){
 			self.id_game = idGame;
 			self.refIdGame.child("data").on('value', function(snapshot) {
 				var data = snapshot.val();
-				self.currentData = data
-				self.fireEvent('showEquation',[data]);
+				if(data) {
+					self.currentData = data
+					self.fireEvent('showEquation', [data]);
+				}
 			});
 
 			self.refIdGame.child('winner').on('value', function(snapshot) {
@@ -175,7 +177,10 @@ function Client(){
 	 * @param {type} boton Button object in main HTML
 	 * @param {type} getCode function to get de code of the button
 	 */
-	this.buttonOnClick = function(value, time){
+	this.buttonOnClick = function(params){
+		var time = params.time
+		var value = params.value
+
 		if(self.numTeam != null){
 
 			var answer = {
