@@ -1,5 +1,5 @@
 
-var soundsPath = "../../shared/minigames/sounds/"
+var soundsPath = "../../../shared/minigames/sounds/"
 
 var battle = function(){
 
@@ -548,6 +548,13 @@ var battle = function(){
 				character.add(rect)
 				rect.inputEnabled = true
 				rect.events.onInputDown.add(selectYogotar)
+                
+                var shadow = game.add.graphics()
+                shadow.beginFill(0x000000)
+                shadow.drawEllipse(0, 0, 110, 30)
+                shadow.endFill()
+                shadow.alpha = 0.3
+                character.addAt(shadow, 0)
 
 				teams[teamIndex][charIndex] = character
 
@@ -779,8 +786,8 @@ var battle = function(){
 		var events = [t1, t2]
 		var diference = convertTime(Math.abs(t1.time - t2.time))
         
-        game.add.tween(answersGroup.parent).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
-        swapYogotars(answersGroup.parent)
+        game.add.tween(answersGroup.parent).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true).onComplete.add(swapYogotars, null, answersGroup.parent)
+        //swapYogotars(answersGroup.parent)
 
 		for(var i = 0; i < answersGroup.length; i++){
 
@@ -831,7 +838,7 @@ var battle = function(){
             
             var yogo = mainYogotorars[i]
             yogo.parent.remove(yogo)
-            newParent.add(yogo)
+            newParent.length > 0 ? newParent.addAt(yogo, 1) : newParent.add(yogo)
         }
     }
 

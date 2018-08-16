@@ -1,5 +1,5 @@
 
-var soundsPath = "../../shared/minigames/sounds/"
+var soundsPath = "../../../shared/minigames/sounds/"
 
 var yogoSelector = function(){
 
@@ -711,7 +711,7 @@ var yogoSelector = function(){
 				var aux = teamGroup.auxArray.indexOf(-1) //index
 			else
 				var aux = teamGroup.auxArray.lastIndexOf(-1) //index
-			//var aux = teamGroup.auxArray.indexOf(-1)
+			
 			aux === -1 ? teamGroup.teamPivot = 3 : teamGroup.teamPivot = aux
 
 			if(alphaGroup.teamPivot == 3 && bravoGroup.teamPivot == 3){

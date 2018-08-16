@@ -1,5 +1,5 @@
 
-var soundsPath = "../../shared/minigames/sounds/";
+var soundsPath = "../../../shared/minigames/sounds/";
 var imagePath = "images/reward/";
 
 var reward = function(){

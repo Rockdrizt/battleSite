@@ -135,7 +135,7 @@ var wfconfig = {
 	},
     custom: {
         families: [ 'VAGRounded' ],
-        urls:['../../shared/minigames/css/custom_fonts.css']
+        urls:['../../../shared/minigames/css/custom_fonts.css']
     },
 };
 WebFont.load(wfconfig);
