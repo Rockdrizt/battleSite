@@ -116,7 +116,7 @@ function startGame(){
         //reward.setWinner(1)
 		//TODO: this a test
 		server = new Server()
-		server.start("000000")
+		server.start("test-online01")
     }
 
     function create(){

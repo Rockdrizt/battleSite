@@ -96,7 +96,7 @@ function startGame(){
 
 	//TODO: this is just testing remove on prod
 	cliente = new Client();
-	cliente.start(team, "000000")
+	cliente.start(team, "test-online01")
 	cliente.startGame = startGame
 })()
 //minigame.orientation.init(startGame)
