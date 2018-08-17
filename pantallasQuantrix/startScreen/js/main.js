@@ -64,17 +64,17 @@ function startGame(){
     	sceneloader.init(game)
     	sound.init(game)
         
-//        var config = {
-//            name: "Alpha Team",
-//            side: 1,
-//            states: {yellow: 0, color: 1},
-//        }
+       var config = {
+           name: "Alpha Team",
+           side: 1,
+           states: {yellow: 0, color: 1},
+       }
         
-        var config = {
-            name: "Bravo Team",
-            side: -1,
-            states: {yellow: 0, color: 2},
-        }
+        // var config = {
+        //     name: "Bravo Team",
+        //     side: -1,
+        //     states: {yellow: 0, color: 2},
+        // }
         
         teamSelector.setConfig(config)
     }

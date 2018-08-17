@@ -353,7 +353,16 @@
 "tournamentHandFan1":"sounds/characters/handFan1.mp3",
 "tournamentHandFan2":"sounds/characters/handFan2.mp3",
 "tournamentFireProjectile9":"sounds/characters/fireProjectile9.mp3",
-"tournamentWaterHit4":"sounds/characters/waterHit4.mp3",
-"tournamentDragonRoar1":"sounds/characters/dragonRoar1.mp3"
+"tournamentWaterHit4":"sounds/characters/waterHit4.mp3" ,
+"tournamentDragonRoar1":"sounds/characters/dragonRoar1.mp3",
+"tournamentMechanicalWings1":"sounds/characters/mechanicalWings1.mp3",
+"tournamentRocksLift2":"sounds/characters/rocksLift2.mp3",
+"tournamentMagicCharge5":"sounds/characters/magicCharge5.mp3",
+"tournamentSmallWoosh4":"sounds/characters/smallWoosh4.mp3",
+"tournamentSmallWoosh5":"sounds/characters/smallWoosh5.mp3",
+"tournamentMassiveExplosion1":"sounds/characters/massiveExplosion1.mp3",
+"tournamentMassiveSwoosh1":"sounds/characters/massiveSwoosh1.mp3",
+"tournamentScifiSparks1":"sounds/characters/scifiSparks1.mp3",
+"tournamentScifiSpawn1":"sounds/characters/scifiSpawn1.mp3"    
     
 }

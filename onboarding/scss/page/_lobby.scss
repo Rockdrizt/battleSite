@@ -1,0 +1,30 @@
+
+/**************************************
+ ********* Media Queries **************
+ **************************************/
+
+@media only screen and (max-width: 992px) {
+  .item--middle {
+    .item__buttons {
+      top: 270px;
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .item--middle {
+    max-width: 250px;
+    .item__buttons {
+      top: 260px;
+    }
+  }
+}
+
+@media only screen and (max-width: 644px) {
+  .item--middle {
+    width: 35%;
+    .item__buttons {
+      top: 230px;
+    }
+  }
+}

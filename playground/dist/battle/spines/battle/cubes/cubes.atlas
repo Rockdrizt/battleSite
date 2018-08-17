@@ -1,0 +1,48 @@
+
+cubes.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Capa_13
+  rotate: false
+  xy: 2, 2
+  size: 42, 35
+  orig: 42, 35
+  offset: 0, 0
+  index: -1
+Capa_14
+  rotate: false
+  xy: 791, 134
+  size: 101, 94
+  orig: 101, 94
+  offset: 0, 0
+  index: -1
+Capa_15
+  rotate: false
+  xy: 894, 135
+  size: 97, 93
+  orig: 97, 93
+  offset: 0, 0
+  index: -1
+Capa_16
+  rotate: false
+  xy: 424, 97
+  size: 250, 131
+  orig: 250, 131
+  offset: 0, 0
+  index: -1
+Capa_17
+  rotate: false
+  xy: 676, 121
+  size: 113, 107
+  orig: 113, 107
+  offset: 0, 0
+  index: -1
+cube
+  rotate: false
+  xy: 2, 39
+  size: 420, 189
+  orig: 420, 189
+  offset: 0, 0
+  index: -1

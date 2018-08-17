@@ -1,8 +1,8 @@
 {
   "timing":{
-    "stop":600,
+    "stop":500,
     "removal":1700,
-    "hit":600
+    "hit":500
   },
   "particles":[
     "particles/characters/windNormal1/windNormal1.json",

@@ -1,0 +1,65 @@
+{
+	"category":"yogotar",
+    "attacks": {
+		"normal": [
+			{
+				"id": "normalEarth",
+				"attachment": "particle12",
+				"delay": 0,
+				"multiplier": 1
+			}
+		],
+		"super": [
+            {
+				"id": "superLuna1",
+				"attachment": "particle13",
+				"delay": 700,
+				"multiplier": 1,
+                "hit": false
+			},
+            {
+				"id": "superLuna2",
+				"attachment": "particle14",
+				"delay": 700,
+				"multiplier": 1
+			},
+            {
+				"id": "superLuna3",
+				"attachment": "particle15",
+				"delay": 700,
+				"multiplier": 1,
+                "hit": false
+			}
+
+		],
+		"ultra":[
+			{
+				"id": "ultraLuna",
+				"attachment": "particle11",
+				"delay": 600,
+				"multiplier": 1
+			}
+		]
+	},
+	"directory": "spines/Luna/luna.json",
+	"name": "Luna",
+	"spine": {
+		"options": {
+			"scale": 0.85,
+			"events": [],
+			"animationSpeed": 10,
+			"useAtlas":"spines/characters/luna/skeleton.atlas"
+		}
+	},
+	"stats": {
+		"health": 80,
+		"element": "earth"
+	},
+	"visuals": {
+		"shadowY":-5,
+		"shadowScaleX": 0.8,
+		"shadowScaleY": 1,
+		"cardFacing": "right",
+		"impactAttachment": "torso1"
+	}
+}

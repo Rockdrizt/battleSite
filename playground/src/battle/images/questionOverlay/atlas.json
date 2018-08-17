@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "questionBox",
+	"frame": {"x":1,"y":1,"w":1657,"h":245},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1657,"h":245},
+	"sourceSize": {"w":1657,"h":245}
+},
+{
+	"filename": "questionBtn",
+	"frame": {"x":1530,"y":248,"w":435,"h":139},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":30,"w":435,"h":139},
+	"sourceSize": {"w":465,"h":199}
+},
+{
+	"filename": "questionImage",
+	"frame": {"x":1,"y":248,"w":1527,"h":385},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1527,"h":385},
+	"sourceSize": {"w":1527,"h":385}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "atlas.png",
+	"format": "RGBA8888",
+	"size": {"w":1966,"h":634},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:31a9bb0c78a4ea9198cd9662e53f7c59:604507747cf7d59a0fdbbe00bcd6e4cf:cbce6b53f0f49e0bf15173c25c41f876$"
+}
+}

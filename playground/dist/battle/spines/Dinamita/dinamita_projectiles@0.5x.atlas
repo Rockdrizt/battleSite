@@ -1,0 +1,300 @@
+
+dinamita_projectiles.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+normal/particle
+  rotate: false
+  xy: 682, 29
+  size: 108, 72
+  orig: 108, 72
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_1
+  rotate: false
+  xy: 2, 1481
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_2
+  rotate: false
+  xy: 2, 914
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_3
+  rotate: false
+  xy: 505, 1481
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_4
+  rotate: false
+  xy: 2, 347
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_5
+  rotate: false
+  xy: 505, 914
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_6
+  rotate: false
+  xy: 1008, 1481
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_7
+  rotate: false
+  xy: 505, 347
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_8
+  rotate: false
+  xy: 1008, 914
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/dinamita_efecto_ultra_9
+  rotate: false
+  xy: 1511, 1481
+  size: 501, 565
+  orig: 501, 565
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola1
+  rotate: false
+  xy: 1472, 637
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola2
+  rotate: false
+  xy: 1422, 484
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola3
+  rotate: false
+  xy: 1631, 637
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola4
+  rotate: false
+  xy: 1581, 484
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola5
+  rotate: false
+  xy: 1501, 331
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola6
+  rotate: false
+  xy: 1501, 178
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola7
+  rotate: true
+  xy: 1660, 325
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola8
+  rotate: false
+  xy: 1660, 172
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola9
+  rotate: false
+  xy: 1740, 484
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_halo1
+  rotate: false
+  xy: 560, 2
+  size: 59, 98
+  orig: 59, 98
+  offset: 0, 0
+  index: -1
+normal1/fireball_halo2
+  rotate: false
+  xy: 621, 2
+  size: 59, 98
+  orig: 59, 98
+  offset: 0, 0
+  index: -1
+normal1/fireball_halo3
+  rotate: false
+  xy: 1204, 50
+  size: 59, 98
+  orig: 59, 98
+  offset: 0, 0
+  index: -1
+normal1/fireball_halo4
+  rotate: true
+  xy: 792, 42
+  size: 59, 98
+  orig: 59, 98
+  offset: 0, 0
+  index: -1
+normal1/flame_1
+  rotate: false
+  xy: 251, 102
+  size: 205, 243
+  orig: 205, 243
+  offset: 0, 0
+  index: -1
+normal1/flame_10
+  rotate: false
+  xy: 1215, 395
+  size: 205, 242
+  orig: 205, 242
+  offset: 0, 0
+  index: -1
+normal1/flame_2
+  rotate: false
+  xy: 1008, 394
+  size: 205, 243
+  orig: 205, 243
+  offset: 0, 0
+  index: -1
+normal1/flame_3
+  rotate: false
+  xy: 1265, 669
+  size: 205, 243
+  orig: 205, 243
+  offset: 0, 0
+  index: -1
+normal1/flame_4
+  rotate: false
+  xy: 1511, 985
+  size: 205, 243
+  orig: 205, 243
+  offset: 0, 0
+  index: -1
+normal1/flame_5
+  rotate: false
+  xy: 1754, 1236
+  size: 205, 243
+  orig: 205, 243
+  offset: 0, 0
+  index: -1
+normal1/flame_6
+  rotate: false
+  xy: 458, 102
+  size: 205, 243
+  orig: 205, 243
+  offset: 0, 0
+  index: -1
+normal1/flame_7
+  rotate: false
+  xy: 665, 103
+  size: 205, 242
+  orig: 205, 242
+  offset: 0, 0
+  index: -1
+normal1/flame_8
+  rotate: false
+  xy: 872, 103
+  size: 205, 242
+  orig: 205, 242
+  offset: 0, 0
+  index: -1
+normal1/flame_9
+  rotate: false
+  xy: 1079, 150
+  size: 205, 242
+  orig: 205, 242
+  offset: 0, 0
+  index: -1
+normal1/grieta_fuego
+  rotate: false
+  xy: 251, 52
+  size: 307, 48
+  orig: 307, 48
+  offset: 0, 0
+  index: -1
+normal1/ultrabomb_dinamita1
+  rotate: false
+  xy: 1813, 352
+  size: 116, 130
+  orig: 116, 130
+  offset: 0, 0
+  index: -1
+normal1/ultrabomb_dinamita2
+  rotate: false
+  xy: 1819, 220
+  size: 116, 130
+  orig: 116, 130
+  offset: 0, 0
+  index: -1
+normal1/ultrabomb_firebody
+  rotate: false
+  xy: 2, 60
+  size: 247, 285
+  orig: 247, 285
+  offset: 0, 0
+  index: -1
+normal1/ultrabomb_firefront
+  rotate: false
+  xy: 1511, 1230
+  size: 241, 249
+  orig: 241, 249
+  offset: 0, 0
+  index: -1
+normal1/ultrabomb_front1
+  rotate: false
+  xy: 1079, 40
+  size: 123, 108
+  orig: 123, 108
+  offset: 0, 0
+  index: -1
+normal1/ultrabomb_front2
+  rotate: true
+  xy: 1286, 159
+  size: 234, 213
+  orig: 234, 213
+  offset: 0, 0
+  index: -1
+normal1/ultrabomb_smoke
+  rotate: true
+  xy: 1511, 790
+  size: 193, 221
+  orig: 193, 221
+  offset: 0, 0
+  index: -1
+normal1/ultrabomb_tail
+  rotate: false
+  xy: 1008, 639
+  size: 255, 273
+  orig: 255, 273
+  offset: 0, 0
+  index: -1
