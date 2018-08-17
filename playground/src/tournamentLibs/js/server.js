@@ -362,6 +362,7 @@ function Server(){
 				possibleAnswers: [],
 				data:false,
 				gameReady:false,
+				battleReady:false,
 				gameEnded:false,
 				retry:false,
 				time:battleTime,
@@ -512,6 +513,10 @@ function Server(){
 
 	this.setGameReady = function (value) {
 		setfb(refIdGame.child("gameReady"), value)//refIdGame.child("gameReady").set(value);
+	}
+
+	this.setBattleReady = function (value) {
+		setfb(refIdGame.child("battleReady"), value)//refIdGame.child("gameReady").set(value);
 	}
 
 	this.retry = function(location){

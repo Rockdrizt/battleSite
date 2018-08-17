@@ -87,6 +87,7 @@ function Client(){
 			self.id_game = null;
 			self.refIdGame= null;
 			self.fireEvent('onGameFull',[]);
+			return false
 		}
 		if(((idGame!==null)&&(!self.id_game))||(idGame === "000000")){
 			self.id_game = idGame;
@@ -110,8 +111,15 @@ function Client(){
 
 			self.refIdGame.child('gameReady').on('value', function(snapshot) {
 				var gameReady = snapshot.val();
-				if(gameReady && startGame){
+				if(gameReady && self.startGame){
 					self.startGame()
+				}
+			});
+
+			self.refIdGame.child('battleReady').on('value', function(snapshot) {
+				var battleReady = snapshot.val();
+				if(battleReady && self.startBattle){
+					self.startBattle()
 				}
 			});
 
@@ -141,6 +149,8 @@ function Client(){
 		}
 		self.time= (new Date()).getTime();
 		self.fireEvent('onClientInit',[]);
+
+		return true
 	}
 
 	/**
@@ -156,8 +166,8 @@ function Client(){
 		self.refIdGame.once('value').then(function(snapshot) {
 			var val = snapshot.val()
 			if(val){
-				initialize(idGame, team, val)
-				if(callback) callback()
+				var success = initialize(idGame, team, val)
+				if(success && callback) callback()
 			}else{
 				onError()
 			}

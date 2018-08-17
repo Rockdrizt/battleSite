@@ -20,6 +20,7 @@ var battleMain = function(){
 
 		function onCompleteSceneLoading(){
 			yogoSelector.showBattle()
+			server.setBattleReady(true)
             //sceneloader.show("battle")
 			//sceneloader.show("battleScene")
 		}

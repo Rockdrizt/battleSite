@@ -784,7 +784,8 @@ var battle = function(){
 			time: 60000 //1 min 30 seg
 		}
 		var events = [t1, t2]
-		var diference = convertTime(Math.abs(t1.time - t2.time))
+		var timeDifference = event.timeDifference || Math.abs(t1.time - t2.time) || 0
+		var timeConvertedDifference = convertTime(timeDifference)
         
         game.add.tween(answersGroup.parent).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true).onComplete.add(swapYogotars, null, answersGroup.parent)
         //swapYogotars(answersGroup.parent)
@@ -796,7 +797,7 @@ var battle = function(){
 
 			var score = answersGroup.children[i]
 			score.timeTxt.setText(ansTime)
-			score.diference.setText("+" + diference)
+			score.diference.setText("+" + timeConvertedDifference)
 			score.time = events[i].time
 			var isCorrect = events[i].value == event.correctAnswer
             changeTexture(score, isCorrect)

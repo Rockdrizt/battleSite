@@ -822,6 +822,9 @@ var teamSelector = function(){
 			loadingGroup = game.add.group()
 
 			initialize()
+			cliente.startBattle = function () {
+				sceneloader.show("questions")
+			}
 
 			gameSong = sound.play("gameSong", {loop:true, volume:0.6})
 

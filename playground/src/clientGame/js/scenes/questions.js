@@ -133,7 +133,7 @@ var questions = function(){
 	return {
 
 		assets: assets,
-		name: "teamSelector",
+		name: "questions",
 		preload:preload,
 		create: function(event){
 
