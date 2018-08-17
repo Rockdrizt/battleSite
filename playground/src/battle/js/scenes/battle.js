@@ -140,6 +140,7 @@ var battle = function(){
 	var QUESTIONS = {N_10: 0, N_15:1}
 	var DAMAGE = DAMAGE_PERCENT[QUESTIONS.N_10]
 	var MAX_LIFE
+    var MIN_LIFE = 0
 	var EMPTY_QUESTION = -1
 
 	var COLORS = [0xFC1E79, 0x00D8FF]
@@ -220,24 +221,24 @@ var battle = function(){
 		damageButom.label.text = "ultra"
 		btngroup.add(damageButom)
 
-		var returnBtn = createButton(returnCamera, 0xff0033)
-		returnBtn.x = game.world.centerX
-		returnBtn.y = game.world.height - 200
-		returnBtn.label.text = "zoom out"
-		btngroup.add(returnBtn)
-
 		var win = createButton(setWinteam, 0xffaa33)
 		win.x = game.world.centerX - 200
 		win.y = game.world.height - 100
 		win.label.text = "winner"
         btngroup.add(win)
 
-        var quest = createButton(setReadyGo, 0x00ffff)
+        var quest = createButton(initGame, 0x00ffff)
         //var quest = createButton(getOperation, 0x00ffff)
 		quest.x = game.world.centerX
 		quest.y = game.world.height - 100
 		quest.label.text = "questions"
 		btngroup.add(quest)
+        
+        var returnBtn = createButton(shakeCamera, 0xff0033)
+		returnBtn.x = game.world.centerX
+		returnBtn.y = game.world.height - 200
+		returnBtn.label.text = "shake"
+		btngroup.add(returnBtn)
 	}
 
 	function createButton(callback, color) {
@@ -338,16 +339,19 @@ var battle = function(){
         var scoresGroup = game.add.group()
         scoresGroup.x = game.world.centerX
         scoresGroup.y = game.world.centerY
-        scoresGroup.alpha = 0
+        //scoresGroup.alpha = 0
         sceneGroup.add(scoresGroup)
         
         var black = game.add.graphics()
         black.beginFill(0x000000, 0.5)
         black.drawRect(-game.world.centerX, -game.world.centerY, game.world.width, game.world.height)
         black.endFill()
+        black.alpha = 0
         scoresGroup.add(black)
         
         answersGroup = battleField.createScores(ORDER_SIDES, mainYogotorars)
+        answersGroup.alpha = 0
+        answersGroup.black = black
         scoresGroup.add(answersGroup)
 
         attackTxt = new Phaser.Text(sceneGroup.game, 0, 0, "NORMAL", fontStyle)
@@ -622,35 +626,47 @@ var battle = function(){
 		var index = team == 0 ? 1 : 0
 		var otherTeam = teams[index]
 
+        if(percent = DAMAGE.ultra)
+            shakeCamera()
+        
 		game.add.tween(life).to({width:damage}, 500, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
-			otherTeam.forEach(function(member){
-				member.setAnimation(["idle_normal"], true)
-			})
+            
+            var defeated = team == 0 ? life.width < MIN_LIFE : life.width > MIN_LIFE
+            if(defeated){
+                game.time.events.add(2000, setWinteam, null, index, team)
+            }
+            else{
+                otherTeam.forEach(function(member){
+                    member.setAnimation(["idle_normal"], true)
+                })
+            }
 		})
 	}
 
 	function attackMove(type, index){
 
 		var yogotar = mainYogotorars[index]
-		console.log(index)
 		var otherTeam = index == 0 ? 1 : 0
-		var target = type === "ultra" ? teams[otherTeam].groupPoint : mainYogotorars[otherTeam]
+        var xPos = 0.4 * ORDER_SIDES[index].direction
+        var delay = 1000
+        var zoom = 1.15
+        var target = type === "ultra" ? teams[otherTeam].groupPoint : mainYogotorars[otherTeam]
 
 		if(type == "normal"){
 			var damage = DAMAGE.normal
-			zoomCamera(1.4, 2000, {x: game.world.centerX * 0.4, y:game.world.centerY + 100})
-			game.time.events.add(2000, returnCamera)
+			zoomCamera(zoom, delay, {x: game.world.centerX * xPos, y:100})
 		}
 		else if(type == "super"){
 			var damage = DAMAGE.super
-			zoomCamera(1.4, 2000, {x: game.world.centerX * 0.4, y:game.world.centerY + 100})
-			game.time.events.add(3000, returnCamera)
+			zoomCamera(zoom, delay, {x: game.world.centerX * xPos, y:100})
 		}
 		else{
 			var damage = DAMAGE.ultra
 		}
 
-		yogotar.attack(target, type, dealDamage.bind(null, otherTeam, damage))
+        game.time.events.add(delay, function(){
+            yogotar.attack(target, type, dealDamage.bind(null, otherTeam, damage))
+        })
 	}
 
 	function ultraMove(index){
@@ -719,10 +735,11 @@ var battle = function(){
 
 	function zoomCamera(zoom, delay, pos) {
 
-		var scaleTween = game.add.tween(game.camera.scale).to({x:zoom, y:zoom}, delay, Phaser.Easing.Cubic.Out, true)
-		game.add.tween(game.camera).to({x:pos.x, y:pos.y}, delay, Phaser.Easing.Cubic.Out, true)
-		game.add.tween(blackMask).to({alpha:0.3}, 500, Phaser.Easing.Cubic.Out, true)
-
+		var scaleTween = game.add.tween(game.camera.scale).to({x:zoom, y:zoom}, delay, Phaser.Easing.Cubic.InOut, true)
+		scaleTween.yoyo(true, delay * 0.5)
+        game.add.tween(game.camera).to({x:pos.x, y:pos.y}, delay, Phaser.Easing.Cubic.InOut, true).yoyo(true, delay * 0.5)
+		game.add.tween(blackMask).to({alpha:0.4}, 500, Phaser.Easing.Cubic.InOut, true).yoyo(true, delay * 0.5)
+        
 		var toScale1 = 1/zoom
 		var actualScale = teamsBarGroup.scale.x
 
@@ -737,17 +754,23 @@ var battle = function(){
 			}
 		})
 	}
+    
+    function shakeCamera(){
+        
+        game.camera.shake(0.01, 900)
+    }
 
-	function returnCamera() {
-		game.camera.follow(null)
-		zoomCamera(1, 1000, {x:0, y:0})
-		game.add.tween(blackMask).to({alpha:0}, 500, Phaser.Easing.Cubic.Out, true)
-	}
+	function setWinteam(win, lose){
 
-	function setWinteam(){
-
-		battleMain.initWinerTeam(game.rnd.integerInRange(0, 1))
-		game.add.tween(white).to({alpha:1}, 300, Phaser.Easing.Cubic.In, true).onComplete.add(function(){
+        teams[lose].forEach(function(member){
+            member.setAnimation(["gg"], true)
+        })
+        teams[win].forEach(function(member){
+            member.setAnimation(["win"], true)
+        })
+        
+		battleMain.initWinerTeam(win)
+		game.add.tween(white).to({alpha:1}, 300, Phaser.Easing.Cubic.In, true, 4000).onComplete.add(function(){
 			sceneloader.show("reward")
 		})
 	}
@@ -759,6 +782,7 @@ var battle = function(){
 		white.drawRect(0, 0, game.world.width, game.world.height)
 		white.endFill()
 		white.alpha = 0
+        sceneGroup.add(white)
 	}
 
 	function showFeedback(event){
@@ -772,23 +796,23 @@ var battle = function(){
         
 		event = event || {}
 		var answers = event.answers || {}
-		var numTeam = event.numTeam || 1
+		var numTeam = event.numTeam || 1//game.rnd.integerInRange(1, 2)
 		var playerWin, playerLose
-		var tie
-
-		var MAX_TIME = 180000 //3 min
+		var MAX_TIME = 30000 //30 seg
+        
 		var t1 = answers.t1 || {value: true,
-			time: 50000 //2 min 30 seg
+			time: game.rnd.integerInRange(1000, MAX_TIME) //10000 //10 seg
 		}
 		var t2 = answers.t2 ||{value: true,
-			time: 60000 //1 min 30 seg
+			time: game.rnd.integerInRange(1000, MAX_TIME) //20000 //20 seg
 		}
 		var events = [t1, t2]
 		var diference = convertTime(Math.abs(t1.time - t2.time))
         
-        game.add.tween(answersGroup.parent).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true).onComplete.add(swapYogotars, null, answersGroup.parent)
-        //swapYogotars(answersGroup.parent)
-
+        swapYogotars(answersGroup.parent)
+        game.add.tween(answersGroup).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
+        game.add.tween(answersGroup.black).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
+        
 		for(var i = 0; i < answersGroup.length; i++){
 
 			var newScale = convertScale(events[i].time)
@@ -798,7 +822,7 @@ var battle = function(){
 			score.timeTxt.setText(ansTime)
 			score.diference.setText("+" + diference)
 			score.time = events[i].time
-            changeTexture(score, events[i].value)
+            changePosture(score, events[i].value)
 
 			var correct = game.add.tween(score.stock.scale).to({x:1.3, y:1.3}, 200, Phaser.Easing.Cubic.Out, true, 1000, 0, true)
 			var sizeBar = game.add.tween(score.bar.scale).to({x: newScale}, 400, Phaser.Easing.Cubic.Out, false)
@@ -811,24 +835,37 @@ var battle = function(){
         var leftAns = answersGroup.children[0]
         var rigthAns = answersGroup.children[1]
 
-		if(numTeam === 1){
-			playerWin = leftAns
-			playerLose = rigthAns
-		}
-		else if(numTeam === 2) {
-			playerWin = rigthAns
-			playerLose = leftAns
-		}
+        if(numTeam !== -1){
+            if(numTeam === 1){
+                playerWin = leftAns
+                playerLose = rigthAns
+            }
+            else if(numTeam === 2) {
+                playerWin = rigthAns
+                playerLose = leftAns
+            }
 
-		tie = t1.value == t2.value
-		setWiner(playerWin, tie)
-		setLoser(playerLose)
+            var tie = t1.value == t2.value
+            setWiner(playerWin, tie)
+            setLoser(playerLose)
+        }
+        else{
+            setLoser(leftAns)
+            setLoser(rigthAns)
+        }
 	}
     
-    function changeTexture(score, name){
+    function changePosture(score, name){
         
         game.time.events.add(1000, function(){
             score.stock.loadTexture("atlas.answers", "ans" + name)
+            var index = score.parent.getChildIndex(score)
+            var team = teams[index]
+            var anim = name ? "answer_good" : "answer_bad"
+            for(var k = 0; k < team.length; k++){
+                var yogo = team[k]
+                changeAnim(yogo, anim)
+            }
         })
     }
     
@@ -844,10 +881,20 @@ var battle = function(){
 
 	function selectAttackType(time){
 
-		if(time > 0 && time <= 60000){
+//		if(time > 0 && time <= 60000){
+//			return "ultra"
+//		}
+//		else if(time > 60000 && time <= 120000){
+//			return "super"
+//		}
+//		else{
+//			return "normal"
+//		}
+        
+        if(time > 0 && time <= 10000){
 			return "ultra"
 		}
-		else if(time > 60000 && time <= 120000){
+		else if(time > 10000 && time <= 15000){
 			return "super"
 		}
 		else{
@@ -870,9 +917,10 @@ var battle = function(){
 
 	function setLoser(results){
 
-		var fadeOut = game.add.tween(results.parent.parent).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, false, 1000)
+		var fadeOut = game.add.tween(results.parent).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, false, 1000)
         fadeOut.onStart.add(function(){
             swapYogotars(layers[1])
+            game.add.tween(results.parent.black).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, true)
         })
 		fadeOut.onComplete.add(restartResults)
 		game.add.tween(results).to({angle: 50 * results.direction}, 1000, Phaser.Easing.Bounce.Out, true, 2000).chain(fadeOut)
@@ -925,6 +973,23 @@ var battle = function(){
 
 		return min + ":" + (sec < 10 ? '0' : '') + sec
 	}
+    
+    function initGame(){
+        
+        for(var i = 0; i < teams.length; i++){
+            var team = teams[i]
+            for(var k = 0; k < team.length; k++){
+                var yogo = team[k]
+                changeAnim(yogo, "idle_normal")
+            }
+        }
+        game.time.events.add(1000, setReadyGo)
+    }
+    
+    function changeAnim(yogo, anim){
+        
+        yogo.setAnimation([anim], true)
+    }
 
     function setReadyGo(){
 
@@ -932,10 +997,10 @@ var battle = function(){
         first.yoyo(true, 700)
 
         var second = game.add.tween(listosYaGroup.ya.scale).to({x: 1,y: 1}, 400, Phaser.Easing.Elastic.Out, false)
-        var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 300)
+        var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 500)
         secondOut.onComplete.add(function(){
-        	//questionGroup.setQuestion(server.generateQuestion())
-			server.sendQuestion()
+        	questionGroup.setQuestion(server.generateQuestion())
+			//server.sendQuestion()
 		})
 
         first.chain(second)
