@@ -635,14 +635,20 @@ var battle = function(){
             shakeCamera()
 
 		game.add.tween(life).to({width:damage}, 500, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
+            
 			var defeated = team == 0 ? life.width < MIN_LIFE : life.width > MIN_LIFE
+            
             if(defeated){
                 game.time.events.add(2000, setWinteam, null, index, team)
             }
             else{
-                otherTeam.forEach(function(member){
-                    member.setAnimation(["idle_normal"], true)
-                })
+                for(var i = 0; i < 2; i++){
+                    game.time.events.add(2000, rotateTeam, null, i)
+                }
+                game.time.events.add(4000, initGame)
+//                otherTeam.forEach(function(member){
+//                    member.setAnimation(["idle_normal"], true)
+//                })
             }
 		})
 	}
@@ -800,7 +806,7 @@ var battle = function(){
         
 		event = event || {}
 		var answers = event.answers || {}
-		var numTeam = event.numTeam || 1 //game.rnd.integerInRange(1, 2)
+		var numTeam = event.numTeam || game.rnd.integerInRange(1, 2)
 		var playerWin, playerLose
 		var MAX_TIME = 30000 //30 seg
         
