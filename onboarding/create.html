@@ -5,28 +5,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Smartkids Tournament</title>
+  <title>Create</title>
   <link rel="stylesheet" href="./css/main.css">
 </head>
 
 <body>
-  <div class="main clearfix">
+  <main class="main">
     <span class="bubbles bubbles-down" id="bubbles"></span>
-    <!-- <div class="header">
-      <h1>Lobby</h1>
-    </div> -->
-    <main class="container">
+
+    <div class="container">
       <section class="item item--left item--create">
         <div class="item__avatar">
           <img src="./img/mathturnament-onboarding-luna-start.png" alt="Avatar Equipo Alfa">
         </div>
       </section>
-      <section class="item item--middle">
+      <section class="item item--middle item--create">
+        <div class="item__logo">
+          <img src="./img/mathtournament-onboarding-logo-sktour.png" alt="">
+        </div>
         <div class="item__textbox item__textbox--create">
-          <div class="item__textbox__container">
-            <p>Invite your students to test their skills in a range of academic subjects. They'll go head-to-head in an educational
-              battle.
-            </p>
+          <div class="item__textbox__container clearfix">
+            <div class="textbox clearfix" id="textbox">
+              <div class="textbox__text move">
+                <p>Invite your students to test their skills in a range of academic subjects. They'll go head-to-head in
+                  an educational battle.
+                </p>
+              </div>
+              <div class="textbox__text move hide">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita eaque odio quibusdam assumenda saepe
+                  earum corrupti nihil
+                </p>
+              </div>
+            </div>
+            <div class="points" id="points"><span class="point point--active"></span><span class="point"></span></div>
           </div>
         </div>
         <div class="item__buttons">
@@ -45,9 +56,19 @@
           <img src="./img/mathturnament-onboarding-eagle-start.png" alt="Avatar Equipo Bravo">
         </div>
       </section>
-    </main>
-  </div>
+    </div>
+  </main>
   <script src="./js/main.js"></script>
+  <script>
+    var textbox = document.getElementById('textbox')
+    var points = document.getElementById('points')
+    setInterval(function () {
+      textbox.children[0].classList.toggle('hide')
+      textbox.children[1].classList.toggle('hide')
+      points.children[0].classList.toggle('point--active')
+      points.children[1].classList.toggle('point--active')
+    }, 5000)
+  </script>
 </body>
 
 </html>

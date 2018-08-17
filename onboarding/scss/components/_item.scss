@@ -1,7 +1,7 @@
 .item {
   display: inline-block;
   position: relative;
-  width: 25%;
+  width: (100% / 3);
 
   &__header {
     width: 400%;
@@ -23,68 +23,26 @@
   &__avatar {
     margin-top: ($teams-header-height + 40px);
     img {
-      width: 100%;
+      display: block;
+      width: 90%;
+      margin: 0 auto;
     }
   }
 }
 
 .item--left {
   float: left;
-  left: 50px;
-
-  .item__header {
-    background-color: #f3246d;
-    right: 10%;
-    text-align: right;
-
-    span {
-      background-image: url(../img/mathtournament-onboarding-alfa-team.png);
-      background-position: top right;
-      right: -20%;
-    }
-  }
 
   img {
     @include img-border(#ff65a5);
   }
 }
 
-.item--middle {
-  .item__textbox {
-    position: absolute;
-    top: 90px;
-    width: 100%;
-  }
-
-  .item__buttons {
-    top: 330px;
-  }
-}
-
 .item--right {
   float: right;
-  right: 50px;
-
-  .item__header {
-    background-color: #24d5f9;
-    left: 10%;
-    text-align: left;
-
-    span {
-      background-image: url(../img/mathturnament-onboarding-bravo-team.png);
-      background-position: top left;
-      left: -20%;
-    }
-  }
 
   img {
     @include img-border(#65d5fb);
-  }
-}
-
-.item--create {
-  .item__avatar {
-    margin: 0;
   }
 }
 
@@ -111,6 +69,9 @@
       line-height: $teams-header-height-768;
       font-size: 30px;
     }
+    &__avatar {
+      margin-top: ($teams-header-height-768 + 20px);
+    }
   }
 }
 
@@ -120,14 +81,12 @@
       font-size: 25px;
       line-height: 35px;
     }
-
     &__avatar {
-      margin-top: 60px;
+      margin-top: 50px;
     }
   }
 
   .item--left {
-    left: 25px;
     img {
       filter: drop-shadow(3px 3px 0 #ff65a5) drop-shadow(-3px -3px 0 #ff65a5)
         drop-shadow(-3px 3px 0 #ff65a5) drop-shadow(3px -3px 0 #ff65a5);
@@ -135,14 +94,6 @@
   }
 
   .item--right {
-    right: 25px;
-    .item__header {
-      left: 0;
-      span {
-        left: -17%;
-      }
-    }
-
     img {
       filter: drop-shadow(3px 3px 0 #24d5f9) drop-shadow(-3px -3px 0 #24d5f9)
         drop-shadow(-3px 3px 0 #24d5f9) drop-shadow(3px -3px 0 #24d5f9);

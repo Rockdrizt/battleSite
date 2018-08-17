@@ -1,5 +1,4 @@
 .item__buttons {
-  position: relative;
   max-width: 300px;
   margin: 0 auto;
 
@@ -50,7 +49,6 @@
 }
 
 .item__btn--back {
-  margin: 0;
   float: left;
 
   p {
@@ -72,7 +70,6 @@
 }
 
 .item__btn--start {
-  margin: 0;
   float: right;
 
   p {
@@ -117,10 +114,6 @@
       p {
         right: 60px;
         padding-right: 10px;
-
-        &::before {
-          right: -20px;
-        }
       }
     }
 
@@ -128,10 +121,6 @@
       p {
         left: 60px;
         padding-left: 10px;
-
-        &::before {
-          left: -20px;
-        }
       }
     }
   }
@@ -141,30 +130,34 @@
   .item__buttons {
     .item__btn {
       p {
-        line-height: 30px;
-        top: 20px;
+        line-height: 25px;
+        // font-size: 18px;
+        top: 17px;
 
         &::before {
-          width: 130px;
-          height: 30px;
+          width: 110px;
+          height: 25px;
         }
       }
 
       span {
-        width: 50px;
-        height: 70px;
+        width: 40px;
+        height: 52px;
       }
     }
 
     .item__btn--back {
       p {
-        right: 50px;
+        right: 30px;
+        &::before {
+          right: -25px;
+        }
       }
     }
 
     .item__btn--start {
       p {
-        left: 50px;
+        left: 30px;
       }
     }
   }
