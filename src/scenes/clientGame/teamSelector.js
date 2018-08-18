@@ -44,8 +44,8 @@ var teamSelector = function(){
 		atlases: [
 			{
 				name: "atlas.yogoSelector",
-				json: "../../images/yogoSelector/atlas.json",
-				image: "../../images/yogoSelector/atlas.png",
+				json: "../../images/teamSelector/atlas.json",
+				image: "../../images/teamSelector/atlas.png",
 			},
 			{
 				name: "atlas.loading",

@@ -9,6 +9,15 @@ function startGame(){
 	window.game = new Phaser.Game(document.body.clientWidth, document.body.clientHeight, Phaser.CANVAS, null, {init: init, create: create }, true, true);
 	document.body.style.visibility = "hidden"
 
+	function bootConfigFiles(sceneList) {
+
+		function onCompleteBoot() {
+			preloadScenes(sceneList)
+		}
+
+		sceneloader.preload(sceneList, {onComplete: onCompleteBoot}, "boot")
+	}
+
 	function preloadScenes(sceneList){
 
 		function onCompletePreloading(){
@@ -77,7 +86,7 @@ function startGame(){
 
 	function create(){
 
-		preloadScenes([
+		bootConfigFiles([
 			teamSelector,
 			questions
 		])
