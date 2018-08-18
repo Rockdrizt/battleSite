@@ -1,0 +1,64 @@
+<html>
+<meta charset="utf-8" />
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="-1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+<meta http-equiv="pragma" content="no-cache" />
+<head>
+	<title>Yogome Minigame</title>
+
+	<!--Style sheets-->
+	<link rel="stylesheet" type="text/css" href="../../shared/minigames/css/custom_fonts.css">
+	<link rel="stylesheet" type="text/css" href="../../shared/minigames/css/minigame.css">
+	<link rel="stylesheet" type="text/css" href="../../css/index.css">
+</head>
+<body>
+<div id="preloadBattle" class="loader">
+	<span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+<div id="ingame" style="margin: 0 auto; height: 100%; overflow: hidden"></div>
+<div id="orientation-overlay" style="visibility: hidden"></div>
+
+<!--Core Libs-->
+<script src="../../shared/minigames/js/phaser283.min.js"></script>
+<script src="../../shared/minigames/js/helpers/phaser-spine309.js"></script>
+
+<!--Scenes-->
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+<script src="../../scenes/battle/playground.js"></script>
+<script src="../../scenes/battle/battle.js"></script>
+<script src="../../scenes/battle/preload2.js"></script>
+<!--<script src="../shared/minigames/js/helpers/yogomeGames.js"></script>-->
+<!--<script src="../shared/epic/data/epicCharacters.js"></script>-->
+<!--<script src="js/projectiles.js"></script>-->
+
+<!--Helpers-->
+<script src="/libs/spineLoader.js"></script>
+<script src="/libs/characterBattle.js"></script>
+<script src="/libs/particleBattle.js"></script>
+<script src="/libs/transition.js"></script>
+<script src="/libs/scripts.js"></script>
+<script src="/libs/projectiles.js"></script>
+<!--<script src="../shared/minigames/js/helpers/buttons.js"></script>-->
+<script src="../../shared/minigames/js/helpers/particles.js"></script>
+<!--<script src="../shared/minigames/js/helpers/swipe.js"></script>-->
+<!--<script src="../shared/minigames/js/helpers/orientationLand.js"></script>-->
+<!--<script src="../shared/minigames/js/helpers/facebook.js"></script>-->
+<script src="../../shared/minigames/js/helpers/mixpanel.js"></script>
+<script src="../../shared/minigames/js/helpers/sound.js"></script>
+<script src="../../shared/minigames/js/helpers/sceneloader.js"></script>
+<script src="../../shared/minigames/js/helpers/localization.js"></script>
+<script src="../../shared/minigames/js/helpers/ads.js"></script>
+<script src="../../shared/minigames/js/helpers/phaser-kinetic-scrolling-plugin.min.js"></script>
+
+
+<!--Entry point-->
+<script>
+	var server = parent.server;
+</script>
+<script src="js/test.js" type="text/javascript"></script>
+
+</body>
+</html>
