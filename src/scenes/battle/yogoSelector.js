@@ -183,7 +183,7 @@ var yogoSelector = function(){
 	function preload(){
 
 		game.stage.disableVisibilityChange = true
-		game.load.bitmapFont('skwig', 'fonts/font.png', 'fonts/font.fnt')
+		game.load.bitmapFont('skwig', '/fonts/font.png', '/fonts/font.fnt')
 	}
 
 	function createBackground(){
