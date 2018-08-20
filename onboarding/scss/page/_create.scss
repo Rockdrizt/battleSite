@@ -79,7 +79,7 @@
  ********* Media Queries **************
  **************************************/
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 991px) {
   .item__textbox--create {
     .item__textbox__container {
       .textbox__text {
@@ -95,7 +95,7 @@
   }
 
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   .item--create
   .item__textbox--create {
     .item__textbox__container {
@@ -108,7 +108,7 @@
     }
   }
 }
-@media only screen and (max-width: 644px) {
+@media only screen and (max-width: 643px) {
   .item__textbox--create {
     .item__textbox__container {
       .textbox__text {

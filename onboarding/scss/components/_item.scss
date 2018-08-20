@@ -68,7 +68,7 @@
  ********* Media Queries **************
  **************************************/
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 991px) {
   .item {
     &__header {
       line-height: $teams-header-height-992;
@@ -81,7 +81,7 @@
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   .item {
     &__header {
       line-height: $teams-header-height-768;
@@ -93,7 +93,7 @@
   }
 }
 
-@media only screen and (max-width: 644px) {
+@media only screen and (max-width: 643px) {
   .item {
     &__header {
       font-size: 25px;

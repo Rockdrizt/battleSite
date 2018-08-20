@@ -1,33 +1,5 @@
-// .item__logo {
-//   div {
-//     width: 500px;
-//     height: 250px;
-//     margin: 0 auto;
-//   }
-// }
 
-/**************************************
- ********* Media Queries **************
- **************************************/
-
-// @media only screen and (max-width: 992px) and (orientation: landscape) {
-//   .item__logo {
-//     div {
-//       width: 500px;
-//       height: 100px;
-//       margin: 0 auto;
-//     }
-//   }
-// }
-
-@media only screen and (max-width: 644px) and (orientation: portrait) {
-  // .item__logo {
-  //   div {
-  //     width: 500px;
-  //     height: 150px;
-  //     margin: 0 auto;
-  //   }
-  // }
+@media only screen and (max-width: 643px) and (orientation: portrait) {
   .item--middle {
     min-width: 250px;
   }
