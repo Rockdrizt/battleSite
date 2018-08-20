@@ -28,9 +28,9 @@ function startGame(){
 			}
 
 			function onCompleteSceneLoading(){
-				var cliente = parent.cliente
-				if(cliente)
-					cliente.setReady(true)
+				// var cliente = parent.cliente
+				// if(cliente)
+				// 	cliente.setReady(true)
 
 				sceneloader.show("teamSelector")
 			}
@@ -87,6 +87,7 @@ function startGame(){
 	function create(){
 
 		bootConfigFiles([
+			alertDialog,
 			teamSelector,
 			questions
 		])
@@ -105,7 +106,8 @@ function startGame(){
 
 	//TODO: this is just testing remove on prod
 	cliente = new Client();
-	cliente.start(team, "000000")
-	cliente.startGame = startGame
+	startGame()
+	//cliente.start(team, "000000", startGame)
+	//cliente.startGame = startGame
 })()
 //minigame.orientation.init(startGame)
