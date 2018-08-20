@@ -19,14 +19,14 @@
   width: 100vw;
   height: 100vh;
   position: relative;
-  background-color: #090743; }
+  background-image: linear-gradient(#702981, #2D1F4E, #2D1F4E, #2D1F4E); }
   .main .bubbles {
     width: 100vw;
     height: 100vh;
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url(../img/mathturnament-onboarding-bg-tile.png); }
+    background-image: url(../img/mathtournament-onboarding-bg-tile.png); }
   .main .bubbles-up {
     animation: slide-up 10s forwards; }
   .main .bubbles-down {
@@ -162,7 +162,7 @@
       right: -40px; } }
 
 .header {
-  background-color: #070634;
+  background-color: #2D1F4E;
   width: 100%;
   text-align: center;
   position: absolute;
@@ -197,7 +197,7 @@
     position: absolute;
     top: -22px;
     left: -19px;
-    background-image: url(../img/mathturnament-onboarding-text-box.png);
+    background-image: url(../img/mathtournament-onboarding-text-box.png);
     background-repeat: no-repeat;
     background-position: top left;
     background-size: 200px;
@@ -243,7 +243,7 @@
       text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
       top: 50px; }
       .item__buttons .item__btn p:hover + span {
-        background-image: url(../img/mathturnament-onboarding-play-btn-down.png); }
+        background-image: url(../img/mathtournament-onboarding-play-btn-down.png); }
       .item__buttons .item__btn p::before {
         content: '';
         background-size: cover;
@@ -255,12 +255,12 @@
     .item__buttons .item__btn span {
       display: inline-block;
       background-size: contain;
-      background-image: url(../img/mathturnament-onboarding-play-btn.png);
+      background-image: url(../img/mathtournament-onboarding-play-btn.png);
       background-repeat: no-repeat;
       width: 110px;
       height: 145px; }
       .item__buttons .item__btn span:hover {
-        background-image: url(../img/mathturnament-onboarding-play-btn-down.png); }
+        background-image: url(../img/mathtournament-onboarding-play-btn-down.png); }
 
 .item__btn--back {
   float: left; }
@@ -282,7 +282,7 @@
     left: 105px;
     padding-left: 10px; }
     .item__btn--start p::before {
-      background-image: url(../img/mathturnament-onboarding-bravo-team.png);
+      background-image: url(../img/mathtournament-onboarding-bravo-team.png);
       left: -10px;
       background-position: top left;
       width: 220px;
@@ -439,7 +439,7 @@
   left: 10%;
   text-align: left; }
   .item--lobby.item--right .item__header span {
-    background-image: url(../img/mathturnament-onboarding-bravo-team.png);
+    background-image: url(../img/mathtournament-onboarding-bravo-team.png);
     background-position: top left;
     left: -10%; }
 
@@ -469,3 +469,42 @@
     font-size: 20px; }
   .item--lobby.item--middle .item__textbox p {
     padding: 10px; } }
+
+.carousel {
+  width: 100%;
+  position: relative; }
+  .carousel__item {
+    width: 30%;
+    position: relative;
+    display: inline-block; }
+    .carousel__item h2 {
+      letter-spacing: 1px;
+      text-shadow: 3px 3px 0 black;
+      position: absolute;
+      height: 60px;
+      width: 100%;
+      line-height: 70px;
+      background-image: url(../img/mathtournament-onboarding-subject-header.png);
+      background-size: 300px 60px;
+      background-repeat: no-repeat;
+      background-position: center center; }
+    .carousel__item img {
+      width: 100%; }
+  .carousel::before, .carousel::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 50%; }
+  .carousel::before {
+    background-image: url(../img/mathtournament-onboarding-left-btn.png);
+    left: 10px; }
+  .carousel::after {
+    background-image: url(../img/mathtournament-onboarding-right-btn.png);
+    right: 10px; }
+  .carousel .locked h2 {
+    display: none; }
+  .carousel .locked img {
+    width: 70%; }
