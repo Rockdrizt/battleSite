@@ -1,0 +1,58 @@
+.header-custom{
+    position: relative;
+    background-color: #2d1f4e;
+    text-align: center;
+    padding: 1%;
+    z-index: 1;
+    font-size: 2vw;
+}
+
+.questions__border{
+    position: relative;
+    width: 80%;
+    margin-top: 5%;
+    height: 70%;
+    left:50%;
+    transform: translate(-50%,0%);
+    border-radius: 1vw;
+    background-image: 
+      linear-gradient(to left,#db7842,#e6a548);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.questions__main{
+    border-radius: 1vw;
+    background-color: #faf3cd;
+    position: relative;
+    width: 97%;
+    height: 95%;
+}
+
+.questions__head{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20%;
+}
+
+.questions__input--title{
+    width: 60%;
+    border-radius: 1vw;
+    border-style: none;
+    font-size: 1.5vw;
+    padding: 1vw;
+    color:#2d1f4e;
+    margin-right: 10%;
+}
+.questions__button--preview,
+.questions__button--updateexcel{
+    height: 100%;
+    
+}
+.questions__button--preview img,
+.questions__button--updateexcel img{
+    height: 90%;
+    padding: 0.5vw;
+}
