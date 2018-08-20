@@ -12,7 +12,7 @@
     position: absolute;
     top: -22px;
     left: -19px;
-    background-image: url(../img/mathturnament-onboarding-text-box.png);
+    background-image: url(../img/mathtournament-onboarding-text-box.png);
     background-repeat: no-repeat;
     background-position: top left;
     background-size: 200px;
@@ -33,63 +33,24 @@
  ********* Media Queries **************
  **************************************/
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 991px) {
   .item__textbox {
     margin-top: 10px;
     padding: 7px;
     width: 90%;
   }
 }
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   .item__textbox {
     .item__textbox__container {
       padding: 5px;
     }
   }
 }
-@media only screen and (max-width: 644px) {
+@media only screen and (max-width: 643px) {
   .item__textbox {
     // margin-top: 10px;
     padding: 5px;
     // width: 90%;
   }
 }
-
-// @media only screen and (max-width: 768px) {
-//   .item--middle {
-//     .item__textbox {
-//       &__container {
-//         padding: 7px;
-//         h3 {
-//           font-size: 25px;
-//           padding-top: 0;
-//         }
-//         .pin {
-//           font-size: 20px;
-//         }
-//         p {
-//           font-size: 16px;
-//           padding-left: 5px;
-//           padding-right: 5px;
-//         }
-//       }
-//     }
-//   }
-// }
-
-// @media only screen and (max-width: 644px) {
-//   .item--middle {
-//     .item__textbox {
-//       padding: 7px;
-//       h3 {
-//         padding: 0;
-//         font-size: 20px;
-//       }
-//       p {
-//         font-size: 14px;
-//         padding: 10px;
-//       }
-//     }
-//   }
-// }
-

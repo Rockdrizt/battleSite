@@ -2,14 +2,12 @@
   display: inline-block;
   position: relative;
   width: (100% / 3);
-
   &__header {
     width: 400%;
     line-height: $teams-header-height;
     font-size: 45px;
     text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
     position: absolute;
-
     span {
       background-repeat: no-repeat;
       background-size: contain;
@@ -19,7 +17,6 @@
       z-index: -1;
     }
   }
-
   &__avatar {
     margin-top: ($teams-header-height + 40px);
     img {
@@ -32,15 +29,36 @@
 
 .item--left {
   float: left;
-
   img {
     @include img-border(#ff65a5);
   }
 }
 
+.item__textbox__container {
+  h3 {
+    color: $color-pin;
+    font-size: 35px;
+    padding: 10px;
+  }
+  input {
+    font-size: 30px;
+    text-align: center;
+    width: 100%;
+    border: none;
+    background-color: #252a4b;
+    border-radius: 5px;
+    padding-top: 5px;
+  }
+  p {
+    color: $color-pin;
+    font-size: 20px;
+    font-family: 'VAGRounded Thin', sans-serif;
+    padding-top: 10px;
+  }
+}
+
 .item--right {
   float: right;
-
   img {
     @include img-border(#65d5fb);
   }
@@ -50,7 +68,7 @@
  ********* Media Queries **************
  **************************************/
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 991px) {
   .item {
     &__header {
       line-height: $teams-header-height-992;
@@ -63,19 +81,19 @@
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   .item {
     &__header {
       line-height: $teams-header-height-768;
       font-size: 30px;
     }
     &__avatar {
-      margin-top: ($teams-header-height-768 + 20px);
+      margin-top: ($teams-header-height-768 + 15px);
     }
   }
 }
 
-@media only screen and (max-width: 644px) {
+@media only screen and (max-width: 643px) {
   .item {
     &__header {
       font-size: 25px;
@@ -97,6 +115,25 @@
     img {
       filter: drop-shadow(3px 3px 0 #24d5f9) drop-shadow(-3px -3px 0 #24d5f9)
         drop-shadow(-3px 3px 0 #24d5f9) drop-shadow(3px -3px 0 #24d5f9);
+    }
+  }
+  .item--left,
+  .item--right {
+    width: 25%;
+  }
+  .item--middle {
+    width: 45%;
+  }
+  .item__buttons {
+    .item__btn {
+      position: absolute;
+      top: 70%;
+      &--back {
+        left: -40px;
+      }
+      &--start {
+        right: -40px;
+      }
     }
   }
 }

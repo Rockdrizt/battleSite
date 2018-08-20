@@ -26,7 +26,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url(../img/mathturnament-onboarding-bg-tile.png); }
+    background-image: url(../img/mathtournament-onboarding-bg-tile.png); }
   .main .bubbles-up {
     animation: slide-up 10s forwards; }
   .main .bubbles-down {
@@ -203,7 +203,7 @@
     position: absolute;
     top: -22px;
     left: -19px;
-    background-image: url(../img/mathturnament-onboarding-text-box.png);
+    background-image: url(../img/mathtournament-onboarding-text-box.png);
     background-repeat: no-repeat;
     background-position: top left;
     background-size: 200px;
@@ -249,7 +249,7 @@
       text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
       top: 50px; }
       .item__buttons .item__btn p:hover + span {
-        background-image: url(../img/mathturnament-onboarding-play-btn-down.png); }
+        background-image: url(../img/mathtournament-onboarding-play-btn-down.png); }
       .item__buttons .item__btn p::before {
         content: '';
         background-size: cover;
@@ -261,12 +261,12 @@
     .item__buttons .item__btn span {
       display: inline-block;
       background-size: contain;
-      background-image: url(../img/mathturnament-onboarding-play-btn.png);
+      background-image: url(../img/mathtournament-onboarding-play-btn.png);
       background-repeat: no-repeat;
       width: 110px;
       height: 145px; }
       .item__buttons .item__btn span:hover {
-        background-image: url(../img/mathturnament-onboarding-play-btn-down.png); }
+        background-image: url(../img/mathtournament-onboarding-play-btn-down.png); }
 
 .item__btn--back {
   float: left; }
@@ -288,7 +288,7 @@
     left: 105px;
     padding-left: 10px; }
     .item__btn--start p::before {
-      background-image: url(../img/mathturnament-onboarding-bravo-team.png);
+      background-image: url(../img/mathtournament-onboarding-bravo-team.png);
       left: -10px;
       background-position: top left;
       width: 220px;
@@ -485,7 +485,7 @@
   left: 10%;
   text-align: left; }
   .item--right .item__header span {
-    background-image: url(../img/mathturnament-onboarding-bravo-team.png);
+    background-image: url(../img/mathtournament-onboarding-bravo-team.png);
     background-position: top left;
     left: -10%; }
 

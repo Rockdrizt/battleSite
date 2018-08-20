@@ -142,6 +142,7 @@ var battle = function(){
 	var MAX_LIFE
     var MIN_LIFE = 0
 	var EMPTY_QUESTION = -1
+    var MAX_TIME = 30000
 
 	var COLORS = [0xFC1E79, 0x00D8FF]
 
@@ -160,7 +161,6 @@ var battle = function(){
 	var scoreBoards = []
 	var usedQuestions = []
 	var layers
-	var attackTxt
 
 	var mainYogotorars
 	var mainSpine
@@ -329,11 +329,17 @@ var battle = function(){
         questionGroup = riddles.createQuestionOverlay()
         questionGroup.callback = function (event) {
 			questionGroup.hide()
+            questionGroup.timer.stop()
         	game.time.events.add(2000, function () {
-				console.log(event)
 				checkAnswer()
 			})
 		}
+        questionGroup.stopTimer = function(){
+            questionGroup.timer.stop()
+            questionGroup.hide()
+            setNoAnswer()
+            console.log("time out")
+        }
         questionGroup.alpha = 0
         sceneGroup.add(questionGroup)
     }
@@ -359,13 +365,14 @@ var battle = function(){
         answersGroup.black = black
         scoresGroup.add(answersGroup)
 
-        attackTxt = new Phaser.Text(sceneGroup.game, 0, 0, "NORMAL", fontStyle)
+        var attackTxt = new Phaser.Text(sceneGroup.game, 0, 0, "NORMAL", fontStyle)
         attackTxt.anchor.setTo(0.5)
         attackTxt.fill = "#ffff54"
         attackTxt.fontSize = 80
         attackTxt.fontStyle = "italic"
         attackTxt.alpha = 0
-        sceneGroup.add(attackTxt)
+        scoresGroup.add(attackTxt)
+        answersGroup.text = attackTxt
     }
 
     function createListosYa(){
@@ -630,9 +637,12 @@ var battle = function(){
 		var damage = life.width - (MAX_LIFE * percent * ORDER_SIDES[team].scale.x)
 		var index = team == 0 ? 1 : 0
 		var otherTeam = teams[index]
+        var delay = 4000
         
-        if(percent == DAMAGE.ultra)
+        if(percent == DAMAGE.ultra){
             shakeCamera()
+            delay = 5000
+        }
 
 		game.add.tween(life).to({width:damage}, 500, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
             
@@ -643,12 +653,9 @@ var battle = function(){
             }
             else{
                 for(var i = 0; i < 2; i++){
-                    game.time.events.add(2000, rotateTeam, null, i)
+                    game.time.events.add(delay * 0.5, rotateTeam, null, i)
                 }
-                game.time.events.add(4000, initGame)
-//                otherTeam.forEach(function(member){
-//                    member.setAnimation(["idle_normal"], true)
-//                })
+                game.time.events.add(delay, initGame)
             }
 		})
 	}
@@ -808,7 +815,6 @@ var battle = function(){
 		var answers = event.answers || {}
 		var numTeam = event.numTeam || game.rnd.integerInRange(1, 2)
 		var playerWin, playerLose
-		var MAX_TIME = 30000 //30 seg
         
 		var t1 = answers.t1 || {value: true,
 			time: game.rnd.integerInRange(1000, MAX_TIME) //10000 //10 seg
@@ -944,11 +950,11 @@ var battle = function(){
         var attack = selectAttackType(winer.time)
         var index = answersGroup.getChildIndex(winer)
         
-        attackTxt.x = winer.x
-        attackTxt.y = winer.y
-        attackTxt.setText(attack.toUpperCase() + " ")
+        answersGroup.text.x = winer.x + 200 * ORDER_SIDES[index].scale.x
+        answersGroup.text.y = winer.y - 230
+        answersGroup.text.setText(attack.toUpperCase() + " ")
         
-        var fadeIn = game.add.tween(attackTxt).to({alpha: 1}, 400, Phaser.Easing.Cubic.Out, true)
+        var fadeIn = game.add.tween(answersGroup.text).to({alpha: 1}, 400, Phaser.Easing.Cubic.Out, true)
         fadeIn.yoyo(true, 1000)
         fadeIn.onComplete.add(function(){
             scoreBoards[index].points++
@@ -974,8 +980,6 @@ var battle = function(){
 
 	function convertScale(time){
 
-		var MAX_TIME = 180000
-
 		return 1 - time/MAX_TIME
 	}
 
@@ -995,8 +999,8 @@ var battle = function(){
         var second = game.add.tween(listosYaGroup.ya.scale).to({x: 1,y: 1}, 400, Phaser.Easing.Elastic.Out, false)
         var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 500)
         secondOut.onComplete.add(function(){
-        	//questionGroup.setQuestion(server.generateQuestion())
-			server.sendQuestion()
+        	questionGroup.showQuestion(server.generateQuestion())
+			//server.sendQuestion()
 		})
 
         first.chain(second)
@@ -1017,6 +1021,21 @@ var battle = function(){
     
     function changeAnim(yogo, anim){
         yogo.setAnimation([anim], true)
+    }
+    
+    function setNoAnswer(){
+        
+        for(var i = 0; i < teams.length; i++){
+            var team = teams[i]
+            for(var k = 0; k < team.length; k++){
+                var yogo = team[k]
+                changeAnim(yogo, "answer_bad")
+            }
+        }
+        for(var i = 0; i < 2; i++){
+            game.time.events.add(2000, rotateTeam, null, i)
+        }
+        game.time.events.add(4000, initGame)
     }
 
 	return {

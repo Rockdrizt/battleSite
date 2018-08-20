@@ -1,0 +1,50 @@
+.carousel {
+  width: 100%;
+  position: relative;
+  &__item {
+    width: 30%;
+    position: relative;
+    display: inline-block;
+    h2 {
+      letter-spacing: 1px;
+      text-shadow: 3px 3px 0 rgb(0, 0, 0);
+      position: absolute;
+      height: 60px;
+      width: 100%;
+      line-height: 70px;
+      background-image: url(../img/mathtournament-onboarding-subject-header.png);
+      background-size: 300px 60px;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+    img {
+      width: 100%;
+    }
+  }
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    top: 50%;
+  }
+  &::before {
+    background-image: url(../img/mathtournament-onboarding-left-btn.png);
+    left: 10px;
+  }
+  &::after {
+    background-image: url(../img/mathtournament-onboarding-right-btn.png);
+    right: 10px;
+  }
+  .locked {
+    h2 {
+      display: none;
+    }
+    img {
+      width: 70%;
+    }
+  }
+}
