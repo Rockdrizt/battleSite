@@ -1,53 +1,31 @@
-.item--left {
-  .item__header {
-    background-color: #f3246d;
-    right: 10%;
-    text-align: right;
+.item--lobby {
+  &.item--left {
+    .item__header {
+      background-color: #f3246d;
+      right: 10%;
+      text-align: right;
 
-    span {
-      background-image: url(../img/mathtournament-onboarding-alfa-team.png);
-      background-position: top right;
-      right: -10%;
+      span {
+        background-image: url(../img/mathtournament-onboarding-alfa-team.png);
+        background-position: top right;
+        right: -10%;
+      }
     }
   }
-}
-
-.item__textbox__container {
-
-  h3 {
-    color: $color-pin;
-    font-size: 35px;
-    padding: 10px;
+  &.item--middle {
+    padding-top: 12%;
   }
+  &.item--right {
+    .item__header {
+      background-color: #24d5f9;
+      left: 10%;
+      text-align: left;
 
-  .pin {
-    font-size: 30px;
-    text-align: center;
-    width: 100%;
-    border: none;
-    background-color: #252a4b;
-    border-radius: 5px;
-    padding-top: 5px;
-  }
-
-  p {
-    color: $color-pin;
-    font-size: 20px;
-    font-family: 'VAGRounded Thin', sans-serif;
-    padding-top: 10px;
-  }
-}
-
-.item--right {
-  .item__header {
-    background-color: #24d5f9;
-    left: 10%;
-    text-align: left;
-
-    span {
-      background-image: url(../img/mathturnament-onboarding-bravo-team.png);
-      background-position: top left;
-      left: -10%;
+      span {
+        background-image: url(../img/mathturnament-onboarding-bravo-team.png);
+        background-position: top left;
+        left: -10%;
+      }
     }
   }
 }
@@ -93,15 +71,16 @@
 }
 
 @media only screen and (max-width: 644px) {
-  .item--middle {
-    .item__textbox {
-      h3 {
-        padding: 0;
-        font-size: 20px;
-      }
-      p {
-        // font-size: 14px;
-        padding: 10px;
+  .item--lobby {
+    &.item--middle {
+      .item__textbox {
+        h3 {
+          padding: 0;
+          font-size: 20px;
+        }
+        p {
+          padding: 10px;
+        }
       }
     }
   }

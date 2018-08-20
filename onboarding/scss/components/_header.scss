@@ -7,20 +7,11 @@
   left: 0;
 
   h1 {
-    display: inline-block;
-    width: 340px;
+    width: 100%;
     font-size: 50px;
+    text-align: center;
     line-height: $height-header;
-    background-color: $color-header;
     position: relative;
-
-    &::after {
-      @include triangle(left, right, $height-header, $triangle-pos);
-    }
-
-    &::before {
-      @include triangle(right, left, $height-header, $triangle-pos);
-    }
   }
 }
 
@@ -31,17 +22,8 @@
 @media only screen and (max-width: 992px) {
   .header {
     h1 {
-      width: 150px;
       font-size: 30px;
       line-height: $height-header-992;
-
-      &::after {
-        @include triangle(left, right, $height-header-992, $triangle-pos-992);
-      }
-
-      &::before {
-        @include triangle(right, left, $height-header-992, $triangle-pos-992);
-      }
     }
   }
 }
