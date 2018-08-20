@@ -33,7 +33,7 @@ var battleScene = function() {
 		jsons: [
 			{
 				name: "sounds",
-				file: "data/sounds/tournament.json"
+				file: "/data/sounds/tournament.json"
 			},
 		],
 		characters: [
@@ -66,12 +66,12 @@ var battleScene = function() {
 		particles: [
 			{
 				name: 'pickedEnergy',
-				file: 'particles/battle/pickedEnergy/specialBar1.json',
+				file: '/particles/battle/pickedEnergy/specialBar1.json',
 				texture: 'specialBar1.png'
 			},
 			{
 				name: 'fireFloor',
-				file: 'particles/battle/fireFloor/fireFloor1.json',
+				file: '/particles/battle/fireFloor/fireFloor1.json',
 				texture: 'fireFloor1.png'
 			}
 		]
@@ -241,7 +241,7 @@ var battleScene = function() {
 
 		var charObj = {
 			name: character,
-			file: "data/characters/" + character + ".json",
+			file: "/data/characters/" + character + ".json",
 			scales: ["@0.5x"],
 			teamNum:teamIndex
 		}

@@ -56,12 +56,8 @@ function startGame(){
         var fullWidth = 1024
         var fullHeight = 1080
 
-        // var ratio = document.body.clientWidth / document.body.clientHeight
-        // var gameHeight = Math.round(fullHeight)
-        // var gameWidth = Math.round(fullHeight * ratio)
-
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
-        // game.scale.setGameSize(gameWidth, gameHeight); game.input.maxPointers = 1
+		game.input.maxPointers = 1
 
         game.stage.backgroundColor = "#ffffff"
         game.time.advancedTiming = true
@@ -70,22 +66,9 @@ function startGame(){
 		game.scale.pageAlignVertically = true;
 		game.scale.refresh()
 
-        // game.plugins.add(Fabrique.Plugins.Spine);
+		game.add.plugin(PhaserInput.Plugin);
         game.plugins.add(PhaserSpine.SpinePlugin);
 		epicparticles.init(game)
-
-        // var language = "EN"
-        // if(window.location.search){
-        //     var params = window.location.search.trim(1)
-        //     var regex = /language=(..)/i
-        //     var result = regex.exec(params)
-        //     if(result){
-        //         language = result[result.index].toUpperCase()
-        //     }else{
-        //         language = "EN"
-        //     }
-        //
-        // }
 
 		localization.setLanguage(parent.language)
 
@@ -94,26 +77,14 @@ function startGame(){
 		spineLoader.init()
     	sound.init(game)
 
-//		var teams = [
-//            
-//			[{name:"yogotarEagle", skin:"eagle1"}, {name:"yogotarNao", skin:"nao2"}, {name:"yogotarTomiko", skin:"tomiko1"}],
-//			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarArthurius", skin:"arthurius1"}, {name:"yogotarEstrella", skin:"estrella1"}],
-//
-//		]
-
         var teams = [
-            
-//            [{name:"dinamita", skin:"dinamita1"}, {name:"theffanie", skin:"theffanie2"}, {name:"luna", skin:"luna1"}],
-//			[{name:"eagle", skin:"eagle2"}, {name:"nao", skin:"nao1"}, {name:"estrella", skin:"estrella1"}],
-            
+
             [{name:"yogotarNao", skin:"nao1"}, {name:"yogotarTheffanie", skin:"theffanie2"}, {name:"yogotarLuna", skin:"luna1"}],
 			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarNao", skin:"nao2"}, {name:"yogotarEstrella", skin:"estrella1"}],
             
         ];
-		//battleScene.setTeams(teams)
+
 		battle.setTeams(teams)
-        //reward.setTeams(teams)
-        //reward.setWinner(1)
 		//TODO: this a test
 		server = new Server()
 		server.start("000000")

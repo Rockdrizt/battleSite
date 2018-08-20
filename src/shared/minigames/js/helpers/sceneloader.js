@@ -171,7 +171,8 @@ var sceneloader = function(){
 				console.warn("Scene with no Assets to preload ", currentScene)
 			}
 
-			saveScene(currentScene)
+			if((phase === "preload")&&(typeof currentScene.create === "function"))
+				saveScene(currentScene)
 		}
 
 		currentLoader.start()

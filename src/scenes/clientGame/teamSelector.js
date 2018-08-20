@@ -840,6 +840,9 @@ var teamSelector = function(){
 			createOk()
 			animateSelector()
 			createReady()
+
+			var dialogGroup = alertDialog.createAlert()
+			sceneGroup.add(dialogGroup)
 		},
 	}
 }()

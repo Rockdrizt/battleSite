@@ -116,11 +116,14 @@ var riddles = function(){
 		})
 		questionGroup.timeElapsed = 0
 
+        questionGroup.showQuestion = showQuestion.bind(questionGroup)
 		questionGroup.setQuestion = setQuestion.bind(questionGroup)
 		questionGroup.fixImage = fixImage.bind(questionGroup)
 		questionGroup.removeImage = removeImage.bind(questionGroup)
 		questionGroup.hide = hideOverlay.bind(questionGroup)
 		questionGroup.update = update.bind(questionGroup)
+        questionGroup.startTimer = startTimer.bind(questionGroup)
+		questionGroup.stopTimer = stopTimer.bind(questionGroup)
 
 		return questionGroup
 	}
@@ -141,6 +144,7 @@ var riddles = function(){
 
 		var info = new Phaser.Text(group.game, 0, 0, "", fontStyle)
 		info.anchor.setTo(0.5)
+        info.alpha = 0
 		info.wordWrapWidth = btn.width
 		btn.addChild(info)
 		btn.info = info
@@ -194,25 +198,16 @@ var riddles = function(){
 	//     }
 	// }
 
-	function setQuestion(riddle){
+	function showQuestion(riddle){
 
 		var delay = 200
 		this.timeElapsed = 0
-
-		this.question.setText(riddle.question)
+        var lastTween
 
 		if(riddle.image) {
 			this.image.loadTexture(riddle.image)
 			var scaleImg = this.fixImage(1)
 			this.image.key = riddle.image
-		}
-
-		for(var i = 0; i < riddle.answers.length; i++){
-
-			var opt = this.options.children[i]
-			opt.value = riddle.answers[i]
-			opt.info.text = riddle.answers[i]
-			opt.correct = riddle.answers[i] == riddle.correctAnswer
 		}
 
 		game.add.tween(this).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
@@ -223,17 +218,36 @@ var riddles = function(){
 		})
 
 		this.options.forEach(function(opt){
-			game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay).onComplete.add(function(){
-				opt.inputEnabled = true
-			})
+			lastTween = game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay)
 			delay += 200
 		})
 
-		delay += 200
-		game.add.tween(this.question).to({alpha:1}, 300, Phaser.Easing.linear, true, delay)
 		if(riddle.image)
-			game.add.tween(this.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
+			lastTween = game.add.tween(this.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
+        
+        var group = this
+        lastTween.onComplete.add(function(){
+            group.setQuestion(riddle)
+        })
 	}
+    
+     function setQuestion(riddle){
+        
+        this.question.setText(riddle.question)
+        
+        for(var i = 0; i < riddle.answers.length; i++){
+ 			var opt = this.options.children[i]
+			opt.value = riddle.answers[i]
+			opt.info.text = riddle.answers[i]
+			opt.correct = riddle.answers[i] == riddle.correctAnswer
+            opt.inputEnabled = true
+            game.add.tween(opt.info).to({alpha:1}, 300, Phaser.Easing.linear, true)
+		}
+        
+        game.add.tween(this.question).to({alpha:1}, 300, Phaser.Easing.linear, true)
+        
+        this.startTimer()
+    }
 
 	function fixImage(scale){
 
@@ -257,6 +271,7 @@ var riddles = function(){
 				opt.alpha = 0
 				opt.x = opt.spawn.x
 				opt.y = opt.spawn.y
+                opt.info.alpha = 0
 			})
 			group.boxes.forEach(function(box){
 				box.scale.setTo(0, 1)
@@ -265,7 +280,6 @@ var riddles = function(){
 				group.image.scale.setTo(0)
 				group.image.alpha = 0
 			}
-
 		})
 	}
 
@@ -310,6 +324,21 @@ var riddles = function(){
 		game.load.onLoadComplete.add(callback)
 		game.load.start()
 	}
+    
+    function startTimer(){
+    
+        var MAX_TIME = 30000
+        var timer = game.time.create()
+        var timerEvent = timer.add(MAX_TIME, this.stopTimer, this)
+        this.timer = timer
+        timer.start()
+        console.log("time start")
+    }
+    
+    function stopTimer(){
+        
+        
+    }
 
 	return{
 		initialize:initialize,
