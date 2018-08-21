@@ -36,7 +36,7 @@ var riddles = function(){
 		usedQuestions = []
 		loadQuestions()
 	}
-
+	//{Number:9,Question:`Escribimos 14 como se muestra en la figura 1 y 123 como en la figura 2. ¿Qué número representa la figura 3?`,useImageQuestion:true,imageQuestion:`SegundoGrado_3`,answer1:`1246`,answer2:`2461`,answer3:`2641`,answer4:`1462`,Correct:3,includeImages:false,image1:`no aplica`,image2:`no aplica`,image3:`no aplica`,image4:`no aplica`,typeQuestion:`Practica`,Level:1,audio:true,grade:2}
 	function createQuestionOverlay(){
 
 		var questionGroup = game.add.group()
@@ -124,6 +124,7 @@ var riddles = function(){
 		questionGroup.update = update.bind(questionGroup)
         questionGroup.startTimer = startTimer.bind(questionGroup)
 		questionGroup.stopTimer = stopTimer.bind(questionGroup)
+		questionGroup.updateTimer = updateTimer.bind(questionGroup)
 
 		return questionGroup
 	}
@@ -329,16 +330,32 @@ var riddles = function(){
     
         var MAX_TIME = 30000
         var timer = game.time.create()
-        var timerEvent = timer.add(MAX_TIME, this.stopTimer, this)
-        this.timer = timer
+		var timerEvent = timer.add(MAX_TIME, this.stopTimer, this)
+		timer.loop(1000, updateTimer, this)
+		this.timer = timer
+		this.timerEvent = timerEvent
         timer.start()
-        console.log("time start")
-    }
+		console.log("time start")
+	}
+	
+	function updateTimer(){
+
+		var text = convertTime(this.timerEvent.delay - this.timer.ms)
+		console.log(text)
+	}
     
     function stopTimer(){
         
         
-    }
+	}
+	
+	function convertTime(time) {
+
+		var min = Math.floor(time / 60000)
+		var sec = ((time % 60000) / 1000).toFixed(0)
+
+		return min + ":" + (sec < 10 ? '0' : '') + sec
+	}
 
 	return{
 		initialize:initialize,

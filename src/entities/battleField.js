@@ -42,101 +42,6 @@ var battleField = function(){
         group.add(rect)
     }
     
-    function createTeamBars(SIDES, listName){
-    
-        var fontStyle = {font: "65px skwig", fontWeight: "bold", fill: "#FFFFFE", align: "center"}
-        var fontScore = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
-        
-        var teamsBarGroup = game.add.group()
-        teamsBarGroup.fixedToCamera = true
-        teamsBarGroup.cameraOffset.setTo(0, 0)
-        
-        var pivotX = 0.25
-        var index = 0
-        
-        for(var i = 0; i < 2; i++){
-            
-            var side = SIDES[i].scale.x
-            
-            var teamSide = game.add.group()
-            teamsBarGroup.add(teamSide)
-            
-            var lifeBox = teamSide.create(game.world.centerX * pivotX, 150, "atlas.battle", "lifeContainer" + i)
-            lifeBox.anchor.setTo(i, 0.5)
-            
-            var text = game.add.bitmapText(lifeBox.x, lifeBox.y - 120, 'skwig', "Equipo Alpha", 75)
-            text.anchor.setTo(i,0.5)
-            teamSide.add(text)
-            
-            var life = teamSide.create(game.world.centerX * pivotX, lifeBox.y - 5, "atlas.battle", "lifeGauge")
-            life.anchor.setTo(0, 0.5)
-            life.scale.setTo(side, 1)
-            teamSide.life = life
-            
-            var teamScore = teamSide.create(lifeBox.x - 80 * side, lifeBox.y * 2.5, "atlas.battle", "score" + i)
-            teamScore.anchor.setTo(0.5)
-            teamScore.scale.setTo(0.6)
-            teamScore.points = 0
-            teamSide.teamScore = teamScore
-            
-            var score = new Phaser.Text(teamSide.game, 0, 60, "0", fontScore)
-            score.anchor.setTo(0.5)
-            score.scale.setTo(1.5)
-            teamScore.addChild(score)
-            teamScore.text = score
-            
-            var tokenGroup = game.add.group()
-            teamSide.add(tokenGroup)
-            teamSide.tokenGroup = tokenGroup
-            
-            var token = tokenGroup.create(lifeBox.x, lifeBox.y, "atlas.battle", "token" + i)
-            token.anchor.setTo(0.5)
-            token.scale.setTo(side, 1)
-            token.x -= 78 * side
-
-            var pic = game.add.sprite(0, - 10, "atlas.battle", listName[index])
-            pic.anchor.setTo(0.5)
-            pic.scale.setTo(0.8, 0.8)
-            token.addChild(pic)
-            
-            index++
-            
-            for(var j = 0; j < 2; j++){
-                
-                var token = tokenGroup.create(lifeBox.x, lifeBox.y + 120, "atlas.battle", "token" + i)
-                token.anchor.setTo(0.5)
-                token.scale.setTo(0.75 * side, 0.75)
-                token.x -= 155 * j * side
-                
-                var pic = game.add.sprite(0, - 10, "atlas.battle", listName[index])
-                pic.anchor.setTo(0.5)
-                pic.scale.setTo(0.8, 0.8)
-                token.addChild(pic)
-                
-                index++
-            }
-            
-            pivotX += 1.5
-        }
-    
-        text.setText("Equipo Bravo")
-        
-        return teamsBarGroup
-    }
-    
-    function createTimer(group){
-        
-        var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#000066", align: "center"}
-        
-        var timeToken = group.create(game.world.centerX, 150, "atlas.battle", "timeToken")
-        timeToken.anchor.setTo(0.5)
-        
-        var text = new Phaser.Text(group.game, 0, -10, "3:00", fontStyle)
-        text.anchor.setTo(0.5)
-        timeToken.addChild(text)
-        timeToken.text = text 
-    }
-    
     function createSpecialAttack(yogo){      
          
         var color = [0xffffff, 0x242A4D]
@@ -278,8 +183,6 @@ var battleField = function(){
     
     return{
         createBackground:createBackground,
-        createTeamBars:createTeamBars,
-        createTimer:createTimer,
         createSpecialAttack:createSpecialAttack,
         createListosYa:createListosYa,
         createScores:createScores
