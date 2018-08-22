@@ -209,7 +209,7 @@ var sceneloader = function(){
 
 			//console.log(game.state.states[sceneName])
 
-			game.state.start(sceneToShow.name)
+			game.state.start(sceneToShow.name, false)
 
 			// var currentState = game.state.getCurrentState()
 			// var stage = currentState.stage

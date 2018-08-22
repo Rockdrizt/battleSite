@@ -67,7 +67,7 @@ function Server(){
 	self.rulesSet = false
 	self.battleTime = 60000
 	self.maxRounds = 1
-	self.numberOperation
+	self.onAlert = null
 
 	this.addEventListener = function(name, handler) {
 		if (self.events.hasOwnProperty(name))
@@ -379,12 +379,14 @@ function Server(){
 				refT1.on('value', function (snapshot) {
 					if (serverReady) {
 						if (!snapshot.val()) {
+							self.t1Ready = false
 							self.fireEvent('onTeamDisconnect', [{numTeam: 1, teamWinner: valores.t1}]);
-						} else if (!valores.t1) {
+						} else if (!self.t1Ready) {
+							self.t1Ready = true
 							var t1 = snapshot.toJSON();
-							valores.t1 = t1;
+							valores.t1 = valores.t1 || t1;
 							self.fireEvent('onInitTeam', [{numTeam: 1, team: valores.t1}]);
-							if (valores.t2) {
+							if (self.t2Ready) {
 								self.currentData = valores
 								self.fireEvent('onTeamsReady', [valores]);
 							}
@@ -397,12 +399,14 @@ function Server(){
 				refT2.on('value', function (snapshot) {
 					if (serverReady) {
 						if (!snapshot.val()) {
+							self.t2Ready = false
 							self.fireEvent('onTeamDisconnect', [{numTeam: 2, teamWinner: valores.t2}]);
-						} else if (!valores.t2) {
+						} else if (!self.t2Ready) {
+							self.t2Ready = true
 							var t2 = snapshot.toJSON();
-							valores.t2 = t2;
+							valores.t2 = valores.t2 || t2;
 							self.fireEvent('onInitTeam', [{numTeam: 2, team: valores.t2}]);
-							if (valores.t1) {
+							if (self.t1Ready) {
 								self.currentData = valores
 								self.fireEvent('onTeamsReady', [valores]);
 							}
@@ -426,14 +430,16 @@ function Server(){
 				var selectt2 = database.ref(id_game + "/t2/players");
 				selectt2.on('value', function (snapshot) {
 					var players = snapshot.val()
-					var objReturn = {
-						numTeam : 2,
-						players : players
+					if(players) {
+						var objReturn = {
+							numTeam: 2,
+							players: players
+						}
+						self.fireEvent('onPlayersChange', [objReturn]);
 					}
-					self.fireEvent('onPlayersChange', [objReturn]);
 				});
 
-				var readyt1 = database.ref(id_game + "/t1/ready");
+				/*var readyt1 = database.ref(id_game + "/t1/ready");
 				readyt1.on('value', function (snapshot) {
 					if (serverReady) {
 						var ready = snapshot.val()
@@ -460,7 +466,7 @@ function Server(){
 							}
 						}
 					}
-				});
+				});*/
 
 				var t1answer = database.ref(id_game + "/t1answer");
 				t1answer.on('value', function (snapshot) {

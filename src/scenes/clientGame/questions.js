@@ -88,7 +88,7 @@ var questions = function(){
 	function preload(){
 
 		game.stage.disableVisibilityChange = true
-		game.load.bitmapFont('skwig', 'images/fonts/font.png', 'images/fonts/font.fnt')
+		game.load.bitmapFont('skwig', '/images/fonts/font.png', '/images/fonts/font.fnt')
 	}
 
 	function createQuestionOverlay(){

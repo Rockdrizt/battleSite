@@ -5,6 +5,8 @@ window.minigame = window.minigame || {}
 
 function startGame(){
 
+	var onReadyCallback
+
 	window.game = new Phaser.Game(1920, 1080, Phaser.WEBGL, "ingame", {init: init, create: create }, false, false);
     document.body.style.visibility = "hidden"
 
@@ -15,6 +17,32 @@ function startGame(){
 		}
     	
     	sceneloader.preload(sceneList, {onComplete: onCompleteBoot}, "boot")
+	}
+
+	function showAlert(message){
+		alertDialog.show({
+			message:message,
+			isButtonDisabled:true,
+			pin:server.getIdGame()
+		})
+	}
+
+	function checkPlayers() {
+		if((server.t1Ready)&&(server.t2Ready)){
+			alertDialog.hide()
+			server.setGameReady(true)
+
+			if(onReadyCallback){
+				onReadyCallback()
+				onReadyCallback = null
+			}
+		}else if(server.t1Ready){
+			showAlert("Esperando a equipo 2 en conectarse")
+		}else if(server.t2Ready){
+			showAlert("Esperando a equipo 1 en conectarse")
+		}else{
+			showAlert("Esperando a equipos en conectarse")
+		}
 	}
    
 	function preloadScenes(sceneList){
@@ -29,10 +57,17 @@ function startGame(){
 
 	    	function onCompleteSceneLoading(){
 				if (server) {
-					server.setGameReady(true)
-					server.startGame = function () {
+					/*server.startGame = function () {
+						sceneloader.show("yogoSelector")
+					}*/
+					alertDialog.init()
+
+					server.addEventListener("onTeamDisconnect", checkPlayers)
+					server.addEventListener("onInitTeam", checkPlayers)
+					onReadyCallback = function () {
 						sceneloader.show("yogoSelector")
 					}
+					checkPlayers()
 				}
 				else {
 					//sceneloader.show("yogoSelector")
@@ -66,8 +101,8 @@ function startGame(){
 		game.scale.pageAlignVertically = true;
 		game.scale.refresh()
 
-		game.add.plugin(PhaserInput.Plugin);
-        game.plugins.add(PhaserSpine.SpinePlugin);
+        game.plugins.add(PhaserSpine.SpinePlugin)
+		game.add.plugin(PhaserInput.Plugin)
 		epicparticles.init(game)
 
 		localization.setLanguage(parent.language)
@@ -85,15 +120,15 @@ function startGame(){
         ];
 
 		battle.setTeams(teams)
-		//TODO: this a test
 		server = new Server()
-		server.start("000000")
+		server.start()
     }
 
     function create(){
 		console.log("createEpicBattle")
     	bootConfigFiles([
             //startScreen,
+			alertDialog,
             yogoSelector,
             //battle,
     	])
