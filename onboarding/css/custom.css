@@ -37,15 +37,20 @@
     height: 20%;
 }
 
-.questions__input--title{
+.input--text{
     width: 60%;
     border-radius: 1vw;
     border-style: none;
     font-size: 1.5vw;
     padding: 1vw;
     color:#2d1f4e;
-    margin-right: 10%;
+    margin-right: 15%;
 }
+
+::placeholder {
+   color: #b3afbf;
+}
+
 .questions__button--preview,
 .questions__button--updateexcel{
     height: 100%;
@@ -56,3 +61,66 @@
     height: 90%;
     padding: 0.5vw;
 }
+
+hr{
+    background-color: #ec6f32;
+    height: 1%;
+    width: 90%;
+    margin-left:5%;
+    border:none;
+}
+
+.questions__body{
+    position: relative;
+    width: 100%;
+    left: 0%;
+    
+}
+
+.questions__item{
+    position: relative;
+    display: flex;
+    width: 90%;
+    margin-top: 1%;
+    margin-left: 5%;
+    align-items: flex-start;
+    justify-content:space-between;
+}
+
+.questions__number{
+    color: #FFF;
+    font-size: 3vw;
+  -webkit-text-stroke-color: #2d1f4e;
+  -webkit-text-stroke-width: 3px; 
+    background-color: #c32851;
+    text-align: center;
+    width: 5.4%;
+    border-radius: 100%;
+}
+
+.question__section--text{
+    position: relative;
+    width: 80%;
+}
+
+.questions__input{
+    width: 100%;
+}
+
+.text_limit{
+    position: absolute;
+    right: 1%;
+    bottom: 0;
+    color: #b3afbf;
+}
+
+.load_image--load{
+   width: 10%; 
+    text-align: center;
+}
+
+.load_image--load img{
+    
+   width: 80%; 
+}
+
