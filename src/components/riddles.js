@@ -25,18 +25,22 @@ var riddles = function(){
 
 		questions = [
 			/*{
-				question: `Eagle tiene dos amigos, Nao y Oona. ¿Cuántos dedos en pies y manos tienen los tres amigos en total?`,
-				src: "/images/questions/imagen.png",
-				image: `imagen.png`,
-				answers: [{text:1, correct:false}, {text:5, correct:false}, {text:2, correct:true}, {text:3, correct:false}],
-				index: 0,
-				grade: 1,
+			   "question": "En un cine había sesenta y cuatro personas y han entrado diecisiete más. ¿Cuántas personas hay ahora en el cine?",
+				"existImg": "false",
+				"image": "",
+				"A": "Ochenta y uno",
+				"B": "Setenta y uno",
+				"C": "Cuarenta y siete",
+				"D": "Cincuenta y siete",
+				"answer": 1,
+				"level": 5,
+				"grade": 2
 			}*/
 		]
 		usedQuestions = []
 		loadQuestions()
 	}
-	//{Number:9,Question:`Escribimos 14 como se muestra en la figura 1 y 123 como en la figura 2. ¿Qué número representa la figura 3?`,useImageQuestion:true,imageQuestion:`SegundoGrado_3`,answer1:`1246`,answer2:`2461`,answer3:`2641`,answer4:`1462`,Correct:3,includeImages:false,image1:`no aplica`,image2:`no aplica`,image3:`no aplica`,image4:`no aplica`,typeQuestion:`Practica`,Level:1,audio:true,grade:2}
+	
 	function createQuestionOverlay(){
 
 		var questionGroup = game.add.group()
@@ -78,6 +82,7 @@ var riddles = function(){
 		img.alpha = 0
 		img.key = ""
 		container.addChild(img)
+		questionGroup.image = img
 
 		var light = questionGroup.create(0,0, "pinkLight")
 		light.anchor.setTo(0.5)
@@ -116,6 +121,7 @@ var riddles = function(){
 		})
 		questionGroup.timeElapsed = 0
 
+		questionGroup.getQuestion = getQuestion.bind(questionGroup)
         questionGroup.showQuestion = showQuestion.bind(questionGroup)
 		questionGroup.setQuestion = setQuestion.bind(questionGroup)
 		questionGroup.fixImage = fixImage.bind(questionGroup)
@@ -161,20 +167,29 @@ var riddles = function(){
 
 			var element = list[i]
 
+			if(element.existImg)
+				var imagePath = "../../images/questionDB/grade" + element.grade + "/" + element.image + ".png"
+			else
+				var imagePath = "../../images/questionDB/default.png"
+				
 			var obj = {
-				question: element[0],
-				src: "/images/questions/" + element[1],
-				image: element[1],
+				question: element.question,
+				existImage : element.existImg,
+				src: imagePath,
+				image: element.image,
 				answers: [],
-				grade: element[7],
+				grade: element.grade,
+				level: element.level,
 				index: i,
 			}
 
-			for(var k = 0; k < 4; k++){
+			var optData = [element.A, element.B, element.C, element.D]
+
+			for(var k = 0; k < optData.length; k++){
 
 				var option = {
-					text: element[k+2],
-					correct: element[k+2] == element[6] ? true : false
+					text: optData[k],
+					correct: k == element.answer - 1 ? true : false
 				}
 				obj.answers.push(option)
 			}
@@ -183,33 +198,41 @@ var riddles = function(){
 		console.log("questions loaded")
 	}
 
-	// function selectQuestion(){
-	//
-	//     if(usedQuestions.length == questions.length){
-	//         usedQuestions = []
-	//         selectQuestion()
-	//     }
-	//     else{
-	//         do{
-	//             var rand = Math.floor(Math.random() * questions.length)
-	//         }while(usedQuestions.includes(rand))
-	//
-	//         usedQuestions.push(rand)
-	//         newQuestion = questions[rand]
-	//     }
-	// }
+	function getQuestion(){
+	
+	    if(usedQuestions.length == questions.length){
+	        usedQuestions = []
+	        getQuestion()
+	    }
+	    else{
+	        do{
+	            var rand = Math.floor(Math.random() * questions.length)
+	        }while(usedQuestions.includes(rand))
+	
+	        usedQuestions.push(rand)
+			newQuestion = questions[rand]
+
+			var group = this
+
+			game.load.image(newQuestion.image, newQuestion.src)
+			game.load.onLoadComplete.add(function(){
+				console.log("new question generated")
+				group.showQuestion(newQuestion)
+			})
+			game.load.start()
+	    }
+	}
 
 	function showQuestion(riddle){
 
 		var delay = 200
 		this.timeElapsed = 0
-        var lastTween
 
-		if(riddle.image) {
+		//if(riddle.existImage) {
 			this.image.loadTexture(riddle.image)
 			var scaleImg = this.fixImage(1)
 			this.image.key = riddle.image
-		}
+		//}
 
 		game.add.tween(this).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
 
@@ -219,12 +242,12 @@ var riddles = function(){
 		})
 
 		this.options.forEach(function(opt){
-			lastTween = game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay)
+			game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay)
 			delay += 200
 		})
 
-		if(riddle.image)
-			lastTween = game.add.tween(this.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
+		//if(riddle.existImage)
+		var lastTween = game.add.tween(this.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
         
         var group = this
         lastTween.onComplete.add(function(){
@@ -239,8 +262,8 @@ var riddles = function(){
         for(var i = 0; i < riddle.answers.length; i++){
  			var opt = this.options.children[i]
 			opt.value = riddle.answers[i]
-			opt.info.text = riddle.answers[i]
-			opt.correct = riddle.answers[i] == riddle.correctAnswer
+			opt.info.text = riddle.answers[i].text
+			opt.correct = riddle.correct
             opt.inputEnabled = true
             game.add.tween(opt.info).to({alpha:1}, 300, Phaser.Easing.linear, true)
 		}
@@ -254,7 +277,7 @@ var riddles = function(){
 
 		this.image.scale.setTo(scale)
 		if(this.image.height > this.container.height){
-			return fixImage(scale - 0.1)
+			return this.fixImage(scale - 0.1)
 		}
 		else{
 			this.image.scale.setTo(0)
@@ -277,10 +300,11 @@ var riddles = function(){
 			group.boxes.forEach(function(box){
 				box.scale.setTo(0, 1)
 			})
-			if(group.image){
+			//if(group.existImage){
 				group.image.scale.setTo(0)
 				group.image.alpha = 0
-			}
+				this.removeImage()
+			//}
 		})
 	}
 
@@ -305,8 +329,6 @@ var riddles = function(){
 		var event = {time : this.timeElapsed, value : btn.value}
 		if(this.callback) this.callback(event)
 		//choise.chain(fadeOut)
-
-		this.removeImage()
 	}
 
 	function removeImage(){
@@ -317,13 +339,6 @@ var riddles = function(){
 			game.cache.removeImage(image, false)
 		}
 		//console.log(game.cache.checkImageKey(image))
-	}
-
-	function onLoadComplete(callback){
-
-		game.load.image(newQuestion.image, newQuestion.src + ".jpg")
-		game.load.onLoadComplete.add(callback)
-		game.load.start()
 	}
     
     function startTimer(){
@@ -345,8 +360,7 @@ var riddles = function(){
 	}
     
     function stopTimer(){
-        
-        
+
 	}
 	
 	function convertTime(time) {
@@ -359,8 +373,6 @@ var riddles = function(){
 
 	return{
 		initialize:initialize,
-		//selectQuestion:selectQuestion,
-		//onLoadComplete:onLoadComplete,
 		createQuestionOverlay:createQuestionOverlay
 	}
 

@@ -958,7 +958,8 @@ var battle = function(){
         var second = game.add.tween(listosYaGroup.ya.scale).to({x: 1,y: 1}, 400, Phaser.Easing.Elastic.Out, false)
         var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 500)
         secondOut.onComplete.add(function(){
-        	questionGroup.showQuestion(server.generateQuestion())
+			//questionGroup.showQuestion(server.generateQuestion())
+			questionGroup.getQuestion()
 			//server.sendQuestion()
 		})
 
