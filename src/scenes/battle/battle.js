@@ -149,16 +149,13 @@ var battle = function(){
 	var teams
 	var battleSong
 	var sceneGroup
-	var teamsBarGroup
+	var HUDGroup
 	var yogoGroup
 	var questionGroup
 	var listosYaGroup
     var answersGroup
 	var specialAttack
 	var blackMask
-	var miniYogos = []
-	var lifeBars = []
-	var scoreBoards = []
 	var usedQuestions = []
 	var layers
 
@@ -174,7 +171,6 @@ var battle = function(){
 		game.stage.backgroundColor = "#0D014D"
 		loadSounds()
 		mainYogotorars = []
-		miniYogos = [[],[]]
 
         riddles.initialize()
 		operationGenerator.setConfiguration()
@@ -274,28 +270,13 @@ var battle = function(){
 		epicparticles.update()
     }
 
-    function createTeamBars(){
+    function createHUD(){
 
         listName = loadNames()
 
-        teamsBarGroup = battleField.createTeamBars(ORDER_SIDES, listName)
-        sceneGroup.add(teamsBarGroup)
-
-        for(var i = 0; i < teamsBarGroup.length; i++){
-
-            var subGroup = teamsBarGroup.children[i]
-            lifeBars.push(subGroup.life)
-            scoreBoards.push(subGroup.teamScore)
-
-            var tokens = subGroup.tokenGroup
-
-            for(var k = 0; k < tokens.length; k++){
-                miniYogos[i].push(tokens.children[k])
-            }
-        }
-
-        battleField.createTimer(teamsBarGroup)
-        MAX_LIFE = lifeBars[0].width
+        HUDGroup = HUD.createHUD(ORDER_SIDES, listName)
+        sceneGroup.add(HUDGroup)
+        MAX_LIFE = HUDGroup.getLifeBar(0).width
     }
 
     function loadNames(){
@@ -341,7 +322,7 @@ var battle = function(){
             console.log("time out")
         }
         questionGroup.alpha = 0
-        sceneGroup.add(questionGroup)
+		sceneGroup.add(questionGroup)
     }
 
     function createScores(){
@@ -449,27 +430,7 @@ var battle = function(){
 		yogoGroup.sort('y', Phaser.Group.SORT_ASCENDING)
 		//ORDER_POSITIONS = copyPositions
 
-		rotateMinis(teamIndex)
-	}
-
-	function rotateMinis(index){
-
-		var minis = miniYogos[index]
-		var dir = ORDER_SIDES[index].scale.x
-
-		for(var i = 0; i < minis.length; i++){
-
-			var pic = minis[i]
-			var pos = i + 1 >= minis.length ? 0 : i + 1
-			var next = minis[pos]
-			var size = next.y < pic.y ? 1 : 0.75
-
-			game.add.tween(pic).to({x: next.x, y: next.y}, 500, Phaser.Easing.linear, true)
-			game.add.tween(pic.scale).to({x: size * dir, y: size}, 490, Phaser.Easing.linear, true)
-
-			if(size == 1)
-				pic.parent.sendToBack(pic)
-		}
+		HUDGroup.rotateTokens(teamIndex)
 	}
 
 	function takeGroupDamage(type, element) {
@@ -633,10 +594,9 @@ var battle = function(){
 
 	function dealDamage(team, percent){
 
-		var life = lifeBars[team]
+		var life = HUDGroup.getLifeBar(team)
 		var damage = life.width - (MAX_LIFE * percent * ORDER_SIDES[team].scale.x)
 		var index = team == 0 ? 1 : 0
-		var otherTeam = teams[index]
         var delay = 4000
         
         if(percent == DAMAGE.ultra){
@@ -758,16 +718,16 @@ var battle = function(){
 		game.add.tween(blackMask).to({alpha:0.4}, 500, Phaser.Easing.Cubic.InOut, true).yoyo(true, delay * 0.5)
 
 		var toScale1 = 1/zoom
-		var actualScale = teamsBarGroup.scale.x
+		var actualScale = HUDGroup.scale.x
 
 		scaleTween.onUpdateCallback(function () {
 			if(toScale1 < actualScale) {
-				teamsBarGroup.scale.x = Phaser.Math.clamp(1 / game.camera.scale.x, toScale1, actualScale)
-				teamsBarGroup.scale.y = Phaser.Math.clamp(1 / game.camera.scale.y, toScale1, actualScale)
+				HUDGroup.scale.x = Phaser.Math.clamp(1 / game.camera.scale.x, toScale1, actualScale)
+				HUDGroup.scale.y = Phaser.Math.clamp(1 / game.camera.scale.y, toScale1, actualScale)
 
 			}else{
-				teamsBarGroup.scale.x = Phaser.Math.clamp(1/ game.camera.scale.x, actualScale, toScale1)
-				teamsBarGroup.scale.y = Phaser.Math.clamp(1/ game.camera.scale.y, actualScale, toScale1)
+				HUDGroup.scale.x = Phaser.Math.clamp(1/ game.camera.scale.x, actualScale, toScale1)
+				HUDGroup.scale.y = Phaser.Math.clamp(1/ game.camera.scale.y, actualScale, toScale1)
 			}
 		})
 	}
@@ -957,8 +917,7 @@ var battle = function(){
         var fadeIn = game.add.tween(answersGroup.text).to({alpha: 1}, 400, Phaser.Easing.Cubic.Out, true)
         fadeIn.yoyo(true, 1000)
         fadeIn.onComplete.add(function(){
-            scoreBoards[index].points++
-            scoreBoards[index].text.setText(scoreBoards[index].points)
+			HUDGroup.setScore(index)
             attack == "ultra" ? ultraMove(index) : attackMove(attack, index)
         })
     }
@@ -999,7 +958,8 @@ var battle = function(){
         var second = game.add.tween(listosYaGroup.ya.scale).to({x: 1,y: 1}, 400, Phaser.Easing.Elastic.Out, false)
         var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 500)
         secondOut.onComplete.add(function(){
-        	questionGroup.showQuestion(server.generateQuestion())
+			//questionGroup.showQuestion(server.generateQuestion())
+			questionGroup.getQuestion()
 			//server.sendQuestion()
 		})
 
@@ -1055,7 +1015,7 @@ var battle = function(){
 			initialize()
 			createBackground()
 			placeYogotars()
-			createTeamBars()
+			createHUD()
 			createSpecialAttack()
 			createScores()
 			createQuestionOverlay()
