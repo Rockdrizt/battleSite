@@ -86,16 +86,23 @@ var riddles = function(){
 	function getOperation(){
         
 		var operation = operationGenerator.generate()
+
+		var question
+		if(operation.operator === "/"){
+			question = operation.operand1 + " ÷ " + operation.operand2 + " = " + operation.result
+		}else{
+			question = operation.operand1 + " " + operation.operator + " " + operation.operand2 + " = " + operation.result
+		}
 		
 		var riddle = {
-			question: operation.operand1 + " " + operation.operator + " " + operation.operand2,
+			question: question,
 			existImage : false,
 			src: "../../images/questionDB/default.png",
 			image: "default",
 			answers: [],
 			grade: 10,
-			level: 10,
-			index: i,
+			level: 10
+			//index: i,
 		}
 
 		var correctAns = operation.correctAnswer
