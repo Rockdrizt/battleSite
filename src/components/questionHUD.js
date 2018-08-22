@@ -1,9 +1,5 @@
 
-var riddles = function(){
-
-	var questions
-	var usedQuestions
-	var newQuestion
+var questionHUD = function(){
 
 	function convertTimeFormat(timeElapsed) {
 		var seconds = Math.floor(timeElapsed * 0.001)
@@ -23,22 +19,6 @@ var riddles = function(){
 
 	function initialize(){
 
-		questions = [
-			/*{
-			   "question": "En un cine había sesenta y cuatro personas y han entrado diecisiete más. ¿Cuántas personas hay ahora en el cine?",
-				"existImg": "false",
-				"image": "",
-				"A": "Ochenta y uno",
-				"B": "Setenta y uno",
-				"C": "Cuarenta y siete",
-				"D": "Cincuenta y siete",
-				"answer": 1,
-				"level": 5,
-				"grade": 2
-			}*/
-		]
-		usedQuestions = []
-		loadQuestions()
 	}
 	
 	function createQuestionOverlay(){
@@ -94,7 +74,7 @@ var riddles = function(){
 		var pivotX = 0.5
 		var opt = ["A", "C", "B", "D"]
 
-		var callInputAnswer = selectQuestion.bind(questionGroup)
+		var callInputAnswer = inputOption.bind(questionGroup)
 
 		for(var i = 0; i < 4; i++){
 
@@ -158,63 +138,6 @@ var riddles = function(){
 		return btn
 	}
 
-	function loadQuestions(){
-
-		var list = rawList
-
-		for(var i = 0; i < list.length; i++){
-
-			var element = list[i]
-
-			if(element.existImg)
-				var imagePath = "../../images/questionDB/grade" + element.grade + "/" + element.image + ".png"
-			else
-				var imagePath = "../../images/questionDB/default.png"
-				
-			var obj = {
-				question: element.question,
-				existImage : element.existImg,
-				src: imagePath,
-				image: element.image,
-				answers: [],
-				grade: element.grade,
-				level: element.level,
-				index: i,
-			}
-
-			var optData = [element.A, element.B, element.C, element.D]
-
-			for(var k = 0; k < optData.length; k++){
-
-				var option = {
-					text: optData[k],
-					correct: k == element.answer - 1 ? true : false
-				}
-				obj.answers.push(option)
-			}
-			questions.push(obj)
-		}
-		console.log("questions loaded")
-	}
-
-	function getQuestion(){
-	
-	    if(usedQuestions.length == questions.length){
-	        usedQuestions = []
-	        getQuestion()
-	    }
-	    else{
-	        do{
-	            var rand = Math.floor(Math.random() * questions.length)
-	        }while(usedQuestions.includes(rand))
-	
-	        usedQuestions.push(rand)
-			newQuestion = questions[rand]
-
-			return newQuestion
-	    }
-	}
-
 	function showQuestion(riddle){
 
 		var delay = 200
@@ -252,22 +175,23 @@ var riddles = function(){
 		//if(riddle.existImage)
 	}
     
-     function setQuestion(riddle){
+    function setQuestion(riddle){
         
         this.question.setText(riddle.question)
         
         for(var i = 0; i < riddle.answers.length; i++){
  			var opt = this.options.children[i]
-			opt.value = riddle.answers[i]
+			opt.value = riddle.answers[i].text
 			opt.info.text = riddle.answers[i].text
-			opt.correct = riddle.correct
+			opt.info.alpha = 0
+			opt.correct = riddle.answers[i].correct
             opt.inputEnabled = true
             game.add.tween(opt.info).to({alpha:1}, 300, Phaser.Easing.linear, true)
 		}
         
         game.add.tween(this.question).to({alpha:1}, 300, Phaser.Easing.linear, true)
         
-        this.startTimer()
+        //this.startTimer()
     }
 
 	function fixImage(scale){
@@ -305,7 +229,7 @@ var riddles = function(){
 		})
 	}
 
-	function selectQuestion(btn){
+	function inputOption(btn){
 
 		this.options.setAll("inputEnabled", false)
 
@@ -373,7 +297,6 @@ var riddles = function(){
 	return{
 		initialize:initialize,
 		createQuestionOverlay:createQuestionOverlay,
-		getQuestion:getQuestion,
 	}
 
 }()

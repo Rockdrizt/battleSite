@@ -156,7 +156,6 @@ var battle = function(){
     var answersGroup
 	var specialAttack
 	var blackMask
-	var usedQuestions = []
 	var layers
 
 	var mainYogotorars
@@ -173,8 +172,6 @@ var battle = function(){
 		mainYogotorars = []
 
         riddles.initialize()
-		operationGenerator.setConfiguration()
-		usedQuestions = []
 	}
 
 	function preload(){
@@ -307,16 +304,16 @@ var battle = function(){
 
     function createQuestionOverlay(){
 
-        questionGroup = riddles.createQuestionOverlay()
+        questionGroup = questionHUD.createQuestionOverlay()
         questionGroup.callback = function (event) {
 			questionGroup.hide()
-            questionGroup.timer.stop()
+            //questionGroup.timer.stop()
         	game.time.events.add(2000, function () {
 				checkAnswer()
 			})
 		}
         questionGroup.stopTimer = function(){
-            questionGroup.timer.destroy()
+			questionGroup.timer.destroy()
             questionGroup.hide()
             setNoAnswer()
             console.log("time out")
@@ -782,7 +779,7 @@ var battle = function(){
 		var t2 = answers.t2 ||{value: true,
 			time: game.rnd.integerInRange(1000, MAX_TIME) //20000 //20 seg
 		}
-		var events = [t1, t2]
+		var players = [t1, t2]
 		var timeDifference = event.timeDifference || Math.abs(t1.time - t2.time) || 0
 		var timeConvertedDifference = convertTime(timeDifference)
         
@@ -792,14 +789,14 @@ var battle = function(){
 
 		for(var i = 0; i < answersGroup.length; i++){
 
-			var newScale = convertScale(events[i].time)
-			var ansTime = convertTime(events[i].time)
+			var newScale = convertScale(players[i].time)
+			var ansTime = convertTime(players[i].time)
 
 			var score = answersGroup.children[i]
 			score.timeTxt.setText(ansTime)
 			score.diference.setText("+" + timeConvertedDifference)
-			score.time = events[i].time
-			var isCorrect = events[i].value == event.correctAnswer
+			score.time = players[i].time
+			var isCorrect = players[i].value == event.correctAnswer
             changePosture(score, isCorrect)
 
 			var correct = game.add.tween(score.stock.scale).to({x:1.3, y:1.3}, 200, Phaser.Easing.Cubic.Out, true, 1000, 0, true)
@@ -959,7 +956,7 @@ var battle = function(){
         var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 500)
         secondOut.onComplete.add(function(){
 			//questionGroup.showQuestion(server.generateQuestion())
-			var riddle = riddles.getQuestion()
+			var riddle = riddles.getOperation()//riddles.getQuestion()
 			questionGroup.showQuestion(riddle)
 			//server.sendQuestion()
 		})
