@@ -311,7 +311,8 @@ function Server(){
 
 	//TODO: generate question is not a server function
 	this.sendQuestion = function () {
-		var questionData = generateQuestion()
+		//var questionData = generateQuestion()
+		var questionData = riddles.getQuestion()
 
 		valores.possibleAnswers = questionData.answers
 		valores.t1answer = false;

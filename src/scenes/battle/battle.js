@@ -316,7 +316,7 @@ var battle = function(){
 			})
 		}
         questionGroup.stopTimer = function(){
-            questionGroup.timer.stop()
+            questionGroup.timer.destroy()
             questionGroup.hide()
             setNoAnswer()
             console.log("time out")
@@ -959,7 +959,8 @@ var battle = function(){
         var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 500)
         secondOut.onComplete.add(function(){
 			//questionGroup.showQuestion(server.generateQuestion())
-			questionGroup.getQuestion()
+			var riddle = riddles.getQuestion()
+			questionGroup.showQuestion(riddle)
 			//server.sendQuestion()
 		})
 
@@ -1026,9 +1027,9 @@ var battle = function(){
 			createWhite()
 
 			if(server){
-				server.removeEventListener('afterGenerateQuestion', questionGroup.setQuestion);
+				server.removeEventListener('afterGenerateQuestion', questionGroup.showQuestion);
 				server.removeEventListener('onTurnEnds', showFeedback);
-				server.addEventListener('afterGenerateQuestion', questionGroup.setQuestion);
+				server.addEventListener('afterGenerateQuestion', questionGroup.showQuestion);
 				server.addEventListener('onTurnEnds', showFeedback);
 			}
 

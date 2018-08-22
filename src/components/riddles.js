@@ -121,7 +121,6 @@ var riddles = function(){
 		})
 		questionGroup.timeElapsed = 0
 
-		questionGroup.getQuestion = getQuestion.bind(questionGroup)
         questionGroup.showQuestion = showQuestion.bind(questionGroup)
 		questionGroup.setQuestion = setQuestion.bind(questionGroup)
 		questionGroup.fixImage = fixImage.bind(questionGroup)
@@ -212,14 +211,7 @@ var riddles = function(){
 	        usedQuestions.push(rand)
 			newQuestion = questions[rand]
 
-			var group = this
-
-			game.load.image(newQuestion.image, newQuestion.src)
-			game.load.onLoadComplete.add(function(){
-				console.log("new question generated")
-				group.showQuestion(newQuestion)
-			})
-			game.load.start()
+			return newQuestion
 	    }
 	}
 
@@ -229,9 +221,20 @@ var riddles = function(){
 		this.timeElapsed = 0
 
 		//if(riddle.existImage) {
+		game.load.image(riddle.image, riddle.src)
+		game.load.onLoadComplete.add(function(){
 			this.image.loadTexture(riddle.image)
 			var scaleImg = this.fixImage(1)
 			this.image.key = riddle.image
+			var lastTween = game.add.tween(this.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
+
+			var group = this
+			lastTween.onComplete.add(function(){
+				group.setQuestion(riddle)
+			})
+		}.bind(this))
+		game.load.start()
+
 		//}
 
 		game.add.tween(this).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
@@ -247,12 +250,6 @@ var riddles = function(){
 		})
 
 		//if(riddle.existImage)
-		var lastTween = game.add.tween(this.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
-        
-        var group = this
-        lastTween.onComplete.add(function(){
-            group.setQuestion(riddle)
-        })
 	}
     
      function setQuestion(riddle){
@@ -303,7 +300,7 @@ var riddles = function(){
 			//if(group.existImage){
 				group.image.scale.setTo(0)
 				group.image.alpha = 0
-				this.removeImage()
+				//this.removeImage()
 			//}
 		})
 	}
@@ -344,12 +341,13 @@ var riddles = function(){
     function startTimer(){
     
         var MAX_TIME = 30000
-        var timer = game.time.create()
-		var timerEvent = timer.add(MAX_TIME, this.stopTimer, this)
-		timer.loop(1000, updateTimer, this)
-		this.timer = timer
-		this.timerEvent = timerEvent
-        timer.start()
+		if(this.timer)
+			this.timer.destroy()
+
+        this.timer = game.time.create()
+		this.timerEvent = this.timer.add(MAX_TIME, this.stopTimer, this)
+		this.timer.loop(1000, updateTimer, this)
+        this.timer.start()
 		console.log("time start")
 	}
 	
@@ -360,7 +358,8 @@ var riddles = function(){
 	}
     
     function stopTimer(){
-
+		this.timer.destroy()
+		this.hide()
 	}
 	
 	function convertTime(time) {
@@ -373,7 +372,8 @@ var riddles = function(){
 
 	return{
 		initialize:initialize,
-		createQuestionOverlay:createQuestionOverlay
+		createQuestionOverlay:createQuestionOverlay,
+		getQuestion:getQuestion,
 	}
 
 }()
