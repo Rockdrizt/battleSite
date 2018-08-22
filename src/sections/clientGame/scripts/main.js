@@ -1,10 +1,10 @@
 window.minigame = window.minigame || {}
 
 function startGame(){
-	if(window.game) {
+	/*if(window.game) {
 		location.reload()
 		return
-	}
+	}*/
 
 	window.game = new Phaser.Game(document.body.clientWidth, document.body.clientHeight, Phaser.CANVAS, null, {init: init, create: create }, true, true);
 	document.body.style.visibility = "hidden"
@@ -18,6 +18,30 @@ function startGame(){
 		sceneloader.preload(sceneList, {onComplete: onCompleteBoot}, "boot")
 	}
 
+	function onWaitingPlayers() {
+		alertDialog.show({message:"Esperando jugadores.", isButtonDisabled:true})
+	}
+
+	function connectToServer(value){
+		cliente.start(value, onWaitingPlayers, onErrorConnection)
+		cliente.startGame = function () {
+			sceneloader.show("teamSelector")
+		}
+	}
+
+	function onErrorConnection(message, showInput){
+
+		alertDialog.show({message:message, callback:connectToServer, showInput:showInput})
+	}
+
+	function onCompleteSceneLoading(){
+
+		alertDialog.init()
+		cliente = new Client();
+		connectToServer(cliente.id_game)
+		//sceneloader.show("teamSelector")
+	}
+
 	function preloadScenes(sceneList){
 
 		function onCompletePreloading(){
@@ -25,14 +49,6 @@ function startGame(){
 			function onLoadFile(event){
 				var loaderScene = sceneloader.getScene("preloaderIntro")
 				loaderScene.updateLoadingBar(event.totalLoaded, event.totalFiles)
-			}
-
-			function onCompleteSceneLoading(){
-				// var cliente = parent.cliente
-				// if(cliente)
-				// 	cliente.setReady(true)
-
-				sceneloader.show("teamSelector")
 			}
 
 			sceneloader.preload(sceneList, {onLoadFile: onLoadFile, onComplete: onCompleteSceneLoading})
@@ -59,6 +75,7 @@ function startGame(){
 		game.time.advancedTiming = true
 		game.stage.disableVisibilityChange = true;
 
+		game.add.plugin(PhaserInput.Plugin);
 		game.plugins.add(PhaserSpine.SpinePlugin);
 		epicparticles.init(game)
 
@@ -95,19 +112,7 @@ function startGame(){
 }
 
 (function () {
-	var team = {
-		players: [
-			{nickname: "yogome", avatar: false, skin:false},
-			{nickname: "yogome", avatar: false, skin:false},
-			{nickname: "yogome", avatar: false, skin:false}
-		],
-		ready:true
-	}
-
-	//TODO: this is just testing remove on prod
-	cliente = new Client();
 	startGame()
-	//cliente.start(team, "000000", startGame)
 	//cliente.startGame = startGame
 })()
 //minigame.orientation.init(startGame)

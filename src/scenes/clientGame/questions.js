@@ -88,7 +88,7 @@ var questions = function(){
 	function preload(){
 
 		game.stage.disableVisibilityChange = true
-		game.load.bitmapFont('skwig', 'images/fonts/font.png', 'images/fonts/font.fnt')
+		game.load.bitmapFont('skwig', '/images/fonts/font.png', '/images/fonts/font.fnt')
 	}
 
 	function createQuestionOverlay(){
@@ -146,9 +146,9 @@ var questions = function(){
 			if(cliente){
 				cliente.removeEventListener("onTurnEnds", checkAnswer)
 				cliente.removeEventListener("onGameEnds", showWinner)
-				cliente.removeEventListener("showEquation", questionGroup.setQuestion)
+				cliente.removeEventListener("showEquation", questionGroup.showQuestion)
 				cliente.addEventListener("onTurnEnds", checkAnswer)
-				cliente.addEventListener("showEquation", questionGroup.setQuestion)
+				cliente.addEventListener("showEquation", questionGroup.showQuestion)
 				cliente.addEventListener("onGameEnds", showWinner)
 
 				//cliente.timeOutCallback = setTimeOut

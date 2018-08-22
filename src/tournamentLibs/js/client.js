@@ -25,6 +25,23 @@ function Client(){
 	/** Events
 	 */
 	self.events = {};
+	self.team = {
+		players: [
+			{nickname: "yogome", avatar: false, skin:false},
+			{nickname: "yogome", avatar: false, skin:false},
+			{nickname: "yogome", avatar: false, skin:false}
+		],
+		ready:true
+	}
+	this.id_game = null;
+	this.numTeam =null;
+	this.gameEnded = false
+	this.queueToInsert = -1;
+	this.refIdGame= null;
+	this.time = null;
+	this.restartGame = null
+	this.timeOutCallback = null
+	this.onError = null
 
 	this.addEventListener = function(name, handler) {
 		if (self.events.hasOwnProperty(name))
@@ -55,16 +72,6 @@ function Client(){
 		}
 	};
 	/**End Events*/
-
-	this.id_game = null;
-	this.numTeam =null;
-	this.gameEnded = false
-	this.queueToInsert = -1;
-	this.refIdGame= null;
-	var self = this;
-	this.time = null;
-	this.restartGame = null
-	this.timeOutCallback = null
 
 	var setfb = function(ref, value) {
 		ref.set(value).catch(function (reason) {
@@ -157,24 +164,27 @@ function Client(){
 	 * @summary Starts the client
 	 * @param {type} idGame Code of the game
 	 */
-	this.start =function(team, idGame, callback, onError){
+	this.start =function(idGame, callback, onError){
 		// self.events = {};
 		console.log(self.events)
-		self.team = team
-		self.refIdGame= database.ref(idGame);
+		self.refIdGame= database.ref();
+		self.onError = onError
 
-		self.refIdGame.once('value').then(function(snapshot) {
+		if((!idGame) || (idGame === "")){
+			return onError("Ingresa un pin valido", true)
+		}
+
+		self.refIdGame.child(idGame).once('value').then(function(snapshot) {
 			var val = snapshot.val()
 			if(val){
-				var success = initialize(idGame, team, val)
+				self.refIdGame = database.ref(idGame)
+				var success = initialize(idGame, self.team, val)
 				if(success && callback) callback()
+				else onError("La sesión esta llena, ingresa un pin diferente")
 			}else{
-				onError()
+				onError("La partida no existe", true)
 			}
-
-
-		});
-
+		}).catch(onError.bind(this, "Ocurrio un error al conectarse. Intenta de nuevo.", true));
 		//Reportando la salida del juego
 		window.onbeforeunload = function(){
 			if(self.numTeam!=null)
@@ -201,12 +211,12 @@ function Client(){
 			//self.refIdGame.child("t"+self.numTeam+"answer").set(answer);
 		}
 	};
-	
-	this.setReady = function (value) {
+
+	/*this.setReady = function (value) {
 		self.team.ready = value
 		setfb(self.refIdGame.child("t" + self.numTeam + "/ready"), value)
 		//self.refIdGame.child("t"+self.numTeam+"/ready").set(value);
-	}
+	}*/
 
 	this.selectYogotar = function (players) {
 		setfb(self.refIdGame.child("t" + self.numTeam + "/players"), players)

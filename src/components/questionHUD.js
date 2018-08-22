@@ -1,9 +1,5 @@
 
-var riddles = function(){
-
-	var questions
-	var usedQuestions
-	var newQuestion
+var questionHUD = function(){
 
 	function convertTimeFormat(timeElapsed) {
 		var seconds = Math.floor(timeElapsed * 0.001)
@@ -23,20 +19,8 @@ var riddles = function(){
 
 	function initialize(){
 
-		questions = [
-			/*{
-				question: `Eagle tiene dos amigos, Nao y Oona. ¿Cuántos dedos en pies y manos tienen los tres amigos en total?`,
-				src: "/images/questions/imagen.png",
-				image: `imagen.png`,
-				answers: [{text:1, correct:false}, {text:5, correct:false}, {text:2, correct:true}, {text:3, correct:false}],
-				index: 0,
-				grade: 1,
-			}*/
-		]
-		usedQuestions = []
-		loadQuestions()
 	}
-
+	
 	function createQuestionOverlay(){
 
 		var questionGroup = game.add.group()
@@ -78,6 +62,7 @@ var riddles = function(){
 		img.alpha = 0
 		img.key = ""
 		container.addChild(img)
+		questionGroup.image = img
 
 		var light = questionGroup.create(0,0, "pinkLight")
 		light.anchor.setTo(0.5)
@@ -89,7 +74,7 @@ var riddles = function(){
 		var pivotX = 0.5
 		var opt = ["A", "C", "B", "D"]
 
-		var callInputAnswer = selectQuestion.bind(questionGroup)
+		var callInputAnswer = inputOption.bind(questionGroup)
 
 		for(var i = 0; i < 4; i++){
 
@@ -124,6 +109,7 @@ var riddles = function(){
 		questionGroup.update = update.bind(questionGroup)
         questionGroup.startTimer = startTimer.bind(questionGroup)
 		questionGroup.stopTimer = stopTimer.bind(questionGroup)
+		questionGroup.updateTimer = updateTimer.bind(questionGroup)
 
 		return questionGroup
 	}
@@ -152,63 +138,27 @@ var riddles = function(){
 		return btn
 	}
 
-	function loadQuestions(){
-
-		var list = rawList
-
-		for(var i = 0; i < list.length; i++){
-
-			var element = list[i]
-
-			var obj = {
-				question: element[0],
-				src: "/images/questions/" + element[1],
-				image: element[1],
-				answers: [],
-				grade: element[7],
-				index: i,
-			}
-
-			for(var k = 0; k < 4; k++){
-
-				var option = {
-					text: element[k+2],
-					correct: element[k+2] == element[6] ? true : false
-				}
-				obj.answers.push(option)
-			}
-			questions.push(obj)
-		}
-		console.log("questions loaded")
-	}
-
-	// function selectQuestion(){
-	//
-	//     if(usedQuestions.length == questions.length){
-	//         usedQuestions = []
-	//         selectQuestion()
-	//     }
-	//     else{
-	//         do{
-	//             var rand = Math.floor(Math.random() * questions.length)
-	//         }while(usedQuestions.includes(rand))
-	//
-	//         usedQuestions.push(rand)
-	//         newQuestion = questions[rand]
-	//     }
-	// }
-
 	function showQuestion(riddle){
 
 		var delay = 200
 		this.timeElapsed = 0
-        var lastTween
 
-		if(riddle.image) {
+		//if(riddle.existImage) {
+		game.load.image(riddle.image, riddle.src)
+		game.load.onLoadComplete.add(function(){
 			this.image.loadTexture(riddle.image)
 			var scaleImg = this.fixImage(1)
 			this.image.key = riddle.image
-		}
+			var lastTween = game.add.tween(this.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
+
+			var group = this
+			lastTween.onComplete.add(function(){
+				group.setQuestion(riddle)
+			})
+		}.bind(this))
+		game.load.start()
+
+		//}
 
 		game.add.tween(this).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
 
@@ -218,42 +168,37 @@ var riddles = function(){
 		})
 
 		this.options.forEach(function(opt){
-			lastTween = game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay)
+			game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay)
 			delay += 200
 		})
 
-		if(riddle.image)
-			lastTween = game.add.tween(this.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
-        
-        var group = this
-        lastTween.onComplete.add(function(){
-            group.setQuestion(riddle)
-        })
+		//if(riddle.existImage)
 	}
     
-     function setQuestion(riddle){
+    function setQuestion(riddle){
         
         this.question.setText(riddle.question)
         
         for(var i = 0; i < riddle.answers.length; i++){
  			var opt = this.options.children[i]
-			opt.value = riddle.answers[i]
-			opt.info.text = riddle.answers[i]
-			opt.correct = riddle.answers[i] == riddle.correctAnswer
+			opt.value = riddle.answers[i].text
+			opt.info.text = riddle.answers[i].text
+			opt.info.alpha = 0
+			opt.correct = riddle.answers[i].correct
             opt.inputEnabled = true
             game.add.tween(opt.info).to({alpha:1}, 300, Phaser.Easing.linear, true)
 		}
         
         game.add.tween(this.question).to({alpha:1}, 300, Phaser.Easing.linear, true)
         
-        this.startTimer()
+        //this.startTimer()
     }
 
 	function fixImage(scale){
 
 		this.image.scale.setTo(scale)
 		if(this.image.height > this.container.height){
-			return fixImage(scale - 0.1)
+			return this.fixImage(scale - 0.1)
 		}
 		else{
 			this.image.scale.setTo(0)
@@ -276,14 +221,15 @@ var riddles = function(){
 			group.boxes.forEach(function(box){
 				box.scale.setTo(0, 1)
 			})
-			if(group.image){
+			//if(group.existImage){
 				group.image.scale.setTo(0)
 				group.image.alpha = 0
-			}
+				//this.removeImage()
+			//}
 		})
 	}
 
-	function selectQuestion(btn){
+	function inputOption(btn){
 
 		this.options.setAll("inputEnabled", false)
 
@@ -304,8 +250,6 @@ var riddles = function(){
 		var event = {time : this.timeElapsed, value : btn.value}
 		if(this.callback) this.callback(event)
 		//choise.chain(fadeOut)
-
-		this.removeImage()
 	}
 
 	function removeImage(){
@@ -317,34 +261,42 @@ var riddles = function(){
 		}
 		//console.log(game.cache.checkImageKey(image))
 	}
-
-	function onLoadComplete(callback){
-
-		game.load.image(newQuestion.image, newQuestion.src + ".jpg")
-		game.load.onLoadComplete.add(callback)
-		game.load.start()
-	}
     
     function startTimer(){
     
         var MAX_TIME = 30000
-        var timer = game.time.create()
-        var timerEvent = timer.add(MAX_TIME, this.stopTimer, this)
-        this.timer = timer
-        timer.start()
-        console.log("time start")
-    }
+		if(this.timer)
+			this.timer.destroy()
+
+        this.timer = game.time.create()
+		this.timerEvent = this.timer.add(MAX_TIME, this.stopTimer, this)
+		this.timer.loop(1000, updateTimer, this)
+        this.timer.start()
+		console.log("time start")
+	}
+	
+	function updateTimer(){
+
+		var text = convertTime(this.timerEvent.delay - this.timer.ms)
+		console.log(text)
+	}
     
     function stopTimer(){
-        
-        
-    }
+		this.timer.destroy()
+		this.hide()
+	}
+	
+	function convertTime(time) {
+
+		var min = Math.floor(time / 60000)
+		var sec = ((time % 60000) / 1000).toFixed(0)
+
+		return min + ":" + (sec < 10 ? '0' : '') + sec
+	}
 
 	return{
 		initialize:initialize,
-		//selectQuestion:selectQuestion,
-		//onLoadComplete:onLoadComplete,
-		createQuestionOverlay:createQuestionOverlay
+		createQuestionOverlay:createQuestionOverlay,
 	}
 
 }()
