@@ -121,7 +121,7 @@ function startGame(){
 
 		battle.setTeams(teams)
 		server = new Server()
-		server.start()
+		server.start(null, null, operationGenerator.RULES_SET.MASTER)
     }
 
     function create(){
