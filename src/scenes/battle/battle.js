@@ -86,6 +86,8 @@ var battle = function(){
 			}
 		],
 		sounds: [
+			{	name: "battleSong",
+				file: soundsPath + "songs/melodyloops.mp3"},
 		],
 		spritesheets: [
 		],
@@ -746,8 +748,9 @@ var battle = function(){
             member.setAnimation(["win"], true)
         })
         
-		battleMain.initWinerTeam(win)
+		battleMain.initWinerTeam(lose)
 		game.add.tween(white).to({alpha:1}, 300, Phaser.Easing.Cubic.In, true, 4000).onComplete.add(function(){
+			battleSong.stop()
 			sceneloader.show("reward")
 		})
 	}
@@ -1028,7 +1031,7 @@ var battle = function(){
 			createListosYa()
 			//createMenuAnimations()
 			//menubuttons()
-			//battleSong = sound.play("battleSong", {loop:true, volume:0.6})
+			battleSong = sound.play("battleSong", {loop:true, volume:0.6})
 			createWhite()
 
 			if(server){

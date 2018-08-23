@@ -91,6 +91,7 @@ var reward = function(){
     //General variables
     var sceneGroup;                         //General group of all scene
     var tile;                               //Reference of tile background
+    var rewardSong
     //Own variables
     var COUPOFFSETX = 820;                  //Offset to collocate the coup in X
     var loseColocation;                     //Position to colocate the window of players in y
@@ -209,7 +210,7 @@ var reward = function(){
             sound.play("song");
             createEmitterParticles("confetti",game.world.centerX,0,null);
             sound.play("cheers");
-            sound.play("music", {loop:true, volume:0.4});
+            rewardSong = sound.play("music", {loop:true, volume:0.4});
             for(var j=0; j<3; j++)
                 squareLoser[j].children[0].setAlive(true)
         },this);
@@ -347,6 +348,17 @@ var reward = function(){
         return playerYogotarSpine;
     }
 
+    function createRetryBtn(){
+
+        var retry = sceneGroup.create(game.world.width, game.world.height - 100, "atlas.reward", "barraAmarilla")
+        retry.anchor.setTo(1, 0.5)
+        retry.inputEnabled = true
+        retry.events.onInputDonw.add(function(){
+            rewardSong.stop()
+            sceneloader.show("yogoSelector")
+        })
+    }
+
     //Load each character to use in assets
     
     //////////////////
@@ -365,6 +377,7 @@ var reward = function(){
             initialize();
             createSpineScenary();
             createScenary();
+            createRetryBtn()
             createParticles();
         },
         setTeams: function (myTeams) {
