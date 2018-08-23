@@ -109,6 +109,8 @@
 }
 
 @media only screen and (max-width: 575px) {
+  .main--client,
+  .main--create {
   .item__buttons {
     .item__btn {
       position: absolute;
@@ -144,4 +146,5 @@
       }
     }
   }
+}
 }

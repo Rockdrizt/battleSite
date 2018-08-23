@@ -10,67 +10,113 @@
 </head>
 
 <body>
-  <main class="main clearfix">
+  <main class="main main--carousel clearfix">
     <span class="bubbles bubbles-down" id="bubbles"></span>
     <header class="header">
       <h1>Select your subject</h1>
     </header>
-    <div class="container" >
-      <section class="carousel" id="carousel">
-        <div class="carousel__item cloud9-item">
-          <h2>Mathdromeda</h2>
+    <section class="carousel" id="carousel">
+      <div class="container">
+        <div class="carousel__item unlocked">
+          <h2 class="planet-title">Mathdromeda</h2>
           <img src="./img/mathtournament-onboarding-math-planet.png" alt="">
         </div>
-        <div class="carousel__item cloud9-item locked">
-          <h2>Locked</h2>
+        <div class="carousel__item">
+          <h2 class="planet-title">Locked</h2>
           <img src="./img/mathtournament-onboarding-locked-planet.png" alt="">
         </div>
-        <div class="carousel__item cloud9-item locked">
-          <h2>Locked</h2>
+        <div class="carousel__item">
+          <h2 class="planet-title">Locked</h2>
           <img src="./img/mathtournament-onboarding-locked-planet.png" alt="">
         </div>
-        <div class="carousel__item cloud9-item locked">
-          <h2>Locked</h2>
+        <div class="carousel__item">
+          <h2 class="planet-title">Locked</h2>
           <img src="./img/mathtournament-onboarding-locked-planet.png" alt="">
         </div>
-        <div class="carousel__item cloud9-item locked">
-          <h2>Locked</h2>
+        <div class="carousel__item">
+          <h2 class="planet-title">Locked</h2>
           <img src="./img/mathtournament-onboarding-locked-planet.png" alt="">
         </div>
-        <div class="carousel__item cloud9-item locked">
-          <h2>Locked</h2>
+        <div class="carousel__item">
+          <h2 class="planet-title">Locked</h2>
           <img src="./img/mathtournament-onboarding-locked-planet.png" alt="">
         </div>
-        <div class="carousel__item cloud9-item locked">
-          <h2>Locked</h2>
+        <div class="carousel__item">
+          <h2 class="planet-title">Locked</h2>
           <img src="./img/mathtournament-onboarding-locked-planet.png" alt="">
         </div>
-        <div class="carousel__item cloud9-item locked">
-          <h2>Locked</h2>
-          <img src="./img/mathtournament-onboarding-locked-planet.png" alt="">
-        </div>
-      </section>
-      <section class="item__buttons" id="buttons">
-        <div class="item__btn item__btn--back left">
-          <span></span>
-        </div>
-        <div class="item__btn item__btn--start right">
-          <span></span>
-        </div>
-      </section>
-    </div>
+      </div>
+    </section>
+    <section class="carousel-buttons" id="buttons">
+      <div class="button button--left left" id="left">
+        <img src="./img/mathtournament-onboarding-left-btn.png" alt="">
+      </div>
+      <div class="button button--right" id="right">
+        <img src="./img/mathtournament-onboarding-right-btn.png" alt="">
+      </div>
+    </section>
+    <section class="item__buttons item__buttons--carousel">
+      <div class="item__btn" id="btn-ok">
+        <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
+      </div>
+
+    </section>
   </main>
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-  crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
   <script src="./js/cloud9carouse.js"></script>
   <script src="./js/main.js"></script>
   <script>
+    var radioX = 1200;
+    var radioY = 200;
+    var originY = -230
+    if (window.innerWidth <= 575) {
+      radioX = 350
+      radioY = 80
+      originY = -100
+    } else if (window.innerWidth <= 767) {
+      radioX = 500
+      radioY = 100
+      originY = -160
+    } else if (window.innerWidth <= 991) {
+      radioX = 650
+      radioY = 100
+      originY = -160
+    }else if (window.innerWidth <= 1199) {
+      radioX = 900
+      radioY = 100
+      originY = -160
+    }
     $("#carousel").Cloud9Carousel({
-        buttonLeft: $("#buttons > .left"),
-        buttonRight: $("#buttons > .right"),
-        autoPlay: 0,
-        bringToFront: true
-      });
+      yOrigin: originY,
+      buttonLeft: $("#buttons > #left"),
+      buttonRight: $("#buttons > #right"),
+      autoPlay: 0,
+      bringToFront: true,
+      xRadius: radioX,
+      yRadius: radioY,
+      farScale: .2,
+      bringToFront: true,
+      itemClass: "carousel__item",
+      frontItemClass: "active"
+    });
+    var carouselItems = document.querySelectorAll('.carousel__item')
+    var btnOk = document.getElementById('btn-ok')
+    var btnLeftRight = [document.getElementById('left'), document.getElementById('right')]
+    var titles = document.querySelectorAll('.planet-title')
+    btnOk.addEventListener('click', function () {
+      carouselItems.forEach(function (el) {
+        if (el.classList.contains('active') && el.classList.contains('unlocked')) {
+          console.log(el)
+        }
+      })
+    })
+    carouselItems.forEach(function (el) {
+      if (el.classList.contains('active') && el.classList.contains('unlocked')) {
+        console.log(el)
+      }
+    })
+
   </script>
 </body>
 
