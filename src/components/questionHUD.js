@@ -56,7 +56,7 @@ var questionHUD = function(){
 		questionGroup.container = container
 		questionGroup.boxes[2] = container
 
-		var img = questionGroup.create(-container.width * 0.5, 0, "ya")
+		var img = questionGroup.create(-container.width * 0.5, 0, "default")
 		img.anchor.setTo(0.5)
 		img.scale.setTo(0)
 		img.alpha = 0

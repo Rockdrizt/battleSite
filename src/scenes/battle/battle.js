@@ -749,6 +749,7 @@ var battle = function(){
         })
         
 		battleMain.initWinerTeam(win)
+		reward.setWinner(win)
 		game.add.tween(white).to({alpha:1}, 300, Phaser.Easing.Cubic.In, true, 4000).onComplete.add(function(){
 			battleSong.stop()
 			sceneloader.show("reward")
@@ -849,10 +850,11 @@ var battle = function(){
             var index = score.parent.getChildIndex(score)
             var team = teams[index]
             var anim = name ? "answer_good" : "answer_bad"
-            for(var k = 0; k < mainYogotorars.length; k++){
-                var yogo = mainYogotorars[k]
-                changeAnim(yogo, anim)
-            }
+            //for(var k = 0; k < mainYogotorars.length; k++){
+				var yogo = mainYogotorars[team]
+				yogo.setAnimation([anim], true)
+                //changeAnim(yogo, anim)
+            //}
         })
     }
     
