@@ -848,10 +848,9 @@ var battle = function(){
         game.time.events.add(1000, function(){
             score.stock.loadTexture("atlas.answers", "ans" + name)
             var index = score.parent.getChildIndex(score)
-            var team = teams[index]
             var anim = name ? "answer_good" : "answer_bad"
             //for(var k = 0; k < mainYogotorars.length; k++){
-				var yogo = mainYogotorars[team]
+				var yogo = mainYogotorars[index]
 				yogo.setAnimation([anim], true)
                 //changeAnim(yogo, anim)
             //}
