@@ -6,15 +6,15 @@ var alertDialog = function () {
 		images: [
 			{
 				name: 'textbox',
-				file: "/images/onboarding/textbox.png"
+				file: settings.BASE_PATH + "/images/onboarding/textbox.png"
 			},
 			{
 				name: 'okOn',
-				file: "/images/onboarding/okOn.png"
+				file: settings.BASE_PATH + "/images/onboarding/okOn.png"
 			},
 			{
 				name: 'okOff',
-				file: "/images/onboarding/okOff.png"
+				file: settings.BASE_PATH + "/images/onboarding/okOff.png"
 			}
 		],
 	}
