@@ -87,42 +87,42 @@ var yogoSelector = function(){
 		spines:[
 			{
 				name:"tomiko",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/tomiko/tomikoSelector.json",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/tomiko/tomikoSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"luna",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/luna/lunaSelector.json",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/luna/lunaSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"nao",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/nao/naoSelector.json",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/nao/naoSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"theffanie",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/theffanie/theffanieSelector.json",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/theffanie/theffanieSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"eagle",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/eagle/eagleSelector.json",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/eagle/eagleSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"dinamita",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/dinamita/dinamitaSelector.json",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/dinamita/dinamitaSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"arthurius",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/arthurius/arthuriusSelector.json",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/arthurius/arthuriusSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"estrella",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/estrella/estrellaSelector.json",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/estrella/estrellaSelector.json",
 				scales: ["@0.5x"]
 			},
 		],
@@ -309,7 +309,7 @@ var yogoSelector = function(){
 
 	function createTeamsBars(){
 
-		var fontStyle = {font: "65px skwig", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
+		var fontStyle = {font: "65px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center", wordWrap: true}
 
 		teamsBarGroup = game.add.group()
 		selectorGroup.add(teamsBarGroup)
@@ -320,12 +320,14 @@ var yogoSelector = function(){
 			img.anchor.setTo(i, 0)
 			img.scale.setTo(0.8)
 
-			var text = game.add.bitmapText(320, 25, 'skwig', "Equipo Alpha",75)
+			var teamName = new Phaser.Text(teamsBarGroup.game, 320, 25, "Equipo Alpha", fontStyle)
+            teamName.anchor.setTo(0.5, 0)
+            teamName.stroke = "#000066"
+			teamName.strokeThickness = 10
+			teamName.alpha = 0
+			img.addChild(teamName)
+			img.text = teamName
 
-			text.anchor.setTo(0.5, 0)
-			text.alpha = 0
-			img.addChild(text)
-			img.text = text
 		}
 		text.x *= -1
 		text.setText("Equipo Bravo")
