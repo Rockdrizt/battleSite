@@ -33,7 +33,7 @@ var battleScene = function() {
 		jsons: [
 			{
 				name: "sounds",
-				file: "/data/sounds/tournament.json"
+				file: settings.BASE_PATH + "/data/sounds/tournament.json"
 			},
 		],
 		characters: [
@@ -50,28 +50,28 @@ var battleScene = function() {
 		images: [
 			{
 				name: "stage",
-				file: "/images/battle/stage.png"
+				file: settings.BASE_PATH + "/images/battle/stage.png"
 			}
 		],
 		spines: [
 			// {
 			// 	name:"yogotarEagle",
-			// 	file:"/spines/Eagle/eagle.json"
+			// 	file:settings.BASE_PATH + "/spines/Eagle/eagle.json"
 			// },
 			// {
 			// 	name:"yogotarEagle",
-			// 	file:"/images/spines/Eagle/eagle.json"
+			// 	file:settings.BASE_PATH + "/images/spines/Eagle/eagle.json"
 			// }
 		],
 		particles: [
 			{
 				name: 'pickedEnergy',
-				file: '/particles/battle/pickedEnergy/specialBar1.json',
+				file: settings.BASE_PATH + '/particles/battle/pickedEnergy/specialBar1.json',
 				texture: 'specialBar1.png'
 			},
 			{
 				name: 'fireFloor',
-				file: '/particles/battle/fireFloor/fireFloor1.json',
+				file: settings.BASE_PATH + '/particles/battle/fireFloor/fireFloor1.json',
 				texture: 'fireFloor1.png'
 			}
 		]
@@ -241,7 +241,7 @@ var battleScene = function() {
 
 		var charObj = {
 			name: character,
-			file: "/data/characters/" + character + ".json",
+			file: settings.BASE_PATH + "/data/characters/" + character + ".json",
 			scales: ["@0.5x"],
 			teamNum:teamIndex
 		}

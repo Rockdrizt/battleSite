@@ -21,7 +21,7 @@ var battle = function(){
 		jsons: [
 			{
 				name: "sounds",
-				file: "/data/sounds/tournament.json"
+				file: settings.BASE_PATH + "/data/sounds/tournament.json"
 			},
 		],
 		characters: [
@@ -37,52 +37,52 @@ var battle = function(){
 		atlases: [
 			{
 				name: "atlas.battle",
-				json: "/images/battle/atlas.json",
-				image: "/images/battle/atlas.png",
+				json: settings.BASE_PATH + "/images/battle/atlas.json",
+				image: settings.BASE_PATH + "/images/battle/atlas.png",
 			},
 			{
 				name: "atlas.question",
-				json: "/images/questionOverlay/atlas.json",
-				image: "/images/questionOverlay/atlas.png",
+				json: settings.BASE_PATH + "/images/questionOverlay/atlas.json",
+				image: settings.BASE_PATH + "/images/questionOverlay/atlas.png",
 			},
 			{
 				name: "atlas.answers",
-				json: "/images/answers/atlas.json",
-				image: "/images/answers/atlas.png",
+				json: settings.BASE_PATH + "/images/answers/atlas.json",
+				image: settings.BASE_PATH + "/images/answers/atlas.png",
 			}
 		],
 		images: [
 			{
 				name: "back",
-				file: "/images/battle/back.png",
+				file: settings.BASE_PATH + "/images/battle/back.png",
 			},
 			{
 				name: "listos",
-				file: "/images/questionOverlay/listos.png",
+				file: settings.BASE_PATH + "/images/questionOverlay/listos.png",
 			},
 			{
 				name: "ya",
-				file: "/images/questionOverlay/ya.png",
+				file: settings.BASE_PATH + "/images/questionOverlay/ya.png",
 			},
 			{
 				name: "frame",
-				file: "/images/battle/frame.png",
+				file: settings.BASE_PATH + "/images/battle/frame.png",
 			},
 			{
 				name: "questionBoard",
-				file: "/images/questionOverlay/questionBoard.png",
+				file: settings.BASE_PATH + "/images/questionOverlay/questionBoard.png",
 			},
 			{
 				name: "pinkLight",
-				file: "/images/yogoSelector/pinkLight.png",
+				file: settings.BASE_PATH + "/images/yogoSelector/pinkLight.png",
 			},
 			{
 				name: "pipes",
-				file: "/images/battle/pipes.png",
+				file: settings.BASE_PATH + "/images/battle/pipes.png",
 			},
 			{
 				name: "default",
-				file: "/images/questionDB/default.png",
+				file: settings.BASE_PATH + "/images/questionDB/default.png",
 			}
 		],
 		sounds: [
@@ -92,23 +92,23 @@ var battle = function(){
 		spines:[
 			{
 				name:"background",
-				file:"/spines/battle/background/Background2.json",
+				file:settings.BASE_PATH + "/spines/battle/background/Background2.json",
 			},
 			{
 				name:"cubes",
-				file:"/spines/battle/cubes/cubes.json",
+				file:settings.BASE_PATH + "/spines/battle/cubes/cubes.json",
 			},
 			{
 				name:"cylinder",
-				file:"/spines/battle/energy_cylinder/energy_cylinder.json",
+				file:settings.BASE_PATH + "/spines/battle/energy_cylinder/energy_cylinder.json",
 			},
 			{
 				name:"floor",
-				file:"/spines/battle/floor/floor.json",
+				file:settings.BASE_PATH + "/spines/battle/floor/floor.json",
 			},
 			{
 				name:"triangles",
-				file:"/spines/battle/triangle/triangle.json",
+				file:settings.BASE_PATH + "/spines/battle/triangle/triangle.json",
 			}
 		],
 		particles: [
@@ -181,7 +181,7 @@ var battle = function(){
 	function preload(){
 
 		game.stage.disableVisibilityChange = true
-		game.load.bitmapFont('skwig', '/fonts/font.png', '/fonts/font.fnt')
+		game.load.bitmapFont('skwig', settings.BASE_PATH + '/fonts/font.png', settings.BASE_PATH + '/fonts/font.fnt')
 	}
 
 	function createBackground(){
@@ -445,7 +445,7 @@ var battle = function(){
 
 		var charObj = {
 			name: character,
-			file: "/data/characters/" + character + ".json",
+			file: settings.BASE_PATH + "/data/characters/" + character + ".json",
 			scales: ["@0.5x"],
 			teamNum:teamIndex
 		}
@@ -456,7 +456,7 @@ var battle = function(){
 
 		var charObj = {
 			name: character + "Special",
-			file: "/images/battle/" + character + "Special.png",
+			file: settings.BASE_PATH + "/images/battle/" + character + "Special.png",
 		}
 		assets.images.push(charObj)
 	}

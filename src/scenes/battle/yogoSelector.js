@@ -20,7 +20,7 @@ var yogoSelector = function(){
 		jsons: [
 			{
 				name: "sounds",
-				file: "/data/sounds/tournament.json"
+				file: settings.BASE_PATH + "/data/sounds/tournament.json"
 			},
 		],
 	}
@@ -29,23 +29,23 @@ var yogoSelector = function(){
 		atlases: [
 			{
 				name: "atlas.yogoSelector",
-				json: "/images/yogoSelector/atlas.json",
-				image: "/images/yogoSelector/atlas.png",
+				json: settings.BASE_PATH + "/images/yogoSelector/atlas.json",
+				image: settings.BASE_PATH + "/images/yogoSelector/atlas.png",
 			},
 			{
 				name: "atlas.loading",
-				json: "/images/loading/atlas.json",
-				image: "/images/loading/atlas.png",
+				json: settings.BASE_PATH + "/images/loading/atlas.json",
+				image: settings.BASE_PATH + "/images/loading/atlas.png",
 			}
 		],
 		images: [
 			{
 				name: "tile",
-				file: "/images/yogoSelector/bgTile.png",
+				file: settings.BASE_PATH + "/images/yogoSelector/bgTile.png",
 			},
 			{
 				name: "ok",
-				file: "/images/yogoSelector/ok.png",
+				file: settings.BASE_PATH + "/images/yogoSelector/ok.png",
 			}
 		],
 		sounds: [
@@ -66,75 +66,75 @@ var yogoSelector = function(){
 			{	name: "gameSong",
 				file: soundsPath + "songs/weLoveElectricCars.mp3"},
             {	name: "tomiko",
-				file: "/sounds/selectorNames/tomiko.mp3"},
+				file: settings.BASE_PATH + "/sounds/selectorNames/tomiko.mp3"},
             {	name: "luna",
-				file: "/sounds/selectorNames/luna.mp3"},
+				file: settings.BASE_PATH + "/sounds/selectorNames/luna.mp3"},
             {	name: "nao",
-				file: "/sounds/selectorNames/nao.mp3"},
+				file: settings.BASE_PATH + "/sounds/selectorNames/nao.mp3"},
             {	name: "theffanie",
-				file: "/sounds/selectorNames/theffanie.mp3"},
+				file: settings.BASE_PATH + "/sounds/selectorNames/theffanie.mp3"},
             {	name: "eagle",
-				file: "/sounds/selectorNames/eagle.mp3"},
+				file: settings.BASE_PATH + "/sounds/selectorNames/eagle.mp3"},
             {	name: "dinamita",
-				file: "/sounds/selectorNames/dinamita.mp3"},
+				file: settings.BASE_PATH + "/sounds/selectorNames/dinamita.mp3"},
             {	name: "arthurius",
-				file: "/sounds/selectorNames/arthurius.mp3"},
+				file: settings.BASE_PATH + "/sounds/selectorNames/arthurius.mp3"},
             {	name: "estrella",
-				file: "/sounds/selectorNames/estrella.mp3"},
+				file: settings.BASE_PATH + "/sounds/selectorNames/estrella.mp3"},
 		],
 		spritesheets: [
 		],
 		spines:[
 			{
 				name:"tomiko",
-				file:"/spines/yogotars/selector/tomiko/tomikoSelector.json",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/tomiko/tomikoSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"luna",
-				file:"/spines/yogotars/selector/luna/lunaSelector.json",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/luna/lunaSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"nao",
-				file:"/spines/yogotars/selector/nao/naoSelector.json",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/nao/naoSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"theffanie",
-				file:"/spines/yogotars/selector/theffanie/theffanieSelector.json",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/theffanie/theffanieSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"eagle",
-				file:"/spines/yogotars/selector/eagle/eagleSelector.json",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/eagle/eagleSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"dinamita",
-				file:"/spines/yogotars/selector/dinamita/dinamitaSelector.json",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/dinamita/dinamitaSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"arthurius",
-				file:"/spines/yogotars/selector/arthurius/arthuriusSelector.json",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/arthurius/arthuriusSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"estrella",
-				file:"/spines/yogotars/selector/estrella/estrellaSelector.json",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/estrella/estrellaSelector.json",
 				scales: ["@0.5x"]
 			},
 		],
 		particles: [
 			{
 				name: 'horizontalLine',
-				file: '/particles/startScreen/horizontalLine/intence_horison_ligth.json',
+				file: settings.BASE_PATH + '/particles/startScreen/horizontalLine/intence_horison_ligth.json',
 				texture: 'intence_horison_ligth.png'
 			},
 			{
 				name: 'particlesHorizontal',
-				file: '/particles/startScreen/particlesHorizontal/particle_horison_ligth.json',
+				file: settings.BASE_PATH + '/particles/startScreen/particlesHorizontal/particle_horison_ligth.json',
 				texture: 'particle_horison_ligth.png'
 			}
 		]
@@ -183,7 +183,7 @@ var yogoSelector = function(){
 	function preload(){
 
 		game.stage.disableVisibilityChange = true
-		game.load.bitmapFont('skwig', '/fonts/font.png', '/fonts/font.fnt')
+		game.load.bitmapFont('skwig', settings.BASE_PATH + '/fonts/font.png', settings.BASE_PATH + '/fonts/font.fnt')
 	}
 
 	function createBackground(){
