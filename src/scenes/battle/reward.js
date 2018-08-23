@@ -182,7 +182,7 @@ var reward = function(){
         coupSpine.x = COUPOFFSETX;
         coupSpine.y = game.height - coupSpine.height/2 - 25;
         coupSpine.scale.setTo(0.95,0.95);
-        if(INDEX_WINNER == 0){
+        if(INDEX_WINNER == 1){
             coupSpine.setSkinByName("alfa");
         }else{
             coupSpine.setSkinByName("bravo");
@@ -230,7 +230,7 @@ var reward = function(){
     //Create elements for the screen
     function createScenary(){
         var namePlayer;
-        if(INDEX_WINNER == 0){
+        if(INDEX_WINNER == 1){
             namePlayer = "equipoAzul";
         }else{
             namePlayer = "equipoRosa";
@@ -302,7 +302,7 @@ var reward = function(){
 
         var appear;
 
-        if(INDEX_WINNER == 0){
+        if(INDEX_WINNER == 1){
             appear = "appear_delta";
         }else{
             appear = "appear_alpha";
@@ -353,16 +353,16 @@ var reward = function(){
         var retry = sceneGroup.create(game.world.width, game.world.height - 100, "atlas.reward", "barraAmarilla")
         retry.anchor.setTo(1, 0.5)
         retry.inputEnabled = true
-        retry.events.onInputDonw.add(function(){
+        retry.events.onInputDown.add(function(){
             rewardSong.stop()
             sceneloader.show("yogoSelector")
         })
 
         var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 
-        var text = new Phaser.Text(sceneGroup.game, 0, -5, "Otra vez", fontStyle)
+        var text = new Phaser.Text(sceneGroup.game, -120, -5, "Otra vez", fontStyle)
 		text.anchor.setTo(0.5)
-		text.addChild(text)
+		retry.addChild(text)
 		retry.text = text
     }
 

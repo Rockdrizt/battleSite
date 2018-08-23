@@ -748,7 +748,7 @@ var battle = function(){
             member.setAnimation(["win"], true)
         })
         
-		battleMain.initWinerTeam(lose)
+		battleMain.initWinerTeam(win)
 		game.add.tween(white).to({alpha:1}, 300, Phaser.Easing.Cubic.In, true, 4000).onComplete.add(function(){
 			battleSong.stop()
 			sceneloader.show("reward")

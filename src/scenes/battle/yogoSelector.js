@@ -309,7 +309,7 @@ var yogoSelector = function(){
 
 	function createTeamsBars(){
 
-		var fontStyle = {font: "65px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center", wordWrap: true}
+		var fontStyle = {font: "65px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 
 		teamsBarGroup = game.add.group()
 		selectorGroup.add(teamsBarGroup)
@@ -329,8 +329,8 @@ var yogoSelector = function(){
 			img.text = teamName
 
 		}
-		text.x *= -1
-		text.setText("Equipo Bravo")
+		teamName.x *= -1
+		teamName.setText("Equipo Bravo")
 	}
 
 	/*NOTES:
