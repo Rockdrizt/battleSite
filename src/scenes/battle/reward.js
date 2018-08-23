@@ -1,5 +1,5 @@
 
-var soundsPath = "../../../shared/minigames/sounds/";
+var soundsPath = "../../shared/minigames/sounds/";
 var imagePath = settings.BASE_PATH + "/images/reward/";
 
 var reward = function(){
@@ -18,7 +18,7 @@ var reward = function(){
         atlases: [
             {   
                 name: "atlas.reward",
-                json: imagePath + settings.BASE_PATH + "/atlas.json",
+                json: imagePath + "atlas.json",
                 image: imagePath + "atlas.png",
             }
         ],
@@ -51,7 +51,7 @@ var reward = function(){
             },
             {
                 name: "music",
-                file: soundsPath + settings.BASE_PATH + "/songs/weLoveElectricCars.mp3"
+                file: soundsPath + "/songs/weLoveElectricCars.mp3"
             }
         ],
         spines:[
@@ -63,7 +63,7 @@ var reward = function(){
         jsons: [
 			{
 				name: "sounds",
-				file: "data/sounds/tournament.json"
+				file: settings.BASE_PATH + "/data/sounds/tournament.json"
 			},
 		],
         particles: [
