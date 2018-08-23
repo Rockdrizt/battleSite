@@ -93,7 +93,7 @@ var questions = function(){
 
 	function createQuestionOverlay(){
 
-		questionGroup = riddles.createQuestionOverlay()
+		questionGroup = questionHUD.createQuestionOverlay()
 		questionGroup.callback = cliente.buttonOnClick
 		questionGroup.alpha = 0
 		sceneGroup.add(questionGroup)

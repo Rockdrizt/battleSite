@@ -30,7 +30,7 @@
 .item--left {
   float: left;
   img {
-    @include img-border(#ff65a5);
+    @include img-border(#cf2e79);
   }
 }
 
@@ -60,7 +60,7 @@
 .item--right {
   float: right;
   img {
-    @include img-border(#65d5fb);
+    @include img-border(#7abcb9);
   }
 }
 
@@ -91,9 +91,22 @@
       margin-top: ($teams-header-height-768 + 15px);
     }
   }
+  .item--left {
+    img {
+      filter: drop-shadow(3px 3px 0 #cf2e79) drop-shadow(-3px -3px 0 #cf2e79)
+        drop-shadow(-3px 3px 0 #cf2e79) drop-shadow(3px -3px 0 #cf2e79);
+    }
+  }
+
+  .item--right {
+    img {
+      filter: drop-shadow(3px 3px 0 #7abcb9) drop-shadow(-3px -3px 0 #7abcb9)
+        drop-shadow(-3px 3px 0 #7abcb9) drop-shadow(3px -3px 0 #7abcb9);
+    }
+  }
 }
 
-@media only screen and (max-width: 643px) {
+@media only screen and (max-width: 575px) {
   .item {
     &__header {
       font-size: 25px;
@@ -104,19 +117,6 @@
     }
   }
 
-  .item--left {
-    img {
-      filter: drop-shadow(3px 3px 0 #ff65a5) drop-shadow(-3px -3px 0 #ff65a5)
-        drop-shadow(-3px 3px 0 #ff65a5) drop-shadow(3px -3px 0 #ff65a5);
-    }
-  }
-
-  .item--right {
-    img {
-      filter: drop-shadow(3px 3px 0 #24d5f9) drop-shadow(-3px -3px 0 #24d5f9)
-        drop-shadow(-3px 3px 0 #24d5f9) drop-shadow(3px -3px 0 #24d5f9);
-    }
-  }
   .item--left,
   .item--right {
     width: 25%;

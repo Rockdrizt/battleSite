@@ -12,7 +12,7 @@
       position: absolute;
       font-size: 30px;
       line-height: 60px;
-      text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
+      text-shadow: 0 0 10px rgb(0, 0, 0);
       top: 50px;
       &:hover + span {
         background-image: url(../img/mathtournament-onboarding-play-btn-down.png);
@@ -21,7 +21,6 @@
         content: '';
         background-size: cover;
         background-repeat: no-repeat;
-        // transform: scaleX(-1);
         position: absolute;
         top: 0;
         height: 100%;
@@ -44,20 +43,15 @@
 
 .item__btn--back {
   float: left;
-
   p {
     right: 105px;
     padding-right: 10px;
     &::before {
-      background-image: url(../img/mathtournament-onboarding-alfa-team.png);
-      right: -10px;
-      width: 190px;
+      background-image: url(../img/mathtournament-onboarding-l-banner-btn.png);
+      right: -85px;
+      width: 220px;
       background-position: top right;
-      transform: scaleX(-1);
     }
-  }
-  span {
-    transform: scaleX(-1);
   }
 }
 
@@ -67,11 +61,10 @@
     left: 105px;
     padding-left: 10px;
     &::before {
-      background-image: url(../img/mathtournament-onboarding-bravo-team.png);
-      left: -10px;
+      background-image: url(../img/mathtournament-onboarding-r-bannerbtn.png);
+      left: -50px;
       background-position: top left;
       width: 220px;
-      transform: scale(-1);
     }
   }
 }
@@ -87,43 +80,41 @@
         font-size: 20px;
         line-height: 40px;
         top: 25px;
-
         &::before {
           width: 150px;
-          height: 40px;
         }
       }
-
       span {
         width: 60px;
         height: 80px;
       }
-    }
-
-    .item__btn--back {
-      p {
-        right: 60px;
-        padding-right: 10px;
+      &--back {
+        p{
+          right: 55px;
+          &::before {
+            right: -45px;
+          }
+        }
       }
-    }
-
-    .item__btn--start {
-      p {
-        left: 60px;
-        padding-left: 10px;
+      &--start {
+        p {
+          left: 60px;
+          &::before {
+            left: -35px;
+          }
+        }
       }
     }
   }
 }
 
-@media only screen and (max-width: 643px) {
+@media only screen and (max-width: 575px) {
   .item__buttons {
     .item__btn {
       position: absolute;
-      top: 90%;
+      top: 185px;
       p {
         line-height: 25px;
-        // font-size: 18px;
         top: 17px;
 
         &::before {
@@ -146,6 +137,9 @@
       &--start {
         p {
           left: 30px;
+          &::before {
+            left: -15px;
+          }
         }
       }
     }

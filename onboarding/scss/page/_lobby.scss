@@ -1,7 +1,7 @@
 .item--lobby {
   &.item--left {
     .item__header {
-      background-color: #f3246d;
+      background-color: #CD4586;
       right: 10%;
       text-align: right;
 
@@ -74,7 +74,7 @@
   }
 }
 
-@media only screen and (max-width: 643px) {
+@media only screen and (max-width: 575px) {
   .item--lobby {
     &.item--middle {
       .item__textbox {

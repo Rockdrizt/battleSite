@@ -86,42 +86,42 @@ var teamSelector = function(){
 		spines:[
 			{
 				name:"tomiko",
-				file:"/images/spines/tomiko/tomikoSelector.json",
+				file:"/spines/yogotars/selector/tomiko/tomikoSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"luna",
-				file:"/images/spines/luna/lunaSelector.json",
+				file:"/spines/yogotars/selector/luna/lunaSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"nao",
-				file:"/images/spines/nao/naoSelector.json",
+				file:"/spines/yogotars/selector/nao/naoSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"theffanie",
-				file:"/images/spines/theffanie/theffanieSelector.json",
+				file:"/spines/yogotars/selector/theffanie/theffanieSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"eagle",
-				file:"/images/spines/eagle/eagleSelector.json",
+				file:"/spines/yogotars/selector/eagle/eagleSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"dinamita",
-				file:"/images/spines/dinamita/dinamitaSelector.json",
+				file:"/spines/yogotars/selector/dinamita/dinamitaSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"arthurius",
-				file:"/images/spines/arthurius/arthuriusSelector.json",
+				file:"/spines/yogotars/selector/arthurius/arthuriusSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"estrella",
-				file:"/images/spines/estrella/estrellaSelector.json",
+				file:"/spines/yogotars/selector/estrella/estrellaSelector.json",
 				scales: ["@0.5x"]
 			},
 		],

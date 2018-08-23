@@ -1,6 +1,9 @@
 .carousel {
   width: 100%;
+  height: 500px;
   position: relative;
+  left: -600px;
+  overflow: visible;
   &__item {
     width: 30%;
     position: relative;
@@ -21,30 +24,12 @@
       width: 100%;
     }
   }
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    top: 50%;
-  }
-  &::before {
-    background-image: url(../img/mathtournament-onboarding-left-btn.png);
-    left: 10px;
-  }
-  &::after {
-    background-image: url(../img/mathtournament-onboarding-right-btn.png);
-    right: 10px;
-  }
   .locked {
     h2 {
       display: none;
     }
     img {
-      width: 70%;
+      // width: 70%;
     }
   }
 }
