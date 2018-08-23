@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Select Subject</title>
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+  <main class="main clearfix">
+    <span class="bubbles bubbles-down" id="bubbles"></span>
+    <header class="header">
+      <h1>Select your subject</h1>
+    </header>
+    <div class="container" >
+      <section class="carousel" id="carousel">
+        <div class="carousel__item cloud9-item">
+          <h2>Mathdromeda</h2>
+          <img src="./img/mathtournament-onboarding-math-planet.png" alt="">
+        </div>
+        <div class="carousel__item cloud9-item locked">
+          <h2>Locked</h2>
+          <img src="./img/mathtournament-onboarding-locked-planet.png" alt="">
+        </div>
+        <div class="carousel__item cloud9-item locked">
+          <h2>Locked</h2>
+          <img src="./img/mathtournament-onboarding-locked-planet.png" alt="">
+        </div>
+        <div class="carousel__item cloud9-item locked">
+          <h2>Locked</h2>
+          <img src="./img/mathtournament-onboarding-locked-planet.png" alt="">
+        </div>
+        <div class="carousel__item cloud9-item locked">
+          <h2>Locked</h2>
+          <img src="./img/mathtournament-onboarding-locked-planet.png" alt="">
+        </div>
+        <div class="carousel__item cloud9-item locked">
+          <h2>Locked</h2>
+          <img src="./img/mathtournament-onboarding-locked-planet.png" alt="">
+        </div>
+        <div class="carousel__item cloud9-item locked">
+          <h2>Locked</h2>
+          <img src="./img/mathtournament-onboarding-locked-planet.png" alt="">
+        </div>
+        <div class="carousel__item cloud9-item locked">
+          <h2>Locked</h2>
+          <img src="./img/mathtournament-onboarding-locked-planet.png" alt="">
+        </div>
+      </section>
+      <section class="item__buttons" id="buttons">
+        <div class="item__btn item__btn--back left">
+          <span></span>
+        </div>
+        <div class="item__btn item__btn--start right">
+          <span></span>
+        </div>
+      </section>
+    </div>
+  </main>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+  <script src="./js/cloud9carouse.js"></script>
+  <script src="./js/main.js"></script>
+  <script>
+    $("#carousel").Cloud9Carousel({
+        buttonLeft: $("#buttons > .left"),
+        buttonRight: $("#buttons > .right"),
+        autoPlay: 0,
+        bringToFront: true
+      });
+  </script>
+</body>
+
+</html>

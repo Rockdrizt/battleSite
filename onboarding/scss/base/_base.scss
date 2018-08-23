@@ -21,7 +21,7 @@
   width: 100vw;
   height: 100vh;
   position: relative;
-  background-color: #090743;
+  background-image: linear-gradient(hsl(275, 52%, 23%), #2D1F4E 40%);
 
   .bubbles {
     width: 100vw;
@@ -29,7 +29,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    background-image: url(../img/mathturnament-onboarding-bg-tile.png);
+    background-image: url(../img/mathtournament-onboarding-bg-tile.png);
   }
 
   .bubbles-up {
@@ -76,14 +76,18 @@
  ********* Media Queries **************
  **************************************/
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 991px) {
   .main {
     .bubbles-up {
       animation: none;
     }
-
     .bubbles-down {
       animation: none;
     }
+  }
+}
+@media only screen and (max-width: 575px) {
+  .container {
+    top: 45%
   }
 }

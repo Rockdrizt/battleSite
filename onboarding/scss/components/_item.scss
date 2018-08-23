@@ -1,15 +1,13 @@
 .item {
   display: inline-block;
   position: relative;
-  width: 25%;
-
+  width: (100% / 3);
   &__header {
     width: 400%;
     line-height: $teams-header-height;
     font-size: 45px;
     text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.4);
     position: absolute;
-
     span {
       background-repeat: no-repeat;
       background-size: contain;
@@ -19,72 +17,50 @@
       z-index: -1;
     }
   }
-
   &__avatar {
     margin-top: ($teams-header-height + 40px);
     img {
-      width: 100%;
+      display: block;
+      width: 90%;
+      margin: 0 auto;
     }
   }
 }
 
 .item--left {
   float: left;
-  left: 50px;
-
-  .item__header {
-    background-color: #f3246d;
-    right: 10%;
-    text-align: right;
-
-    span {
-      background-image: url(../img/mathtournament-onboarding-alfa-team.png);
-      background-position: top right;
-      right: -20%;
-    }
-  }
-
   img {
-    @include img-border(#ff65a5);
+    @include img-border(#cf2e79);
   }
 }
 
-.item--middle {
-  .item__textbox {
-    position: absolute;
-    top: 90px;
-    width: 100%;
+.item__textbox__container {
+  h3 {
+    color: $color-pin;
+    font-size: 35px;
+    padding: 10px;
   }
-
-  .item__buttons {
-    top: 330px;
+  input {
+    font-size: 30px;
+    text-align: center;
+    width: 100%;
+    border: none;
+    background-color: #252a4b;
+    border-radius: 5px;
+    padding-top: 5px;
+  }
+  p {
+    color: $color-pin;
+    font-size: 20px;
+    font-family: 'VAGRounded Thin', sans-serif;
+    padding-top: 10px;
   }
 }
 
 .item--right {
   float: right;
-  right: 50px;
-
-  .item__header {
-    background-color: #24d5f9;
-    left: 10%;
-    text-align: left;
-
-    span {
-      background-image: url(../img/mathturnament-onboarding-bravo-team.png);
-      background-position: top left;
-      left: -20%;
-    }
-  }
-
   img {
-    @include img-border(#65d5fb);
-  }
-}
-
-.item--create {
-  .item__avatar {
-    margin: 0;
+    @include img-border(#7abcb9);
   }
 }
 
@@ -92,7 +68,7 @@
  ********* Media Queries **************
  **************************************/
 
-@media only screen and (max-width: 992px) {
+@media only screen and (max-width: 991px) {
   .item {
     &__header {
       line-height: $teams-header-height-992;
@@ -105,47 +81,59 @@
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   .item {
     &__header {
       line-height: $teams-header-height-768;
       font-size: 30px;
     }
+    &__avatar {
+      margin-top: ($teams-header-height-768 + 15px);
+    }
+  }
+  .item--left {
+    img {
+      filter: drop-shadow(3px 3px 0 #cf2e79) drop-shadow(-3px -3px 0 #cf2e79)
+        drop-shadow(-3px 3px 0 #cf2e79) drop-shadow(3px -3px 0 #cf2e79);
+    }
+  }
+
+  .item--right {
+    img {
+      filter: drop-shadow(3px 3px 0 #7abcb9) drop-shadow(-3px -3px 0 #7abcb9)
+        drop-shadow(-3px 3px 0 #7abcb9) drop-shadow(3px -3px 0 #7abcb9);
+    }
   }
 }
 
-@media only screen and (max-width: 644px) {
+@media only screen and (max-width: 575px) {
   .item {
     &__header {
       font-size: 25px;
       line-height: 35px;
     }
-
     &__avatar {
-      margin-top: 60px;
+      margin-top: 50px;
     }
   }
 
-  .item--left {
-    left: 25px;
-    img {
-      filter: drop-shadow(3px 3px 0 #ff65a5) drop-shadow(-3px -3px 0 #ff65a5)
-        drop-shadow(-3px 3px 0 #ff65a5) drop-shadow(3px -3px 0 #ff65a5);
-    }
-  }
-
+  .item--left,
   .item--right {
-    right: 25px;
-    .item__header {
-      left: 0;
-      span {
-        left: -17%;
+    width: 25%;
+  }
+  .item--middle {
+    width: 45%;
+  }
+  .item__buttons {
+    .item__btn {
+      position: absolute;
+      top: 70%;
+      &--back {
+        left: -40px;
       }
-    }
-
-    img {
-      filter: drop-shadow(3px 3px 0 #24d5f9) drop-shadow(-3px -3px 0 #24d5f9)
-        drop-shadow(-3px 3px 0 #24d5f9) drop-shadow(3px -3px 0 #24d5f9);
+      &--start {
+        right: -40px;
+      }
     }
   }
 }
