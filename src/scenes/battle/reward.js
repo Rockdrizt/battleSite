@@ -357,6 +357,13 @@ var reward = function(){
             rewardSong.stop()
             sceneloader.show("yogoSelector")
         })
+
+        var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
+
+        var text = new Phaser.Text(sceneGroup.game, 0, -5, "Otra vez", fontStyle)
+		text.anchor.setTo(0.5)
+		text.addChild(text)
+		retry.text = text
     }
 
     //Load each character to use in assets
