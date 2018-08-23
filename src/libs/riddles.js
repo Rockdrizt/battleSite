@@ -24,7 +24,7 @@ var riddles = function(){
 		]
 		usedQuestions = []
 		loadQuestions()
-		operationGenerator.setConfiguration()
+		//operationGenerator.setConfiguration()
 	}
 
 	function loadQuestions(){

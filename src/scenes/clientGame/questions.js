@@ -52,6 +52,10 @@ var questions = function(){
 				name: "pinkLight",
 				file: settings.BASE_PATH + "/images/yogoSelector/pinkLight.png",
 			},
+			{
+				name: "default",
+				file: settings.BASE_PATH + "/images/questionDB/default.png",
+			}
 		],
 		sounds: [
 		],

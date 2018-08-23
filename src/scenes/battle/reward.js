@@ -182,7 +182,7 @@ var reward = function(){
         coupSpine.x = COUPOFFSETX;
         coupSpine.y = game.height - coupSpine.height/2 - 25;
         coupSpine.scale.setTo(0.95,0.95);
-        if(INDEX_WINNER == 1){
+        if(INDEX_WINNER == 0){
             coupSpine.setSkinByName("alfa");
         }else{
             coupSpine.setSkinByName("bravo");
@@ -239,12 +239,14 @@ var reward = function(){
         brainGroup = game.add.group();
         sceneGroup.add(brainGroup);
 
+        var loser = INDEX_WINNER == 0 ? 1 : 0
+
         loseColocation = game.height;
         for(var i=0; i<3; i++){
             squareLoser.push(game.add.sprite(game.width + 300, loseColocation,"atlas.reward","ventanaFondo"));
             sceneGroup.add(squareLoser[i]);
             closeSquare.push(game.add.sprite(game.width + 300 - 2, loseColocation + squareLoser[i].height - 5,"atlas.reward","ventanaFrente"));
-            createSpineLoser(180,260,players[1][i].name,0.65*scaleOrder[i],0.65,squareLoser[i],players[1][i].skin);
+            createSpineLoser(180,260,players[loser][i].name,0.65*scaleOrder[i],0.65,squareLoser[i],players[loser][i].skin);
             loseColocation += squareLoser[i].height + 10;
          }
 
@@ -265,7 +267,7 @@ var reward = function(){
         tweenNameWin.onComplete.add(addLosersTween);
 
         for(var m=0; m<3; m++){
-            createSpineWinner(winnerColocationX[m],winnerColocationY[m],players[0][m].name,winnerScale[m]*scaleOrder[m], winnerScale[m], players[0][m].skin);
+            createSpineWinner(winnerColocationX[m],winnerColocationY[m],players[INDEX_WINNER][m].name,winnerScale[m]*scaleOrder[m], winnerScale[m], players[INDEX_WINNER][m].skin);
         }
     }
 
