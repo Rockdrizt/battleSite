@@ -942,7 +942,7 @@ var yogoSelector = function(){
 		var teams = getTeams()
 
 		gameSong.stop()
-        inputsGroup.alpha = 0
+        //inputsGroup.alpha = 0
 
 		game.add.tween(readyGroup.pinkLight.scale).to({x: 1, y: 1}, 400, Phaser.Easing.Cubic.InOut, true, 0, 0, true).onComplete.add(function(){
 			readyGroup.ready.alpha = 1
@@ -1068,7 +1068,7 @@ var yogoSelector = function(){
 			createTeamsBars()
             createYogoNames()
 			createButtons()
-			createOk()
+			//createOk()
             
 			game.add.tween(tile).to({alpha:1}, 1000, Phaser.Easing.Cubic.Out, true).onComplete.add(animateSelector)
 

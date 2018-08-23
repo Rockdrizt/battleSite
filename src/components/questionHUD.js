@@ -110,6 +110,7 @@ var questionHUD = function(){
         questionGroup.startTimer = startTimer.bind(questionGroup)
 		questionGroup.stopTimer = stopTimer.bind(questionGroup)
 		questionGroup.updateTimer = updateTimer.bind(questionGroup)
+		questionGroup.alpha = 0
 
 		return questionGroup
 	}
@@ -143,18 +144,15 @@ var questionHUD = function(){
 		var delay = 200
 		this.timeElapsed = 0
 
+		this.riddle = riddle
 		//if(riddle.existImage) {
 		game.load.image(riddle.image, riddle.src)
 		game.load.onLoadComplete.add(function(){
-			this.image.loadTexture(riddle.image)
+			this.image.loadTexture(this.riddle.image)
 			var scaleImg = this.fixImage(1)
-			this.image.key = riddle.image
+			this.image.key = this.riddle.image
 			var lastTween = game.add.tween(this.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
-
-			var group = this
-			lastTween.onComplete.add(function(){
-				group.setQuestion(riddle)
-			})
+			lastTween.onComplete.add(this.setQuestion)
 		}.bind(this))
 		game.load.start()
 
@@ -175,16 +173,16 @@ var questionHUD = function(){
 		//if(riddle.existImage)
 	}
     
-    function setQuestion(riddle){
-        
+    function setQuestion(){
+		
+		var riddle = this.riddle
         this.question.setText(riddle.question)
         
         for(var i = 0; i < riddle.answers.length; i++){
- 			var opt = this.options.children[i]
-			opt.value = riddle.answers[i].text
-			opt.info.text = riddle.answers[i].text
-			opt.info.alpha = 0
-			opt.correct = riddle.answers[i].correct
+			var opt = this.options.children[i]
+			opt.value = riddle.answers[i]
+			opt.info.text = riddle.answers[i]
+			opt.correct = riddle.correctAnswer == riddle.answers[i]
             opt.inputEnabled = true
             game.add.tween(opt.info).to({alpha:1}, 300, Phaser.Easing.linear, true)
 		}
@@ -211,22 +209,30 @@ var questionHUD = function(){
 		var fadeOut = game.add.tween(this).to({alpha:0}, 500, Phaser.Easing.linear, true)
 		var group = this
 		fadeOut.onComplete.add(function(){
-			group.question.alpha = 0
-			group.options.forEach(function(opt){
+			console.log(this)
+			this.question.alpha = 0
+
+			this.options.children.forEach(function(opt){
+				console.log(opt)
 				opt.alpha = 0
 				opt.x = opt.spawn.x
 				opt.y = opt.spawn.y
-                opt.info.alpha = 0
+				opt.info.alpha = 0
+				opt.info.text = ""
+				opt.correct = false
 			})
-			group.boxes.forEach(function(box){
+
+			this.boxes.forEach(function(box){
 				box.scale.setTo(0, 1)
 			})
+
 			//if(group.existImage){
-				group.image.scale.setTo(0)
-				group.image.alpha = 0
+				this.image.scale.setTo(0)
+				this.image.alpha = 0
 				//this.removeImage()
 			//}
-		})
+			console.log(this)
+		},group)
 	}
 
 	function inputOption(btn){
@@ -243,7 +249,7 @@ var questionHUD = function(){
 		this.light.y = btn.y
 		var shine = game.add.tween(this.light.scale).to({x: 0.5, y:0.5}, 300, Phaser.Easing.Cubic.Out, true, 0, 0, true)
 
-		var newY = this.boxes[1].y - 180
+		//var newY = this.boxes[1].y - 180
 		//var choise = game.add.tween(btn).to({x: game.world.centerX, y:newY}, 500, Phaser.Easing.Cubic.Out, false)
 
 		//shine.chain(choise)

@@ -4,6 +4,7 @@ var riddles = function(){
 	var questions
 	var usedQuestions
 	var newQuestion
+	var NUMBER_OF_FAKE_ANSWERS = 3
 
 	function initialize(){
 
@@ -47,7 +48,9 @@ var riddles = function(){
 				answers: [],
 				grade: element.grade,
 				level: element.level,
+				correctAnswer: element.answer - 1,
 				index: i,
+				//correctIndex:
 			}
 
 			var optData = [element.A, element.B, element.C, element.D]
@@ -84,8 +87,21 @@ var riddles = function(){
 	}
 
 	function getOperation(){
-        
+
 		var operation = operationGenerator.generate()
+		var correctAnswer = operation.correctAnswer
+
+		var possibleAnswers = [correctAnswer];
+		var negativeOrPositive = Math.round(Math.random()) * 2 - 1;
+		for(var i = 0; i< NUMBER_OF_FAKE_ANSWERS; i++){
+			var diff = Math.floor(correctAnswer / 10) > 1 ? 10 : 1
+			// 	while(possibleAnswers.includes(n)){
+			negativeOrPositive = negativeOrPositive * -1
+			var n = correctAnswer + diff * negativeOrPositive
+			possibleAnswers.push(n);
+		}
+
+		Phaser.ArrayUtils.shuffle(possibleAnswers)
 
 		var question
 		if(operation.operator === "/"){
@@ -93,19 +109,32 @@ var riddles = function(){
 		}else{
 			question = operation.operand1 + " " + operation.operator + " " + operation.operand2 + " = " + operation.result
 		}
-		
+
+		//TODO: correctAnswer only in server side
+
 		var riddle = {
 			question: question,
 			existImage : false,
 			src: "../../images/questionDB/default.png",
 			image: "default",
-			answers: [],
+			answers: possibleAnswers,
 			grade: 10,
-			level: 10
+			level: 10,
+			correctAnswer: correctAnswer
 			//index: i,
 		}
 
-		var correctAns = operation.correctAnswer
+		return riddle
+
+        
+		/*
+
+		var questionData = {
+			question : question,
+			answers : possibleAnswers,
+			correctAnswer : correctAnswer
+		}
+
 		var option = {
 			text: correctAns,
 			correct: true
@@ -128,7 +157,7 @@ var riddles = function(){
         
 		Phaser.ArrayUtils.shuffle(riddle.answers)
 		
-		return riddle
+		return riddle*/
     }
 
 	return{

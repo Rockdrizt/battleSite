@@ -308,9 +308,7 @@ var battle = function(){
         questionGroup.callback = function (event) {
 			questionGroup.hide()
             //questionGroup.timer.stop()
-        	game.time.events.add(2000, function () {
-				checkAnswer()
-			})
+        	game.time.events.add(2000, checkAnswer)
 		}
         questionGroup.stopTimer = function(){
 			questionGroup.timer.destroy()
@@ -318,7 +316,6 @@ var battle = function(){
             setNoAnswer()
             console.log("time out")
         }
-        questionGroup.alpha = 0
 		sceneGroup.add(questionGroup)
     }
 
@@ -555,6 +552,8 @@ var battle = function(){
 
 			yogoGroup.add(groupPoint)
 		}
+
+		game.time.events.add(8000, initGame)
 	}
 
 	function selectYogotar(obj) {
@@ -594,7 +593,7 @@ var battle = function(){
 		var life = HUDGroup.getLifeBar(team)
 		var damage = life.width - (MAX_LIFE * percent * ORDER_SIDES[team].scale.x)
 		var index = team == 0 ? 1 : 0
-        var delay = 4000
+        var delay = 3500
         
         if(percent == DAMAGE.ultra){
             shakeCamera()
@@ -770,14 +769,16 @@ var battle = function(){
         
 		event = event || {}
 		var answers = event.answers || {}
-		var numTeam = event.numTeam || game.rnd.integerInRange(1, 2)
+		var numTeam = event.numTeam || -1//game.rnd.integerInRange(1, 2)
 		var playerWin, playerLose
         
-		var t1 = answers.t1 || {value: true,
-			time: game.rnd.integerInRange(1000, MAX_TIME) //10000 //10 seg
+		var t1 = answers.t1 || {
+			//value: true,
+			//time: game.rnd.integerInRange(1000, MAX_TIME) //10000 //10 seg
 		}
-		var t2 = answers.t2 ||{value: true,
-			time: game.rnd.integerInRange(1000, MAX_TIME) //20000 //20 seg
+		var t2 = answers.t2 ||{
+			//value: true,
+			//time: game.rnd.integerInRange(1000, MAX_TIME) //20000 //20 seg
 		}
 		var players = [t1, t2]
 		var timeDifference = event.timeDifference || Math.abs(t1.time - t2.time) || 0
@@ -790,6 +791,8 @@ var battle = function(){
 		for(var i = 0; i < answersGroup.length; i++){
 
 			var newScale = convertScale(players[i].time)
+			if(newScale < 0)
+				newScale = 0
 			var ansTime = convertTime(players[i].time)
 
 			var score = answersGroup.children[i]
@@ -827,7 +830,8 @@ var battle = function(){
         }
         else{
             setLoser(leftAns)
-            setLoser(rigthAns)
+			setLoser(rigthAns)
+			game.time.events.add(4500, setNoAnswer)
         }
 	}
     
@@ -956,9 +960,10 @@ var battle = function(){
         var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 500)
         secondOut.onComplete.add(function(){
 			//questionGroup.showQuestion(server.generateQuestion())
-			//var riddle = riddles.getOperation()//riddles.getQuestion()
-			//questionGroup.showQuestion(riddle)
-			server.sendQuestion()
+			var riddle = riddles.getOperation()//riddles.getQuestion()
+			questionGroup.showQuestion(riddle)
+			//server.sendQuestion()
+			console.log("se mando la pregunta")
 		})
 
         first.chain(second)
@@ -1019,7 +1024,7 @@ var battle = function(){
 			createQuestionOverlay()
 			createListosYa()
 			//createMenuAnimations()
-			menubuttons()
+			//menubuttons()
 			//battleSong = sound.play("battleSong", {loop:true, volume:0.6})
 			createWhite()
 
