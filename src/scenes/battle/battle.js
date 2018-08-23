@@ -79,6 +79,10 @@ var battle = function(){
 			{
 				name: "pipes",
 				file: "/images/battle/pipes.png",
+			},
+			{
+				name: "default",
+				file: "/images/questionDB/default.png",
 			}
 		],
 		sounds: [

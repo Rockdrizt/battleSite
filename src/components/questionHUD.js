@@ -69,8 +69,8 @@ var questionHUD = function(){
 		light.scale.setTo(0)
 		questionGroup.light = light
 
-		var options = game.add.group()
-		questionGroup.add(options)
+		var options = []//game.add.group()
+		//questionGroup.add(options)
 		var pivotX = 0.5
 		var opt = ["A", "C", "B", "D"]
 
@@ -78,7 +78,7 @@ var questionHUD = function(){
 
 		for(var i = 0; i < 4; i++){
 
-			var btn = createButtons(board.centerX * pivotX, board.centerY + board.height * 0.17, opt[i], options)
+			var btn = createButtons(board.centerX * pivotX, board.centerY + board.height * 0.17, opt[i], questionGroup)
 
 			pivotX += 0.3
 
@@ -89,13 +89,14 @@ var questionHUD = function(){
 			btn.spawn = {x: btn.x, y: btn.y}
 			btn.inputEnabled = true
 			btn.events.onInputDown.add(callInputAnswer)
-			options.add(btn)
+			btn.inputEnabled = false
+			options.push(btn)
 		}
 
 		questionGroup.question = text
 		questionGroup.image = img
 		questionGroup.options = options
-		questionGroup.options.setAll("inputEnabled", false)
+		//questionGroup.options.setAll("inputEnabled", false)
 		questionGroup.boxes.forEach(function(box){
 			box.scale.setTo(0, 1)
 		})
@@ -146,29 +147,34 @@ var questionHUD = function(){
 
 		this.riddle = riddle
 		//if(riddle.existImage) {
-		game.load.image(riddle.image, riddle.src)
-		game.load.onLoadComplete.add(function(){
+		//game.load.image(riddle.image, riddle.src)
+		//game.load.onLoadComplete.add(function(){
 			this.image.loadTexture(this.riddle.image)
 			var scaleImg = this.fixImage(1)
 			this.image.key = this.riddle.image
+			
+
+			game.add.tween(this).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
+
+			this.boxes.forEach(function(box){
+				game.add.tween(box.scale).to({x: 1}, 400, Phaser.Easing.Cubic.Out, true, delay)
+				delay += 400
+			})
+
+			this.options.forEach(function(opt){
+				opt.info.alpha = 0
+				game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay)
+				delay += 200
+			})
+
 			var lastTween = game.add.tween(this.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
 			lastTween.onComplete.add(this.setQuestion)
-		}.bind(this))
-		game.load.start()
+		//}.bind(this))
+		//game.load.start()
 
 		//}
 
-		game.add.tween(this).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
-
-		this.boxes.forEach(function(box){
-			game.add.tween(box.scale).to({x: 1}, 400, Phaser.Easing.Cubic.Out, true, delay)
-			delay += 400
-		})
-
-		this.options.forEach(function(opt){
-			game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay)
-			delay += 200
-		})
+		
 
 		//if(riddle.existImage)
 	}
@@ -179,7 +185,7 @@ var questionHUD = function(){
         this.question.setText(riddle.question)
         
         for(var i = 0; i < riddle.answers.length; i++){
-			var opt = this.options.children[i]
+			var opt = this.options[i]
 			opt.value = riddle.answers[i]
 			opt.info.text = riddle.answers[i]
 			opt.correct = riddle.correctAnswer == riddle.answers[i]
@@ -212,7 +218,9 @@ var questionHUD = function(){
 			console.log(this)
 			this.question.alpha = 0
 
-			this.options.children.forEach(function(opt){
+			for(var i = 0; i < this.options.length; i++){
+			//this.options.forEach(function(opt){
+				var opt = this.options[i]
 				console.log(opt)
 				opt.alpha = 0
 				opt.x = opt.spawn.x
@@ -220,7 +228,7 @@ var questionHUD = function(){
 				opt.info.alpha = 0
 				opt.info.text = ""
 				opt.correct = false
-			})
+			}
 
 			this.boxes.forEach(function(box){
 				box.scale.setTo(0, 1)
@@ -237,9 +245,10 @@ var questionHUD = function(){
 
 	function inputOption(btn){
 
-		this.options.setAll("inputEnabled", false)
+		//this.options.setAll("inputEnabled", false)
 
 		this.options.forEach(function(opt){
+			opt.inputEnabled = false
 			if(opt != btn){
 				game.add.tween(opt).to({alpha:0.5}, 300, Phaser.Easing.linear, true)
 			}
