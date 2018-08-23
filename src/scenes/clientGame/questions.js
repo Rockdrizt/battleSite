@@ -35,22 +35,22 @@ var questions = function(){
 		atlases: [
 			{
 				name: "atlas.question",
-				json: "/images/questionOverlay/atlas.json",
-				image: "/images/questionOverlay/atlas.png",
+				json: settings.BASE_PATH + "/images/questionOverlay/atlas.json",
+				image: settings.BASE_PATH + "/images/questionOverlay/atlas.png",
 			},
 		],
 		images: [
 			{
 				name: "tile",
-				file: "/images/yogoSelector/bgTile.png",
+				file: settings.BASE_PATH + "/images/yogoSelector/bgTile.png",
 			},
 			{
 				name: "questionBoard",
-				file: "/images/questionOverlay/questionBoard.png",
+				file: settings.BASE_PATH + "/images/questionOverlay/questionBoard.png",
 			},
 			{
 				name: "pinkLight",
-				file: "/images/yogoSelector/pinkLight.png",
+				file: settings.BASE_PATH + "/images/yogoSelector/pinkLight.png",
 			},
 		],
 		sounds: [
@@ -88,7 +88,7 @@ var questions = function(){
 	function preload(){
 
 		game.stage.disableVisibilityChange = true
-		game.load.bitmapFont('skwig', '/images/fonts/font.png', '/images/fonts/font.fnt')
+		game.load.bitmapFont('skwig', settings.BASE_PATH + '/images/fonts/font.png', settings.BASE_PATH + '/images/fonts/font.fnt')
 	}
 
 	function createQuestionOverlay(){

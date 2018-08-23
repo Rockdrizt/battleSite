@@ -77,7 +77,7 @@ var characterBattle = function () {
 		assets.spines = assets.spines || []
 		assets.spines.push({
 			name:character.name,
-			file:data.directory,
+			file:settings.BASE_PATH + data.directory,
 			scales:character.scales,
 			data:data
 		})

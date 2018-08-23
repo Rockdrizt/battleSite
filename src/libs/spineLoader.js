@@ -255,7 +255,7 @@ var spineLoader = function () {
 
 		var soundObj = {
 			name:name,
-			file:soundsList[name]
+			file:settings.BASE_PATH + soundsList[name]
 		}
 
 		if(typeof soundObj.file === "undefined"){
@@ -271,8 +271,8 @@ var spineLoader = function () {
 
 		var particleObj = {
 			name:name,
-			file:typeof string === "string" ? "/particles/characters/" + string
-				: "/particles/characters/" + name + "/" + name + ".json",
+			file:typeof string === "string" ? settings.BASE_PATH + "/particles/characters/" + string
+				: settings.BASE_PATH + "/particles/characters/" + name + "/" + name + ".json",
 			texture:name + ".png"
 		}
 

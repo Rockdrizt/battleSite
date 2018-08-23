@@ -1,6 +1,6 @@
 
 var soundsPath = "../../../shared/minigames/sounds/";
-var imagePath = "/images/reward/";
+var imagePath = settings.BASE_PATH + "/images/reward/";
 
 var reward = function(){
     
@@ -18,7 +18,7 @@ var reward = function(){
         atlases: [
             {   
                 name: "atlas.reward",
-                json: imagePath + "/atlas.json",
+                json: imagePath + settings.BASE_PATH + "/atlas.json",
                 image: imagePath + "atlas.png",
             }
         ],
@@ -51,13 +51,13 @@ var reward = function(){
             },
             {
                 name: "music",
-                file: soundsPath + "/songs/weLoveElectricCars.mp3"
+                file: soundsPath + settings.BASE_PATH + "/songs/weLoveElectricCars.mp3"
             }
         ],
         spines:[
             {
                 name:"coup",
-                file:"/spines/reward/brain/pantalla_victoria.json"
+                file:settings.BASE_PATH + "/spines/reward/brain/pantalla_victoria.json"
             }
         ],
         jsons: [
@@ -69,17 +69,17 @@ var reward = function(){
         particles: [
             {
                 name: "brain_particles",
-                file: "/particles/rewardScreen/brain_particles/sphere_ligths1.json",
+                file: settings.BASE_PATH + "/particles/rewardScreen/brain_particles/sphere_ligths1.json",
                 texture: "sphere_ligths1.png"
             },
             {
                 name: "brain_particlesB",
-                file: "/particles/rewardScreen/brain_particles/Ligth_Brain.json",
+                file: settings.BASE_PATH + "/particles/rewardScreen/brain_particles/Ligth_Brain.json",
                 texture: "Ligth_Brain.png"
             },
             {
                 name: "confetti",
-                file: "/particles/rewardScreen/confetti/Conffeti_win.json",
+                file: settings.BASE_PATH + "/particles/rewardScreen/confetti/Conffeti_win.json",
                 texture: "Conffeti_win.png"
             }
         ]

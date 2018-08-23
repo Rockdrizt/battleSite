@@ -22,46 +22,46 @@ var startScreen = function(){
         atlases: [
             {   
                 name: "atlas.startScreen",
-                json: "/images/startScreen/atlas.json",
-                image: "/images/startScreen/atlas.png",
+                json: settings.BASE_PATH + "/images/startScreen/atlas.json",
+                image: settings.BASE_PATH + "/images/startScreen/atlas.png",
             }
         ],
         images: [
             {
                 name: "tile",
-                file: "/images/startScreen/bgTile.png",
+                file: settings.BASE_PATH + "/images/startScreen/bgTile.png",
             },
             {
                 name: "player6",
-                file: "/images/startScreen/dinamita.png",
+                file: settings.BASE_PATH + "/images/startScreen/dinamita.png",
             },
             {
                 name: "player7",
-                file: "/images/startScreen/luna.png",
+                file: settings.BASE_PATH + "/images/startScreen/luna.png",
             },
             {
                 name: "player0",
-                file: "/images/startScreen/nao.png",
+                file: settings.BASE_PATH + "/images/startScreen/nao.png",
             },
             {
                 name: "player1",
-                file: "/images/startScreen/theffanie.png",
+                file: settings.BASE_PATH + "/images/startScreen/theffanie.png",
             },
             {
                 name: "player3",
-                file: "/images/startScreen/eagle.png",
+                file: settings.BASE_PATH + "/images/startScreen/eagle.png",
             },
             {
                 name: "player5",
-                file: "/images/startScreen/tomiko.png",
+                file: settings.BASE_PATH + "/images/startScreen/tomiko.png",
             },
             {
                 name: "player4",
-                file: "/images/startScreen/arthurius.png",
+                file: settings.BASE_PATH + "/images/startScreen/arthurius.png",
             },
             {
                 name: "player2",
-                file: "/images/startScreen/estrella.png",
+                file: settings.BASE_PATH + "/images/startScreen/estrella.png",
             },
 		],
 		sounds: [

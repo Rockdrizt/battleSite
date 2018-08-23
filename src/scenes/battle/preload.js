@@ -3,8 +3,8 @@ var preloaderIntro = function(){
 	var assets = {
 		atlases: [{
 				name: "logoAtlas",
-				json: "/images/preload/atlas.json",
-				image: "/images/preload/atlas.png"
+				json: settings.BASE_PATH + "/images/preload/atlas.json",
+				image: settings.BASE_PATH + "/images/preload/atlas.png"
 			}],
 		
 	}

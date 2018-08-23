@@ -240,7 +240,7 @@ var epicProjectiles = function(){
 
 		assetsSounds.push({
 			name:soundID,
-			file: soundsList[soundID]
+			file: settings.BASE_PATH + soundsList[soundID]
 		})
 	}
 
@@ -256,7 +256,7 @@ var epicProjectiles = function(){
 		assets.particles = assets.particles || []
 		assets.particles.push({
 			name:particleName,
-			file:particlePath,
+			file:settings.BASE_PATH + particlePath,
 			texture: particleName + ".png"
 		})
 	}
@@ -267,7 +267,7 @@ var epicProjectiles = function(){
 		assets.spines = assets.spines || []
 		assets.spines.push({
 			name:spineInfo.name,
-			file:spineInfo.file,
+			file:settings.BASE_PATH + spineInfo.file,
 			scales:spineInfo.scales
 		})
 	}
@@ -325,7 +325,7 @@ var epicProjectiles = function(){
 
 	function loadProjectileData(id, currentLoader, loadingFiles, scene) {
 		currentScene = scene
-		currentLoader.json(id + "Data", "/data/projectiles/" + id + ".json")
+		currentLoader.json(id + "Data", settings.BASE_PATH + "/data/projectiles/" + id + ".json")
 		loadingFiles[id + "Data"] = {onComplete:addProjectile.bind(null, id)}
 	}
 
