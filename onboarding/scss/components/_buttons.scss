@@ -43,6 +43,9 @@
 
 .item__btn--back {
   float: left;
+  span {
+    transform: scaleX(-1);
+  }
   p {
     right: 105px;
     padding-right: 10px;
@@ -75,22 +78,23 @@
 
 @media only screen and (max-width: 991px) {
   .item__buttons {
+    width: 200px;
     .item__btn {
       p {
         font-size: 20px;
         line-height: 40px;
-        top: 25px;
+        top: 30px;
         &::before {
           width: 150px;
         }
       }
       span {
-        width: 60px;
-        height: 80px;
+        width: 75px;
+        height: 100px;
       }
       &--back {
-        p{
-          right: 55px;
+        p {
+          right:70px;
           &::before {
             right: -45px;
           }
@@ -98,10 +102,34 @@
       }
       &--start {
         p {
-          left: 60px;
+          left: 70px;
           &::before {
             left: -35px;
           }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 767px) {
+  .item__buttons {
+    width: 150px;
+    .item__btn {
+      p {
+        top: 20px;
+      }
+      span {
+        width: 54px;
+        height: 70px;
+      }
+      &--back {
+        p {
+          right: 50px;
+        }
+      }
+      &--start {
+        p {
+          left: 50px;
         }
       }
     }
@@ -111,40 +139,39 @@
 @media only screen and (max-width: 575px) {
   .main--client,
   .main--create {
-  .item__buttons {
-    .item__btn {
-      position: absolute;
-      top: 185px;
-      p {
-        line-height: 25px;
-        top: 17px;
-
-        &::before {
-          width: 110px;
-          height: 25px;
-        }
-      }
-      span {
-        width: 40px;
-        height: 52px;
-      }
-      &--back {
+    .item__buttons {
+      .item__btn {
+        position: absolute;
+        top: 185px;
         p {
-          right: 30px;
+          line-height: 25px;
+          top: 17px;
           &::before {
-            right: -25px;
+            width: 110px;
+            height: 25px;
           }
         }
-      }
-      &--start {
-        p {
-          left: 30px;
-          &::before {
-            left: -15px;
+        span {
+          width: 40px;
+          height: 52px;
+        }
+        &--back {
+          p {
+            right: 30px;
+            &::before {
+              right: -25px;
+            }
+          }
+        }
+        &--start {
+          p {
+            left: 30px;
+            &::before {
+              left: -15px;
+            }
           }
         }
       }
     }
   }
-}
 }

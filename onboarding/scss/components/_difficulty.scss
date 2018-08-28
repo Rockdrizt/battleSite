@@ -1,0 +1,115 @@
+.container--difficulty {
+  top: 55%;
+}
+
+.item--difficulty {
+  width: 40%;
+  .header--difficulty {
+    width: 100%;
+    font-size: 40px;
+    background-image: linear-gradient(90deg, #efc54f, #db7742);
+    text-shadow: 3px 3px 0 rgb(0, 0, 0);
+    position: relative;
+    .header__btn {
+      width: 80px;
+      display: inline-block;
+      position: absolute;
+      top: -18px;
+      &--left {
+        left: -60px;
+      }
+      &--right {
+        right: -60px;
+      }
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .difficulty__row {
+    background-color: #f9f3d1;
+    background-image: url(../img/mathtournament-onboarding-board-tile.png);
+    background-size: 150px;
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+  }
+  .difficulty__container {
+    .difficulty__column {
+      display: inline-block;
+      width: 45%;
+      .difficulty__item {
+        img {
+          width: 100%;
+          padding: 5px;
+        }
+      }
+    }
+  }
+}
+
+/**************************************
+ ********* Media Queries **************
+ **************************************/
+
+@media only screen and (max-width: 991px) {
+}
+@media only screen and (max-width: 767px) {
+  .item--difficulty {
+    width: 50%;
+    .header--difficulty {
+      font-size: 30px;
+      .header__btn {
+        width: 60px;
+        top: -15px;
+        &--left {
+          left: -40px;
+        }
+        &--right {
+          right: -40px;
+        }
+      }
+    }
+    .difficulty__row {
+      background-size: 100px;
+      padding: 5px;
+    }
+    .difficulty__container {
+      .difficulty__column {
+        .difficulty__item {
+          img {
+            padding: 0;
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 575px) {
+  .container--difficulty {
+    .item--difficulty {
+      width: 55%;
+      .header--difficulty {
+        font-size: 30px;
+        .header__btn {
+          width: 50px;
+          top: -10px;
+          &--left {
+            left: -30px;
+          }
+          &--right {
+            right: -30px;
+          }
+        }
+      }
+      .item__buttons {
+        top: 10px;
+        .item__btn--back {
+          left: 0;
+        }
+        .item__btn--start {
+          right: 0;
+        }
+      }
+    }
+  }
+}
