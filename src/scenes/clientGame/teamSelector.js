@@ -198,7 +198,7 @@ var teamSelector = function(){
 
 	function preload(){
 
-		game.stage.disableVisibilityChange = false
+		game.stage.disableVisibilityChange = true
 		game.load.bitmapFont('skwig', settings.BASE_PATH + '/images/fonts/font.png', settings.BASE_PATH + '/images/fonts/font.fnt')
 	}
 
@@ -226,7 +226,7 @@ var teamSelector = function(){
 	function update(){
 		tile.tilePosition.y -= 0.4
 		tile.tilePosition.x -= 0.4
-		epicparticles.update()
+		//epicparticles.update()
 	}
 
 	function createPlatforms(){

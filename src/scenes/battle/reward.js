@@ -230,7 +230,7 @@ var reward = function(){
     //Create elements for the screen
     function createScenary(){
         var namePlayer;
-        if(INDEX_WINNER == 1){
+        if(INDEX_WINNER == 0){
             namePlayer = "equipoAzul";
         }else{
             namePlayer = "equipoRosa";

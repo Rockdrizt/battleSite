@@ -1,0 +1,177 @@
+.item__buttons {
+  max-width: 300px;
+  margin: 0 auto;
+  .item__btn {
+    position: relative;
+    display: inline-block;
+    p,
+    span {
+      cursor: pointer;
+    }
+    p {
+      position: absolute;
+      font-size: 30px;
+      line-height: 60px;
+      text-shadow: 0 0 10px rgb(0, 0, 0);
+      top: 50px;
+      &:hover + span {
+        background-image: url(../img/mathtournament-onboarding-play-btn-down.png);
+      }
+      &::before {
+        content: '';
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        z-index: -1;
+      }
+    }
+    span {
+      display: inline-block;
+      background-size: contain;
+      background-image: url(../img/mathtournament-onboarding-play-btn.png);
+      background-repeat: no-repeat;
+      width: 110px;
+      height: 145px;
+      &:hover {
+        background-image: url(../img/mathtournament-onboarding-play-btn-down.png);
+      }
+    }
+  }
+}
+
+.item__btn--back {
+  float: left;
+  span {
+    transform: scaleX(-1);
+  }
+  p {
+    right: 105px;
+    padding-right: 10px;
+    &::before {
+      background-image: url(../img/mathtournament-onboarding-l-banner-btn.png);
+      right: -85px;
+      width: 220px;
+      background-position: top right;
+    }
+  }
+}
+
+.item__btn--start {
+  float: right;
+  p {
+    left: 105px;
+    padding-left: 10px;
+    &::before {
+      background-image: url(../img/mathtournament-onboarding-r-bannerbtn.png);
+      left: -50px;
+      background-position: top left;
+      width: 220px;
+    }
+  }
+}
+
+/**************************************
+ ********* Media Queries **************
+ **************************************/
+
+@media only screen and (max-width: 991px) {
+  .item__buttons {
+    width: 200px;
+    .item__btn {
+      p {
+        font-size: 20px;
+        line-height: 40px;
+        top: 30px;
+        &::before {
+          width: 150px;
+        }
+      }
+      span {
+        width: 75px;
+        height: 100px;
+      }
+      &--back {
+        p {
+          right:70px;
+          &::before {
+            right: -45px;
+          }
+        }
+      }
+      &--start {
+        p {
+          left: 70px;
+          &::before {
+            left: -35px;
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 767px) {
+  .item__buttons {
+    width: 150px;
+    .item__btn {
+      p {
+        top: 20px;
+      }
+      span {
+        width: 54px;
+        height: 70px;
+      }
+      &--back {
+        p {
+          right: 50px;
+        }
+      }
+      &--start {
+        p {
+          left: 50px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .main--client,
+  .main--create {
+    .item__buttons {
+      .item__btn {
+        position: absolute;
+        top: 185px;
+        p {
+          line-height: 25px;
+          top: 17px;
+          &::before {
+            width: 110px;
+            height: 25px;
+          }
+        }
+        span {
+          width: 40px;
+          height: 52px;
+        }
+        &--back {
+          p {
+            right: 30px;
+            &::before {
+              right: -25px;
+            }
+          }
+        }
+        &--start {
+          p {
+            left: 30px;
+            &::before {
+              left: -15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
