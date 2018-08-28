@@ -285,6 +285,8 @@
 
 .item__btn--back {
   float: left; }
+  .item__btn--back span {
+    transform: scaleX(-1); }
   .item__btn--back p {
     right: 105px;
     padding-right: 10px; }
@@ -309,23 +311,38 @@
  ********* Media Queries **************
  **************************************/
 @media only screen and (max-width: 991px) {
-  .item__buttons .item__btn p {
-    font-size: 20px;
-    line-height: 40px;
-    top: 25px; }
-    .item__buttons .item__btn p::before {
-      width: 150px; }
-  .item__buttons .item__btn span {
-    width: 60px;
-    height: 80px; }
-  .item__buttons .item__btn--back p {
-    right: 55px; }
-    .item__buttons .item__btn--back p::before {
-      right: -45px; }
-  .item__buttons .item__btn--start p {
-    left: 60px; }
-    .item__buttons .item__btn--start p::before {
-      left: -35px; } }
+  .item__buttons {
+    width: 200px; }
+    .item__buttons .item__btn p {
+      font-size: 20px;
+      line-height: 40px;
+      top: 30px; }
+      .item__buttons .item__btn p::before {
+        width: 150px; }
+    .item__buttons .item__btn span {
+      width: 75px;
+      height: 100px; }
+    .item__buttons .item__btn--back p {
+      right: 70px; }
+      .item__buttons .item__btn--back p::before {
+        right: -45px; }
+    .item__buttons .item__btn--start p {
+      left: 70px; }
+      .item__buttons .item__btn--start p::before {
+        left: -35px; } }
+
+@media only screen and (max-width: 767px) {
+  .item__buttons {
+    width: 150px; }
+    .item__buttons .item__btn p {
+      top: 20px; }
+    .item__buttons .item__btn span {
+      width: 54px;
+      height: 70px; }
+    .item__buttons .item__btn--back p {
+      right: 50px; }
+    .item__buttons .item__btn--start p {
+      left: 50px; } }
 
 @media only screen and (max-width: 575px) {
   .main--client .item__buttons .item__btn,
@@ -364,6 +381,9 @@
     display: block;
     margin: 0 auto; }
 
+/**************************************
+ ********* Media Queries **************
+ **************************************/
 @media only screen and (max-width: 575px) {
   .item__logo img {
     width: 50%; } }
@@ -426,11 +446,14 @@
     .item__buttons--carousel .item__btn img {
       width: 100%; }
 
+/**************************************
+ ********* Media Queries **************
+ **************************************/
 @media only screen and (max-width: 991px) {
   .main--carousel .item__buttons {
     width: 180px; } }
 
-@media only screen and (max-width: 676px) {
+@media only screen and (max-width: 767px) {
   .main--carousel .carousel__item h2 {
     background-size: contain; }
   .main--carousel .item__buttons {
@@ -442,6 +465,81 @@
     font-size: 20px; }
   .main--carousel .item__buttons {
     width: 110px; } }
+
+.container--difficulty {
+  top: 55%; }
+
+.item--difficulty {
+  width: 40%; }
+  .item--difficulty .header--difficulty {
+    width: 100%;
+    font-size: 40px;
+    background-image: linear-gradient(90deg, #efc54f, #db7742);
+    text-shadow: 3px 3px 0 black;
+    position: relative; }
+    .item--difficulty .header--difficulty .header__btn {
+      width: 80px;
+      display: inline-block;
+      position: absolute;
+      top: -18px; }
+      .item--difficulty .header--difficulty .header__btn--left {
+        left: -60px; }
+      .item--difficulty .header--difficulty .header__btn--right {
+        right: -60px; }
+      .item--difficulty .header--difficulty .header__btn img {
+        width: 100%; }
+  .item--difficulty .difficulty__row {
+    background-color: #f9f3d1;
+    background-image: url(../img/mathtournament-onboarding-board-tile.png);
+    background-size: 150px;
+    padding: 10px;
+    border-radius: 0 0 10px 10px; }
+  .item--difficulty .difficulty__container .difficulty__column {
+    display: inline-block;
+    width: 45%; }
+    .item--difficulty .difficulty__container .difficulty__column .difficulty__item img {
+      width: 100%;
+      padding: 5px; }
+
+/**************************************
+ ********* Media Queries **************
+ **************************************/
+@media only screen and (max-width: 767px) {
+  .item--difficulty {
+    width: 50%; }
+    .item--difficulty .header--difficulty {
+      font-size: 30px; }
+      .item--difficulty .header--difficulty .header__btn {
+        width: 60px;
+        top: -15px; }
+        .item--difficulty .header--difficulty .header__btn--left {
+          left: -40px; }
+        .item--difficulty .header--difficulty .header__btn--right {
+          right: -40px; }
+    .item--difficulty .difficulty__row {
+      background-size: 100px;
+      padding: 5px; }
+    .item--difficulty .difficulty__container .difficulty__column .difficulty__item img {
+      padding: 0; } }
+
+@media only screen and (max-width: 575px) {
+  .container--difficulty .item--difficulty {
+    width: 55%; }
+    .container--difficulty .item--difficulty .header--difficulty {
+      font-size: 30px; }
+      .container--difficulty .item--difficulty .header--difficulty .header__btn {
+        width: 50px;
+        top: -10px; }
+        .container--difficulty .item--difficulty .header--difficulty .header__btn--left {
+          left: -30px; }
+        .container--difficulty .item--difficulty .header--difficulty .header__btn--right {
+          right: -30px; }
+    .container--difficulty .item--difficulty .item__buttons {
+      top: 10px; }
+      .container--difficulty .item--difficulty .item__buttons .item__btn--back {
+        left: 0; }
+      .container--difficulty .item--difficulty .item__buttons .item__btn--start {
+        right: 0; } }
 
 .item__textbox--create .item__textbox__container .textbox {
   width: 200%; }
