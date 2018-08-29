@@ -1,7 +1,6 @@
 var spineLoader = function () {
 
 	var currentLoader
-	var spines = {}
 	var pullGroup
 
 	function getGroupRef(ref, self) {
@@ -15,8 +14,7 @@ var spineLoader = function () {
 		}
 	}
 
-	function removeSpine() {
-		pullGroup.add(this)
+	function removeParticles() {
 
 		var particles = this.particles
 		if(!particles)
@@ -210,8 +208,10 @@ var spineLoader = function () {
 		spineGroup.setSkinByName = setSkin.bind(spineSkeleton)
 
 		spineGroup.setAlive = function (alive) {
-			this.autoUpdate = alive
-		}.bind(spineSkeleton)
+			this.spine.autoUpdate = alive
+			if(alive)
+				this.removeParticles()
+		}.bind(spineGroup)
 
 		spineGroup.getSlotContainer = function (slotName) {
 			var slotIndex
@@ -242,7 +242,7 @@ var spineLoader = function () {
 
 		spineGroup.spine = spineSkeleton
 
-		spineGroup.remove = removeSpine.bind(spineGroup)
+		spineGroup.removeParticles = removeParticles.bind(spineGroup)
 
 		// if(!unlike)
 		// 	spines[skeleton] = spineGroup
