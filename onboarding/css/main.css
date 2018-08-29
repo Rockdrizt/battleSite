@@ -649,8 +649,8 @@
         cursor: pointer;
         border: none;
         background-color: transparent;
-        width: 125px;
-        height: 125px;
+        width: 110px;
+        height: 110px;
         position: absolute;
         bottom: -60px;
         left: 50%;
@@ -818,6 +818,79 @@
         width: 60px;
         height: 60px;
         bottom: -20px; } }
+
+.container--customize {
+  width: 600px; }
+  .container--customize .item {
+    width: 100%; }
+    .container--customize .item .customize__header {
+      position: relative;
+      font-size: 40px;
+      text-shadow: 0 0 10px #000000;
+      line-height: 40px;
+      z-index: 1; }
+      .container--customize .item .customize__header::after {
+        content: '';
+        width: 115%;
+        height: 250%;
+        position: absolute;
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-image: url(../img/mathtournament-onboarding-subject-header.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: -1; }
+    .container--customize .item .customize__container {
+      width: 100%; }
+      .container--customize .item .customize__container .customize__row {
+        width: 90%;
+        margin: 0 auto;
+        background-color: #f9f3d1;
+        background-image: url(../img/mathtournament-onboarding-board-tile.png);
+        background-size: 150px;
+        padding: 10px;
+        border-radius: 0 0 10px 10px; }
+        .container--customize .item .customize__container .customize__row .customize__col {
+          margin: 10px;
+          position: relative;
+          width: 90%;
+          margin: 0 auto;
+          height: 65px;
+          font-size: 25px;
+          z-index: 5; }
+          .container--customize .item .customize__container .customize__row .customize__col .background {
+            position: absolute;
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-image: url(../img/mathtournament-onboarding-text-line.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+            z-index: 1; }
+          .container--customize .item .customize__container .customize__row .customize__col button {
+            display: inline-block;
+            height: 100%;
+            border: none;
+            background-color: transparent; }
+            .container--customize .item .customize__container .customize__row .customize__col button img {
+              height: 100%;
+              vertical-align: middle; }
+          .container--customize .item .customize__container .customize__row .customize__col .option {
+            text-shadow: 0 0 5px #000000;
+            display: inline-block; }
+          .container--customize .item .customize__container .customize__row .customize__col input {
+            display: inline-block;
+            text-align: center;
+            font-size: inherit;
+            color: black;
+            width: 40px;
+            height: 40px;
+            border: none;
+            background-color: transparent; }
 
 .item__textbox--create .item__textbox__container .textbox {
   width: 200%; }
