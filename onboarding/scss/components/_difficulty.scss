@@ -52,10 +52,8 @@
  **************************************/
 
 @media only screen and (max-width: 991px) {
-}
-@media only screen and (max-width: 767px) {
   .item--difficulty {
-    width: 50%;
+    // width: 60%;
     .header--difficulty {
       font-size: 30px;
       .header__btn {
@@ -81,6 +79,14 @@
           }
         }
       }
+    }
+  }
+}
+@media only screen and (max-width: 767px) {
+  .item--difficulty {
+    width: 60%;
+    .header--difficulty {
+      font-size: 30px;
     }
   }
 }

@@ -506,23 +506,27 @@
 /**************************************
  ********* Media Queries **************
  **************************************/
+@media only screen and (max-width: 991px) {
+  .item--difficulty .header--difficulty {
+    font-size: 30px; }
+    .item--difficulty .header--difficulty .header__btn {
+      width: 60px;
+      top: -15px; }
+      .item--difficulty .header--difficulty .header__btn--left {
+        left: -40px; }
+      .item--difficulty .header--difficulty .header__btn--right {
+        right: -40px; }
+  .item--difficulty .difficulty__row {
+    background-size: 100px;
+    padding: 5px; }
+  .item--difficulty .difficulty__container .difficulty__column .difficulty__item img {
+    padding: 0; } }
+
 @media only screen and (max-width: 767px) {
   .item--difficulty {
-    width: 50%; }
+    width: 60%; }
     .item--difficulty .header--difficulty {
-      font-size: 30px; }
-      .item--difficulty .header--difficulty .header__btn {
-        width: 60px;
-        top: -15px; }
-        .item--difficulty .header--difficulty .header__btn--left {
-          left: -40px; }
-        .item--difficulty .header--difficulty .header__btn--right {
-          right: -40px; }
-    .item--difficulty .difficulty__row {
-      background-size: 100px;
-      padding: 5px; }
-    .item--difficulty .difficulty__container .difficulty__column .difficulty__item img {
-      padding: 0; } }
+      font-size: 30px; } }
 
 @media only screen and (max-width: 575px) {
   .container--difficulty .item--difficulty {
@@ -552,18 +556,19 @@
   height: 100vh; }
   .modal .borde {
     position: absolute;
-    top: 50%;
+    padding: 10px;
+    top: 49%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border-radius: 10px; }
+    border-radius: 10px;
+    width: 500px; }
     .modal .borde .modal__container {
       position: relative;
-      margin: 10px;
-      padding: 20px 40px;
+      padding: 10px 40px;
       background-color: #fff;
       border-radius: 10px;
-      font-family: 'VAGRoundedStd Bold', sans-serif;
-      width: 500px; }
+      width: 100%;
+      font-family: 'VAGRoundedStd Bold', sans-serif; }
       .modal .borde .modal__container .close {
         display: inline-block;
         width: 70px;
@@ -596,10 +601,10 @@
           text-shadow: 0 0 5px black;
           font-size: 45px; }
         .modal .borde .modal__container header p {
-          font-size: 23px;
+          font-size: 25px;
           color: #000000; }
       .modal .borde .modal__container .modal__list {
-        max-height: 350px;
+        max-height: 250px;
         margin-bottom: 30px;
         overflow: auto; }
         .modal .borde .modal__container .modal__list li {
@@ -670,7 +675,7 @@
     background-color: #e3f1f1; }
 
 /**************************************
- ********* Modal Substraction *************
+ ********* Modal Substraction *********
  **************************************/
 .modal--substraction .borde {
   background-image: linear-gradient(135deg, #D26C42, #A33065); }
@@ -686,7 +691,7 @@
     background-color: #F9EAE1; }
 
 /**************************************
- ********* Modal Multiplication *************
+ ********* Modal Multiplication *******
  **************************************/
 .modal--multiplication .borde {
   background-image: linear-gradient(135deg, #D0337C, #8F2D6F); }
@@ -716,6 +721,103 @@
     border-image: url(../img/mathtournament-onboarding-div-header.png) 1; }
   .modal--division .borde .modal__container .modal__list li:nth-child(odd) {
     background-color: #E9E0FC; }
+
+/**************************************
+ ********* Media Queries **************
+ **************************************/
+@media only screen and (max-width: 991px) {
+  .modal .borde {
+    width: 80%; }
+    .modal .borde .modal__container {
+      padding: 10px 20px; }
+      .modal .borde .modal__container .close {
+        width: 60px;
+        height: 60px;
+        top: -35px;
+        right: -35px; }
+        .modal .borde .modal__container .close::after {
+          top: 18px;
+          left: -4px;
+          font-size: 60px; }
+      .modal .borde .modal__container header {
+        padding-bottom: 5px;
+        margin-bottom: 10px; }
+        .modal .borde .modal__container header h2 {
+          font-size: 35px; }
+        .modal .borde .modal__container header p {
+          font-size: 23px; }
+      .modal .borde .modal__container .modal__list {
+        height: 120px;
+        margin-bottom: 20px; }
+        .modal .borde .modal__container .modal__list li {
+          padding: 7px; }
+          .modal .borde .modal__container .modal__list li label {
+            font-size: 23px;
+            margin-left: 5%; }
+            .modal .borde .modal__container .modal__list li label span {
+              margin-right: 10%; }
+      .modal .borde .modal__container .modal__btn {
+        width: 80px;
+        height: 80px;
+        bottom: -40px; } }
+
+@media only screen and (max-width: 767px) {
+  .modal .borde .modal__container {
+    padding: 5px 20px; }
+    .modal .borde .modal__container .close {
+      width: 50px;
+      height: 50px;
+      top: -35px;
+      right: -35px; }
+      .modal .borde .modal__container .close::after {
+        top: 15px;
+        left: -4px;
+        font-size: 50px; }
+    .modal .borde .modal__container header {
+      padding-bottom: 0;
+      margin-bottom: 5px; }
+      .modal .borde .modal__container header h2 {
+        font-size: 3opx; }
+      .modal .borde .modal__container header p {
+        font-size: 20px; }
+    .modal .borde .modal__container .modal__btn {
+      width: 70px;
+      height: 70px;
+      bottom: -40px; } }
+
+@media only screen and (max-width: 575px) {
+  .modal .borde {
+    top: 50%;
+    padding: 7px; }
+    .modal .borde .modal__container {
+      padding: 5px 10px 5px 10px; }
+      .modal .borde .modal__container .close {
+        border-radius: 7px;
+        width: 40px;
+        height: 40px;
+        top: -25px;
+        right: -25px; }
+        .modal .borde .modal__container .close::after {
+          top: 11px;
+          left: -3px;
+          font-size: 40px; }
+      .modal .borde .modal__container header {
+        padding-bottom: 0;
+        margin-bottom: 3px; }
+      .modal .borde .modal__container .modal__list {
+        height: 120px;
+        margin-bottom: 20px; }
+        .modal .borde .modal__container .modal__list li {
+          padding: 5px; }
+          .modal .borde .modal__container .modal__list li label {
+            font-size: 23px;
+            margin-left: 5%; }
+            .modal .borde .modal__container .modal__list li label span {
+              margin-right: 5%; }
+      .modal .borde .modal__container .modal__btn {
+        width: 60px;
+        height: 60px;
+        bottom: -20px; } }
 
 .item__textbox--create .item__textbox__container .textbox {
   width: 200%; }
