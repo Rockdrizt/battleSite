@@ -39,6 +39,9 @@
   .bubbles-down {
     animation: slide-down 10s forwards;
   }
+  .hidden {
+    display: none;
+  }
 }
 
 .container {

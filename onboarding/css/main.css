@@ -31,6 +31,8 @@
     animation: slide-up 10s forwards; }
   .main .bubbles-down {
     animation: slide-down 10s forwards; }
+  .main .hidden {
+    display: none; }
 
 .container {
   position: absolute;
@@ -473,19 +475,19 @@
   width: 40%; }
   .item--difficulty .header--difficulty {
     width: 100%;
-    font-size: 40px;
+    font-size: 50px;
     background-image: linear-gradient(90deg, #efc54f, #db7742);
     text-shadow: 3px 3px 0 black;
     position: relative; }
     .item--difficulty .header--difficulty .header__btn {
-      width: 80px;
+      width: 100px;
       display: inline-block;
       position: absolute;
-      top: -18px; }
+      top: -25px; }
       .item--difficulty .header--difficulty .header__btn--left {
-        left: -60px; }
+        left: -70px; }
       .item--difficulty .header--difficulty .header__btn--right {
-        right: -60px; }
+        right: -70px; }
       .item--difficulty .header--difficulty .header__btn img {
         width: 100%; }
   .item--difficulty .difficulty__row {
@@ -500,6 +502,102 @@
     .item--difficulty .difficulty__container .difficulty__column .difficulty__item img {
       width: 100%;
       padding: 5px; }
+
+.modal {
+  position: relative;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh; }
+  .modal .borde {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #72dae6;
+    border-radius: 10px; }
+    .modal .borde .modal__container {
+      position: relative;
+      margin: 10px;
+      background-color: #fff;
+      padding-bottom: 25px;
+      border-radius: 10px;
+      font-family: 'VAGRoundedStd Bold', sans-serif;
+      width: 500px; }
+      .modal .borde .modal__container header {
+        margin: 0 40px;
+        text-align: center;
+        border-bottom: 3px solid transparent;
+        -moz-border-image: url(../img/mathtournament-onboarding-add-header.png) 1;
+        /* Old firefox */
+        -webkit-border-image: url(../img/mathtournament-onboarding-add-header.png) 1;
+        /* Safari */
+        -o-border-image: url(../img/mathtournament-onboarding-add-header.png) 1;
+        /* Opera */
+        border-image: url(../img/mathtournament-onboarding-add-header.png) 1;
+        padding-bottom: 10px;
+        margin-bottom: 10px; }
+        .modal .borde .modal__container header h2 {
+          text-shadow: 0 0 5px black;
+          font-size: 45px; }
+        .modal .borde .modal__container header p {
+          font-size: 23px;
+          color: #000000; }
+      .modal .borde .modal__container .modal__list {
+        max-height: 350px;
+        margin-bottom: 30px;
+        overflow: auto; }
+        .modal .borde .modal__container .modal__list li {
+          padding: 10px;
+          margin: 0 40px;
+          border-radius: 5px;
+          list-style: none; }
+          .modal .borde .modal__container .modal__list li:nth-child(odd) {
+            background-color: #e3f1f1; }
+          .modal .borde .modal__container .modal__list li label {
+            color: #000000;
+            font-size: 25px;
+            margin-left: 10px;
+            cursor: pointer; }
+            .modal .borde .modal__container .modal__list li label input {
+              display: none; }
+              .modal .borde .modal__container .modal__list li label input:checked + span {
+                border: 2px solid green;
+                background-color: #00b500; }
+                .modal .borde .modal__container .modal__list li label input:checked + span::after {
+                  content: '';
+                  position: absolute;
+                  top: 2px;
+                  left: 5px;
+                  height: 75%;
+                  width: 45%;
+                  border-radius: 3px;
+                  border-right: 4px solid;
+                  border-bottom: 4px solid;
+                  border-color: white; }
+            .modal .borde .modal__container .modal__list li label span {
+              position: relative;
+              width: 10px;
+              margin-right: 20px;
+              display: inline-block;
+              width: 25px;
+              height: 25px;
+              background-color: #7F7A93;
+              transform: rotate(45deg);
+              border: 2px solid #fff;
+              border-radius: 7px;
+              vertical-align: text-bottom;
+              transition: all .5s ease; }
+      .modal .borde .modal__container .modal__btn {
+        width: 125px;
+        height: 125px;
+        position: absolute;
+        bottom: -60px;
+        left: 50%;
+        transform: translateX(-50%); }
+        .modal .borde .modal__container .modal__btn img {
+          width: 100%; }
 
 /**************************************
  ********* Media Queries **************
