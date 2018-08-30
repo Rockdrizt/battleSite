@@ -46,6 +46,9 @@
 .clearfix {
   overflow: hidden; }
 
+.pointer {
+  cursor: pointer; }
+
 @keyframes slide-up {
   0% {
     background-position: 0 20%; }
@@ -89,6 +92,7 @@
       position: absolute;
       z-index: -1; }
   .item__avatar {
+    position: relative;
     margin-top: 115px; }
     .item__avatar img {
       display: block;
@@ -101,25 +105,25 @@
     transform: scaleX(-1);
     filter: drop-shadow(5px 5px 0 #cf2e79) drop-shadow(-5px -5px 0 #cf2e79) drop-shadow(-5px 5px 0 #cf2e79) drop-shadow(5px -5px 0 #cf2e79); }
 
-.item__textbox__container h3 {
-  color: #070634;
-  font-size: 35px;
-  padding: 10px; }
-
-.item__textbox__container input {
-  font-size: 30px;
-  text-align: center;
-  width: 100%;
-  border: none;
-  background-color: #252a4b;
-  border-radius: 5px;
-  padding-top: 5px; }
-
-.item__textbox__container p {
-  color: #070634;
-  font-size: 20px;
-  font-family: 'VAGRounded Thin', sans-serif;
-  padding-top: 10px; }
+.item__textbox__container {
+  position: relative; }
+  .item__textbox__container h3 {
+    color: #2d1f4e;
+    font-size: 35px;
+    padding: 10px; }
+  .item__textbox__container input {
+    font-size: 30px;
+    text-align: center;
+    width: 100%;
+    border: none;
+    background-color: #252a4b;
+    border-radius: 5px;
+    padding-top: 5px; }
+  .item__textbox__container p {
+    color: #2d1f4e;
+    font-size: 20px;
+    font-family: 'VAGRounded Thin', sans-serif;
+    padding-top: 10px; }
 
 .item--right {
   float: right; }
@@ -260,10 +264,11 @@
     .item__buttons .item__btn span {
       cursor: pointer; }
     .item__buttons .item__btn p {
+      letter-spacing: 2px;
+      text-shadow: 0 3px 0 #2d1f4e, 0 -3px 0 #2d1f4e, -3px 0 0 #2d1f4e, 3px 0 0 #2d1f4e, 2px 2px 0 #2d1f4e, -2px -2px 0 #2d1f4e, 2px -2px 0 #2d1f4e, -2px 2px 0 #2d1f4e;
       position: absolute;
       font-size: 30px;
       line-height: 60px;
-      text-shadow: 0 0 10px black;
       top: 50px; }
       .item__buttons .item__btn p:hover + span {
         background-image: url(../img/mathtournament-onboarding-play-btn-down.png); }
@@ -299,7 +304,8 @@
       background-position: top right; }
 
 .item__btn--start {
-  float: right; }
+  float: right;
+  z-index: 5; }
   .item__btn--start p {
     left: 105px;
     padding-left: 10px; }
@@ -379,173 +385,24 @@
 .item__logo {
   width: 100%; }
   .item__logo img {
-    width: 70%;
+    width: 90%;
     display: block;
     margin: 0 auto; }
 
 /**************************************
  ********* Media Queries **************
  **************************************/
-@media only screen and (max-width: 575px) {
+@media only screen and (max-width: 991px) {
   .item__logo img {
     width: 50%; } }
 
-.main--carousel .header {
-  z-index: 200; }
-
-.carousel {
-  width: 100%;
-  height: 100%;
-  overflow: visible; }
-  .carousel .container {
-    position: relative;
-    top: 25%;
-    max-width: 100%;
-    text-align: left; }
-  .carousel__item {
-    width: 40%;
-    max-width: 700px; }
-    .carousel__item h2 {
-      display: none;
-      letter-spacing: 1px;
-      text-shadow: 3px 3px 0 black;
-      text-align: center;
-      position: absolute;
-      height: 60px;
-      width: 100%;
-      line-height: 70px;
-      background-image: url(../img/mathtournament-onboarding-subject-header.png);
-      background-size: 300px 60px;
-      background-repeat: no-repeat;
-      background-position: center center; }
-    .carousel__item img {
-      width: 100%; }
-  .carousel .unlocked h2 {
-    display: inline-block; }
-  .carousel-buttons .button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 10%;
-    z-index: 200; }
-    .carousel-buttons .button img {
-      width: 100%; }
-    .carousel-buttons .button--left {
-      left: 5%; }
-    .carousel-buttons .button--right {
-      right: 5%; }
-
-.item__buttons--carousel {
-  position: absolute;
-  bottom: 5%;
-  left: 50%;
-  transform: translateX(-50%); }
-  .item__buttons--carousel .item__btn {
-    width: 45%;
-    display: block;
-    margin: 0 auto;
-    filter: saturate(1); }
-    .item__buttons--carousel .item__btn img {
-      width: 100%; }
-
-/**************************************
- ********* Media Queries **************
- **************************************/
-@media only screen and (max-width: 991px) {
-  .main--carousel .item__buttons {
-    width: 180px; } }
-
 @media only screen and (max-width: 767px) {
-  .main--carousel .carousel__item h2 {
-    background-size: contain; }
-  .main--carousel .item__buttons {
-    width: 150px; } }
+  .item__logo img {
+    width: 60%; } }
 
 @media only screen and (max-width: 575px) {
-  .main--carousel .carousel__item h2 {
-    background-size: contain;
-    font-size: 20px; }
-  .main--carousel .item__buttons {
-    width: 110px; } }
-
-.container--difficulty {
-  top: 55%; }
-
-.item--difficulty {
-  width: 40%; }
-  .item--difficulty .header--difficulty {
-    width: 100%;
-    font-size: 50px;
-    background-image: linear-gradient(90deg, #efc54f, #db7742);
-    text-shadow: 3px 3px 0 black;
-    position: relative; }
-    .item--difficulty .header--difficulty .header__btn {
-      width: 100px;
-      display: inline-block;
-      position: absolute;
-      top: -25px; }
-      .item--difficulty .header--difficulty .header__btn--left {
-        left: -70px; }
-      .item--difficulty .header--difficulty .header__btn--right {
-        right: -70px; }
-      .item--difficulty .header--difficulty .header__btn img {
-        width: 100%; }
-  .item--difficulty .difficulty__row {
-    background-color: #f9f3d1;
-    background-image: url(../img/mathtournament-onboarding-board-tile.png);
-    background-size: 150px;
-    padding: 10px;
-    border-radius: 0 0 10px 10px; }
-  .item--difficulty .difficulty__container .difficulty__column {
-    display: inline-block;
-    width: 45%; }
-    .item--difficulty .difficulty__container .difficulty__column .difficulty__item img {
-      width: 100%;
-      padding: 5px; }
-
-/**************************************
- ********* Media Queries **************
- **************************************/
-@media only screen and (max-width: 991px) {
-  .item--difficulty .header--difficulty {
-    font-size: 30px; }
-    .item--difficulty .header--difficulty .header__btn {
-      width: 60px;
-      top: -15px; }
-      .item--difficulty .header--difficulty .header__btn--left {
-        left: -40px; }
-      .item--difficulty .header--difficulty .header__btn--right {
-        right: -40px; }
-  .item--difficulty .difficulty__row {
-    background-size: 100px;
-    padding: 5px; }
-  .item--difficulty .difficulty__container .difficulty__column .difficulty__item img {
-    padding: 0; } }
-
-@media only screen and (max-width: 767px) {
-  .item--difficulty {
-    width: 60%; }
-    .item--difficulty .header--difficulty {
-      font-size: 30px; } }
-
-@media only screen and (max-width: 575px) {
-  .container--difficulty .item--difficulty {
-    width: 55%; }
-    .container--difficulty .item--difficulty .header--difficulty {
-      font-size: 30px; }
-      .container--difficulty .item--difficulty .header--difficulty .header__btn {
-        width: 50px;
-        top: -10px; }
-        .container--difficulty .item--difficulty .header--difficulty .header__btn--left {
-          left: -30px; }
-        .container--difficulty .item--difficulty .header--difficulty .header__btn--right {
-          right: -30px; }
-    .container--difficulty .item--difficulty .item__buttons {
-      top: 10px; }
-      .container--difficulty .item--difficulty .item__buttons .item__btn--back {
-        left: 0; }
-      .container--difficulty .item--difficulty .item__buttons .item__btn--start {
-        right: 0; } }
+  .item__logo img {
+    width: 50%; } }
 
 .modal {
   position: relative;
@@ -819,79 +676,6 @@
         height: 60px;
         bottom: -20px; } }
 
-.container--customize {
-  width: 600px; }
-  .container--customize .item {
-    width: 100%; }
-    .container--customize .item .customize__header {
-      position: relative;
-      font-size: 40px;
-      text-shadow: 0 0 10px #000000;
-      line-height: 40px;
-      z-index: 1; }
-      .container--customize .item .customize__header::after {
-        content: '';
-        width: 115%;
-        height: 250%;
-        position: absolute;
-        top: 0%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-image: url(../img/mathtournament-onboarding-subject-header.png);
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        background-position: center;
-        z-index: -1; }
-    .container--customize .item .customize__container {
-      width: 100%; }
-      .container--customize .item .customize__container .customize__row {
-        width: 90%;
-        margin: 0 auto;
-        background-color: #f9f3d1;
-        background-image: url(../img/mathtournament-onboarding-board-tile.png);
-        background-size: 150px;
-        padding: 10px;
-        border-radius: 0 0 10px 10px; }
-        .container--customize .item .customize__container .customize__row .customize__col {
-          margin: 10px;
-          position: relative;
-          width: 90%;
-          margin: 0 auto;
-          height: 65px;
-          font-size: 25px;
-          z-index: 5; }
-          .container--customize .item .customize__container .customize__row .customize__col .background {
-            position: absolute;
-            display: inline-block;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background-image: url(../img/mathtournament-onboarding-text-line.png);
-            background-size: 100%;
-            background-repeat: no-repeat;
-            z-index: 1; }
-          .container--customize .item .customize__container .customize__row .customize__col button {
-            display: inline-block;
-            height: 100%;
-            border: none;
-            background-color: transparent; }
-            .container--customize .item .customize__container .customize__row .customize__col button img {
-              height: 100%;
-              vertical-align: middle; }
-          .container--customize .item .customize__container .customize__row .customize__col .option {
-            text-shadow: 0 0 5px #000000;
-            display: inline-block; }
-          .container--customize .item .customize__container .customize__row .customize__col input {
-            display: inline-block;
-            text-align: center;
-            font-size: inherit;
-            color: black;
-            width: 40px;
-            height: 40px;
-            border: none;
-            background-color: transparent; }
-
 .item__textbox--create .item__textbox__container .textbox {
   width: 200%; }
   .item__textbox--create .item__textbox__container .textbox__text {
@@ -1021,3 +805,249 @@
     font-size: 20px; }
   .item--lobby.item--middle .item__textbox p {
     padding: 10px; } }
+
+.main--carousel .header {
+  z-index: 200; }
+
+.carousel {
+  width: 100%;
+  height: 100%;
+  overflow: visible; }
+  .carousel .container {
+    position: relative;
+    top: 25%;
+    max-width: 100%;
+    text-align: left; }
+  .carousel__item {
+    width: 40%;
+    max-width: 700px; }
+    .carousel__item h2 {
+      display: none;
+      letter-spacing: 1px;
+      text-shadow: 3px 3px 0 black;
+      text-align: center;
+      position: absolute;
+      height: 60px;
+      width: 100%;
+      line-height: 70px;
+      background-image: url(../img/mathtournament-onboarding-subject-header.png);
+      background-size: 300px 60px;
+      background-repeat: no-repeat;
+      background-position: center center; }
+    .carousel__item img {
+      width: 100%; }
+  .carousel .unlocked h2 {
+    display: inline-block; }
+  .carousel-buttons .button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10%;
+    z-index: 200; }
+    .carousel-buttons .button img {
+      width: 100%; }
+    .carousel-buttons .button--left {
+      left: 5%; }
+    .carousel-buttons .button--right {
+      right: 5%; }
+
+.item__buttons--carousel {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%); }
+  .item__buttons--carousel .item__btn {
+    width: 45%;
+    display: block;
+    margin: 0 auto;
+    filter: saturate(1); }
+    .item__buttons--carousel .item__btn img {
+      width: 100%; }
+
+/**************************************
+ ********* Media Queries **************
+ **************************************/
+@media only screen and (max-width: 991px) {
+  .main--carousel .item__buttons {
+    width: 180px; } }
+
+@media only screen and (max-width: 767px) {
+  .main--carousel .carousel__item h2 {
+    background-size: contain; }
+  .main--carousel .item__buttons {
+    width: 150px; } }
+
+@media only screen and (max-width: 575px) {
+  .main--carousel .carousel__item h2 {
+    background-size: contain;
+    font-size: 20px; }
+  .main--carousel .item__buttons {
+    width: 110px; } }
+
+.container--difficulty {
+  top: 55%; }
+
+.item--difficulty {
+  width: 40%; }
+  .item--difficulty .header--difficulty {
+    width: 100%;
+    font-size: 50px;
+    background-image: linear-gradient(90deg, #efc54f, #db7742);
+    text-shadow: 3px 3px 0 black;
+    position: relative; }
+    .item--difficulty .header--difficulty .header__btn {
+      width: 100px;
+      display: inline-block;
+      position: absolute;
+      top: -25px; }
+      .item--difficulty .header--difficulty .header__btn--left {
+        left: -70px; }
+      .item--difficulty .header--difficulty .header__btn--right {
+        right: -70px; }
+      .item--difficulty .header--difficulty .header__btn img {
+        width: 100%; }
+  .item--difficulty .difficulty__row {
+    background-color: #f9f3d1;
+    background-image: url(../img/mathtournament-onboarding-board-tile.png);
+    background-size: 150px;
+    padding: 10px;
+    border-radius: 0 0 10px 10px; }
+  .item--difficulty .difficulty__container .difficulty__column {
+    display: inline-block;
+    width: 45%; }
+    .item--difficulty .difficulty__container .difficulty__column .difficulty__item img {
+      width: 100%;
+      padding: 5px; }
+
+/**************************************
+ ********* Media Queries **************
+ **************************************/
+@media only screen and (max-width: 991px) {
+  .item--difficulty .header--difficulty {
+    font-size: 30px; }
+    .item--difficulty .header--difficulty .header__btn {
+      width: 60px;
+      top: -15px; }
+      .item--difficulty .header--difficulty .header__btn--left {
+        left: -40px; }
+      .item--difficulty .header--difficulty .header__btn--right {
+        right: -40px; }
+  .item--difficulty .difficulty__row {
+    background-size: 100px;
+    padding: 5px; }
+  .item--difficulty .difficulty__container .difficulty__column .difficulty__item img {
+    padding: 0; } }
+
+@media only screen and (max-width: 767px) {
+  .item--difficulty {
+    width: 60%; }
+    .item--difficulty .header--difficulty {
+      font-size: 30px; } }
+
+@media only screen and (max-width: 575px) {
+  .container--difficulty .item--difficulty {
+    width: 55%; }
+    .container--difficulty .item--difficulty .header--difficulty {
+      font-size: 30px; }
+      .container--difficulty .item--difficulty .header--difficulty .header__btn {
+        width: 50px;
+        top: -10px; }
+        .container--difficulty .item--difficulty .header--difficulty .header__btn--left {
+          left: -30px; }
+        .container--difficulty .item--difficulty .header--difficulty .header__btn--right {
+          right: -30px; }
+    .container--difficulty .item--difficulty .item__buttons {
+      top: 10px; }
+      .container--difficulty .item--difficulty .item__buttons .item__btn--back {
+        left: 0; }
+      .container--difficulty .item--difficulty .item__buttons .item__btn--start {
+        right: 0; } }
+
+.container--customize {
+  width: 600px; }
+  .container--customize .item {
+    width: 100%; }
+    .container--customize .item .customize__header {
+      position: relative;
+      font-size: 50px;
+      letter-spacing: 2px;
+      text-shadow: 0 3px 0 #2d1f4e, 0 -3px 0 #2d1f4e, -3px 0 0 #2d1f4e, 3px 0 0 #2d1f4e, 2px 2px 0 #2d1f4e, -2px -2px 0 #2d1f4e, 2px -2px 0 #2d1f4e, -2px 2px 0 #2d1f4e;
+      letter-spacing: 2px;
+      line-height: 40px;
+      z-index: 1; }
+      .container--customize .item .customize__header::after {
+        content: '';
+        width: 115%;
+        height: 250%;
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-image: url(../img/mathtournament-onboarding-subject-header.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        z-index: -1; }
+    .container--customize .item .customize__container {
+      width: 100%; }
+      .container--customize .item .customize__container .customize__row {
+        width: 90%;
+        margin: 0 auto;
+        background-color: #f9f3d1;
+        background-image: url(../img/mathtournament-onboarding-board-tile.png);
+        background-size: 150px;
+        padding: 10px;
+        border-radius: 0 0 10px 10px;
+        overflow: auto; }
+        .container--customize .item .customize__container .customize__row .customize__col {
+          position: relative;
+          width: 100%;
+          margin: 15px auto;
+          height: 65px;
+          font-size: 35px;
+          background-image: url(../img/mathtournament-onboarding-text-line.png);
+          background-size: 90% 100%;
+          background-repeat: no-repeat;
+          background-position: center; }
+          .container--customize .item .customize__container .customize__row .customize__col .option {
+            letter-spacing: 2px;
+            text-shadow: 0 3px 0 #2d1f4e, 0 -3px 0 #2d1f4e, -3px 0 0 #2d1f4e, 3px 0 0 #2d1f4e, 2px 2px 0 #2d1f4e, -2px -2px 0 #2d1f4e, 2px -2px 0 #2d1f4e, -2px 2px 0 #2d1f4e;
+            position: absolute;
+            left: 60px;
+            display: inline-block;
+            line-height: 65px; }
+          .container--customize .item .customize__container .customize__row .customize__col div {
+            position: absolute;
+            right: 10px;
+            width: 40%;
+            height: 100%;
+            padding-left: 10px;
+            display: inline-block; }
+            .container--customize .item .customize__container .customize__row .customize__col div button {
+              position: absolute;
+              display: inline-block;
+              height: 80px;
+              border: none;
+              background-color: transparent;
+              top: -9px; }
+              .container--customize .item .customize__container .customize__row .customize__col div button.less {
+                left: 0; }
+              .container--customize .item .customize__container .customize__row .customize__col div button.plus {
+                right: 0; }
+              .container--customize .item .customize__container .customize__row .customize__col div button img {
+                height: 100%; }
+            .container--customize .item .customize__container .customize__row .customize__col div input {
+              width: 100%;
+              text-align: center;
+              display: inline-block;
+              font-size: 40px;
+              color: #2B204B;
+              height: 100%;
+              border: none;
+              background-color: transparent; }
+    .container--customize .item .customize__btn {
+      border: none;
+      background-color: transparent;
+      width: 100px;
+      margin-top: 20px; }
+      .container--customize .item .customize__btn img {
+        width: 100%; }

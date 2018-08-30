@@ -18,6 +18,7 @@
     }
   }
   &__avatar {
+  position: relative;
     margin-top: ($teams-header-height + 40px);
     img {
       display: block;
@@ -35,8 +36,9 @@
 }
 
 .item__textbox__container {
+  position: relative;
   h3 {
-    color: $color-pin;
+    color: #2d1f4e;
     font-size: 35px;
     padding: 10px;
   }
@@ -50,7 +52,7 @@
     padding-top: 5px;
   }
   p {
-    color: $color-pin;
+    color: #2d1f4e;
     font-size: 20px;
     font-family: 'VAGRounded Thin', sans-serif;
     padding-top: 10px;
