@@ -3,7 +3,7 @@ var epicparticles = function(){
 	var emitters = []
 	var loaders = {}
 	var datas = {}
-	var sceneGroup
+	var texture
 
 	var kParticleTypeGravity = 0
 	var kParticleTypeRadial = 1
@@ -32,16 +32,16 @@ var epicparticles = function(){
 		}
 	}
 
-	function newParticle(emitter, i){
-		var sprite = emitter.children[i] || game.add.sprite(0, 0, emitter.key)
+	function newParticle(emitter){
+		/*var sprite = emitter.children[i] || game.add.sprite(0, 0, emitter.key)
 		sprite.anchor.setTo(0.5, 0.5)
 		sprite.visible = false
 		sprite.alpha = 1
 		sprite.x = 0; sprite.y = 0
-		emitter.add(sprite)
+		emitter.add(sprite)*/
 
 		return {
-			sprite: sprite,
+			sprite: emitter.sprite,
 			position: {
 				x: 0,
 				y: 0
@@ -177,8 +177,8 @@ var epicparticles = function(){
 		particle.rotationDelta = (endA - startA) / particle.timeToLive
 
 		// TODO set missing values to sprite
-		particle.sprite.x = particle.position.x
-		particle.sprite.y = particle.position.y
+		//particle.sprite.x = particle.position.x
+		//particle.sprite.y = particle.position.y
 		particle.sprite.angle = Phaser.Math.radToDeg(particle.rotation)
 
 		particle.sprite.width = particle.particleSize
@@ -192,10 +192,11 @@ var epicparticles = function(){
 		var g = start.g * 255
 		var b = start.b * 255
 
-		if(emitter.isColor) {
-			var tint = Phaser.Color.getColor(r, g, b)
-			particle.sprite.tint = tint
-		}
+		var tint = Phaser.Color.getColor(r, g, b)
+		particle.sprite.tint = tint
+
+
+		emitter.texture.renderXY(particle.sprite, particle.position.x + emitter.texture.width * 0.5, particle.position.y + + emitter.texture.height * 0.5)
 	}
 
 	function addParticle(emitter){
@@ -344,10 +345,12 @@ var epicparticles = function(){
 		var g = c.g * 255
 		var b = c.b * 255
 
-		if((emitter.isColor)&&(emitter.frameCounter % 4 === 0)) {
+		if((emitter.frameCounter % 4 === 0)) {
 			var tint = Phaser.Color.getColor(r, g, b)
 			particle.sprite.tint = tint
 		}
+
+		emitter.texture.renderXY(particle.sprite, particle.sprite.x + emitter.texture.width * 0.5, particle.sprite.y + emitter.texture.height * 0.5)
 
 		//particle.sprite.blendMode = PIXI.blendModes.MULTIPLY;
 
@@ -356,7 +359,8 @@ var epicparticles = function(){
 
 	function removeParticleAtIndex(emitter, index){
 		var particle = emitter.particles[index]
-		particle.sprite.visible = false
+		//particle.sprite.visible = false
+		//emitter.emitter.texture.renderXY(particle.sprite)
 
 		if (index != emitter.particleCount - 1) {
 			emitter.particles.splice(index, 1)
@@ -372,7 +376,8 @@ var epicparticles = function(){
 
 		emitter.particleCount = 0
 		emitter.alpha = 0
-		//emitter.destroy()
+		emitter.destroy()
+		emitter.texture.destroy()
 		//emitters.splice(emitter.index, 1)
 	}
 
@@ -382,6 +387,7 @@ var epicparticles = function(){
 		var arrayLength = emitters.length
 		for (var i = 0; i < arrayLength; i++) {
 			var emitter = emitters[i]
+			emitter.texture.clear()
 			emitter.index = i
 			emitter.frameCounter++
 
@@ -432,6 +438,17 @@ var epicparticles = function(){
 		}
 	}
 
+	function createSprite(key) {
+		var sprite = game.make.sprite(0, 0, key)
+		sprite.anchor.setTo(0.5, 0.5)
+		sprite.visible = false
+		sprite.alpha = 1
+		//sprite.scale.setTo(5, 5)
+
+		return sprite
+		//emitter.add(sprite)
+	}
+
 	function loadEmitter(loader, key, texture, url){
 		// var data = game.cache.getJSON(key)
 		// var jsonURL = game.cache.getItem(key, Phaser.Cache.JSON, null, "url")
@@ -448,7 +465,7 @@ var epicparticles = function(){
 
 	function newEmitter(key, options){
 		var emitter
-		if(emitters[key]){
+		/*if(emitters[key]){
 			emitter = emitters[key]
 			emitter.alpha = 1
 			if(emitter.index) {
@@ -458,11 +475,15 @@ var epicparticles = function(){
 		}else{
 			emitter = game.add.group()
 			emitters[key] = emitter
-		}
+		}*/
+		var texture = game.add.renderTexture(game.world.width, game.world.height)
+		emitter = game.add.sprite(0, 0, texture)
+		emitter.anchor.setTo(0.5, 0.5)
+		emitter.texture = texture
 
 		// TODO implement options
 		options = options || {}
-		emitter.isColor = options.hasColor || false
+		//emitter.isColor = options.hasColor || false
 
 		var data = game.cache.getJSON(key)
 		if(!data){
@@ -555,8 +576,11 @@ var epicparticles = function(){
 		emitter.remove = removeEmitter.bind(null, emitter)
 
 		// Create particle pool
+		emitter.sprite = createSprite(key)
+		//emitter.emitter.texture.renderXY(emitter.sprite, emitter.sprite.x, emitter.sprite.y)
+
 		for (var i = 0; i < emitter.maxParticles; i++) {
-			emitter.particles[i] = newParticle(emitter, i)
+			emitter.particles[i] = newParticle(emitter)
 		}
 
 		var group = options.group
