@@ -23,31 +23,90 @@
         <div class="customize__container">
           <div class="customize__row">
             <div class="customize__col">
-              <span class="option">Minutes</span>
-              <button class="prev"><img src="./img/mathtournament-onboarding-prev.btn.png"></button>
-              <input type="number" readonly value="3">
-              <button class="next"><img src="./img/mathtournament-onboarding-next-btn.png"></button>
-              <span class="background"></span>
+              <p class="option">Minutes</p>
+              <div>
+                <button class="less less-min"><img src="./img/mathtournament-onboarding-prev.btn.png"></button>
+                <input type="number" readonly value="3">
+                <button class="plus plus-min"><img src="./img/mathtournament-onboarding-next-btn.png"></button>
+              </div>
             </div>
             <div class="customize__col">
-              
-              <span class="background"></span>
+              <p class="option">Rounds</p>
+              <div>
+                <button class="less less-rounds"><img src="./img/mathtournament-onboarding-prev.btn.png"></button>
+                <input type="number" readonly value="5">
+                <button class="plus plus-rounds"><img src="./img/mathtournament-onboarding-next-btn.png"></button>
+              </div>
             </div>
             <div class="customize__col">
-              
-              <span class="background"></span>
+              <p class="option">Battle Mode</p>
+              <div>
+                <button class="less less-battle-mode"><img src="./img/mathtournament-onboarding-prev.btn.png"></button>
+                <input type="text" readonly value="3vs3">
+                <button class="plus plus-battle-mode"><img src="./img/mathtournament-onboarding-next-btn.png"></button>
+              </div>
             </div>
           </div>
         </div>
-        <div class="item__buttons">
-          <div class="item__btn">
-            <span></span>
-          </div>
-        </div>
+        <button class="customize__btn">
+          <img src="./img/mathtournament-onboarding-ok-btn.png">
+        </button>
       </section>
     </div>
   </main>
   <script src="./js/main.js"></script>
+  <script>
+    var less = document.querySelectorAll('.less')
+    var plus = document.querySelectorAll('.plus')
+    less.forEach(function (el) {
+      el.addEventListener('click', function () {
+        switch (el.classList[1]) {
+          case 'less-min':
+            el.nextElementSibling.value > '1' ? el.nextElementSibling.value-- : el.nextElementSibling.value
+            break;
+          case 'less-rounds':
+            el.nextElementSibling.value > '1' ? el.nextElementSibling.value -= 2 : el.nextElementSibling.value
+            break;
+          case 'less-battle-mode':
+            switch (el.nextElementSibling.value) {
+              case '1vs1':
+                break;
+              case '2vs2':
+                el.nextElementSibling.value = '1vs1'
+                break;
+              case '3vs3':
+                el.nextElementSibling.value = '2vs2'
+                break;
+            }
+            break;
+        }
+      })
+    })
+    plus.forEach(function (el) {
+      el.addEventListener('click', function () {
+        switch (el.classList[1]) {
+          case 'plus-min':
+            el.previousElementSibling.value < '5' ? el.previousElementSibling.value++ : el.previousElementSibling.value
+            break;
+          case 'plus-rounds':
+            el.previousElementSibling.value < '5' ? el.previousElementSibling.value = parseInt(el.previousElementSibling.value) + 2 : el.previousElementSibling.value
+            break;
+          case 'plus-battle-mode':
+            switch (el.previousElementSibling.value) {
+              case '3vs3':
+                break;
+              case '2vs2':
+                el.previousElementSibling.value = '3vs3'
+                break;
+              case '1vs1':
+                el.previousElementSibling.value = '2vs2'
+                break;
+            }
+            break;
+        }
+      })
+    })
+  </script>
 </body>
 
 </html>

@@ -3,3 +3,7 @@
   filter: drop-shadow(5px 5px 0 $color) drop-shadow(-5px -5px 0 $color)
     drop-shadow(-5px 5px 0 $color) drop-shadow(5px -5px 0 $color);
 }
+@mixin text-border {
+  letter-spacing: 2px;
+  text-shadow: 0 3px 0 #2d1f4e, 0 -3px 0 #2d1f4e, -3px 0 0 #2d1f4e, 3px 0 0 #2d1f4e, 2px 2px 0 #2d1f4e, -2px -2px 0 #2d1f4e, 2px -2px 0 #2d1f4e, -2px 2px 0 #2d1f4e;
+}

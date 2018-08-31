@@ -1,0 +1,102 @@
+.container--customize {
+  width: 600px;
+  .item {
+    width: 100%;
+    .customize__header {
+      position: relative;
+      font-size: 50px;
+      @include text-border;
+      letter-spacing: 2px;
+      line-height: 40px;
+      z-index: 1;
+      &::after {
+        content: '';
+        width: 115%;
+        height: 250%;
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-image: url(../img/mathtournament-onboarding-subject-header.png);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        z-index: -1;
+      }
+    }
+    .customize__container {
+      width: 100%;
+      .customize__row {
+        width: 90%;
+        margin: 0 auto;
+        background-color: #f9f3d1;
+        background-image: url(../img/mathtournament-onboarding-board-tile.png);
+        background-size: 150px;
+        padding: 10px;
+        border-radius: 0 0 10px 10px;
+        overflow: auto;
+        .customize__col {
+          position: relative;
+          width: 100%;
+          margin: 15px auto;
+          height: 65px;
+          font-size: 35px;
+          background-image: url(../img/mathtournament-onboarding-text-line.png);
+          background-size: 90% 100%;
+          background-repeat: no-repeat;
+          background-position: center;
+          .option {
+            @include text-border;
+            position: absolute;
+            left: 60px;
+            display: inline-block;
+            line-height: 65px;
+          }
+          div {
+            position: absolute;
+            right: 10px;
+            width: 40%;
+            height: 100%;
+            padding-left: 10px;
+            display: inline-block;
+            button {
+              position: absolute;
+              display: inline-block;
+              height: 80px;
+              border: none;
+              background-color: transparent;
+              top: -9px;
+              &.less {
+                left: 0;
+              }
+              &.plus {
+                right: 0;
+              }
+              img {
+                height: 100%;
+              }
+            }
+            input {
+              width: 100%;
+              text-align: center;
+              display: inline-block;
+              font-size: 40px;
+              color: #2B204B;
+              height: 100%;
+              border: none;
+              background-color: transparent;
+            }
+          }
+        }
+      }
+    }
+    .customize__btn {
+      border: none;
+      background-color: transparent;
+      width: 100px;
+      margin-top: 20px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
