@@ -1058,6 +1058,9 @@ var battle = function(){
 					pushSpecialArt(img)
 				}
 			}
+		},
+		shutdown:function () {
+			sceneGroup.destroy()
 		}
 	}
 }()

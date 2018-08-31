@@ -161,5 +161,8 @@ var questions = function(){
 				game.time.events.add(1000, questionGroup.setQuestion)
 			}
 		},
+		shutdown: function () {
+			sceneGroup.destroy()
+		}
 	}
 }()

@@ -394,6 +394,9 @@ var reward = function(){
         },
         setWinner: function(winner){
             INDEX_WINNER = winner
-        }
+        },
+        shutdown: function () {
+            sceneGroup.destroy()
+		}
     }
 }()

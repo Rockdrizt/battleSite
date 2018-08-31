@@ -1090,6 +1090,9 @@ var yogoSelector = function(){
 			// 	}
 			// 	onPlayersChange(data)
 			// })
+		},
+		shutdown: function () {
+			sceneGroup.destroy()
 		}
 	}
 }()

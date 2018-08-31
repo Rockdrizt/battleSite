@@ -1,6 +1,7 @@
 var epicparticles = function(){
 	var game = null
 	var emitters = []
+	var emittersPull = {}
 	var loaders = {}
 	var datas = {}
 	var sceneGroup
@@ -192,10 +193,8 @@ var epicparticles = function(){
 		var g = start.g * 255
 		var b = start.b * 255
 
-		if(emitter.isColor) {
 			var tint = Phaser.Color.getColor(r, g, b)
 			particle.sprite.tint = tint
-		}
 	}
 
 	function addParticle(emitter){
@@ -344,7 +343,7 @@ var epicparticles = function(){
 		var g = c.g * 255
 		var b = c.b * 255
 
-		if((emitter.isColor)&&(emitter.frameCounter % 4 === 0)) {
+		if((emitter.frameCounter % 4 === 0)) {
 			var tint = Phaser.Color.getColor(r, g, b)
 			particle.sprite.tint = tint
 		}
@@ -372,7 +371,9 @@ var epicparticles = function(){
 
 		emitter.particleCount = 0
 		emitter.alpha = 0
-		//emitter.destroy()
+		// emitter.callAll("kill")
+		// emitter.alive = false
+		emitter.destroy()
 		//emitters.splice(emitter.index, 1)
 	}
 
@@ -391,7 +392,7 @@ var epicparticles = function(){
 			}
 
 			if (emitter.active == true && emitter.emissionRate > 0) {
-				var rate = 1.0 / emitter.emissionRate
+				var rate = 1 / emitter.emissionRate
 
 				if (emitter.particleCount < emitter.maxParticles) {
 					emitter.emitCounter += deltaTime
@@ -421,13 +422,14 @@ var epicparticles = function(){
 				} else {
 					removeParticleAtIndex(emitter, index)
 
-					if (emitter.particleCount <= 0){
-						removeEmitter(emitter)
-						emitters.splice(i, 1)
-						emitter.index = null
-						return
-					}
 				}
+			}
+
+			if (emitter.particleCount <= 0){
+				removeEmitter(emitter)
+				emitters.splice(i, 1)
+				emitter.index = null
+				return
 			}
 		}
 	}
@@ -448,21 +450,26 @@ var epicparticles = function(){
 
 	function newEmitter(key, options){
 		var emitter
-		if(emitters[key]){
-			emitter = emitters[key]
-			emitter.alpha = 1
-			if(emitter.index) {
-				emitters.splice(emitter.index, 1)
-				emitter.index = null
-			}
-		}else{
+		var emitterIndex = 1
+		var emitterPullKey = key + "v" + emitterIndex
+
+		// while((emittersPull[emitterPullKey])&&(emittersPull[emitterPullKey].alive)){
+		// 	emitterIndex++
+		// 	emitterPullKey = key + "v" + emitterIndex
+		// }
+		// if(emittersPull[emitterPullKey]){
+		// 	emitter = emittersPull[emitterPullKey]
+		// 	emitter.alpha = 1
+		// 	emitter.callAll("revive")
+		// }else{
 			emitter = game.add.group()
-			emitters[key] = emitter
-		}
+			// emittersPull[emitterPullKey] = emitter
+		// }
+		emitter.alive = true
 
 		// TODO implement options
 		options = options || {}
-		emitter.isColor = options.hasColor || false
+		//emitter.isColor = options.hasColor || false
 
 		var data = game.cache.getJSON(key)
 		if(!data){

@@ -339,6 +339,9 @@ var startScreen = function(){
             createLogos()
             createWhite()
             startAnimation()
+		},
+        shutdown: function () {
+            sceneGroup.destroy()
 		}
 	}
 }()

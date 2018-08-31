@@ -82,5 +82,8 @@ var preloaderIntro = function(){
             var spin = game.add.tween(spiner).to({angle: -360}, 2000, Phaser.Easing.linear, true)
             spin.repeat(-1)
 		},
+		shutdown:function () {
+			sceneGroup.destroy()
+		}
 	}
 }()

@@ -56,5 +56,8 @@ var preloaderIntro = function(){
 			loadingBar = loadingGroup
 			loadingBar.topBar.width = 0
 		},
+		shutdown: function () {
+			sceneGroup.destroy()
+		}
 	}
 }()

@@ -390,6 +390,9 @@ var battleScene = function() {
 					setCharacter(character.name, teamIndex)
 				}
 			}
+		},
+		shutdown: function () {
+			sceneGroup.destroy()
 		}
 	}
 }()

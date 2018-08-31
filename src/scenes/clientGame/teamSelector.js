@@ -842,5 +842,8 @@ var teamSelector = function(){
 			createReady()
 
 		},
+		shutdown:function () {
+			sceneGroup.destroy()
+		}
 	}
 }()
