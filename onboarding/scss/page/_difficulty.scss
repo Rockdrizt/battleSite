@@ -38,10 +38,20 @@
       display: inline-block;
       width: 45%;
       .difficulty__item {
+        cursor: pointer;
         img {
           width: 100%;
           padding: 5px;
         }
+      }
+    }
+  }
+  .item__buttons {
+    .item__btn {
+      margin-top: 10px;
+      width: 120px;
+      img {
+        width: 100%;
       }
     }
   }

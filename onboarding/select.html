@@ -131,22 +131,6 @@
         }
       })
     })
-    var btnOkActive = false
-
-    btnLeftRight.forEach(function (btn) {
-      btn.addEventListener('mouseup', function () {
-        carouselItems.forEach(function (elem) {
-          if (elem.classList.contains('active') && elem.classList.contains('unlocked')) {
-            btnOkActive = true
-          } else {
-            btnOkActive = false
-          }
-        })
-        if (btnOkActive) {
-          console.log(btnOkActive);
-        }
-      })
-    })
   </script>
 </body>
 

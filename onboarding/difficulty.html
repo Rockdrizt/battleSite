@@ -29,30 +29,27 @@
           </h2>
           <div class="difficulty__row">
             <section class="difficulty__column difficulty__column--left">
-              <div class="difficulty__item">
+              <div class="difficulty__item addition">
                 <img src="./img/mathtournament-onboarding-add-btn.png" alt="">
               </div>
-              <div class="difficulty__item">
+              <div class="difficulty__item multiplication">
                 <img src="./img/mathtournament-onboarding-multi-btn.png" alt="">
               </div>
             </section>
             <section class="difficulty__column difficulty__column--right">
-              <div class="difficulty__item">
+              <div class="difficulty__item substraction">
                 <img src="./img/mathtournament-onboarding-sub-btn.png" alt="">
               </div>
-              <div class="difficulty__item">
+              <div class="difficulty__item division">
                 <img src="./img/mathtournament-onboarding-division-btn.png" alt="">
               </div>
             </section>
           </div>
         </div>
         <div class="item__buttons">
-          <div class="item__btn item__btn--back">
-            <span></span>
-          </div>
-          <div class="item__btn item__btn--start">
-            <span></span>
-          </div>
+          <a href="customize-battle.html" class="item__btn">
+            <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
+          </a>
         </div>
       </section>
     </div>
@@ -426,6 +423,54 @@
     <!--/Modal Division -->
   </main>
   <script src="./js/main.js"></script>
+  <script>
+    var difficultyBtns = document.querySelectorAll('.difficulty__item')
+    var modals = document.querySelectorAll('.modal')
+    var closeModal = document.querySelectorAll('.close')
+    // console.log(closeModal);
+    difficultyBtns.forEach(function (el) {
+      el.addEventListener('click', function () {
+        switch (el.classList[1]) {
+          case 'addition':
+            modals.forEach(function (el) {
+              if (el.classList.contains('modal--addition')) {
+                el.classList.remove('hidden')
+              }
+            })
+            break;
+          case 'multiplication':
+            modals.forEach(function (el) {
+              if (el.classList.contains('modal--multiplication')) {
+                el.classList.remove('hidden')
+              }
+            })
+            break;
+          case 'substraction':
+            modals.forEach(function (el) {
+              if (el.classList.contains('modal--substraction')) {
+                el.classList.remove('hidden')
+              }
+            })
+            break;
+          case 'division':
+            modals.forEach(function (el) {
+              if (el.classList.contains('modal--division')) {
+                el.classList.remove('hidden')
+              }
+            })
+            break;
+
+        }
+      })
+    })
+    closeModal.forEach(function (el) {
+      el.addEventListener('click', function () {
+        modals.forEach(function (elem) {
+          elem.classList.add('hidden')
+        })
+      })
+    })
+  </script>
 </body>
 
 </html>
