@@ -3,22 +3,37 @@
 	"attacks": {
 		"normal": [
 			{
-				"id": "fireball2",
-				"attachment": "particle8",
-				"delay": 250,
+				"id": "normalFire",
+				"attachment": "particle2",
+				"delay":    600,
 				"multiplier": 1
 			}
 		],
-		"special": [
+		"super": [
+            {
+				"id": "superDazzle",
+				"attachment": "particle5",
+				"delay": 2250,
+				"multiplier": 1
+			},
+            {
+				"id": "superDazzle",
+				"attachment": "particle6",
+				"delay": 2750,
+				"multiplier": 1,
+                "hit": false
+			}
+		],
+		"ultra":[
 			{
-				"id": "fireFlame1",
-				"attachment": "particle8",
-				"delay": 350,
+				"id": "ultraDazzle",
+				"attachment": "particle14",
+				"delay": 1800,
 				"multiplier": 1
 			}
 		]
 	},
-	"directory": "images/spines/Dazzle/dazzle.json",
+	"directory": "spines/Dazzle/dazzle.json",
 	"name": "Dazzle",
 	"spine": {
 		"options": {
