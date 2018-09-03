@@ -19,6 +19,10 @@ function startGame(){
     	sceneloader.preload(sceneList, {onComplete: onCompleteBoot}, "boot")
 	}
 
+	function pauseUpdate() {
+		alertDialog.pauseUpdate()
+	}
+
 	function showAlert(message){
 		alertDialog.show({
 			message:message,
