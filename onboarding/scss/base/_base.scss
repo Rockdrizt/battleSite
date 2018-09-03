@@ -1,0 +1,99 @@
+@font-face {
+  font-family: 'VAGRoundedStd Bold';
+  src: url(../fonts/VAGRoundedStd-Bold.otf);
+}
+@font-face {
+  font-family: 'VAGRounded Thin';
+  src: url(../fonts/vagrounded-thin.otf);
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'VAGRoundedStd Bold', sans-serif;
+  color: #fff;
+}
+
+.main {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background-image: linear-gradient(hsl(275, 52%, 23%), #2D1F4E 40%);
+
+  .bubbles {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url(../img/mathtournament-onboarding-bg-tile.png);
+  }
+
+  .bubbles-up {
+    animation: slide-up 10s forwards;
+  }
+
+  .bubbles-down {
+    animation: slide-down 10s forwards;
+  }
+  .hidden {
+    display: none;
+  }
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  max-width: 1200px;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.clearfix {
+  overflow: hidden;
+}
+.pointer {
+  cursor: pointer;
+}
+
+@keyframes slide-up {
+  0% {
+    background-position: 0 20%;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+@keyframes slide-down {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 20%;
+  }
+}
+
+/**************************************
+ ********* Media Queries **************
+ **************************************/
+
+@media only screen and (max-width: 991px) {
+  .main {
+    .bubbles-up {
+      animation: none;
+    }
+    .bubbles-down {
+      animation: none;
+    }
+  }
+}
+@media only screen and (max-width: 575px) {
+  .container {
+    top: 45%
+  }
+}

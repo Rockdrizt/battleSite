@@ -1,0 +1,95 @@
+.item__textbox {
+  position: relative;
+  max-width: 300px;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 20px auto 0;
+  background-image: linear-gradient(135deg, #e6a548 2%, rgb(219, 120, 66) 50%);
+  &::after {
+    content: '';
+    box-sizing: border-box;
+    background-origin: border-box;
+    position: absolute;
+    top: -22px;
+    left: -19px;
+    background-image: url(../img/mathtournament-onboarding-text-box.png);
+    background-repeat: no-repeat;
+    background-position: top left;
+    background-size: 200px;
+    width: 50px;
+    height: 60px;
+    z-index: -1;
+  }
+
+  &__container {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+}
+
+/**************************************
+ ********* Media Queries **************
+ **************************************/
+
+@media only screen and (max-width: 992px) {
+  .item__textbox {
+    margin-top: 10px;
+    padding: 7px;
+    width: 90%;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .item__textbox {
+    .item__textbox__container {
+      padding: 5px;
+    }
+  }
+}
+@media only screen and (max-width: 644px) {
+  .item__textbox {
+    // margin-top: 10px;
+    padding: 5px;
+    // width: 90%;
+  }
+}
+
+// @media only screen and (max-width: 768px) {
+//   .item--middle {
+//     .item__textbox {
+//       &__container {
+//         padding: 7px;
+//         h3 {
+//           font-size: 25px;
+//           padding-top: 0;
+//         }
+//         .pin {
+//           font-size: 20px;
+//         }
+//         p {
+//           font-size: 16px;
+//           padding-left: 5px;
+//           padding-right: 5px;
+//         }
+//       }
+//     }
+//   }
+// }
+
+// @media only screen and (max-width: 644px) {
+//   .item--middle {
+//     .item__textbox {
+//       padding: 7px;
+//       h3 {
+//         padding: 0;
+//         font-size: 20px;
+//       }
+//       p {
+//         font-size: 14px;
+//         padding: 10px;
+//       }
+//     }
+//   }
+// }
+

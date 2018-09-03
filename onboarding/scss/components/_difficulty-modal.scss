@@ -1,0 +1,361 @@
+.modal {
+  position: relative;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+
+  .borde {
+    position: absolute;
+    padding: 10px;
+    top: 49%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    width: 500px;
+
+    .modal__container {
+      position: relative;
+      padding: 10px 40px;
+      background-color: #fff;
+      border-radius: 10px;
+      width: 100%;
+      font-family: 'VAGRoundedStd Bold', sans-serif;
+      .close {
+        display: inline-block;
+        width: 70px;
+        height: 70px;
+        border: 1px solid #fff;
+        border-radius: 10px;
+        background-color: #bb3f4d;
+        position: absolute;
+        top: -45px;
+        right: -40px;
+        transform: rotate(45deg);
+        box-shadow: 5px 5px 0 0 #bb3f4d;
+        &::after {
+          content: 'x';
+          cursor: pointer;
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 22px;
+          left: -3px;
+          font-size: 70px;
+          font-family: 'VAGRounded Thin', sans-serif;
+          transform: rotate(135deg);
+        }
+      }
+      header {
+        text-align: center;
+        border-bottom: 3px solid transparent;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+        h2 {
+          text-shadow: 0 0 5px rgb(0, 0, 0);
+          font-size: 45px;
+        }
+        p {
+          font-size: 25px;
+          color: #000000;
+        }
+      }
+      .modal__list {
+        max-height: 250px;
+        margin-bottom: 30px;
+        overflow: auto;
+        li {
+          padding: 10px;
+          border-radius: 5px;
+          list-style: none;
+          label {
+            color: #000000;
+            font-size: 25px;
+            margin-left: 10px;
+            cursor: pointer;
+            input {
+              display: none;
+              &:checked + span {
+                border: 2px solid rgb(0, 128, 0);
+                background-color: rgb(0, 181, 0);
+                &::after {
+                  content: '';
+                  position: absolute;
+                  top: 2px;
+                  left: 5px;
+                  height: 75%;
+                  width: 45%;
+                  border-radius: 3px;
+                  border-right: 4px solid;
+                  border-bottom: 4px solid;
+                  border-color: rgb(255, 255, 255);
+                }
+              }
+            }
+            span {
+              position: relative;
+              width: 10px;
+              margin-right: 20px;
+              display: inline-block;
+              width: 25px;
+              height: 25px;
+              background-color: #7f7a93;
+              transform: rotate(45deg);
+              border: 2px solid #fff;
+              border-radius: 7px;
+              vertical-align: text-bottom;
+              transition: all 0.5s ease;
+            }
+          }
+        }
+      }
+      .modal__btn {
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        width: 110px;
+        height: 110px;
+        position: absolute;
+        bottom: -60px;
+        left: 50%;
+        transform: translateX(-50%);
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+/**************************************
+ ********* Modal Addition *************
+ **************************************/
+.modal--addition {
+  .borde {
+    background-color: #72dae6;
+    .modal__container {
+      header {
+        -moz-border-image: url(../img/mathtournament-onboarding-add-header.png)
+          1; /* Old firefox */
+        -webkit-border-image: url(../img/mathtournament-onboarding-add-header.png)
+          1; /* Safari */
+        -o-border-image: url(../img/mathtournament-onboarding-add-header.png) 1; /* Opera */
+        border-image: url(../img/mathtournament-onboarding-add-header.png) 1;
+      }
+      .modal__list {
+        li:nth-child(odd) {
+          background-color: #e3f1f1;
+        }
+      }
+    }
+  }
+}
+
+/**************************************
+ ********* Modal Substraction *********
+ **************************************/
+.modal--substraction {
+  .borde {
+    background-image: linear-gradient(135deg, #D26C42, #A33065);
+    .modal__container {
+      header {
+        -moz-border-image: url(../img/mathtournament-onboarding-sub-header-line.png)
+          1; /* Old firefox */
+        -webkit-border-image: url(../img/mathtournament-onboarding-sub-header-line.png)
+          1; /* Safari */
+        -o-border-image: url(../img/mathtournament-onboarding-sub-header-line.png) 1; /* Opera */
+        border-image: url(../img/mathtournament-onboarding-sub-header-line.png) 1;
+      }
+      .modal__list {
+        li:nth-child(odd) {
+          background-color: #F9EAE1;
+        }
+      }
+    }
+  }
+}
+
+/**************************************
+ ********* Modal Multiplication *******
+ **************************************/
+.modal--multiplication {
+  .borde {
+    background-image: linear-gradient(135deg, #D0337C, #8F2D6F);
+    .modal__container {
+      header {
+        -moz-border-image: url(../img/mathtournament-onboarding-multi-header.png)
+          1; /* Old firefox */
+        -webkit-border-image: url(../img/mathtournament-onboarding-multi-header.png)
+          1; /* Safari */
+        -o-border-image: url(../img/mathtournament-onboarding-multi-header.png) 1; /* Opera */
+        border-image: url(../img/mathtournament-onboarding-multi-header.png) 1;
+      }
+      .modal__list {
+        li:nth-child(odd) {
+          background-color: #F8E0EB;
+        }
+      }
+    }
+  }
+}
+
+/**************************************
+ ********* Modal Division *************
+ **************************************/
+.modal--division {
+  .borde {
+    background-image: linear-gradient(135deg, #51428C, #2B204B);
+    .modal__container {
+      header {
+        -moz-border-image: url(../img/mathtournament-onboarding-div-header.png)
+          1; /* Old firefox */
+        -webkit-border-image: url(../img/mathtournament-onboarding-div-header.png)
+          1; /* Safari */
+        -o-border-image: url(../img/mathtournament-onboarding-div-header.png) 1; /* Opera */
+        border-image: url(../img/mathtournament-onboarding-div-header.png) 1;
+      }
+      .modal__list {
+        li:nth-child(odd) {
+          background-color: #E9E0FC;
+        }
+      }
+    }
+  }
+}
+
+/**************************************
+ ********* Media Queries **************
+ **************************************/
+@media only screen and (max-width: 991px) {
+  .modal {
+    .borde {
+      // top: 50%;
+      width: 80%;
+      .modal__container {
+        padding: 10px 20px;
+        .close {
+          width: 60px;
+          height: 60px;
+          top: -35px;
+          right: -35px;
+          &::after {
+            top: 18px;
+            left: -4px;
+            font-size: 60px;
+          }
+        }
+        header {
+          padding-bottom: 5px;
+          margin-bottom: 10px;
+          h2 {
+            font-size: 35px;
+          }
+          p {
+            font-size: 23px;
+          }
+        }
+        .modal__list {
+          height: 120px;
+          margin-bottom: 20px;
+          li {
+            padding: 7px;
+            label {
+              font-size: 23px;
+              margin-left: 5%;
+              span {
+                margin-right: 10%;
+              }
+            }
+          }
+        }
+        .modal__btn {
+          width: 80px;
+          height: 80px;
+          bottom: -40px;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 767px) {
+  .modal {
+    .borde {
+      .modal__container {
+        padding: 5px 20px;
+        .close {
+          width: 50px;
+          height: 50px;
+          top: -35px;
+          right: -35px;
+          &::after {
+            top: 15px;
+            left: -4px;
+            font-size: 50px;
+          }
+        }
+        header {
+          padding-bottom: 0;
+          margin-bottom: 5px;
+          h2 {
+            font-size: 3opx;
+          }
+          p {
+            font-size: 20px;
+          }
+        }
+        .modal__btn {
+          width: 70px;
+          height: 70px;
+          bottom: -40px;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 575px) {
+  .modal {
+    .borde {
+      top: 50%;
+      padding: 7px;
+      .modal__container {
+        padding: 5px 10px 5px 10px;
+        .close {
+          border-radius: 7px;
+          width: 40px;
+          height: 40px;
+          top: -25px;
+          right: -25px;
+          &::after {
+            top: 11px;
+            left: -3px;
+            font-size: 40px;
+          }
+        }
+        header {
+          padding-bottom: 0;
+          margin-bottom: 3px;
+        }
+        .modal__list {
+          height: 120px;
+          margin-bottom: 20px;
+          li {
+            padding: 5px;
+            label {
+              font-size: 23px;
+              margin-left: 5%;
+              span {
+                margin-right: 5%;
+              }
+            }
+          }
+        }
+        .modal__btn {
+          width: 60px;
+          height: 60px;
+          bottom: -20px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,141 @@
+.item {
+  display: inline-block;
+  position: relative;
+  width: (100% / 3);
+  &__header {
+    width: 400%;
+    line-height: $teams-header-height;
+    font-size: 45px;
+    @include text-border;
+    position: absolute;
+    span {
+      background-repeat: no-repeat;
+      background-size: contain;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      z-index: -1;
+    }
+  }
+  &__avatar {
+    position: relative;
+    margin-top: ($teams-header-height + 40px);
+    img {
+      display: block;
+      width: 90%;
+      margin: 0 auto;
+    }
+  }
+}
+
+.item--left {
+  float: left;
+  .avatar {
+    @include img-border(#cf2e79);
+  }
+}
+
+.item__textbox__container {
+  position: relative;
+  h3 {
+    color: #2d1f4e;
+    font-size: 35px;
+    padding: 10px;
+  }
+  input {
+    font-size: 30px;
+    text-align: center;
+    width: 100%;
+    border: none;
+    background-color: #252a4b;
+    border-radius: 5px;
+    padding-top: 5px;
+  }
+  p {
+    color: #2d1f4e;
+    font-size: 20px;
+    font-family: 'VAGRounded Thin', sans-serif;
+    padding-top: 10px;
+  }
+}
+
+.item--right {
+  float: right;
+  .avatar {
+    @include img-border(#7abcb9);
+  }
+}
+
+/**************************************
+ ********* Media Queries **************
+ **************************************/
+
+@media only screen and (max-width: 991px) {
+  .item {
+    &__header {
+      line-height: $teams-header-height-992;
+      font-size: 35px;
+    }
+
+    &__avatar {
+      margin-top: ($teams-header-height-992 + 30px);
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .item {
+    &__header {
+      line-height: $teams-header-height-768;
+      font-size: 30px;
+    }
+    &__avatar {
+      margin-top: ($teams-header-height-768 + 15px);
+    }
+  }
+  .item--left {
+    img {
+      filter: drop-shadow(3px 3px 0 #cf2e79) drop-shadow(-3px -3px 0 #cf2e79)
+        drop-shadow(-3px 3px 0 #cf2e79) drop-shadow(3px -3px 0 #cf2e79);
+    }
+  }
+
+  .item--right {
+    img {
+      filter: drop-shadow(3px 3px 0 #7abcb9) drop-shadow(-3px -3px 0 #7abcb9)
+        drop-shadow(-3px 3px 0 #7abcb9) drop-shadow(3px -3px 0 #7abcb9);
+    }
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .item {
+    &__header {
+      font-size: 25px;
+      line-height: 35px;
+    }
+    &__avatar {
+      margin-top: 50px;
+    }
+  }
+
+  .item--left,
+  .item--right {
+    width: 25%;
+  }
+  .item--middle {
+    width: 45%;
+  }
+  .item__buttons {
+    .item__btn {
+      position: absolute;
+      top: 70%;
+      &--back {
+        left: -40px;
+      }
+      &--start {
+        right: -40px;
+      }
+    }
+  }
+}

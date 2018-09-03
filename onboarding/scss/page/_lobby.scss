@@ -1,0 +1,206 @@
+.item--lobby {
+  &.item--left {
+    .item__header {
+      right: 10%;
+      text-align: right;
+
+      span {
+        position: absolute;
+        background-image: url(../img/mathtournament-onboarding-bg-teamalpha.png);
+        background-position: top right;
+        z-index: -1;
+        right: -100px;
+        &::before {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          left: -500px;
+          background-color: #E2007B;
+        }
+      }
+    }
+  }
+  &.item--middle {
+    padding-top: 50px;
+    .item__textbox__container {
+      background-color: transparent;
+      .item__pin {
+        width: 200px;
+        margin: 0 auto;
+        h3 {
+          color: #fff;
+        }
+        input {
+          padding: 5px 0;
+          background-color: #fff;
+          color: #2d1f4e;
+          border-radius: 15px;
+        }
+      }
+      .players__container {
+        position: relative;
+        height: 180px;
+        width: 180px;
+        margin: 40px auto 20px;
+        .loader {
+          position: absolute;
+          top: 0;
+          left: 0;
+          height: 100%;
+          width: 100%;
+          background-image: url(../img/mathtournament-onboarding-load-pin.png);
+          background-position: top left;
+          background-size: 100%;
+          background-repeat: no-repeat;
+          animation: rotate-pin infinite 5s;
+        }
+        .player {
+          position: absolute;
+          width: 70%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          img {
+            width: 100%;
+          }
+        }
+        p {
+          position: absolute;
+          width: 100%;
+          top: 50%;
+          transform: translateY(-50%);
+          padding: 0;
+        }
+      }
+    }
+    .item__buttons {
+      .item__btn {
+        width: 120px;
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+  &.item--right {
+    .item__header {
+      left: 10%;
+      text-align: left;
+
+      span {
+        background-image: url(../img/mathtournament-onboarding-bg-teambravo.png);
+        background-position: top left;
+        left: -100px;
+        &::after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          right: -500px;
+          background-color: #76cfbd;
+        }
+      }
+    }
+  }
+  .item__avatar {
+    // padding-top: 115px;
+    .item__players {
+      width: 125px;
+      margin: 0 auto;
+      position: relative;
+      .players__container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: 100%;
+        p {
+          position: absolute;
+          width: 100%;
+          top: 50%;
+          transform: translateY(-50%);
+          padding: 0;
+        }
+      }
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@keyframes rotate-pin {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/**************************************
+ ********* Media Queries **************
+ **************************************/
+
+@media only screen and (max-width: 991px) {
+  .item--middle {
+    .item__textbox {
+      &__container {
+        h3 {
+          font-size: 30px;
+          padding-top: 0;
+        }
+        .pin {
+          font-size: 25px;
+        }
+        p {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .item--middle {
+    .item__textbox {
+      &__container {
+        h3 {
+          font-size: 25px;
+          padding-top: 0;
+        }
+        .pin {
+          font-size: 20px;
+        }
+        p {
+          font-size: 16px;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  .item--lobby {
+    &.item--middle {
+      .item__textbox {
+        h3 {
+          padding: 0;
+          font-size: 20px;
+        }
+        p {
+          padding: 10px;
+        }
+      }
+    }
+  }
+}
