@@ -210,7 +210,7 @@ var sceneloader = function(){
 		if(sceneToShow != null){
 
 			//console.log(game.state.states[sceneName])
-			game.add.tween(game.world).to()
+			//game.add.tween(game.world).to()
 
 			game.state.start(sceneToShow.name, false)
 
