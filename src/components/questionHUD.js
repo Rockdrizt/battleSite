@@ -42,12 +42,14 @@ var questionHUD = function(){
 		box.anchor.setTo(1, 1)
 		box.x += box.width * 0.42
 		questionGroup.boxes[0] = box
+		questionGroup.questionBox = box
 
-		var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "left", wordWrap: true, wordWrapWidth: box.width - 180}
+		var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "left", wordWrap: true}
 
 		var text = new Phaser.Text(questionGroup.game, box.centerX + 70, box.centerY, "", fontStyle)
 		text.anchor.setTo(0.5)
 		text.alpha = 0
+		text.wordWrapWidth = box.width * 0.8
 		questionGroup.add(text)
 
 		var container = questionGroup.create(board.centerX, board.centerY - board.height * 0.2, "atlas.question", "questionImage")
@@ -56,7 +58,7 @@ var questionHUD = function(){
 		questionGroup.container = container
 		questionGroup.boxes[2] = container
 
-		var img = questionGroup.create(-container.width * 0.5, 0, "ya")
+		var img = questionGroup.create(-container.width * 0.5, 0, "default")
 		img.anchor.setTo(0.5)
 		img.scale.setTo(0)
 		img.alpha = 0
@@ -69,8 +71,8 @@ var questionHUD = function(){
 		light.scale.setTo(0)
 		questionGroup.light = light
 
-		var options = game.add.group()
-		questionGroup.add(options)
+		var options = []//game.add.group()
+		//questionGroup.add(options)
 		var pivotX = 0.5
 		var opt = ["A", "C", "B", "D"]
 
@@ -78,7 +80,7 @@ var questionHUD = function(){
 
 		for(var i = 0; i < 4; i++){
 
-			var btn = createButtons(board.centerX * pivotX, board.centerY + board.height * 0.17, opt[i], options)
+			var btn = createButtons(board.centerX * pivotX, board.centerY + board.height * 0.17, opt[i], questionGroup)
 
 			pivotX += 0.3
 
@@ -89,13 +91,14 @@ var questionHUD = function(){
 			btn.spawn = {x: btn.x, y: btn.y}
 			btn.inputEnabled = true
 			btn.events.onInputDown.add(callInputAnswer)
-			options.add(btn)
+			btn.inputEnabled = false
+			options.push(btn)
 		}
 
 		questionGroup.question = text
 		questionGroup.image = img
 		questionGroup.options = options
-		questionGroup.options.setAll("inputEnabled", false)
+		//questionGroup.options.setAll("inputEnabled", false)
 		questionGroup.boxes.forEach(function(box){
 			box.scale.setTo(0, 1)
 		})
@@ -104,19 +107,22 @@ var questionHUD = function(){
         questionGroup.showQuestion = showQuestion.bind(questionGroup)
 		questionGroup.setQuestion = setQuestion.bind(questionGroup)
 		questionGroup.fixImage = fixImage.bind(questionGroup)
+		questionGroup.fixText = fixText.bind(questionGroup)
 		questionGroup.removeImage = removeImage.bind(questionGroup)
 		questionGroup.hide = hideOverlay.bind(questionGroup)
 		questionGroup.update = update.bind(questionGroup)
         questionGroup.startTimer = startTimer.bind(questionGroup)
 		questionGroup.stopTimer = stopTimer.bind(questionGroup)
 		questionGroup.updateTimer = updateTimer.bind(questionGroup)
+		questionGroup.startTweens = startTweens.bind(questionGroup)
+		questionGroup.alpha = 0
 
 		return questionGroup
 	}
 
 	function createButtons(x, y, opt, group){
 
-		var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center", wordWrap: true}
+		var fontStyle = {font: "50px VAGRounded", fill: "#FFFFFF", align: "center", wordWrap: true}
 
 		var btn = game.add.sprite(x, y, "atlas.question", "questionBtn")
 		btn.anchor.setTo(0.5)
@@ -128,10 +134,10 @@ var questionHUD = function(){
 		btn.addChild(letter)
 		btn.letter = letter
 
-		var info = new Phaser.Text(group.game, 0, 0, "", fontStyle)
+		var info = new Phaser.Text(group.game, 0, 5, "", fontStyle)
 		info.anchor.setTo(0.5)
         info.alpha = 0
-		info.wordWrapWidth = btn.width
+		info.wordWrapWidth = btn.width * 0.6
 		btn.addChild(info)
 		btn.info = info
 
@@ -140,25 +146,27 @@ var questionHUD = function(){
 
 	function showQuestion(riddle){
 
+		var hud = this
+		hud.timeElapsed = 0
+		hud.riddle = riddle
+
+		if(riddle.existImage){
+			game.load.image(hud.riddle.image, hud.riddle.src)
+			game.load.onLoadComplete.add(hud.startTweens)
+			game.load.start()
+		}
+		else{
+			hud.startTweens()
+		}
+	}
+
+	function startTweens(){
+
 		var delay = 200
-		this.timeElapsed = 0
-
-		//if(riddle.existImage) {
-		game.load.image(riddle.image, riddle.src)
-		game.load.onLoadComplete.add(function(){
-			this.image.loadTexture(riddle.image)
-			var scaleImg = this.fixImage(1)
-			this.image.key = riddle.image
-			var lastTween = game.add.tween(this.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
-
-			var group = this
-			lastTween.onComplete.add(function(){
-				group.setQuestion(riddle)
-			})
-		}.bind(this))
-		game.load.start()
-
-		//}
+		this.image.loadTexture(this.riddle.image)
+		var scaleImg = this.fixImage(1)
+		this.image.key = this.riddle.image
+		
 
 		game.add.tween(this).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
 
@@ -168,23 +176,27 @@ var questionHUD = function(){
 		})
 
 		this.options.forEach(function(opt){
+			opt.info.alpha = 0
 			game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay)
 			delay += 200
 		})
 
-		//if(riddle.existImage)
+		var lastTween = game.add.tween(this.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
+		lastTween.onComplete.add(this.setQuestion)
 	}
     
-    function setQuestion(riddle){
-        
-        this.question.setText(riddle.question)
+    function setQuestion(){
+		
+		var riddle = this.riddle
+		this.question.setText(riddle.question)
+		this.question.wordWrapWidth = this.questionBox.width * 0.8
+		this.fixText(1)
         
         for(var i = 0; i < riddle.answers.length; i++){
- 			var opt = this.options.children[i]
-			opt.value = riddle.answers[i].text
-			opt.info.text = riddle.answers[i].text
-			opt.info.alpha = 0
-			opt.correct = riddle.answers[i].correct
+			var opt = this.options[i]
+			opt.value = riddle.answers[i]
+			opt.info.text = riddle.answers[i]
+			opt.correct = riddle.correctAnswer == riddle.answers[i]
             opt.inputEnabled = true
             game.add.tween(opt.info).to({alpha:1}, 300, Phaser.Easing.linear, true)
 		}
@@ -207,33 +219,51 @@ var questionHUD = function(){
 		}
 	}
 
+	function fixText(scale){
+
+		this.question.scale.setTo(scale)
+		if(this.question.height > this.questionBox.height){
+			this.question.wordWrapWidth += this.questionBox.width * 0.15
+			return this.fixText(scale - 0.1)
+		}
+		else{
+			console.log(this.question.wordWrapWidth)
+			return
+		}
+	}
+
 	function hideOverlay(){
 		var fadeOut = game.add.tween(this).to({alpha:0}, 500, Phaser.Easing.linear, true)
 		var group = this
 		fadeOut.onComplete.add(function(){
-			group.question.alpha = 0
-			group.options.forEach(function(opt){
+			this.question.alpha = 0
+
+			for(var i = 0; i < this.options.length; i++){
+				var opt = this.options[i]
 				opt.alpha = 0
 				opt.x = opt.spawn.x
 				opt.y = opt.spawn.y
-                opt.info.alpha = 0
-			})
-			group.boxes.forEach(function(box){
+				opt.info.alpha = 0
+				opt.info.text = ""
+				opt.correct = false
+			}
+
+			this.boxes.forEach(function(box){
 				box.scale.setTo(0, 1)
 			})
-			//if(group.existImage){
-				group.image.scale.setTo(0)
-				group.image.alpha = 0
-				//this.removeImage()
-			//}
-		})
+
+			this.image.scale.setTo(0)
+			this.image.alpha = 0
+			if(group.existImage) this.removeImage()
+		},group)
 	}
 
 	function inputOption(btn){
 
-		this.options.setAll("inputEnabled", false)
+		//this.options.setAll("inputEnabled", false)
 
 		this.options.forEach(function(opt){
+			opt.inputEnabled = false
 			if(opt != btn){
 				game.add.tween(opt).to({alpha:0.5}, 300, Phaser.Easing.linear, true)
 			}
@@ -243,7 +273,7 @@ var questionHUD = function(){
 		this.light.y = btn.y
 		var shine = game.add.tween(this.light.scale).to({x: 0.5, y:0.5}, 300, Phaser.Easing.Cubic.Out, true, 0, 0, true)
 
-		var newY = this.boxes[1].y - 180
+		//var newY = this.boxes[1].y - 180
 		//var choise = game.add.tween(btn).to({x: game.world.centerX, y:newY}, 500, Phaser.Easing.Cubic.Out, false)
 
 		//shine.chain(choise)

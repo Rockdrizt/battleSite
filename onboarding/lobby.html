@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <main class="main clearfix">
+  <main class="main main--lobby clearfix">
     <span class="bubbles bubbles-down" id="bubbles"></span>
     <header class="header">
       <h1>Lobby</h1>
@@ -22,26 +22,38 @@
           <span></span>
         </h2>
         <div class="item__avatar">
-          <img src="./img/mathtournament-onboarding-luna-start.png" alt="Avatar Equipo Alfa">
+          <div class="item__players" >
+            <span class="players__container"></span>
+            <img src="./img/mathtournament-onboarding-hitbox-alpha.png" alt="">
+          </div>
+          <div class="item__players" >
+            <span class="players__container"></span>
+            <img src="./img/mathtournament-onboarding-hitbox-alpha.png" alt="">
+          </div>
+          <div class="item__players" >
+            <span class="players__container"></span>
+            <img src="./img/mathtournament-onboarding-hitbox-alpha.png" alt="">
+          </div>
         </div>
       </section>
       <section class="item item--middle item--lobby">
-        <div class="item__textbox item__textbox--pin">
           <div class="item__textbox__container">
-            <h3>Pin</h3>
-            <input type="text" id="pin" value="12345">
-            <p>Share this numbers with two other players.</p>
+            <div class="item__pin">
+              <h3>Pin</h3>
+              <input type="text" id="pin" value="12345">
+            </div>
+            <div class="players__container">
+              <span class="loader"></span>
+              <div class="player" id="player" draggable="true">
+                <img src="./img/mathtournament-onboarding-yellow-select.png" alt="">
+                <p>...</p>
+              </div>
+            </div>
           </div>
-        </div>
         <div class="item__buttons">
-          <div class="item__btn item__btn--back">
-            <p>Back </p>
-            <span></span>
-          </div>
-          <div class="item__btn item__btn--start">
-            <p>Start</p>
-            <span></span>
-          </div>
+          <button class="item__btn">
+            <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
+          </button>
         </div>
       </section>
       <section class="item item--right item--lobby">
@@ -50,12 +62,44 @@
           <span></span>
         </h2>
         <div class="item__avatar">
-          <img src="./img/mathtournament-onboarding-eagle-start.png" alt="Avatar Equipo Bravo">
+          <div class="item__players">
+            <span class="players__container"></span>
+            <img src="./img/mathtournament-onboarding-hitbox-bravo.png" alt="">
+          </div>
+          <div class="item__players">
+            <span class="players__container"></span>
+            <img src="./img/mathtournament-onboarding-hitbox-bravo.png" alt="">
+          </div>
+          <div class="item__players">
+            <span class="players__container"></span>
+            <img src="./img/mathtournament-onboarding-hitbox-bravo.png" alt="">
+          </div>
         </div>
       </section>
     </div>
   </main>
   <script src="./js/main.js"></script>
+  <script>
+    var player = document.getElementById('player')
+    var container = document.querySelectorAll('.players__container')
+    function dragover (e) {
+      e.preventDefault()
+      console.log(e);
+    }
+    function dragenter (e) {
+      e.preventDefault()
+      console.log(e);
+    }
+    function drop (e) {
+      this.append(player)
+      console.log(e);
+    }
+    container.forEach(function (el) {
+      el.addEventListener('dragover', dragover)
+      el.addEventListener('dragenter', dragenter)
+      el.addEventListener('drop', drop)
+    })
+  </script>
 </body>
 
 </html>

@@ -20,7 +20,7 @@ var yogoSelector = function(){
 		jsons: [
 			{
 				name: "sounds",
-				file: "/data/sounds/tournament.json"
+				file: settings.BASE_PATH + "/data/sounds/tournament.json"
 			},
 		],
 	}
@@ -29,23 +29,23 @@ var yogoSelector = function(){
 		atlases: [
 			{
 				name: "atlas.yogoSelector",
-				json: "/images/yogoSelector/atlas.json",
-				image: "/images/yogoSelector/atlas.png",
+				json: settings.BASE_PATH + "/images/yogoSelector/atlas.json",
+				image: settings.BASE_PATH + "/images/yogoSelector/atlas.png",
 			},
 			{
 				name: "atlas.loading",
-				json: "/images/loading/atlas.json",
-				image: "/images/loading/atlas.png",
+				json: settings.BASE_PATH + "/images/loading/atlas.json",
+				image: settings.BASE_PATH + "/images/loading/atlas.png",
 			}
 		],
 		images: [
 			{
 				name: "tile",
-				file: "/images/yogoSelector/bgTile.png",
+				file: settings.BASE_PATH + "/images/yogoSelector/bgTile.png",
 			},
 			{
 				name: "ok",
-				file: "/images/yogoSelector/ok.png",
+				file: settings.BASE_PATH + "/images/yogoSelector/ok.png",
 			}
 		],
 		sounds: [
@@ -66,75 +66,75 @@ var yogoSelector = function(){
 			{	name: "gameSong",
 				file: soundsPath + "songs/weLoveElectricCars.mp3"},
             {	name: "tomiko",
-				file: "/sounds/selectorNames/tomiko.mp3"},
+				file: settings.BASE_PATH + "/sounds/selectorNames/tomiko.mp3"},
             {	name: "luna",
-				file: "/sounds/selectorNames/luna.mp3"},
+				file: settings.BASE_PATH + "/sounds/selectorNames/luna.mp3"},
             {	name: "nao",
-				file: "/sounds/selectorNames/nao.mp3"},
+				file: settings.BASE_PATH + "/sounds/selectorNames/nao.mp3"},
             {	name: "theffanie",
-				file: "/sounds/selectorNames/theffanie.mp3"},
+				file: settings.BASE_PATH + "/sounds/selectorNames/theffanie.mp3"},
             {	name: "eagle",
-				file: "/sounds/selectorNames/eagle.mp3"},
+				file: settings.BASE_PATH + "/sounds/selectorNames/eagle.mp3"},
             {	name: "dinamita",
-				file: "/sounds/selectorNames/dinamita.mp3"},
+				file: settings.BASE_PATH + "/sounds/selectorNames/dinamita.mp3"},
             {	name: "arthurius",
-				file: "/sounds/selectorNames/arthurius.mp3"},
+				file: settings.BASE_PATH + "/sounds/selectorNames/arthurius.mp3"},
             {	name: "estrella",
-				file: "/sounds/selectorNames/estrella.mp3"},
+				file: settings.BASE_PATH + "/sounds/selectorNames/estrella.mp3"},
 		],
 		spritesheets: [
 		],
 		spines:[
 			{
 				name:"tomiko",
-				file:"/spines/yogotars/selector/tomiko/tomikoSelector.json",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/tomiko/tomikoSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"luna",
-				file:"/spines/yogotars/selector/luna/lunaSelector.json",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/luna/lunaSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"nao",
-				file:"/spines/yogotars/selector/nao/naoSelector.json",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/nao/naoSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"theffanie",
-				file:"/spines/yogotars/selector/theffanie/theffanieSelector.json",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/theffanie/theffanieSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"eagle",
-				file:"/spines/yogotars/selector/eagle/eagleSelector.json",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/eagle/eagleSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"dinamita",
-				file:"/spines/yogotars/selector/dinamita/dinamitaSelector.json",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/dinamita/dinamitaSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"arthurius",
-				file:"/spines/yogotars/selector/arthurius/arthuriusSelector.json",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/arthurius/arthuriusSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"estrella",
-				file:"/spines/yogotars/selector/estrella/estrellaSelector.json",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/estrella/estrellaSelector.json",
 				scales: ["@0.5x"]
 			},
 		],
 		particles: [
 			{
 				name: 'horizontalLine',
-				file: '/particles/startScreen/horizontalLine/intence_horison_ligth.json',
+				file: settings.BASE_PATH + '/particles/startScreen/horizontalLine/intence_horison_ligth.json',
 				texture: 'intence_horison_ligth.png'
 			},
 			{
 				name: 'particlesHorizontal',
-				file: '/particles/startScreen/particlesHorizontal/particle_horison_ligth.json',
+				file: settings.BASE_PATH + '/particles/startScreen/particlesHorizontal/particle_horison_ligth.json',
 				texture: 'particle_horison_ligth.png'
 			}
 		]
@@ -183,7 +183,7 @@ var yogoSelector = function(){
 	function preload(){
 
 		game.stage.disableVisibilityChange = true
-		game.load.bitmapFont('skwig', '/fonts/font.png', '/fonts/font.fnt')
+		game.load.bitmapFont('skwig', settings.BASE_PATH + '/fonts/font.png', settings.BASE_PATH + '/fonts/font.fnt')
 	}
 
 	function createBackground(){
@@ -309,7 +309,7 @@ var yogoSelector = function(){
 
 	function createTeamsBars(){
 
-		var fontStyle = {font: "65px skwig", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
+		var fontStyle = {font: "65px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 
 		teamsBarGroup = game.add.group()
 		selectorGroup.add(teamsBarGroup)
@@ -320,15 +320,17 @@ var yogoSelector = function(){
 			img.anchor.setTo(i, 0)
 			img.scale.setTo(0.8)
 
-			var text = game.add.bitmapText(320, 25, 'skwig', "Equipo Alpha",75)
+			var teamName = new Phaser.Text(teamsBarGroup.game, 320, 25, "Equipo Alpha", fontStyle)
+            teamName.anchor.setTo(0.5, 0)
+            teamName.stroke = "#000066"
+			teamName.strokeThickness = 10
+			teamName.alpha = 0
+			img.addChild(teamName)
+			img.text = teamName
 
-			text.anchor.setTo(0.5, 0)
-			text.alpha = 0
-			img.addChild(text)
-			img.text = text
 		}
-		text.x *= -1
-		text.setText("Equipo Bravo")
+		teamName.x *= -1
+		teamName.setText("Equipo Bravo")
 	}
 
 	/*NOTES:
@@ -942,7 +944,7 @@ var yogoSelector = function(){
 		var teams = getTeams()
 
 		gameSong.stop()
-        inputsGroup.alpha = 0
+        //inputsGroup.alpha = 0
 
 		game.add.tween(readyGroup.pinkLight.scale).to({x: 1, y: 1}, 400, Phaser.Easing.Cubic.InOut, true, 0, 0, true).onComplete.add(function(){
 			readyGroup.ready.alpha = 1
@@ -1068,7 +1070,7 @@ var yogoSelector = function(){
 			createTeamsBars()
             createYogoNames()
 			createButtons()
-			createOk()
+			//createOk()
             
 			game.add.tween(tile).to({alpha:1}, 1000, Phaser.Easing.Cubic.Out, true).onComplete.add(animateSelector)
 
@@ -1088,6 +1090,15 @@ var yogoSelector = function(){
 			// 	}
 			// 	onPlayersChange(data)
 			// })
+			game.onPause.add(function () {
+				PhaserSpine.Spine.globalAutoUpdate = false
+			})
+			game.onResume.add(function () {
+				PhaserSpine.Spine.globalAutoUpdate = true
+			})
+		},
+		shutdown: function () {
+			sceneGroup.destroy()
 		}
 	}
 }()

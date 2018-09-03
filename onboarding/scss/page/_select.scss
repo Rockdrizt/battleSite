@@ -1,16 +1,26 @@
+.main--carousel {
+  .header {
+    z-index: 200;
+  }
+}
 .carousel {
   width: 100%;
-  height: 500px;
-  position: relative;
-  left: -600px;
+  height: 100%;
   overflow: visible;
-  &__item {
-    width: 30%;
+  .container {
     position: relative;
-    display: inline-block;
+    top: 25%;
+    max-width: 100%;
+    text-align: left;
+  }
+  &__item {
+    width: 40%;
+    max-width: 700px;
     h2 {
+      display: none;
       letter-spacing: 1px;
       text-shadow: 3px 3px 0 rgb(0, 0, 0);
+      text-align: center;
       position: absolute;
       height: 60px;
       width: 100%;
@@ -24,12 +34,80 @@
       width: 100%;
     }
   }
-  .locked {
+  .unlocked {
     h2 {
-      display: none;
+      display: inline-block;
     }
+  }
+  &-buttons {
+    .button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 10%;
+      z-index: 200;
+      img {
+        width: 100%;
+      }
+      &--left {
+        left: 5%;
+      }
+      &--right {
+        right: 5%;
+      }
+    }
+  }
+}
+.item__buttons--carousel {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  .item__btn {
+    width: 45%;
+    // height: 20%;
+    display: block;
+    margin: 0 auto;
+    filter: saturate(1);
     img {
-      // width: 70%;
+      width: 100%;
+    }
+  }
+}
+
+/**************************************
+ ********* Media Queries **************
+ **************************************/
+
+@media only screen and (max-width: 991px) {
+  .main--carousel {
+    .item__buttons {
+      width: 180px;
+    }
+  }
+}
+@media only screen and (max-width: 767px) {
+  .main--carousel {
+    .carousel__item {
+      h2 {
+        background-size: contain;
+      }
+    }
+    .item__buttons {
+      width: 150px;
+    }
+  }
+}
+@media only screen and (max-width: 575px) {
+  .main--carousel {
+    .carousel__item {
+      h2 {
+        background-size: contain;
+        font-size: 20px;
+      }
+    }
+    .item__buttons {
+      width: 110px;
     }
   }
 }

@@ -12,7 +12,7 @@
 	<!--Style sheets-->
 	<link rel="stylesheet" type="text/css" href="../../shared/minigames/css/custom_fonts.css">
 	<link rel="stylesheet" type="text/css" href="../../shared/minigames/css/minigame.css">
-	<link rel="stylesheet" type="text/css" href="/css/index.css">
+	<link rel="stylesheet" type="text/css" href="../../css/index.css">
 </head>
 <body>
 <div id="preloadBattle" class="loader">
@@ -21,47 +21,50 @@
 <div id="ingame" style="margin: 0 auto; height: 100%; overflow: hidden"></div>
 <div id="orientation-overlay" style="visibility: hidden"></div>
 
+<!-- Global settings -->
+<script src="../../settings.js"></script>
+
 <!--Core Libs-->
 <script src="../../shared/minigames/js/phaser283.min.js"></script>
 <script src="../../shared/minigames/js/helpers/phaser-spine309.js"></script>
 
 <!--Scenes-->
 <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
-<script src="/scenes/battle/battle.js"></script>
-<script src="/scenes/battle/preload.js"></script>
-<script src="/scenes/battle/startScreen.js"></script>
-<script src="/scenes/battle/yogoSelector.js"></script>
-<script src="/scenes/battle/reward.js"></script>
+<script src="../../scenes/battle/battle.js"></script>
+<script src="../../scenes/preloads/preload.js"></script>
+<script src="../../scenes/battle/startScreen.js"></script>
+<script src="../../scenes/battle/yogoSelector.js"></script>
+<script src="../../scenes/battle/reward.js"></script>
 <!--<script src="../shared/minigames/js/helpers/yogomeGames.js"></script>-->
 <!--<script src="../shared/epic/data/epicCharacters.js"></script>-->
 <!--<script src="js/projectiles.js"></script>-->
 
 <!--Helpers-->
-<script src="/libs/spineLoader.js"></script>
-<script src="/entities/characterBattle.js"></script>
-<script src="/entities/particleBattle.js"></script>
-<script src="/libs/transition.js"></script>
-<script src="/libs/scripts.js"></script>
-<script src="/components/alertDialog.js"></script>
-<script src="/components/HUD.js"></script>
-<script src="/entities/projectiles.js"></script>
-<script src="/libs/riddles.js"></script>
-<script src="/components/questionHUD.js"></script>
-<script src="/libs/rawList.js"></script>
-<script src="/libs/operationGenerator.js"></script>
-<script src="/entities/battleField.js"></script>
+<script src="../../libs/spineLoader.js"></script>
+<script src="../../entities/characterBattle.js"></script>
+<script src="../../entities/particleBattle.js"></script>
+<script src="../../libs/transition.js"></script>
+<script src="../../libs/scripts.js"></script>
+<script src="../../components/alertDialog.js"></script>
+<script src="../../components/HUD.js"></script>
+<script src="../../entities/projectiles.js"></script>
+<script src="../../libs/riddles.js"></script>
+<script src="../../components/questionHUD.js"></script>
+<script src="../../libs/rawList.js"></script>
+<script src="../../libs/operationGenerator.js"></script>
+<script src="../../entities/battleField.js"></script>
 <!--<script src="../shared/minigames/js/helpers/buttons.js"></script>-->
-<script src="/shared/minigames/js/helpers/particles.js"></script>
+<script src="../../shared/minigames/js/helpers/particles.js"></script>
 <!--<script src="../shared/minigames/js/helpers/swipe.js"></script>-->
 <!--<script src="../shared/minigames/js/helpers/orientationLand.js"></script>-->
 <!--<script src="../shared/minigames/js/helpers/facebook.js"></script>-->
-<script src="/shared/minigames/js/helpers/mixpanel.js"></script>
-<script src="/shared/minigames/js/helpers/sound.js"></script>
-<script src="/shared/minigames/js/helpers/sceneloader.js"></script>
-<script src="/shared/minigames/js/helpers/localization.js"></script>
-<script src="/shared/minigames/js/helpers/ads.js"></script>
-<script src="/shared/minigames/js/helpers/phaser-kinetic-scrolling-plugin.min.js"></script>
-<script src="/shared/minigames/js/helpers/phaser-input.min.js"></script>
+<script src="../../shared/minigames/js/helpers/mixpanel.js"></script>
+<script src="../../shared/minigames/js/helpers/sound.js"></script>
+<script src="../../shared/minigames/js/helpers/sceneloader.js"></script>
+<script src="../../shared/minigames/js/helpers/localization.js"></script>
+<script src="../../shared/minigames/js/helpers/ads.js"></script>
+<script src="../../shared/minigames/js/helpers/phaser-kinetic-scrolling-plugin.min.js"></script>
+<script src="../../shared/minigames/js/helpers/phaser-input.min.js"></script>
 
 
 <!--Entry point-->
@@ -71,8 +74,8 @@
 
 <!--TODO:server.js this is only in test-->
 <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
-<script src="/tournamentLibs/js/server.js" type="text/javascript"></script>
-<script src="/tournamentLibs/js/operationGenerator.js" type="text/javascript"></script>
+<script src="../../tournamentLibs/js/server.js" type="text/javascript"></script>
+<script src="../../tournamentLibs/js/operationGenerator.js" type="text/javascript"></script>
 
 <script src="scripts/battlemain.js" type="text/javascript"></script>
 <script src="scripts/serverMain.js" type="text/javascript"></script>

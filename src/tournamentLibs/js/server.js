@@ -313,6 +313,7 @@ function Server(){
 	this.sendQuestion = function () {
 		//var questionData = generateQuestion()
 		var questionData = riddles.getOperation()
+		correctAnswer = questionData.correctAnswer
 
 		valores.possibleAnswers = questionData.answers
 		valores.t1answer = false;

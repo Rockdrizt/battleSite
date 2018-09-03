@@ -21,7 +21,7 @@ var battle = function(){
 		jsons: [
 			{
 				name: "sounds",
-				file: "/data/sounds/tournament.json"
+				file: settings.BASE_PATH + "/data/sounds/tournament.json"
 			},
 		],
 		characters: [
@@ -37,74 +37,80 @@ var battle = function(){
 		atlases: [
 			{
 				name: "atlas.battle",
-				json: "/images/battle/atlas.json",
-				image: "/images/battle/atlas.png",
+				json: settings.BASE_PATH + "/images/battle/atlas.json",
+				image: settings.BASE_PATH + "/images/battle/atlas.png",
 			},
 			{
 				name: "atlas.question",
-				json: "/images/questionOverlay/atlas.json",
-				image: "/images/questionOverlay/atlas.png",
+				json: settings.BASE_PATH + "/images/questionOverlay/atlas.json",
+				image: settings.BASE_PATH + "/images/questionOverlay/atlas.png",
 			},
 			{
 				name: "atlas.answers",
-				json: "/images/answers/atlas.json",
-				image: "/images/answers/atlas.png",
+				json: settings.BASE_PATH + "/images/answers/atlas.json",
+				image: settings.BASE_PATH + "/images/answers/atlas.png",
 			}
 		],
 		images: [
 			{
 				name: "back",
-				file: "/images/battle/back.png",
+				file: settings.BASE_PATH + "/images/battle/back.png",
 			},
 			{
 				name: "listos",
-				file: "/images/questionOverlay/listos.png",
+				file: settings.BASE_PATH + "/images/questionOverlay/listos.png",
 			},
 			{
 				name: "ya",
-				file: "/images/questionOverlay/ya.png",
+				file: settings.BASE_PATH + "/images/questionOverlay/ya.png",
 			},
 			{
 				name: "frame",
-				file: "/images/battle/frame.png",
+				file: settings.BASE_PATH + "/images/battle/frame.png",
 			},
 			{
 				name: "questionBoard",
-				file: "/images/questionOverlay/questionBoard.png",
+				file: settings.BASE_PATH + "/images/questionOverlay/questionBoard.png",
 			},
 			{
 				name: "pinkLight",
-				file: "/images/yogoSelector/pinkLight.png",
+				file: settings.BASE_PATH + "/images/yogoSelector/pinkLight.png",
 			},
 			{
 				name: "pipes",
-				file: "/images/battle/pipes.png",
+				file: settings.BASE_PATH + "/images/battle/pipes.png",
+			},
+			{
+				name: "default",
+				file: settings.BASE_PATH + "/images/questionDB/default.png",
 			}
 		],
 		sounds: [
+			{	name: "battleSong",
+				file: soundsPath + "songs/melodyloops.mp3"},
 		],
 		spritesheets: [
 		],
 		spines:[
 			{
 				name:"background",
-				file:"/spines/battle/background/Background2.json",
+				file:settings.BASE_PATH + "/spines/battle/background/Background2.json",
 			},
 			{
 				name:"cubes",
-				file:"/spines/battle/cubes/cubes.json",
+				file:settings.BASE_PATH + "/spines/battle/cubes/cubes.json",
 			},
 			{
 				name:"cylinder",
-				file:"/spines/battle/energy_cylinder/energy_cylinder.json",
+				file:settings.BASE_PATH + "/spines/battle/energy_cylinder/energy_cylinder.json",
 			},
 			{
 				name:"floor",
-				file:"/spines/battle/floor/floor.json",
+				file:settings.BASE_PATH + "/spines/battle/floor/floor.json",
 			},
 			{
 				name:"triangles",
-				file:"/spines/battle/triangle/triangle.json",
+				file:settings.BASE_PATH + "/spines/battle/triangle/triangle.json",
 			}
 		],
 		particles: [
@@ -160,6 +166,7 @@ var battle = function(){
 
 	var mainYogotorars
 	var mainSpine
+	var listName
 
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -177,7 +184,7 @@ var battle = function(){
 	function preload(){
 
 		game.stage.disableVisibilityChange = true
-		game.load.bitmapFont('skwig', '/fonts/font.png', '/fonts/font.fnt')
+		game.load.bitmapFont('skwig', settings.BASE_PATH + '/fonts/font.png', settings.BASE_PATH + '/fonts/font.fnt')
 	}
 
 	function createBackground(){
@@ -308,9 +315,7 @@ var battle = function(){
         questionGroup.callback = function (event) {
 			questionGroup.hide()
             //questionGroup.timer.stop()
-        	game.time.events.add(2000, function () {
-				checkAnswer()
-			})
+        	game.time.events.add(2000, checkAnswer)
 		}
         questionGroup.stopTimer = function(){
 			questionGroup.timer.destroy()
@@ -318,7 +323,6 @@ var battle = function(){
             setNoAnswer()
             console.log("time out")
         }
-        questionGroup.alpha = 0
 		sceneGroup.add(questionGroup)
     }
 
@@ -444,7 +448,7 @@ var battle = function(){
 
 		var charObj = {
 			name: character,
-			file: "/data/characters/" + character + ".json",
+			file: settings.BASE_PATH + "/data/characters/" + character + ".json",
 			scales: ["@0.5x"],
 			teamNum:teamIndex
 		}
@@ -455,7 +459,7 @@ var battle = function(){
 
 		var charObj = {
 			name: character + "Special",
-			file: "/images/battle/" + character + "Special.png",
+			file: settings.BASE_PATH + "/images/battle/" + character + "Special.png",
 		}
 		assets.images.push(charObj)
 	}
@@ -555,6 +559,8 @@ var battle = function(){
 
 			yogoGroup.add(groupPoint)
 		}
+
+		game.time.events.add(8000, initGame)
 	}
 
 	function selectYogotar(obj) {
@@ -594,7 +600,7 @@ var battle = function(){
 		var life = HUDGroup.getLifeBar(team)
 		var damage = life.width - (MAX_LIFE * percent * ORDER_SIDES[team].scale.x)
 		var index = team == 0 ? 1 : 0
-        var delay = 4000
+        var delay = 3500
         
         if(percent == DAMAGE.ultra){
             shakeCamera()
@@ -744,7 +750,9 @@ var battle = function(){
         })
         
 		battleMain.initWinerTeam(win)
+		reward.setWinner(win)
 		game.add.tween(white).to({alpha:1}, 300, Phaser.Easing.Cubic.In, true, 4000).onComplete.add(function(){
+			battleSong.stop()
 			sceneloader.show("reward")
 		})
 	}
@@ -770,14 +778,16 @@ var battle = function(){
         
 		event = event || {}
 		var answers = event.answers || {}
-		var numTeam = event.numTeam || game.rnd.integerInRange(1, 2)
+		var numTeam = event.numTeam || -1//game.rnd.integerInRange(1, 2)
 		var playerWin, playerLose
         
-		var t1 = answers.t1 || {value: true,
-			time: game.rnd.integerInRange(1000, MAX_TIME) //10000 //10 seg
+		var t1 = answers.t1 || {
+			//value: true,
+			//time: game.rnd.integerInRange(1000, MAX_TIME) //10000 //10 seg
 		}
-		var t2 = answers.t2 ||{value: true,
-			time: game.rnd.integerInRange(1000, MAX_TIME) //20000 //20 seg
+		var t2 = answers.t2 ||{
+			//value: true,
+			//time: game.rnd.integerInRange(1000, MAX_TIME) //20000 //20 seg
 		}
 		var players = [t1, t2]
 		var timeDifference = event.timeDifference || Math.abs(t1.time - t2.time) || 0
@@ -790,6 +800,8 @@ var battle = function(){
 		for(var i = 0; i < answersGroup.length; i++){
 
 			var newScale = convertScale(players[i].time)
+			if(newScale < 0)
+				newScale = 0
 			var ansTime = convertTime(players[i].time)
 
 			var score = answersGroup.children[i]
@@ -827,7 +839,8 @@ var battle = function(){
         }
         else{
             setLoser(leftAns)
-            setLoser(rigthAns)
+			setLoser(rigthAns)
+			game.time.events.add(4500, setNoAnswer)
         }
 	}
     
@@ -836,12 +849,12 @@ var battle = function(){
         game.time.events.add(1000, function(){
             score.stock.loadTexture("atlas.answers", "ans" + name)
             var index = score.parent.getChildIndex(score)
-            var team = teams[index]
             var anim = name ? "answer_good" : "answer_bad"
-            for(var k = 0; k < mainYogotorars.length; k++){
-                var yogo = mainYogotorars[k]
-                changeAnim(yogo, anim)
-            }
+            //for(var k = 0; k < mainYogotorars.length; k++){
+				var yogo = mainYogotorars[index]
+				yogo.setAnimation([anim], true)
+                //changeAnim(yogo, anim)
+            //}
         })
     }
     
@@ -956,7 +969,7 @@ var battle = function(){
         var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 500)
         secondOut.onComplete.add(function(){
 			//questionGroup.showQuestion(server.generateQuestion())
-			//var riddle = riddles.getOperation()//riddles.getQuestion()
+			//var riddle = riddles.getOperation()
 			//questionGroup.showQuestion(riddle)
 			server.sendQuestion()
 		})
@@ -1019,8 +1032,8 @@ var battle = function(){
 			createQuestionOverlay()
 			createListosYa()
 			//createMenuAnimations()
-			menubuttons()
-			//battleSong = sound.play("battleSong", {loop:true, volume:0.6})
+			//menubuttons()
+			battleSong = sound.play("battleSong", {loop:true, volume:0.6})
 			createWhite()
 
 			if(server){
@@ -1031,6 +1044,13 @@ var battle = function(){
 			}
 
 			game.add.tween(sceneGroup).from({alpha:0},500, Phaser.Easing.Cubic.Out,true)
+
+			game.onPause.add(function () {
+				PhaserSpine.Spine.globalAutoUpdate = false
+			})
+			game.onResume.add(function () {
+				PhaserSpine.Spine.globalAutoUpdate = true
+			})
 		},
 		setCharacter:setCharacter,
 		setTeams: function (myTeams) {
@@ -1046,6 +1066,9 @@ var battle = function(){
 					pushSpecialArt(img)
 				}
 			}
+		},
+		shutdown:function () {
+			sceneGroup.destroy()
 		}
 	}
 }()

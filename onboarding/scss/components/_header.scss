@@ -5,10 +5,9 @@
   position: absolute;
   top: 0;
   left: 0;
-
   h1 {
     width: 100%;
-    font-size: 40px;
+    font-size: 50px;
     text-align: center;
     line-height: $height-header;
     position: relative;
@@ -22,7 +21,6 @@
       top: 50%;
       right: 0;
       transform: translateY(-50%);
-
       li {
         display: inline-block;
         padding: 0 10px;
@@ -34,7 +32,6 @@
 /**************************************
  ********* Media Queries **************
  **************************************/
-
 @media only screen and (max-width: 991px) {
   .header {
     h1 {

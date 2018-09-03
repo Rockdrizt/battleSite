@@ -3,8 +3,8 @@ var preloaderIntro = function(){
 	var assets = {
 		atlases: [{
 				name: "logoAtlas",
-				json: "/images/preload/atlas.json",
-				image: "/images/preload/atlas.png"
+				json: settings.BASE_PATH + "/images/preload/atlas.json",
+				image: settings.BASE_PATH + "/images/preload/atlas.png"
 			}],
 		
 	}
@@ -82,5 +82,8 @@ var preloaderIntro = function(){
             var spin = game.add.tween(spiner).to({angle: -360}, 2000, Phaser.Easing.linear, true)
             spin.repeat(-1)
 		},
+		shutdown:function () {
+			sceneGroup.destroy()
+		}
 	}
 }()

@@ -21,8 +21,8 @@ var gulp = require('gulp'),
 var _TOURNAMENT = {
   SERVER : {
     PORT : 3004,
-    BASE_DIR : "src",
-    START_PATH : "sections/battle/index.html"
+    BASE_DIR : "../MathTournament",
+    START_PATH : "src/sections/battle/index.html"
   },
   FILE_WATCH : [
     '.html',

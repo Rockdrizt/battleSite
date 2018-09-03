@@ -94,6 +94,7 @@ function Client(){
 			self.id_game = null;
 			self.refIdGame= null;
 			self.fireEvent('onGameFull',[]);
+			onError("La sesión esta llena, ingresa un pin diferente", true)
 			return false
 		}
 		if(((idGame!==null)&&(!self.id_game))||(idGame === "000000")){
@@ -164,27 +165,25 @@ function Client(){
 	 * @summary Starts the client
 	 * @param {type} idGame Code of the game
 	 */
-	this.start =function(idGame, callback, onError){
+	this.start =function(idGame, onAlert){
 		// self.events = {};
 		console.log(self.events)
 		self.refIdGame= database.ref();
-		self.onError = onError
+		self.showAlert = onAlert
 
 		if((!idGame) || (idGame === "")){
-			return onError("Ingresa un pin valido", true)
+			return onAlert("Ingresa un pin valido", true)
 		}
 
 		self.refIdGame.child(idGame).once('value').then(function(snapshot) {
 			var val = snapshot.val()
 			if(val){
 				self.refIdGame = database.ref(idGame)
-				var success = initialize(idGame, self.team, val)
-				if(success && callback) callback()
-				else onError("La sesión esta llena, ingresa un pin diferente")
+				initialize(idGame, self.team, val)
 			}else{
-				onError("La partida no existe", true)
+				onAlert("La partida no existe", true)
 			}
-		}).catch(onError.bind(this, "Ocurrio un error al conectarse. Intenta de nuevo.", true));
+		}).catch(onAlert.bind(this, "Ocurrio un error al conectarse. Intenta de nuevo.", true));
 		//Reportando la salida del juego
 		window.onbeforeunload = function(){
 			if(self.numTeam!=null)

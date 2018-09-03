@@ -1,6 +1,7 @@
 var epicparticles = function(){
 	var game = null
 	var emitters = []
+	var emittersPull = {}
 	var loaders = {}
 	var datas = {}
 	var sceneGroup
@@ -32,10 +33,12 @@ var epicparticles = function(){
 		}
 	}
 
-	function newParticle(emitter){
-		var sprite = game.add.sprite(0, 0, emitter.key)
+	function newParticle(emitter, i){
+		var sprite = emitter.children[i] || game.add.sprite(0, 0, emitter.key)
 		sprite.anchor.setTo(0.5, 0.5)
 		sprite.visible = false
+		sprite.alpha = 1
+		sprite.x = 0; sprite.y = 0
 		emitter.add(sprite)
 
 		return {
@@ -190,8 +193,8 @@ var epicparticles = function(){
 		var g = start.g * 255
 		var b = start.b * 255
 
-		var tint = Phaser.Color.getColor(r, g, b)
-		particle.sprite.tint = tint
+			var tint = Phaser.Color.getColor(r, g, b)
+			particle.sprite.tint = tint
 	}
 
 	function addParticle(emitter){
@@ -340,7 +343,7 @@ var epicparticles = function(){
 		var g = c.g * 255
 		var b = c.b * 255
 
-		if(emitter.frameCounter % 4 === 0) {
+		if((emitter.frameCounter % 4 === 0)) {
 			var tint = Phaser.Color.getColor(r, g, b)
 			particle.sprite.tint = tint
 		}
@@ -367,6 +370,9 @@ var epicparticles = function(){
 			return
 
 		emitter.particleCount = 0
+		emitter.alpha = 0
+		// emitter.callAll("kill")
+		// emitter.alive = false
 		emitter.destroy()
 		//emitters.splice(emitter.index, 1)
 	}
@@ -377,7 +383,7 @@ var epicparticles = function(){
 		var arrayLength = emitters.length
 		for (var i = 0; i < arrayLength; i++) {
 			var emitter = emitters[i]
-			var key = emitter.key
+			emitter.index = i
 			emitter.frameCounter++
 
 			if(emitter.follow){
@@ -386,7 +392,7 @@ var epicparticles = function(){
 			}
 
 			if (emitter.active == true && emitter.emissionRate > 0) {
-				var rate = 1.0 / emitter.emissionRate
+				var rate = 1 / emitter.emissionRate
 
 				if (emitter.particleCount < emitter.maxParticles) {
 					emitter.emitCounter += deltaTime
@@ -416,12 +422,14 @@ var epicparticles = function(){
 				} else {
 					removeParticleAtIndex(emitter, index)
 
-					if (emitter.particleCount <= 0){
-						removeEmitter(emitter)
-						emitters.splice(i, 1)
-						return
-					}
 				}
+			}
+
+			if (emitter.particleCount <= 0){
+				removeEmitter(emitter)
+				emitters.splice(i, 1)
+				emitter.index = null
+				return
 			}
 		}
 	}
@@ -441,10 +449,27 @@ var epicparticles = function(){
 	}
 
 	function newEmitter(key, options){
+		var emitter
+		var emitterIndex = 1
+		var emitterPullKey = key + "v" + emitterIndex
+
+		// while((emittersPull[emitterPullKey])&&(emittersPull[emitterPullKey].alive)){
+		// 	emitterIndex++
+		// 	emitterPullKey = key + "v" + emitterIndex
+		// }
+		// if(emittersPull[emitterPullKey]){
+		// 	emitter = emittersPull[emitterPullKey]
+		// 	emitter.alpha = 1
+		// 	emitter.callAll("revive")
+		// }else{
+			emitter = game.add.group()
+			// emittersPull[emitterPullKey] = emitter
+		// }
+		emitter.alive = true
+
 		// TODO implement options
 		options = options || {}
-		var emitter = game.add.group()
-		emitters.push(emitter)
+		//emitter.isColor = options.hasColor || false
 
 		var data = game.cache.getJSON(key)
 		if(!data){
@@ -531,14 +556,14 @@ var epicparticles = function(){
 
 		emitter.key = key
 		emitter.absolute = data.absolutePosition
-		emitter.particles = []
+		emitter.particles = emitter.particles || []
 		emitter.frameCounter = 0
 		emitter.stop = stopParticleEmitter.bind(null, emitter)
 		emitter.remove = removeEmitter.bind(null, emitter)
 
 		// Create particle pool
 		for (var i = 0; i < emitter.maxParticles; i++) {
-			emitter.particles[i] = newParticle(emitter)
+			emitter.particles[i] = newParticle(emitter, i)
 		}
 
 		var group = options.group
@@ -553,6 +578,8 @@ var epicparticles = function(){
 				group.add(emitter)
 			}
 		}
+
+		emitters.push(emitter)
 
 		return emitter
 	}

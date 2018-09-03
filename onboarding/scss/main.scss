@@ -13,6 +13,7 @@
 @import './components/textbox';
 @import './components/buttons';
 @import './components/logo';
+@import './components/difficulty-modal';
 
 // Create
 @import './page/create';
@@ -24,4 +25,10 @@
 @import './page/lobby';
 
 // Select
-@import './page/select'
+@import './page/select';
+
+// Difficulty
+@import './page/difficulty';
+
+// Customize Battle
+@import './page/customize-battle';

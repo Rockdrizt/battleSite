@@ -3,7 +3,7 @@ var riddles = function(){
 
 	var questions
 	var usedQuestions
-	var newQuestion
+	var NUMBER_OF_FAKE_ANSWERS = 3
 
 	function initialize(){
 
@@ -23,7 +23,7 @@ var riddles = function(){
 		]
 		usedQuestions = []
 		loadQuestions()
-		operationGenerator.setConfiguration()
+		//operationGenerator.setConfiguration()
 	}
 
 	function loadQuestions(){
@@ -44,21 +44,12 @@ var riddles = function(){
 				existImage : element.existImg,
 				src: imagePath,
 				image: element.image,
-				answers: [],
+				answers: [element.A, element.B, element.C, element.D],
 				grade: element.grade,
 				level: element.level,
-				index: i,
-			}
-
-			var optData = [element.A, element.B, element.C, element.D]
-
-			for(var k = 0; k < optData.length; k++){
-
-				var option = {
-					text: optData[k],
-					correct: k == element.answer - 1 ? true : false
-				}
-				obj.answers.push(option)
+				correctAnswer: element.answer - 1,
+				//index: i,
+				//correctIndex:
 			}
 			questions.push(obj)
 		}
@@ -77,15 +68,28 @@ var riddles = function(){
 	        }while(usedQuestions.includes(rand))
 	
 	        usedQuestions.push(rand)
-			newQuestion = questions[rand]
+			var newQuestion = questions[rand]
 
 			return newQuestion
 	    }
 	}
 
 	function getOperation(){
-        
+
 		var operation = operationGenerator.generate()
+		var correctAnswer = operation.correctAnswer
+
+		var possibleAnswers = [correctAnswer];
+		var negativeOrPositive = Math.round(Math.random()) * 2 - 1;
+		for(var i = 0; i< NUMBER_OF_FAKE_ANSWERS; i++){
+			var diff = Math.floor(correctAnswer / 10) > 1 ? 10 : 1
+			// 	while(possibleAnswers.includes(n)){
+			negativeOrPositive = negativeOrPositive * -1
+			var n = correctAnswer + diff * negativeOrPositive
+			possibleAnswers.push(n);
+		}
+
+		Phaser.ArrayUtils.shuffle(possibleAnswers)
 
 		var question
 		if(operation.operator === "/"){
@@ -93,41 +97,21 @@ var riddles = function(){
 		}else{
 			question = operation.operand1 + " " + operation.operator + " " + operation.operand2 + " = " + operation.result
 		}
-		
+
+		//TODO: correctAnswer only in server side
+
 		var riddle = {
 			question: question,
 			existImage : false,
 			src: "../../images/questionDB/default.png",
 			image: "default",
-			answers: [],
+			answers: possibleAnswers,
 			grade: 10,
-			level: 10
+			level: 10,
+			correctAnswer: correctAnswer
 			//index: i,
 		}
 
-		var correctAns = operation.correctAnswer
-		var option = {
-			text: correctAns,
-			correct: true
-		}
-        riddle.answers.push(option)
-		var negativeOrPositive = Math.round(Math.random()) * 2 - 1
-        
-		for(var i = 0; i < 3; i++){
-            
-			var diff = Math.floor(correctAns / 10) > 1 ? game.rnd.integerInRange(5, 10) : game.rnd.integerInRange(1, 5)
-			negativeOrPositive = negativeOrPositive * -1
-			var n = correctAns + diff * negativeOrPositive
-
-			var option = {
-				text: n,
-				correct: false
-			}
-			riddle.answers.push(option)
-		}
-        
-		Phaser.ArrayUtils.shuffle(riddle.answers)
-		
 		return riddle
     }
 
@@ -135,6 +119,5 @@ var riddles = function(){
 		initialize:initialize,
 		getOperation:getOperation,
 		getQuestion:getQuestion
-		
 	}
 }()

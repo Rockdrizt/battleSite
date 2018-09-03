@@ -35,7 +35,7 @@ var teamSelector = function(){
 		jsons: [
 			{
 				name: "sounds",
-				file: "/data/sounds/tournament.json"
+				file: settings.BASE_PATH + "/data/sounds/tournament.json"
 			},
 		],
 	}
@@ -49,14 +49,14 @@ var teamSelector = function(){
 			},
 			{
 				name: "atlas.loading",
-				json: "/images/loading/atlas.json",
-				image: "/images/loading/atlas.png",
+				json: settings.BASE_PATH + "/images/loading/atlas.json",
+				image: settings.BASE_PATH + "/images/loading/atlas.png",
 			}
 		],
 		images: [
 			{
 				name: "tile",
-				file: "/images/yogoSelector/bgTile.png",
+				file: settings.BASE_PATH + "/images/yogoSelector/bgTile.png",
 			}
 		],
 		sounds: [
@@ -76,7 +76,7 @@ var teamSelector = function(){
 				file: soundsPath + "cut.mp3"},
 			{	name: "gameSong",
 				file: soundsPath + "songs/party-pop.mp3",},
-			//file: "/sounds/songs/electro.mp3"},
+			//file: settings.BASE_PATH + "/sounds/songs/electro.mp3"},
 			{	name: "startSong",
 				file: soundsPath + "songs/battleLoop.mp3"},
 		],
@@ -86,54 +86,54 @@ var teamSelector = function(){
 		spines:[
 			{
 				name:"tomiko",
-				file:"/spines/yogotars/selector/tomiko/tomikoSelector.json",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/tomiko/tomikoSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"luna",
-				file:"/spines/yogotars/selector/luna/lunaSelector.json",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/luna/lunaSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"nao",
-				file:"/spines/yogotars/selector/nao/naoSelector.json",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/nao/naoSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"theffanie",
-				file:"/spines/yogotars/selector/theffanie/theffanieSelector.json",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/theffanie/theffanieSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"eagle",
-				file:"/spines/yogotars/selector/eagle/eagleSelector.json",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/eagle/eagleSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"dinamita",
-				file:"/spines/yogotars/selector/dinamita/dinamitaSelector.json",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/dinamita/dinamitaSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"arthurius",
-				file:"/spines/yogotars/selector/arthurius/arthuriusSelector.json",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/arthurius/arthuriusSelector.json",
 				scales: ["@0.5x"]
 			},
 			{
 				name:"estrella",
-				file:"/spines/yogotars/selector/estrella/estrellaSelector.json",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/estrella/estrellaSelector.json",
 				scales: ["@0.5x"]
 			},
 		],
 		particles: [
 			{
 				name: 'horizontalLine',
-				file: '/particles/horizontalLine/intence_horison_ligth.json',
+				file: settings.BASE_PATH + '/particles/horizontalLine/intence_horison_ligth.json',
 				texture: 'intence_horison_ligth.png'
 			},
 			{
 				name: 'particlesHorizontal',
-				file: '/particles/particlesHorizontal/particle_horison_ligth.json',
+				file: settings.BASE_PATH + '/particles/particlesHorizontal/particle_horison_ligth.json',
 				texture: 'particle_horison_ligth.png'
 			}
 		]
@@ -198,8 +198,8 @@ var teamSelector = function(){
 
 	function preload(){
 
-		game.stage.disableVisibilityChange = false
-		game.load.bitmapFont('skwig', '/images/fonts/font.png', '/images/fonts/font.fnt')
+		game.stage.disableVisibilityChange = true
+		game.load.bitmapFont('skwig', settings.BASE_PATH + '/images/fonts/font.png', settings.BASE_PATH + '/images/fonts/font.fnt')
 	}
 
 	function createBackground(){
@@ -226,7 +226,7 @@ var teamSelector = function(){
 	function update(){
 		tile.tilePosition.y -= 0.4
 		tile.tilePosition.x -= 0.4
-		epicparticles.update()
+		//epicparticles.update()
 	}
 
 	function createPlatforms(){
@@ -842,5 +842,8 @@ var teamSelector = function(){
 			createReady()
 
 		},
+		shutdown:function () {
+			sceneGroup.destroy()
+		}
 	}
 }()

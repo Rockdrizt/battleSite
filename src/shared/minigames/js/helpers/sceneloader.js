@@ -5,9 +5,11 @@ var sceneloader = function(){
 	var initialized = false
 	var currentLoader = null
 	var loadingFiles
+	var alphaMask
 
 	function init(gameObject){
 		game = gameObject
+		alphaMask = game.add.graphics()
 	}
 
 	function createNewLoader(callbacks){
@@ -208,6 +210,7 @@ var sceneloader = function(){
 		if(sceneToShow != null){
 
 			//console.log(game.state.states[sceneName])
+			//game.add.tween(game.world).to()
 
 			game.state.start(sceneToShow.name, false)
 

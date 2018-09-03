@@ -39,6 +39,9 @@
   .bubbles-down {
     animation: slide-down 10s forwards;
   }
+  .hidden {
+    display: none;
+  }
 }
 
 .container {
@@ -53,6 +56,9 @@
 
 .clearfix {
   overflow: hidden;
+}
+.pointer {
+  cursor: pointer;
 }
 
 @keyframes slide-up {

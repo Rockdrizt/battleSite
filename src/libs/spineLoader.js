@@ -1,7 +1,6 @@
 var spineLoader = function () {
 
 	var currentLoader
-	var spines = {}
 	var pullGroup
 
 	function getGroupRef(ref, self) {
@@ -15,8 +14,7 @@ var spineLoader = function () {
 		}
 	}
 
-	function removeSpine() {
-		pullGroup.add(this)
+	function removeParticles() {
 
 		var particles = this.particles
 		if(!particles)
@@ -210,8 +208,10 @@ var spineLoader = function () {
 		spineGroup.setSkinByName = setSkin.bind(spineSkeleton)
 
 		spineGroup.setAlive = function (alive) {
-			this.autoUpdate = alive
-		}.bind(spineSkeleton)
+			this.spine.autoUpdate = alive
+			if(alive)
+				this.removeParticles()
+		}.bind(spineGroup)
 
 		spineGroup.getSlotContainer = function (slotName) {
 			var slotIndex
@@ -242,7 +242,7 @@ var spineLoader = function () {
 
 		spineGroup.spine = spineSkeleton
 
-		spineGroup.remove = removeSpine.bind(spineGroup)
+		spineGroup.removeParticles = removeParticles.bind(spineGroup)
 
 		// if(!unlike)
 		// 	spines[skeleton] = spineGroup
@@ -255,7 +255,7 @@ var spineLoader = function () {
 
 		var soundObj = {
 			name:name,
-			file:soundsList[name]
+			file:settings.BASE_PATH + soundsList[name]
 		}
 
 		if(typeof soundObj.file === "undefined"){
@@ -271,8 +271,8 @@ var spineLoader = function () {
 
 		var particleObj = {
 			name:name,
-			file:typeof string === "string" ? "/particles/characters/" + string
-				: "/particles/characters/" + name + "/" + name + ".json",
+			file:typeof string === "string" ? settings.BASE_PATH + "/particles/characters/" + string
+				: settings.BASE_PATH + "/particles/characters/" + name + "/" + name + ".json",
 			texture:name + ".png"
 		}
 

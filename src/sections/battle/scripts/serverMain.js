@@ -19,6 +19,10 @@ function startGame(){
     	sceneloader.preload(sceneList, {onComplete: onCompleteBoot}, "boot")
 	}
 
+	function pauseUpdate() {
+		alertDialog.pauseUpdate()
+	}
+
 	function showAlert(message){
 		alertDialog.show({
 			message:message,
@@ -121,7 +125,7 @@ function startGame(){
 
 		battle.setTeams(teams)
 		server = new Server()
-		server.start()
+		server.start(null, null, {rules:operationGenerator.RULES_SET.MASTER})
     }
 
     function create(){

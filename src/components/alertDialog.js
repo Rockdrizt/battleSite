@@ -1,37 +1,57 @@
 var alertDialog = function () {
 	var alertGroup
 	var okButton
+	var appearTween
 
 	var assets = {
 		images: [
 			{
 				name: 'textbox',
-				file: "/images/onboarding/textbox.png"
+				file: settings.BASE_PATH + "/images/onboarding/textbox.png"
 			},
 			{
 				name: 'okOn',
-				file: "/images/onboarding/okOn.png"
+				file: settings.BASE_PATH + "/images/onboarding/okOn.png"
 			},
 			{
 				name: 'okOff',
-				file: "/images/onboarding/okOff.png"
+				file: settings.BASE_PATH + "/images/onboarding/okOff.png"
 			}
 		],
 	}
 
 	function hideAlert() {
-		alertGroup.dialog.text = ""
-		alertGroup.input.setText("")
-		alertGroup.input.alpha = 0
+		game.paused = false
 
 		var dissapearTween = game.add.tween(alertGroup).to({alpha:0}, 300, Phaser.Easing.Cubic.Out, true)
-		if(okButton.callback)
-			dissapearTween.onComplete.add(okButton.callback)
+		dissapearTween.onComplete.add(function () {
+			alertGroup.dialog.text = ""
+			alertGroup.input.setText("")
+			alertGroup.input.alpha = 0
+		})
 	}
 
 	function disableButton() {
 		this.btn.inputEnabled = false
 		this.alpha = 0
+	}
+
+	function onClickOk (btn) {
+		var button = btn.parent
+		var okOn = button.okOn
+		var okOff = button.okOff
+		var value = alertGroup.input.value
+
+		okOn.alpha = 1
+		okOff.alpha = 0
+		sound.play("pop")
+		console.log(value)
+		btn.inputEnabled = false
+
+		if(okButton.callback)
+			okButton.callback(value)
+
+		hideAlert()
 	}
 	
 	function createButton() {
@@ -40,27 +60,24 @@ var alertDialog = function () {
 		okOff.anchor.setTo(0.5, 0.5)
 		var okOn = okButton.create(0, 0, "okOn")
 		okOn.anchor.setTo(0.5, 0.5)
+		okButton.okOn = okOn
+		okButton.okOff = okOff
 
 		okOn.alpha = 0
 		okOn.inputEnabled = true
 		okButton.btn = okOn
-		okOn.events.onInputDown.add(function (btn) {
-			okOn.alpha = 1
-			okOff.alpha = 0
-			sound.play("pop")
-			var value = alertGroup.input.value
-			console.log(value)
-			okButton.callback = okButton.callback.bind(this, value)
-			btn.inputEnabled = false
-
-			game.time.events.add(200, function () {
-				okOn.alpha = 0
-				okOff.alpha = 1
-				hideAlert()
-			})
-		}, this)
+		okOn.events.onInputDown.add(onClickOk, this)
 		
 		okButton.disable = disableButton.bind(okButton)
+		okButton.initialize = initButton.bind(okButton)
+	}
+
+	function initButton(){
+		this.okOff.alpha = 1
+		this.okOn.alpha = 0
+
+		this.btn.inputEnabled = true
+		this.alpha = 1
 	}
 
 	function showAlertGroup(params) {
@@ -80,15 +97,19 @@ var alertDialog = function () {
 		if(isButtonDisabled)
 			okButton.disable()
 		else
-			okButton.btn.inputEnabled = true
+			okButton.initialize()
 
 		if(pin) {
 			alertGroup.pinGroup.alpha = 1
 			alertGroup.pinGroup.pin.text = pin
 		}
 
-
-		game.add.tween(alertGroup).to({alpha:1}, 200, Phaser.Easing.Cubic.Out, true)
+		game.paused = false
+		appearTween = game.add.tween(alertGroup).to({alpha:1}, 200, Phaser.Easing.Cubic.Out, true)
+		appearTween.onComplete.add(function() {
+			game.paused = true
+		})
+		//appearTween.update()
 
 		if(params.callback) okButton.callback = params.callback
 	}
@@ -174,10 +195,16 @@ var alertDialog = function () {
 		return alertGroup
 	}
 
+	function pauseUpdate() {
+		//if(appearTween)appearTween.update()
+		alertGroup.input.update()
+	}
+
 	return{
 		assets : assets,
 		init : initAlert,
 		show : showAlertGroup,
-		hide : hideAlert
+		hide : hideAlert,
+		pauseUpdate: pauseUpdate
 	}
 }()

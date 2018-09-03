@@ -1,6 +1,6 @@
 
-var soundsPath = "../../../shared/minigames/sounds/";
-var imagePath = "/images/reward/";
+var soundsPath = "../../shared/minigames/sounds/";
+var imagePath = settings.BASE_PATH + "/images/reward/";
 
 var reward = function(){
     
@@ -18,7 +18,7 @@ var reward = function(){
         atlases: [
             {   
                 name: "atlas.reward",
-                json: imagePath + "/atlas.json",
+                json: imagePath + "atlas.json",
                 image: imagePath + "atlas.png",
             }
         ],
@@ -57,29 +57,29 @@ var reward = function(){
         spines:[
             {
                 name:"coup",
-                file:"/spines/reward/brain/pantalla_victoria.json"
+                file:settings.BASE_PATH + "/spines/reward/brain/pantalla_victoria.json"
             }
         ],
         jsons: [
 			{
 				name: "sounds",
-				file: "data/sounds/tournament.json"
+				file: settings.BASE_PATH + "/data/sounds/tournament.json"
 			},
 		],
         particles: [
             {
                 name: "brain_particles",
-                file: "/particles/rewardScreen/brain_particles/sphere_ligths1.json",
+                file: settings.BASE_PATH + "/particles/rewardScreen/brain_particles/sphere_ligths1.json",
                 texture: "sphere_ligths1.png"
             },
             {
                 name: "brain_particlesB",
-                file: "/particles/rewardScreen/brain_particles/Ligth_Brain.json",
+                file: settings.BASE_PATH + "/particles/rewardScreen/brain_particles/Ligth_Brain.json",
                 texture: "Ligth_Brain.png"
             },
             {
                 name: "confetti",
-                file: "/particles/rewardScreen/confetti/Conffeti_win.json",
+                file: settings.BASE_PATH + "/particles/rewardScreen/confetti/Conffeti_win.json",
                 texture: "Conffeti_win.png"
             }
         ]
@@ -91,6 +91,7 @@ var reward = function(){
     //General variables
     var sceneGroup;                         //General group of all scene
     var tile;                               //Reference of tile background
+    var rewardSong
     //Own variables
     var COUPOFFSETX = 820;                  //Offset to collocate the coup in X
     var loseColocation;                     //Position to colocate the window of players in y
@@ -209,7 +210,7 @@ var reward = function(){
             sound.play("song");
             createEmitterParticles("confetti",game.world.centerX,0,null);
             sound.play("cheers");
-            sound.play("music", {loop:true, volume:0.4});
+            rewardSong = sound.play("music", {loop:true, volume:0.4});
             for(var j=0; j<3; j++)
                 squareLoser[j].children[0].setAlive(true)
         },this);
@@ -238,12 +239,14 @@ var reward = function(){
         brainGroup = game.add.group();
         sceneGroup.add(brainGroup);
 
+        var loser = INDEX_WINNER == 0 ? 1 : 0
+
         loseColocation = game.height;
         for(var i=0; i<3; i++){
             squareLoser.push(game.add.sprite(game.width + 300, loseColocation,"atlas.reward","ventanaFondo"));
             sceneGroup.add(squareLoser[i]);
             closeSquare.push(game.add.sprite(game.width + 300 - 2, loseColocation + squareLoser[i].height - 5,"atlas.reward","ventanaFrente"));
-            createSpineLoser(180,260,players[1][i].name,0.65*scaleOrder[i],0.65,squareLoser[i],players[1][i].skin);
+            createSpineLoser(180,260,players[loser][i].name,0.65*scaleOrder[i],0.65,squareLoser[i],players[loser][i].skin);
             loseColocation += squareLoser[i].height + 10;
          }
 
@@ -264,7 +267,7 @@ var reward = function(){
         tweenNameWin.onComplete.add(addLosersTween);
 
         for(var m=0; m<3; m++){
-            createSpineWinner(winnerColocationX[m],winnerColocationY[m],players[0][m].name,winnerScale[m]*scaleOrder[m], winnerScale[m], players[0][m].skin);
+            createSpineWinner(winnerColocationX[m],winnerColocationY[m],players[INDEX_WINNER][m].name,winnerScale[m]*scaleOrder[m], winnerScale[m], players[INDEX_WINNER][m].skin);
         }
     }
 
@@ -301,7 +304,7 @@ var reward = function(){
 
         var appear;
 
-        if(INDEX_WINNER == 0){
+        if(INDEX_WINNER == 1){
             appear = "appear_delta";
         }else{
             appear = "appear_alpha";
@@ -347,6 +350,24 @@ var reward = function(){
         return playerYogotarSpine;
     }
 
+    function createRetryBtn(){
+
+        var retry = sceneGroup.create(game.world.width, game.world.height - 100, "atlas.reward", "barraAmarilla")
+        retry.anchor.setTo(1, 0.5)
+        retry.inputEnabled = true
+        retry.events.onInputDown.add(function(){
+            rewardSong.stop()
+            sceneloader.show("yogoSelector")
+        })
+
+        var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
+
+        var text = new Phaser.Text(sceneGroup.game, -120, -5, "Otra vez", fontStyle)
+		text.anchor.setTo(0.5)
+		retry.addChild(text)
+		retry.text = text
+    }
+
     //Load each character to use in assets
     
     //////////////////
@@ -365,6 +386,7 @@ var reward = function(){
             initialize();
             createSpineScenary();
             createScenary();
+            createRetryBtn()
             createParticles();
         },
         setTeams: function (myTeams) {
@@ -372,6 +394,9 @@ var reward = function(){
         },
         setWinner: function(winner){
             INDEX_WINNER = winner
-        }
+        },
+        shutdown: function () {
+            sceneGroup.destroy()
+		}
     }
 }()
