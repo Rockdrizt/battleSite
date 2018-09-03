@@ -28,7 +28,19 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				sceneloader.show("battleScene")
+				if (server) {
+					server.setGameReady(true)
+					server.startGame = function () {
+						sceneloader.show("yogoSelector")
+					}
+				}
+				else {
+					//sceneloader.show("yogoSelector")
+					var loaderScene = sceneloader.getScene("preloaderIntro")
+
+					//loaderScene.onComplete("startScreen")
+					sceneloader.show("yogoSelector")
+				}
 	    	}
 
 			document.body.style.visibility = "visible"
@@ -82,37 +94,53 @@ function startGame(){
 		spineLoader.init()
     	sound.init(game)
 
-		var teams = [
+//		var teams = [
+//            
+//			[{name:"yogotarEagle", skin:"eagle1"}, {name:"yogotarNao", skin:"nao2"}, {name:"yogotarTomiko", skin:"tomiko1"}],
+//			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarArthurius", skin:"arthurius1"}, {name:"yogotarEstrella", skin:"estrella1"}],
+//
+//		]
 
-			["yogotarDazzle", "yogotarDazzle", "yogotarDazzle"],
-			["yogotarTheffanie", "yogotarTheffanie", "yogotarTheffanie"],
-
-		]
-		var objTeams = []
-
-		for(var teamIndex = 0; teamIndex < teams.length; teamIndex++){
-			var team = teams[teamIndex]
-			objTeams[teamIndex] = []
-			for(var yogoIndex = 0; yogoIndex < team.length; yogoIndex++){
-				var yogotar = team[yogoIndex]
-				objTeams[teamIndex][yogoIndex] = {
-					name: yogotar,
-					skin: yogotar.substr(7).toLowerCase() + 1
-				}
-			}
-		}
-
-		battleScene.setTeams(objTeams)
+        var teams = [
+            
+//            [{name:"dinamita", skin:"dinamita1"}, {name:"theffanie", skin:"theffanie2"}, {name:"luna", skin:"luna1"}],
+//			[{name:"eagle", skin:"eagle2"}, {name:"nao", skin:"nao1"}, {name:"estrella", skin:"estrella1"}],
+            
+            [{name:"yogotarNao", skin:"nao1"}, {name:"yogotarTheffanie", skin:"theffanie2"}, {name:"yogotarLuna", skin:"luna1"}],
+			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarNao", skin:"nao2"}, {name:"yogotarEstrella", skin:"estrella1"}],
+            
+        ];
+		//battleScene.setTeams(teams)
+		battle.setTeams(teams)
+        //reward.setTeams(teams)
+        //reward.setWinner(1)
+		//TODO: this a test
+		server = new Server()
+		server.start("000000")
     }
 
     function create(){
 		console.log("createEpicBattle")
     	bootConfigFiles([
-			battleScene
-            //result,
+            //startScreen,
+            yogoSelector,
+            //battle,
     	])
     }
 }
 
-startGame()
+var wfconfig = {
+
+	active: function() {
+		console.log("font loaded");
+        startGame()
+	},
+    custom: {
+        families: [ 'VAGRounded' ],
+        urls:['../../shared/minigames/css/custom_fonts.css']
+    },
+};
+WebFont.load(wfconfig);
+
+//startGame()
 
