@@ -5,8 +5,8 @@ format: RGBA8888
 filter: Linear,Linear
 repeat: none
 normal1/diskultra1_a
-  rotate: true
-  xy: 2010, 1970
+  rotate: false
+  xy: 1622, 45
   size: 62, 27
   orig: 62, 27
   offset: 0, 0
@@ -83,7 +83,7 @@ normal1/explosion_9
   index: -1
 normal4/super_attack1
   rotate: false
-  xy: 1516, 14
+  xy: 699, 16
   size: 60, 58
   orig: 60, 58
   offset: 0, 0
@@ -104,7 +104,7 @@ normal5/bracket
   index: -1
 normal5/diskultra1_b
   rotate: false
-  xy: 610, 47
+  xy: 761, 47
   size: 62, 27
   orig: 62, 27
   offset: 0, 0
@@ -117,10 +117,38 @@ normal5/fusion
   offset: 0, 0
   index: -1
 normal5/top
-  rotate: true
-  xy: 2, 2
+  rotate: false
+  xy: 2010, 1811
   size: 5, 63
   orig: 5, 63
+  offset: 0, 0
+  index: -1
+normal6/base
+  rotate: false
+  xy: 2010, 1876
+  size: 15, 156
+  orig: 15, 156
+  offset: 0, 0
+  index: -1
+normal6/bracket
+  rotate: false
+  xy: 1516, 32
+  size: 104, 40
+  orig: 104, 40
+  offset: 0, 0
+  index: -1
+normal6/fusion
+  rotate: false
+  xy: 610, 16
+  size: 87, 58
+  orig: 87, 58
+  offset: 0, 0
+  index: -1
+normal6/top
+  rotate: true
+  xy: 2, 2
+  size: 5, 64
+  orig: 5, 64
   offset: 0, 0
   index: -1
 secuencia_in/Comp1_00000
