@@ -8,7 +8,7 @@
     {
       "file":"/spines/yogotars/battle/Luna/luna_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"luna_projectiles",
+      "skin":"luna1",
       "animations":["in_normal", "idle_normal"]
     }
   ],

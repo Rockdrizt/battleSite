@@ -1,7 +1,7 @@
 {
   "timing":{
-    "stop":550,
-    "removal":1500,
+    "stop":1550,
+    "removal":3500,
     "hit":550
   },
   "particles":[
@@ -15,7 +15,7 @@
     {
       "file":"/spines/yogotars/battle/Eagle/eagle_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"eagle_projectiles",
+      "skin":"eagle1",
       "animations":["idle_ultra","idle_ultra","idle_ultra","idle_ultra"]
     }
   ],
@@ -71,7 +71,7 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":600 
+      "value":800 
     },
     {
       "id":"set",
