@@ -143,7 +143,7 @@ var epicProjectiles = function(){
 				spineGroup.data = spineData
 
 				var onShootAnimations = spineData.animations
-				spineGroup.setAnimation(onShootAnimations, true)
+				spineGroup.setAnimation(onShootAnimations, false)
 
 				self.add(spineGroup)
 				self.spines.push(spineGroup)
