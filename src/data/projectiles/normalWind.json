@@ -13,7 +13,7 @@
     {
       "file":"/spines/yogotars/battle/Eagle/eagle_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"eagle_projectiles",
+      "skin":"eagle1",
       "animations":["in_normal","idle_normal"]
     }
   ],
