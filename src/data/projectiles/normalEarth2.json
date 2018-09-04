@@ -19,6 +19,7 @@
       "/particles/characters/impactEarth8/impactEarth25.json",
       "/particles/characters/impactEarth8/impactEarth26.json"
     ],
+      
     "soundID":"tournamentRockImpact2"
   },
   "onShoot":[

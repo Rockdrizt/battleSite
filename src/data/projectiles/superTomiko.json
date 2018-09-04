@@ -15,7 +15,7 @@
     {
       "file":"/spines/yogotars/battle/Tomiko/tomiko_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"tomiko_projectiles",
+      "skin":"tomiko1",
       "animations":["idle_super"]
     }
   ],
