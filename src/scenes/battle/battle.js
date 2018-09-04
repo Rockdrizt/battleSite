@@ -87,7 +87,7 @@ var battle = function(){
 		],
 		sounds: [
 			{	name: "battleSong",
-				file: soundsPath + "songs/melodyloops.mp3"},
+				file: "../../sounds/songs/battle.mp3"},
 		],
 		spritesheets: [
 		],
@@ -166,6 +166,7 @@ var battle = function(){
 
 	var mainYogotorars
 	var mainSpine
+	var listName
 
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -968,8 +969,8 @@ var battle = function(){
         var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 500)
         secondOut.onComplete.add(function(){
 			//questionGroup.showQuestion(server.generateQuestion())
-			//var riddle = riddles.getOperation()
-			//questionGroup.showQuestion(riddle)
+			// var riddle = riddles.getQuestion()
+			// questionGroup.showQuestion(riddle)
 			server.sendQuestion()
 		})
 
@@ -1043,6 +1044,13 @@ var battle = function(){
 			}
 
 			game.add.tween(sceneGroup).from({alpha:0},500, Phaser.Easing.Cubic.Out,true)
+
+			game.onPause.add(function () {
+				PhaserSpine.Spine.globalAutoUpdate = false
+			})
+			game.onResume.add(function () {
+				PhaserSpine.Spine.globalAutoUpdate = true
+			})
 		},
 		setCharacter:setCharacter,
 		setTeams: function (myTeams) {

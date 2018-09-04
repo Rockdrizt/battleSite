@@ -15,7 +15,7 @@
     {
       "file":"/spines/yogotars/battle/Estrella/estrella_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"estrella_projectiles",
+      "skin":"estrella1",
       "animations":["in_ultra", "idle_ultra"]
     }
   ],
@@ -67,7 +67,7 @@
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":1100
+      "value":1200
     },
     {
       "index":"to",

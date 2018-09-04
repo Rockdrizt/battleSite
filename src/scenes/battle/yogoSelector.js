@@ -49,22 +49,20 @@ var yogoSelector = function(){
 			}
 		],
 		sounds: [
-			{	name: "swordSmash",
-				file: soundsPath + "swordSmash.mp3"},
 			{	name: "swipe",
 				file: soundsPath + "swipe.mp3"},
 			{	name: "robotBeep",
 				file: soundsPath + "robotBeep.mp3"},
-			{	name: "winBattle1",
-				file: soundsPath + "winBattle1.mp3"},
+			{	name: "shineSpell",
+				file: "../../sounds/sounds/shineSpell.mp3"},
 			{	name: "pop",
 				file: soundsPath + "pop.mp3"},
 			{	name: "brightTransition",
 				file: soundsPath + "brightTransition.mp3"},
 			{	name: "cut",
 				file: soundsPath + "cut.mp3"},
-			{	name: "gameSong",
-				file: soundsPath + "songs/weLoveElectricCars.mp3"},
+			{	name: "gameSong", 
+				file: "../../sounds/songs/selector.mp3"},
             {	name: "tomiko",
 				file: settings.BASE_PATH + "/sounds/selectorNames/tomiko.mp3"},
             {	name: "luna",
@@ -902,7 +900,7 @@ var yogoSelector = function(){
 		})
 	}
 
-	function getTeams() {
+	function getTeams(){
 		var teams = []
 		teams[0] = []
 		teams[1] = []
@@ -948,7 +946,7 @@ var yogoSelector = function(){
 
 		game.add.tween(readyGroup.pinkLight.scale).to({x: 1, y: 1}, 400, Phaser.Easing.Cubic.InOut, true, 0, 0, true).onComplete.add(function(){
 			readyGroup.ready.alpha = 1
-			sound.play("swordSmash")
+			sound.play("shineSpell")
 			game.add.tween(readyGroup.ready.scale).from({x: 0, y:0}, 200, Phaser.Easing.linear, true).onComplete.add(function () {
 				battleMain.init(teams)
 				battleMain.create()
@@ -974,7 +972,7 @@ var yogoSelector = function(){
 		var delay = 500
 		var aux = 0
 
-		sound.play("winBattle1")
+		//sound.play("shineSpell")
 
 		for(var i = 0; i < splashArtGroup.length; i++){
 
@@ -1090,6 +1088,12 @@ var yogoSelector = function(){
 			// 	}
 			// 	onPlayersChange(data)
 			// })
+			game.onPause.add(function () {
+				PhaserSpine.Spine.globalAutoUpdate = false
+			})
+			game.onResume.add(function () {
+				PhaserSpine.Spine.globalAutoUpdate = true
+			})
 		},
 		shutdown: function () {
 			sceneGroup.destroy()

@@ -1,15 +1,15 @@
 {
   "timing":{
-    "stop":700,
-    "removal":1000,
-    "hit":700
+    "stop":900,
+    "removal":1500,
+    "hit":750
   },
   "spines":[
     {
       "file":"/spines/yogotars/battle/Tomiko/tomiko_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"tomiko_projectiles",
-      "animations":["in_ultra","idle_ultra"]
+      "skin":"tomiko1",
+      "animations":["in_ultra","idle_ultra","out_ultra"]
     }
   ],
   "impact":{
@@ -66,13 +66,13 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":500
+      "value":650
     },
     {
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":150
+      "value":0
     },
     {
       "index":"to",

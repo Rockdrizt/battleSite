@@ -23,15 +23,14 @@ function startGame(){
 	}
 
 	function connectToServer(value){
-		cliente.start(value, onWaitingPlayers, onErrorConnection)
+		cliente.start(value, showAlert)
 		cliente.startGame = function () {
 			sceneloader.show("teamSelector")
 		}
 	}
 
-	function onErrorConnection(message, showInput){
-
-		alertDialog.show({message:message, callback:connectToServer, showInput:showInput})
+	function showAlert(message, showInput, disableButton){
+		alertDialog.show({message:message, callback:connectToServer, showInput:showInput, isButtonDisabled:disableButton})
 	}
 
 	function onCompleteSceneLoading(){
@@ -39,7 +38,7 @@ function startGame(){
 		alertDialog.init()
 		cliente = new Client();
 		connectToServer(cliente.id_game)
-		//sceneloader.show("teamSelector")
+		//sceneloader.show("questions")
 	}
 
 	function preloadScenes(sceneList){
