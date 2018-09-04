@@ -6,7 +6,7 @@
   },
   "spines":[
     {
-        "file":"spines/Dazzle/dazzle_projectiles.json",
+        "file":"/spines/yogotars/battle/Dazzle/dazzle_projectiles.json",
         "scales":["@0.5x"],
         "skin":"dazzle1",
         "animations":["in_ultra","idle_ultra"]

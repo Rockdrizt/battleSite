@@ -5,7 +5,7 @@
 			{
 				"id": "normalFire",
 				"attachment": "particle4",
-				"delay": 500,
+				"delay": 575,
 				"multiplier": 1
 			}
 		],
