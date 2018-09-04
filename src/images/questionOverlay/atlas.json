@@ -2,7 +2,7 @@
 
 {
 	"filename": "questionBox",
-	"frame": {"x":1,"y":388,"w":1657,"h":245},
+	"frame": {"x":1,"y":1,"w":1657,"h":245},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":1657,"h":245},
@@ -10,7 +10,7 @@
 },
 {
 	"filename": "questionBtn",
-	"frame": {"x":1530,"y":243,"w":435,"h":139},
+	"frame": {"x":1530,"y":248,"w":435,"h":139},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":30,"y":30,"w":435,"h":139},
@@ -18,27 +18,11 @@
 },
 {
 	"filename": "questionImage",
-	"frame": {"x":1,"y":1,"w":1527,"h":385},
+	"frame": {"x":1,"y":248,"w":1527,"h":385},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":1527,"h":385},
 	"sourceSize": {"w":1527,"h":385}
-},
-{
-	"filename": "timeGauge",
-	"frame": {"x":1660,"y":384,"w":225,"h":226},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":226},
-	"sourceSize": {"w":225,"h":226}
-},
-{
-	"filename": "yellowCircle",
-	"frame": {"x":1530,"y":1,"w":341,"h":240},
-	"rotated": false,
-	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":341,"h":240},
-	"sourceSize": {"w":341,"h":240}
 }],
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
@@ -47,6 +31,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1966,"h":634},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:419aa74ab31634d10c9cce8bd28deea1:7c3747dd5d78f90a4cc53e5fb4492766:cbce6b53f0f49e0bf15173c25c41f876$"
+	"smartupdate": "$TexturePacker:SmartUpdate:31a9bb0c78a4ea9198cd9662e53f7c59:604507747cf7d59a0fdbbe00bcd6e4cf:cbce6b53f0f49e0bf15173c25c41f876$"
 }
 }

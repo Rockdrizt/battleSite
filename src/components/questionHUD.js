@@ -34,20 +34,20 @@ var questionHUD = function(){
 		questionGroup.add(black)
 		questionGroup.black = black
 
-		var board = questionGroup.create(game.world.centerX + 5, game.world.height - 15, "questionBoard")
+		var board = questionGroup.create(game.world.centerX, game.world.height - 50, "questionBoard")
 		board.anchor.setTo(0, 1)
 		board.x -= board.width * 0.47
 		questionGroup.boxes[1] = board
 
 		var box = questionGroup.create(board.centerX, board.y - board.height + 2, "atlas.question", "questionBox")
 		box.anchor.setTo(1, 1)
-		box.x += box.width * 0.42
+		box.x += box.width * 0.43
 		questionGroup.boxes[0] = box
 		questionGroup.questionBox = box
 
 		var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "left", wordWrap: true}
 
-		var text = new Phaser.Text(questionGroup.game, box.centerX + 70, box.centerY, "", fontStyle)
+		var text = new Phaser.Text(questionGroup.game, box.centerX + 60, box.centerY, "", fontStyle)
 		text.anchor.setTo(0.5)
 		text.alpha = 0
 		text.wordWrapWidth = box.width * 0.8
@@ -77,7 +77,7 @@ var questionHUD = function(){
 		var callInputAnswer = inputOption.bind(questionGroup)
 
 		if(client){
-			INITIAL_X = board.centerX
+			INITIAL_X = board.centerX * 0.9
 			offsetX = 0.9
 		}
 
@@ -145,9 +145,8 @@ var questionHUD = function(){
 		var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 
 		var board = hud.boxes[0]
-		var teamName = new Phaser.Text(hud.game, board.x, board.y - board.height - 20, NAME, fontStyle)
+		var teamName = new Phaser.Text(hud.game, board.x, board.y - board.height - 30, NAME, fontStyle)
 		teamName.anchor.setTo(1, 0.5)
-		teamName.fontSize = 65
 		teamName.stroke = "#000066"
 		teamName.strokeThickness = 10
 		hud.add(teamName)
@@ -158,7 +157,7 @@ var questionHUD = function(){
 		var box = hud.boxes[1]
 
 		var chronoGroup = game.add.group()
-		chronoGroup.x = box.x * 3.5
+		chronoGroup.x = box.centerX * 1.5
 		chronoGroup.y = box.centerY * 1.3
 		hud.add(chronoGroup)
 		hud.chrono = chronoGroup
@@ -279,7 +278,6 @@ var questionHUD = function(){
 			return this.fixText(scale - 0.1)
 		}
 		else{
-			console.log(this.question.wordWrapWidth)
 			return
 		}
 	}
