@@ -65,21 +65,25 @@
     width: 180px;
     .player {
       position: absolute;
+      height: 150px;
+      line-height: 150px;
       width: 100%;
       top: 50%;
       left: 50%;
+      background-position: top left;
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-image: url(../img/mathtournament-onboarding-bg-green-select.png);
       transform: translate(-50%, -50%);
+      touch-action: none;
+      user-select: none;
+      color: #000;
       img {
         width: 100%;
       }
-    }
-    p {
-      color: #000;
-      position: absolute;
-      width: 100%;
-      top: 50%;
-      transform: translateY(-50%);
-      padding: 0;
+      &:hover {
+        cursor: move;
+      }
     }
   }
   &.item--left {
@@ -136,10 +140,13 @@
         background-size: 100%;
         background-repeat: no-repeat;
         animation: rotate-pin infinite 5s;
+        z-index: -1;
       }
       .player {
         position: absolute;
         width: 130px;
+        background-image: url(../img/mathtournament-onboarding-yellow-select.png);
+        transition: ease all .5;
         // top: 50%;
       }
     }

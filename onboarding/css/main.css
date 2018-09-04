@@ -804,19 +804,23 @@
     width: 180px; }
     .item--lobby .players__container .player {
       position: absolute;
+      height: 150px;
+      line-height: 150px;
       width: 100%;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%); }
+      background-position: top left;
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-image: url(../img/mathtournament-onboarding-bg-green-select.png);
+      transform: translate(-50%, -50%);
+      touch-action: none;
+      user-select: none;
+      color: #000; }
       .item--lobby .players__container .player img {
         width: 100%; }
-    .item--lobby .players__container p {
-      color: #000;
-      position: absolute;
-      width: 100%;
-      top: 50%;
-      transform: translateY(-50%);
-      padding: 0; }
+      .item--lobby .players__container .player:hover {
+        cursor: move; }
   .item--lobby.item--left .item__header {
     right: 10%;
     text-align: right; }
@@ -860,10 +864,13 @@
         background-position: top left;
         background-size: 100%;
         background-repeat: no-repeat;
-        animation: rotate-pin infinite 5s; }
+        animation: rotate-pin infinite 5s;
+        z-index: -1; }
       .item--lobby.item--middle .players__container .player {
         position: absolute;
-        width: 130px; }
+        width: 130px;
+        background-image: url(../img/mathtournament-onboarding-yellow-select.png);
+        transition: ease all .5; }
     .item--lobby.item--middle .item__buttons .item__btn {
       width: 130px; }
       .item--lobby.item--middle .item__buttons .item__btn img {
@@ -1169,7 +1176,9 @@
               background-color: transparent; }
     .container--customize .item .customize__btn {
       display: inline-block;
-      width: 140px;
+      border: none;
+      background-color: transparent;
+      width: 130px;
       margin-top: 20px; }
       .container--customize .item .customize__btn img {
         width: 100%; }
