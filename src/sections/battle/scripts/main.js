@@ -106,7 +106,7 @@ function startGame(){
 //            [{name:"dinamita", skin:"dinamita1"}, {name:"theffanie", skin:"theffanie2"}, {name:"luna", skin:"luna1"}],
 //			[{name:"eagle", skin:"eagle2"}, {name:"nao", skin:"nao1"}, {name:"estrella", skin:"estrella1"}],
             
-            [{name:"yogotarNao", skin:"nao1"}, {name:"yogotarTheffanie", skin:"theffanie2"}, {name:"yogotarLuna", skin:"luna1"}],
+            [{name:"yogotarNao", skin:"nao1"}, {name:"yogotarDinamita", skin:"dinamita2"}, {name:"yogotarLuna", skin:"luna1"}],
 			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarNao", skin:"nao2"}, {name:"yogotarEstrella", skin:"estrella1"}],
             
         ];

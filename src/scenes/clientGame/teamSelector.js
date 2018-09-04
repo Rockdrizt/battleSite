@@ -60,25 +60,34 @@ var teamSelector = function(){
 			}
 		],
 		sounds: [
-			{	name: "swordSmash",
-				file: soundsPath + "swordSmash.mp3"},
+			{	name: "shineSpell",
+				file: "../../sounds/sounds/shineSpell.mp3"},
 			{	name: "swipe",
 				file: soundsPath + "swipe.mp3"},
 			{	name: "robotBeep",
 				file: soundsPath + "robotBeep.mp3"},
-			{	name: "winBattle1",
-				file: soundsPath + "winBattle1.mp3"},
-			{	name: "pop",
-				file: soundsPath + "pop.mp3"},
-			{	name: "brightTransition",
-				file: soundsPath + "brightTransition.mp3"},
+			{	name: "lightUp",
+				file: "../../sounds/sounds/lightUp.mp3"},
 			{	name: "cut",
 				file: soundsPath + "cut.mp3"},
-			{	name: "gameSong",
-				file: soundsPath + "songs/party-pop.mp3",},
-			//file: settings.BASE_PATH + "/sounds/songs/electro.mp3"},
-			{	name: "startSong",
-				file: soundsPath + "songs/battleLoop.mp3"},
+			{	name: "gameSong", 
+				file: "../../sounds/songs/selector.mp3"},
+			{	name: "tomiko",
+				file: settings.BASE_PATH + "/sounds/selectorNames/tomiko.mp3"},
+            {	name: "luna",
+				file: settings.BASE_PATH + "/sounds/selectorNames/luna.mp3"},
+            {	name: "nao",
+				file: settings.BASE_PATH + "/sounds/selectorNames/nao.mp3"},
+            {	name: "theffanie",
+				file: settings.BASE_PATH + "/sounds/selectorNames/theffanie.mp3"},
+            {	name: "eagle",
+				file: settings.BASE_PATH + "/sounds/selectorNames/eagle.mp3"},
+            {	name: "dinamita",
+				file: settings.BASE_PATH + "/sounds/selectorNames/dinamita.mp3"},
+            {	name: "arthurius",
+				file: settings.BASE_PATH + "/sounds/selectorNames/arthurius.mp3"},
+            {	name: "estrella",
+				file: settings.BASE_PATH + "/sounds/selectorNames/estrella.mp3"},
 		],
 		spritesheets: [
 
@@ -541,7 +550,7 @@ var teamSelector = function(){
 		okOff.events.onInputDown.add(function(btn){
 			if(okButton.canClick && teamGroup.currentSelect !== -1){
 				okButton.canClick = false
-				sound.play("pop")
+				sound.play("lightUp")
 				okButton.setAll("alpha", 0)
 				okButton.onBtn.alpha = 1
 				clickOk()
@@ -675,7 +684,7 @@ var teamSelector = function(){
 			while(i !== 5){
 				buttonsGroup.children[i].yogotar.alpha = 1
 				game.add.tween(buttonsGroup.children[i].yogotar.scale).from({x: 0,y: 0}, 500, Phaser.Easing.Cubic.Out, true, delay)
-				game.time.events.add(delay, function(){sound.play("pop")})
+				game.time.events.add(delay, function(){sound.play("lightUp")})
 
 
 				i === 2 ? i = 7 : i--
@@ -776,7 +785,7 @@ var teamSelector = function(){
 		readyGroup.emitter.alpha = 1
 		game.add.tween(readyGroup.pinkLight.scale).from({x: 0}, 100, Phaser.Easing.linear, true).onComplete.add(function(){
 			readyGroup.ready.alpha = 1
-			sound.play("swordSmash")
+			sound.play("shineSpell")
 			game.add.tween(readyGroup.ready.scale).from({x: 0, y:0}, 200, Phaser.Easing.linear, true)
 		})
 
@@ -791,8 +800,6 @@ var teamSelector = function(){
 
 		var delay = 500
 		var aux = side > 0 ? 0 : 1
-
-		sound.play("winBattle1")
 
 		for(var i = 0; i < splashArtGroup.length; i++){
 
