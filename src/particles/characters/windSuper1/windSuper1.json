@@ -11,7 +11,7 @@
   "rotationEnd" : 0,
   "startColorVarianceBlue" : 0,
   "rotatePerSecondVariance" : 0,
-  "particleLifespan" : 1,
+  "particleLifespan" : 0.5,
   "minRadius" : 300,
   "configName" : "windSuper1",
   "tangentialAcceleration" : -0,

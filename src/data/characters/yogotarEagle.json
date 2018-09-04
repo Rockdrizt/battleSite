@@ -5,7 +5,7 @@
 			{
 				"id": "normalWind",
 				"attachment": "particle4",
-				"delay": 500,
+				"delay": 550,
 				"multiplier": 1
 			}
 		],
@@ -22,20 +22,20 @@
 			{
 				"id": "ultraEagle",
 				"attachment": "particle13",
-				"delay": 3500,
+				"delay": 3000,
 				"multiplier": 1
 			},
             {
 				"id": "ultraEagle",
 				"attachment": "particle13",
-				"delay": 4000,
+				"delay": 3500,
 				"multiplier": 1,
 				"hit":false
 			},
             {
 				"id": "ultraEagle",
 				"attachment": "particle13",
-				"delay": 4500,
+				"delay": 4000,
 				"multiplier": 1,
 				"hit":false
 			}

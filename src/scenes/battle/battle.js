@@ -166,6 +166,7 @@ var battle = function(){
 
 	var mainYogotorars
 	var mainSpine
+	var listName
 
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -1043,6 +1044,13 @@ var battle = function(){
 			}
 
 			game.add.tween(sceneGroup).from({alpha:0},500, Phaser.Easing.Cubic.Out,true)
+
+			game.onPause.add(function () {
+				PhaserSpine.Spine.globalAutoUpdate = false
+			})
+			game.onResume.add(function () {
+				PhaserSpine.Spine.globalAutoUpdate = true
+			})
 		},
 		setCharacter:setCharacter,
 		setTeams: function (myTeams) {

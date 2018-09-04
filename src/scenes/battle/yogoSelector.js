@@ -1088,6 +1088,12 @@ var yogoSelector = function(){
 			// 	}
 			// 	onPlayersChange(data)
 			// })
+			game.onPause.add(function () {
+				PhaserSpine.Spine.globalAutoUpdate = false
+			})
+			game.onResume.add(function () {
+				PhaserSpine.Spine.globalAutoUpdate = true
+			})
 		},
 		shutdown: function () {
 			sceneGroup.destroy()

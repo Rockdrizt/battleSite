@@ -3,7 +3,7 @@
     "attacks": {
 		"normal": [
 			{
-				"id": "normalEarth",
+				"id": "normalEarth2",
 				"attachment": "particle12",
 				"delay":    0,
 				"multiplier": 1

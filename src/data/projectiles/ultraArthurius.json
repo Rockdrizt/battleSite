@@ -11,7 +11,7 @@
     {
       "file":"/spines/yogotars/battle/Arthurius/arthurius_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"arthurius_projectiles",
+      "skin":"arthurius1",
       "animations":["in_ultra", "idle_ultra"]
     }
 
