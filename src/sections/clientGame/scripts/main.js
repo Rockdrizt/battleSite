@@ -38,7 +38,7 @@ function startGame(){
 		alertDialog.init()
 		cliente = new Client();
 		connectToServer(cliente.id_game)
-		//sceneloader.show("questions")
+		//sceneloader.show("teamSelector")
 	}
 
 	function preloadScenes(sceneList){

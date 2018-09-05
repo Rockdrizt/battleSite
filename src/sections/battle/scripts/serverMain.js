@@ -31,6 +31,15 @@ function startGame(){
 		})
 	}
 
+	function showError(message){
+    	alertDialog.show({
+			message:message,
+			callback:function(){
+				location.reload()
+			}
+		})
+	}
+
 	function checkPlayers() {
 		if((server.t1Ready)&&(server.t2Ready)){
 			alertDialog.hide()
@@ -60,18 +69,21 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
+				alertDialog.init()
+				server = new Server()
+				server.start(null, checkPlayers, {rules:operationGenerator.RULES_SET.MASTER}, showError)
+
 				if (server) {
 					/*server.startGame = function () {
 						sceneloader.show("yogoSelector")
 					}*/
-					alertDialog.init()
+					//alertDialog.init()
 
 					server.addEventListener("onTeamDisconnect", checkPlayers)
 					server.addEventListener("onInitTeam", checkPlayers)
 					onReadyCallback = function () {
 						sceneloader.show("yogoSelector")
 					}
-					checkPlayers()
 				}
 				else {
 					//sceneloader.show("yogoSelector")
@@ -124,12 +136,11 @@ function startGame(){
         ];
 
 		battle.setTeams(teams)
-		server = new Server()
-		server.start(null, null, {rules:operationGenerator.RULES_SET.MASTER})
     }
 
     function create(){
 		console.log("createEpicBattle")
+
     	bootConfigFiles([
             //startScreen,
 			alertDialog,

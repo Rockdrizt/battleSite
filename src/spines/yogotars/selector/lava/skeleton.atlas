@@ -1,0 +1,255 @@
+
+skeleton.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+secuencia/01_00000
+  rotate: false
+  xy: 2, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00002
+  rotate: false
+  xy: 264, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00004
+  rotate: false
+  xy: 526, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00006
+  rotate: false
+  xy: 788, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00008
+  rotate: false
+  xy: 1050, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00010
+  rotate: false
+  xy: 1312, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00012
+  rotate: true
+  xy: 2, 264
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00014
+  rotate: false
+  xy: 1574, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00016
+  rotate: true
+  xy: 2, 2
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+
+skeleton2.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+secuencia/01_00018
+  rotate: false
+  xy: 2, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00020
+  rotate: false
+  xy: 264, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00022
+  rotate: false
+  xy: 526, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00024
+  rotate: false
+  xy: 788, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00026
+  rotate: false
+  xy: 1050, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00028
+  rotate: false
+  xy: 1312, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00030
+  rotate: true
+  xy: 2, 264
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00032
+  rotate: false
+  xy: 1574, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00034
+  rotate: true
+  xy: 2, 2
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+
+skeleton3.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+secuencia/01_00036
+  rotate: false
+  xy: 2, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00038
+  rotate: false
+  xy: 264, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00040
+  rotate: false
+  xy: 526, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00042
+  rotate: false
+  xy: 788, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00044
+  rotate: false
+  xy: 1050, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00046
+  rotate: false
+  xy: 1312, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00048
+  rotate: true
+  xy: 2, 264
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00050
+  rotate: false
+  xy: 1574, 526
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00052
+  rotate: true
+  xy: 2, 2
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+
+skeleton4.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+assets/yogo
+  rotate: true
+  xy: 2, 2
+  size: 259, 1088
+  orig: 259, 1088
+  offset: 0, 0
+  index: -1
+secuencia/01_00054
+  rotate: false
+  xy: 2, 263
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00056
+  rotate: false
+  xy: 264, 263
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00058
+  rotate: false
+  xy: 526, 263
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00059
+  rotate: false
+  xy: 788, 263
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1
+secuencia/01_00060
+  rotate: false
+  xy: 1050, 263
+  size: 260, 1400
+  orig: 260, 1400
+  offset: 0, 0
+  index: -1

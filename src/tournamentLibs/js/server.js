@@ -68,6 +68,7 @@ function Server(){
 	self.battleTime = 60000
 	self.maxRounds = 1
 	self.onAlert = null
+	var serverReady = false;
 
 	this.addEventListener = function(name, handler) {
 		if (self.events.hasOwnProperty(name))
@@ -331,13 +332,14 @@ function Server(){
 	 * @summary Starts the server
 	 */
 
-	this.start = function(currentId, onStart, params){
+	this.start = function(currentId, onStart, params, onError){
 
 		var params = params || {}
 		var rules = params.rules || operationGenerator.RULES_SET.EASY
 		var battleTime = params.battleTime || 300000
 		self.battleTime = battleTime
 		self.rules = rules
+		self.onAlert = onError
 		self.maxRounds = typeof params.maxRounds !== "undefined" ? params.maxRounds : self.maxRounds
 
 		self.events = {};
@@ -347,13 +349,19 @@ function Server(){
 		var numPerOperations = Math.round(battleTime / 60000) * 3
 		self.numberOperation = numPerOperations
 
+		database.ref('.info/connected').on('value', function (snap) {
+			if (snap.val() === false) {
+				self.onAlert("Tienes un problema de conexión.\n\n Revisa que tu internet sea estable" +
+					" y dale click en OK para continuar.")
+				serverReady = false
+			}
+		})
+
 		var promise = makeid(currentId);
 		promise.then(function(id){
-
 			id_game = id;
 			operationGenerator.setConfiguration(rules, numPerOperations)
 
-			var serverReady = false;
 			valores = {
 				rules:rules,
 				t1: false,
@@ -369,14 +377,13 @@ function Server(){
 				retry:false,
 				time:battleTime,
 				maxRounds:self.maxRounds,
-				timeOut:false,
-
+				timeOut:false
 			};
 			refIdGame = database.ref(id_game);
 			setfb(refIdGame, valores)//refIdGame.set(valores);
 
 			if((!currentId)||("000000")) {
-				if(onStart) onStart()
+				if((id)&&(onStart)) onStart()
 
 				var refT1 = database.ref(id_game + "/t1");
 				refT1.on('value', function (snapshot) {
@@ -491,30 +498,34 @@ function Server(){
 					}
 				});
 
+				//checar si se desconecto
+
 				//Borrando los datos al abandonar la partida
-				window.onbeforeunload = function () {
+				if(id !== "000000") {
+					database.ref(id_game).onDisconnect().remove(function (err) {
+						if (err)
+							self.onAlert("Tienes un problema de conexión.\n\n Revisa que tu internet sea estable" +
+								" y dale click en OK para continuar.")
+					})
+				}
+				else{
 					// if(!id_game.includes("egs"))
-					if(id === "000000"){
-						valores.t1answer =false;
-						valores.t2answer =false;
-						valores.t1.life =INITIAL_LIFE;
-						valores.t2.life =INITIAL_LIFE;
-						valores.winner =false;
-						valores.possibleAnswers = [];
-						valores.time = self.battleTime;
-						valores.maxRounds = self.maxRounds;
-						valores.rules = self.rules
-						valores.data = false;
-						valores.gameEnded = false;
-						valores.gameReady = false
-						valores.timeOut = false
-					}
-					else {
-						refIdGame.remove();
-					}
-					// else
-					// 	self.retry();
-				};
+					var reset = {}
+					reset.t1answer =false;
+					reset.t2answer =false;
+					reset.t1.life =INITIAL_LIFE;
+					reset.t2.life =INITIAL_LIFE;
+					reset.winner =false;
+					reset.possibleAnswers = [];
+					reset.time = self.battleTime;
+					reset.maxRounds = self.maxRounds;
+					reset.rules = self.rules
+					reset.data = false;
+					reset.gameEnded = false;
+					reset.gameReady = false
+					reset.timeOut = false
+					database.ref(id_game).onDisconnect.set(reset)
+				}
 				serverReady = true;
 			}
 		});

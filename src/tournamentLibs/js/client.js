@@ -155,6 +155,9 @@ function Client(){
 			})
 
 		}
+
+		database.ref(idGame + "/t" + self.numTeam).onDisconnect().remove()
+
 		self.time= (new Date()).getTime();
 		self.fireEvent('onClientInit',[]);
 
@@ -184,11 +187,18 @@ function Client(){
 				onAlert("La partida no existe", true)
 			}
 		}).catch(onAlert.bind(this, "Ocurrio un error al conectarse. Intenta de nuevo.", true));
+
+		database.ref().child(idGame).on('value', function(snapshot) {
+			var val = snapshot.val()
+			if(!val){
+				onAlert("Se perdio la comunicación con el servidor.", true)
+			}
+		})
 		//Reportando la salida del juego
-		window.onbeforeunload = function(){
+		/*window.onbeforeunload = function(){
 			if(self.numTeam!=null)
-				setfb(self.refIdGame.child("t" + self.numTeam), false)//self.refIdGame.child("t"+self.numTeam).set(false);
-		};
+				database.ref().child("t"+self.numTeam).update(false);
+		};*/
 	};
 
 	/**

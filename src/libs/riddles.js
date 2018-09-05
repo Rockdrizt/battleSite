@@ -4,6 +4,24 @@ var riddles = function(){
 	var questions
 	var usedQuestions
 	var NUMBER_OF_FAKE_ANSWERS = 3
+	var DIFFICULT_RULES = {
+		1 : {
+			time : 20000,
+			attacks : {
+				ultra : 6600,
+				super : 0,
+				normal : 0
+			}
+		},
+		2 : {
+			time : 60000,
+			attacks : {
+				ultra : 6600,
+				super : 0,
+				normal : 0
+			}
+		}
+	}
 
 	function initialize(){
 
@@ -48,6 +66,7 @@ var riddles = function(){
 				grade: element.grade,
 				level: element.level,
 				correctAnswer: element.answer - 1,
+				time:DIFFICULT_RULES[level].time
 				//index: i,
 				//correctIndex:
 			}
