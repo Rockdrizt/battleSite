@@ -1327,8 +1327,8 @@ normal/arm1_a
   offset: 0, 0
   index: -1
 normal/arm1_a_i
-  rotate: true
-  xy: 2013, 376
+  rotate: false
+  xy: 1114, 144
   size: 24, 30
   orig: 24, 30
   offset: 0, 0
@@ -1425,8 +1425,8 @@ normal/eyes_h3
   offset: 0, 0
   index: -1
 normal/eyes_h4
-  rotate: false
-  xy: 519, 127
+  rotate: true
+  xy: 1951, 359
   size: 80, 25
   orig: 80, 25
   offset: 0, 0
@@ -1461,49 +1461,49 @@ normal/eyes_i4
   index: -1
 normal/forearm1_a
   rotate: false
-  xy: 575, 99
+  xy: 2008, 342
   size: 26, 26
   orig: 26, 26
   offset: 0, 0
   index: -1
 normal/forearm2_a
   rotate: false
-  xy: 1291, 155
+  xy: 1595, 167
   size: 24, 27
   orig: 24, 27
   offset: 0, 0
   index: -1
 normal/hand1_b
   rotate: false
-  xy: 1512, 157
+  xy: 1729, 186
   size: 24, 25
   orig: 24, 25
   offset: 0, 0
   index: -1
 normal/hand1_c
-  rotate: true
-  xy: 1484, 157
+  rotate: false
+  xy: 1675, 179
   size: 25, 26
   orig: 25, 26
   offset: 0, 0
   index: -1
 normal/hand1_e
-  rotate: true
-  xy: 458, 20
+  rotate: false
+  xy: 418, 39
   size: 32, 26
   orig: 32, 26
   offset: 0, 0
   index: -1
 normal/leg1_a
   rotate: false
-  xy: 363, 7
+  xy: 1906, 301
   size: 32, 36
   orig: 32, 36
   offset: 0, 0
   index: -1
 normal/leg1_a_i
   rotate: false
-  xy: 477, 105
+  xy: 407, 105
   size: 32, 36
   orig: 32, 36
   offset: 0, 0
@@ -1517,7 +1517,7 @@ normal/leg1_b
   index: -1
 normal/leg1_c
   rotate: false
-  xy: 1936, 339
+  xy: 452, 39
   size: 30, 29
   orig: 30, 29
   offset: 0, 0
@@ -1531,21 +1531,28 @@ normal/leg2_a
   index: -1
 normal/leg2_a_i
   rotate: false
-  xy: 397, 10
+  xy: 452, 70
   size: 28, 33
   orig: 28, 33
   offset: 0, 0
   index: -1
 normal/leg2_c
-  rotate: true
-  xy: 1951, 370
+  rotate: false
+  xy: 1140, 153
   size: 30, 29
   orig: 30, 29
   offset: 0, 0
   index: -1
 normal/particle
   rotate: false
-  xy: 423, 89
+  xy: 364, 51
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: -1
+normal2/particle
+  rotate: false
+  xy: 364, 51
   size: 52, 52
   orig: 52, 52
   offset: 0, 0
@@ -1558,22 +1565,22 @@ normal/ponytail4
   offset: 0, 0
   index: -1
 normal/shin1_b
-  rotate: false
-  xy: 1373, 157
+  rotate: true
+  xy: 1267, 157
   size: 25, 28
   orig: 25, 28
   offset: 0, 0
   index: -1
 normal/shin2_b
-  rotate: false
-  xy: 1400, 159
+  rotate: true
+  xy: 1978, 343
   size: 25, 28
   orig: 25, 28
   offset: 0, 0
   index: -1
 normal/torso1
   rotate: false
-  xy: 305, 45
+  xy: 1974, 452
   size: 57, 58
   orig: 57, 58
   offset: 0, 0
@@ -1671,14 +1678,14 @@ normal1/estrella_super5
   index: -1
 normal2/arm1_a
   rotate: true
-  xy: 511, 101
+  xy: 1203, 158
   size: 24, 30
   orig: 24, 30
   offset: 0, 0
   index: -1
 normal2/arm1_a_i
   rotate: true
-  xy: 543, 101
+  xy: 1235, 158
   size: 24, 30
   orig: 24, 30
   offset: 0, 0
@@ -1776,7 +1783,7 @@ normal2/eyes_g2
   index: -1
 normal2/eyes_h1
   rotate: false
-  xy: 1210, 155
+  xy: 519, 125
   size: 79, 27
   orig: 79, 27
   offset: 0, 0
@@ -1789,15 +1796,15 @@ normal2/eyes_h2
   offset: 0, 0
   index: -1
 normal2/eyes_h3
-  rotate: false
-  xy: 1128, 155
+  rotate: true
+  xy: 1978, 370
   size: 80, 27
   orig: 80, 27
   offset: 0, 0
   index: -1
 normal2/eyes_h4
-  rotate: false
-  xy: 1727, 186
+  rotate: true
+  xy: 2007, 370
   size: 80, 25
   orig: 80, 25
   offset: 0, 0
@@ -1839,35 +1846,35 @@ normal2/eyes_i4
   index: -1
 normal2/forearm1_a
   rotate: false
-  xy: 1427, 161
+  xy: 1647, 179
   size: 26, 26
   orig: 26, 26
   offset: 0, 0
   index: -1
 normal2/forearm2_a
-  rotate: true
-  xy: 1455, 163
+  rotate: false
+  xy: 1621, 177
   size: 24, 27
   orig: 24, 27
   offset: 0, 0
   index: -1
 normal2/hand1_b
   rotate: false
-  xy: 1565, 169
+  xy: 1755, 186
   size: 24, 25
   orig: 24, 25
   offset: 0, 0
   index: -1
 normal2/hand1_c
   rotate: false
-  xy: 1538, 168
+  xy: 1702, 179
   size: 25, 26
   orig: 25, 26
   offset: 0, 0
   index: -1
 normal2/hand1_e
   rotate: true
-  xy: 1940, 305
+  xy: 484, 39
   size: 32, 26
   orig: 32, 26
   offset: 0, 0
@@ -1881,14 +1888,14 @@ normal2/head
   index: -1
 normal2/leg1_a
   rotate: false
-  xy: 423, 51
+  xy: 441, 105
   size: 32, 36
   orig: 32, 36
   offset: 0, 0
   index: -1
 normal2/leg1_a_i
   rotate: false
-  xy: 1906, 301
+  xy: 418, 67
   size: 32, 36
   orig: 32, 36
   offset: 0, 0
@@ -1902,37 +1909,30 @@ normal2/leg1_b
   index: -1
 normal2/leg1_c
   rotate: false
-  xy: 1982, 371
+  xy: 1172, 153
   size: 29, 29
   orig: 29, 29
   offset: 0, 0
   index: -1
 normal2/leg2_c
   rotate: false
-  xy: 1982, 371
+  xy: 1172, 153
   size: 29, 29
   orig: 29, 29
   offset: 0, 0
   index: -1
 normal2/leg2_a
   rotate: false
-  xy: 427, 16
+  xy: 475, 108
   size: 29, 33
   orig: 29, 33
   offset: 0, 0
   index: -1
 normal2/leg2_a_i
   rotate: false
-  xy: 457, 54
+  xy: 482, 73
   size: 29, 33
   orig: 29, 33
-  offset: 0, 0
-  index: -1
-normal2/particle
-  rotate: true
-  xy: 1974, 402
-  size: 108, 72
-  orig: 108, 72
   offset: 0, 0
   index: -1
 normal2/ponytail4
@@ -1943,22 +1943,22 @@ normal2/ponytail4
   offset: 0, 0
   index: -1
 normal2/shin1_b
-  rotate: false
-  xy: 1317, 157
+  rotate: true
+  xy: 1535, 168
   size: 26, 28
   orig: 26, 28
   offset: 0, 0
   index: -1
 normal2/shin2_b
-  rotate: false
-  xy: 1345, 157
+  rotate: true
+  xy: 1565, 168
   size: 26, 28
   orig: 26, 28
   offset: 0, 0
   index: -1
 normal2/torso1
   rotate: false
-  xy: 364, 45
+  xy: 305, 45
   size: 57, 58
   orig: 57, 58
   offset: 0, 0
