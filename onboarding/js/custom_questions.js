@@ -2,6 +2,7 @@ var countQuestions = 0;
 var optionLetters = ["a","b","c","d"];
 var _buttonAddQuestion = $(".questions__botton--add");
 var _buttonWindowConfirm = $(".window__button--confirm");
+var _buttonWindowClose = $(".window__button--close");
 var questionsArray = [];
 var selectQuestionToDelete;
 
@@ -110,6 +111,6 @@ _buttonWindowConfirm.click(function(){
     $(".window__contain").css("display","none");
 })
 
-$(".window__button--close").click(function(){
+_buttonWindowClose.click(function(){
     $(".window__contain").css("display","none");
 })

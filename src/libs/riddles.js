@@ -66,7 +66,7 @@ var riddles = function(){
 				grade: element.grade,
 				level: element.level,
 				correctAnswer: element.answer - 1,
-				time:DIFFICULT_RULES[level].time
+				//time:DIFFICULT_RULES[level].time
 				//index: i,
 				//correctIndex:
 			}

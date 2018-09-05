@@ -100,6 +100,7 @@ var HUD = function(){
         
         var text = new Phaser.Text(group.game, 0, -10, "3:00", fontStyle)
         text.anchor.setTo(0.5)
+        text.alpha = 0
         timeToken.addChild(text)
         timeToken.text = text 
 	}
