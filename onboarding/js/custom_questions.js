@@ -1,6 +1,7 @@
 var countQuestions = 0;
 var optionLetters = ["a","b","c","d"];
 var _buttonAddQuestion = $(".questions__botton--add");
+var _buttonWindowConfirm = $(".window__button--confirm");
 var questionsArray = [];
 var selectQuestionToDelete;
 
@@ -36,6 +37,8 @@ function confirmDeleteQuestion(obj){
 }
 
 
+
+
 function addQuestion(){
     countQuestions++
     var body = $(".questions__body");
@@ -57,7 +60,7 @@ function addQuestion(){
                             <div class="answer__letter">`+optionLetters[i-1]+`)</div>
                             <div class="question__section--text">
                                 <div id="limitTextAnswer_`+countQuestions+`_`+i+`" class="text_limit__answer" limit="70">70/70</div>
-                                <textarea id="AnswerText_`+countQuestions+`_`+i+`" class="input--text answer__input" placeholder="respuesta `+optionLetters[i-1]+`" rows="1" cols="2" place="`+countQuestions+`" answerNumber="`+i+`" maxlength="70" spellcheck="true"></textarea>
+            <textarea id="AnswerText_`+countQuestions+`_`+i+`" class="input--text answer__input" placeholder="respuesta `+optionLetters[i-1]+`" rows="1" cols="2" place="`+countQuestions+`" answerNumber="`+i+`" maxlength="70" spellcheck="true"></textarea>
                             </div>
                             <div id="choiceCorrect_`+countQuestions+`_`+i+`" class="star__image--select answer__choice_`+countQuestions+`" index="`+countQuestions+`">
                                 <div class="circle--select"></div>
@@ -102,7 +105,7 @@ _buttonAddQuestion.click(function(){
     addQuestion();
 });
 
-$(".window__button--confirm").click(function(){
+_buttonWindowConfirm.click(function(){
     confirmDeleteQuestion(selectQuestionToDelete);
     $(".window__contain").css("display","none");
 })
