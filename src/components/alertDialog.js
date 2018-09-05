@@ -81,6 +81,7 @@ var alertDialog = function () {
 	}
 
 	function showAlertGroup(params) {
+		game.paused = false
 		params = params || {}
 		game.world.remove(alertGroup)
 		game.world.add(alertGroup)
@@ -102,9 +103,10 @@ var alertDialog = function () {
 		if(pin) {
 			alertGroup.pinGroup.alpha = 1
 			alertGroup.pinGroup.pin.text = pin
+		}else{
+			alertGroup.pinGroup.alpha = 0
 		}
 
-		game.paused = false
 		appearTween = game.add.tween(alertGroup).to({alpha:1}, 200, Phaser.Easing.Cubic.Out, true)
 		appearTween.onComplete.add(function() {
 			game.paused = true
