@@ -139,7 +139,8 @@ var epicProjectiles = function(){
 				var index = spineSkeleton.indexOf(".");
 
 				spineSkeleton = spineSkeleton.substring(0, index)
-				var spineGroup = spineLoader.createSpine(spineSkeleton, spineData.skin, "idle")
+				var skin = spineData.dynamicSkin ? options.skin : spineData.skin
+				var spineGroup = spineLoader.createSpine(spineSkeleton, skin, "idle")
 				spineGroup.data = spineData
 
 				var onShootAnimations = spineData.animations

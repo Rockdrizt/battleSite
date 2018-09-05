@@ -49,7 +49,7 @@ var characterBattle = function () {
 				projectile.scale.x *= self.scale.x
 				self.parent.add(projectile)
 
-				projectile.setTarget(enemy, {onImpact : onImpact})
+				projectile.setTarget(enemy, {onImpact : onImpact, skin : self.skin})
 			}, null, projectileInfo)
 		}
 
@@ -62,6 +62,7 @@ var characterBattle = function () {
 		var character = spineLoader.createSpine(charName, skin, "idle_normal", 0, 0, true)
 		character.x = position.x; character.y = position.y
 		character.data = characterData
+		character.skin = skin
 
 		character.takeDamage = takeDamage.bind(character)
 		character.attack = attack.bind(character)
