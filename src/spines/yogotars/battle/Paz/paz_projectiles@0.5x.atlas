@@ -1,0 +1,544 @@
+
+paz_projectiles.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+After/assets/5
+  rotate: false
+  xy: 1762, 1773
+  size: 269, 261
+  orig: 269, 261
+  offset: 0, 0
+  index: -1
+After/assets/6
+  rotate: true
+  xy: 276, 13
+  size: 261, 269
+  orig: 261, 269
+  offset: 0, 0
+  index: -1
+After/assets/7
+  rotate: false
+  xy: 2, 6
+  size: 272, 268
+  orig: 272, 268
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00000
+  rotate: false
+  xy: 2, 1684
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00001
+  rotate: false
+  xy: 2, 1332
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00002
+  rotate: false
+  xy: 354, 1684
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00003
+  rotate: false
+  xy: 2, 980
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00004
+  rotate: false
+  xy: 354, 1332
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00005
+  rotate: false
+  xy: 706, 1684
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00006
+  rotate: false
+  xy: 2, 628
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00007
+  rotate: false
+  xy: 354, 980
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00008
+  rotate: false
+  xy: 706, 1332
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00009
+  rotate: false
+  xy: 1058, 1684
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00010
+  rotate: false
+  xy: 2, 276
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00011
+  rotate: false
+  xy: 354, 628
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00012
+  rotate: false
+  xy: 706, 980
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00013
+  rotate: false
+  xy: 1058, 1332
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00014
+  rotate: false
+  xy: 1410, 1684
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00015
+  rotate: false
+  xy: 354, 276
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00016
+  rotate: false
+  xy: 706, 628
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00017
+  rotate: false
+  xy: 1058, 980
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00018
+  rotate: false
+  xy: 1410, 1332
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00019
+  rotate: false
+  xy: 706, 276
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00020
+  rotate: false
+  xy: 1058, 628
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00021
+  rotate: false
+  xy: 1410, 980
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00022
+  rotate: false
+  xy: 1058, 276
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00023
+  rotate: false
+  xy: 1410, 628
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00024
+  rotate: false
+  xy: 1410, 276
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+normal/particle
+  rotate: false
+  xy: 1921, 1519
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola1
+  rotate: false
+  xy: 1762, 1620
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola2
+  rotate: false
+  xy: 547, 123
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola3
+  rotate: false
+  xy: 1762, 1467
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola4
+  rotate: false
+  xy: 706, 123
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola5
+  rotate: false
+  xy: 1762, 1314
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola6
+  rotate: false
+  xy: 865, 123
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola7
+  rotate: false
+  xy: 1762, 1161
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola8
+  rotate: false
+  xy: 1024, 123
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_bola9
+  rotate: false
+  xy: 1762, 1008
+  size: 157, 151
+  orig: 157, 151
+  offset: 0, 0
+  index: -1
+normal1/fireball_halo1
+  rotate: false
+  xy: 1921, 1673
+  size: 59, 98
+  orig: 59, 98
+  offset: 0, 0
+  index: -1
+normal1/fireball_halo2
+  rotate: false
+  xy: 547, 23
+  size: 59, 98
+  orig: 59, 98
+  offset: 0, 0
+  index: -1
+normal1/fireball_halo3
+  rotate: false
+  xy: 1921, 1573
+  size: 59, 98
+  orig: 59, 98
+  offset: 0, 0
+  index: -1
+normal1/fireball_halo4
+  rotate: false
+  xy: 608, 23
+  size: 59, 98
+  orig: 59, 98
+  offset: 0, 0
+  index: -1
+normal1/star
+  rotate: false
+  xy: 1899, 866
+  size: 147, 140
+  orig: 147, 140
+  offset: 0, 0
+  index: -1
+star_fire/0_00002
+  rotate: false
+  xy: 1183, 139
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00003
+  rotate: true
+  xy: 1762, 836
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00004
+  rotate: false
+  xy: 1355, 139
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00005
+  rotate: true
+  xy: 1762, 664
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00006
+  rotate: false
+  xy: 1527, 139
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00007
+  rotate: true
+  xy: 1762, 492
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00008
+  rotate: true
+  xy: 1762, 320
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00009
+  rotate: true
+  xy: 1899, 694
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00010
+  rotate: true
+  xy: 1899, 522
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00011
+  rotate: true
+  xy: 1899, 350
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00012
+  rotate: false
+  xy: 1699, 139
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00013
+  rotate: false
+  xy: 1183, 2
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00014
+  rotate: false
+  xy: 1355, 2
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00015
+  rotate: false
+  xy: 1527, 2
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00016
+  rotate: false
+  xy: 1699, 2
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00017
+  rotate: true
+  xy: 1899, 178
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00018
+  rotate: true
+  xy: 1871, 6
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+
+paz_projectiles2.png
+size: 2048,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fireweel/ultra_00025
+  rotate: false
+  xy: 2, 139
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00026
+  rotate: false
+  xy: 354, 139
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00027
+  rotate: false
+  xy: 706, 139
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00028
+  rotate: false
+  xy: 1058, 139
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+fireweel/ultra_00029
+  rotate: false
+  xy: 1410, 139
+  size: 350, 350
+  orig: 350, 350
+  offset: 0, 0
+  index: -1
+star_fire/0_00019
+  rotate: false
+  xy: 2, 2
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00020
+  rotate: false
+  xy: 1762, 354
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00021
+  rotate: false
+  xy: 174, 2
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00022
+  rotate: false
+  xy: 1762, 217
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00023
+  rotate: false
+  xy: 346, 2
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00024
+  rotate: false
+  xy: 518, 2
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00025
+  rotate: false
+  xy: 690, 2
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00026
+  rotate: false
+  xy: 862, 2
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00027
+  rotate: false
+  xy: 1034, 2
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00028
+  rotate: false
+  xy: 1206, 2
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
+star_fire/0_00029
+  rotate: false
+  xy: 1378, 2
+  size: 170, 135
+  orig: 170, 135
+  offset: 0, 0
+  index: -1
