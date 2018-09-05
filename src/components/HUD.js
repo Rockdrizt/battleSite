@@ -34,7 +34,7 @@ var HUD = function(){
             life.scale.setTo(side, 1)
             teamSide.life = life
             
-            var teamScore = teamSide.create(lifeBox.x - 80 * side, lifeBox.y * 2.5, "atlas.battle", "score" + i)
+            var teamScore = teamSide.create(life.x - 80 * side, life.y * 2.5, "atlas.battle", "score" + i)
             teamScore.anchor.setTo(0.5)
             teamScore.scale.setTo(0.6)
             teamScore.points = 0
@@ -46,12 +46,12 @@ var HUD = function(){
                 teamScore.addChild(score)
                 teamScore.text = score
             
-			var tokenGroup = game.add.group()
+            var tokenGroup = game.add.group()
 			tokenGroup.side = side
 			teamSide.add(tokenGroup)
             teamSide.tokenGroup = tokenGroup
             
-                var token = tokenGroup.create(lifeBox.x, lifeBox.y, "atlas.battle", "token" + i)
+                var token = tokenGroup.create(life.x, life.y, "atlas.battle", "token" + i)
                 token.anchor.setTo(0.5)
                 token.scale.setTo(side, 1)
                 token.x -= 78 * side
@@ -65,7 +65,7 @@ var HUD = function(){
                 
                 for(var j = 0; j < 2; j++){
                     
-                    var token = tokenGroup.create(lifeBox.x, lifeBox.y + 120, "atlas.battle", "token" + i)
+                    var token = tokenGroup.create(life.x, life.y + 120, "atlas.battle", "token" + i)
                     token.anchor.setTo(0.5)
                     token.scale.setTo(0.75 * side, 0.75)
                     token.x -= 155 * j * side

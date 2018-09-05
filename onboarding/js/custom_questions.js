@@ -1,7 +1,9 @@
 var countQuestions = 0;
 var optionLetters = ["a","b","c","d"];
 var _buttonAddQuestion = $(".questions__botton--add");
+var _buttonWindowConfirm = $(".window__button--confirm");
 var questionsArray = [];
+var selectQuestionToDelete;
 
 function addElementArray(number){
     questionsArray[number-1] = new Array;
@@ -15,6 +17,25 @@ function saveInfoinArray(){
         questionsArray[i].answer1 = $("#AnswerText_" + [i+1] + "_1").val();
     }
 }
+
+
+function confirmDeleteQuestion(obj){
+    $("#question__new_" + $(obj).attr("index") ).remove();
+        countQuestions--
+        var getTotalQuestions = $(".questions__container").children().length;
+        var hijos = []
+        $('section','.questions__container').each(function(){
+           hijos.push($(this).attr("id"));
+        });
+        for(var p = 0;p<getTotalQuestions;p++){  
+            $("#" + hijos[p]).attr("id", "question__new_" + [p+1] );
+            var element = $(".questions__container").children()[p].id;
+            $("#" + element).find(".questions__number").find("span").html([p+1]);
+            $("#" + element).find(".question__button--delete").attr("index",[p+1]);
+        }
+    
+}
+
 
 
 
@@ -39,7 +60,7 @@ function addQuestion(){
                             <div class="answer__letter">`+optionLetters[i-1]+`)</div>
                             <div class="question__section--text">
                                 <div id="limitTextAnswer_`+countQuestions+`_`+i+`" class="text_limit__answer" limit="70">70/70</div>
-                                <textarea id="AnswerText_`+countQuestions+`_`+i+`" class="input--text answer__input" placeholder="respuesta `+optionLetters[i-1]+`" rows="1" cols="2" place="`+countQuestions+`" answerNumber="`+i+`" maxlength="70" spellcheck="true"></textarea>
+            <textarea id="AnswerText_`+countQuestions+`_`+i+`" class="input--text answer__input" placeholder="respuesta `+optionLetters[i-1]+`" rows="1" cols="2" place="`+countQuestions+`" answerNumber="`+i+`" maxlength="70" spellcheck="true"></textarea>
                             </div>
                             <div id="choiceCorrect_`+countQuestions+`_`+i+`" class="star__image--select answer__choice_`+countQuestions+`" index="`+countQuestions+`">
                                 <div class="circle--select"></div>
@@ -63,20 +84,9 @@ function addQuestion(){
         }   
     //delete question
     $("#question__new_" + countQuestions).find(".question__button--delete").click(function(){
-        $("#question__new_" + $(this).attr("index")).remove();
-        countQuestions--
-        var getTotalQuestions = $(".questions__container").children().length;
-        var hijos = []
-        $('section','.questions__container').each(function(){
-           hijos.push($(this).attr("id"));
-        });
-        for(var p = 0;p<getTotalQuestions;p++){  
-            $("#" + hijos[p]).attr("id", "question__new_" + [p+1] );
-            var element = $(".questions__container").children()[p].id;
-            $("#" + element).find(".questions__number").find("span").html([p+1]);
-            $("#" + element).find(".question__button--delete").attr("index",[p+1]);
-        }
-        //body.animate({scrollTop: (body.height() * $(this).attr("index"))},"2000"); 
+        $(".window__contain").css("display","block");
+        selectQuestionToDelete = this       
+        $(".window__message").find("span").html("¿Estás seguro de eliminar la pregunta "+ $(this).attr("index")  +"?");
     });
     //scroll animate 
     body.animate({scrollTop: (body.height() * countQuestions)},"2000"); 
@@ -93,5 +103,13 @@ function addQuestion(){
 
 _buttonAddQuestion.click(function(){
     addQuestion();
-    
 });
+
+_buttonWindowConfirm.click(function(){
+    confirmDeleteQuestion(selectQuestionToDelete);
+    $(".window__contain").css("display","none");
+})
+
+$(".window__button--close").click(function(){
+    $(".window__contain").css("display","none");
+})

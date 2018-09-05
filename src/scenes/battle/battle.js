@@ -88,6 +88,10 @@ var battle = function(){
 		sounds: [
 			{	name: "battleSong",
 				file: "../../sounds/songs/battle.mp3"},
+			{	name: "listos",
+				file: "../../sounds/sounds/listos.wav"},
+			{	name: "ya",
+				file: "../../sounds/sounds/ya.wav"},
 		],
 		spritesheets: [
 		],
@@ -834,8 +838,8 @@ var battle = function(){
             }
             
             var tie = t1.value == t2.value
-            setWiner(playerWin, tie)
-            setLoser(playerLose)
+            setWiner(playerWin)
+            setLoser(playerLose, tie)
         }
         else{
             setLoser(leftAns)
@@ -891,20 +895,19 @@ var battle = function(){
  		}
 	}
 
-	function setWiner(results, tie){
+	function setWiner(results){
 
-		if(tie) results.diference.alpha = 1
-
-		var showShine = game.add.tween(results.shine.scale).from({y:0}, 400, Phaser.Easing.Cubic.Out, false, 500)
+		var showShine = game.add.tween(results.shine.scale).from({y:0}, 400, Phaser.Easing.Cubic.Out, true, 1500)
 		showShine.onStart.add(function(){
 			results.particles.start(true, 1000, null, 20)
 			results.shine.alpha = 1
             showAttackTxt(results)
 		})
-        game.add.tween(results.diference).from({y: 30}, 400, Phaser.Easing.Cubic.Out, true, 1500).chain(showShine)
 	}
 
-	function setLoser(results){
+	function setLoser(results, tie){
+
+		if(tie) results.diference.alpha = 1
 
 		var fadeOut = game.add.tween(results.parent).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, false, 1000)
         fadeOut.onStart.add(function(){
@@ -913,6 +916,8 @@ var battle = function(){
         })
 		fadeOut.onComplete.add(restartResults)
 		game.add.tween(results).to({angle: 50 * results.direction}, 1000, Phaser.Easing.Bounce.Out, true, 2000).chain(fadeOut)
+
+		game.add.tween(results.diference).from({y: 30}, 400, Phaser.Easing.Cubic.Out, true, 1500)
 	}
     
     function showAttackTxt(winer){
@@ -962,10 +967,14 @@ var battle = function(){
 
     function setReadyGo(){
 
-        var first = game.add.tween(listosYaGroup.listos).to({y: game.world.centerY}, 200, Phaser.Easing.Cubic.Out, true)
+		var first = game.add.tween(listosYaGroup.listos).to({y: game.world.centerY}, 200, Phaser.Easing.Cubic.Out, true)
+		sound.play("listos")
         first.yoyo(true, 700)
 
-        var second = game.add.tween(listosYaGroup.ya.scale).to({x: 1,y: 1}, 400, Phaser.Easing.Elastic.Out, false)
+		var second = game.add.tween(listosYaGroup.ya.scale).to({x: 1,y: 1}, 400, Phaser.Easing.Elastic.Out, false)
+		second.onStart.add(function(){
+			sound.play("ya")
+		})
         var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 500)
         secondOut.onComplete.add(function(){
 			//questionGroup.showQuestion(server.generateQuestion())
