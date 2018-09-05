@@ -83,7 +83,7 @@ var HUD = function(){
     
 		teamName.setText("Equipo Bravo")
 		
-		createTimer(HUDGroup)
+		//createTimer(HUDGroup)
 		HUDGroup.rotateTokens = rotateTokens.bind(HUDGroup)
 		HUDGroup.getLifeBar = getLifeBar.bind(HUDGroup)
 		HUDGroup.setScore = setScore.bind(HUDGroup)

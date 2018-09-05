@@ -125,6 +125,14 @@ var questions = function(){
 		sceneGroup.add(tile)
 	}
 
+	function checkAnswer(){
+		questionGroup.clearQuestion()
+	}
+
+	function showWinner(){
+
+	}
+
 	return {
 
 		assets: assets,

@@ -109,6 +109,7 @@ var questionHUD = function(){
 		questionGroup.question = text
 		questionGroup.image = img
 		questionGroup.options = options
+		questionGroup.options.btnPressed = null
 		questionGroup.options.setAll("inputEnabled", false)
 		questionGroup.boxes.forEach(function(box){
 			box.scale.setTo(0, 1)
@@ -126,6 +127,7 @@ var questionHUD = function(){
 		questionGroup.stopTimer = stopTimer.bind(questionGroup)
 		questionGroup.updateTimer = updateTimer.bind(questionGroup)
 		questionGroup.startTweens = startTweens.bind(questionGroup)
+		questionGroup.clearQuestion = clearQuestion.bind(questionGroup)
 		questionGroup.alpha = 0
 
 		if(client){
@@ -133,6 +135,7 @@ var questionHUD = function(){
 			black.alpha = 0
 			createTeamName(questionGroup, 1)
 			createChrono(questionGroup)
+			createWaiting(questionGroup)
 			questionGroup.client = true
 		}
 
@@ -158,6 +161,7 @@ var questionHUD = function(){
 		var box = hud.boxes[1]
 
 		var chronoGroup = game.add.group()
+		chronoGroup.alpha = 0 // no mostrar timer por ahora 
 		chronoGroup.x = box.centerX * 1.5
 		chronoGroup.y = box.centerY * 1.3
 		hud.add(chronoGroup)
@@ -174,6 +178,28 @@ var questionHUD = function(){
 		timeText.anchor.setTo(0.5)
 		chronoGroup.add(timeText)
 		chronoGroup.timeText = timeText
+	}
+
+	function createWaiting(hud){
+
+		var fontStyle = {font: "70px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
+
+		var waitGroup = game.add.group()
+		waitGroup.alpha = 0
+		hud.add(waitGroup)
+		hud.waiting = waitGroup
+
+		var spiner = game.add.sprite(game.world.centerX, game.world.centerY - 130, "logoAtlas", "spiner")
+		spiner.anchor.setTo(0.5)
+		spiner.scale.setTo(1.2)
+		waitGroup.add(spiner)
+		waitGroup.spiner = spiner
+
+		var text = new Phaser.Text(waitGroup.game, spiner.x, spiner.y + 220, "  Esperando...", fontStyle)
+		text.anchor.setTo(0.5)
+		text.stroke = "#000000"
+		text.strokeThickness = 5
+		waitGroup.add(text)
 	}
 
 	function createButtons(x, y, opt, group){
@@ -320,12 +346,33 @@ var questionHUD = function(){
 	function inputOption(btn){
 
 		sound.play("shineSpell")
+		this.options.btnPressed = btn
 		this.options.setAll("inputEnabled", false)
 		this.options.remove(btn)
 		this.add(btn)
 
+		this.waiting.spin = game.add.tween(this.waiting.spiner).to({angle: -360}, 2000, Phaser.Easing.linear, false)
+		this.waiting.spin.repeat(-1)
+		
+		game.add.tween(this.black).to({alpha:0.5}, 300, Phaser.Easing.linear, true)
+		game.add.tween(this.waiting).to({alpha:1}, 300, Phaser.Easing.linear, true).chain(this.waiting.spin)
+
+		var event = {time : this.timeElapsed, value : btn.value}
+		if(this.callback) this.callback(event) 
+
+		//game.time.events.add(3000, this.clearQuestion, null, btn)
+	}
+
+	function clearQuestion(){
+
 		var self = this
-		var fadeOut = game.add.tween(this.black).to({alpha:0}, 300, Phaser.Easing.linear, false, 3000)
+		var btn = self.options.btnPressed
+		if(self.waiting.spin){
+			self.waiting.spin.stop()
+		}
+
+		var fadeOut = game.add.tween(self.black).to({alpha:0}, 300, Phaser.Easing.linear, true)
+		game.add.tween(self.waiting).to({alpha:0}, 300, Phaser.Easing.linear, true)
 
 		fadeOut.onComplete.add(function(){
 
@@ -339,11 +386,9 @@ var questionHUD = function(){
 				opt.info.alpha = 0
 				opt.info.text = ""
 			}
-		})
-		game.add.tween(this.black).to({alpha:0.5}, 300, Phaser.Easing.linear, true).chain(fadeOut)
 
-		var event = {time : this.timeElapsed, value : btn.value}
-		if(this.callback) this.callback(event) 
+			self.options.btnPressed = null
+		})
 	}
 
 	function removeImage(){
