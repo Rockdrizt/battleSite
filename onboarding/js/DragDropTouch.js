@@ -304,7 +304,8 @@ var DragDropTouch;
       // if creating from drag source, apply offset and opacity
       if (!this._imgCustom) {
         var rc = src.getBoundingClientRect(), pt = this._getPoint(e);
-        this._imgOffset = { x: pt.x - rc.left, y: pt.y - rc.top };
+        // this._imgOffset = { x: pt.x - rc.left, y: pt.y - rc.top };
+        this._imgOffset = { x: pt.x, y: pt.y };
         this._img.style.opacity = DragDropTouch._OPACITY.toString();
       }
       // add image to document
@@ -328,8 +329,10 @@ var DragDropTouch;
           s.position = 'absolute';
           s.pointerEvents = 'none';
           s.zIndex = '999999';
-          s.left = Math.round(pt.x - _this._imgOffset.x) + 'px';
-          s.top = Math.round(pt.y - _this._imgOffset.y) + 'px';
+          // s.left = Math.round(pt.x - _this._imgOffset.x) + 'px';
+          // s.top = Math.round(pt.y - _this._imgOffset.y) + 'px';
+          s.left = Math.round(pt.x) + 'px';
+          s.top = Math.round(pt.y) + 'px';
         }
       });
     };

@@ -78,11 +78,9 @@
       touch-action: none;
       user-select: none;
       color: #000;
+      cursor: move;
       img {
         width: 100%;
-      }
-      &:hover {
-        cursor: move;
       }
     }
   }
@@ -143,11 +141,9 @@
         z-index: -1;
       }
       .player {
-        position: absolute;
         width: 130px;
         background-image: url(../img/mathtournament-onboarding-yellow-select.png);
-        transition: ease all .5;
-        // top: 50%;
+        cursor: initial;
       }
     }
     .item__buttons {

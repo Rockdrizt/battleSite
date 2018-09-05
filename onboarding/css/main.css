@@ -413,7 +413,11 @@
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
-  height: 100vh; }
+  height: 100vh;
+  /*SCROLL*/
+  /* width */
+  /* Track */
+  /* Handle */ }
   .modal .borde {
     position: absolute;
     padding: 10px;
@@ -433,25 +437,12 @@
         display: inline-block;
         width: 70px;
         height: 70px;
-        border: 1px solid #fff;
-        border-radius: 10px;
-        background-color: #bb3f4d;
         position: absolute;
         top: -45px;
         right: -40px;
-        transform: rotate(45deg);
-        box-shadow: 5px 5px 0 0 #bb3f4d; }
-        .modal .borde .modal__container .close::after {
-          content: 'x';
-          cursor: pointer;
-          width: 100%;
-          height: 100%;
-          position: absolute;
-          top: 22px;
-          left: -3px;
-          font-size: 70px;
-          font-family: 'VAGRounded Thin', sans-serif;
-          transform: rotate(135deg); }
+        cursor: pointer; }
+        .modal .borde .modal__container .close img {
+          width: 100%; }
       .modal .borde .modal__container header {
         text-align: center;
         border-bottom: 3px solid transparent;
@@ -517,6 +508,19 @@
         transform: translateX(-50%); }
         .modal .borde .modal__container .modal__btn img {
           width: 100%; }
+  .modal ::-webkit-scrollbar {
+    width: 10%; }
+  .modal ::-webkit-scrollbar-track {
+    background-image: url(../img/mathtournament-onboarding-slider-bar.png);
+    background-size: 20%;
+    background-repeat: repeat-y;
+    background-position: center; }
+  .modal ::-webkit-scrollbar-thumb {
+    background-image: url("../img/scroll_track.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 5%; }
 
 /**************************************
  ********* Modal Addition *************
@@ -533,12 +537,17 @@
     border-image: url(../img/mathtournament-onboarding-add-header.png) 1; }
   .modal--addition .borde .modal__container .modal__list li:nth-child(odd) {
     background-color: #e3f1f1; }
+  .modal--addition .borde .modal__container .modal__list li:first-child {
+    background-color: #fdf3ab; }
+    .modal--addition .borde .modal__container .modal__list li:first-child label input:checked + span {
+      border: 2px solid #fb7312;
+      background-color: #ff9706; }
 
 /**************************************
  ********* Modal Substraction *********
  **************************************/
 .modal--substraction .borde {
-  background-image: linear-gradient(135deg, #D26C42, #A33065); }
+  background-image: linear-gradient(135deg, #d26c42, #a33065); }
   .modal--substraction .borde .modal__container header {
     -moz-border-image: url(../img/mathtournament-onboarding-sub-header-line.png) 1;
     /* Old firefox */
@@ -548,13 +557,18 @@
     /* Opera */
     border-image: url(../img/mathtournament-onboarding-sub-header-line.png) 1; }
   .modal--substraction .borde .modal__container .modal__list li:nth-child(odd) {
-    background-color: #F9EAE1; }
+    background-color: #f9eae1; }
+  .modal--substraction .borde .modal__container .modal__list li:first-child {
+    background-color: #fdf3ab; }
+    .modal--substraction .borde .modal__container .modal__list li:first-child label input:checked + span {
+      border: 2px solid #fb7312;
+      background-color: #ff9706; }
 
 /**************************************
  ********* Modal Multiplication *******
  **************************************/
 .modal--multiplication .borde {
-  background-image: linear-gradient(135deg, #D0337C, #8F2D6F); }
+  background-image: linear-gradient(135deg, #d0337c, #8f2d6f); }
   .modal--multiplication .borde .modal__container header {
     -moz-border-image: url(../img/mathtournament-onboarding-multi-header.png) 1;
     /* Old firefox */
@@ -564,13 +578,18 @@
     /* Opera */
     border-image: url(../img/mathtournament-onboarding-multi-header.png) 1; }
   .modal--multiplication .borde .modal__container .modal__list li:nth-child(odd) {
-    background-color: #F8E0EB; }
+    background-color: #f8e0eb; }
+  .modal--multiplication .borde .modal__container .modal__list li:first-child {
+    background-color: #fdf3ab; }
+    .modal--multiplication .borde .modal__container .modal__list li:first-child label input:checked + span {
+      border: 2px solid #fb7312;
+      background-color: #ff9706; }
 
 /**************************************
  ********* Modal Division *************
  **************************************/
 .modal--division .borde {
-  background-image: linear-gradient(135deg, #51428C, #2B204B); }
+  background-image: linear-gradient(135deg, #51428c, #2b204b); }
   .modal--division .borde .modal__container header {
     -moz-border-image: url(../img/mathtournament-onboarding-div-header.png) 1;
     /* Old firefox */
@@ -580,7 +599,44 @@
     /* Opera */
     border-image: url(../img/mathtournament-onboarding-div-header.png) 1; }
   .modal--division .borde .modal__container .modal__list li:nth-child(odd) {
-    background-color: #E9E0FC; }
+    background-color: #e9e0fc; }
+  .modal--division .borde .modal__container .modal__list li:first-child {
+    background-color: #fdf3ab; }
+    .modal--division .borde .modal__container .modal__list li:first-child label input:checked + span {
+      border: 2px solid #fb7312;
+      background-color: #ff9706; }
+
+/**************************************
+ ********* Modal Division *************
+ **************************************/
+.modal--lobby .borde {
+  width: 600px;
+  background-color: #fff;
+  position: relative; }
+  .modal--lobby .borde .modal__container {
+    padding: 10px;
+    position: relative;
+    height: auto;
+    background-image: url(../img/mathtournament-onboarding-bg-tile.png), linear-gradient(#430C66, #0C022A 40%); }
+    .modal--lobby .borde .modal__container .img-container {
+      position: relative;
+      width: 100%;
+      height: 300px; }
+      .modal--lobby .borde .modal__container .img-container img {
+        width: 45%;
+        position: absolute;
+        top: 60%;
+        transform: translateY(-50%); }
+        .modal--lobby .borde .modal__container .img-container img:first-child {
+          left: -35px; }
+        .modal--lobby .borde .modal__container .img-container img:last-child {
+          width: 50%;
+          right: -60px; }
+    .modal--lobby .borde .modal__container h2 {
+      width: 100%;
+      text-align: center;
+      font-size: 60px;
+      margin-bottom: 50px; }
 
 /**************************************
  ********* Media Queries **************
@@ -816,11 +872,10 @@
       transform: translate(-50%, -50%);
       touch-action: none;
       user-select: none;
-      color: #000; }
+      color: #000;
+      cursor: move; }
       .item--lobby .players__container .player img {
         width: 100%; }
-      .item--lobby .players__container .player:hover {
-        cursor: move; }
   .item--lobby.item--left .item__header {
     right: 10%;
     text-align: right; }
@@ -867,10 +922,9 @@
         animation: rotate-pin infinite 5s;
         z-index: -1; }
       .item--lobby.item--middle .players__container .player {
-        position: absolute;
         width: 130px;
         background-image: url(../img/mathtournament-onboarding-yellow-select.png);
-        transition: ease all .5; }
+        cursor: initial; }
     .item--lobby.item--middle .item__buttons .item__btn {
       width: 130px; }
       .item--lobby.item--middle .item__buttons .item__btn img {
@@ -1007,47 +1061,70 @@
   .main--carousel .item__buttons {
     width: 110px; } }
 
-.container--difficulty {
-  top: 55%; }
-
 .item--difficulty {
-  width: 40%; }
+  width: 60%; }
   .item--difficulty .header--difficulty {
     width: 100%;
-    font-size: 50px;
-    background-image: linear-gradient(90deg, #efc54f, #db7742);
-    text-shadow: 3px 3px 0 black;
-    position: relative; }
+    background-image: linear-gradient(90deg, #bbd400, #129264);
+    letter-spacing: 2px;
+    text-shadow: 0 3px 0 #2d1f4e, 0 -3px 0 #2d1f4e, -3px 0 0 #2d1f4e, 3px 0 0 #2d1f4e, 2px 2px 0 #2d1f4e, -2px -2px 0 #2d1f4e, 2px -2px 0 #2d1f4e, -2px 2px 0 #2d1f4e;
+    position: relative;
+    transition: ease all .3s; }
+    .item--difficulty .header--difficulty h2 {
+      height: 70px;
+      line-height: 70px;
+      font-size: 50px; }
     .item--difficulty .header--difficulty .header__btn {
-      width: 100px;
+      width: 80px;
       display: inline-block;
       position: absolute;
-      top: -25px; }
+      top: -7px;
+      cursor: pointer; }
       .item--difficulty .header--difficulty .header__btn--left {
-        left: -70px; }
+        left: -45px; }
       .item--difficulty .header--difficulty .header__btn--right {
-        right: -70px; }
+        right: -45px;
+        transform: scaleX(-1); }
       .item--difficulty .header--difficulty .header__btn img {
         width: 100%; }
-  .item--difficulty .difficulty__row {
+  .item--difficulty .difficulty {
     background-color: #f9f3d1;
     background-image: url(../img/mathtournament-onboarding-board-tile.png);
     background-size: 150px;
     padding: 10px;
     border-radius: 0 0 10px 10px; }
-  .item--difficulty .difficulty__container .difficulty__column {
-    display: inline-block;
-    width: 45%; }
-    .item--difficulty .difficulty__container .difficulty__column .difficulty__item {
-      cursor: pointer; }
-      .item--difficulty .difficulty__container .difficulty__column .difficulty__item img {
-        width: 100%;
-        padding: 5px; }
-  .item--difficulty .item__buttons .item__btn {
-    margin-top: 10px;
-    width: 120px; }
-    .item--difficulty .item__buttons .item__btn img {
-      width: 100%; }
+    .item--difficulty .difficulty .difficulty__list {
+      padding: 20px 50px 50px; }
+      .item--difficulty .difficulty .difficulty__list .difficulty__item {
+        list-style: none; }
+        .item--difficulty .difficulty .difficulty__list .difficulty__item p {
+          font-size: 30px;
+          display: inline-block;
+          width: 75%;
+          text-align: left;
+          color: #2d1f4e;
+          background-color: #fff;
+          padding: 10px 30px;
+          margin: 10px;
+          border-radius: 10px;
+          box-shadow: 0 3px 0 rgba(45, 31, 78, 0.2); }
+        .item--difficulty .difficulty .difficulty__list .difficulty__item button {
+          cursor: pointer;
+          border: none;
+          background-color: #00000011;
+          width: 40px;
+          height: 40px; }
+          .item--difficulty .difficulty .difficulty__list .difficulty__item button img {
+            width: 100%; }
+  .item--difficulty .item__buttons {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -80px; }
+    .item--difficulty .item__buttons .item__btn {
+      width: 120px; }
+      .item--difficulty .item__buttons .item__btn img {
+        width: 100%; }
 
 /**************************************
  ********* Media Queries **************
@@ -1061,12 +1138,7 @@
       .item--difficulty .header--difficulty .header__btn--left {
         left: -40px; }
       .item--difficulty .header--difficulty .header__btn--right {
-        right: -40px; }
-  .item--difficulty .difficulty__row {
-    background-size: 100px;
-    padding: 5px; }
-  .item--difficulty .difficulty__container .difficulty__column .difficulty__item img {
-    padding: 0; } }
+        right: -40px; } }
 
 @media only screen and (max-width: 767px) {
   .item--difficulty {
