@@ -88,6 +88,10 @@ var battle = function(){
 		sounds: [
 			{	name: "battleSong",
 				file: "../../sounds/songs/battle.mp3"},
+			{	name: "listos",
+				file: "../../sounds/sounds/listos.wav"},
+			{	name: "ya",
+				file: "../../sounds/sounds/ya.wav"},
 		],
 		spritesheets: [
 		],
@@ -963,10 +967,14 @@ var battle = function(){
 
     function setReadyGo(){
 
-        var first = game.add.tween(listosYaGroup.listos).to({y: game.world.centerY}, 200, Phaser.Easing.Cubic.Out, true)
+		var first = game.add.tween(listosYaGroup.listos).to({y: game.world.centerY}, 200, Phaser.Easing.Cubic.Out, true)
+		sound.play("listos")
         first.yoyo(true, 700)
 
-        var second = game.add.tween(listosYaGroup.ya.scale).to({x: 1,y: 1}, 400, Phaser.Easing.Elastic.Out, false)
+		var second = game.add.tween(listosYaGroup.ya.scale).to({x: 1,y: 1}, 400, Phaser.Easing.Elastic.Out, false)
+		second.onStart.add(function(){
+			sound.play("ya")
+		})
         var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 500)
         secondOut.onComplete.add(function(){
 			//questionGroup.showQuestion(server.generateQuestion())
