@@ -359,7 +359,6 @@ function Server(){
 
 		var promise = makeid(currentId);
 		promise.then(function(id){
-			if((id)&&(onStart)) onStart()
 			id_game = id;
 			operationGenerator.setConfiguration(rules, numPerOperations)
 
@@ -384,6 +383,7 @@ function Server(){
 			setfb(refIdGame, valores)//refIdGame.set(valores);
 
 			if((!currentId)||("000000")) {
+				if((id)&&(onStart)) onStart()
 
 				var refT1 = database.ref(id_game + "/t1");
 				refT1.on('value', function (snapshot) {
