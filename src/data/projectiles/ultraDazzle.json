@@ -8,6 +8,7 @@
     {
         "file":"/spines/yogotars/battle/Dazzle/dazzle_projectiles.json",
         "scales":["@0.5x"],
+        "dynamicSkin":true,
         "skin":"dazzle1",
         "animations":["in_ultra","idle_ultra"]
     }    
