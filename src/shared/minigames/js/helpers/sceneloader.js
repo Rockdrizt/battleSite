@@ -9,7 +9,12 @@ var sceneloader = function(){
 
 	function init(gameObject){
 		game = gameObject
+
 		alphaMask = game.add.graphics()
+		alphaMask.beginFill(0xffffff)
+		alphaMask.drawRect(-2, -2, game.world.width + 2, game.world.height + 2)
+		alphaMask.endFill()
+		alphaMask.alpha = 0
 	}
 
 	function createNewLoader(callbacks){
@@ -210,9 +215,17 @@ var sceneloader = function(){
 		if(sceneToShow != null){
 
 			//console.log(game.state.states[sceneName])
-			//game.add.tween(game.world).to()
+			game.world.remove(alphaMask)
+			game.world.add(alphaMask)
+			alphaMask.alpha = 0
+			var appear = game.add.tween(alphaMask).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
+			appear.onComplete.add(function(){
+				game.state.start(sceneToShow.name, false)
+				game.world.remove(alphaMask)
+				game.world.add(alphaMask)
+				game.add.tween(alphaMask).to({alpha:0}, 300, Phaser.Easing.Cubic.In, true)
+			})
 
-			game.state.start(sceneToShow.name, false)
 
 			// var currentState = game.state.getCurrentState()
 			// var stage = currentState.stage

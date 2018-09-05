@@ -21,35 +21,32 @@
           Equipo Alfa
           <span></span>
         </h2>
-        <div class="item__avatar">
-          <div class="item__players" >
+        <div class="item__players">
+          <div class="item__alfa item__alfa--one">
             <span class="players__container"></span>
-            <img src="./img/mathtournament-onboarding-hitbox-alpha.png" alt="">
+            <img class="hitbox hitbox--alfa" src="./img/mathtournament-onboarding-hitbox-alpha.png" alt="">
           </div>
-          <div class="item__players" >
+          <div class="item__alfa item__alfa--two one">
             <span class="players__container"></span>
-            <img src="./img/mathtournament-onboarding-hitbox-alpha.png" alt="">
+            <img class="hitbox hitbox--alfa" src="./img/mathtournament-onboarding-hitbox-alpha.png" alt="">
           </div>
-          <div class="item__players" >
+          <div class="item__alfa item__alfa--three two one">
             <span class="players__container"></span>
-            <img src="./img/mathtournament-onboarding-hitbox-alpha.png" alt="">
+            <img class="hitbox hitbox--alfa" src="./img/mathtournament-onboarding-hitbox-alpha.png" alt="">
           </div>
         </div>
       </section>
       <section class="item item--middle item--lobby">
-          <div class="item__textbox__container">
-            <div class="item__pin">
-              <h3>Pin</h3>
-              <input type="text" id="pin" value="12345">
-            </div>
-            <div class="players__container">
-              <span class="loader"></span>
-              <div class="player" id="player" draggable="true">
-                <img src="./img/mathtournament-onboarding-yellow-select.png" alt="">
-                <p>...</p>
-              </div>
-            </div>
+        <div class="item__textbox__container">
+          <div class="item__pin">
+            <h3>Pin</h3>
+            <input type="text" id="pin" value="12345">
           </div>
+          <div class="players__container" id="players-container">
+            <span class="loader"></span>
+            <div class="player" id="player">...</div>
+          </div>
+        </div>
         <div class="item__buttons">
           <button class="item__btn">
             <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
@@ -61,40 +58,104 @@
           Equipo Bravo
           <span></span>
         </h2>
-        <div class="item__avatar">
-          <div class="item__players">
+        <div class="item__players">
+          <div class="item__bravo item__bravo--one">
             <span class="players__container"></span>
-            <img src="./img/mathtournament-onboarding-hitbox-bravo.png" alt="">
+            <img class="hitbox hitbox--bravo" src="./img/mathtournament-onboarding-hitbox-bravo.png" alt="">
           </div>
-          <div class="item__players">
+          <div class="item__bravo item__bravo--two one">
             <span class="players__container"></span>
-            <img src="./img/mathtournament-onboarding-hitbox-bravo.png" alt="">
+            <img class="hitbox hitbox--bravo" src="./img/mathtournament-onboarding-hitbox-bravo.png" alt="">
           </div>
-          <div class="item__players">
-            <span class="players__container"></span>
-            <img src="./img/mathtournament-onboarding-hitbox-bravo.png" alt="">
+          <div class="item__bravo item__bravo--three two one">
+            <span class="players__container "></span>
+            <img class="hitbox hitbox--bravo" src="./img/mathtournament-onboarding-hitbox-bravo.png" alt="">
           </div>
         </div>
       </section>
     </div>
   </main>
+  <script src="./js/DragDropTouch.js"></script>
   <script src="./js/main.js"></script>
   <script>
-    var player = document.getElementById('player')
+
+    var configBattle = {}
+    var paramstr = window.location.search.substr(1);
+    var paramArr = paramstr.split('&')
+    paramArr.forEach(function (el) {
+      var conf = el.split('=')
+      configBattle[conf[0]] = conf[1]
+    })
+    function hideHitbox(mode) {
+      var hitboxToHide = document.querySelectorAll(mode)
+      hitboxToHide.forEach(function (el) {
+        el.classList.add('hidden')
+      })
+    }
+    var playersContainer = document.getElementById('players-container')
+    function generatePlayer(players) {
+      var playersName = ['player 1', 'player 2', 'player 3', 'player 4', 'player 5', 'player 6']
+
+      for (var index = 0; index < players; index++) {
+        var templatePlayer = document.createElement('div')
+        templatePlayer.classList.add('player')
+        templatePlayer.setAttribute('id', 'player' + (index + 1))
+        templatePlayer.setAttribute('draggable', true)
+
+        var templateName = document.createTextNode(playersName[index])
+        templatePlayer.appendChild(templateName)
+        playersContainer.appendChild(templatePlayer)
+      }
+    }
+
+    if (configBattle.mode === '1vs1') {
+      hideHitbox('.one')
+      generatePlayer(2)
+    } else if (configBattle.mode === '2vs2') {
+      hideHitbox('.two')
+      generatePlayer(4)
+    } else {
+      generatePlayer(6)
+    }
+
+    // Drag and Drop
+    var players = document.querySelectorAll('.player')
     var container = document.querySelectorAll('.players__container')
-    function dragover (e) {
-      e.preventDefault()
-      console.log(e);
+    var from, to, element
+
+    function dragstart (e) {
+      element = e.target
+      from = e.target.parentNode
+      e.target.classList.add('drop')
+      playersContainer.classList.remove('full')
+      container.forEach(function (el) {
+        if (el.children.length === 0) {
+          el.classList.remove('full')
+        }
+      })
+
     }
-    function dragenter (e) {
+    function dragover(e) {
       e.preventDefault()
-      console.log(e);
     }
-    function drop (e) {
-      this.append(player)
-      console.log(e);
+    function dragenter(e) {
+      e.preventDefault()
+      to = e.target
+    }
+    function drop(e) {
+      var drop = document.querySelector('.drop')
+      if (to.parentNode.id === 'players-container') {
+        this.append(drop)
+      } else if (to.parentNode.classList.contains('players__container')) {
+        from.append(to)
+        this.append(drop)
+      } else {
+        this.append(drop)
+      }
+      drop.classList.remove('drop')
     }
     container.forEach(function (el) {
+      el.addEventListener('dragstart', dragstart)
       el.addEventListener('dragover', dragover)
       el.addEventListener('dragenter', dragenter)
       el.addEventListener('drop', drop)

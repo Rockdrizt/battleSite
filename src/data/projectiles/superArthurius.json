@@ -1,6 +1,6 @@
 {
   "timing":{
-    "stop":1200,
+    "stop":1850,
     "removal":2500,
     "hit":1200
   },
@@ -8,7 +8,7 @@
     {
       "file":"/spines/yogotars/battle/Arthurius/arthurius_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"arthurius_projectiles",
+      "skin":"arthurius1",
       "animations":["idle_super","out_super"]
     }
   ],

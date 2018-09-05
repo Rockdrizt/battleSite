@@ -370,6 +370,7 @@ function Server(){
 				time:battleTime,
 				maxRounds:self.maxRounds,
 				timeOut:false,
+
 			};
 			refIdGame = database.ref(id_game);
 			setfb(refIdGame, valores)//refIdGame.set(valores);

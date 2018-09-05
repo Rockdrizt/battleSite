@@ -51,7 +51,7 @@ var reward = function(){
             },
             {
                 name: "music",
-                file: soundsPath + "/songs/weLoveElectricCars.mp3"
+                file: "../../sounds/songs/reward.mp3",
             }
         ],
         spines:[

@@ -1,8 +1,8 @@
 {
   "timing":{
-    "stop":800,
+    "stop":600,
     "removal":2300,
-    "hit":800
+    "hit":600
   },
     "particles":[
     "/particles/characters/specialAttackFire14/specialAttackFire54.json",
