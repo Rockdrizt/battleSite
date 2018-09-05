@@ -2,6 +2,7 @@ var countQuestions = 0;
 var optionLetters = ["a","b","c","d"];
 var _buttonAddQuestion = $(".questions__botton--add");
 var questionsArray = [];
+var selectQuestionToDelete;
 
 function addElementArray(number){
     questionsArray[number-1] = new Array;
@@ -16,6 +17,23 @@ function saveInfoinArray(){
     }
 }
 
+
+function confirmDeleteQuestion(obj){
+    $("#question__new_" + $(obj).attr("index") ).remove();
+        countQuestions--
+        var getTotalQuestions = $(".questions__container").children().length;
+        var hijos = []
+        $('section','.questions__container').each(function(){
+           hijos.push($(this).attr("id"));
+        });
+        for(var p = 0;p<getTotalQuestions;p++){  
+            $("#" + hijos[p]).attr("id", "question__new_" + [p+1] );
+            var element = $(".questions__container").children()[p].id;
+            $("#" + element).find(".questions__number").find("span").html([p+1]);
+            $("#" + element).find(".question__button--delete").attr("index",[p+1]);
+        }
+    
+}
 
 
 function addQuestion(){
@@ -63,20 +81,9 @@ function addQuestion(){
         }   
     //delete question
     $("#question__new_" + countQuestions).find(".question__button--delete").click(function(){
-        $("#question__new_" + $(this).attr("index")).remove();
-        countQuestions--
-        var getTotalQuestions = $(".questions__container").children().length;
-        var hijos = []
-        $('section','.questions__container').each(function(){
-           hijos.push($(this).attr("id"));
-        });
-        for(var p = 0;p<getTotalQuestions;p++){  
-            $("#" + hijos[p]).attr("id", "question__new_" + [p+1] );
-            var element = $(".questions__container").children()[p].id;
-            $("#" + element).find(".questions__number").find("span").html([p+1]);
-            $("#" + element).find(".question__button--delete").attr("index",[p+1]);
-        }
-        //body.animate({scrollTop: (body.height() * $(this).attr("index"))},"2000"); 
+        $(".window__contain").css("display","block");
+        selectQuestionToDelete = this       
+        $(".window__message").find("span").html("¿Estás seguro de eliminar la pregunta "+ $(this).attr("index")  +"?");
     });
     //scroll animate 
     body.animate({scrollTop: (body.height() * countQuestions)},"2000"); 
@@ -93,5 +100,13 @@ function addQuestion(){
 
 _buttonAddQuestion.click(function(){
     addQuestion();
-    
 });
+
+$(".window__button--confirm").click(function(){
+    confirmDeleteQuestion(selectQuestionToDelete);
+    $(".window__contain").css("display","none");
+})
+
+$(".window__button--close").click(function(){
+    $(".window__contain").css("display","none");
+})
