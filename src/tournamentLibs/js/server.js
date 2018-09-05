@@ -354,6 +354,8 @@ function Server(){
 				self.onAlert("Tienes un problema de conexión.\n\n Revisa que tu internet sea estable" +
 					" y dale click en OK para continuar.")
 				serverReady = false
+			}else {
+				onStart()
 			}
 		})
 

@@ -3,6 +3,15 @@ var alertDialog = function () {
 	var okButton
 	var appearTween
 
+	var DIALOG = {
+		width : 400,
+		height : 300,
+		offsetX : 5,
+		offsetYLong : 40,
+		offsetYShort : -40
+	}
+
+
 	var assets = {
 		images: [
 			{
@@ -107,6 +116,11 @@ var alertDialog = function () {
 			alertGroup.pinGroup.alpha = 0
 		}
 
+		if((showInput)||(pin))
+			alertGroup.dialog.setTextBounds(DIALOG.offsetX, DIALOG.offsetYShort, DIALOG.width, DIALOG.height)
+		else
+			alertGroup.dialog.setTextBounds(DIALOG.offsetX, DIALOG.offsetYLong, DIALOG.width, DIALOG.height)
+
 		appearTween = game.add.tween(alertGroup).to({alpha:1}, 200, Phaser.Easing.Cubic.Out, true)
 		appearTween.onComplete.add(function() {
 			game.paused = true
@@ -137,7 +151,10 @@ var alertDialog = function () {
 
 		var fontStyle = {font: "32px VAGRounded", fontWeight: "bold", fill: "#000000", align: "center"}
 		var fontStyle2 = {font: "46px VAGRounded", fontWeight: "bold", fill: "#000000", align: "center"}
-		var dialog = game.add.text(10, -30, "", fontStyle)
+		var dialog = game.add.text(10, -10, "", fontStyle)
+		//dialog.setTextBounds(5, 40, textBox.width, textBox.height)
+		dialog.boundsAlignH = "middle"
+		dialog.boundsAlignV = "top"
 		dialog.anchor.setTo(0.5,0.5)
 		alertGroup.add(dialog)
 		dialog.wordWrapWidth = textBox.width - 100
