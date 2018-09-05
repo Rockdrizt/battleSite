@@ -91,7 +91,9 @@
     }
     .customize__btn {
       display: inline-block;
-      width: 100px;
+      border: none;
+      background-color: transparent;
+      width: 130px;
       margin-top: 20px;
       img {
         width: 100%;

@@ -20,7 +20,7 @@
         <h2 class="customize__header">
           Options Menu
         </h2>
-        <div class="customize__container">
+        <form class="customize__container" id="customize-battle">
           <div class="customize__row">
             <div class="customize__col">
               <p class="option">Minutes</p>
@@ -47,10 +47,10 @@
               </div>
             </div>
           </div>
-          <a href="lobby.html" class="customize__btn">
+          <button class="customize__btn">
             <img src="./img/mathtournament-onboarding-ok-btn.png">
-          </a>
-        </div>
+          </button>
+        </form>
       </section>
     </div>
   </main>
@@ -58,8 +58,10 @@
   <script>
     var less = document.querySelectorAll('.less')
     var plus = document.querySelectorAll('.plus')
+    var customizeBattle = document.getElementById('customize-battle')
     less.forEach(function (el) {
-      el.addEventListener('click', function () {
+      el.addEventListener('click', function (ev) {
+        ev.preventDefault()
         switch (el.classList[1]) {
           case 'less-min':
             el.nextElementSibling.value > '1' ? el.nextElementSibling.value-- : el.nextElementSibling.value
@@ -83,7 +85,8 @@
       })
     })
     plus.forEach(function (el) {
-      el.addEventListener('click', function () {
+      el.addEventListener('click', function (ev) {
+        ev.preventDefault()
         switch (el.classList[1]) {
           case 'plus-min':
             el.previousElementSibling.value < '5' ? el.previousElementSibling.value++ : el.previousElementSibling.value
@@ -105,6 +108,16 @@
             break;
         }
       })
+    })
+    customizeBattle.addEventListener('submit', function (ev) {
+      ev.preventDefault()
+      var config = {
+        minutes: ev.target[1].value,
+        rounds: ev.target[4].value,
+        battleMode: ev.target[7].value
+      }
+      window.location.href = 'lobby.html' + '?' + 'min=' + config.minutes + '&' + 'rounds=' + config.rounds + '&' + 'mode=' + config.battleMode
+      console.log(ev);
     })
   </script>
 </body>

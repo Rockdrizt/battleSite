@@ -1,4 +1,91 @@
 .item--lobby {
+  position: relative;
+  height: 600px;
+  .item__players {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    div {
+      width: 100%;
+      height: 150px;
+      position: relative;
+      .players__container,
+      .hitbox {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-40%);
+        display: inline-block;
+      }
+      .players__container {
+        width: 130px;
+        height: 130px;
+      }
+      .hitbox {
+        width: 130px;
+        z-index: -1;
+      }
+    }
+    .item__alfa {
+      &--one,
+      &--three {
+        .players__container,
+        .hitbox {
+          position: absolute;
+          right: 50px;
+        }
+      }
+      &--two {
+        .players__container,
+        .hitbox {
+          left: 130px;
+        }
+      }
+    }
+    .item__bravo {
+      &--one,
+      &--three {
+        .players__container,
+        .hitbox {
+          left: 50px;
+        }
+      }
+      &--two {
+        .players__container,
+        .hitbox {
+          right: 130px;
+        }
+      }
+    }
+  }
+  .players__container {
+    position: relative;
+    height: 180px;
+    width: 180px;
+    .player {
+      position: absolute;
+      height: 150px;
+      line-height: 150px;
+      width: 100%;
+      top: 50%;
+      left: 50%;
+      background-position: top left;
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-image: url(../img/mathtournament-onboarding-bg-green-select.png);
+      transform: translate(-50%, -50%);
+      touch-action: none;
+      user-select: none;
+      color: #000;
+      img {
+        width: 100%;
+      }
+      &:hover {
+        cursor: move;
+      }
+    }
+  }
   &.item--left {
     .item__header {
       right: 10%;
@@ -17,13 +104,13 @@
           height: 100%;
           top: 0;
           left: -500px;
-          background-color: #E2007B;
+          background-color: #e2007b;
         }
       }
     }
   }
   &.item--middle {
-    padding-top: 50px;
+    padding-top: 60px;
     .item__textbox__container {
       background-color: transparent;
       .item__pin {
@@ -39,45 +126,33 @@
           border-radius: 15px;
         }
       }
-      .players__container {
-        position: relative;
-        height: 180px;
-        width: 180px;
-        margin: 40px auto 20px;
-        .loader {
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: 100%;
-          background-image: url(../img/mathtournament-onboarding-load-pin.png);
-          background-position: top left;
-          background-size: 100%;
-          background-repeat: no-repeat;
-          animation: rotate-pin infinite 5s;
-        }
-        .player {
-          position: absolute;
-          width: 70%;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          img {
-            width: 100%;
-          }
-        }
-        p {
-          position: absolute;
-          width: 100%;
-          top: 50%;
-          transform: translateY(-50%);
-          padding: 0;
-        }
+    }
+    .players__container {
+      margin: 40px auto 20px;
+      .loader {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-image: url(../img/mathtournament-onboarding-load-pin.png);
+        background-position: top left;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        animation: rotate-pin infinite 5s;
+        z-index: -1;
+      }
+      .player {
+        position: absolute;
+        width: 130px;
+        background-image: url(../img/mathtournament-onboarding-yellow-select.png);
+        transition: ease all .5;
+        // top: 50%;
       }
     }
     .item__buttons {
       .item__btn {
-        width: 120px;
+        width: 130px;
         img {
           width: 100%;
         }
@@ -102,32 +177,6 @@
           right: -500px;
           background-color: #76cfbd;
         }
-      }
-    }
-  }
-  .item__avatar {
-    // padding-top: 115px;
-    .item__players {
-      width: 125px;
-      margin: 0 auto;
-      position: relative;
-      .players__container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100%;
-        height: 100%;
-        p {
-          position: absolute;
-          width: 100%;
-          top: 50%;
-          transform: translateY(-50%);
-          padding: 0;
-        }
-      }
-      img {
-        width: 100%;
       }
     }
   }
