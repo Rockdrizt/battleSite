@@ -138,33 +138,33 @@ var questions = function(){
 			createBackground()
 			createQuestionOverlay()
 				
-			// var obj = {
-			// 	question: "En un cine había sesenta y cuatro personas y han entrado diecisiete más. ¿Cuántas personas hay ahora en el cine?",
-			// 	existImage : false,
-			// 	src: "../../images/questionDB/default.png",
-			// 	image: "",
-			// 	answers: ["Ochenta y uno", "Setenta y uno", "Cuarenta y siete", "Cincuenta y siete"],
-			// 	grade: 2,
-			// 	level: 5,
-			// 	correctAnswer: 1,
-			// }
-
-			// var riddle = obj
-			// questionGroup.showQuestion(riddle)
-
-			if(cliente){
-				cliente.removeEventListener("onTurnEnds", checkAnswer)
-				cliente.removeEventListener("onGameEnds", showWinner)
-				cliente.removeEventListener("showEquation", questionGroup.showQuestion)
-				cliente.addEventListener("onTurnEnds", checkAnswer)
-				cliente.addEventListener("showEquation", questionGroup.showQuestion)
-				cliente.addEventListener("onGameEnds", showWinner)
-
-				//cliente.timeOutCallback = setTimeOut
-				// clientData.setReady(true)
-			}else{
-				game.time.events.add(1000, questionGroup.setQuestion)
+			var obj = {
+				question: "En un cine había sesenta y cuatro personas y han entrado diecisiete más. ¿Cuántas personas hay ahora en el cine?",
+				existImage : false,
+				src: "../../images/questionDB/default.png",
+				image: "",
+				answers: ["Ochenta y uno", "Setenta y uno", "Cuarenta y siete", "Cincuenta y siete"],
+				grade: 2,
+				level: 5,
+				correctAnswer: 1,
 			}
+
+			var riddle = obj
+			questionGroup.showQuestion(riddle)
+
+			// if(cliente){
+			// 	cliente.removeEventListener("onTurnEnds", checkAnswer)
+			// 	cliente.removeEventListener("onGameEnds", showWinner)
+			// 	cliente.removeEventListener("showEquation", questionGroup.showQuestion)
+			// 	cliente.addEventListener("onTurnEnds", checkAnswer)
+			// 	cliente.addEventListener("showEquation", questionGroup.showQuestion)
+			// 	cliente.addEventListener("onGameEnds", showWinner)
+
+			// 	//cliente.timeOutCallback = setTimeOut
+			// 	// clientData.setReady(true)
+			// }else{
+			// 	game.time.events.add(1000, questionGroup.setQuestion)
+			// }
 		},
 		shutdown: function () {
 			sceneGroup.destroy()

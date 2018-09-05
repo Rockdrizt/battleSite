@@ -77,7 +77,7 @@ var questionHUD = function(){
 		var callInputAnswer = inputOption.bind(questionGroup)
 
 		if(client){
-			INITIAL_X = board.centerX * 0.9
+			INITIAL_X = board.centerX * 0.85
 			offsetX = 0.9
 		}
 
@@ -154,6 +154,7 @@ var questionHUD = function(){
 
 	function createChrono(hud){
 
+		var fontStyle = {font: "75px VAGRounded", fontWeight: "bold", fill: "#000066", align: "center"}
 		var box = hud.boxes[1]
 
 		var chronoGroup = game.add.group()
@@ -165,6 +166,14 @@ var questionHUD = function(){
 		var cont = chronoGroup.create(0, 0, "atlas.question", "yellowCircle")
 		cont.anchor.setTo(0.5)
 
+		var timeGauge = chronoGroup.create(50, 0, "atlas.question", "timeGauge")
+		timeGauge.anchor.setTo(0.5)
+		chronoGroup.timeGauge = timeGauge
+
+		var timeText = new Phaser.Text(chronoGroup.game, 50, 0, "3:00", fontStyle)
+		timeText.anchor.setTo(0.5)
+		chronoGroup.add(timeText)
+		chronoGroup.timeText = timeText
 	}
 
 	function createButtons(x, y, opt, group){
