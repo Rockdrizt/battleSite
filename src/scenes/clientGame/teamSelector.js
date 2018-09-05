@@ -60,25 +60,34 @@ var teamSelector = function(){
 			}
 		],
 		sounds: [
-			{	name: "swordSmash",
-				file: soundsPath + "swordSmash.mp3"},
+			{	name: "shineSpell",
+				file: "../../sounds/sounds/shineSpell.mp3"},
 			{	name: "swipe",
 				file: soundsPath + "swipe.mp3"},
 			{	name: "robotBeep",
 				file: soundsPath + "robotBeep.mp3"},
-			{	name: "winBattle1",
-				file: soundsPath + "winBattle1.mp3"},
-			{	name: "pop",
-				file: soundsPath + "pop.mp3"},
-			{	name: "brightTransition",
-				file: soundsPath + "brightTransition.mp3"},
+			{	name: "lightUp",
+				file: "../../sounds/sounds/lightUp.mp3"},
 			{	name: "cut",
 				file: soundsPath + "cut.mp3"},
-			{	name: "gameSong",
-				file: soundsPath + "songs/party-pop.mp3",},
-			//file: settings.BASE_PATH + "/sounds/songs/electro.mp3"},
-			{	name: "startSong",
-				file: soundsPath + "songs/battleLoop.mp3"},
+			{	name: "gameSong", 
+				file: "../../sounds/songs/selector.mp3"},
+			{	name: "tomiko",
+				file: settings.BASE_PATH + "/sounds/selectorNames/tomiko.mp3"},
+            {	name: "luna",
+				file: settings.BASE_PATH + "/sounds/selectorNames/luna.mp3"},
+            {	name: "nao",
+				file: settings.BASE_PATH + "/sounds/selectorNames/nao.mp3"},
+            {	name: "theffanie",
+				file: settings.BASE_PATH + "/sounds/selectorNames/theffanie.mp3"},
+            {	name: "eagle",
+				file: settings.BASE_PATH + "/sounds/selectorNames/eagle.mp3"},
+            {	name: "dinamita",
+				file: settings.BASE_PATH + "/sounds/selectorNames/dinamita.mp3"},
+            {	name: "arthurius",
+				file: settings.BASE_PATH + "/sounds/selectorNames/arthurius.mp3"},
+            {	name: "estrella",
+				file: settings.BASE_PATH + "/sounds/selectorNames/estrella.mp3"},
 		],
 		spritesheets: [
 
@@ -124,6 +133,11 @@ var teamSelector = function(){
 				file:settings.BASE_PATH + "/spines/yogotars/selector/estrella/estrellaSelector.json",
 				scales: ["@0.5x"]
 			},
+			{
+				name:"lava",
+				file:settings.BASE_PATH + "/spines/yogotars/selector/lava/skeleton.json",
+				//scales: ["@0.5x"]
+			},
 		],
 		particles: [
 			{
@@ -141,30 +155,30 @@ var teamSelector = function(){
 
 	var TEAMS = {
 		1: {
-			name: "Alpha Team",
+			name: "Equipo Alpha",
 			side: 1,
 			states: {yellow: 0, color: 1},
 		},
 		2: {
-			name: "Bravo Team",
+			name: "Equipo Bravo",
 			side: -1,
 			states: {yellow: 0, color: 2},
 		},
 	}
 
-    var DEFAULT_NUMTEAM = 1
+	var DEFAULT_NUMTEAM = 1
+	var TEAM_COMPLETE = 3
 
-	var states
-	var side
-	var teamName
-	var chosenOne
+	var STATES
+	var SIDE
+	var TEAM_NAME
 
 	var gameSong
 	var sceneGroup
 	var platformGroup
 	var teamGroup
 	var pullGroup
-	var okGroup
+	var okButton
 
 	var teamBar
 	var buttonsGroup
@@ -188,10 +202,9 @@ var teamSelector = function(){
         var numTeam = cliente.numTeam || DEFAULT_NUMTEAM
         var config = TEAMS[numTeam]
 
-		states = config.states
-		side = config.side
-		chosenOne = config.states.color
-		teamName = config.name
+		STATES = config.states
+		SIDE = config.side
+		TEAM_NAME = config.name
 
 		loadSounds()
 	}
@@ -199,7 +212,6 @@ var teamSelector = function(){
 	function preload(){
 
 		game.stage.disableVisibilityChange = true
-		game.load.bitmapFont('skwig', settings.BASE_PATH + '/images/fonts/font.png', settings.BASE_PATH + '/images/fonts/font.fnt')
 	}
 
 	function createBackground(){
@@ -234,11 +246,11 @@ var teamSelector = function(){
 		platformGroup = game.add.group()
 		sceneGroup.add(platformGroup)
 
-		var pivotX = side < 0 ? 0.3 : 1.2
+		var pivotX = SIDE < 0 ? 0.3 : 1.2
 
 		for(var i = 0; i < 3; i++){
 
-			var plat = platformGroup.create(game.world.centerX * pivotX, game.world.centerY + 50, "atlas.yogoSelector", "plat" + states.color)
+			var plat = platformGroup.create(game.world.centerX * pivotX, game.world.centerY + 50, "atlas.yogoSelector", "plat" + STATES.color)
 			plat.anchor.setTo(0.5)
 
 			pivotX += 0.25
@@ -250,15 +262,15 @@ var teamSelector = function(){
 	function createTeam(){
 
 		teamGroup = game.add.group()
-		teamGroup.teamPivot = side > 0 ? 0 : 2
+		teamGroup.teamPivot = SIDE > 0 ? 0 : 2
 		teamGroup.currentSelect = -1
 		teamGroup.auxArray = [-1, -1, -1]
 		teamGroup.slots = []
-		teamGroup.color = states.color
-		teamGroup.side = side
+		teamGroup.color = STATES.color
+		teamGroup.side = SIDE
 		sceneGroup.add(teamGroup)
 
-		var pivotX = side < 0 ? 0.3 : 1.2
+		var pivotX = SIDE < 0 ? 0.3 : 1.2
 
 		for(var i = 0; i < 3; i++){
 
@@ -290,18 +302,20 @@ var teamSelector = function(){
 
 	function createTeamBar(){
 
-		var fontStyle = {font: "65px skwig", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
+		var fontStyle = {font: "65px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 
-		var border = states.color - 1
+		var border = STATES.color - 1
 
-		teamBar = sceneGroup.create(game.world.width * border, 30, "atlas.yogoSelector", "teamBar" + states.color)
+		teamBar = sceneGroup.create(game.world.width * border, 30, "atlas.yogoSelector", "teamBar" + STATES.color)
 		teamBar.anchor.setTo(border, 0)
 		teamBar.scale.setTo(0.8)
 
-		var text = game.add.bitmapText(320, 25, 'skwig', teamName, 75)
+		var text = new Phaser.Text(sceneGroup.game, 320, 25, TEAM_NAME, fontStyle)
 		text.anchor.setTo(0.5, 0)
+		text.stroke = "#000066"
+		text.strokeThickness = 10
 		text.alpha = 0
-		text.x *= side
+		text.x *= SIDE
 		teamBar.addChild(text)
 		teamBar.text = text
 	}
@@ -311,17 +325,17 @@ var teamSelector = function(){
 		buttonsGroup = game.add.group()
 		sceneGroup.add(buttonsGroup)
 
-		var pivotX = side < 0 ? game.world.centerX * 1.45 : game.world.centerX * 0.25
+		var pivotX = SIDE < 0 ? game.world.centerX * 1.45 : game.world.centerX * 0.25
 		var pivotY = 320
 		var aux = 0
-		var scale = side
+		var scale = SIDE
 
 		for(var i = 0; i < 8; i++){
 
 			var subGroup = game.add.group()
 			subGroup.x = pivotX
 			subGroup.y = pivotY
-			subGroup.color = states.yellow
+			subGroup.color = STATES.yellow
 			buttonsGroup.add(subGroup)
 
 			var token = subGroup.create(0, 0, "atlas.yogoSelector", "token" + 0)
@@ -332,7 +346,7 @@ var teamSelector = function(){
 			token.canClick = false
 			subGroup.token = token
 
-			var light = subGroup.create(0, 55, "atlas.yogoSelector", "light" + states.color)
+			var light = subGroup.create(0, 55, "atlas.yogoSelector", "light" + STATES.color)
 			light.alpha = 0
 			light.anchor.setTo(0.5, 1)
 			subGroup.light = light
@@ -348,7 +362,7 @@ var teamSelector = function(){
 
 			if(i % 2){
 				pivotY += 180
-				if(side > 0)
+				if(SIDE > 0)
 					pivotX = aux % 2 ? game.world.centerX * 0.25 : game.world.centerX * 0.4
 				else
 					pivotX = aux % 2 ? game.world.centerX * 1.45 : game.world.centerX * 1.3
@@ -357,11 +371,11 @@ var teamSelector = function(){
 			}
 		}
 
-		buttonsGroup.children[0].yogotar.x -= 30 * side
-		buttonsGroup.children[3].yogotar.x -= 10 * side
-		buttonsGroup.children[7].yogotar.x -= 10 * side
+		buttonsGroup.children[0].yogotar.x -= 30 * SIDE
+		buttonsGroup.children[3].yogotar.x -= 10 * SIDE
+		buttonsGroup.children[7].yogotar.x -= 10 * SIDE
 
-		var btn = side > 0 ? 0 : 3
+		var btn = SIDE > 0 ? 0 : 3
 		teamGroup.marker = buttonsGroup.children[btn]
 	}
 
@@ -373,10 +387,10 @@ var teamSelector = function(){
 
 			teamGroup.marker = btn.parent
 
-			if(btn.parent.color === states.yellow){
+			if(btn.parent.color === STATES.yellow){
 				if(teamGroup.teamPivot < 3){
 					markYogotar(btn.parent)
-					animateButton(btn.parent, states.color)
+					animateButton(btn.parent, STATES.color)
 				}
 				else{
 					btn.canClick = true
@@ -385,8 +399,8 @@ var teamSelector = function(){
 			}
 			else{
 				removeCharacter(btn.parent, teamGroup)
-				turnOff(btn.parent, states.yellow)
-				animateButton(btn.parent, states.yellow)
+				turnOff(btn.parent, STATES.yellow)
+				animateButton(btn.parent, STATES.yellow)
 			}
 		}
 	}
@@ -502,7 +516,7 @@ var teamSelector = function(){
 			var btn = buttonsGroup.children[i]
 
 			if(btn != teamGroup.marker){
-				if(btn.color === states.yellow){
+				if(btn.color === STATES.yellow){
 					btn.token.loadTexture("atlas.yogoSelector", "token0")
 					btn.light.alpha = 0
 				}
@@ -517,7 +531,7 @@ var teamSelector = function(){
 	function createOk(){
 
 		okButton = game.add.group()
-		okButton.x = game.world.centerX + 100 * -side
+		okButton.x = game.world.centerX + 100 * -SIDE
 		okButton.y = game.world.centerY + 120
 		okButton.alpha = 0
 		okButton.canClick = false
@@ -541,7 +555,7 @@ var teamSelector = function(){
 		okOff.events.onInputDown.add(function(btn){
 			if(okButton.canClick && teamGroup.currentSelect !== -1){
 				okButton.canClick = false
-				sound.play("pop")
+				sound.play("lightUp")
 				okButton.setAll("alpha", 0)
 				okButton.onBtn.alpha = 1
 				clickOk()
@@ -582,7 +596,7 @@ var teamSelector = function(){
 		if(teamGroup.currentSelect !== -1 && teamGroup.teamPivot < 3 && !teamGroup.auxArray.includes(teamGroup.currentSelect)){
 
 			okButton.canClick = false
-			buttonsGroup.children[teamGroup.currentSelect].color = states.color
+			buttonsGroup.children[teamGroup.currentSelect].color = STATES.color
 			turnOn(buttonsGroup.children[teamGroup.currentSelect])
 
 			teamGroup.auxArray[teamGroup.teamPivot] = teamGroup.currentSelect
@@ -596,12 +610,12 @@ var teamSelector = function(){
 			else
 				var aux = teamGroup.auxArray.lastIndexOf(-1) //index
 
-			aux === -1 ? teamGroup.teamPivot = 3 : teamGroup.teamPivot = aux
+			aux === -1 ? teamGroup.teamPivot = TEAM_COMPLETE : teamGroup.teamPivot = aux
 			
 			var teamPlayers = getTeam()
 			cliente.selectYogotar(teamPlayers)
 
-			if(teamGroup.teamPivot == 3){
+			if(teamGroup.teamPivot == TEAM_COMPLETE){
 				buttonsGroup.setAll("token.canClick", false)
 				okButton.canClick = false
 				game.time.events.add(2000, getReady)
@@ -614,7 +628,7 @@ var teamSelector = function(){
 		namesGroup = game.add.group()
 		sceneGroup.add(namesGroup)
 
-		var light = namesGroup.create(game.world.centerX + 320 * side, game.world.height - 200, "atlas.yogoSelector", "pinkLight")
+		var light = namesGroup.create(game.world.centerX + 320 * SIDE, game.world.height - 200, "atlas.yogoSelector", "pinkLight")
 		light.anchor.setTo(0.5)
 		light.scale.setTo(0)
 		namesGroup.light = light
@@ -643,7 +657,7 @@ var teamSelector = function(){
 
 	function turnOn(btn){
 
-		btn.light.loadTexture("atlas.yogoSelector", "light" + states.color)
+		btn.light.loadTexture("atlas.yogoSelector", "light" + STATES.color)
 		btn.light.alpha = 1
 		game.add.tween(btn.light.scale).from({y:0}, 150, Phaser.Easing.linear, true)
 	}
@@ -675,7 +689,7 @@ var teamSelector = function(){
 			while(i !== 5){
 				buttonsGroup.children[i].yogotar.alpha = 1
 				game.add.tween(buttonsGroup.children[i].yogotar.scale).from({x: 0,y: 0}, 500, Phaser.Easing.Cubic.Out, true, delay)
-				game.time.events.add(delay, function(){sound.play("pop")})
+				game.time.events.add(delay, function(){sound.play("lightUp")})
 
 
 				i === 2 ? i = 7 : i--
@@ -684,7 +698,7 @@ var teamSelector = function(){
 
 			game.add.tween(okButton).to({alpha: 1}, 300, Phaser.Easing.linear, true, delay).onComplete.add(function(){
 				buttonsGroup.setAll("token.canClick", true)
-				pressBtn(teamGroup.marker.token, states.color)
+				pressBtn(teamGroup.marker.token, STATES.color)
 				okButton.canClick = true
 			})
 		})
@@ -694,34 +708,70 @@ var teamSelector = function(){
 
 	function createSplashArt(){
 
-		var pivotX = 0.5
-		var aux = side > 0 ? 1 : 0
+		var pivotX = SIDE > 0 ? 0.3 : 1.7
+		var aux = SIDE > 0 ? 1 : -1
 		var pivotS = 1
-		var offsetY = side > 0 ? 400 : 150
+		var offsetY = SIDE > 0 ? 100 : 110
 
 		for(var i = 0; i < teamGroup.auxArray.length; i++){
 
-			var container = game.add.sprite(0, 100 * aux, "atlas.loading", "container" + aux)
+			var lava = game.add.game.add.spine(game.world.centerX * pivotX, game.world.centerY - 50 * aux, "lava")
+			lava.setSkinByName("normal")
+			lava.scale.setTo(1, aux)
+			lava.alpha = 0
+			splashArtGroup.add(lava)
+
 			var splash = game.add.sprite(0, offsetY, "atlas.loading", assets.spines[teamGroup.auxArray[i]].name)
+			splash.anchor.setTo(0.5)
+			splash.scale.setTo(1, aux)
 
-			var bmd = game.make.bitmapData(splash.width, container.height)
-			bmd.alphaMask(splash, container)
+			var slot = getSpineSlot(lava, "yogo")
+			slot.add(splash)
 
-			var splashArt = game.add.image(game.world.centerX * pivotX, game.world.height * aux, bmd)
-			splashArt.anchor.setTo(0.5, aux)
-			splashArt.scale.setTo(0.9)
-			splashArt.alpha = 0
-			splashArtGroup.add(splashArt)
+			game.time.events.add(game.rnd.integerInRange(0, 10) * 100, function(lava){
+				lava.setAnimationByName(0, "idle", true)
+			},null, lava)
 
-			pivotX += 0.5
+			// var container = game.add.sprite(0, 100 * aux, "atlas.loading", "container" + aux)
+			// var splash = game.add.sprite(0, offsetY, "atlas.loading", assets.spines[teamGroup.auxArray[i]].name)
+
+			// var bmd = game.make.bitmapData(splash.width, container.height)
+			// bmd.alphaMask(splash, container)
+
+			// var splashArt = game.add.image(game.world.centerX * pivotX, game.world.height * aux, bmd)
+			// splashArt.anchor.setTo(0.5, aux)
+			// //splashArt.scale.setTo(0.9)
+			// //splashArt.alpha = 0
+			// splashArtGroup.add(splashArt)
+
+			pivotX += 0.4 * aux
 
 			if(pivotS === i){
 				pivotS += 2
-				splashArt.scale.setTo(-0.9, 0.9)
+				lava.scale.setTo(-1, aux)
 			}
 
-			container.destroy()
-			splash.destroy()
+			// container.destroy()
+			// splash.destroy()
+		}
+	}
+
+	function animateSpine(){
+		
+	}
+
+	function getSpineSlot(spine, slotName){
+		
+		var slotIndex
+		for(var index = 0, n = spine.skeletonData.slots.length; index < n; index++){
+			var slotData = spine.skeletonData.slots[index]
+			if(slotData.name === slotName){
+				slotIndex = index
+			}
+		}
+
+		if (slotIndex){
+			return spine.slotContainers[slotIndex]
 		}
 	}
 
@@ -750,12 +800,16 @@ var teamSelector = function(){
 		ready.anchor.setTo(0.5)
 		readyGroup.ready = ready
 
-		var VS = readyGroup.create(game.world.centerX, game.world.centerY, "atlas.loading", "vs")
+		var spiner = readyGroup.create(game.world.centerX * 1.6, game.world.centerY, "logoAtlas", "spiner")
+		spiner.anchor.setTo(0.5)
+		spiner.scale.setTo(1.2)
+		spiner.alpha = 0
+		readyGroup.spiner = spiner
+
+		var VS = readyGroup.create(spiner.centerX, spiner.centerY, "atlas.loading", "vs")
 		VS.anchor.setTo(0.5)
 		VS.alpha = 0
 		readyGroup.VS = VS
-
-		//createSplashArt()
 	}
 
 	function shake(position, periodA, periodB) {
@@ -776,7 +830,7 @@ var teamSelector = function(){
 		readyGroup.emitter.alpha = 1
 		game.add.tween(readyGroup.pinkLight.scale).from({x: 0}, 100, Phaser.Easing.linear, true).onComplete.add(function(){
 			readyGroup.ready.alpha = 1
-			sound.play("swordSmash")
+			sound.play("shineSpell")
 			game.add.tween(readyGroup.ready.scale).from({x: 0, y:0}, 200, Phaser.Easing.linear, true)
 		})
 
@@ -790,21 +844,25 @@ var teamSelector = function(){
 	function animateSplashArt(){
 
 		var delay = 500
-		var aux = side > 0 ? 0 : 1
-
-		sound.play("winBattle1")
+		var aux = SIDE > 0 ? -1.5 : 1.5
 
 		for(var i = 0; i < splashArtGroup.length; i++){
 
-			splashArtGroup.children[i].alpha = 1
-			var landing = game.add.tween(splashArtGroup.children[i]).from({y: game.world.height * aux}, game.rnd.integerInRange(300, 400), Phaser.Easing.Cubic.Out, true, 400)
+			var splashArt = splashArtGroup.children[i]
+			splashArt.alpha = 1
+			var landing = game.add.tween(splashArt).from({y: game.world.height * aux}, game.rnd.integerInRange(300, 400), Phaser.Easing.Cubic.Out, true, 400)
 		}
 
 		pullGroup.destroy()
 		landing.onComplete.add(function(){
+
+			var spin = game.add.tween(readyGroup.spiner).to({angle: -360}, 2000, Phaser.Easing.linear, false)
+			spin.repeat(-1)
+			
 			game.add.tween(readyGroup.ready).to({alpha:0}, 300, Phaser.Easing.Cubic.Out, true)
 			readyGroup.VS.alpha = 1
-			game.add.tween(readyGroup.VS.scale).from({x: 10, y: 10}, 400, Phaser.Easing.Cubic.Out, true)
+			readyGroup.spiner.alpha = 1
+			game.add.tween(readyGroup.VS.scale).from({x: 10, y: 10}, 400, Phaser.Easing.Cubic.Out, true).chain(spin)
 			game.add.tween(readyGroup.VS).to({x: readyGroup.VS.x + 10}, 500, function (k) {
 				return shake(k, 45, 100)
 			}, true, 500, -1)
@@ -840,7 +898,6 @@ var teamSelector = function(){
 			createOk()
 			animateSelector()
 			createReady()
-
 		},
 		shutdown:function () {
 			sceneGroup.destroy()

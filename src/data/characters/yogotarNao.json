@@ -5,7 +5,7 @@
 			{
 				"id": "normalNao",
 				"attachment": "particle5",
-				"delay":    660,
+				"delay":    700,
 				"multiplier": 1
 			}
 		],

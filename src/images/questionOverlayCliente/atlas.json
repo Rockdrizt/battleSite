@@ -1,0 +1,52 @@
+{"frames": [
+
+{
+	"filename": "questionBox",
+	"frame": {"x":1,"y":351,"w":1260,"h":220},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1260,"h":220},
+	"sourceSize": {"w":1260,"h":220}
+},
+{
+	"filename": "questionBtn",
+	"frame": {"x":1263,"y":243,"w":435,"h":139},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":30,"y":30,"w":435,"h":139},
+	"sourceSize": {"w":465,"h":199}
+},
+{
+	"filename": "questionImage",
+	"frame": {"x":1,"y":1,"w":1124,"h":348},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1124,"h":348},
+	"sourceSize": {"w":1124,"h":348}
+},
+{
+	"filename": "timeGauge",
+	"frame": {"x":1470,"y":1,"w":225,"h":226},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":226},
+	"sourceSize": {"w":225,"h":226}
+},
+{
+	"filename": "yellowCircle",
+	"frame": {"x":1127,"y":1,"w":341,"h":240},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":341,"h":240},
+	"sourceSize": {"w":341,"h":240}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "atlas.png",
+	"format": "RGBA8888",
+	"size": {"w":1699,"h":572},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:beeb62b32a5c4eb5d63d45a3cc36ceb9:9177f4eb0fc6b10eebb7aaadb3ed49f7:cbce6b53f0f49e0bf15173c25c41f876$"
+}
+}
