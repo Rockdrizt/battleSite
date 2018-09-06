@@ -521,12 +521,17 @@ function Server(){
 		var numPerOperations = Math.round(battleTime / 60000) * 3
 		self.numberOperation = numPerOperations
 
+		database.ref('.info/connected').off()
 		database.ref('.info/connected').on('value', function (snap) {
 			if (snap.val() === false) {
-				self.onAlert("Tienes un problema de conexión.\n\n Revisa que tu internet sea estable" +
-					" y dale click en OK para continuar.")
+				var message = "Tratando de recuperar la conexión. Revisa que tu internet sea estable."
+				alertDialog.show({
+					message:message,
+					isButtonDisabled:true,
+					showSpin:true,
+				})
 				serverReady = false
-				database.ref(id_game + "/serverReady").set(false)
+				database.ref(id_game + "/serverReady").set(serverReady)
 				self.setGameReady(false)
 			} else if (snap.val() === true) {
 				var id = id_game || currentId

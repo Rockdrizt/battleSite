@@ -93,46 +93,7 @@ var teamSelector = function(){
 
 		],
 		spines:[
-			{
-				name:"tomiko",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/tomiko/tomikoSelector.json",
-				scales: ["@0.5x"]
-			},
-			{
-				name:"luna",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/luna/lunaSelector.json",
-				scales: ["@0.5x"]
-			},
-			{
-				name:"nao",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/nao/naoSelector.json",
-				scales: ["@0.5x"]
-			},
-			{
-				name:"theffanie",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/theffanie/theffanieSelector.json",
-				scales: ["@0.5x"]
-			},
-			{
-				name:"eagle",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/eagle/eagleSelector.json",
-				scales: ["@0.5x"]
-			},
-			{
-				name:"dinamita",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/dinamita/dinamitaSelector.json",
-				scales: ["@0.5x"]
-			},
-			{
-				name:"arthurius",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/arthurius/arthuriusSelector.json",
-				scales: ["@0.5x"]
-			},
-			{
-				name:"estrella",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/estrella/estrellaSelector.json",
-				scales: ["@0.5x"]
-			},
+			
 			//win
 			{
 				name:"tomikoWin",
@@ -210,6 +171,7 @@ var teamSelector = function(){
 
 	var DEFAULT_NUMTEAM = 1
 	var TEAM_COMPLETE = 3
+	var MAX_YOGOTARS = 8
 
 	var STATES
 	var SIDE
@@ -230,7 +192,52 @@ var teamSelector = function(){
 	var loadingGroup
 	var splashArtGroup
 	var readyGroup
-    var cliente
+	var cliente
+
+	var YOGOTARS_LIST = [
+		{
+			name:"tomiko",
+			file:settings.BASE_PATH + "/spines/yogotars/selector/tomiko/tomikoSelector.json",
+			scales: ["@0.5x"]
+		},
+		{
+			name:"luna",
+			file:settings.BASE_PATH + "/spines/yogotars/selector/luna/lunaSelector.json",
+			scales: ["@0.5x"]
+		},
+		{
+			name:"nao",
+			file:settings.BASE_PATH + "/spines/yogotars/selector/nao/naoSelector.json",
+			scales: ["@0.5x"]
+		},
+		{
+			name:"theffanie",
+			file:settings.BASE_PATH + "/spines/yogotars/selector/theffanie/theffanieSelector.json",
+			scales: ["@0.5x"]
+		},
+		{
+			name:"eagle",
+			file:settings.BASE_PATH + "/spines/yogotars/selector/eagle/eagleSelector.json",
+			scales: ["@0.5x"]
+		},
+		{
+			name:"dinamita",
+			file:settings.BASE_PATH + "/spines/yogotars/selector/dinamita/dinamitaSelector.json",
+			scales: ["@0.5x"]
+		},
+		{
+			name:"arthurius",
+			file:settings.BASE_PATH + "/spines/yogotars/selector/arthurius/arthuriusSelector.json",
+			scales: ["@0.5x"]
+		},
+		{
+			name:"estrella",
+			file:settings.BASE_PATH + "/spines/yogotars/selector/estrella/estrellaSelector.json",
+			scales: ["@0.5x"]
+		},
+	]
+	
+	assets.spines = assets.spines.concat(YOGOTARS_LIST)
 
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -288,17 +295,17 @@ var teamSelector = function(){
 		platformGroup = game.add.group()
 		sceneGroup.add(platformGroup)
 
-		var pivotX = SIDE < 0 ? 0.3 : 1.2
+		var pivotX = 0.5
 
 		for(var i = 0; i < 3; i++){
 
-			var plat = platformGroup.create(game.world.centerX * pivotX, game.world.centerY + 50, "atlas.yogoSelector", "plat" + STATES.color)
+			var plat = platformGroup.create(game.world.centerX * pivotX, game.world.centerY + 30, "atlas.yogoSelector", "plat" + STATES.color)
 			plat.anchor.setTo(0.5)
 
-			pivotX += 0.25
+			pivotX += 0.5
 		}
 
-		platformGroup.children[1].y += 100
+		platformGroup.children[1].y += 50
 	}
 
 	function createTeam(){
@@ -316,12 +323,13 @@ var teamSelector = function(){
 
 		for(var i = 0; i < 3; i++){
 
-			var data = {x:game.world.centerX * pivotX, y: game.world.centerY + 50, yogo:null, check: false}
+			var plat = platformGroup.children[i]
+			var data = {x:plat.x, y: plat.y, yogo:null, check: false}
 			teamGroup.slots.push(data)
 
 			pivotX += 0.25
 		}
-		teamGroup.slots[1].y += 100
+		//teamGroup.slots[1].y += 100
 	}
 
 	function createPullGroup(){
@@ -329,12 +337,12 @@ var teamSelector = function(){
 		pullGroup = game.add.group()
 		sceneGroup.add(pullGroup)
 
-		for(var i = 0; i < assets.spines.length; i++){
+		for(var i = 0; i < YOGOTARS_LIST.length; i++){
 
-			var player = spineLoader.createSpine(assets.spines[i].name, assets.spines[i].name + "1", "wait", 0, 0, true)//characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait")
+			var player = spineLoader.createSpine(YOGOTARS_LIST[i].name, YOGOTARS_LIST[i].name + "1", "wait", 0, 0, true)//characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait")
 			player.x = 0
 			player.y = -100
-			player.name = assets.spines[i].name
+			player.name = YOGOTARS_LIST[i].name
 			player.tag = i
 			player.used = false
 			player.setAlive(false)
@@ -367,16 +375,20 @@ var teamSelector = function(){
 		buttonsGroup = game.add.group()
 		sceneGroup.add(buttonsGroup)
 
-		var pivotX = SIDE < 0 ? game.world.centerX * 1.45 : game.world.centerX * 0.25
-		var pivotY = 320
+		// var pivotX = SIDE < 0 ? game.world.centerX * 1.45 : game.world.centerX * 0.25
+		// var pivotY = 320
+		var pivotX = 0.35
+		var pivotY = 270
 		var aux = 0
 		var scale = SIDE
 
 		for(var i = 0; i < 8; i++){
 
 			var subGroup = game.add.group()
-			subGroup.x = pivotX
-			subGroup.y = pivotY
+			// subGroup.x = pivotX
+			// subGroup.y = pivotY
+			subGroup.x = game.world.centerX * pivotX
+			subGroup.y = game.world.height - pivotY
 			subGroup.color = STATES.yellow
 			buttonsGroup.add(subGroup)
 
@@ -395,22 +407,36 @@ var teamSelector = function(){
 
 			var yogotar = subGroup.create(0, -40, "atlas.yogoSelector", "yogo" + i)
 			yogotar.anchor.setTo(0.5)
-			yogotar.scale.setTo(scale, 1)
+			//yogotar.scale.setTo(scale, 1)
 			yogotar.rescale = scale
 			yogotar.alpha = 0
 			subGroup.yogotar = yogotar
 
-			pivotX += 210
+			// pivotX += 210
 
-			if(i % 2){
-				pivotY += 180
-				if(SIDE > 0)
-					pivotX = aux % 2 ? game.world.centerX * 0.25 : game.world.centerX * 0.4
-				else
-					pivotX = aux % 2 ? game.world.centerX * 1.45 : game.world.centerX * 1.3
-				aux++
-				scale *= -1
+			// if(i % 2){
+			// 	pivotY += 180
+			// 	if(SIDE > 0)
+			// 		pivotX = aux % 2 ? game.world.centerX * 0.25 : game.world.centerX * 0.4
+			// 	else
+			// 		pivotX = aux % 2 ? game.world.centerX * 1.45 : game.world.centerX * 1.3
+			// 	aux++
+			// 	scale *= -1
+			// }
+
+			if(i < 4)
+				aux == 1 ? pivotX += 0.7 : pivotX += 0.3
+			else
+				aux == 1 ? pivotX += 0.4 : pivotX += 0.3
+
+			aux++
+
+			if(i === 3){
+				pivotY = 130
+				pivotX = 0.5
+				aux = 0
 			}
+
 		}
 
 		buttonsGroup.children[0].yogotar.x -= 30 * SIDE
@@ -573,8 +599,9 @@ var teamSelector = function(){
 	function createOk(){
 
 		okButton = game.add.group()
-		okButton.x = game.world.centerX + 100 * -SIDE
-		okButton.y = game.world.centerY + 120
+		okButton.x = game.world.centerX
+		okButton.y = game.world.height - 290
+		okButton.scale.setTo(0.9)
 		okButton.alpha = 0
 		okButton.canClick = false
 		sceneGroup.add(okButton)
@@ -754,25 +781,30 @@ var teamSelector = function(){
 		var aux = SIDE
 		var pivotS = 1
 		var offsetY = SIDE > 0 ? 100 : 110
+		var delay = 0
+
+		//teamGroup.auxArray = [1,1,1] 
 		
 		for(var i = 0; i < teamGroup.auxArray.length; i++){
 
 			var lava = game.add.game.add.spine(game.world.centerX * pivotX, game.world.centerY - 50 * aux, "lava")
 			lava.setSkinByName("normal")
 			lava.scale.setTo(1, aux)
-			lava.alpha = 0
+			//lava.alpha = 0
 			splashArtGroup.add(lava)
 
-			var splash = game.add.sprite(0, offsetY, "atlas.loading", assets.spines[teamGroup.auxArray[i]].name)
+			var splash = game.add.sprite(0, offsetY, "atlas.loading", YOGOTARS_LIST[teamGroup.auxArray[i]].name)
 			splash.anchor.setTo(0.5)
 			splash.scale.setTo(1, aux)
 
 			var slot = getSpineSlot(lava, "yogo")
 			slot.add(splash)
 
-			game.time.events.add(game.rnd.integerInRange(0, 10) * 100, function(lava){
+			game.time.events.add(delay, function(lava){
 				lava.setAnimationByName(0, "idle", true)
 			},null, lava)
+
+			delay += 300
 
 			// var container = game.add.sprite(0, 100 * aux, "atlas.loading", "container" + aux)
 			// var splash = game.add.sprite(0, offsetY, "atlas.loading", assets.spines[teamGroup.auxArray[i]].name)

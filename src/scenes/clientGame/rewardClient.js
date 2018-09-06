@@ -37,11 +37,7 @@ var rewardClient = function(){
                 json: imagePath + "atlas.json",
                 image: imagePath + "atlas.png",
             },
-            {
-				name: "atlas.yogoSelector",
-				json: settings.BASE_PATH + "images/teamSelector/atlas.json",
-				image: settings.BASE_PATH + "images/teamSelector/atlas.png",
-			},
+
         ],
         images: [
             {
