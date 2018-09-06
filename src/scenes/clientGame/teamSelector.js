@@ -169,7 +169,7 @@ var teamSelector = function(){
 		},
 	}
 
-	var DEFAULT_NUMTEAM = 2
+	var DEFAULT_NUMTEAM = 1
 	var TEAM_COMPLETE = 3
 	var MAX_YOGOTARS = 8
 
@@ -295,17 +295,17 @@ var teamSelector = function(){
 		platformGroup = game.add.group()
 		sceneGroup.add(platformGroup)
 
-		var pivotX = 1//SIDE < 0 ? 0.3 : 1.2
+		var pivotX = 0.5
 
 		for(var i = 0; i < 3; i++){
 
-			var plat = platformGroup.create(game.world.centerX, game.world.centerY + 50, "atlas.yogoSelector", "plat" + STATES.color)
+			var plat = platformGroup.create(game.world.centerX * pivotX, game.world.centerY + 30, "atlas.yogoSelector", "plat" + STATES.color)
 			plat.anchor.setTo(0.5)
 
-			pivotX += 0.25
+			pivotX += 0.5
 		}
 
-		platformGroup.children[1].y += 100
+		platformGroup.children[1].y += 50
 	}
 
 	function createTeam(){
@@ -323,13 +323,13 @@ var teamSelector = function(){
 
 		for(var i = 0; i < 3; i++){
 
-			//var plat = platformGroup.children[]
-			var data = {x:game.world.centerX * pivotX, y: game.world.centerY + 50, yogo:null, check: false}
+			var plat = platformGroup.children[i]
+			var data = {x:plat.x, y: plat.y, yogo:null, check: false}
 			teamGroup.slots.push(data)
 
 			pivotX += 0.25
 		}
-		teamGroup.slots[1].y += 100
+		//teamGroup.slots[1].y += 100
 	}
 
 	function createPullGroup(){
@@ -781,8 +781,9 @@ var teamSelector = function(){
 		var aux = SIDE
 		var pivotS = 1
 		var offsetY = SIDE > 0 ? 100 : 110
+		var delay = 0
 
-		teamGroup.auxArray = [1,1,1] 
+		//teamGroup.auxArray = [1,1,1] 
 		
 		for(var i = 0; i < teamGroup.auxArray.length; i++){
 
@@ -792,16 +793,18 @@ var teamSelector = function(){
 			//lava.alpha = 0
 			splashArtGroup.add(lava)
 
-			var splash = game.add.sprite(0, offsetY, "atlas.loading", assets.spines[teamGroup.auxArray[i]].name)
+			var splash = game.add.sprite(0, offsetY, "atlas.loading", YOGOTARS_LIST[teamGroup.auxArray[i]].name)
 			splash.anchor.setTo(0.5)
 			splash.scale.setTo(1, aux)
 
 			var slot = getSpineSlot(lava, "yogo")
 			slot.add(splash)
 
-			game.time.events.add(game.rnd.integerInRange(0, 10) * 100, function(lava){
+			game.time.events.add(delay, function(lava){
 				lava.setAnimationByName(0, "idle", true)
 			},null, lava)
+
+			delay += 300
 
 			// var container = game.add.sprite(0, 100 * aux, "atlas.loading", "container" + aux)
 			// var splash = game.add.sprite(0, offsetY, "atlas.loading", assets.spines[teamGroup.auxArray[i]].name)
@@ -971,7 +974,6 @@ var teamSelector = function(){
 			createOk()
 			animateSelector()
 			createReady()
-			createSplashArt()
 		},
 		shutdown:function () {
 			sceneGroup.destroy()
