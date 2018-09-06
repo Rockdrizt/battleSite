@@ -41,7 +41,10 @@ function startGame(){
 	}
 
 	function checkPlayers() {
-		if((server.t1Ready)&&(server.t2Ready)){
+		var t1Ready = server.currentData.t1.ready
+		var t2Ready = server.currentData.t2.ready
+
+    	if((t1Ready)&&(t2Ready)){
 			alertDialog.hide()
 			server.setGameReady(true)
 
@@ -49,9 +52,9 @@ function startGame(){
 				onReadyCallback()
 				onReadyCallback = null
 			}
-		}else if(server.t1Ready){
+		}else if(t1Ready){
 			showAlert("Esperando a equipo 2 en conectarse")
-		}else if(server.t2Ready){
+		}else if(t2Ready){
 			showAlert("Esperando a equipo 1 en conectarse")
 		}else{
 			showAlert("Esperando a equipos en conectarse")

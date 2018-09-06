@@ -29,14 +29,14 @@ var alertDialog = function () {
 		],
 	}
 
-	function hideAlert() {
+	function hideAlert(callback) {
 		game.paused = false
 
-		var dissapearTween = game.add.tween(alertGroup).to({alpha:0}, 300, Phaser.Easing.Cubic.Out, true)
+		var dissapearTween = game.add.tween(alertGroup).to({alpha:0}, 200, Phaser.Easing.Cubic.Out, true)
 		dissapearTween.onComplete.add(function () {
-			alertGroup.dialog.text = ""
-			alertGroup.input.setText("")
-			alertGroup.input.alpha = 0
+			var value = alertGroup.input.value
+			if(typeof callback === "function")
+				callback(value)
 		})
 	}
 
@@ -49,18 +49,13 @@ var alertDialog = function () {
 		var button = btn.parent
 		var okOn = button.okOn
 		var okOff = button.okOff
-		var value = alertGroup.input.value
 
 		okOn.alpha = 1
 		okOff.alpha = 0
 		sound.play("pop")
-		console.log(value)
 		btn.inputEnabled = false
 
-		if(okButton.callback)
-			okButton.callback(value)
-
-		hideAlert()
+		hideAlert(button.callback)
 	}
 	
 	function createButton() {
@@ -102,6 +97,9 @@ var alertDialog = function () {
 
 		if(showInput)
 			alertGroup.input.alpha = 1
+		else
+			alertGroup.input.alpha = 0
+
 		alertGroup.dialog.text = message
 
 		if(isButtonDisabled)

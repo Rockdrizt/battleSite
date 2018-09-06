@@ -23,14 +23,20 @@ function startGame(){
 	}
 
 	function connectToServer(value){
-		cliente.start(value, showAlert)
+		cliente.start(value, showAlert, onWaitingPlayers)
 		cliente.startGame = function () {
+			alertDialog.hide()
 			sceneloader.show("teamSelector")
 		}
 	}
 
 	function showAlert(message, showInput, disableButton){
-		alertDialog.show({message:message, callback:connectToServer, showInput:showInput, isButtonDisabled:disableButton})
+		alertDialog.show({
+			message:message,
+			callback:connectToServer,
+			showInput:showInput,
+			isButtonDisabled:disableButton
+		})
 	}
 
 	function onCompleteSceneLoading(){
