@@ -30,10 +30,10 @@ function startGame(){
 		}
 	}
 
-	function showAlert(message, showInput, disableButton){
+	function showAlert(message, showInput, disableButton, callback){
 		alertDialog.show({
 			message:message,
-			callback:connectToServer,
+			callback:callback || connectToServer,
 			showInput:showInput,
 			isButtonDisabled:disableButton
 		})
