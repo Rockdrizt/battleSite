@@ -133,7 +133,7 @@ var questionHUD = function(){
 		if(client){
 			questionGroup.bringToTop(black)
 			black.alpha = 0
-			createTeamName(questionGroup, 1)
+			createTeamName(questionGroup)
 			createChrono(questionGroup)
 			createWaiting(questionGroup)
 			questionGroup.client = true
@@ -142,17 +142,17 @@ var questionHUD = function(){
 		return questionGroup
 	}
 
-	function createTeamName(hud, teamIndex){
+	function createTeamName(hud){
 
-		var NAME = teamIndex == 1 ? "Equipo Alpha" : "Equipo Bravo"
 		var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 
 		var board = hud.boxes[0]
-		var teamName = new Phaser.Text(hud.game, board.x, board.y - board.height - 30, NAME, fontStyle)
+		var teamName = new Phaser.Text(hud.game, board.x, board.y - board.height - 30, "", fontStyle)
 		teamName.anchor.setTo(1, 0.5)
 		teamName.stroke = "#000066"
 		teamName.strokeThickness = 10
 		hud.add(teamName)
+		hud.teamName = teamName
 	}
 
 	function createChrono(hud){

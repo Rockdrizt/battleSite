@@ -18,32 +18,34 @@
     <div class="container container--difficulty">
       <section class="item item--difficulty">
         <div class="difficulty__container">
-          <h2 class="header--difficulty">
-            <span class="header__btn header__btn--left">
+          <header class="header--difficulty" id="easy">
+            <span class="header__btn header__btn--left" id="btn-left">
               <img src="./img/mathtournament-onboarding-left-btn.png" alt="">
             </span>
-            Easy
-            <span class="header__btn header__btn--right">
-              <img src="./img/mathtournament-onboarding-right-btn.png" alt="">
+            <h2>Easy</h2>
+            <span class="header__btn header__btn--right" id="btn-right">
+              <img src="./img/mathtournament-onboarding-left-btn.png" alt="">
             </span>
-          </h2>
-          <div class="difficulty__row">
-            <section class="difficulty__column difficulty__column--left">
-              <div class="difficulty__item addition">
-                <img src="./img/mathtournament-onboarding-add-btn.png" alt="">
-              </div>
-              <div class="difficulty__item multiplication">
-                <img src="./img/mathtournament-onboarding-multi-btn.png" alt="">
-              </div>
-            </section>
-            <section class="difficulty__column difficulty__column--right">
-              <div class="difficulty__item substraction">
-                <img src="./img/mathtournament-onboarding-sub-btn.png" alt="">
-              </div>
-              <div class="difficulty__item division">
-                <img src="./img/mathtournament-onboarding-division-btn.png" alt="">
-              </div>
-            </section>
+          </header>
+          <div class="difficulty">
+            <ul class="difficulty__list">
+              <li class="difficulty__item">
+                <p>Addition</p>
+                <button class="difficulty__btn"><img src="" alt=""></button>
+              </li>
+              <li class="difficulty__item">
+                <p>Substraction</p>
+                <button class="difficulty__btn"><img src="" alt=""></button>
+              </li>
+              <li class="difficulty__item">
+                <p>Multiplication</p>
+                <button class="difficulty__btn"><img src="" alt=""></button>
+              </li>
+              <li class="difficulty__item">
+                <p>Division</p>
+                <button class="difficulty__btn"><img src="" alt=""></button>
+              </li>
+            </ul>
           </div>
         </div>
         <div class="item__buttons">
@@ -58,14 +60,21 @@
       <div class="borde">
         <div class="modal__container">
           <span class="close">
-            <img src="" alt="">
+            <img src="./img/close_button.png" alt="">
           </span>
           <header>
             <h2>Addition</h2>
             <p>Select the Math Operation you want your student to solve</p>
           </header>
-          <form action="">
+          <form action="" name="formAdd">
             <ul class="modal__list">
+              <li>
+                <label for="select-all-additon">
+                  <input type="checkbox" class="select-all" name="select-all-additon" id="select-all-additon">
+                  <span></span>
+                  Select all
+                </label>
+              </li>
               <li>
                 <label for="add-option0">
                   <input type="checkbox" name="add-option0" id="add-option0">
@@ -150,14 +159,21 @@
       <div class="borde">
         <div class="modal__container">
           <span class="close">
-            <img src="" alt="">
+            <img src="./img/close_button.png" alt="">
           </span>
           <header>
             <h2>Substraction</h2>
             <p>Select the Math Operation you want your student to solve</p>
           </header>
-          <form action="">
+          <form action="" name="formSub">
             <ul class="modal__list">
+              <li>
+                <label for="select-all-substraction">
+                  <input type="checkbox" class="select-all" name="select-all-substraction" id="select-all-substraction">
+                  <span></span>
+                  Select all
+                </label>
+              </li>
               <li>
                 <label for="sub-option0">
                   <input type="checkbox" name="sub-option0" id="sub-option0">
@@ -242,14 +258,21 @@
       <div class="borde">
         <div class="modal__container">
           <span class="close">
-            <img src="" alt="">
+            <img src="./img/close_button.png" alt="">
           </span>
           <header>
             <h2>Multiplication</h2>
             <p>Select the Math Operation you want your student to solve</p>
           </header>
-          <form action="">
+          <form action="" name="formMult">
             <ul class="modal__list">
+              <li>
+                <label for="select-all-multiplication">
+                  <input type="checkbox" class="select-all" name="select-all-multiplication" id="select-all-multiplication">
+                  <span></span>
+                  Select all
+                </label>
+              </li>
               <li>
                 <label for="multi-option0">
                   <input type="checkbox" name="multi-option0" id="multi-option0">
@@ -334,14 +357,21 @@
       <div class="borde">
         <div class="modal__container">
           <span class="close">
-            <img src="" alt="">
+            <img src="./img/close_button.png" alt="">
           </span>
           <header>
             <h2>Division</h2>
             <p>Select the Math Operation you want your student to solve</p>
           </header>
-          <form action="">
+          <form action="" name="formDiv">
             <ul class="modal__list">
+              <li>
+                <label for="select-all-division">
+                  <input type="checkbox" class="select-all" name="select-all-division" id="select-all-division">
+                  <span></span>
+                  Select all
+                </label>
+              </li>
               <li>
                 <label for="div-option0">
                   <input type="checkbox" name="div-option0" id="div-option0">
@@ -399,15 +429,15 @@
                 </label>
               </li>
               <li>
-                <label for="multi-option8">
-                  <input type="checkbox" name="multi-option8" id="multi-option8">
+                <label for="div-option8">
+                  <input type="checkbox" name="div-option8" id="div-option8">
                   <span></span>
                   X/X=? Max. Sum 9
                 </label>
               </li>
               <li>
-                <label for="multi-option9">
-                  <input type="checkbox" name="multi-option9" id="multi-option9">
+                <label for="div-option9">
+                  <input type="checkbox" name="div-option9" id="div-option9">
                   <span></span>
                   X/X=? Max. Sum 9
                 </label>
@@ -424,13 +454,56 @@
   </main>
   <script src="./js/main.js"></script>
   <script>
-    var difficultyBtns = document.querySelectorAll('.difficulty__item')
+    var difficultyBtns = document.querySelectorAll('.difficulty__btn')
     var modals = document.querySelectorAll('.modal')
     var closeModal = document.querySelectorAll('.close')
-    // console.log(closeModal);
+    var btnLeft = document.getElementById('btn-left')
+    var btnRight = document.getElementById('btn-right')
+
+    // change difficulty
+    btnLeft.addEventListener('click', function () {
+      switch (btnLeft.parentNode.id) {
+        case 'easy':
+          btnRight.parentNode.children[1].innerText = 'Hard'
+          btnRight.parentNode.id = 'hard'
+          btnRight.parentNode.style.backgroundImage = 'linear-gradient(90deg,  #e8522c, #c52752)'
+          break;
+        case 'medium':
+          btnLeft.parentNode.children[1].innerText = 'Easy'
+          btnLeft.parentNode.id = 'easy'
+          btnLeft.parentNode.style.backgroundImage = 'linear-gradient(90deg, #bbd400, #129264)'
+          break;
+        case 'hard':
+          btnLeft.parentNode.children[1].innerText = 'Medium'
+          btnLeft.parentNode.id = 'medium'
+          btnLeft.parentNode.style.backgroundImage = 'linear-gradient(90deg, #f8c22a, #ec6f32)'
+          break;
+      }
+    })
+    btnRight.addEventListener('click', function () {
+      switch (btnRight.parentNode.id) {
+        case 'easy':
+          btnRight.parentNode.children[1].innerText = 'Medium'
+          btnRight.parentNode.id = 'medium'
+          btnRight.parentNode.style.backgroundImage = 'linear-gradient(90deg, #f8c22a, #ec6f32)'
+          break;
+        case 'medium':
+          btnRight.parentNode.children[1].innerText = 'Hard'
+          btnRight.parentNode.id = 'hard'
+          btnRight.parentNode.style.backgroundImage = 'linear-gradient(90deg, #e8522c, #c52752)'
+          break;
+        case 'hard':
+          btnLeft.parentNode.children[1].innerText = 'Easy'
+          btnLeft.parentNode.id = 'easy'
+          btnLeft.parentNode.style.backgroundImage = 'linear-gradient(90deg, #bbd400, #129264)'
+          break;
+      }
+    })
+
+    // show modal
     difficultyBtns.forEach(function (el) {
       el.addEventListener('click', function () {
-        switch (el.classList[1]) {
+        switch (el.previousElementSibling.innerText.toLowerCase()) {
           case 'addition':
             modals.forEach(function (el) {
               if (el.classList.contains('modal--addition')) {
@@ -459,10 +532,10 @@
               }
             })
             break;
-
         }
       })
     })
+
     closeModal.forEach(function (el) {
       el.addEventListener('click', function () {
         modals.forEach(function (elem) {
@@ -470,6 +543,7 @@
         })
       })
     })
+
   </script>
 </body>
 

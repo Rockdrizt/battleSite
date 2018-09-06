@@ -3,6 +3,15 @@ var alertDialog = function () {
 	var okButton
 	var appearTween
 
+	var DIALOG = {
+		width : 400,
+		height : 300,
+		offsetX : 5,
+		offsetYLong : 40,
+		offsetYShort : -40
+	}
+
+
 	var assets = {
 		images: [
 			{
@@ -20,14 +29,14 @@ var alertDialog = function () {
 		],
 	}
 
-	function hideAlert() {
+	function hideAlert(callback) {
 		game.paused = false
 
-		var dissapearTween = game.add.tween(alertGroup).to({alpha:0}, 300, Phaser.Easing.Cubic.Out, true)
+		var dissapearTween = game.add.tween(alertGroup).to({alpha:0}, 200, Phaser.Easing.Cubic.Out, true)
 		dissapearTween.onComplete.add(function () {
-			alertGroup.dialog.text = ""
-			alertGroup.input.setText("")
-			alertGroup.input.alpha = 0
+			var value = alertGroup.input.value
+			if(typeof callback === "function")
+				callback(value)
 		})
 	}
 
@@ -40,18 +49,13 @@ var alertDialog = function () {
 		var button = btn.parent
 		var okOn = button.okOn
 		var okOff = button.okOff
-		var value = alertGroup.input.value
 
 		okOn.alpha = 1
 		okOff.alpha = 0
 		sound.play("pop")
-		console.log(value)
 		btn.inputEnabled = false
 
-		if(okButton.callback)
-			okButton.callback(value)
-
-		hideAlert()
+		hideAlert(button.callback)
 	}
 	
 	function createButton() {
@@ -93,6 +97,9 @@ var alertDialog = function () {
 
 		if(showInput)
 			alertGroup.input.alpha = 1
+		else
+			alertGroup.input.alpha = 0
+
 		alertGroup.dialog.text = message
 
 		if(isButtonDisabled)
@@ -106,6 +113,11 @@ var alertDialog = function () {
 		}else{
 			alertGroup.pinGroup.alpha = 0
 		}
+
+		if((showInput)||(pin))
+			alertGroup.dialog.setTextBounds(DIALOG.offsetX, DIALOG.offsetYShort, DIALOG.width, DIALOG.height)
+		else
+			alertGroup.dialog.setTextBounds(DIALOG.offsetX, DIALOG.offsetYLong, DIALOG.width, DIALOG.height)
 
 		appearTween = game.add.tween(alertGroup).to({alpha:1}, 200, Phaser.Easing.Cubic.Out, true)
 		appearTween.onComplete.add(function() {
@@ -137,7 +149,10 @@ var alertDialog = function () {
 
 		var fontStyle = {font: "32px VAGRounded", fontWeight: "bold", fill: "#000000", align: "center"}
 		var fontStyle2 = {font: "46px VAGRounded", fontWeight: "bold", fill: "#000000", align: "center"}
-		var dialog = game.add.text(10, -30, "", fontStyle)
+		var dialog = game.add.text(10, -10, "", fontStyle)
+		//dialog.setTextBounds(5, 40, textBox.width, textBox.height)
+		dialog.boundsAlignH = "middle"
+		dialog.boundsAlignV = "top"
 		dialog.anchor.setTo(0.5,0.5)
 		alertGroup.add(dialog)
 		dialog.wordWrapWidth = textBox.width - 100

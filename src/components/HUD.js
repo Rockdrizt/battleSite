@@ -132,8 +132,9 @@ var HUD = function(){
 
         var score = this.children[index].teamScore
         score.points++
-        game.add.tween(score.scale).to({x: 1, y:1}, 400, Phaser.Easing.Cubic.Out, true, 0, 0, true)
-        score.text.setText(score.points)
+        game.add.tween(score.scale).to({x: 1, y:1}, 400, Phaser.Easing.Cubic.Out, true, 1500, 0, true).onStart.add(function(){
+            score.text.setText(score.points)
+        })
 	}
 	
 	return{

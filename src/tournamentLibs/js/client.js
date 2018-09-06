@@ -83,13 +83,14 @@ function Client(){
 	function initialize(idGame, team, val){
 		var t1 = val.t1;
 		var t2 = val.t2;
-		if(!t1){
+		if(!t1.ready){
 			setfb(self.refIdGame.child("t1"), team)//self.refIdGame.child("t1").set(team);
 			self.numTeam = 1;
-		}else if(!t2){
+			self.opponent = 2
+		}else if(!t2.ready){
 			setfb(self.refIdGame.child("t2"), team)//self.refIdGame.child("t2").set(player);
 			self.numTeam = 2;
-			console.log("SET TEAM 2")
+			self.opponent = 1;
 		}else{
 			self.id_game = null;
 			self.refIdGame= null;
@@ -99,6 +100,14 @@ function Client(){
 		}
 		if(((idGame!==null)&&(!self.id_game))||(idGame === "000000")){
 			self.id_game = idGame;
+			self.refIdGame.child("data").on('value', function(snapshot) {
+				var data = snapshot.val();
+				if(data) {
+					self.currentData = data
+					self.fireEvent('showEquation', [data]);
+				}
+			});
+
 			self.refIdGame.child("data").on('value', function(snapshot) {
 				var data = snapshot.val();
 				if(data) {
@@ -121,6 +130,8 @@ function Client(){
 				var gameReady = snapshot.val();
 				if(gameReady && self.startGame){
 					self.startGame()
+				}else{
+					//self.onWait()
 				}
 			});
 
@@ -156,7 +167,7 @@ function Client(){
 
 		}
 
-		database.ref(idGame + "/t" + self.numTeam).onDisconnect().remove()
+		database.ref(idGame + "/t" + self.numTeam + "/ready").onDisconnect().set(false)
 
 		self.time= (new Date()).getTime();
 		self.fireEvent('onClientInit',[]);
@@ -168,11 +179,12 @@ function Client(){
 	 * @summary Starts the client
 	 * @param {type} idGame Code of the game
 	 */
-	this.start =function(idGame, onAlert){
+	this.start =function(idGame, onAlert, onWait){
 		// self.events = {};
 		console.log(self.events)
 		self.refIdGame= database.ref();
 		self.showAlert = onAlert
+		self.onWait = onWait
 
 		if((!idGame) || (idGame === "")){
 			return onAlert("Ingresa un pin valido", true)
@@ -180,20 +192,26 @@ function Client(){
 
 		self.refIdGame.child(idGame).once('value').then(function(snapshot) {
 			var val = snapshot.val()
-			if(val){
+			if((val)&&(val.serverReady)){
 				self.refIdGame = database.ref(idGame)
 				initialize(idGame, self.team, val)
+				database.ref().child(idGame).on('value', function(snapshot) {
+					var val = snapshot.val()
+					if((!val)||(val.serverReady === false)||
+						((self.numTeam)&&(!val["t" + self.numTeam].ready))) {
+						onAlert("Se perdio la comunicación con el servidor.")
+						//database.ref().child(idGame + "/t" + self.numTeam)
+						self.numTeam = null
+					}else if((self.numTeam)&&(val["t" + self.numTeam].ready)&&(!val["t" + self.opponent].ready)){
+						onWait()
+					}
+				})
+				/*if(!val.gameReady)
+					onWait()*/
 			}else{
 				onAlert("La partida no existe", true)
 			}
 		}).catch(onAlert.bind(this, "Ocurrio un error al conectarse. Intenta de nuevo.", true));
-
-		database.ref().child(idGame).on('value', function(snapshot) {
-			var val = snapshot.val()
-			if(!val){
-				onAlert("Se perdio la comunicación con el servidor.", true)
-			}
-		})
 		//Reportando la salida del juego
 		/*window.onbeforeunload = function(){
 			if(self.numTeam!=null)
