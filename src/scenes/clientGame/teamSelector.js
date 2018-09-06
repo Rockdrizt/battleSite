@@ -133,6 +133,48 @@ var teamSelector = function(){
 				file:settings.BASE_PATH + "/spines/yogotars/selector/estrella/estrellaSelector.json",
 				scales: ["@0.5x"]
 			},
+			//win
+			{
+				name:"tomikoWin",
+				file:settings.BASE_PATH + "/spines/yogotars/win/tomiko/tomikoWin.json",
+				scales: ["@0.5x"]
+			},
+			{
+				name:"lunaWin",
+				file:settings.BASE_PATH + "/spines/yogotars/win/luna/lunaWin.json",
+				scales: ["@0.5x"]
+			},
+			{
+				name:"naoWin",
+				file:settings.BASE_PATH + "/spines/yogotars/win/nao/naoWin.json",
+				scales: ["@0.5x"]
+			},
+			{
+				name:"theffanieWin",
+				file:settings.BASE_PATH + "/spines/yogotars/win/theffanie/theffanieWin.json",
+				scales: ["@0.5x"]
+			},
+			{
+				name:"eagleWin",
+				file:settings.BASE_PATH + "/spines/yogotars/win/eagle/eagleWin.json",
+				scales: ["@0.5x"]
+			},
+			{
+				name:"dinamitaWin",
+				file:settings.BASE_PATH + "/spines/yogotars/win/dinamita/dinamitaWin.json",
+				scales: ["@0.5x"]
+			},
+			{
+				name:"arthuriusWin",
+				file:settings.BASE_PATH + "/spines/yogotars/win/arthurius/arthuriusWin.json",
+				scales: ["@0.5x"]
+			},
+			{
+				name:"estrellaWin",
+				file:settings.BASE_PATH + "/spines/yogotars/win/estrella/estrellaWin.json",
+				scales: ["@0.5x"]
+			},
+
 			{
 				name:"lava",
 				file:settings.BASE_PATH + "/spines/yogotars/selector/lava/skeleton.json",
@@ -709,10 +751,10 @@ var teamSelector = function(){
 	function createSplashArt(){
 
 		var pivotX = SIDE > 0 ? 0.3 : 1.7
-		var aux = SIDE > 0 ? 1 : -1
+		var aux = SIDE
 		var pivotS = 1
 		var offsetY = SIDE > 0 ? 100 : 110
-
+		
 		for(var i = 0; i < teamGroup.auxArray.length; i++){
 
 			var lava = game.add.game.add.spine(game.world.centerX * pivotX, game.world.centerY - 50 * aux, "lava")
@@ -777,6 +819,8 @@ var teamSelector = function(){
 
 	function createReady(){
 
+		var offsetX = SIDE > 0 ? 1.6 : 0.4
+
 		splashArtGroup = game.add.group()
 		loadingGroup.add(splashArtGroup)
 
@@ -800,7 +844,7 @@ var teamSelector = function(){
 		ready.anchor.setTo(0.5)
 		readyGroup.ready = ready
 
-		var spiner = readyGroup.create(game.world.centerX * 1.6, game.world.centerY, "logoAtlas", "spiner")
+		var spiner = readyGroup.create(game.world.centerX * offsetX, game.world.centerY, "logoAtlas", "spiner")
 		spiner.anchor.setTo(0.5)
 		spiner.scale.setTo(1.2)
 		spiner.alpha = 0

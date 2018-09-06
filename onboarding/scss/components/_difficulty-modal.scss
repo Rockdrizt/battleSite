@@ -26,25 +26,12 @@
         display: inline-block;
         width: 70px;
         height: 70px;
-        border: 1px solid #fff;
-        border-radius: 10px;
-        background-color: #bb3f4d;
         position: absolute;
         top: -45px;
         right: -40px;
-        transform: rotate(45deg);
-        box-shadow: 5px 5px 0 0 #bb3f4d;
-        &::after {
-          content: 'x';
-          cursor: pointer;
+        cursor: pointer;
+        img {
           width: 100%;
-          height: 100%;
-          position: absolute;
-          top: 22px;
-          left: -3px;
-          font-size: 70px;
-          font-family: 'VAGRounded Thin', sans-serif;
-          transform: rotate(135deg);
         }
       }
       header {
@@ -126,6 +113,29 @@
       }
     }
   }
+  /*SCROLL*/
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10%;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-image: url(../img/mathtournament-onboarding-slider-bar.png);
+    background-size: 20%;
+    background-repeat: repeat-y;
+    background-position: center;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    // border-radius: 50%;
+    background-image: url('../img/scroll_track.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 5%;
+  }
 }
 
 /**************************************
@@ -147,6 +157,7 @@
         li:nth-child(odd) {
           background-color: #e3f1f1;
         }
+        @include first-li;
       }
     }
   }
@@ -157,20 +168,23 @@
  **************************************/
 .modal--substraction {
   .borde {
-    background-image: linear-gradient(135deg, #D26C42, #A33065);
+    background-image: linear-gradient(135deg, #d26c42, #a33065);
     .modal__container {
       header {
         -moz-border-image: url(../img/mathtournament-onboarding-sub-header-line.png)
           1; /* Old firefox */
         -webkit-border-image: url(../img/mathtournament-onboarding-sub-header-line.png)
           1; /* Safari */
-        -o-border-image: url(../img/mathtournament-onboarding-sub-header-line.png) 1; /* Opera */
-        border-image: url(../img/mathtournament-onboarding-sub-header-line.png) 1;
+        -o-border-image: url(../img/mathtournament-onboarding-sub-header-line.png)
+          1; /* Opera */
+        border-image: url(../img/mathtournament-onboarding-sub-header-line.png)
+          1;
       }
       .modal__list {
         li:nth-child(odd) {
-          background-color: #F9EAE1;
+          background-color: #f9eae1;
         }
+        @include first-li;
       }
     }
   }
@@ -181,20 +195,22 @@
  **************************************/
 .modal--multiplication {
   .borde {
-    background-image: linear-gradient(135deg, #D0337C, #8F2D6F);
+    background-image: linear-gradient(135deg, #d0337c, #8f2d6f);
     .modal__container {
       header {
         -moz-border-image: url(../img/mathtournament-onboarding-multi-header.png)
           1; /* Old firefox */
         -webkit-border-image: url(../img/mathtournament-onboarding-multi-header.png)
           1; /* Safari */
-        -o-border-image: url(../img/mathtournament-onboarding-multi-header.png) 1; /* Opera */
+        -o-border-image: url(../img/mathtournament-onboarding-multi-header.png)
+          1; /* Opera */
         border-image: url(../img/mathtournament-onboarding-multi-header.png) 1;
       }
       .modal__list {
         li:nth-child(odd) {
-          background-color: #F8E0EB;
+          background-color: #f8e0eb;
         }
+        @include first-li;
       }
     }
   }
@@ -205,7 +221,7 @@
  **************************************/
 .modal--division {
   .borde {
-    background-image: linear-gradient(135deg, #51428C, #2B204B);
+    background-image: linear-gradient(135deg, #51428c, #2b204b);
     .modal__container {
       header {
         -moz-border-image: url(../img/mathtournament-onboarding-div-header.png)
@@ -217,8 +233,50 @@
       }
       .modal__list {
         li:nth-child(odd) {
-          background-color: #E9E0FC;
+          background-color: #e9e0fc;
         }
+        @include first-li;
+      }
+    }
+  }
+}
+
+/**************************************
+ ********* Modal Division *************
+ **************************************/
+.modal--lobby {
+  .borde {
+    width: 600px;
+    background-color: #fff;
+    position: relative;
+    .modal__container {
+      padding: 10px;
+      position: relative;
+      height: auto;
+      background-image:  url(../img/mathtournament-onboarding-bg-tile.png), linear-gradient(#430C66, #0C022A 40%);
+      .img-container {
+        position: relative;
+        width: 100%;
+        height: 300px;
+        img {
+          width: 45%;
+          position: absolute;
+          top: 60%;
+          transform: translateY(-50%);
+          &:first-child {
+            left: -35px;
+          }
+          &:last-child {
+            width: 50%;
+            right: -60px;
+          }
+        }
+      }
+      h2 {
+        width: 100%;
+        text-align: center;
+        font-size: 60px;
+        margin-bottom: 50px;
       }
     }
   }

@@ -44,7 +44,7 @@
           </div>
           <div class="players__container" id="players-container">
             <span class="loader"></span>
-            <div class="player" id="player">...</div>
+            <div class="player">...</div>
           </div>
         </div>
         <div class="item__buttons">
@@ -74,11 +74,28 @@
         </div>
       </section>
     </div>
+    <section class="modal modal--lobby">
+      <div class="borde">
+        <div class="main modal__container">
+          <span class="close">
+            <img src="./img/close_button.png" alt="">
+          </span>
+          <div class="img-container">
+            <img src="./img/mathtournament-onboarding-eagle-start.png" alt="">
+            <img src="./img/mathtournament-onboarding-luna-start.png" alt="">
+          </div>
+          <h2>¿Estás seguro<br>de iniciar tu torneo?</h2>
+          <button class="modal__btn" type="submit">
+            <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
+          </button>
+        </div>
+      </div>
+    </section>
   </main>
   <script src="./js/DragDropTouch.js"></script>
   <script src="./js/main.js"></script>
   <script>
-
+    // Get battle configuration
     var configBattle = {}
     var paramstr = window.location.search.substr(1);
     var paramArr = paramstr.split('&')
@@ -86,12 +103,8 @@
       var conf = el.split('=')
       configBattle[conf[0]] = conf[1]
     })
-    function hideHitbox(mode) {
-      var hitboxToHide = document.querySelectorAll(mode)
-      hitboxToHide.forEach(function (el) {
-        el.classList.add('hidden')
-      })
-    }
+
+    // Generate players
     var playersContainer = document.getElementById('players-container')
     function generatePlayer(players) {
       var playersName = ['player 1', 'player 2', 'player 3', 'player 4', 'player 5', 'player 6']
@@ -99,13 +112,19 @@
       for (var index = 0; index < players; index++) {
         var templatePlayer = document.createElement('div')
         templatePlayer.classList.add('player')
-        templatePlayer.setAttribute('id', 'player' + (index + 1))
         templatePlayer.setAttribute('draggable', true)
-
         var templateName = document.createTextNode(playersName[index])
         templatePlayer.appendChild(templateName)
         playersContainer.appendChild(templatePlayer)
       }
+    }
+
+    // hide unnevessary elements
+    function hideHitbox(selector) {
+      var hitboxToHide = document.querySelectorAll(selector)
+      hitboxToHide.forEach(function (el) {
+        el.parentNode.removeChild(el)
+      })
     }
 
     if (configBattle.mode === '1vs1') {
@@ -123,7 +142,7 @@
     var container = document.querySelectorAll('.players__container')
     var from, to, element
 
-    function dragstart (e) {
+    function dragstart(e) {
       element = e.target
       from = e.target.parentNode
       e.target.classList.add('drop')

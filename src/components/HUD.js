@@ -83,7 +83,7 @@ var HUD = function(){
     
 		teamName.setText("Equipo Bravo")
 		
-		createTimer(HUDGroup)
+		//createTimer(HUDGroup)
 		HUDGroup.rotateTokens = rotateTokens.bind(HUDGroup)
 		HUDGroup.getLifeBar = getLifeBar.bind(HUDGroup)
 		HUDGroup.setScore = setScore.bind(HUDGroup)
@@ -100,7 +100,6 @@ var HUD = function(){
         
         var text = new Phaser.Text(group.game, 0, -10, "3:00", fontStyle)
         text.anchor.setTo(0.5)
-        text.alpha = 0
         timeToken.addChild(text)
         timeToken.text = text 
 	}
@@ -133,8 +132,9 @@ var HUD = function(){
 
         var score = this.children[index].teamScore
         score.points++
-        game.add.tween(score.scale).to({x: 1, y:1}, 400, Phaser.Easing.Cubic.Out, true, 0, 0, true)
-        score.text.setText(score.points)
+        game.add.tween(score.scale).to({x: 1, y:1}, 400, Phaser.Easing.Cubic.Out, true, 1500, 0, true).onStart.add(function(){
+            score.text.setText(score.points)
+        })
 	}
 	
 	return{

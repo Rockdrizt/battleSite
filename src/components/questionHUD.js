@@ -109,6 +109,7 @@ var questionHUD = function(){
 		questionGroup.question = text
 		questionGroup.image = img
 		questionGroup.options = options
+		questionGroup.options.btnPressed = null
 		questionGroup.options.setAll("inputEnabled", false)
 		questionGroup.boxes.forEach(function(box){
 			box.scale.setTo(0, 1)
@@ -132,7 +133,7 @@ var questionHUD = function(){
 		if(client){
 			questionGroup.bringToTop(black)
 			black.alpha = 0
-			createTeamName(questionGroup, 1)
+			createTeamName(questionGroup)
 			createChrono(questionGroup)
 			createWaiting(questionGroup)
 			questionGroup.client = true
@@ -141,17 +142,17 @@ var questionHUD = function(){
 		return questionGroup
 	}
 
-	function createTeamName(hud, teamIndex){
+	function createTeamName(hud){
 
-		var NAME = teamIndex == 1 ? "Equipo Alpha" : "Equipo Bravo"
 		var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 
 		var board = hud.boxes[0]
-		var teamName = new Phaser.Text(hud.game, board.x, board.y - board.height - 30, NAME, fontStyle)
+		var teamName = new Phaser.Text(hud.game, board.x, board.y - board.height - 30, "", fontStyle)
 		teamName.anchor.setTo(1, 0.5)
 		teamName.stroke = "#000066"
 		teamName.strokeThickness = 10
 		hud.add(teamName)
+		hud.teamName = teamName
 	}
 
 	function createChrono(hud){
@@ -160,6 +161,7 @@ var questionHUD = function(){
 		var box = hud.boxes[1]
 
 		var chronoGroup = game.add.group()
+		chronoGroup.alpha = 0 // no mostrar timer por ahora 
 		chronoGroup.x = box.centerX * 1.5
 		chronoGroup.y = box.centerY * 1.3
 		hud.add(chronoGroup)
@@ -344,6 +346,7 @@ var questionHUD = function(){
 	function inputOption(btn){
 
 		sound.play("shineSpell")
+		this.options.btnPressed = btn
 		this.options.setAll("inputEnabled", false)
 		this.options.remove(btn)
 		this.add(btn)
@@ -357,12 +360,13 @@ var questionHUD = function(){
 		var event = {time : this.timeElapsed, value : btn.value}
 		if(this.callback) this.callback(event) 
 
-		game.time.events.add(3000, this.clearQuestion, null, btn)
+		//game.time.events.add(3000, this.clearQuestion, null, btn)
 	}
 
-	function clearQuestion(btn){
+	function clearQuestion(){
 
 		var self = this
+		var btn = self.options.btnPressed
 		if(self.waiting.spin){
 			self.waiting.spin.stop()
 		}
@@ -382,6 +386,8 @@ var questionHUD = function(){
 				opt.info.alpha = 0
 				opt.info.text = ""
 			}
+
+			self.options.btnPressed = null
 		})
 	}
 

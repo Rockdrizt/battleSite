@@ -97,8 +97,11 @@ var questions = function(){
 
 	function createQuestionOverlay(){
 
+		var NAME = numTeam == 1 ? "Equipo Alpha" : "Equipo Bravo"
+
 		questionGroup = questionHUD.createQuestionOverlay(true)
 		questionGroup.callback = cliente.buttonOnClick
+		questionGroup.teamName.setText(NAME)
 		sceneGroup.add(questionGroup)
 	}
 
@@ -123,6 +126,14 @@ var questions = function(){
 		tile.tint = 0x0099AA
 		tile.angle = 45
 		sceneGroup.add(tile)
+	}
+
+	function checkAnswer(){
+		questionGroup.clearQuestion()
+	}
+
+	function showWinner(){
+
 	}
 
 	return {
