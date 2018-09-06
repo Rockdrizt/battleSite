@@ -41,23 +41,27 @@ function confirmDeleteQuestion(obj){
         var hijos = [];
         var newCount = 0;
         var newCountAnswer = 1;
+        var newCountChoice = 1;
         $('section','.questions__container').each(function(){
             hijos.push($(this).attr("id"));
             var newID = $("#" + hijos[newCount]).attr("id", "question__new_" + [newCount+1] );
             hijos[newCount] = newID.attr("id");
-            $("#" + hijos[newCount]).find(".questions__input").attr("id", "questionText_" + [newCount+1] );
+            $("#" + hijos[newCount]).find(".questions__input").attr("id", "questionText_" + [newCount+1] ).attr("place",newCount+1 );
             $("#" + hijos[newCount]).find(".questions__number").find("span").html(newCount+1);
             $("#" + hijos[newCount]).find(".question__button--delete").attr("index",newCount+1);
+            $("#" + hijos[newCount]).find(".text_limit").attr("id","limitTextQuestion_" + newCount+1);
+        
              $('.answers__item',"#" + hijos[newCount]).each(function(){
                  if(newCountAnswer == 5){newCountAnswer = 1};
                  $(this).find("textarea").attr("id","AnswerText_" +[newCount+1]+"_"+ newCountAnswer)
                  newCountAnswer++;
             });  
-//             $('.star__image--select',"#" + hijos[newCount]).each(function(){
-//                 if(newCountAnswer == 5){newCountAnswer = 1};
-//                 $(this).find("textarea").attr("id","AnswerText_" +[newCount+1]+"_"+ newCountAnswer)
-//                 newCountAnswer++;
-//            });  
+             $('.star__image--select',"#" + hijos[newCount]).each(function(){
+                 if(newCountChoice == 5){newCountChoice = 1};
+                 $(this).attr("id","choiceCorrect_" +[newCount+1]+"_"+ newCountChoice).attr("place",[newCount+1]).attr("num",[newCount+1]).attr("index",newCountChoice).removeAttr('class');
+                 $(this).attr('class', 'star__image--select answer__choice_' +  $(this).attr("num") );
+                 newCountChoice++;
+            });  
             newCount++; 
         });
     }
