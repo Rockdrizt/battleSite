@@ -13,6 +13,11 @@
   <main class="main clearfix">
     <span class="bubbles bubbles-down" id="bubbles"></span>
     <header class="header">
+      <span class="back">
+        <a href="select.html">
+          <img src="./img/mathtournament-onboarding-button-back.png">
+        </a>
+      </span>
       <h1>Difficulty</h1>
     </header>
     <div class="container container--difficulty">
@@ -31,19 +36,27 @@
             <ul class="difficulty__list">
               <li class="difficulty__item">
                 <p>Addition</p>
-                <button class="difficulty__btn"><img src="" alt=""></button>
+                <button class="difficulty__btn">
+                  <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                </button>
               </li>
               <li class="difficulty__item">
                 <p>Substraction</p>
-                <button class="difficulty__btn"><img src="" alt=""></button>
+                <button class="difficulty__btn">
+                  <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                </button>
               </li>
               <li class="difficulty__item">
                 <p>Multiplication</p>
-                <button class="difficulty__btn"><img src="" alt=""></button>
+                <button class="difficulty__btn">
+                  <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                </button>
               </li>
               <li class="difficulty__item">
                 <p>Division</p>
-                <button class="difficulty__btn"><img src="" alt=""></button>
+                <button class="difficulty__btn">
+                  <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                </button>
               </li>
             </ul>
           </div>
@@ -66,7 +79,7 @@
             <h2>Addition</h2>
             <p>Select the Math Operation you want your student to solve</p>
           </header>
-          <form action="" name="formAdd">
+          <form class="modal-form" name="formAdd">
             <ul class="modal__list">
               <li>
                 <label for="select-all-additon">
@@ -165,7 +178,7 @@
             <h2>Substraction</h2>
             <p>Select the Math Operation you want your student to solve</p>
           </header>
-          <form action="" name="formSub">
+          <form class="modal-form" name="formSub">
             <ul class="modal__list">
               <li>
                 <label for="select-all-substraction">
@@ -264,7 +277,7 @@
             <h2>Multiplication</h2>
             <p>Select the Math Operation you want your student to solve</p>
           </header>
-          <form action="" name="formMult">
+          <form class="modal-form" name="formMult">
             <ul class="modal__list">
               <li>
                 <label for="select-all-multiplication">
@@ -363,7 +376,7 @@
             <h2>Division</h2>
             <p>Select the Math Operation you want your student to solve</p>
           </header>
-          <form action="" name="formDiv">
+          <form class="modal-form" name="formDiv">
             <ul class="modal__list">
               <li>
                 <label for="select-all-division">
@@ -455,6 +468,7 @@
   <script src="./js/main.js"></script>
   <script>
     var difficultyBtns = document.querySelectorAll('.difficulty__btn')
+    var modalForms = document.querySelectorAll('.modal-form')
     var modals = document.querySelectorAll('.modal')
     var closeModal = document.querySelectorAll('.close')
     var btnLeft = document.getElementById('btn-left')
@@ -538,6 +552,15 @@
 
     closeModal.forEach(function (el) {
       el.addEventListener('click', function () {
+        modals.forEach(function (elem) {
+          elem.classList.add('hidden')
+        })
+      })
+    })
+
+    modalForms.forEach(function (el) {
+      el.addEventListener('submit', function (e) {
+        e.preventDefault()
         modals.forEach(function (elem) {
           elem.classList.add('hidden')
         })
