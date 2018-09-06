@@ -97,8 +97,11 @@ var questions = function(){
 
 	function createQuestionOverlay(){
 
+		var NAME = numTeam == 1 ? "Equipo Alpha" : "Equipo Bravo"
+
 		questionGroup = questionHUD.createQuestionOverlay(true)
 		questionGroup.callback = cliente.buttonOnClick
+		questionGroup.teamName.setText(NAME)
 		sceneGroup.add(questionGroup)
 	}
 
