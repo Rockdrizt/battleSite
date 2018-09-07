@@ -62,7 +62,7 @@ function startGame(){
 	function init(){
 
 		var fullWidth = 720
-		var fullHeight = 1080
+		var fullHeight = 720
 
 		var ratio = document.body.clientWidth / document.body.clientHeight
 		var gameHeight = Math.round(fullHeight)
