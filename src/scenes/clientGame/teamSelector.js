@@ -782,8 +782,6 @@ var teamSelector = function(){
 		var pivotS = 1
 		var offsetY = SIDE > 0 ? 100 : 110
 		var delay = 0
-
-		//teamGroup.auxArray = [1,1,1] 
 		
 		for(var i = 0; i < teamGroup.auxArray.length; i++){
 
@@ -949,7 +947,7 @@ var teamSelector = function(){
 		bootFiles:bootFiles,
 		assets: assets,
 		name: "teamSelector",
-		update: update,
+		//update: update,
 		preload:preload,
 		create: function(event){
 
