@@ -977,7 +977,7 @@ var teamSelector = function(){
 			cliente.startBattle = function () {
 				sceneloader.show("questions")
 			}
-			//gameSong = sound.play("gameSong", {loop:true, volume:0.6})
+			gameSong = sound.play("gameSong", {loop:true, volume:0.6})
 
 			//createPlatforms()
 			//createTeam()
