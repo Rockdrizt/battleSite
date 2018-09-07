@@ -188,6 +188,7 @@ var teamSelector = function(){
 	var buttonsGroup
 
 	var tile
+	var bmd
 
 	var loadingGroup
 	var splashArtGroup
@@ -265,8 +266,8 @@ var teamSelector = function(){
 
 	function createBackground(){
 
-		var bmd = game.add.bitmapData(game.world.width, game.world.height)
-		var back = bmd.addToWorld()
+		bmd = game.add.bitmapData(game.world.width, game.world.height)
+		bmd.back = bmd.addToWorld()
 
 		var y = 0
 
@@ -278,10 +279,10 @@ var teamSelector = function(){
 			y += 2
 		}
 
-		tile = game.add.tileSprite(game.world.centerX, game.world.centerY, game.world.width + 150, game.world.width + 180, "tile")
-		tile.anchor.setTo(0.5)
+		tile = game.add.tileSprite(0, 0, game.world.width, game.world.height, "tile")
+		//tile.anchor.setTo(0.5)
 		tile.tint = 0x0099AA
-		tile.angle = 45
+		//tile.angle = 45
 	}
 
 	function update(){
@@ -785,7 +786,7 @@ var teamSelector = function(){
 		
 		for(var i = 0; i < teamGroup.auxArray.length; i++){
 
-			var lava = game.add.game.add.spine(game.world.centerX * pivotX, game.world.centerY - 50 * aux, "lava")
+			var lava = game.add.spine(game.world.centerX * pivotX, game.world.centerY - 50 * aux, "lava")
 			lava.setSkinByName("normal")
 			lava.scale.setTo(1, aux)
 			//lava.alpha = 0
@@ -946,20 +947,24 @@ var teamSelector = function(){
 		bootFiles:bootFiles,
 		assets: assets,
 		name: "teamSelector",
-		//update: update,
+		update: update,
 		preload:preload,
+		render:function () {
+			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
+		},
 		create: function(event){
 
 			createBackground()
 
 			sceneGroup = game.add.group()
+			//sceneGroup.add(bmd.back)
+			//sceneGroup.add(tile)
 			loadingGroup = game.add.group()
 
 			initialize()
 			cliente.startBattle = function () {
 				sceneloader.show("questions")
 			}
-
 			gameSong = sound.play("gameSong", {loop:true, volume:0.6})
 
 			createPlatforms()
@@ -974,6 +979,7 @@ var teamSelector = function(){
 		},
 		shutdown:function () {
 			sceneGroup.destroy()
+			bmd.destroy()
 		}
 	}
 }()
