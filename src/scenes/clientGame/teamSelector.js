@@ -979,15 +979,15 @@ var teamSelector = function(){
 			}
 			gameSong = sound.play("gameSong", {loop:true, volume:0.6})
 
-			//createPlatforms()
-			//createTeam()
-			//createPullGroup()
-			//createTeamBar()
-			//createButtons()
-			//createYogoNames()
-			//createOk()
-			//animateSelector()
-			//createReady()
+			createPlatforms()
+			createTeam()
+			createPullGroup()
+			createTeamBar()
+			createButtons()
+			createYogoNames()
+			createOk()
+			animateSelector()
+			createReady()
 		},
 		shutdown:function () {
 			sceneGroup.destroy()
