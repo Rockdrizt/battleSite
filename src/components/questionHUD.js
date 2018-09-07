@@ -136,7 +136,10 @@ var questionHUD = function(){
 			createTeamName(questionGroup)
 			createChrono(questionGroup)
 			createWaiting(questionGroup)
+			createFeedback(questionGroup)
+			createUsedGroup(questionGroup)
 			questionGroup.client = true
+			questionGroup.showFeedback = showFeedback.bind(questionGroup)
 		}
 
 		return questionGroup
@@ -202,6 +205,13 @@ var questionHUD = function(){
 		waitGroup.add(text)
 	}
 
+	function createUsedGroup(hud){
+
+		var usedOptions = game.add.group()
+		hud.add(usedOptions)
+		hud.usedOptions = usedOptions
+	}
+
 	function createButtons(x, y, opt, group){
 
 		var fontStyle = {font: "50px VAGRounded", fill: "#FFFFFF", align: "center", wordWrap: true}
@@ -210,6 +220,12 @@ var questionHUD = function(){
 		btn.anchor.setTo(0.5)
 		btn.alpha = 0
 		btn.correct = false
+
+		var blue = game.add.sprite(-8, -3, "atlas.question", "blueBtn")
+		blue.anchor.setTo(0.5)
+		blue.alpha = 0
+		btn.addChild(blue)
+		btn.blue = blue
 
 		var letter = new Phaser.Text(group.game, -btn.width * 0.30, -5, opt, fontStyle)
 		letter.anchor.setTo(0.5)
@@ -224,6 +240,14 @@ var questionHUD = function(){
 		btn.info = info
 
 		return btn
+	}
+
+	function createFeedback(hud){
+
+		var feedImg = hud.create(game.world.centerX, game.world.centerY - 100, "atlas.question", "correct")
+		feedImg.anchor.setTo(0.5)
+		feedImg.alpha = 0
+		hud.feedBackImg = feedImg
 	}
 
 	function showQuestion(riddle){
@@ -349,7 +373,7 @@ var questionHUD = function(){
 		this.options.btnPressed = btn
 		this.options.setAll("inputEnabled", false)
 		this.options.remove(btn)
-		this.add(btn)
+		this.usedOptions.add(btn)
 
 		this.waiting.spin = game.add.tween(this.waiting.spiner).to({angle: -360}, 2000, Phaser.Easing.linear, true)
 		this.waiting.spin.repeat(-1)
@@ -357,38 +381,84 @@ var questionHUD = function(){
 		game.add.tween(this.waiting).to({alpha:1}, 300, Phaser.Easing.linear, true)
 
 		var event = {time : this.timeElapsed, value : btn.groupPos}
-		if(this.callback) this.callback(event) 
-
-		//game.time.events.add(3000, this.clearQuestion, null, btn)
+		if(this.callback) this.callback(event)
 	}
 
 	function showFeedback(){
 		
-	}
-
-	function clearQuestion(){
-
 		var self = this
-		var btn = self.options.btnPressed
-		if(self.waiting.spin){
-			self.waiting.spin.stop()
+		if(this.waiting.spin){
+			this.waiting.spin.stop()
 		}
 
-		var fadeOut = game.add.tween(self.black).to({alpha:0}, 300, Phaser.Easing.linear, true)
-		game.add.tween(self.waiting).to({alpha:0}, 300, Phaser.Easing.linear, true)
+		var riddle = this.riddle
+		var correctBtn = getCorrectAns(self)
+		var btn = this.options.btnPressed
+		var ans = btn.groupPos == riddle.correctAnswer 
+		var texture = ans ? "correct" : "wrong"
 
+		this.feedBackImg.loadTexture("atlas.question", texture)
+		var apearMsg = game.add.tween(this.feedBackImg).to({alpha:1}, 300, Phaser.Easing.linear, false)
+
+		apearMsg.onComplete.add(function(){
+
+			if(ans){
+				var endTween = game.add.tween(btn.blue).to({alpha:1}, 200, Phaser.Easing.linear, true)
+			}
+			else{
+				game.add.tween(correctBtn.blue).to({alpha:1}, 200, Phaser.Easing.linear, true, 700).onStart.add(function(){
+					self.options.remove(correctBtn)
+					self.usedOptions.addAt(correctBtn, self.usedOptions.length)
+				})
+				var endTween = game.add.tween(btn).to({angle: -30}, 800, Phaser.Easing.Bounce.Out, true, 800)
+			}
+
+			endTween.onComplete.add(function(){
+				game.time.events.add(1000, self.clearQuestion)
+			})
+		})
+
+		game.add.tween(this.waiting).to({alpha:0}, 300, Phaser.Easing.linear, true).chain(apearMsg)
+	}
+
+	function getCorrectAns(hud){
+
+		for(var i = 0 ; i < hud.options.length; i++){
+			var opt = hud.options.children[i]
+			if(opt.value == hud.riddle.correctValue)
+				return opt
+		}
+	}
+
+	function clearQuestion(blueBtn){
+
+		var self = this
+
+		var fadeOut = game.add.tween(self.black).to({alpha:0}, 300, Phaser.Easing.linear, true)
+		
 		fadeOut.onComplete.add(function(){
 
+			game.add.tween(self.feedBackImg).to({alpha:0}, 300, Phaser.Easing.linear, true)
 			game.add.tween(self.image).to({alpha:0}, 300, Phaser.Easing.linear, true)
 			game.add.tween(self.question).to({alpha:0}, 300, Phaser.Easing.linear, true)
-			self.remove(btn)
-			self.options.addChildAt(btn, btn.groupPos)
+
+			var totalUsed = self.usedOptions.length
+
+			for(var i = 0; i < totalUsed; i++){
+				var used = self.usedOptions.children[0]
+				self.usedOptions.remove(used)
+				self.options.add(used)
+			}
+
+			self.options.sort("groupPos", Phaser.Group.SORT_ASCENDING)
 
 			for(var i = 0; i < self.options.length; i++){
 				var opt = self.options.children[i]
 				game.add.tween(opt).to({alpha:0}, 300, Phaser.Easing.linear, true)
 				opt.info.alpha = 0
 				opt.info.text = ""
+				opt.angle = 0
+				opt.blue.alpha = 0
 			}
 
 			self.options.btnPressed = null

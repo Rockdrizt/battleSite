@@ -129,8 +129,7 @@ var questions = function(){
 	}
 
 	function checkAnswer(){
-		//questionGroup.showFeedback()
-		questionGroup.clearQuestion()
+		questionGroup.showFeedback()
 	}
 
 	function showWinner(){
@@ -184,7 +183,11 @@ var questions = function(){
 			// quest.x = game.world.centerX
 			// quest.y = game.world.height - 100
 			// quest.label.text = "questions"
-			// btngroup.add(quest)
+
+			// var quest = createButton(checkAnswer, 0x00ffff)
+			// quest.x = game.world.centerX
+			// quest.y = game.world.height - 150
+			// quest.label.text = "clear"
 
 			if(cliente){
 				cliente.removeEventListener("onTurnEnds", checkAnswer)

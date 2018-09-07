@@ -39,6 +39,9 @@ var riddles = function(){
 
 				var element = subList[i]
 
+				var answers = [element.A, element.B, element.C, element.D]
+				var correctValue = answers[element.answer - 1]
+
 				if(element.imgExist)
 					var imagePath = settings.BASE_PATH + "/images/questionDB/grade" + element.grade + "/" + element.image + ".png"
 				else
@@ -49,15 +52,15 @@ var riddles = function(){
 					existImage : element.imgExist,
 					src: imagePath,
 					image: element.image,
-					answers: [element.A, element.B, element.C, element.D],
+					answers: answers,
 					grade: element.grade,
 					level: element.level,
 					correctAnswer: element.answer - 1,
 					//time:DIFFICULT_RULES[level].time
 					index: i,
+					correctValue: correctValue
 					//correctIndex:
 				}
-
 				gradeList.push(obj)
 			}
 			questions.push(gradeList)

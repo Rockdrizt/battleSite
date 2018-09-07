@@ -930,14 +930,12 @@ var teamSelector = function(){
 
 		pullGroup.destroy()
 		landing.onComplete.add(function(){
-
-			var spin = game.add.tween(readyGroup.spiner).to({angle: -360}, 2000, Phaser.Easing.linear, false)
-			spin.repeat(-1)
 			
 			game.add.tween(readyGroup.ready).to({alpha:0}, 300, Phaser.Easing.Cubic.Out, true)
 			readyGroup.VS.alpha = 1
 			readyGroup.spiner.alpha = 1
-			game.add.tween(readyGroup.VS.scale).from({x: 10, y: 10}, 400, Phaser.Easing.Cubic.Out, true).chain(spin)
+			game.add.tween(readyGroup.VS.scale).from({x: 10, y: 10}, 400, Phaser.Easing.Cubic.Out, true)
+			game.add.tween(readyGroup.spiner).to({angle: -360}, 2000, Phaser.Easing.linear, true).repeat(-1)
 			game.add.tween(readyGroup.VS).to({x: readyGroup.VS.x + 10}, 500, function (k) {
 				return shake(k, 45, 100)
 			}, true, 500, -1)
