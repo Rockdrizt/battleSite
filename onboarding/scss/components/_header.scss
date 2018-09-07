@@ -5,6 +5,19 @@
   position: absolute;
   top: 0;
   left: 0;
+  .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    cursor: pointer;
+    z-index: 1;
+    a {
+      img {
+        height: 100%;
+      }
+    }
+  }
   h1 {
     width: 100%;
     font-size: 50px;

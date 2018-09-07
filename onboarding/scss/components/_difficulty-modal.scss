@@ -5,6 +5,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
+  z-index: 2;
 
   .borde {
     position: absolute;
@@ -242,7 +243,7 @@
 }
 
 /**************************************
- ********* Modal Division *************
+ ********* Modal Lobby ****************
  **************************************/
 .modal--lobby {
   .borde {
@@ -281,6 +282,30 @@
     }
   }
 }
+
+/**************************************
+ ********* Modal Warning **************
+ **************************************/
+ .modal--warning {
+   .borde {
+     background-image: linear-gradient(#C94E42, #B43754);
+     width: 250px;
+     .modal__container {
+       background-color: transparent;
+       text-align: center;
+       padding: 10px;
+       h2 {
+         @include text-border;
+         padding: 10px;
+       }
+       p {
+         font-family: 'VAGRounded Thin', sans-serif;
+         letter-spacing: 1px;
+         line-height: 25px;
+       }
+     }
+   }
+ }
 
 /**************************************
  ********* Media Queries **************

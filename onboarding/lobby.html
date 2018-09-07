@@ -13,6 +13,11 @@
   <main class="main main--lobby clearfix">
     <span class="bubbles bubbles-down" id="bubbles"></span>
     <header class="header">
+      <span class="back">
+        <a href="customize-battle.html">
+          <img src="./img/mathtournament-onboarding-button-back.png">
+        </a>
+      </span>
       <h1>Lobby</h1>
     </header>
     <div class="container">
@@ -48,7 +53,7 @@
           </div>
         </div>
         <div class="item__buttons">
-          <button class="item__btn">
+          <button class="item__btn" id="btn-ok">
             <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
           </button>
         </div>
@@ -74,7 +79,7 @@
         </div>
       </section>
     </div>
-    <section class="modal modal--lobby">
+    <section class="modal modal--lobby hidden" id="modal-ready">
       <div class="borde">
         <div class="main modal__container">
           <span class="close">
@@ -88,6 +93,17 @@
           <button class="modal__btn" type="submit">
             <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
           </button>
+        </div>
+      </div>
+    </section>
+    <section class="modal modal--warning hidden" id="modal-warning">
+      <div class="borde">
+        <div class="modal__container">
+          <span class="close">
+            <img src="./img/close_button.png" alt="">
+          </span>
+          <h2>Warning!</h2>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur voluptatibus quisquam amet saepe.</p>
         </div>
       </div>
     </section>
@@ -119,7 +135,7 @@
       }
     }
 
-    // hide unnevessary elements
+    // hide unnecessary elements
     function hideHitbox(selector) {
       var hitboxToHide = document.querySelectorAll(selector)
       hitboxToHide.forEach(function (el) {
@@ -152,7 +168,6 @@
           el.classList.remove('full')
         }
       })
-
     }
     function dragover(e) {
       e.preventDefault()
@@ -179,6 +194,22 @@
       el.addEventListener('dragenter', dragenter)
       el.addEventListener('drop', drop)
     })
+
+    //show modal
+    var okBtn = document.getElementById('btn-ok')
+    var modalReady = document.getElementById('modal-ready')
+    var modalWarning = document.getElementById('modal-warning')
+    var closeModal = document.querySelectorAll('.close')
+    okBtn.addEventListener('click', function () {
+      modalReady.classList.remove('hidden')
+    })
+    closeModal.forEach(function (el) {
+      el.addEventListener('click', function () {
+        modalReady.classList.add('hidden')
+        modalWarning.classList.add('hidden')
+      })
+    })
+    
   </script>
 </body>
 
