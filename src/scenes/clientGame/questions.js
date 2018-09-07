@@ -85,7 +85,6 @@ var questions = function(){
 
 		cliente = parent.cliente || {}
 		numTeam = cliente.numTeam || DEFAULT_NUMTEAM
-		riddles.initialize()
 		loadSounds()
 	}
 

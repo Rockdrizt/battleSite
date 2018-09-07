@@ -454,11 +454,12 @@ var questionHUD = function(){
 
 			for(var i = 0; i < self.options.length; i++){
 				var opt = self.options.children[i]
-				game.add.tween(opt).to({alpha:0}, 300, Phaser.Easing.linear, true)
-				opt.info.alpha = 0
-				opt.info.text = ""
-				opt.angle = 0
-				opt.blue.alpha = 0
+				game.add.tween(opt).to({alpha:0}, 300, Phaser.Easing.linear, true).onComplete.add(function(opt){
+					opt.info.alpha = 0
+					opt.info.text = ""
+					opt.angle = 0
+					opt.blue.alpha = 0
+				},this, opt)
 			}
 
 			self.options.btnPressed = null
