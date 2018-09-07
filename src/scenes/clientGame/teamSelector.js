@@ -973,11 +973,10 @@ var teamSelector = function(){
 			//sceneGroup.add(tile)
 			loadingGroup = game.add.group()
 
-			/*initialize()
+			initialize()
 			cliente.startBattle = function () {
 				sceneloader.show("questions")
 			}
-			*/
 			//gameSong = sound.play("gameSong", {loop:true, volume:0.6})
 
 			//createPlatforms()
