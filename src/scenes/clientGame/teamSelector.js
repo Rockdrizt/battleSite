@@ -265,7 +265,7 @@ var teamSelector = function(){
 
 	function createBackground(){
 
-		var bmd = game.add.bitmapData(game.world.width, game.world.height)
+		/*var bmd = game.add.bitmapData(game.world.width, game.world.height)
 		var back = bmd.addToWorld()
 
 		var y = 0
@@ -276,17 +276,18 @@ var teamSelector = function(){
 
 			bmd.rect(0, y, bmd.width, y + 1, Phaser.Color.getWebRGB(color))
 			y += 2
-		}
+		}*/
 
 		tile = game.add.tileSprite(game.world.centerX, game.world.centerY, game.world.width + 150, game.world.width + 180, "tile")
 		tile.anchor.setTo(0.5)
 		tile.tint = 0x0099AA
 		tile.angle = 45
+		sceneGroup.add(tile)
 	}
 
 	function update(){
-		//tile.tilePosition.y -= 0.4
-		//tile.tilePosition.x -= 0.4
+		tile.tilePosition.y -= 0.4
+		tile.tilePosition.x -= 0.4
 		//epicparticles.update()
 	}
 
@@ -956,10 +957,9 @@ var teamSelector = function(){
 		},
 		create: function(event){
 
-			createBackground()
-
 			sceneGroup = game.add.group()
 			loadingGroup = game.add.group()
+			createBackground()
 
 			initialize()
 			cliente.startBattle = function () {
