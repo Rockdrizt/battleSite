@@ -797,7 +797,7 @@ var teamSelector = function(){
 		
 		for(var i = 0; i < teamGroup.auxArray.length; i++){
 
-			var lava = game.add.game.add.spine(game.world.centerX * pivotX, game.world.centerY - 50 * aux, "lava")
+			var lava = game.add.spine(game.world.centerX * pivotX, game.world.centerY - 50 * aux, "lava")
 			lava.setSkinByName("normal")
 			lava.scale.setTo(1, aux)
 			//lava.alpha = 0
@@ -980,15 +980,15 @@ var teamSelector = function(){
 
 			gameSong = sound.play("gameSong", {loop:true, volume:0.6})
 
-			createPlatforms()
-			createTeam()
-			createPullGroup()
-			createTeamBar()
-			createButtons()
-			createYogoNames()
-			createOk()
-			animateSelector()
-			createReady()
+			//createPlatforms()
+			//createTeam()
+			//createPullGroup()
+			//createTeamBar()
+			//createButtons()
+			//createYogoNames()
+			//createOk()
+			//animateSelector()
+			//createReady()
 		},
 		shutdown:function () {
 			sceneGroup.destroy()
