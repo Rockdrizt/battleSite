@@ -32,6 +32,7 @@ var DAMAGE_BY_HIT = 20;
 var HEALTH_BY_HIT = 20;
 var DAMAGE_BY_CRITICAL_HIT = 30;
 
+var questionGrade = 0
 /**
  * @summary As default, an empty array has one element (an empty String). This function removes that element
  * @param {type} arr Array to be cleaned
@@ -310,8 +311,8 @@ function Server(){
 
 	//TODO: generate question is not a server function
 	this.sendQuestion = function () {
-		//var questionData = generateQuestion()
-		var questionData = riddles.getOperation()
+		var questionData = riddles.getQuestion(questionGrade)
+		//var questionData = riddles.getOperation()
 		correctAnswer = questionData.correctAnswer
 
 		valores.possibleAnswers = questionData.answers

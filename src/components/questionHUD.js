@@ -351,16 +351,19 @@ var questionHUD = function(){
 		this.options.remove(btn)
 		this.add(btn)
 
-		this.waiting.spin = game.add.tween(this.waiting.spiner).to({angle: -360}, 2000, Phaser.Easing.linear, false)
+		this.waiting.spin = game.add.tween(this.waiting.spiner).to({angle: -360}, 2000, Phaser.Easing.linear, true)
 		this.waiting.spin.repeat(-1)
-		
 		game.add.tween(this.black).to({alpha:0.5}, 300, Phaser.Easing.linear, true)
-		game.add.tween(this.waiting).to({alpha:1}, 300, Phaser.Easing.linear, true).chain(this.waiting.spin)
+		game.add.tween(this.waiting).to({alpha:1}, 300, Phaser.Easing.linear, true)
 
-		var event = {time : this.timeElapsed, value : btn.value}
+		var event = {time : this.timeElapsed, value : btn.groupPos}
 		if(this.callback) this.callback(event) 
 
 		//game.time.events.add(3000, this.clearQuestion, null, btn)
+	}
+
+	function showFeedback(){
+		
 	}
 
 	function clearQuestion(){
@@ -376,6 +379,7 @@ var questionHUD = function(){
 
 		fadeOut.onComplete.add(function(){
 
+			game.add.tween(self.image).to({alpha:0}, 300, Phaser.Easing.linear, true)
 			game.add.tween(self.question).to({alpha:0}, 300, Phaser.Easing.linear, true)
 			self.remove(btn)
 			self.options.addChildAt(btn, btn.groupPos)

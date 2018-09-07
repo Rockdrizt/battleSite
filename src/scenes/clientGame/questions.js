@@ -85,7 +85,7 @@ var questions = function(){
 
 		cliente = parent.cliente || {}
 		numTeam = cliente.numTeam || DEFAULT_NUMTEAM
-
+		riddles.initialize()
 		loadSounds()
 	}
 
@@ -129,12 +129,43 @@ var questions = function(){
 	}
 
 	function checkAnswer(){
+		//questionGroup.showFeedback()
 		questionGroup.clearQuestion()
 	}
 
 	function showWinner(){
 
 	}
+
+	function createButton(callback, color) {
+		color = color || 0x000000
+
+		var buttonGroup = game.add.group()
+
+		var rectBg = game.add.graphics()
+		rectBg.beginFill(color)
+		rectBg.lineStyle(5, 0xffffff, 1)
+		rectBg.drawRect(0, 0, 200, 50)
+		rectBg.endFill()
+		buttonGroup.add(rectBg)
+
+		rectBg.inputEnabled = true
+		rectBg.events.onInputDown.add(callback)
+
+		var fontStyle = {font: "24px Arial", fontWeight: "bold", fill: "#ffffff", align: "center"}
+		var text = game.add.text(10, 10, "", fontStyle)
+		buttonGroup.add(text)
+		buttonGroup.label = text
+
+		return buttonGroup
+	}
+
+	function setReadyGo(){
+		var grade = 1
+		var riddle = riddles.getQuestion(grade)
+		questionGroup.showQuestion(riddle)
+	}
+
 
 	return {
 
@@ -148,20 +179,12 @@ var questions = function(){
 			initialize()
 			createBackground()
 			createQuestionOverlay()
-				
-			// var obj = {
-			// 	question: "En un cine había sesenta y cuatro personas y han entrado diecisiete más. ¿Cuántas personas hay ahora en el cine?",
-			// 	existImage : false,
-			// 	src: "../../images/questionDB/default.png",
-			// 	image: "",
-			// 	answers: ["Ochenta y uno", "Setenta y uno", "Cuarenta y siete", "Cincuenta y siete"],
-			// 	grade: 2,
-			// 	level: 5,
-			// 	correctAnswer: 1,
-			// }
 
-			// var riddle = obj
-			// questionGroup.showQuestion(riddle)
+			// var quest = createButton(setReadyGo, 0x00ffff)
+			// quest.x = game.world.centerX
+			// quest.y = game.world.height - 100
+			// quest.label.text = "questions"
+			// btngroup.add(quest)
 
 			if(cliente){
 				cliente.removeEventListener("onTurnEnds", checkAnswer)

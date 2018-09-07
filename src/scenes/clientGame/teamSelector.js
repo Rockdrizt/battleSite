@@ -409,7 +409,7 @@ var teamSelector = function(){
 			var yogotar = subGroup.create(0, -40, "atlas.yogoSelector", "yogo" + i)
 			yogotar.anchor.setTo(0.5)
 			//yogotar.scale.setTo(scale, 1)
-			yogotar.rescale = scale
+			//yogotar.rescale = scale
 			yogotar.alpha = 0
 			subGroup.yogotar = yogotar
 
@@ -440,9 +440,9 @@ var teamSelector = function(){
 
 		}
 
-		buttonsGroup.children[0].yogotar.x -= 30 * SIDE
-		buttonsGroup.children[3].yogotar.x -= 10 * SIDE
-		buttonsGroup.children[7].yogotar.x -= 10 * SIDE
+		buttonsGroup.children[0].yogotar.x -= 30 //* SIDE
+		buttonsGroup.children[3].yogotar.x += 10 //* SIDE
+		buttonsGroup.children[7].yogotar.x += 10 //* SIDE
 
 		var btn = SIDE > 0 ? 0 : 3
 		teamGroup.marker = buttonsGroup.children[btn]
@@ -480,7 +480,7 @@ var teamSelector = function(){
 		game.add.tween(obj.token.scale).to({x: 1.2, y:1.2}, 100, Phaser.Easing.linear, true, 0, 0, true).onComplete.add(function(){
 			obj.token.canClick = true
 		})
-		game.add.tween(obj.yogotar.scale).to({x: obj.yogotar.rescale * 1.2, y:1.2}, 100, Phaser.Easing.linear, true, 0, 0, true)
+		game.add.tween(obj.yogotar.scale).to({x:1.2, y:1.2}, 100, Phaser.Easing.linear, true, 0, 0, true)
 
 		if(obj.light.alpha == 1){
 			obj.light.loadTexture("atlas.yogoSelector", "light" + obj.color)
@@ -698,7 +698,7 @@ var teamSelector = function(){
 		namesGroup = game.add.group()
 		sceneGroup.add(namesGroup)
 
-		var light = namesGroup.create(game.world.centerX + 320 * SIDE, game.world.height - 200, "atlas.yogoSelector", "pinkLight")
+		var light = namesGroup.create(game.world.centerX, game.world.height - 200, "atlas.yogoSelector", "pinkLight")
 		light.anchor.setTo(0.5)
 		light.scale.setTo(0)
 		namesGroup.light = light
@@ -783,8 +783,6 @@ var teamSelector = function(){
 		var pivotS = 1
 		var offsetY = SIDE > 0 ? 100 : 110
 		var delay = 0
-
-		//teamGroup.auxArray = [1,1,1] 
 		
 		for(var i = 0; i < teamGroup.auxArray.length; i++){
 
@@ -863,6 +861,7 @@ var teamSelector = function(){
 		var pinkLight = readyGroup.create(game.world.centerX, game.world.centerY, "atlas.yogoSelector", "pinkLight")
 		pinkLight.alpha = 0
 		pinkLight.anchor.setTo(0.5)
+		pinkLight.scale.setTo(0, 1)
 		readyGroup.pinkLight = pinkLight
 
 		var emitter = epicparticles.newEmitter("horizontalLine")
@@ -905,7 +904,7 @@ var teamSelector = function(){
 		gameSong.stop()
 		readyGroup.pinkLight.alpha = 1
 		readyGroup.emitter.alpha = 1
-		game.add.tween(readyGroup.pinkLight.scale).from({x: 0}, 100, Phaser.Easing.linear, true).onComplete.add(function(){
+		game.add.tween(readyGroup.pinkLight.scale).to({x: 1}, 100, Phaser.Easing.linear, true, 0, 0, true).onComplete.add(function(){
 			readyGroup.ready.alpha = 1
 			sound.play("shineSpell")
 			game.add.tween(readyGroup.ready.scale).from({x: 0, y:0}, 200, Phaser.Easing.linear, true)
@@ -975,8 +974,8 @@ var teamSelector = function(){
 			createPullGroup()
 			createTeamBar()
 			createButtons()
-			createYogoNames()
 			createOk()
+			createYogoNames()
 			animateSelector()
 			createReady()
 		},

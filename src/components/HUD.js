@@ -20,6 +20,7 @@ var HUD = function(){
             HUDGroup.add(teamSide)
             
             var lifeBox = teamSide.create(game.world.centerX * pivotX, 150, "atlas.battle", "lifeContainer" + i)
+            lifeBox.x -= 10 * side
             lifeBox.anchor.setTo(i, 0.5)
 
             var teamName = new Phaser.Text(teamSide.game, lifeBox.x, lifeBox.y - 105, "Equipo Alpha", fontStyle)
