@@ -62,13 +62,13 @@ function startGame(){
 	function init(){
 
 		var fullWidth = 720
-		var fullHeight = 720
+		var fullHeight = 1080
 
 		var ratio = document.body.clientWidth / document.body.clientHeight
 		var gameHeight = Math.round(fullHeight)
 		var gameWidth = Math.round(fullHeight * ratio)
 
-		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
+		game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
 		game.scale.setGameSize(gameWidth, gameHeight)
 
 		game.stage.backgroundColor = "#ffffff"

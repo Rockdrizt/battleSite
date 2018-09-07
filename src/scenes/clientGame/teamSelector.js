@@ -285,8 +285,8 @@ var teamSelector = function(){
 	}
 
 	function update(){
-		tile.tilePosition.y -= 0.4
-		tile.tilePosition.x -= 0.4
+		//tile.tilePosition.y -= 0.4
+		//tile.tilePosition.x -= 0.4
 		//epicparticles.update()
 	}
 
