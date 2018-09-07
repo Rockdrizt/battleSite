@@ -188,6 +188,7 @@ var teamSelector = function(){
 	var buttonsGroup
 
 	var tile
+	var bmd
 
 	var loadingGroup
 	var splashArtGroup
@@ -265,8 +266,8 @@ var teamSelector = function(){
 
 	function createBackground(){
 
-		/*var bmd = game.add.bitmapData(game.world.width, game.world.height)
-		var back = bmd.addToWorld()
+		bmd = game.add.bitmapData(game.world.width, game.world.height)
+		bmd.back = bmd.addToWorld()
 
 		var y = 0
 
@@ -276,13 +277,12 @@ var teamSelector = function(){
 
 			bmd.rect(0, y, bmd.width, y + 1, Phaser.Color.getWebRGB(color))
 			y += 2
-		}*/
+		}
 
 		tile = game.add.tileSprite(game.world.centerX, game.world.centerY, game.world.width + 150, game.world.width + 180, "tile")
 		tile.anchor.setTo(0.5)
 		tile.tint = 0x0099AA
 		tile.angle = 45
-		sceneGroup.add(tile)
 	}
 
 	function update(){
@@ -340,7 +340,16 @@ var teamSelector = function(){
 
 		for(var i = 0; i < YOGOTARS_LIST.length; i++){
 
-			var player = spineLoader.createSpine(YOGOTARS_LIST[i].name, YOGOTARS_LIST[i].name + "1", "wait", 0, 0, true)//characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait")
+			var player = game.add.graphics()//spineLoader.createSpine(YOGOTARS_LIST[i].name, YOGOTARS_LIST[i].name + "1", "wait", 0, 0, true)//characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait")
+			player.beginFill(0xffffff)
+			player.drawRect(0,0, 100, 100)
+			player.endFill()
+			player.setAnimation = function () {
+				
+			}
+			player.setAlive = function () {
+				
+			}
 			player.x = 0
 			player.y = -100
 			player.name = YOGOTARS_LIST[i].name
@@ -957,9 +966,12 @@ var teamSelector = function(){
 		},
 		create: function(event){
 
-			sceneGroup = game.add.group()
-			loadingGroup = game.add.group()
 			createBackground()
+
+			sceneGroup = game.add.group()
+			sceneGroup.add(bmd.back)
+			sceneGroup.add(tile)
+			loadingGroup = game.add.group()
 
 			initialize()
 			cliente.startBattle = function () {
@@ -980,6 +992,7 @@ var teamSelector = function(){
 		},
 		shutdown:function () {
 			sceneGroup.destroy()
+			bmd.destroy()
 		}
 	}
 }()
