@@ -340,16 +340,7 @@ var teamSelector = function(){
 
 		for(var i = 0; i < YOGOTARS_LIST.length; i++){
 
-			var player = game.add.graphics()//spineLoader.createSpine(YOGOTARS_LIST[i].name, YOGOTARS_LIST[i].name + "1", "wait", 0, 0, true)//characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait")
-			player.beginFill(0xffffff)
-			player.drawRect(0,0, 100, 100)
-			player.endFill()
-			player.setAnimation = function () {
-				
-			}
-			player.setAlive = function () {
-				
-			}
+			var player = spineLoader.createSpine(YOGOTARS_LIST[i].name, YOGOTARS_LIST[i].name + "1", "wait", 0, 0, true)//characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait")
 			player.x = 0
 			player.y = -100
 			player.name = YOGOTARS_LIST[i].name
