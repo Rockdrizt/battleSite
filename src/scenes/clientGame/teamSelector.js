@@ -959,26 +959,26 @@ var teamSelector = function(){
 		bootFiles:bootFiles,
 		assets: assets,
 		name: "teamSelector",
-		update: update,
+		//update: update,
 		preload:preload,
 		render:function () {
 			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
 		},
 		create: function(event){
 
-			createBackground()
+			//createBackground()
 
 			sceneGroup = game.add.group()
-			sceneGroup.add(bmd.back)
-			sceneGroup.add(tile)
+			//sceneGroup.add(bmd.back)
+			//sceneGroup.add(tile)
 			loadingGroup = game.add.group()
 
-			initialize()
+			/*initialize()
 			cliente.startBattle = function () {
 				sceneloader.show("questions")
 			}
-
-			gameSong = sound.play("gameSong", {loop:true, volume:0.6})
+			*/
+			//gameSong = sound.play("gameSong", {loop:true, volume:0.6})
 
 			//createPlatforms()
 			//createTeam()
