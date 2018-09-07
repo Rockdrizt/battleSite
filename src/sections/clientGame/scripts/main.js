@@ -23,15 +23,20 @@ function startGame(){
 	}
 
 	function connectToServer(value){
-		cliente.start(value, onWaitingPlayers, onErrorConnection)
+		cliente.start(value, showAlert, onWaitingPlayers)
 		cliente.startGame = function () {
+			alertDialog.hide()
 			sceneloader.show("teamSelector")
 		}
 	}
 
-	function onErrorConnection(message, showInput){
-
-		alertDialog.show({message:message, callback:connectToServer, showInput:showInput})
+	function showAlert(message, showInput, disableButton, callback){
+		alertDialog.show({
+			message:message,
+			callback:callback || connectToServer,
+			showInput:showInput,
+			isButtonDisabled:disableButton
+		})
 	}
 
 	function onCompleteSceneLoading(){
@@ -39,7 +44,7 @@ function startGame(){
 		alertDialog.init()
 		cliente = new Client();
 		connectToServer(cliente.id_game)
-		//sceneloader.show("teamSelector")
+		//sceneloader.show("rewardClient")
 	}
 
 	function preloadScenes(sceneList){
@@ -101,12 +106,22 @@ function startGame(){
 		//server test
 	}
 
+	// var teams = [
+            
+	// 	[{name:"arthuriusWin", skin:"arthurius1"}, {name:"naoWin", skin:"nao1"}, {name:"theffanieWin", skin:"theffanie1"}],
+	// 	[{name:"arthuriusWin", skin:"arthurius2"}, {name:"naoWin", skin:"nao2"}, {name:"theffanieWin", skin:"theffanie2"}],
+		
+	// ];
+	
+	// rewardClient.setTeams(teams)
+
 	function create(){
 
 		bootConfigFiles([
 			alertDialog,
 			teamSelector,
-			questions
+			questions,
+			rewardClient
 		])
 	}
 }

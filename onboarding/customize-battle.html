@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Customize Battle</title>
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+
+<body>
+  <main class="main clearfix">
+    <span class="bubbles bubbles-down" id="bubbles"></span>
+    <header class="header">
+      <span class="back">
+        <a href="difficulty.html">
+          <img src="./img/mathtournament-onboarding-button-back.png">
+        </a>
+      </span>
+      <h1>Customize</h1>
+    </header>
+    <div class="container container--customize">
+      <section class="item">
+        <h2 class="customize__header">
+          Options Menu
+        </h2>
+        <form class="customize__container" id="customize-battle">
+          <div class="customize__row">
+            <div class="customize__col">
+              <p class="option">Minutes</p>
+              <div>
+                <button class="less less-min"><img src="./img/mathtournament-onboarding-prev.btn.png"></button>
+                <input type="number" readonly value="3">
+                <button class="plus plus-min"><img src="./img/mathtournament-onboarding-next-btn.png"></button>
+              </div>
+            </div>
+            <div class="customize__col">
+              <p class="option">Rounds</p>
+              <div>
+                <button class="less less-rounds"><img src="./img/mathtournament-onboarding-prev.btn.png"></button>
+                <input type="number" readonly value="5">
+                <button class="plus plus-rounds"><img src="./img/mathtournament-onboarding-next-btn.png"></button>
+              </div>
+            </div>
+            <div class="customize__col">
+              <p class="option">Battle Mode</p>
+              <div>
+                <button class="less less-battle-mode"><img src="./img/mathtournament-onboarding-prev.btn.png"></button>
+                <input type="text" readonly value="3vs3">
+                <button class="plus plus-battle-mode"><img src="./img/mathtournament-onboarding-next-btn.png"></button>
+              </div>
+            </div>
+          </div>
+          <button class="customize__btn">
+            <img src="./img/mathtournament-onboarding-ok-btn.png">
+          </button>
+        </form>
+      </section>
+    </div>
+  </main>
+  <script src="./js/main.js"></script>
+  <script>
+    var less = document.querySelectorAll('.less')
+    var plus = document.querySelectorAll('.plus')
+    var customizeBattle = document.getElementById('customize-battle')
+    less.forEach(function (el) {
+      el.addEventListener('click', function (ev) {
+        ev.preventDefault()
+        switch (el.classList[1]) {
+          case 'less-min':
+            el.nextElementSibling.value > '1' ? el.nextElementSibling.value-- : el.nextElementSibling.value
+            break;
+          case 'less-rounds':
+            el.nextElementSibling.value > '1' ? el.nextElementSibling.value -= 2 : el.nextElementSibling.value
+            break;
+          case 'less-battle-mode':
+            switch (el.nextElementSibling.value) {
+              case '1vs1':
+                break;
+              case '2vs2':
+                el.nextElementSibling.value = '1vs1'
+                break;
+              case '3vs3':
+                el.nextElementSibling.value = '2vs2'
+                break;
+            }
+            break;
+        }
+      })
+    })
+    plus.forEach(function (el) {
+      el.addEventListener('click', function (ev) {
+        ev.preventDefault()
+        switch (el.classList[1]) {
+          case 'plus-min':
+            el.previousElementSibling.value < '5' ? el.previousElementSibling.value++ : el.previousElementSibling.value
+            break;
+          case 'plus-rounds':
+            el.previousElementSibling.value < '5' ? el.previousElementSibling.value = parseInt(el.previousElementSibling.value) + 2 : el.previousElementSibling.value
+            break;
+          case 'plus-battle-mode':
+            switch (el.previousElementSibling.value) {
+              case '3vs3':
+                break;
+              case '2vs2':
+                el.previousElementSibling.value = '3vs3'
+                break;
+              case '1vs1':
+                el.previousElementSibling.value = '2vs2'
+                break;
+            }
+            break;
+        }
+      })
+    })
+    customizeBattle.addEventListener('submit', function (ev) {
+      ev.preventDefault()
+      var config = {
+        minutes: ev.target[1].value,
+        rounds: ev.target[4].value,
+        battleMode: ev.target[7].value
+      }
+      window.location.href = 'lobby.html' + '?' + 'min=' + config.minutes + '&' + 'rounds=' + config.rounds + '&' + 'mode=' + config.battleMode
+      console.log(ev);
+    })
+  </script>
+</body>
+
+</html>

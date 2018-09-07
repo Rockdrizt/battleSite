@@ -13,51 +13,561 @@
   <main class="main clearfix">
     <span class="bubbles bubbles-down" id="bubbles"></span>
     <header class="header">
+      <span class="back">
+        <a href="select.html">
+          <img src="./img/mathtournament-onboarding-button-back.png">
+        </a>
+      </span>
       <h1>Difficulty</h1>
     </header>
     <div class="container container--difficulty">
       <section class="item item--difficulty">
         <div class="difficulty__container">
-          <h2 class="header--difficulty">
-            <span class="header__btn header__btn--left">
+          <header class="header--difficulty" id="easy">
+            <span class="header__btn header__btn--left" id="btn-left">
               <img src="./img/mathtournament-onboarding-left-btn.png" alt="">
             </span>
-            Easy
-            <span class="header__btn header__btn--right">
-              <img src="./img/mathtournament-onboarding-right-btn.png" alt="">
+            <h2>Easy</h2>
+            <span class="header__btn header__btn--right" id="btn-right">
+              <img src="./img/mathtournament-onboarding-left-btn.png" alt="">
             </span>
-          </h2>
-          <div class="difficulty__row">
-            <section class="difficulty__column difficulty__column--left">
-              <div class="difficulty__item">
-                <img src="./img/mathtournament-onboarding-add-btn.png" alt="">
-              </div>
-              <div class="difficulty__item">
-                <img src="./img/mathtournament-onboarding-multi-btn.png" alt="">
-              </div>
-            </section>
-            <section class="difficulty__column difficulty__column--right">
-              <div class="difficulty__item">
-                <img src="./img/mathtournament-onboarding-sub-btn.png" alt="">
-              </div>
-              <div class="difficulty__item">
-                <img src="./img/mathtournament-onboarding-division-btn.png" alt="">
-              </div>
-            </section>
+          </header>
+          <div class="difficulty">
+            <ul class="difficulty__list">
+              <li class="difficulty__item">
+                <p>Addition</p>
+                <button class="difficulty__btn">
+                  <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                </button>
+              </li>
+              <li class="difficulty__item">
+                <p>Substraction</p>
+                <button class="difficulty__btn">
+                  <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                </button>
+              </li>
+              <li class="difficulty__item">
+                <p>Multiplication</p>
+                <button class="difficulty__btn">
+                  <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                </button>
+              </li>
+              <li class="difficulty__item">
+                <p>Division</p>
+                <button class="difficulty__btn">
+                  <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                </button>
+              </li>
+            </ul>
           </div>
         </div>
         <div class="item__buttons">
-          <div class="item__btn item__btn--back">
-            <span></span>
-          </div>
-          <div class="item__btn item__btn--start">
-            <span></span>
-          </div>
+          <a href="customize-battle.html" class="item__btn">
+            <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
+          </a>
         </div>
       </section>
     </div>
+    <!-- Modal Addition -->
+    <section class="modal modal--addition hidden">
+      <div class="borde">
+        <div class="modal__container">
+          <span class="close">
+            <img src="./img/close_button.png" alt="">
+          </span>
+          <header>
+            <h2>Addition</h2>
+            <p>Select the Math Operation you want your student to solve</p>
+          </header>
+          <form class="modal-form" name="formAdd">
+            <ul class="modal__list">
+              <li>
+                <label for="select-all-additon">
+                  <input type="checkbox" class="select-all" name="select-all-additon" id="select-all-additon">
+                  <span></span>
+                  Select all
+                </label>
+              </li>
+              <li>
+                <label for="add-option0">
+                  <input type="checkbox" name="add-option0" id="add-option0">
+                  <span></span>
+                  X+X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="add-option1">
+                  <input type="checkbox" name="add-option1" id="add-option1">
+                  <span></span>
+                  X+X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="add-option2">
+                  <input type="checkbox" name="add-option2" id="add-option2">
+                  <span></span>
+                  X+X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="add-option3">
+                  <input type="checkbox" name="add-option3" id="add-option3">
+                  <span></span>
+                  X+X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="add-option4">
+                  <input type="checkbox" name="add-option4" id="add-option4">
+                  <span></span>
+                  X+X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="add-option5">
+                  <input type="checkbox" name="add-option5" id="add-option5">
+                  <span></span>
+                  X+X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="add-option6">
+                  <input type="checkbox" name="add-option6" id="add-option6">
+                  <span></span>
+                  X+X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="add-option7">
+                  <input type="checkbox" name="add-option7" id="add-option7">
+                  <span></span>
+                  X+X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="add-option8">
+                  <input type="checkbox" name="add-option8" id="add-option8">
+                  <span></span>
+                  X+X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="add-option9">
+                  <input type="checkbox" name="add-option9" id="add-option9">
+                  <span></span>
+                  X+X=? Max. Sum 9
+                </label>
+              </li>
+            </ul>
+            <button class="modal__btn" type="submit">
+              <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!--/Modal Addition -->
+    <!-- Modal Substraction -->
+    <section class="modal modal--substraction hidden">
+      <div class="borde">
+        <div class="modal__container">
+          <span class="close">
+            <img src="./img/close_button.png" alt="">
+          </span>
+          <header>
+            <h2>Substraction</h2>
+            <p>Select the Math Operation you want your student to solve</p>
+          </header>
+          <form class="modal-form" name="formSub">
+            <ul class="modal__list">
+              <li>
+                <label for="select-all-substraction">
+                  <input type="checkbox" class="select-all" name="select-all-substraction" id="select-all-substraction">
+                  <span></span>
+                  Select all
+                </label>
+              </li>
+              <li>
+                <label for="sub-option0">
+                  <input type="checkbox" name="sub-option0" id="sub-option0">
+                  <span></span>
+                  X-X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="sub-option1">
+                  <input type="checkbox" name="sub-option1" id="sub-option1">
+                  <span></span>
+                  X-X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="sub-option2">
+                  <input type="checkbox" name="sub-option2" id="sub-option2">
+                  <span></span>
+                  X-X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="sub-option3">
+                  <input type="checkbox" name="sub-option3" id="sub-option3">
+                  <span></span>
+                  X-X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="sub-option4">
+                  <input type="checkbox" name="sub-option4" id="sub-option4">
+                  <span></span>
+                  X-X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="sub-option5">
+                  <input type="checkbox" name="sub-option5" id="sub-option5">
+                  <span></span>
+                  X-X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="sub-option6">
+                  <input type="checkbox" name="sub-option6" id="sub-option6">
+                  <span></span>
+                  X-X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="sub-option7">
+                  <input type="checkbox" name="sub-option7" id="sub-option7">
+                  <span></span>
+                  X-X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="sub-option8">
+                  <input type="checkbox" name="sub-option8" id="sub-option8">
+                  <span></span>
+                  X-X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="sub-option9">
+                  <input type="checkbox" name="sub-option9" id="sub-option9">
+                  <span></span>
+                  X-X=? Max. Sum 9
+                </label>
+              </li>
+            </ul>
+            <button class="modal__btn" type="submit">
+              <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!--/Modal Substraction -->
+    <!-- Modal Multiplication -->
+    <section class="modal modal--multiplication hidden">
+      <div class="borde">
+        <div class="modal__container">
+          <span class="close">
+            <img src="./img/close_button.png" alt="">
+          </span>
+          <header>
+            <h2>Multiplication</h2>
+            <p>Select the Math Operation you want your student to solve</p>
+          </header>
+          <form class="modal-form" name="formMult">
+            <ul class="modal__list">
+              <li>
+                <label for="select-all-multiplication">
+                  <input type="checkbox" class="select-all" name="select-all-multiplication" id="select-all-multiplication">
+                  <span></span>
+                  Select all
+                </label>
+              </li>
+              <li>
+                <label for="multi-option0">
+                  <input type="checkbox" name="multi-option0" id="multi-option0">
+                  <span></span>
+                  X*X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="multi-option1">
+                  <input type="checkbox" name="multi-option1" id="multi-option1">
+                  <span></span>
+                  X*X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="multi-option2">
+                  <input type="checkbox" name="multi-option2" id="multi-option2">
+                  <span></span>
+                  X*X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="multi-option3">
+                  <input type="checkbox" name="multi-option3" id="multi-option3">
+                  <span></span>
+                  X*X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="multi-option4">
+                  <input type="checkbox" name="multi-option4" id="multi-option4">
+                  <span></span>
+                  X*X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="multi-option5">
+                  <input type="checkbox" name="multi-option5" id="multi-option5">
+                  <span></span>
+                  X*X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="multi-option6">
+                  <input type="checkbox" name="multi-option6" id="multi-option6">
+                  <span></span>
+                  X*X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="multi-option7">
+                  <input type="checkbox" name="multi-option7" id="multi-option7">
+                  <span></span>
+                  X*X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="multi-option8">
+                  <input type="checkbox" name="multi-option8" id="multi-option8">
+                  <span></span>
+                  X*X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="multi-option9">
+                  <input type="checkbox" name="multi-option9" id="multi-option9">
+                  <span></span>
+                  X*X=? Max. Sum 9
+                </label>
+              </li>
+            </ul>
+            <button class="modal__btn" type="submit">
+              <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!--/Modal Multiplication -->
+    <!-- Modal Division -->
+    <section class="modal modal--division hidden">
+      <div class="borde">
+        <div class="modal__container">
+          <span class="close">
+            <img src="./img/close_button.png" alt="">
+          </span>
+          <header>
+            <h2>Division</h2>
+            <p>Select the Math Operation you want your student to solve</p>
+          </header>
+          <form class="modal-form" name="formDiv">
+            <ul class="modal__list">
+              <li>
+                <label for="select-all-division">
+                  <input type="checkbox" class="select-all" name="select-all-division" id="select-all-division">
+                  <span></span>
+                  Select all
+                </label>
+              </li>
+              <li>
+                <label for="div-option0">
+                  <input type="checkbox" name="div-option0" id="div-option0">
+                  <span></span>
+                  X/X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="div-option1">
+                  <input type="checkbox" name="div-option1" id="div-option1">
+                  <span></span>
+                  X/X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="div-option2">
+                  <input type="checkbox" name="div-option2" id="div-option2">
+                  <span></span>
+                  X/X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="div-option3">
+                  <input type="checkbox" name="div-option3" id="div-option3">
+                  <span></span>
+                  X/X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="div-option4">
+                  <input type="checkbox" name="div-option4" id="div-option4">
+                  <span></span>
+                  X/X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="div-option5">
+                  <input type="checkbox" name="div-option5" id="div-option5">
+                  <span></span>
+                  X/X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="div-option6">
+                  <input type="checkbox" name="div-option6" id="div-option6">
+                  <span></span>
+                  X/X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="div-option7">
+                  <input type="checkbox" name="div-option7" id="div-option7">
+                  <span></span>
+                  X/X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="div-option8">
+                  <input type="checkbox" name="div-option8" id="div-option8">
+                  <span></span>
+                  X/X=? Max. Sum 9
+                </label>
+              </li>
+              <li>
+                <label for="div-option9">
+                  <input type="checkbox" name="div-option9" id="div-option9">
+                  <span></span>
+                  X/X=? Max. Sum 9
+                </label>
+              </li>
+            </ul>
+            <button class="modal__btn" type="submit">
+              <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!--/Modal Division -->
   </main>
   <script src="./js/main.js"></script>
+  <script>
+    var difficultyBtns = document.querySelectorAll('.difficulty__btn')
+    var modalForms = document.querySelectorAll('.modal-form')
+    var modals = document.querySelectorAll('.modal')
+    var closeModal = document.querySelectorAll('.close')
+    var btnLeft = document.getElementById('btn-left')
+    var btnRight = document.getElementById('btn-right')
+
+    // change difficulty
+    btnLeft.addEventListener('click', function () {
+      switch (btnLeft.parentNode.id) {
+        case 'easy':
+          btnRight.parentNode.children[1].innerText = 'Hard'
+          btnRight.parentNode.id = 'hard'
+          btnRight.parentNode.style.backgroundImage = 'linear-gradient(90deg,  #e8522c, #c52752)'
+          break;
+        case 'medium':
+          btnLeft.parentNode.children[1].innerText = 'Easy'
+          btnLeft.parentNode.id = 'easy'
+          btnLeft.parentNode.style.backgroundImage = 'linear-gradient(90deg, #bbd400, #129264)'
+          break;
+        case 'hard':
+          btnLeft.parentNode.children[1].innerText = 'Medium'
+          btnLeft.parentNode.id = 'medium'
+          btnLeft.parentNode.style.backgroundImage = 'linear-gradient(90deg, #f8c22a, #ec6f32)'
+          break;
+      }
+    })
+    btnRight.addEventListener('click', function () {
+      switch (btnRight.parentNode.id) {
+        case 'easy':
+          btnRight.parentNode.children[1].innerText = 'Medium'
+          btnRight.parentNode.id = 'medium'
+          btnRight.parentNode.style.backgroundImage = 'linear-gradient(90deg, #f8c22a, #ec6f32)'
+          break;
+        case 'medium':
+          btnRight.parentNode.children[1].innerText = 'Hard'
+          btnRight.parentNode.id = 'hard'
+          btnRight.parentNode.style.backgroundImage = 'linear-gradient(90deg, #e8522c, #c52752)'
+          break;
+        case 'hard':
+          btnLeft.parentNode.children[1].innerText = 'Easy'
+          btnLeft.parentNode.id = 'easy'
+          btnLeft.parentNode.style.backgroundImage = 'linear-gradient(90deg, #bbd400, #129264)'
+          break;
+      }
+    })
+
+    // show modal
+    difficultyBtns.forEach(function (el) {
+      el.addEventListener('click', function () {
+        switch (el.previousElementSibling.innerText.toLowerCase()) {
+          case 'addition':
+            modals.forEach(function (el) {
+              if (el.classList.contains('modal--addition')) {
+                el.classList.remove('hidden')
+              }
+            })
+            break;
+          case 'multiplication':
+            modals.forEach(function (el) {
+              if (el.classList.contains('modal--multiplication')) {
+                el.classList.remove('hidden')
+              }
+            })
+            break;
+          case 'substraction':
+            modals.forEach(function (el) {
+              if (el.classList.contains('modal--substraction')) {
+                el.classList.remove('hidden')
+              }
+            })
+            break;
+          case 'division':
+            modals.forEach(function (el) {
+              if (el.classList.contains('modal--division')) {
+                el.classList.remove('hidden')
+              }
+            })
+            break;
+        }
+      })
+    })
+
+    closeModal.forEach(function (el) {
+      el.addEventListener('click', function () {
+        modals.forEach(function (elem) {
+          elem.classList.add('hidden')
+        })
+      })
+    })
+
+    modalForms.forEach(function (el) {
+      el.addEventListener('submit', function (e) {
+        e.preventDefault()
+        modals.forEach(function (elem) {
+          elem.classList.add('hidden')
+        })
+      })
+    })
+
+  </script>
 </body>
 
 </html>

@@ -13,6 +13,11 @@
   <main class="main main--lobby clearfix">
     <span class="bubbles bubbles-down" id="bubbles"></span>
     <header class="header">
+      <span class="back">
+        <a href="customize-battle.html">
+          <img src="./img/mathtournament-onboarding-button-back.png">
+        </a>
+      </span>
       <h1>Lobby</h1>
     </header>
     <div class="container">
@@ -21,27 +26,36 @@
           Equipo Alfa
           <span></span>
         </h2>
-        <div class="item__avatar">
-          <img src="./img/mathtournament-onboarding-luna-start.png" alt="Avatar Equipo Alfa">
+        <div class="item__players">
+          <div class="item__alfa item__alfa--one">
+            <span class="players__container"></span>
+            <img class="hitbox hitbox--alfa" src="./img/mathtournament-onboarding-hitbox-alpha.png" alt="">
+          </div>
+          <div class="item__alfa item__alfa--two one">
+            <span class="players__container"></span>
+            <img class="hitbox hitbox--alfa" src="./img/mathtournament-onboarding-hitbox-alpha.png" alt="">
+          </div>
+          <div class="item__alfa item__alfa--three two one">
+            <span class="players__container"></span>
+            <img class="hitbox hitbox--alfa" src="./img/mathtournament-onboarding-hitbox-alpha.png" alt="">
+          </div>
         </div>
       </section>
       <section class="item item--middle item--lobby">
-        <div class="item__textbox item__textbox--pin">
-          <div class="item__textbox__container">
+        <div class="item__textbox__container">
+          <div class="item__pin">
             <h3>Pin</h3>
             <input type="text" id="pin" value="12345">
-            <p>Share this numbers with two other players.</p>
+          </div>
+          <div class="players__container" id="players-container">
+            <span class="loader"></span>
+            <div class="player">...</div>
           </div>
         </div>
         <div class="item__buttons">
-          <div class="item__btn item__btn--back">
-            <p>Back </p>
-            <span></span>
-          </div>
-          <div class="item__btn item__btn--start">
-            <p>Start</p>
-            <span></span>
-          </div>
+          <button class="item__btn" id="btn-ok">
+            <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
+          </button>
         </div>
       </section>
       <section class="item item--right item--lobby">
@@ -49,13 +63,154 @@
           Equipo Bravo
           <span></span>
         </h2>
-        <div class="item__avatar">
-          <img src="./img/mathtournament-onboarding-eagle-start.png" alt="Avatar Equipo Bravo">
+        <div class="item__players">
+          <div class="item__bravo item__bravo--one">
+            <span class="players__container"></span>
+            <img class="hitbox hitbox--bravo" src="./img/mathtournament-onboarding-hitbox-bravo.png" alt="">
+          </div>
+          <div class="item__bravo item__bravo--two one">
+            <span class="players__container"></span>
+            <img class="hitbox hitbox--bravo" src="./img/mathtournament-onboarding-hitbox-bravo.png" alt="">
+          </div>
+          <div class="item__bravo item__bravo--three two one">
+            <span class="players__container "></span>
+            <img class="hitbox hitbox--bravo" src="./img/mathtournament-onboarding-hitbox-bravo.png" alt="">
+          </div>
         </div>
       </section>
     </div>
+    <section class="modal modal--lobby hidden" id="modal-ready">
+      <div class="borde">
+        <div class="main modal__container">
+          <span class="close">
+            <img src="./img/close_button.png" alt="">
+          </span>
+          <div class="img-container">
+            <img src="./img/mathtournament-onboarding-eagle-start.png" alt="">
+            <img src="./img/mathtournament-onboarding-luna-start.png" alt="">
+          </div>
+          <h2>¿Estás seguro<br>de iniciar tu torneo?</h2>
+          <button class="modal__btn" type="submit">
+            <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
+          </button>
+        </div>
+      </div>
+    </section>
+    <section class="modal modal--warning hidden" id="modal-warning">
+      <div class="borde">
+        <div class="modal__container">
+          <span class="close">
+            <img src="./img/close_button.png" alt="">
+          </span>
+          <h2>Warning!</h2>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequatur voluptatibus quisquam amet saepe.</p>
+        </div>
+      </div>
+    </section>
   </main>
+  <script src="./js/DragDropTouch.js"></script>
   <script src="./js/main.js"></script>
+  <script>
+    // Get battle configuration
+    var configBattle = {}
+    var paramstr = window.location.search.substr(1);
+    var paramArr = paramstr.split('&')
+    paramArr.forEach(function (el) {
+      var conf = el.split('=')
+      configBattle[conf[0]] = conf[1]
+    })
+
+    // Generate players
+    var playersContainer = document.getElementById('players-container')
+    function generatePlayer(players) {
+      var playersName = ['player 1', 'player 2', 'player 3', 'player 4', 'player 5', 'player 6']
+
+      for (var index = 0; index < players; index++) {
+        var templatePlayer = document.createElement('div')
+        templatePlayer.classList.add('player')
+        templatePlayer.setAttribute('draggable', true)
+        var templateName = document.createTextNode(playersName[index])
+        templatePlayer.appendChild(templateName)
+        playersContainer.appendChild(templatePlayer)
+      }
+    }
+
+    // hide unnecessary elements
+    function hideHitbox(selector) {
+      var hitboxToHide = document.querySelectorAll(selector)
+      hitboxToHide.forEach(function (el) {
+        el.parentNode.removeChild(el)
+      })
+    }
+
+    if (configBattle.mode === '1vs1') {
+      hideHitbox('.one')
+      generatePlayer(2)
+    } else if (configBattle.mode === '2vs2') {
+      hideHitbox('.two')
+      generatePlayer(4)
+    } else {
+      generatePlayer(6)
+    }
+
+    // Drag and Drop
+    var players = document.querySelectorAll('.player')
+    var container = document.querySelectorAll('.players__container')
+    var from, to, element
+
+    function dragstart(e) {
+      element = e.target
+      from = e.target.parentNode
+      e.target.classList.add('drop')
+      playersContainer.classList.remove('full')
+      container.forEach(function (el) {
+        if (el.children.length === 0) {
+          el.classList.remove('full')
+        }
+      })
+    }
+    function dragover(e) {
+      e.preventDefault()
+    }
+    function dragenter(e) {
+      e.preventDefault()
+      to = e.target
+    }
+    function drop(e) {
+      var drop = document.querySelector('.drop')
+      if (to.parentNode.id === 'players-container') {
+        this.append(drop)
+      } else if (to.parentNode.classList.contains('players__container')) {
+        from.append(to)
+        this.append(drop)
+      } else {
+        this.append(drop)
+      }
+      drop.classList.remove('drop')
+    }
+    container.forEach(function (el) {
+      el.addEventListener('dragstart', dragstart)
+      el.addEventListener('dragover', dragover)
+      el.addEventListener('dragenter', dragenter)
+      el.addEventListener('drop', drop)
+    })
+
+    //show modal
+    var okBtn = document.getElementById('btn-ok')
+    var modalReady = document.getElementById('modal-ready')
+    var modalWarning = document.getElementById('modal-warning')
+    var closeModal = document.querySelectorAll('.close')
+    okBtn.addEventListener('click', function () {
+      modalReady.classList.remove('hidden')
+    })
+    closeModal.forEach(function (el) {
+      el.addEventListener('click', function () {
+        modalReady.classList.add('hidden')
+        modalWarning.classList.add('hidden')
+      })
+    })
+    
+  </script>
 </body>
 
 </html>

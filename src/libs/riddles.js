@@ -3,8 +3,25 @@ var riddles = function(){
 
 	var questions
 	var usedQuestions
-	var newQuestion
 	var NUMBER_OF_FAKE_ANSWERS = 3
+	var DIFFICULT_RULES = {
+		1 : {
+			time : 20000,
+			attacks : {
+				ultra : 6600,
+				super : 0,
+				normal : 0
+			}
+		},
+		2 : {
+			time : 60000,
+			attacks : {
+				ultra : 6600,
+				super : 0,
+				normal : 0
+			}
+		}
+	}
 
 	function initialize(){
 
@@ -45,23 +62,13 @@ var riddles = function(){
 				existImage : element.existImg,
 				src: imagePath,
 				image: element.image,
-				answers: [],
+				answers: [element.A, element.B, element.C, element.D],
 				grade: element.grade,
 				level: element.level,
 				correctAnswer: element.answer - 1,
-				index: i,
+				//time:DIFFICULT_RULES[level].time
+				//index: i,
 				//correctIndex:
-			}
-
-			var optData = [element.A, element.B, element.C, element.D]
-
-			for(var k = 0; k < optData.length; k++){
-
-				var option = {
-					text: optData[k],
-					correct: k == element.answer - 1 ? true : false
-				}
-				obj.answers.push(option)
 			}
 			questions.push(obj)
 		}
@@ -80,7 +87,7 @@ var riddles = function(){
 	        }while(usedQuestions.includes(rand))
 	
 	        usedQuestions.push(rand)
-			newQuestion = questions[rand]
+			var newQuestion = questions[rand]
 
 			return newQuestion
 	    }
@@ -125,45 +132,11 @@ var riddles = function(){
 		}
 
 		return riddle
-
-        
-		/*
-
-		var questionData = {
-			question : question,
-			answers : possibleAnswers,
-			correctAnswer : correctAnswer
-		}
-
-		var option = {
-			text: correctAns,
-			correct: true
-		}
-        riddle.answers.push(option)
-		var negativeOrPositive = Math.round(Math.random()) * 2 - 1
-        
-		for(var i = 0; i < 3; i++){
-            
-			var diff = Math.floor(correctAns / 10) > 1 ? game.rnd.integerInRange(5, 10) : game.rnd.integerInRange(1, 5)
-			negativeOrPositive = negativeOrPositive * -1
-			var n = correctAns + diff * negativeOrPositive
-
-			var option = {
-				text: n,
-				correct: false
-			}
-			riddle.answers.push(option)
-		}
-        
-		Phaser.ArrayUtils.shuffle(riddle.answers)
-		
-		return riddle*/
     }
 
 	return{
 		initialize:initialize,
 		getOperation:getOperation,
 		getQuestion:getQuestion
-		
 	}
 }()

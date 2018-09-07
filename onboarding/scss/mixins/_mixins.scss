@@ -1,0 +1,24 @@
+@mixin img-border($color) {
+  transform: scaleX(-1);
+  filter: drop-shadow(5px 5px 0 $color) drop-shadow(-5px -5px 0 $color)
+    drop-shadow(-5px 5px 0 $color) drop-shadow(5px -5px 0 $color);
+}
+@mixin text-border {
+  letter-spacing: 2px;
+  text-shadow: 0 3px 0 #2d1f4e, 0 -3px 0 #2d1f4e, -3px 0 0 #2d1f4e,
+    3px 0 0 #2d1f4e, 2px 2px 0 #2d1f4e, -2px -2px 0 #2d1f4e, 2px -2px 0 #2d1f4e,
+    -2px 2px 0 #2d1f4e;
+}
+@mixin first-li {
+  li:first-child {
+    background-color: #fdf3ab;
+    label {
+      input {
+        &:checked + span {
+          border: 2px solid rgb(251, 115, 18);
+          background-color: rgb(255, 151, 6);
+        }
+      }
+    }
+  }
+}

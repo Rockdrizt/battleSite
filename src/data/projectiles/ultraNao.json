@@ -13,7 +13,7 @@
     {
       "file":"/spines/yogotars/battle/Nao/nao_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"nao_projectiles",
+      "skin":"nao1",
       "animations":["in_ultra","idle_ultra"]
     }
   ],

@@ -371,6 +371,14 @@
 "tournamentWindTwister1":"/sounds/characters/windTwister1.mp3",
 "tournamentWindImpact2":"/sounds/characters/windImpact2.mp3",
 "tournamentMassiveExplosion2":"/sounds/characters/massiveExplosion2.mp3",
-"tournamentBirdWings2":"/sounds/characters/birdWings2.mp3"    
+"tournamentBirdWings2":"/sounds/characters/birdWings2.mp3",
+"tournamentElectricExplosion1":"/sounds/characters/electricExplosion1.mp3",
+"tournamentLaserGun1":"/sounds/characters/laserGun1.mp3",
+"tournamentElectricCharge1":"/sounds/characters/electricCharge1.mp3",
+"tournamentRobotMachine7":"/sounds/characters/robotMachine7.mp3",
+"tournamentAirGun1":"/sounds/characters/airGun1.mp3",
+"tournamentMotorEngine1":"/sounds/characters/motorEngine1.mp3",
+"tournamentMotorAcceleration1":"/sounds/characters/motorAcceleration1.mp3",
+"tournamentMassiveExplosion3":"/sounds/characters/massiveExplosion3.mp3"    
     
 }

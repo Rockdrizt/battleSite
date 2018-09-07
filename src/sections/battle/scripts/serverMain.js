@@ -19,6 +19,10 @@ function startGame(){
     	sceneloader.preload(sceneList, {onComplete: onCompleteBoot}, "boot")
 	}
 
+	function pauseUpdate() {
+		alertDialog.pauseUpdate()
+	}
+
 	function showAlert(message){
 		alertDialog.show({
 			message:message,
@@ -27,8 +31,20 @@ function startGame(){
 		})
 	}
 
+	function showError(message){
+    	alertDialog.show({
+			message:message,
+			callback:function(){
+				location.reload()
+			}
+		})
+	}
+
 	function checkPlayers() {
-		if((server.t1Ready)&&(server.t2Ready)){
+		var t1Ready = server.currentData.t1.ready
+		var t2Ready = server.currentData.t2.ready
+
+    	if((t1Ready)&&(t2Ready)){
 			alertDialog.hide()
 			server.setGameReady(true)
 
@@ -36,9 +52,9 @@ function startGame(){
 				onReadyCallback()
 				onReadyCallback = null
 			}
-		}else if(server.t1Ready){
+		}else if(t1Ready){
 			showAlert("Esperando a equipo 2 en conectarse")
-		}else if(server.t2Ready){
+		}else if(t2Ready){
 			showAlert("Esperando a equipo 1 en conectarse")
 		}else{
 			showAlert("Esperando a equipos en conectarse")
@@ -56,18 +72,21 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
+				alertDialog.init()
+				server = new Server()
+				server.start(null, checkPlayers, {rules:operationGenerator.RULES_SET.MASTER}, showError)
+
 				if (server) {
 					/*server.startGame = function () {
 						sceneloader.show("yogoSelector")
 					}*/
-					alertDialog.init()
+					//alertDialog.init()
 
 					server.addEventListener("onTeamDisconnect", checkPlayers)
 					server.addEventListener("onInitTeam", checkPlayers)
 					onReadyCallback = function () {
 						sceneloader.show("yogoSelector")
 					}
-					checkPlayers()
 				}
 				else {
 					//sceneloader.show("yogoSelector")
@@ -120,12 +139,11 @@ function startGame(){
         ];
 
 		battle.setTeams(teams)
-		server = new Server()
-		server.start(null, null, {rules:operationGenerator.RULES_SET.MASTER})
     }
 
     function create(){
 		console.log("createEpicBattle")
+
     	bootConfigFiles([
             //startScreen,
 			alertDialog,

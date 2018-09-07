@@ -1,6 +1,16 @@
 var alertDialog = function () {
 	var alertGroup
 	var okButton
+	var appearTween
+
+	var DIALOG = {
+		width : 400,
+		height : 300,
+		offsetX : 5,
+		offsetYLong : 40,
+		offsetYShort : -40
+	}
+
 
 	var assets = {
 		images: [
@@ -19,19 +29,34 @@ var alertDialog = function () {
 		],
 	}
 
-	function hideAlert() {
-		alertGroup.dialog.text = ""
-		alertGroup.input.setText("")
-		alertGroup.input.alpha = 0
+	function hideAlert(callback) {
+		game.paused = false
 
-		var dissapearTween = game.add.tween(alertGroup).to({alpha:0}, 300, Phaser.Easing.Cubic.Out, true)
-		if(okButton.callback)
-			dissapearTween.onComplete.add(okButton.callback)
+		alertGroup.spiner.tween.stop()
+		var dissapearTween = game.add.tween(alertGroup).to({alpha:0}, 200, Phaser.Easing.Cubic.Out, true)
+		dissapearTween.onComplete.add(function () {
+			var value = alertGroup.input.value
+			if(typeof callback === "function")
+				callback(value)
+		})
 	}
 
 	function disableButton() {
 		this.btn.inputEnabled = false
 		this.alpha = 0
+	}
+
+	function onClickOk (btn) {
+		var button = btn.parent
+		var okOn = button.okOn
+		var okOff = button.okOff
+
+		okOn.alpha = 1
+		okOff.alpha = 0
+		sound.play("pop")
+		btn.inputEnabled = false
+
+		hideAlert(button.callback)
 	}
 	
 	function createButton() {
@@ -40,30 +65,28 @@ var alertDialog = function () {
 		okOff.anchor.setTo(0.5, 0.5)
 		var okOn = okButton.create(0, 0, "okOn")
 		okOn.anchor.setTo(0.5, 0.5)
+		okButton.okOn = okOn
+		okButton.okOff = okOff
 
 		okOn.alpha = 0
 		okOn.inputEnabled = true
 		okButton.btn = okOn
-		okOn.events.onInputDown.add(function (btn) {
-			okOn.alpha = 1
-			okOff.alpha = 0
-			sound.play("pop")
-			var value = alertGroup.input.value
-			console.log(value)
-			okButton.callback = okButton.callback.bind(this, value)
-			btn.inputEnabled = false
-
-			game.time.events.add(200, function () {
-				okOn.alpha = 0
-				okOff.alpha = 1
-				hideAlert()
-			})
-		}, this)
+		okOn.events.onInputDown.add(onClickOk, this)
 		
 		okButton.disable = disableButton.bind(okButton)
+		okButton.initialize = initButton.bind(okButton)
+	}
+
+	function initButton(){
+		this.okOff.alpha = 1
+		this.okOn.alpha = 0
+
+		this.btn.inputEnabled = true
+		this.alpha = 1
 	}
 
 	function showAlertGroup(params) {
+		game.paused = false
 		params = params || {}
 		game.world.remove(alertGroup)
 		game.world.add(alertGroup)
@@ -72,23 +95,45 @@ var alertDialog = function () {
 		var showInput = params.showInput
 		var isButtonDisabled = params.isButtonDisabled
 		var pin = params.pin
+		var showSpin = params.showSpin
 
 		if(showInput)
 			alertGroup.input.alpha = 1
+		else
+			alertGroup.input.alpha = 0
+
 		alertGroup.dialog.text = message
 
 		if(isButtonDisabled)
 			okButton.disable()
 		else
-			okButton.btn.inputEnabled = true
+			okButton.initialize()
 
 		if(pin) {
 			alertGroup.pinGroup.alpha = 1
 			alertGroup.pinGroup.pin.text = pin
+		}else{
+			alertGroup.pinGroup.alpha = 0
 		}
 
+		if((showInput)||(pin)||(showSpin))
+			alertGroup.dialog.setTextBounds(DIALOG.offsetX, DIALOG.offsetYShort, DIALOG.width, DIALOG.height)
+		else
+			alertGroup.dialog.setTextBounds(DIALOG.offsetX, DIALOG.offsetYLong, DIALOG.width, DIALOG.height)
 
-		game.add.tween(alertGroup).to({alpha:1}, 200, Phaser.Easing.Cubic.Out, true)
+		var spiner = alertGroup.spiner
+		if(showSpin) {
+			spiner.alpha = 1
+			spiner.tween.start()
+		}else{
+			spiner.alpha = 0
+		}
+
+		appearTween = game.add.tween(alertGroup).to({alpha:1}, 200, Phaser.Easing.Cubic.Out, true)
+		appearTween.onComplete.add(function() {
+			//game.paused = true
+		})
+		//appearTween.update()
 
 		if(params.callback) okButton.callback = params.callback
 	}
@@ -114,7 +159,10 @@ var alertDialog = function () {
 
 		var fontStyle = {font: "32px VAGRounded", fontWeight: "bold", fill: "#000000", align: "center"}
 		var fontStyle2 = {font: "46px VAGRounded", fontWeight: "bold", fill: "#000000", align: "center"}
-		var dialog = game.add.text(10, -30, "", fontStyle)
+		var dialog = game.add.text(10, -10, "", fontStyle)
+		//dialog.setTextBounds(5, 40, textBox.width, textBox.height)
+		dialog.boundsAlignH = "middle"
+		dialog.boundsAlignV = "top"
 		dialog.anchor.setTo(0.5,0.5)
 		alertGroup.add(dialog)
 		dialog.wordWrapWidth = textBox.width - 100
@@ -170,14 +218,28 @@ var alertDialog = function () {
 		okButton.x = 0; okButton.y = 380
 		okButton.scale.setTo(0.8, 0.8)
 
+		var spiner = alertGroup.create(10, 115, 'logoAtlas', 'spiner')
+		spiner.anchor.setTo(0.5, 0.5)
+		spiner.scale.setTo(0.5, 0.5)
+		spiner.scale.setTo(0.5, 0.5)
+		spiner.tween = game.add.tween(spiner).to({angle: -360}, 2000, Phaser.Easing.linear)
+		spiner.tween.loop(true)
+		alertGroup.spiner = spiner
+
 		alertGroup.alpha = 0
 		return alertGroup
+	}
+
+	function pauseUpdate() {
+		//if(appearTween)appearTween.update()
+		alertGroup.input.update()
 	}
 
 	return{
 		assets : assets,
 		init : initAlert,
 		show : showAlertGroup,
-		hide : hideAlert
+		hide : hideAlert,
+		pauseUpdate: pauseUpdate
 	}
 }()

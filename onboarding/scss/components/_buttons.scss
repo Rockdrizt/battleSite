@@ -4,15 +4,17 @@
   .item__btn {
     position: relative;
     display: inline-block;
+    border: none;
+    background-color: transparent;
     p,
     span {
       cursor: pointer;
     }
     p {
+      @include text-border;
       position: absolute;
       font-size: 30px;
       line-height: 60px;
-      text-shadow: 0 0 10px rgb(0, 0, 0);
       top: 50px;
       &:hover + span {
         background-image: url(../img/mathtournament-onboarding-play-btn-down.png);
@@ -60,6 +62,7 @@
 
 .item__btn--start {
   float: right;
+  z-index: 5;
   p {
     left: 105px;
     padding-left: 10px;

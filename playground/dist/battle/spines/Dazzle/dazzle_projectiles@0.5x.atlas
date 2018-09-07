@@ -1,0 +1,438 @@
+
+dazzle_projectiles.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+normal1/explosion_0
+  rotate: false
+  xy: 2, 1532
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+normal1/explosion_1
+  rotate: false
+  xy: 2, 1030
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+normal1/explosion_2
+  rotate: false
+  xy: 504, 1532
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+normal1/explosion_3
+  rotate: false
+  xy: 2, 528
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+normal1/explosion_4
+  rotate: false
+  xy: 504, 1030
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+normal1/explosion_5
+  rotate: false
+  xy: 1006, 1532
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+normal1/explosion_6
+  rotate: false
+  xy: 2, 26
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+normal1/explosion_7
+  rotate: false
+  xy: 504, 528
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+normal1/explosion_8
+  rotate: false
+  xy: 1006, 1030
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+normal1/explosion_9
+  rotate: false
+  xy: 1508, 1532
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+normal4/super_attack1
+  rotate: false
+  xy: 1516, 14
+  size: 60, 58
+  orig: 60, 58
+  offset: 0, 0
+  index: -1
+normal5/base
+  rotate: true
+  xy: 2, 9
+  size: 15, 156
+  orig: 15, 156
+  offset: 0, 0
+  index: -1
+normal5/bracket
+  rotate: false
+  xy: 504, 34
+  size: 104, 40
+  orig: 104, 40
+  offset: 0, 0
+  index: -1
+normal5/diskultra1_b
+  rotate: true
+  xy: 2010, 1970
+  size: 62, 27
+  orig: 62, 27
+  offset: 0, 0
+  index: -1
+normal5/fusion
+  rotate: true
+  xy: 1924, 87
+  size: 87, 58
+  orig: 87, 58
+  offset: 0, 0
+  index: -1
+normal5/top
+  rotate: true
+  xy: 2, 2
+  size: 5, 63
+  orig: 5, 63
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00000
+  rotate: false
+  xy: 504, 76
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00001
+  rotate: false
+  xy: 1006, 578
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00002
+  rotate: false
+  xy: 1508, 1080
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00003
+  rotate: false
+  xy: 1006, 126
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00004
+  rotate: false
+  xy: 1508, 628
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00005
+  rotate: false
+  xy: 1508, 176
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_super/Comp 1_00000
+  rotate: false
+  xy: 1006, 24
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia_super/Comp 1_00001
+  rotate: false
+  xy: 1108, 24
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia_super/Comp 1_00002
+  rotate: false
+  xy: 1210, 24
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia_super/Comp 1_00003
+  rotate: false
+  xy: 1312, 24
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia_super/Comp 1_00004
+  rotate: false
+  xy: 1414, 24
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia_super/Comp 1_00005
+  rotate: false
+  xy: 1516, 74
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia_super/Comp 1_00006
+  rotate: false
+  xy: 1618, 74
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia_super/Comp 1_00007
+  rotate: false
+  xy: 1720, 74
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+secuencia_super/Comp 1_00008
+  rotate: false
+  xy: 1822, 74
+  size: 100, 100
+  orig: 100, 100
+  offset: 0, 0
+  index: -1
+
+dazzle_projectiles2.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+secuencia_in/Comp1_00006
+  rotate: false
+  xy: 2, 1358
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00007
+  rotate: false
+  xy: 2, 906
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00008
+  rotate: false
+  xy: 504, 1358
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00009
+  rotate: false
+  xy: 2, 454
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00010
+  rotate: false
+  xy: 504, 906
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00011
+  rotate: false
+  xy: 1006, 1358
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00012
+  rotate: false
+  xy: 2, 2
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00013
+  rotate: false
+  xy: 504, 454
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00014
+  rotate: false
+  xy: 1006, 906
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00015
+  rotate: false
+  xy: 1508, 1358
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00016
+  rotate: false
+  xy: 504, 2
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00017
+  rotate: false
+  xy: 1006, 454
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00018
+  rotate: false
+  xy: 1508, 906
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00019
+  rotate: false
+  xy: 1006, 2
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00020
+  rotate: false
+  xy: 1508, 454
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00021
+  rotate: false
+  xy: 1508, 2
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+
+dazzle_projectiles3.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+secuencia_in/Comp1_00022
+  rotate: false
+  xy: 2, 1358
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00023
+  rotate: false
+  xy: 2, 906
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00024
+  rotate: false
+  xy: 504, 1358
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00025
+  rotate: false
+  xy: 2, 454
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00026
+  rotate: false
+  xy: 504, 906
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00027
+  rotate: false
+  xy: 1006, 1358
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00028
+  rotate: false
+  xy: 2, 2
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00029
+  rotate: false
+  xy: 504, 454
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00030
+  rotate: false
+  xy: 1006, 906
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00031
+  rotate: false
+  xy: 1508, 1358
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00032
+  rotate: false
+  xy: 504, 2
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00033
+  rotate: false
+  xy: 1006, 454
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1
+secuencia_in/Comp1_00034
+  rotate: false
+  xy: 1508, 906
+  size: 500, 450
+  orig: 500, 450
+  offset: 0, 0
+  index: -1

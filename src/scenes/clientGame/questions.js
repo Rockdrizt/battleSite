@@ -35,8 +35,8 @@ var questions = function(){
 		atlases: [
 			{
 				name: "atlas.question",
-				json: settings.BASE_PATH + "/images/questionOverlay/atlas.json",
-				image: settings.BASE_PATH + "/images/questionOverlay/atlas.png",
+				json: settings.BASE_PATH + "/images/questionOverlayCliente/atlas.json",
+				image: settings.BASE_PATH + "/images/questionOverlayCliente/atlas.png",
 			},
 		],
 		images: [
@@ -46,7 +46,7 @@ var questions = function(){
 			},
 			{
 				name: "questionBoard",
-				file: settings.BASE_PATH + "/images/questionOverlay/questionBoard.png",
+				file: settings.BASE_PATH + "/images/questionOverlayCliente/questionBoard.png",
 			},
 			{
 				name: "pinkLight",
@@ -97,9 +97,11 @@ var questions = function(){
 
 	function createQuestionOverlay(){
 
-		questionGroup = questionHUD.createQuestionOverlay()
+		var NAME = numTeam == 1 ? "Equipo Alpha" : "Equipo Bravo"
+
+		questionGroup = questionHUD.createQuestionOverlay(true)
 		questionGroup.callback = cliente.buttonOnClick
-		questionGroup.alpha = 0
+		questionGroup.teamName.setText(NAME)
 		sceneGroup.add(questionGroup)
 	}
 
@@ -126,11 +128,11 @@ var questions = function(){
 		sceneGroup.add(tile)
 	}
 
-	function checkAnswer() {
-
+	function checkAnswer(){
+		questionGroup.clearQuestion()
 	}
 
-	function showWinner() {
+	function showWinner(){
 
 	}
 
@@ -146,6 +148,20 @@ var questions = function(){
 			initialize()
 			createBackground()
 			createQuestionOverlay()
+				
+			// var obj = {
+			// 	question: "En un cine había sesenta y cuatro personas y han entrado diecisiete más. ¿Cuántas personas hay ahora en el cine?",
+			// 	existImage : false,
+			// 	src: "../../images/questionDB/default.png",
+			// 	image: "",
+			// 	answers: ["Ochenta y uno", "Setenta y uno", "Cuarenta y siete", "Cincuenta y siete"],
+			// 	grade: 2,
+			// 	level: 5,
+			// 	correctAnswer: 1,
+			// }
+
+			// var riddle = obj
+			// questionGroup.showQuestion(riddle)
 
 			if(cliente){
 				cliente.removeEventListener("onTurnEnds", checkAnswer)
@@ -161,5 +177,8 @@ var questions = function(){
 				game.time.events.add(1000, questionGroup.setQuestion)
 			}
 		},
+		shutdown: function () {
+			sceneGroup.destroy()
+		}
 	}
 }()

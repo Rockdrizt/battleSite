@@ -10,9 +10,9 @@
   ],
   "spines":[
     {
-      "file":"/spines/yogotars/battle/Estrella/estrella_projectiles.json",
+      "file":"/spines/yogotars/battle/Nao/nao_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"estrella_projectiles",
+      "skin":"nao1",
       "animations":["in_normal","idle_normal"]
     }
   ],
@@ -54,13 +54,13 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":300    
+      "value":450    
     },
     {
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":200
+      "value":150
     }, 
     {
       "index":"to",

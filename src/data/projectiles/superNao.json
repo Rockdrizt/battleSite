@@ -1,8 +1,8 @@
 {
   "timing":{
-    "stop":500,
+    "stop":800,
     "removal":1700,
-    "hit":500
+    "hit":600
   },
      "particles":[
     ],
@@ -10,7 +10,7 @@
     {
       "file":"/spines/yogotars/battle/Nao/nao_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"nao_projectiles",
+      "skin":"nao1",
       "animations":["in_super","idle_super"]
     }
   ],
@@ -51,7 +51,7 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":400
+      "value":500
     },
       {
       "id":"set",

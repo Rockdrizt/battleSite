@@ -13,6 +13,11 @@
   <main class="main main--carousel clearfix">
     <span class="bubbles bubbles-down" id="bubbles"></span>
     <header class="header">
+      <span class="back">
+        <a href="create.html">
+          <img src="./img/mathtournament-onboarding-button-back.png">
+        </a>
+      </span>
       <h1>Select your subject</h1>
     </header>
     <section class="carousel" id="carousel">
@@ -56,10 +61,9 @@
       </div>
     </section>
     <section class="item__buttons item__buttons--carousel">
-      <div class="item__btn" id="btn-ok">
+      <a class="item__btn" id="btn-ok">
         <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
-      </div>
-
+      </a>
     </section>
   </main>
   <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
@@ -88,35 +92,50 @@
       originY = -160
     }
     $("#carousel").Cloud9Carousel({
-      yOrigin: originY,
-      buttonLeft: $("#buttons > #left"),
-      buttonRight: $("#buttons > #right"),
-      autoPlay: 0,
-      bringToFront: true,
-      xRadius: radioX,
-      yRadius: radioY,
-      farScale: .2,
-      bringToFront: true,
-      itemClass: "carousel__item",
-      frontItemClass: "active"
+        yOrigin: originY,
+        buttonLeft: $("#buttons > #left"),
+        buttonRight: $("#buttons > #right"),
+        autoPlay: 0,
+        bringToFront: true,
+        xRadius: radioX,
+        yRadius: radioY,
+        farScale: .2,
+        bringToFront: true,
+        itemClass: "carousel__item",
+        frontItemClass: "active"
+      });
+    $(window).resize(function () {
+      if (this.resizeTO) clearTimeout(this.resizeTO);
+      this.resizeTO = setTimeout(function () {
+        $(this).trigger('resizeEnd');
+      }, 50);
     });
+    $(window).bind("resizeEnd", function () {
+      $("#carousel").Cloud9Carousel({
+        yOrigin: originY,
+        buttonLeft: $("#buttons > #left"),
+        buttonRight: $("#buttons > #right"),
+        autoPlay: 0,
+        bringToFront: true,
+        xRadius: radioX,
+        yRadius: radioY,
+        farScale: .2,
+        bringToFront: true,
+        itemClass: "carousel__item",
+        frontItemClass: "active"
+      });
+    });
+
     var carouselItems = document.querySelectorAll('.carousel__item')
     var btnOk = document.getElementById('btn-ok')
     var btnLeftRight = [document.getElementById('left'), document.getElementById('right')]
-    var titles = document.querySelectorAll('.planet-title')
-    btnOk.addEventListener('click', function () {
+    btnOk.addEventListener('click', function (e) {
       carouselItems.forEach(function (el) {
         if (el.classList.contains('active') && el.classList.contains('unlocked')) {
-          console.log(el)
+          btnOk.setAttribute('href','difficulty.html')
         }
       })
     })
-    carouselItems.forEach(function (el) {
-      if (el.classList.contains('active') && el.classList.contains('unlocked')) {
-        console.log(el)
-      }
-    })
-
   </script>
 </body>
 

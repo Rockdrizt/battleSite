@@ -1,0 +1,139 @@
+.item--difficulty {
+  width: 60%;
+  .header--difficulty {
+    width: 100%;
+    background-image: linear-gradient(90deg, #bbd400, #129264);
+    @include text-border;
+    position: relative;
+    transition: ease all .3s;
+    h2 {
+      height: 70px;
+      line-height: 70px;
+      font-size: 50px;
+    }
+    .header__btn {
+      width: 80px;
+      display: inline-block;
+      position: absolute;
+      top: -7px;
+      cursor: pointer;
+      &--left {
+        left: -45px;
+      }
+      &--right {
+        right: -45px;
+        transform: scaleX(-1);
+      }
+      img {
+        width: 100%;
+      }
+    }
+  }
+  .difficulty {
+    background-color: #f9f3d1;
+    background-image: url(../img/mathtournament-onboarding-board-tile.png);
+    background-size: 150px;
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
+    .difficulty__list {
+      padding: 20px 50px 50px;
+      .difficulty__item {
+        list-style: none;
+        p {
+          font-size: 30px;
+          display: inline-block;
+          width: 75%;
+          text-align: left;
+          color: #2d1f4e;
+          background-color: #fff;
+          padding: 10px 30px;
+          margin: 10px;
+          border-radius: 10px;
+          box-shadow: 0 3px 0 rgba(45, 31, 78, 0.2);
+        }
+        button {
+          cursor: pointer;
+          border: none;
+          background-color: transparent;
+          width: 55px;
+          img {
+            width: 100%;
+            vertical-align: middle;
+          }
+        }
+      }
+    }
+  }
+  .item__buttons {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -80px;
+    .item__btn {
+      width: 120px;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
+/**************************************
+ ********* Media Queries **************
+ **************************************/
+
+@media only screen and (max-width: 991px) {
+  .item--difficulty {
+    // width: 60%;
+    .header--difficulty {
+      font-size: 30px;
+      .header__btn {
+        width: 60px;
+        top: -15px;
+        &--left {
+          left: -40px;
+        }
+        &--right {
+          right: -40px;
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 767px) {
+  .item--difficulty {
+    width: 60%;
+    .header--difficulty {
+      font-size: 30px;
+    }
+  }
+}
+@media only screen and (max-width: 575px) {
+  .container--difficulty {
+    .item--difficulty {
+      width: 55%;
+      .header--difficulty {
+        font-size: 30px;
+        .header__btn {
+          width: 50px;
+          top: -10px;
+          &--left {
+            left: -30px;
+          }
+          &--right {
+            right: -30px;
+          }
+        }
+      }
+      .item__buttons {
+        top: 10px;
+        .item__btn--back {
+          left: 0;
+        }
+        .item__btn--start {
+          right: 0;
+        }
+      }
+    }
+  }
+}
