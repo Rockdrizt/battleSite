@@ -104,6 +104,7 @@ function Client(){
 			onError("La sesión esta llena, ingresa un pin diferente", true)
 			return false
 		}
+
 		if(((idGame!==null)&&(!self.id_game))||(idGame === "000000")){
 			self.id_game = idGame;
 			self.refIdGame.child("data").on('value', function(snapshot) {
@@ -136,10 +137,15 @@ function Client(){
 				var gameReady = snapshot.val();
 				if(gameReady && self.startGame){
 					self.startGame()
-				}else{
-					self.onWait()
 				}
 			});
+
+			self.refIdGame.child('t' + self.opponent + "/ready").on('value', function (snapshot) {
+				var playerReady = snapshot.val()
+				if(playerReady === false) {
+					self.onWait()
+				}
+			})
 
 			self.refIdGame.child('battleReady').on('value', function(snapshot) {
 				var battleReady = snapshot.val();
