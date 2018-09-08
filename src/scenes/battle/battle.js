@@ -518,6 +518,7 @@ var battle = function(){
 				character.skin = skin
 				character.index = charIndex
 				layers[charIndex].add(character)
+				character.updateImpactPoint()
 				createAppear(character, teamIndex, charIndex)
 
 				var rect = game.add.graphics()
