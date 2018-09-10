@@ -383,6 +383,7 @@
 "tournamentMagicSpell1":"/sounds/characters/magicSpell1.mp3",
 "tournamentFlipPage1":"/sounds/characters/flipPage1.mp3",
 "tournamentFemaleInhale1":"/sounds/characters/femaleInhale1.mp3",
-"tournamentFemaleBlow1":"/sounds/characters/femaleBlow1.mp3"    
+"tournamentFemaleBlow1":"/sounds/characters/femaleBlow1.mp3",
+"tournamentMagicSpawn1":"/sounds/characters/magicSpawn1.mp3"    
     
 }
