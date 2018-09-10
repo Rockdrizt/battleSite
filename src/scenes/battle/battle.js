@@ -376,7 +376,7 @@ var battle = function(){
 		function returnNormal(obj) {
 			obj.setAnimation(["idle_normal"], true)
 			obj.scale.x = obj.prevScale * side.scale.x
-			obj.updatePosition()
+			obj.updateImpactPoint()
 
 			if(obj.index < team.length - 1)
 				layers[obj.index].add(obj)
