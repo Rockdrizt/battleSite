@@ -118,7 +118,7 @@ var battleScene = function() {
 		function returnNormal(obj) {
 			obj.setAnimation(["idle_normal"], true)
 			obj.scale.x = obj.prevScale
-			obj.updatePosition()
+			obj.updateImpactPoint()
 		}
 
 		for (var playerIndex = 0; playerIndex < team.length; playerIndex++) {
@@ -284,6 +284,7 @@ var battleScene = function() {
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
 				character.teamIndex = teamIndex
 				layers[charIndex].add(character)
+				character.updateImpactPoint()
 
 				var rect = game.add.graphics()
 				rect.beginFill(0xffffff)

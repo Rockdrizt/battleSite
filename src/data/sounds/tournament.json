@@ -379,6 +379,10 @@
 "tournamentAirGun1":"/sounds/characters/airGun1.mp3",
 "tournamentMotorEngine1":"/sounds/characters/motorEngine1.mp3",
 "tournamentMotorAcceleration1":"/sounds/characters/motorAcceleration1.mp3",
-"tournamentMassiveExplosion3":"/sounds/characters/massiveExplosion3.mp3"    
+"tournamentMassiveExplosion3":"/sounds/characters/massiveExplosion3.mp3",
+"tournamentMagicSpell1":"/sounds/characters/magicSpell1.mp3",
+"tournamentFlipPage1":"/sounds/characters/flipPage1.mp3",
+"tournamentFemaleInhale1":"/sounds/characters/femaleInhale1.mp3",
+"tournamentFemaleBlow1":"/sounds/characters/femaleBlow1.mp3"    
     
 }

@@ -404,7 +404,7 @@ var battle = function(){
 		function returnNormal(obj) {
 			obj.setAnimation(["idle_normal"], true)
 			obj.scale.x = obj.prevScale * side.scale.x
-			obj.updatePosition()
+			obj.updateImpactPoint()
 
 			if(obj.index < team.length - 1)
 				layers[obj.index].add(obj)
@@ -546,6 +546,7 @@ var battle = function(){
 				character.skin = skin
 				character.index = charIndex
 				layers[charIndex].add(character)
+				character.updateImpactPoint()
 				createAppear(character, teamIndex, charIndex)
 
 				var rect = game.add.graphics()
