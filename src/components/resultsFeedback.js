@@ -94,6 +94,10 @@ var resultsFeedback = function(){
             roundInfo.particles = particles
         }
 
+        var blueAns = createCorrectAns()
+        feedbackGroup.add(blueAns)
+        feedbackGroup.blueAns = blueAns
+
         subGroup.leftTeam = subGroup.children[0]
         subGroup.rightTeam = subGroup.children[1]
         subGroup.setWiner = setWiner.bind(subGroup)
@@ -225,7 +229,47 @@ var resultsFeedback = function(){
         return particle
     }
 
-    function displayResults(event){
+    function createCorrectAns(){
+
+        var blueBtn = game.add.sprite(0, 0, "atlas.question", "blueBtn")
+        blueBtn.anchor.setTo(0.5)
+        blueBtn.alpha = 0
+
+        var txt = new Phaser.Text(blueBtn.game, -137, 0, "B", fontStyle)
+        txt.anchor.setTo(0.5)
+        txt.fill = "#ffffff"
+        blueBtn.addChild(txt)
+        blueBtn.text = txt
+        
+        var info = new Phaser.Text(blueBtn.game, 25, 5, "", fontStyle)
+        info.anchor.setTo(0.5)
+        info.wordWrap = true
+        info.fontSize = 50
+        info.wordWrapWidth = blueBtn.width * 0.5
+        info.fill = "#ffffff"
+        blueBtn.addChild(info)
+        blueBtn.info = info
+
+        blueBtn.setInfo = setInfo.bind(blueBtn)
+        blueBtn.clearInfo = clearInfo.bind(blueBtn)
+        
+        function setInfo(index, info){
+            console.log(index)
+            this.text.setText(OPTIONS_LETTER[index])
+            this.info.setText(info)
+            game.add.tween(this).to({alpha: 1}, 300, Phaser.Easing.Cubic.Out, true)
+        }
+
+        function clearInfo(){
+            this.text.setText("")
+            this.info.setText("")
+            game.add.tween(this).to({alpha: 0}, 500, Phaser.Easing.Cubic.Out, true)
+        }
+
+        return blueBtn
+    }
+
+    function displayResults(event, riddle){
 
         var event = event || {}
 		var answers = event.answers || {}
@@ -243,12 +287,13 @@ var resultsFeedback = function(){
 
         game.add.tween(parent.black).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
         game.add.tween(this).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
+        parent.blueAns.setInfo(riddle.correctAnswer, riddle.correctValue)
 
         for(var i = 0; i < this.length; i++){
 
 			var newScale = convertScale(players[i].time)
             var ansTime = convertTimeFormat(players[i].time)
-            var correct = players[i].value == event.correctAnswer
+            var correct = numTeam == (i + 1) ? true : false //players[i].value == event.correctAnswer
 
 			var score = this.children[i]
 			score.timeTxt.setText(ansTime)
@@ -310,12 +355,17 @@ var resultsFeedback = function(){
         self.attack.loadTexture("atlas.feedback", attack)
         self.attack.x = winSide.x
         self.attack.y = winSide.y
-        
-        var fadeIn = game.add.tween(self.attack).to({alpha: 1}, 400, Phaser.Easing.Cubic.Out, true, 2300)
-        fadeIn.yoyo(true, 1000)
-        fadeIn.onComplete.add(function(){
+
+        var apear = game.add.tween(self.attack.scale).from({x: 0,y: 0}, 300, Phaser.Easing.Elastic.Out, true, 2300)
+        apear.onStart.add(function(){
+            self.attack.alpha = 1
+        })
+
+        var fadeOut = game.add.tween(self.attack).to({alpha: 0}, 300, Phaser.Easing.Cubic.InOut, false, 800)
+        fadeOut.onComplete.add(function(){
             self.winCallback(index, attack)
         })
+        apear.chain(fadeOut)
     }
 
     function setLoser(loseSide, tie){
@@ -327,10 +377,12 @@ var resultsFeedback = function(){
         fadeOut.onStart.add(function(){
             self.loserCallback()
             game.add.tween(loseSide.parent.parent.black).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, true)
+            self.parent.blueAns.clearInfo()
         })
         fadeOut.onComplete.add(self.clearInfo)
         
-		game.add.tween(loseSide).to({angle: 50 * loseSide.twist}, 1000, Phaser.Easing.Bounce.Out, true, 3000).chain(fadeOut)
+        var hangOff = game.add.tween(loseSide).to({angle: 50 * loseSide.twist}, 1000, Phaser.Easing.Bounce.Out, true, 3000)
+        hangOff.chain(fadeOut)
         game.add.tween(loseSide.timeDif).from({y: 30}, 400, Phaser.Easing.Cubic.Out, true, 2500)
     }
 
@@ -383,7 +435,7 @@ var resultsFeedback = function(){
             roundInfo.timeTxt.alpha = 0
             roundInfo.token.restore()
             roundInfo.timeBar.restore()
-		}
+        }
     }
     
     return{ 

@@ -1,6 +1,14 @@
 {"frames": [
 
 {
+	"filename": "blueBtn",
+	"frame": {"x":1530,"y":248,"w":481,"h":205},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":481,"h":205},
+	"sourceSize": {"w":482,"h":208}
+},
+{
 	"filename": "questionBox",
 	"frame": {"x":1,"y":1,"w":1657,"h":245},
 	"rotated": false,
@@ -10,7 +18,7 @@
 },
 {
 	"filename": "questionBtn",
-	"frame": {"x":1530,"y":248,"w":435,"h":139},
+	"frame": {"x":1530,"y":455,"w":435,"h":139},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":30,"y":30,"w":435,"h":139},
@@ -29,8 +37,8 @@
 	"version": "1.0",
 	"image": "atlas.png",
 	"format": "RGBA8888",
-	"size": {"w":1966,"h":634},
+	"size": {"w":2012,"h":634},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:31a9bb0c78a4ea9198cd9662e53f7c59:604507747cf7d59a0fdbbe00bcd6e4cf:cbce6b53f0f49e0bf15173c25c41f876$"
+	"smartupdate": "$TexturePacker:SmartUpdate:772d94c8963c347ae83007ae515e5a6b:6e799bdcb709bcfae27939e36ab8c527:cbce6b53f0f49e0bf15173c25c41f876$"
 }
 }

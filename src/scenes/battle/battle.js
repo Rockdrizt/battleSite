@@ -365,28 +365,6 @@ var battle = function(){
 			setNoAnswer()
 		}
         sceneGroup.add(feedbackGroup)
-		
-		
-		// var players = {
-		// 	t1:{
-		// 		time: 7035,
-		// 		value: 0
-		// 	},
-		// 	t2:{
-		// 		time: 6035,
-		// 		value: 0
-		// 	},
-		// }
-
-		// var toSend = {
-		// 	answers: players,
-		// 	numTeam: -1,
-		// 	correctAnswer: 0
-		// }
-
-		// game.time.events.add(5000, function(){
-		// 	checkAnswer(toSend)
-		// })
     }
 
     function createListosYa(){
@@ -824,7 +802,7 @@ var battle = function(){
 			game.time.events.add(1000, changeAnim, null, yogo, anim)
 		}
 
-		feedbackGroup.displayResults(event)
+		feedbackGroup.displayResults(event, questionGroup.riddle)
 	}
     
     function swapYogotars(newParent){
@@ -930,7 +908,7 @@ var battle = function(){
 			createListosYa()
 			//createMenuAnimations()
 			//menubuttons()
-			battleSong = sound.play("battleSong", {loop:true, volume:0.6})
+			battleSong = sound.play("battleSong", {loop:true, volume:0.4})
 			createWhite()
 
 			if(server){
