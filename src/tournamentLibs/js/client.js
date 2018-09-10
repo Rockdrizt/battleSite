@@ -83,7 +83,13 @@ function Client(){
 	function initialize(idGame, team, val){
 		var t1 = val.t1;
 		var t2 = val.t2;
-		if(!t1.ready){
+		if(self.numTeam){
+			if((val[self.numTeam])&&(!val[self.numTeam].ready))
+				setfb(self.refIdGame.child("t" + self.numTeam), team)
+			else
+				onError("El equipo " + self.numTeam + " ya esta siendo ocupado. Da click en OK para continuar", false, true)
+		}
+		else if(!t1.ready){
 			setfb(self.refIdGame.child("t1"), team)//self.refIdGame.child("t1").set(team);
 			self.numTeam = 1;
 			self.opponent = 2
@@ -98,6 +104,7 @@ function Client(){
 			onError("La sesión esta llena, ingresa un pin diferente", true)
 			return false
 		}
+
 		if(((idGame!==null)&&(!self.id_game))||(idGame === "000000")){
 			self.id_game = idGame;
 			self.refIdGame.child("data").on('value', function(snapshot) {
@@ -130,10 +137,15 @@ function Client(){
 				var gameReady = snapshot.val();
 				if(gameReady && self.startGame){
 					self.startGame()
-				}else{
-					//self.onWait()
 				}
 			});
+
+			self.refIdGame.child('t' + self.opponent + "/ready").on('value', function (snapshot) {
+				var playerReady = snapshot.val()
+				if(playerReady === false) {
+					self.onWait()
+				}
+			})
 
 			self.refIdGame.child('battleReady').on('value', function(snapshot) {
 				var battleReady = snapshot.val();
@@ -175,6 +187,28 @@ function Client(){
 		return true
 	}
 
+	function setGame(idGame){
+
+		//database.ref().child(idGame).off()
+		database.ref().child(idGame + "/serverReady").on('value', function(snapshot) {
+			var gameReady = snapshot.val()
+			if (gameReady) {
+				database.ref().child(idGame).once('value', function (snap) {
+					var val = snap.val()
+					self.refIdGame = database.ref(idGame)
+					initialize(idGame, self.team, val)
+				})
+			} else if(self.numTeam) {
+				self.showAlert("Se perdió la comunicación con el servidor. ", true)
+			}else{
+				self.showAlert("La partida no existe.", true)
+			}
+		})
+	}	/*if(!val.gameReady)
+				onWait()*/
+
+
+
 	/**
 	 * @summary Starts the client
 	 * @param {type} idGame Code of the game
@@ -186,37 +220,30 @@ function Client(){
 		self.showAlert = onAlert
 		self.onWait = onWait
 
-		if((!idGame) || (idGame === "")){
-			return onAlert("Ingresa un pin valido", true)
-		}
-
-		self.refIdGame.child(idGame).once('value').then(function(snapshot) {
-			var val = snapshot.val()
-			if((val)&&(val.serverReady)){
-				self.refIdGame = database.ref(idGame)
-				initialize(idGame, self.team, val)
-				database.ref().child(idGame).on('value', function(snapshot) {
-					var val = snapshot.val()
-					if((!val)||(val.serverReady === false)||
-						((self.numTeam)&&(!val["t" + self.numTeam].ready))) {
-						onAlert("Se perdio la comunicación con el servidor.")
-						//database.ref().child(idGame + "/t" + self.numTeam)
-						self.numTeam = null
-					}else if((self.numTeam)&&(val["t" + self.numTeam].ready)&&(!val["t" + self.opponent].ready)){
-						onWait()
-					}
+		database.ref('.info/connected').off()
+		database.ref('.info/connected').on('value', function (snap) {
+			var val = snap.val()
+			if (val === false) {
+				var message = "Tratando de recuperar la conexión. Revisa que tu internet sea estable."
+				alertDialog.show({
+					message:message,
+					isButtonDisabled:true,
+					showSpin:true,
 				})
-				/*if(!val.gameReady)
-					onWait()*/
-			}else{
-				onAlert("La partida no existe", true)
+				if(self.numTeam)
+					database.ref(idGame + "/t" + self.numTeam + "ready").set(false)
+				//self.numTeam = null
+			} else if (val === true) {
+				if((!idGame) || (idGame === "")){
+					return onAlert("Ingresa un pin valido", true)
+				}else {
+					if(self.numTeam)
+						database.ref(idGame + "/t" + self.numTeam + "/ready").set(true)
+					setGame(idGame)
+				}
+
 			}
-		}).catch(onAlert.bind(this, "Ocurrio un error al conectarse. Intenta de nuevo.", true));
-		//Reportando la salida del juego
-		/*window.onbeforeunload = function(){
-			if(self.numTeam!=null)
-				database.ref().child("t"+self.numTeam).update(false);
-		};*/
+		})
 	};
 
 	/**

@@ -32,6 +32,7 @@ var DAMAGE_BY_HIT = 20;
 var HEALTH_BY_HIT = 20;
 var DAMAGE_BY_CRITICAL_HIT = 30;
 
+var questionGrade = 0
 /**
  * @summary As default, an empty array has one element (an empty String). This function removes that element
  * @param {type} arr Array to be cleaned
@@ -310,8 +311,8 @@ function Server(){
 
 	//TODO: generate question is not a server function
 	this.sendQuestion = function () {
-		//var questionData = generateQuestion()
-		var questionData = riddles.getOperation()
+		var questionData = riddles.getQuestion(questionGrade)
+		//var questionData = riddles.getOperation()
 		correctAnswer = questionData.correctAnswer
 
 		valores.possibleAnswers = questionData.answers
@@ -521,12 +522,17 @@ function Server(){
 		var numPerOperations = Math.round(battleTime / 60000) * 3
 		self.numberOperation = numPerOperations
 
+		database.ref('.info/connected').off()
 		database.ref('.info/connected').on('value', function (snap) {
 			if (snap.val() === false) {
-				self.onAlert("Tienes un problema de conexión.\n\n Revisa que tu internet sea estable" +
-					" y dale click en OK para continuar.")
+				var message = "Tratando de recuperar la conexión. Revisa que tu internet sea estable."
+				alertDialog.show({
+					message:message,
+					isButtonDisabled:true,
+					showSpin:true,
+				})
 				serverReady = false
-				database.ref(id_game + "/serverReady").set(false)
+				database.ref(id_game + "/serverReady").set(serverReady)
 				self.setGameReady(false)
 			} else if (snap.val() === true) {
 				var id = id_game || currentId

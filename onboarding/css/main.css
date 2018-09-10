@@ -179,6 +179,15 @@
   position: absolute;
   top: 0;
   left: 0; }
+  .header .back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    cursor: pointer;
+    z-index: 1; }
+    .header .back a img {
+      height: 100%; }
   .header h1 {
     width: 100%;
     font-size: 50px;
@@ -414,6 +423,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   width: 100vw;
   height: 100vh;
+  z-index: 2;
   /*SCROLL*/
   /* width */
   /* Track */
@@ -607,7 +617,7 @@
       background-color: #ff9706; }
 
 /**************************************
- ********* Modal Division *************
+ ********* Modal Lobby ****************
  **************************************/
 .modal--lobby .borde {
   width: 600px;
@@ -637,6 +647,25 @@
       text-align: center;
       font-size: 60px;
       margin-bottom: 50px; }
+
+/**************************************
+ ********* Modal Warning **************
+ **************************************/
+.modal--warning .borde {
+  background-image: linear-gradient(#C94E42, #B43754);
+  width: 250px; }
+  .modal--warning .borde .modal__container {
+    background-color: transparent;
+    text-align: center;
+    padding: 10px; }
+    .modal--warning .borde .modal__container h2 {
+      letter-spacing: 2px;
+      text-shadow: 0 3px 0 #2d1f4e, 0 -3px 0 #2d1f4e, -3px 0 0 #2d1f4e, 3px 0 0 #2d1f4e, 2px 2px 0 #2d1f4e, -2px -2px 0 #2d1f4e, 2px -2px 0 #2d1f4e, -2px 2px 0 #2d1f4e;
+      padding: 10px; }
+    .modal--warning .borde .modal__container p {
+      font-family: 'VAGRounded Thin', sans-serif;
+      letter-spacing: 1px;
+      line-height: 25px; }
 
 /**************************************
  ********* Media Queries **************
@@ -1111,11 +1140,11 @@
         .item--difficulty .difficulty .difficulty__list .difficulty__item button {
           cursor: pointer;
           border: none;
-          background-color: #00000011;
-          width: 40px;
-          height: 40px; }
+          background-color: transparent;
+          width: 55px; }
           .item--difficulty .difficulty .difficulty__list .difficulty__item button img {
-            width: 100%; }
+            width: 100%;
+            vertical-align: middle; }
   .item--difficulty .item__buttons {
     position: absolute;
     left: 50%;

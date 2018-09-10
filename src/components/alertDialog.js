@@ -32,6 +32,7 @@ var alertDialog = function () {
 	function hideAlert(callback) {
 		game.paused = false
 
+		alertGroup.spiner.tween.stop()
 		var dissapearTween = game.add.tween(alertGroup).to({alpha:0}, 200, Phaser.Easing.Cubic.Out, true)
 		dissapearTween.onComplete.add(function () {
 			var value = alertGroup.input.value
@@ -94,6 +95,7 @@ var alertDialog = function () {
 		var showInput = params.showInput
 		var isButtonDisabled = params.isButtonDisabled
 		var pin = params.pin
+		var showSpin = params.showSpin
 
 		if(showInput)
 			alertGroup.input.alpha = 1
@@ -114,14 +116,22 @@ var alertDialog = function () {
 			alertGroup.pinGroup.alpha = 0
 		}
 
-		if((showInput)||(pin))
+		if((showInput)||(pin)||(showSpin))
 			alertGroup.dialog.setTextBounds(DIALOG.offsetX, DIALOG.offsetYShort, DIALOG.width, DIALOG.height)
 		else
 			alertGroup.dialog.setTextBounds(DIALOG.offsetX, DIALOG.offsetYLong, DIALOG.width, DIALOG.height)
 
+		var spiner = alertGroup.spiner
+		if(showSpin) {
+			spiner.alpha = 1
+			spiner.tween.start()
+		}else{
+			spiner.alpha = 0
+		}
+
 		appearTween = game.add.tween(alertGroup).to({alpha:1}, 200, Phaser.Easing.Cubic.Out, true)
 		appearTween.onComplete.add(function() {
-			game.paused = true
+			//game.paused = true
 		})
 		//appearTween.update()
 
@@ -207,6 +217,14 @@ var alertDialog = function () {
 		alertGroup.add(okButton)
 		okButton.x = 0; okButton.y = 380
 		okButton.scale.setTo(0.8, 0.8)
+
+		var spiner = alertGroup.create(10, 115, 'logoAtlas', 'spiner')
+		spiner.anchor.setTo(0.5, 0.5)
+		spiner.scale.setTo(0.5, 0.5)
+		spiner.scale.setTo(0.5, 0.5)
+		spiner.tween = game.add.tween(spiner).to({angle: -360}, 2000, Phaser.Easing.linear)
+		spiner.tween.loop(true)
+		alertGroup.spiner = spiner
 
 		alertGroup.alpha = 0
 		return alertGroup

@@ -95,7 +95,7 @@ var battleField = function(){
     }
     
     function createListosYa(){
-        
+
         var listosYaGroup = game.add.group()
         
         var listos = listosYaGroup.create(game.world.centerX, -150, "listos")
@@ -110,82 +110,10 @@ var battleField = function(){
         return listosYaGroup
     }
     
-    function createScores(SIDES, pos){
-        
-        var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#000066", align: "center"}
-        
-        var answersGroup = game.add.group()
-        answersGroup.y = -130
-        
-        for(var i = 0; i < 2; i++){
-        
-            var side = SIDES[i]
-
-            var teamScore = game.add.group()
-            teamScore.x = pos[i].x
-            teamScore.time = 0
-            teamScore.direction = side.direction
-            answersGroup.add(teamScore)
-            
-            var timeDif = new Phaser.Text(teamScore.game, 50 * side.direction, -70, "-2 sec", fontStyle)
-            timeDif.anchor.setTo(0.5)
-            timeDif.fill = "#ffff54"
-            timeDif.fontSize = 45
-            timeDif.stroke = "#000066"
-            timeDif.strokeThickness = 10
-            timeDif.alpha = 0
-            teamScore.add(timeDif)
-            teamScore.diference = timeDif
-
-            var timeCont = teamScore.create(0, 0, "atlas.answers", "timeCont")
-            timeCont.anchor.setTo(0.5)
-            timeCont.scale.setTo(side.direction, 1)
-            
-            var timeTxt = new Phaser.Text(teamScore.game, 50 * side.direction, 7, "0:00", fontStyle)
-            timeTxt.anchor.setTo(0.5)
-            timeTxt.alpha = 0
-            teamScore.add(timeTxt)
-            teamScore.timeTxt = timeTxt
-
-            var stock = teamScore.create(200 * side.direction, 0, "atlas.answers", "stock")
-            stock.anchor.setTo(0.5)
-            teamScore.stock = stock
-            
-            var bg = teamScore.create(0, 80, "atlas.answers", "containerBG")
-            bg.anchor.setTo(0.5)
-            
-            var bar = game.add.sprite(110 * side.direction, 0, "atlas.answers", "fillBar")
-            bar.anchor.setTo(i, 0.5)
-            bg.addChild(bar)
-            teamScore.bar = bar
-            
-            var shine = game.add.sprite(0, 0, "atlas.answers", "shineBar")
-            shine.anchor.setTo(0.5)
-            shine.alpha = 0
-            bg.addChild(shine)
-            teamScore.shine = shine
-            
-            var container = game.add.sprite(0, 0, "atlas.answers", "container" + i)
-            container.anchor.setTo(0.5)
-            bg.addChild(container)
-            
-            var particle = game.add.emitter(0, 50, 50);
-            particle.makeParticles("atlas.answers", "bubblePart");
-            particle.gravity = -150;
-            particle.setAlpha(1, 0, 1000, Phaser.Easing.Cubic.In)
-            particle.width = bg.width
-            teamScore.add(particle)
-            teamScore.particles = particle
-        }
-        
-        return answersGroup
-    }
-    
     return{
         createBackground:createBackground,
         createSpecialAttack:createSpecialAttack,
         createListosYa:createListosYa,
-        createScores:createScores
     }
     
 }()

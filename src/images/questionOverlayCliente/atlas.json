@@ -1,8 +1,24 @@
 {"frames": [
 
 {
+	"filename": "blueBtn",
+	"frame": {"x":1,"y":573,"w":481,"h":205},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":1,"y":1,"w":481,"h":205},
+	"sourceSize": {"w":482,"h":208}
+},
+{
+	"filename": "correct",
+	"frame": {"x":1127,"y":243,"w":827,"h":241},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":827,"h":241},
+	"sourceSize": {"w":827,"h":241}
+},
+{
 	"filename": "questionBox",
-	"frame": {"x":1,"y":351,"w":1260,"h":220},
+	"frame": {"x":1,"y":1,"w":1260,"h":220},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":1260,"h":220},
@@ -10,7 +26,7 @@
 },
 {
 	"filename": "questionBtn",
-	"frame": {"x":1263,"y":243,"w":435,"h":139},
+	"frame": {"x":484,"y":573,"w":435,"h":139},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":30,"y":30,"w":435,"h":139},
@@ -18,7 +34,7 @@
 },
 {
 	"filename": "questionImage",
-	"frame": {"x":1,"y":1,"w":1124,"h":348},
+	"frame": {"x":1,"y":223,"w":1124,"h":348},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":1124,"h":348},
@@ -26,15 +42,23 @@
 },
 {
 	"filename": "timeGauge",
-	"frame": {"x":1470,"y":1,"w":225,"h":226},
+	"frame": {"x":1606,"y":1,"w":225,"h":226},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":226},
 	"sourceSize": {"w":225,"h":226}
 },
 {
+	"filename": "wrong",
+	"frame": {"x":1127,"y":486,"w":720,"h":241},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":241},
+	"sourceSize": {"w":720,"h":241}
+},
+{
 	"filename": "yellowCircle",
-	"frame": {"x":1127,"y":1,"w":341,"h":240},
+	"frame": {"x":1263,"y":1,"w":341,"h":240},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":341,"h":240},
@@ -45,8 +69,8 @@
 	"version": "1.0",
 	"image": "atlas.png",
 	"format": "RGBA8888",
-	"size": {"w":1699,"h":572},
+	"size": {"w":1955,"h":779},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:beeb62b32a5c4eb5d63d45a3cc36ceb9:9177f4eb0fc6b10eebb7aaadb3ed49f7:cbce6b53f0f49e0bf15173c25c41f876$"
+	"smartupdate": "$TexturePacker:SmartUpdate:b00546042d34d43928e346493c333c80:6caea2a87636c26fc9f760d8e15002e3:cbce6b53f0f49e0bf15173c25c41f876$"
 }
 }

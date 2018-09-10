@@ -5,14 +5,14 @@ var characterBattle = function () {
 	var currentLoader
 	var game
 
-	function updatePosition() {
+	function updateImpactPoint() {
 		this.spine.setToSetupPose()
 		this.spine.updateTransform()
 
 		var impactSlot = this.getSlotContainer(this.data.visuals.impactAttachment)
 		this.impactPoint = {
-			x:impactSlot.x + this.x * this.scale.x,
-			y:impactSlot.y + this.y * this.scale.y
+			x:this.x + impactSlot.x * this.scale.x,
+			y:this.y + impactSlot.y * this.scale.y
 		}
 	}
 
@@ -66,8 +66,7 @@ var characterBattle = function () {
 
 		character.takeDamage = takeDamage.bind(character)
 		character.attack = attack.bind(character)
-		character.updatePosition = updatePosition.bind(character)
-		character.updatePosition()
+		character.updateImpactPoint = updateImpactPoint.bind(character)
 
 		return character
 	}
