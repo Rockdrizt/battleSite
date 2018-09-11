@@ -780,7 +780,6 @@ var teamSelector = function(){
 		var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 		var pivotX = game.world.centerX * 0.8 * -SIDE
 		var RISE_X = game.world.centerY * 0.6 * SIDE
-		var pivotY = SIDE > 0 ? 0 : 1
 		var delay = 0
 		
 		for(var i = 0; i < teamGroup.auxArray.length; i++){
@@ -803,7 +802,7 @@ var teamSelector = function(){
 
 			delay += 300
 
-			var text = new Phaser.Text(splashArtGroup.game, -75, 500 * pivotY, YOGOTARS_LIST[teamGroup.auxArray[i]].name.toUpperCase(), fontStyle)
+			var text = new Phaser.Text(splashArtGroup.game, -75, 0, YOGOTARS_LIST[teamGroup.auxArray[i]].name.toUpperCase(), fontStyle)
 			text.anchor.setTo(0, 0.5)
 			text.scale.setTo(1, SIDE)
 			text.stroke = "#751375"
@@ -966,7 +965,6 @@ var teamSelector = function(){
 			animateSelector()
 			createReady()
 
-			createSplashArt()
 		},
 		shutdown:function () {
 			sceneGroup.destroy()

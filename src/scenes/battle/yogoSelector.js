@@ -819,7 +819,6 @@ var yogoSelector = function(){
 			var pivotX = game.world.centerX * 0.82 * side.direction
 			var RISE_X = game.world.centerY * 0.5 * -side.direction
 			var team = images[j]
-			var textY = side.direction > 0 ? 400 : 100
 
 			for(var i = 0; i < team.length; i++){
 
@@ -840,7 +839,7 @@ var yogoSelector = function(){
 				var slot = getSpineSlot(lava, "yogo")
 				slot.add(splash)
 
-				var text = new Phaser.Text(splashArtGroup.game, 75 * side.direction, textY, YOGOTARS_LIST[team[i]].name.toUpperCase(), fontStyle)
+				var text = new Phaser.Text(splashArtGroup.game, 75 * side.direction, 0, YOGOTARS_LIST[team[i]].name.toUpperCase(), fontStyle)
 				text.anchor.setTo(0, 0.5)
 				text.scale.setTo(1, side.scale.x)
 				text.stroke = "#751375"
@@ -1084,7 +1083,7 @@ var yogoSelector = function(){
 
 			createReady()
 			createWhite()
-			createSplashArt()
+			
 			if(server)
 				server.addEventListener("onPlayersChange", onPlayersChange)
 			// game.time.events.add(6000, function () {
