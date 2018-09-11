@@ -34,6 +34,7 @@ function saveInfoinArray(){
     
 }
 
+
 function confirmDeleteQuestion(obj){
     $("#question__new_" + $(obj).attr("index") ).remove();
         countQuestions--
@@ -49,11 +50,12 @@ function confirmDeleteQuestion(obj){
             $("#" + hijos[newCount]).find(".questions__input").attr("id", "questionText_" + [newCount+1] ).attr("place",newCount+1 );
             $("#" + hijos[newCount]).find(".questions__number").find("span").html(newCount+1);
             $("#" + hijos[newCount]).find(".question__button--delete").attr("index",newCount+1);
-            $("#" + hijos[newCount]).find(".text_limit").attr("id","limitTextQuestion_" + newCount+1);
+            $("#" + hijos[newCount]).find(".text_limit").attr("id","limitTextQuestion_" + [newCount+1]);
         
              $('.answers__item',"#" + hijos[newCount]).each(function(){
                  if(newCountAnswer == 5){newCountAnswer = 1};
-                 $(this).find("textarea").attr("id","AnswerText_" +[newCount+1]+"_"+ newCountAnswer)
+                 $(this).find("textarea").attr("id","AnswerText_" +[newCount+1]+"_"+ newCountAnswer).attr("place",[newCount+1])
+                 $(this).find(".text_limit__answer").attr("id","limitTextAnswer_" +[newCount+1]+"_"+ newCountAnswer )
                  newCountAnswer++;
             });  
              $('.star__image--select',"#" + hijos[newCount]).each(function(){
@@ -100,7 +102,13 @@ function addQuestion(){
                    )
             .append($("<div/>")
                     .addClass("load_image--load")
-                    .html('<img src="img/load_image.png">')
+                    .append('<img src="img/load_image.png">')
+                    .append($("<input/>")
+                    .addClass("load__image--button")
+                    .attr("type","file")
+                    )
+                    
+                    
                    )
             .append($("<div/>")
                     .addClass("load_image--load question__button--delete")
@@ -175,6 +183,9 @@ function addQuestion(){
     //scroll animate 
     body.animate({scrollTop: (body.height() * countQuestions)},"2000"); 
     //change text limit of question
+    
+
+    
     $( "#questionText_" + countQuestions ).on('input',function(e){
         var value = $( this ).val().length;
         var limitText = $("#limitTextQuestion_" + $( this ).attr("place"));

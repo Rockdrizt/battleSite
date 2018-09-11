@@ -87,7 +87,7 @@ function Client(){
 			if((val[self.numTeam])&&(!val[self.numTeam].ready))
 				setfb(self.refIdGame.child("t" + self.numTeam), team)
 			else
-				onError("El equipo " + self.numTeam + " ya esta siendo ocupado. Da click en OK para continuar", false, true)
+				self.onError("El equipo " + self.numTeam + " ya esta siendo ocupado. Da click en OK para continuar", false, true)
 		}
 		else if(!t1.ready){
 			setfb(self.refIdGame.child("t1"), team)//self.refIdGame.child("t1").set(team);
@@ -101,90 +101,89 @@ function Client(){
 			self.id_game = null;
 			self.refIdGame= null;
 			self.fireEvent('onGameFull',[]);
-			onError("La sesión esta llena, ingresa un pin diferente", true)
+			self.onError("La sesión esta llena, ingresa un pin diferente", true)
 			return false
 		}
 
-		if(((idGame!==null)&&(!self.id_game))||(idGame === "000000")){
-			self.id_game = idGame;
-			self.refIdGame.child("data").on('value', function(snapshot) {
-				var data = snapshot.val();
-				if(data) {
-					self.currentData = data
-					self.fireEvent('showEquation', [data]);
-				}
-			});
+		//if(((idGame!==null)&&(!self.id_game))||(idGame === "000000")){
+		self.id_game = idGame;
 
-			self.refIdGame.child("data").on('value', function(snapshot) {
-				var data = snapshot.val();
-				if(data) {
-					self.currentData = data
-					self.fireEvent('showEquation', [data]);
-				}
-			});
+		self.refIdGame.child("data").off()
+		self.refIdGame.child("data").on('value', function(snapshot) {
+			var data = snapshot.val();
+			if(data) {
+				self.currentData = data
+				self.fireEvent('showEquation', [data]);
+			}
+		});
 
-			self.refIdGame.child('winner').on('value', function(snapshot) {
+		self.refIdGame.child('winner').off()
+		self.refIdGame.child('winner').on('value', function(snapshot) {
 
-				var values = snapshot.val();
-				if(values){
-					console.log("on Turn End triggered")
-					self.fireEvent('onTurnEnds',[values]);
-				}
+			var values = snapshot.val();
+			if(values){
+				console.log("on Turn End triggered")
+				self.fireEvent('onTurnEnds',[values]);
+			}
 
-			});
+		});
 
-			self.refIdGame.child('gameReady').on('value', function(snapshot) {
-				var gameReady = snapshot.val();
-				if(gameReady && self.startGame){
-					self.startGame()
-				}
-			});
+		self.refIdGame.child('gameReady').off()
+		self.refIdGame.child('gameReady').on('value', function(snapshot) {
+			var gameReady = snapshot.val();
+			if(gameReady && self.startGame){
+				self.startGame()
+			}
+		});
 
-			self.refIdGame.child('t' + self.opponent + "/ready").on('value', function (snapshot) {
-				var playerReady = snapshot.val()
-				if(playerReady === false) {
-					self.onWait()
-				}
-			})
+		self.refIdGame.child('t' + self.opponent + "/ready").off()
+		self.refIdGame.child('t' + self.opponent + "/ready").on('value', function (snapshot) {
+			var playerReady = snapshot.val()
+			if(playerReady === false) {
+				self.onWait()
+			}
+		})
 
-			self.refIdGame.child('battleReady').on('value', function(snapshot) {
-				var battleReady = snapshot.val();
-				if(battleReady && self.startBattle){
-					self.startBattle()
-				}
-			});
+		self.refIdGame.child('battleReady').off()
+		self.refIdGame.child('battleReady').on('value', function(snapshot) {
+			var battleReady = snapshot.val();
+			if(battleReady && self.startBattle){
+				self.startBattle()
+			}
+		});
 
-			self.refIdGame.child('gameEnded').on('value', function(snapshot) {
-				var gameEnded = snapshot.toJSON();
-				if((gameEnded)&&(gameEnded.winner)){
-					self.fireEvent('onGameEnds',[gameEnded]);
-					self.gameEnded = true
-				}
-			});
+		self.refIdGame.child('gameEnded').off()
+		self.refIdGame.child('gameEnded').on('value', function(snapshot) {
+			var gameEnded = snapshot.toJSON();
+			if((gameEnded)&&(gameEnded.winner)){
+				self.fireEvent('onGameEnds',[gameEnded]);
+				self.gameEnded = true
+			}
+		});
 
-			self.refIdGame.child('retry').on('value', function(snapshot) {
-				var values = snapshot.toJSON();
-				console.log("retryPressed", values)
-				if((values)&&(values.retry)){
-					self.restartGame(values.retry)
-					self.gameEnded = false
-				}
-			});
+		self.refIdGame.child('retry').off()
+		self.refIdGame.child('retry').on('value', function(snapshot) {
+			var values = snapshot.toJSON();
+			console.log("retryPressed", values)
+			if((values)&&(values.retry)){
+				self.restartGame(values.retry)
+				self.gameEnded = false
+			}
+		});
 
-			self.refIdGame.child('timeOut').on('value', function (snapshot) {
-				var timeOut = snapshot.val()
-				if(timeOut)
-					self.timeOutCallback()
-			})
+		self.refIdGame.child('timeOut').off()
+		self.refIdGame.child('timeOut').on('value', function (snapshot) {
+			var timeOut = snapshot.val()
+			if(timeOut)
+				self.timeOutCallback()
+		})
 
-		}
 
+		database.ref(idGame + "/t" + self.numTeam + "/ready").onDisconnect().cancel()
 		database.ref(idGame + "/t" + self.numTeam + "/ready").onDisconnect().set(false)
 
 		self.time= (new Date()).getTime();
 		self.fireEvent('onClientInit',[]);
-
-		return true
 	}
 
 	function setGame(idGame){
@@ -198,10 +197,16 @@ function Client(){
 					self.refIdGame = database.ref(idGame)
 					initialize(idGame, self.team, val)
 				})
-			} else if(self.numTeam) {
-				self.showAlert("Se perdió la comunicación con el servidor. ", true)
-			}else{
-				self.showAlert("La partida no existe.", true)
+			} else {
+				if(self.numTeam)
+					self.showAlert("Se perdió la comunicación con el servidor. ", true)
+				else
+					self.showAlert("La partida no existe.", true)
+
+				database.ref().child(idGame).once('value', function (snap) {
+					if(snap.exists() === false)
+						database.ref(idGame + "/t" + self.numTeam + "/ready").onDisconnect().cancel()
+				})
 			}
 		})
 	}	/*if(!val.gameReady)
@@ -237,8 +242,8 @@ function Client(){
 				if((!idGame) || (idGame === "")){
 					return onAlert("Ingresa un pin valido", true)
 				}else {
-					if(self.numTeam)
-						database.ref(idGame + "/t" + self.numTeam + "/ready").set(true)
+					//if(self.numTeam)
+						//database.ref(idGame + "/t" + self.numTeam + "/ready").set(true)
 					setGame(idGame)
 				}
 
@@ -259,7 +264,8 @@ function Client(){
 
 			var answer = {
 				time: time,
-				value: value
+				value: value,
+				date: firebase.database.ServerValue.TIMESTAMP
 			}
 			setfb(self.refIdGame.child("t" + self.numTeam + "answer"), answer)
 			//self.refIdGame.child("t"+self.numTeam+"answer").set(answer);
@@ -273,29 +279,30 @@ function Client(){
 	}*/
 
 	this.selectYogotar = function (players) {
+		//players.date = firebase.database.ServerValue.TIMESTAMP
 		setfb(self.refIdGame.child("t" + self.numTeam + "/players"), players)
 	}
 }
 
-function loadGame(){
-	if(gameFrame)
-		gameContainer.removeChild(gameFrame);
-	else
-		gameFrame = document.createElement("iframe")
-	gameFrame.src= src
-	gameFrame.style.borderStyle = "none"
-	gameFrame.scrolling = "no"
-	gameFrame.width = "100%"
-	gameFrame.height = "100%"
-	gameContainer.appendChild(gameFrame);
-}
-
-window.onload =  function(){
-	gameContainer = document.getElementById("game-container")
-	if(gameContainer){
-		loadGame()
-		cliente = new Client();
-	}
-}
+// function loadGame(){
+// 	if(gameFrame)
+// 		gameContainer.removeChild(gameFrame);
+// 	else
+// 		gameFrame = document.createElement("iframe")
+// 	gameFrame.src= src
+// 	gameFrame.style.borderStyle = "none"
+// 	gameFrame.scrolling = "no"
+// 	gameFrame.width = "100%"
+// 	gameFrame.height = "100%"
+// 	gameContainer.appendChild(gameFrame);
+// }
+//
+// window.onload =  function(){
+// 	gameContainer = document.getElementById("game-container")
+// 	if(gameContainer){
+// 		loadGame()
+// 		cliente = new Client();
+// 	}
+// }
 
 // window.addEventListener("resize", loadGame);

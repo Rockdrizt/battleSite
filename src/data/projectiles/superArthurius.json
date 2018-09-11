@@ -13,11 +13,7 @@
     }
   ],
   "impact":{
-    "particles":[
-      "/particles/characters/impactEarth3/impactEarth8.json",
-      "/particles/characters/impactEarth3/impactEarth9.json",
-      "/particles/characters/impactEarth3/impactEarth10.json"
-    ],
+    
     "soundID":"tournamentRockThrow1"
   },
   "onShoot":[

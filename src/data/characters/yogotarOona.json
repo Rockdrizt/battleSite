@@ -3,23 +3,25 @@
 	"attacks": {
 		"normal": [
 			{
-				"id": "windball",
-				"attachment": "particle2",
-				"delay": 150,
-				"multiplier": 1
-			},
-			{
-				"id": "windball",
+				"id": "normalWind",
 				"attachment": "particle4",
-				"delay": 150,
+				"delay": 500,
 				"multiplier": 1
 			}
 		],
-		"special": [
+		"super": [
+            {
+				"id": "superOona",
+				"attachment": "particle12",
+				"delay": 850,
+				"multiplier": 1
+			}
+		],
+		"ultra":[
 			{
-				"id": "windballSpecial2",
-				"attachment": "particle2",
-				"delay": 500,
+				"id": "ultraOona",
+				"attachment": "particle13",
+				"delay": 4650,
 				"multiplier": 1
 			}
 		]
@@ -39,9 +41,8 @@
 		"element": "wind"
 	},
 	"visuals": {
-		"shadowY": -5,
 		"shadowScaleX": 0.8,
-		"shadowScaleY": 1.3,
+		"shadowScaleY": 1.1,
 		"cardFacing": "right",
 		"impactAttachment": "torso1"
 	}

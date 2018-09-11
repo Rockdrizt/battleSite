@@ -1,50 +1,4 @@
-var isKinder = isKinder != undefined ? isKinder : false
-// var src = isKinder ? "https://play.yogome.com/epicweb/minigames/mathServer/indexSLP.html":"https://play.yogome.com/epicweb/minigames/mathServer/index.html"
-// var isMobile =
-var testExp = new RegExp('Android|webOS|iPhone|iPad|' +
-	'BlackBerry|Windows Phone|'  +
-	'Opera Mini|IEMobile|Mobile' ,
-	'i');
 
-var isMobile = testExp.test(navigator.userAgent)
-
-//dev is without yogoTournament
-var src = "../onboarding/index.html"
-var gameFrame
-var gameContainer
-var server
-var language = null
-
-// Initialize Firebase
-var config = {
-	apiKey: "AIzaSyDSKraaLJOVdFvExqI9q5i-PfUl1k9h3GQ",
-	authDomain: "smartkidstournament-ce44b.firebaseapp.com",
-	databaseURL: "https://smartkidstournament-ce44b.firebaseio.com",
-	projectId: "smartkidstournament-ce44b",
-	storageBucket: "smartkidstournament-ce44b.appspot.com",
-	messagingSenderId: "745841805113"
-};
-firebase.initializeApp(config);
-var database = firebase.database();
-var MAX_OPERAND_VALUE = 500;
-var INITIAL_LIFE = 100;
-var DAMAGE_BY_HIT = 20;
-var HEALTH_BY_HIT = 20;
-var DAMAGE_BY_CRITICAL_HIT = 30;
-
-var questionGrade = 0
-/**
- * @summary As default, an empty array has one element (an empty String). This function removes that element
- * @param {type} arr Array to be cleaned
- * @returns {unresolved} Array cleaned
- */
-var cleanArray = function(arr){
-	var i = arr.indexOf("");
-	if(i>-1){
-		arr.splice(i,1);
-	}
-	return arr;
-};
 
 /**
  * @class
@@ -55,7 +9,46 @@ var cleanArray = function(arr){
 // function Server(inLevel){
 function Server(){
 
+	var testExp = new RegExp('Android|webOS|iPhone|iPad|' +
+		'BlackBerry|Windows Phone|'  +
+		'Opera Mini|IEMobile|Mobile' ,
+		'i');
+
+
+// Initialize Firebase
+	var config = {
+		apiKey: "AIzaSyDSKraaLJOVdFvExqI9q5i-PfUl1k9h3GQ",
+		authDomain: "smartkidstournament-ce44b.firebaseapp.com",
+		databaseURL: "https://smartkidstournament-ce44b.firebaseio.com",
+		projectId: "smartkidstournament-ce44b",
+		storageBucket: "smartkidstournament-ce44b.appspot.com",
+		messagingSenderId: "745841805113"
+	};
+	firebase.initializeApp(config);
+	var database = firebase.database();
+	var questionGrade = 0
+
+
+	var MAX_OPERAND_VALUE = 500;
+	var INITIAL_LIFE = 100;
+	var DAMAGE_BY_HIT = 20;
+	var HEALTH_BY_HIT = 20;
+	var DAMAGE_BY_CRITICAL_HIT = 30;
+	var NUM_TEAMS = 2
 	var NUMBER_OF_FAKE_ANSWERS = 3;
+
+	/**
+	 * @summary As default, an empty array has one element (an empty String). This function removes that element
+	 * @param {type} arr Array to be cleaned
+	 * @returns {unresolved} Array cleaned
+	 */
+	var cleanArray = function(arr){
+		var i = arr.indexOf("");
+		if(i>-1){
+			arr.splice(i,1);
+		}
+		return arr;
+	};
 
 	var self = this;
 	/** Events
@@ -330,181 +323,191 @@ function Server(){
 	/**
 	 * @summary Starts the server
 	 */
+	function initialize(id){
+		id_game = id;
+		operationGenerator.setConfiguration(self.rules, self.numPerOperations)
+
+		valores = {
+			rules:self.rules,
+			t1: {ready : false},
+			t2: {ready : false},
+			winner :false,
+			t1answer : false,
+			t2answer : false,
+			possibleAnswers: [],
+			data:false,
+			gameReady:false,
+			battleReady:false,
+			gameEnded:false,
+			retry:false,
+			time:self.battleTime,
+			maxRounds:self.maxRounds,
+			timeOut:false,
+			serverReady:true
+		};
+		refIdGame = database.ref(id_game);
+		refIdGame.set(valores).then(function () {  serverReady = true })
+		self.currentData = valores
+	}
+
+	function evaluateAllReady(key){
+		var allReady = true
+		for(var i = 1; i <= NUM_TEAMS; i++){
+			allReady = allReady && valores[key].ready
+		}
+
+		return allReady
+	}
+
+	function checkTeamReady(value, key, num, team) {
+		if ((!value) || (value.ready === false)) {
+			self.currentData[key].ready = false
+			self.setGameReady(false)
+			self.fireEvent('onTeamDisconnect', [{numTeam: num, teamWinner: valores[key]}]);
+		} else if (valores[key].ready === false) {
+			valores[key] = team;
+			self.currentData = valores
+			self.fireEvent('onInitTeam', [{numTeam: num, team: valores[key]}]);
+			var allTeamsReady = evaluateAllReady(key)
+			if (allTeamsReady) {
+				self.fireEvent('onTeamsReady', [valores]);
+			}
+		}
+	}
+
+	function checkPlayers(players, numTeam){
+		if (players) {
+			var objReturn = {
+				numTeam: numTeam,
+				players: players
+			}
+			self.fireEvent('onPlayersChange', [objReturn]);
+		}
+	}
+
+	function checkTeams(){
+		for(var teamIndex = 1; teamIndex <= NUM_TEAMS; teamIndex++){
+			var refT = database.ref(id_game + "/t" + teamIndex);
+			refT.on('value', function (snapshot) {
+				if (serverReady) {
+					var value = snapshot.val()
+					var key = snapshot.key
+					var num = Number(key[key.length - 1])
+					var players = snapshot.child("players").val()
+					var team = snapshot.toJSON();
+
+					checkTeamReady(value, key, num, team)
+					checkPlayers(players, num)
+				}
+			});
+		}
+	}
+
+	function checkAllAnswered(){
+		var allAnswer = true
+		for(var teamIndex = 1; teamIndex <= NUM_TEAMS; teamIndex++){
+			allAnswer = allAnswer && valores["t" + teamIndex + "answer"]
+		}
+		return allAnswer
+	}
+
+	function checkTeamAnswers() {
+		for(var teamIndex = 1; teamIndex <= NUM_TEAMS; teamIndex++) {
+			var tAnswer = database.ref(id_game + "/t" + teamIndex + "answer");
+			tAnswer.on('value', function (snapshot) {
+				var answer = snapshot.toJSON();
+				var key = snapshot.key
+				valores[key] = answer;
+				console.log("answer", answer)
+				var isAllAnswered = checkAllAnswered()
+				if (isAllAnswered) {
+					checkResults();
+				}
+			});
+		}
+	}
+
+	function checkDisconnect(id){
+		if(id !== "000000") {
+			database.ref(id_game).onDisconnect().remove()
+		}
+		else{
+			// if(!id_game.includes("egs"))
+			database.ref(id_game + "/serverReady").onDisconnect().set(false)
+		}
+	}
+
 	function setGame(currentId) {
 		var promise = makeid(currentId);
 		promise.then(function(id){
-			id_game = id;
-			operationGenerator.setConfiguration(self.rules, self.numPerOperations)
-
-			valores = {
-				rules:self.rules,
-				t1: {ready : false},
-				t2: {ready : false},
-				winner :false,
-				t1answer : false,
-				t2answer : false,
-				possibleAnswers: [],
-				data:false,
-				gameReady:false,
-				battleReady:false,
-				gameEnded:false,
-				retry:false,
-				time:self.battleTime,
-				maxRounds:self.maxRounds,
-				timeOut:false,
-				serverReady:true
-			};
-			refIdGame = database.ref(id_game);
-			refIdGame.set(valores).then(function () {  serverReady = true })
-			self.currentData = valores
+			initialize(id)
 
 			if((id)&&(self.onStart)) self.onStart()
 
 			if((!currentId)||("000000")) {
 
-				var refT1 = database.ref(id_game + "/t1");
-				refT1.on('value', function (snapshot) {
-					if (serverReady) {
-						var value = snapshot.val()
-						if ((!value)||(value.ready === false)) {
-							self.currentData.t1.ready = false
-							self.setGameReady(false)
-							self.fireEvent('onTeamDisconnect', [{numTeam: 1, teamWinner: valores.t1}]);
-						} else if (valores.t1.ready === false) {
-							var t1 = snapshot.toJSON();
-							valores.t1 =  t1;
-							self.currentData = valores
-							self.fireEvent('onInitTeam', [{numTeam: 1, team: valores.t1}]);
-							if (valores.t2.ready) {
-								self.fireEvent('onTeamsReady', [valores]);
-							}
-						}
-					}
-
-				});
-
-				var refT2 = database.ref(id_game + "/t2");
-				refT2.on('value', function (snapshot) {
-					if (serverReady) {
-						var value = snapshot.val()
-						if ((!value)||(!value.ready)) {
-							self.currentData.t2.ready = false
-							self.fireEvent('onTeamDisconnect', [{numTeam: 2, teamWinner: valores.t2}]);
-							self.setGameReady(false)
-						} else if (valores.t2.ready === false) {
-							var t2 = snapshot.toJSON();
-							valores.t2 = t2;
-							self.currentData = valores
-							self.fireEvent('onInitTeam', [{numTeam: 2, team: valores.t2}]);
-							if (valores.t1.ready) {
-								self.currentData = valores
-								self.fireEvent('onTeamsReady', [valores]);
-							}
-						}
-					}
-				});
-
-				var selectt1 = database.ref(id_game + "/t1/players");
-				selectt1.on('value', function (snapshot) {
-					var players = snapshot.val()
-					// console.log(ready)
-					if (players) {
-						var objReturn = {
-							numTeam : 1,
-							players : players
-						}
-						self.fireEvent('onPlayersChange', [objReturn]);
-					}
-				});
-
-				var selectt2 = database.ref(id_game + "/t2/players");
-				selectt2.on('value', function (snapshot) {
-					var players = snapshot.val()
-					if(players) {
-						var objReturn = {
-							numTeam: 2,
-							players: players
-						}
-						self.fireEvent('onPlayersChange', [objReturn]);
-					}
-				});
-
-				/*var readyt1 = database.ref(id_game + "/t1/ready");
-				readyt1.on('value', function (snapshot) {
-					if (serverReady) {
-						var ready = snapshot.val()
-						// console.log(ready)
-						if (ready) {
-							self.t1Ready = true;
-							if (self.t2Ready) {
-								console.log("START GAME INIT")
-								if(self.startGame) self.startGame()
-							}
-						}
-					}
-				});
-
-				var readyt2 = database.ref(id_game + "/t2/ready");
-				readyt2.on('value', function (snapshot) {
-					if (serverReady) {
-						var ready = snapshot.val()
-						// console.log(ready)
-						if (ready) {
-							self.t2Ready = true;
-							if (self.t1Ready) {
-								if(self.startGame) self.startGame()
-							}
-						}
-					}
-				});*/
-
-				var t1answer = database.ref(id_game + "/t1answer");
-				t1answer.on('value', function (snapshot) {
-					var t1answer = snapshot.toJSON();
-					valores.t1answer = t1answer;
-					console.log("answer", t1answer)
-					if (valores.t2answer) {
-						checkResults();
-					}
-				});
-
-				var t2answer = database.ref(id_game + "/t2answer");
-				t2answer.on('value', function (snapshot) {
-					var t2answer = snapshot.toJSON();
-					valores.t2answer = t2answer;
-					console.log("answer", t1answer)
-					if (valores.t1answer) {
-						checkResults();
-					}
-				});
-
-				//checar si se desconecto
-
-				//Borrando los datos al abandonar la partida
-				if(id !== "000000") {
-					database.ref(id_game).onDisconnect().remove()
-				}
-				else{
-					// if(!id_game.includes("egs"))
-					var reset = {}
-					reset.t1answer =false;
-					reset.t2answer =false;
-					reset.t1.life =INITIAL_LIFE;
-					reset.t2.life =INITIAL_LIFE;
-					reset.winner =false;
-					reset.possibleAnswers = [];
-					reset.time = self.battleTime;
-					reset.maxRounds = self.maxRounds;
-					reset.rules = self.rules
-					reset.data = false;
-					reset.gameEnded = false;
-					reset.gameReady = false
-					reset.timeOut = false
-					database.ref(id_game).onDisconnect.set(reset)
-				}
+				checkTeams()
+				checkTeamAnswers()
+				checkDisconnect(id)
 			}
 		});
 	};
+
+	function getGame(currentId) {
+		if((!currentId) || (currentId === "")) {
+			var message = "El pin es invalido."
+			alertDialog.show({
+				message: message,
+			})
+			return
+		}
+
+		refIdGame = database.ref(currentId);
+		refIdGame.once('value').then(function (snapshot) {
+			if(snapshot.exists()){
+				valores = snapshot.val()
+				serverReady = true
+				database.ref(currentId + "/serverReady").set(true)
+				self.currentData = valores
+
+				if(!id_game){
+					id_game = currentId
+
+					checkTeams()
+					checkTeamAnswers()
+					checkDisconnect(currentId)
+
+				}
+			}else{
+				var message = "No existe el servidor al que se intento conectar."
+				alertDialog.show({
+					message:message,
+				})
+			}
+		});
+	}
+
+	function checkConnected(currentId, callback){
+		database.ref('.info/connected').off()
+		database.ref('.info/connected').on('value', function (snap) {
+			if (snap.val() === false) {
+				var message = "Tratando de recuperar la conexión. Revisa que tu internet sea estable."
+				alertDialog.show({
+					message:message,
+					isButtonDisabled:true,
+					showSpin:true,
+				})
+				serverReady = false
+				if(id_game) {
+					self.setGameReady(false)
+					database.ref(id_game + "/serverReady").set(serverReady)
+				}
+			} else if (snap.val() === true) {
+				var id = id_game || currentId
+				callback(id)
+			}
+		})
+	}
 
 	this.start = function(currentId, onStart, params, onError) {
 
@@ -522,24 +525,15 @@ function Server(){
 		var numPerOperations = Math.round(battleTime / 60000) * 3
 		self.numberOperation = numPerOperations
 
-		database.ref('.info/connected').off()
-		database.ref('.info/connected').on('value', function (snap) {
-			if (snap.val() === false) {
-				var message = "Tratando de recuperar la conexión. Revisa que tu internet sea estable."
-				alertDialog.show({
-					message:message,
-					isButtonDisabled:true,
-					showSpin:true,
-				})
-				serverReady = false
-				database.ref(id_game + "/serverReady").set(serverReady)
-				self.setGameReady(false)
-			} else if (snap.val() === true) {
-				var id = id_game || currentId
-				setGame(id)
-			}
-		})
+		checkConnected(currentId, setGame)
 
+	}
+
+	this.connect = function (id, onStart, onError) {
+		self.onStart = onStart
+		self.onError = onError
+
+		checkConnected(id, getGame)
 	}
 
 	this.setGameReady = function (value) {
@@ -584,27 +578,3 @@ function Server(){
 		setfb(refIdGame.child("timeOut"), true)
 	}
 }
-
-function loadGame(){
-	if(gameFrame)
-		gameContainer.removeChild(gameFrame);
-	else
-		gameFrame = document.createElement("iframe")
-	gameFrame.src= src
-	gameFrame.style.borderStyle = "none"
-	gameFrame.scrolling = "no"
-	gameFrame.width = "100%"
-	gameFrame.height = "100%"
-	gameContainer.appendChild(gameFrame);
-}
-
-window.onload =  function(){
-	gameContainer = document.getElementById("game-container")
-	if(gameContainer){
-		loadGame()
-		server = new Server();
-	}
-	// cliente = new Client();
-}
-
-// window.addEventListener("resize", loadGame);

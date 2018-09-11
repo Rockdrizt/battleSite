@@ -84,12 +84,12 @@ var rewardClient = function(){
 		],
         particles: [
             {
-                name: "brain_particles",
+                name: "brainSpheres",
                 file: settings.BASE_PATH + "/particles/rewardScreen/brain_particles/sphere_ligths1.json",
                 texture: "sphere_ligths1.png"
             },
             {
-                name: "brain_particlesB",
+                name: "brainLigths",
                 file: settings.BASE_PATH + "/particles/rewardScreen/brain_particles/Ligth_Brain.json",
                 texture: "Ligth_Brain.png"
             },
@@ -179,11 +179,11 @@ var rewardClient = function(){
         }
         sceneGroup.add(back);
         
-        tile = game.add.tileSprite(game.world.centerX, game.world.centerY, game.world.width + 150, game.world.width + 180, "tile");
-        tile.anchor.setTo(0.5);
-        tile.tint = 0x0099AA;
-        tile.angle = 45;
-        sceneGroup.add(tile);
+        tile = game.add.tileSprite(0, 0, game.world.width, game.world.height, "tile")
+        //tile.anchor.setTo(0.5)
+        tile.tint = 0x0099AA
+        //tile.angle = 45
+        sceneGroup.add(tile)
     }
 
     function createTeamBar(){
@@ -227,6 +227,11 @@ var rewardClient = function(){
         coup.addAnimationByName(0, "winstill", true)
         sceneGroup.add(coup)
         sceneGroup.coup = coup
+
+        var particle = epicparticles.newEmitter("confetti")
+        particle.x = game.world.centerX
+        particle.y = 100
+        sceneGroup.add(particle)
     }
 
     function createWinTeam(){
@@ -236,9 +241,10 @@ var rewardClient = function(){
         winnerGroup = game.add.group()
         sceneGroup.add(winnerGroup)
 
-        var pivotX = WIN_DATA.color == 1 ? 0.5 : 0.7
+        var pivotX = sceneGroup.coup.centerX * 0.5//WIN_DATA.color == 1 ? 0.5 : 0.7
         var RISE = 1 - pivotX
         var directon = -1
+        
 
         for(var i = 0; i < TEAM_MEMBERS; i++){
 
@@ -355,18 +361,6 @@ var rewardClient = function(){
         if(group!=null){
             group.add(prefabParticles);
         }
-    }
-
-    //Appear losers in their squares with animation
-    function addLosersTween(){
-        loseColocation = 150;
-        for(var j=0; j<3; j++){
-            game.add.tween(squareLoser[j]).to({ x: loseColocationX, y: loseColocation }, 5000, Phaser.Easing.Sinusoidal.Out, true);
-            game.add.tween(closeSquare[j]).to({ x: loseColocationX - 2, y: loseColocation + squareLoser[j].height - 5 }, 5000, Phaser.Easing.Sinusoidal.Out, true);
-            loseColocationX += 50;
-            loseColocation += squareLoser[j].height + 10;
-        }
-        game.time.events.add(Phaser.Timer.SECOND * 10, showInformation, this);
     }
 
     return {

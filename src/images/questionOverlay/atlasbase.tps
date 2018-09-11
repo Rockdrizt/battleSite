@@ -181,6 +181,19 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">blueBtn.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>121,52,241,104</rect>
+                <key>scale9Paddings</key>
+                <rect>121,52,241,104</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">questionBox.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -226,6 +239,7 @@
             <filename>questionBox.png</filename>
             <filename>questionBtn.png</filename>
             <filename>questionImage.png</filename>
+            <filename>blueBtn.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

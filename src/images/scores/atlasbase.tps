@@ -181,125 +181,165 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">ansfalse.png</key>
-            <key type="filename">anstrue.png</key>
+            <key type="filename">light0.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>34,41,68,81</rect>
+                <rect>37,121,75,243</rect>
                 <key>scale9Paddings</key>
-                <rect>34,41,68,81</rect>
+                <rect>37,121,75,243</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">bubblePart.png</key>
+            <key type="filename">light1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>7,7,13,13</rect>
+                <rect>38,117,75,233</rect>
                 <key>scale9Paddings</key>
-                <rect>7,7,13,13</rect>
+                <rect>38,117,75,233</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">container0.png</key>
-            <key type="filename">container1.png</key>
+            <key type="filename">logo0.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>67,10,133,20</rect>
+                <rect>256,69,512,137</rect>
                 <key>scale9Paddings</key>
-                <rect>67,10,133,20</rect>
+                <rect>256,69,512,137</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">containerBG.png</key>
+            <key type="filename">logo1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>65,7,129,13</rect>
+                <rect>42,34,84,67</rect>
                 <key>scale9Paddings</key>
-                <rect>65,7,129,13</rect>
+                <rect>42,34,84,67</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">fillBar.png</key>
+            <key type="filename">nameBoard.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>87,31,174,63</rect>
+                <rect>132,28,263,56</rect>
                 <key>scale9Paddings</key>
-                <rect>87,31,174,63</rect>
+                <rect>132,28,263,56</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">shineBar.png</key>
+            <key type="filename">score0.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>56,3,113,7</rect>
+                <rect>60,85,120,171</rect>
                 <key>scale9Paddings</key>
-                <rect>56,3,113,7</rect>
+                <rect>60,85,120,171</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">stock.png</key>
+            <key type="filename">score1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>34,41,67,81</rect>
+                <rect>60,85,121,171</rect>
                 <key>scale9Paddings</key>
-                <rect>34,41,67,81</rect>
+                <rect>60,85,121,171</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">timeCont.png</key>
+            <key type="filename">teamBar0.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>68,21,135,43</rect>
+                <rect>201,35,401,69</rect>
                 <key>scale9Paddings</key>
-                <rect>68,21,135,43</rect>
+                <rect>201,35,401,69</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">teamBar1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>194,36,387,72</rect>
+                <key>scale9Paddings</key>
+                <rect>194,36,387,72</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">token0.png</key>
+            <key type="filename">token1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>48,57,97,113</rect>
+                <key>scale9Paddings</key>
+                <rect>48,57,97,113</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">vs.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>75,45,149,89</rect>
+                <key>scale9Paddings</key>
+                <rect>75,45,149,89</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>container1.png</filename>
-            <filename>container0.png</filename>
-            <filename>stock.png</filename>
-            <filename>containerBG.png</filename>
-            <filename>fillBar.png</filename>
-            <filename>shineBar.png</filename>
-            <filename>timeCont.png</filename>
-            <filename>bubblePart.png</filename>
-            <filename>ansfalse.png</filename>
-            <filename>anstrue.png</filename>
+            <filename>logo0.png</filename>
+            <filename>logo1.png</filename>
+            <filename>teamBar0.png</filename>
+            <filename>teamBar1.png</filename>
+            <filename>light0.png</filename>
+            <filename>light1.png</filename>
+            <filename>nameBoard.png</filename>
+            <filename>token0.png</filename>
+            <filename>token1.png</filename>
+            <filename>vs.png</filename>
+            <filename>score0.png</filename>
+            <filename>score1.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
