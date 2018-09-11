@@ -171,6 +171,16 @@ hr{
     text-align: center;
 }
 
+.load__image--button{
+    background-color: aqua;
+    position: absolute;
+    width: 6%;
+    height: 60%;
+    opacity: 0;
+    transform: translate(-100%,-10%);
+    overflow: hidden;
+}
+
 .load_image--load img{
     transform: translate(0%,-10%);
     width: 80%; 

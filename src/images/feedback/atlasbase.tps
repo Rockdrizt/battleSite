@@ -181,17 +181,29 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">ansfalse.png</key>
-            <key type="filename">anstrue.png</key>
+            <key type="filename">answerBlue.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>34,41,68,81</rect>
+                <rect>113,40,225,79</rect>
                 <key>scale9Paddings</key>
-                <rect>34,41,68,81</rect>
+                <rect>113,40,225,79</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">bar_frame.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>67,18,133,36</rect>
+                <key>scale9Paddings</key>
+                <rect>67,18,133,36</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
@@ -208,98 +220,126 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">container0.png</key>
-            <key type="filename">container1.png</key>
+            <key type="filename">happy.png</key>
+            <key type="filename">sad.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>67,10,133,20</rect>
+                <rect>34,41,68,81</rect>
                 <key>scale9Paddings</key>
-                <rect>67,10,133,20</rect>
+                <rect>34,41,68,81</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">containerBG.png</key>
+            <key type="filename">normal.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>65,7,129,13</rect>
+                <rect>200,41,400,82</rect>
                 <key>scale9Paddings</key>
-                <rect>65,7,129,13</rect>
+                <rect>200,41,400,82</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">fillBar.png</key>
+            <key type="filename">super.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>87,31,174,63</rect>
+                <rect>160,42,321,83</rect>
                 <key>scale9Paddings</key>
-                <rect>87,31,174,63</rect>
+                <rect>160,42,321,83</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">shineBar.png</key>
+            <key type="filename">time_container.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>56,3,113,7</rect>
+                <rect>144,25,289,51</rect>
                 <key>scale9Paddings</key>
-                <rect>56,3,113,7</rect>
+                <rect>144,25,289,51</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">stock.png</key>
+            <key type="filename">time_icon.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>34,41,67,81</rect>
+                <rect>29,33,57,67</rect>
                 <key>scale9Paddings</key>
-                <rect>34,41,67,81</rect>
+                <rect>29,33,57,67</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">timeCont.png</key>
+            <key type="filename">token_correct.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>68,21,135,43</rect>
+                <rect>34,40,67,79</rect>
                 <key>scale9Paddings</key>
-                <rect>68,21,135,43</rect>
+                <rect>34,40,67,79</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">token_neutral.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>34,40,68,79</rect>
+                <key>scale9Paddings</key>
+                <rect>34,40,68,79</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">ultra.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>178,44,356,88</rect>
+                <key>scale9Paddings</key>
+                <rect>178,44,356,88</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>container1.png</filename>
-            <filename>container0.png</filename>
-            <filename>stock.png</filename>
-            <filename>containerBG.png</filename>
-            <filename>fillBar.png</filename>
-            <filename>shineBar.png</filename>
-            <filename>timeCont.png</filename>
             <filename>bubblePart.png</filename>
-            <filename>ansfalse.png</filename>
-            <filename>anstrue.png</filename>
+            <filename>time_container.png</filename>
+            <filename>normal.png</filename>
+            <filename>super.png</filename>
+            <filename>time_icon.png</filename>
+            <filename>ultra.png</filename>
+            <filename>answerBlue.png</filename>
+            <filename>bar_frame.png</filename>
+            <filename>token_correct.png</filename>
+            <filename>token_neutral.png</filename>
+            <filename>sad.png</filename>
+            <filename>happy.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

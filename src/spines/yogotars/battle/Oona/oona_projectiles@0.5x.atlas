@@ -1,0 +1,104 @@
+
+oona_projectiles.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+normal/particle
+  rotate: false
+  xy: 960, 784
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: -1
+normal1/oona_ultra_tornado1
+  rotate: true
+  xy: 2, 2
+  size: 345, 290
+  orig: 345, 290
+  offset: 0, 0
+  index: -1
+normal1/oona_ultra_tornado2
+  rotate: false
+  xy: 2, 725
+  size: 372, 287
+  orig: 372, 287
+  offset: 0, 0
+  index: -1
+normal1/oona_ultra_tornado3
+  rotate: true
+  xy: 2, 349
+  size: 374, 282
+  orig: 374, 282
+  offset: 0, 0
+  index: -1
+normal1/oona_ultra_tornado4
+  rotate: true
+  xy: 286, 363
+  size: 360, 290
+  orig: 360, 290
+  offset: 0, 0
+  index: -1
+normal1/oona_ultra_tornado5
+  rotate: true
+  xy: 294, 3
+  size: 358, 287
+  orig: 358, 287
+  offset: 0, 0
+  index: -1
+normal1/oona_ultra_tornado6
+  rotate: false
+  xy: 376, 730
+  size: 371, 282
+  orig: 371, 282
+  offset: 0, 0
+  index: -1
+normal1/super_blow_attacklow
+  rotate: false
+  xy: 583, 128
+  size: 134, 137
+  orig: 134, 137
+  offset: 0, 0
+  index: -1
+normal1/super_blow_attacktop
+  rotate: false
+  xy: 583, 9
+  size: 123, 117
+  orig: 123, 117
+  offset: 0, 0
+  index: -1
+normal1/wind_ball1
+  rotate: true
+  xy: 583, 267
+  size: 202, 163
+  orig: 202, 163
+  offset: 0, 0
+  index: -1
+normal1/wind_ball2
+  rotate: false
+  xy: 753, 487
+  size: 203, 174
+  orig: 203, 174
+  offset: 0, 0
+  index: -1
+normal1/wind_ball3
+  rotate: false
+  xy: 753, 663
+  size: 205, 173
+  orig: 205, 173
+  offset: 0, 0
+  index: -1
+normal1/wind_ball4
+  rotate: false
+  xy: 749, 838
+  size: 257, 174
+  orig: 257, 174
+  offset: 0, 0
+  index: -1
+normal1/wind_ball5
+  rotate: true
+  xy: 578, 471
+  size: 257, 173
+  orig: 257, 173
+  offset: 0, 0
+  index: -1

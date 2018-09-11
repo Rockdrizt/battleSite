@@ -46,9 +46,9 @@ var battle = function(){
 				image: settings.BASE_PATH + "/images/questionOverlay/atlas.png",
 			},
 			{
-				name: "atlas.answers",
-				json: settings.BASE_PATH + "/images/answers/atlas.json",
-				image: settings.BASE_PATH + "/images/answers/atlas.png",
+				name: "atlas.feedback",
+				json: settings.BASE_PATH + "/images/feedback/atlas.json",
+				image: settings.BASE_PATH + "/images/feedback/atlas.png",
 			}
 		],
 		images: [
@@ -141,6 +141,25 @@ var battle = function(){
 		{normal: 0.0666, super: 0.083, ultra: 0.111}
 	]
 
+	var DIFFICULT_RULES = {
+		1 : {
+			time : 20000,
+			attacks : {
+				ultra : 6600,
+				super : 0,
+				normal : 0
+			}
+		},
+		2 : {
+			time : 60000,
+			attacks : {
+				ultra : 6600,
+				super : 0,
+				normal : 0
+			}
+		}
+	}
+
 	var ATTACKS = ["normal", "super", "ultra"]
 
 	var ORDER_SIDES = [SIDES.LEFT, SIDES.RIGHT]
@@ -152,7 +171,6 @@ var battle = function(){
 	var MAX_LIFE
     var MIN_LIFE = 0
 	var EMPTY_QUESTION = -1
-    var MAX_TIME = 30000
 
 	var COLORS = [0xFC1E79, 0x00D8FF]
 
@@ -163,10 +181,12 @@ var battle = function(){
 	var yogoGroup
 	var questionGroup
 	var listosYaGroup
+	var feedbackGroup
     var answersGroup
 	var specialAttack
 	var blackMask
 	var layers
+	var gradeQuestion
 
 	var mainYogotorars
 	var mainSpine
@@ -181,6 +201,7 @@ var battle = function(){
 		game.stage.backgroundColor = "#0D014D"
 		loadSounds()
 		mainYogotorars = []
+		gradeQuestion = 0
 
         riddles.initialize()
 	}
@@ -330,35 +351,20 @@ var battle = function(){
 		sceneGroup.add(questionGroup)
     }
 
-    function createScores(){
+    function createFeedback(){
 
-        var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#000066", align: "center"}
-
-        var scoresGroup = game.add.group()
-        scoresGroup.x = game.world.centerX
-        scoresGroup.y = game.world.centerY
-        sceneGroup.add(scoresGroup)
-        
-        var black = game.add.graphics()
-        black.beginFill(0x000000, 0.5)
-        black.drawRect(-game.world.centerX, -game.world.centerY, game.world.width, game.world.height)
-        black.endFill()
-        black.alpha = 0
-        scoresGroup.add(black)
-        
-        answersGroup = battleField.createScores(ORDER_SIDES, mainYogotorars)
-        answersGroup.alpha = 0
-        answersGroup.black = black
-        scoresGroup.add(answersGroup)
-
-        var attackTxt = new Phaser.Text(sceneGroup.game, 0, 0, "NORMAL", fontStyle)
-        attackTxt.anchor.setTo(0.5)
-        attackTxt.fill = "#ffff54"
-        attackTxt.fontSize = 80
-        attackTxt.fontStyle = "italic"
-        attackTxt.alpha = 0
-        scoresGroup.add(attackTxt)
-        answersGroup.text = attackTxt
+		feedbackGroup = resultsFeedback.createFeedback()
+		feedbackGroup.score.loserCallback = function(){
+			swapYogotars(layers[1])
+		}
+		feedbackGroup.winCallback = function(index, attack){
+			HUDGroup.setScore(index)
+            attack == "ultra" ? ultraMove(index) : attackMove(attack, index)
+		}
+		feedbackGroup.score.tieCallback = function(){
+			setNoAnswer()
+		}
+        sceneGroup.add(feedbackGroup)
     }
 
     function createListosYa(){
@@ -783,108 +789,37 @@ var battle = function(){
         
 		event = event || {}
 		var answers = event.answers || {}
-		var numTeam = event.numTeam || -1//game.rnd.integerInRange(1, 2)
-		var playerWin, playerLose
         
-		var t1 = answers.t1 || {
-			//value: true,
-			//time: game.rnd.integerInRange(1000, MAX_TIME) //10000 //10 seg
-		}
-		var t2 = answers.t2 ||{
-			//value: true,
-			//time: game.rnd.integerInRange(1000, MAX_TIME) //20000 //20 seg
-		}
+		var t1 = answers.t1 || {}
+		var t2 = answers.t2 ||{}
 		var players = [t1, t2]
-		var timeDifference = event.timeDifference || Math.abs(t1.time - t2.time) || 0
-		var timeConvertedDifference = convertTime(timeDifference)
         
-        swapYogotars(answersGroup.parent)
-        game.add.tween(answersGroup).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
-        game.add.tween(answersGroup.black).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
-
-		for(var i = 0; i < answersGroup.length; i++){
-
-			var newScale = convertScale(players[i].time)
-			if(newScale < 0)
-				newScale = 0
-			var ansTime = convertTime(players[i].time)
-
-			var score = answersGroup.children[i]
-			score.timeTxt.setText(ansTime)
-			score.diference.setText("+" + timeConvertedDifference)
-			score.time = players[i].time
-			var isCorrect = players[i].value == event.correctAnswer
-            changePosture(score, isCorrect)
-
-			var correct = game.add.tween(score.stock.scale).to({x:1.3, y:1.3}, 200, Phaser.Easing.Cubic.Out, true, 1000, 0, true)
-			var sizeBar = game.add.tween(score.bar.scale).to({x: newScale}, 400, Phaser.Easing.Cubic.Out, false)
-			var showTime = game.add.tween(score.timeTxt).to({alpha: 1}, 200, Phaser.Easing.Cubic.Out, false)
-
-			correct.chain(sizeBar)
-			sizeBar.chain(showTime)
+		swapYogotars(feedbackGroup)
+		
+		for(var i = 0; i < players.length; i++){
+			var anim = players[i].value == event.correctAnswer ? "answer_good" : "answer_bad"
+			var yogo = mainYogotorars[i]
+			game.time.events.add(1000, changeAnim, null, yogo, anim)
 		}
-        
-        var leftAns = answersGroup.children[0]
-        var rigthAns = answersGroup.children[1]
 
-        if(numTeam !== -1){
-            
-            if(numTeam === 1){
-                playerWin = leftAns
-                playerLose = rigthAns
-            }
-            else if(numTeam === 2) {
-                playerWin = rigthAns
-                playerLose = leftAns
-            }
-            
-            var tie = t1.value == t2.value
-            setWiner(playerWin)
-            setLoser(playerLose, tie)
-        }
-        else{
-            setLoser(leftAns)
-			setLoser(rigthAns)
-			game.time.events.add(4500, setNoAnswer)
-        }
+		feedbackGroup.displayResults(event, questionGroup.riddle)
 	}
     
-    function changePosture(score, name){
-        
-        game.time.events.add(1000, function(){
-            score.stock.loadTexture("atlas.answers", "ans" + name)
-            var index = score.parent.getChildIndex(score)
-            var anim = name ? "answer_good" : "answer_bad"
-            //for(var k = 0; k < mainYogotorars.length; k++){
-				var yogo = mainYogotorars[index]
-				yogo.setAnimation([anim], true)
-                //changeAnim(yogo, anim)
-            //}
-        })
-    }
-    
     function swapYogotars(newParent){
-        
+       
         for(var i = 0; i < mainYogotorars.length; i++){
             
             var yogo = mainYogotorars[i]
-            yogo.parent.remove(yogo)
-            newParent.length > 0 ? newParent.addAt(yogo, 1) : newParent.add(yogo)
+			yogo.parent.remove(yogo)
+			newParent.add(yogo)
+            //newParent.length > 0 ? newParent.addAt(yogo, 1) : newParent.add(yogo)
         }
-    }
+	}
 
 	function selectAttackType(time){
 
-//		if(time > 0 && time <= 60000){
-//			return "ultra"
-//		}
-//		else if(time > 60000 && time <= 120000){
-//			return "super"
-//		}
-//		else{
-//			return "normal"
-//		}
-        
+		//var riddleTime = curentRiddle.index !== 4 ? DIFFICULT_RULES[1].time : DIFFICULT_RULES[2].time
+
         if(time > 0 && time <= 10000){
 			return "ultra"
 		}
@@ -893,77 +828,7 @@ var battle = function(){
 		}
 		else{
  			return "normal"
- 		}
-	}
-
-	function setWiner(results){
-
-		var showShine = game.add.tween(results.shine.scale).from({y:0}, 400, Phaser.Easing.Cubic.Out, true, 1500)
-		showShine.onStart.add(function(){
-			results.particles.start(true, 1000, null, 20)
-			results.shine.alpha = 1
-            showAttackTxt(results)
-		})
-	}
-
-	function setLoser(results, tie){
-
-		if(tie) results.diference.alpha = 1
-
-		var fadeOut = game.add.tween(results.parent).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, false, 1000)
-        fadeOut.onStart.add(function(){
-            swapYogotars(layers[1])
-            game.add.tween(results.parent.black).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, true)
-        })
-		fadeOut.onComplete.add(restartResults)
-		game.add.tween(results).to({angle: 50 * results.direction}, 1000, Phaser.Easing.Bounce.Out, true, 2000).chain(fadeOut)
-
-		game.add.tween(results.diference).from({y: 30}, 400, Phaser.Easing.Cubic.Out, true, 1500)
-	}
-    
-    function showAttackTxt(winer){
-        
-        var attack = selectAttackType(winer.time)
-        var index = answersGroup.getChildIndex(winer)
-        
-        answersGroup.text.x = winer.x + 200 * ORDER_SIDES[index].scale.x
-        answersGroup.text.y = winer.y - 230
-        answersGroup.text.setText(attack.toUpperCase() + " ")
-        
-        var fadeIn = game.add.tween(answersGroup.text).to({alpha: 1}, 400, Phaser.Easing.Cubic.Out, true)
-        fadeIn.yoyo(true, 1000)
-        fadeIn.onComplete.add(function(){
-			HUDGroup.setScore(index)
-            attack == "ultra" ? ultraMove(index) : attackMove(attack, index)
-        })
-    }
-
-	function restartResults(){
-
-		for(var i = 0; i < answersGroup.length; i++){
-
-			var results = answersGroup.children[i]
-			results.stock.loadTexture("atlas.answers", "stock")
-			results.angle = 0
-			results.diference.alpha = 0
-			results.timeTxt.alpha = 0
-			results.time = 0
-			results.bar.scale.setTo(1)
-			results.shine.alpha = 0
 		}
-	}
-
-	function convertScale(time){
-
-		return 1 - time/MAX_TIME
-	}
-
-	function convertTime(time) {
-
-		var min = Math.floor(time / 60000)
-		var sec = ((time % 60000) / 1000).toFixed(0)
-
-		return min + ":" + (sec < 10 ? '0' : '') + sec
 	}
 
     function setReadyGo(){
@@ -978,8 +843,8 @@ var battle = function(){
 		})
         var secondOut = game.add.tween(listosYaGroup.ya.scale).to({x: 0,y: 0}, 300, Phaser.Easing.Cubic.InOut, false, 500)
         secondOut.onComplete.add(function(){
-			//questionGroup.showQuestion(server.generateQuestion())
-			// var riddle = riddles.getQuestion()
+			// questionGroup.showQuestion(server.generateQuestion())
+			// var riddle = riddles.getQuestion(gradeQuestion)
 			// questionGroup.showQuestion(riddle)
 			server.sendQuestion()
 		})
@@ -1038,12 +903,12 @@ var battle = function(){
 			placeYogotars()
 			createHUD()
 			createSpecialAttack()
-			createScores()
+			createFeedback()
 			createQuestionOverlay()
 			createListosYa()
 			//createMenuAnimations()
 			//menubuttons()
-			battleSong = sound.play("battleSong", {loop:true, volume:0.6})
+			battleSong = sound.play("battleSong", {loop:true, volume:0.4})
 			createWhite()
 
 			if(server){
