@@ -166,10 +166,10 @@ var reward = function(){
         }
         sceneGroup.add(back);
         
-        tile = game.add.tileSprite(game.world.centerX, game.world.centerY, game.world.width + 150, game.world.width + 180, "tile");
-        tile.anchor.setTo(0.5);
+        tile = game.add.tileSprite(0, 0, game.world.width, game.world.height, "tile")
+        //tile.anchor.setTo(0.5);
         tile.tint = 0x0099AA;
-        tile.angle = 45;
+        //tile.angle = 45;
         sceneGroup.add(tile);
     }
 

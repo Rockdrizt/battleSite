@@ -18,7 +18,7 @@
 },
 {
 	"filename": "bubblePart",
-	"frame": {"x":1256,"y":1,"w":26,"h":26},
+	"frame": {"x":715,"y":167,"w":26,"h":26},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":26,"h":26},
@@ -58,11 +58,11 @@
 },
 {
 	"filename": "time_container",
-	"frame": {"x":715,"y":236,"w":577,"h":101},
+	"frame": {"x":715,"y":236,"w":518,"h":101},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":577,"h":101},
-	"sourceSize": {"w":577,"h":101}
+	"spriteSourceSize": {"x":0,"y":0,"w":518,"h":101},
+	"sourceSize": {"w":518,"h":101}
 },
 {
 	"filename": "time_icon",
@@ -103,6 +103,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1311,"h":512},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:5af4775f6e377c6d486b8fd4145b0bb3:b0a0b8035035649eb3c554966aea18f2:cbce6b53f0f49e0bf15173c25c41f876$"
+	"smartupdate": "$TexturePacker:SmartUpdate:41a7f3adec2bc76a549a53954fb3d577:db82da36b5cedbbbcfc002fccb12b0d9:cbce6b53f0f49e0bf15173c25c41f876$"
 }
 }
