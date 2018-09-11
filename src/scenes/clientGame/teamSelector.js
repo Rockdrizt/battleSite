@@ -169,7 +169,7 @@ var teamSelector = function(){
 		},
 	}
 
-	var DEFAULT_NUMTEAM = 2
+	var DEFAULT_NUMTEAM = 1
 	var TEAM_COMPLETE = 3
 
 	var STATES
@@ -802,9 +802,9 @@ var teamSelector = function(){
 
 			delay += 300
 
-			var text = new Phaser.Text(splashArtGroup.game, -75, 0, YOGOTARS_LIST[teamGroup.auxArray[i]].name.toUpperCase(), fontStyle)
+			var text = new Phaser.Text(splashArtGroup.game, -75 * SIDE, 250, YOGOTARS_LIST[teamGroup.auxArray[i]].name.toUpperCase(), fontStyle)
 			text.anchor.setTo(0, 0.5)
-			text.scale.setTo(1, SIDE)
+			text.scale.setTo(SIDE, 1)
 			text.stroke = "#751375"
 			text.strokeThickness = 20
 			text.angle = -90
@@ -814,7 +814,7 @@ var teamSelector = function(){
 
 			if(i === 1){
 				lava.scale.setTo(-1, SIDE)
-				text.scale.setTo(1, -SIDE)
+				text.scale.setTo(SIDE, -1)
 				text.x *= -1
 			}
 		}
@@ -964,7 +964,7 @@ var teamSelector = function(){
 			createYogoNames()
 			animateSelector()
 			createReady()
-
+			
 		},
 		shutdown:function () {
 			sceneGroup.destroy()

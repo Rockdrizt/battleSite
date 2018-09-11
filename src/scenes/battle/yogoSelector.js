@@ -839,7 +839,7 @@ var yogoSelector = function(){
 				var slot = getSpineSlot(lava, "yogo")
 				slot.add(splash)
 
-				var text = new Phaser.Text(splashArtGroup.game, 75 * side.direction, 0, YOGOTARS_LIST[team[i]].name.toUpperCase(), fontStyle)
+				var text = new Phaser.Text(splashArtGroup.game, 75 * side.direction, 240, YOGOTARS_LIST[team[i]].name.toUpperCase(), fontStyle)
 				text.anchor.setTo(0, 0.5)
 				text.scale.setTo(1, side.scale.x)
 				text.stroke = "#751375"
