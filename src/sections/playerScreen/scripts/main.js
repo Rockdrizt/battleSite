@@ -29,8 +29,7 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				//sceneloader.show("battle")
-				sceneloader.show("scores")
+				sceneloader.show("playerScreen")
                 
 	    	}
 
@@ -84,21 +83,17 @@ function startGame(){
 		//server test
 	}
 
-	var teams = [
-		["dinamita", "theffanie", "luna"],
-		["eagle", "nao", "estrella"],
-	]
-	var kids = [
-		["Rock", "Pawel", "Rulas"], 
-		["Mares", "Cherry", "Humbert"]
-	]
+	var player = {
+		yogo: "eagle",
+		kid: "Rock"
+	}
 
-	scores.setTeams(teams, kids)
+	playerScreen.setTeams(player)
     
 	function create(){
 
 		bootConfigFiles([
-			scores
+			playerScreen
 		])
 	}
 }
