@@ -61,13 +61,13 @@ var teamSelector = function(){
 		],
 		sounds: [
 			{	name: "shineSpell",
-				file: "../../sounds/sounds/shineSpell.mp3"},
+				file: "../../sounds/sounds/shineSpell.wav"},
 			{	name: "swipe",
 				file: soundsPath + "swipe.mp3"},
 			{	name: "robotBeep",
 				file: soundsPath + "robotBeep.mp3"},
 			{	name: "lightUp",
-				file: "../../sounds/sounds/lightUp.mp3"},
+				file: "../../sounds/sounds/lightUp.wav"},
 			{	name: "cut",
 				file: soundsPath + "cut.mp3"},
 			{	name: "gameSong", 
@@ -169,9 +169,8 @@ var teamSelector = function(){
 		},
 	}
 
-	var DEFAULT_NUMTEAM = 1
+	var DEFAULT_NUMTEAM = 2
 	var TEAM_COMPLETE = 3
-	var MAX_YOGOTARS = 8
 
 	var STATES
 	var SIDE
@@ -778,11 +777,14 @@ var teamSelector = function(){
 
 	function createSplashArt(){
 
+		var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 		var pivotX = SIDE > 0 ? 0.3 : 1.7
+		var pivotY = SIDE > 0 ? 0 : 1
 		var aux = SIDE
 		var pivotS = 1
 		var offsetY = SIDE > 0 ? 100 : 110
 		var delay = 0
+		teamGroup.auxArray = [1,1,1]
 		
 		for(var i = 0; i < teamGroup.auxArray.length; i++){
 
@@ -805,6 +807,15 @@ var teamSelector = function(){
 
 			delay += 300
 
+			var text = new Phaser.Text(splashArtGroup.game, -75, 500 * pivotY, YOGOTARS_LIST[teamGroup.auxArray[i]].name.toUpperCase(), fontStyle)
+			text.anchor.setTo(0, 0.5)
+			text.scale.setTo(1, aux)
+			text.stroke = "#751375"
+			text.strokeThickness = 20
+			text.angle = -90
+			lava.addChild(text)
+
+
 			// var container = game.add.sprite(0, 100 * aux, "atlas.loading", "container" + aux)
 			// var splash = game.add.sprite(0, offsetY, "atlas.loading", assets.spines[teamGroup.auxArray[i]].name)
 
@@ -822,6 +833,8 @@ var teamSelector = function(){
 			if(pivotS === i){
 				pivotS += 2
 				lava.scale.setTo(-1, aux)
+				text.scale.setTo(1, -aux)
+				text.x *= -1
 			}
 
 			// container.destroy()
@@ -976,6 +989,8 @@ var teamSelector = function(){
 			createYogoNames()
 			animateSelector()
 			createReady()
+
+			createSplashArt()
 		},
 		shutdown:function () {
 			sceneGroup.destroy()
