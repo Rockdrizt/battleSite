@@ -54,7 +54,7 @@ var yogoSelector = function(){
 			{	name: "robotBeep",
 				file: soundsPath + "robotBeep.mp3"},
 			{	name: "shineSpell",
-				file: "../../sounds/sounds/shineSpell.mp3"},
+				file: "../../sounds/sounds/shineSpell.wav"},
 			{	name: "pop",
 				file: soundsPath + "pop.mp3"},
 			{	name: "brightTransition",
@@ -812,33 +812,35 @@ var yogoSelector = function(){
 		var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 		var delay = 0
 		var images = [alphaGroup.auxArray, bravoGroup.auxArray]
-
+		
 		for(var j = 0; j < images.length; j++){
 
 			var side = ORDER_SIDES[j]
 			var pivotX = game.world.centerX * 0.82 * side.direction
 			var RISE_X = game.world.centerY * 0.5 * -side.direction
 			var team = images[j]
+			var textY = side.direction > 0 ? 400 : 100
 
 			for(var i = 0; i < team.length; i++){
 
 				var lava = game.add.spine(pivotX, game.world.height * 1.3 * side.direction, "lava")
 				lava.setSkinByName("normal")
 				lava.scale.setTo(1, side.scale.x)
+				lava.dir = 150 * side.direction
 				splashArtGroup.add(lava)
 
 				game.time.events.add(delay, function(lava){
 					lava.setAnimationByName(0, "idle", true)
 				},null, lava)
 
-				var splash = game.add.sprite(0, 120, "atlas.loading", YOGOTARS_LIST[team[i]].name)
+				var splash = game.add.sprite(0, 230, "atlas.loading", YOGOTARS_LIST[team[i]].name)
 				splash.anchor.setTo(0.5)
 				splash.scale.setTo(1, side.scale.x)
 
 				var slot = getSpineSlot(lava, "yogo")
 				slot.add(splash)
 
-				var text = new Phaser.Text(splashArtGroup.game, 75 * side.direction, 300 * j, YOGOTARS_LIST[team[i]].name.toUpperCase(), fontStyle)
+				var text = new Phaser.Text(splashArtGroup.game, 75 * side.direction, textY, YOGOTARS_LIST[team[i]].name.toUpperCase(), fontStyle)
 				text.anchor.setTo(0, 0.5)
 				text.scale.setTo(1, side.scale.x)
 				text.stroke = "#751375"
@@ -988,10 +990,7 @@ var yogoSelector = function(){
 
 			var splashArt = splashArtGroup.children[i]
 			var delay = game.rnd.integerInRange(300, 400)
-			var landing = game.add.tween(splashArt).to({y: 0}, delay, Phaser.Easing.Cubic.Out, true, 400)
-			// landing.onStart.add(function(splashArt){
-			// 	splashArt.alpha = 1
-			// },splashArt)
+			var landing = game.add.tween(splashArt).to({y: splashArt.dir}, delay, Phaser.Easing.Cubic.Out, true, 400)
 		}
 
 		pullGroup.destroy()
@@ -1085,7 +1084,7 @@ var yogoSelector = function(){
 
 			createReady()
 			createWhite()
-			
+			createSplashArt()
 			if(server)
 				server.addEventListener("onPlayersChange", onPlayersChange)
 			// game.time.events.add(6000, function () {
