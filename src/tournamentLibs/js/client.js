@@ -87,7 +87,7 @@ function Client(){
 			if((val[self.numTeam])&&(!val[self.numTeam].ready))
 				setfb(self.refIdGame.child("t" + self.numTeam), team)
 			else
-				self.onError("El equipo " + self.numTeam + " ya esta siendo ocupado. Da click en OK para continuar", false, true)
+				self.showAlert("El equipo " + self.numTeam + " ya esta siendo ocupado. Da click en OK para continuar", false, true)
 		}
 		else if(!t1.ready){
 			setfb(self.refIdGame.child("t1"), team)//self.refIdGame.child("t1").set(team);
@@ -101,7 +101,7 @@ function Client(){
 			self.id_game = null;
 			self.refIdGame= null;
 			self.fireEvent('onGameFull',[]);
-			self.onError("La sesión esta llena, ingresa un pin diferente", true)
+			self.showAlert("La sesión esta llena, ingresa un pin diferente", true)
 			return false
 		}
 
