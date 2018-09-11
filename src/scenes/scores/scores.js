@@ -132,11 +132,12 @@ var scores = function(){
 	
        	for(var j = 0; j < 2; j++){
            
-			var logo = logos.create(game.world.centerX, game.world.height - 30, "atlas.scores", "logo" + j)
-			logo.x -= 50 * ORDER_SIDES[j].direction
-           	logo.anchor.setTo(j, 1)
+			var logo = logos.create(game.world.centerX, game.world.height - 150, "atlas.scores", "logo" + j)
+			logo.x -= 150 * ORDER_SIDES[j].direction
+           	logo.anchor.setTo(0.5, 0)
 		}
 		logos.children[0].scale.setTo(0.3)
+		logos.children[1].scale.setTo(0.9)
 	}
 	
 	function createTeamBar(){
