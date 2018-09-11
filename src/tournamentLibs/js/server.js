@@ -467,7 +467,11 @@ function Server(){
 			if(snapshot.exists()){
 				valores = snapshot.val()
 				serverReady = true
-				database.ref(currentId + "/serverReady").set(true)
+				var reconnectStatus = {
+					serverReady : true,
+					battleReady : false
+				}
+				database.ref(currentId).update(reconnectStatus)
 				self.currentData = valores
 
 				if(!id_game){
