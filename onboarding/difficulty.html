@@ -62,8 +62,7 @@
           </div>
         </div>
         <div class="item__buttons">
-          <a href="customize-battle.html" class="item__btn">
-            <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
+          <a href="customize-battle.html" class="item__btn item__btn--ok">
           </a>
         </div>
       </section>
@@ -159,8 +158,8 @@
                 </label>
               </li>
             </ul>
-            <button class="modal__btn" type="submit">
-              <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
+            <button class="modal__btn item__btn--ok" type="submit">
+              <!-- <img src="./img/mathtournament-onboarding-ok-btn.png" alt=""> -->
             </button>
           </form>
         </div>
@@ -258,8 +257,8 @@
                 </label>
               </li>
             </ul>
-            <button class="modal__btn" type="submit">
-              <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
+            <button class="modal__btn item__btn--ok" type="submit">
+              <!-- <img src="./img/mathtournament-onboarding-ok-btn.png" alt=""> -->
             </button>
           </form>
         </div>
@@ -357,8 +356,8 @@
                 </label>
               </li>
             </ul>
-            <button class="modal__btn" type="submit">
-              <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
+            <button class="modal__btn item__btn--ok" type="submit">
+              <!-- <img src="./img/mathtournament-onboarding-ok-btn.png" alt=""> -->
             </button>
           </form>
         </div>
@@ -456,8 +455,8 @@
                 </label>
               </li>
             </ul>
-            <button class="modal__btn" type="submit">
-              <img src="./img/mathtournament-onboarding-ok-btn.png" alt="">
+            <button class="modal__btn item__btn--ok" type="submit">
+              <!-- <img src="./img/mathtournament-onboarding-ok-btn.png" alt=""> -->
             </button>
           </form>
         </div>
@@ -567,6 +566,25 @@
       })
     })
 
+    // Select all
+    var selectAll = document.querySelectorAll('.select-all')
+    selectAll.forEach(function (el, i) {
+      el.addEventListener('change', function (e) {
+        var inputs = modalForms[i].elements
+        if (e.target.checked === true) {
+          for (var index = 1; index < inputs.length - 1; index++) {
+            modalForms[i].elements[index].checked = true
+            modalForms[i].elements[index].addEventListener('change', function () {
+              e.target.checked = false
+            })
+          }
+        } else {
+          for (var index = 1; index < inputs.length - 1; index++) {
+            modalForms[i].elements[index].checked = false
+          }
+        }
+      })
+    })
   </script>
 </body>
 
