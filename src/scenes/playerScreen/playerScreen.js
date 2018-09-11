@@ -38,11 +38,7 @@ var playerScreen = function(){
 		]
     }
 
-	var PLAYER_DATA = {
-			yogo: "",
-			kid: "",
-			index: 0
-		}
+	var PLAYER_DATA
 	
 	var sceneGroup
     var tile
@@ -64,8 +60,6 @@ var playerScreen = function(){
     
 	function createBackground(){
 		
-		var fontStyle = {font: "100px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
-
         var bmd = game.add.bitmapData(game.world.width, game.world.height)
         var back = bmd.addToWorld()
 
@@ -84,18 +78,12 @@ var playerScreen = function(){
 		tile.tint = 0x00FFFF
 		tile.alpha = 0.2
 		sceneGroup.add(tile)
-		
-		// var title = new Phaser.Text(sceneGroup.game, game.world.centerX, 230, "Resultados", fontStyle)
-		// title.anchor.setTo(0.5)
-		// sceneGroup.add(title)
 	}
 	
     
 	function update(){
         tile.tilePosition.y -= 0.4
-        //epicparticles.update()
     }
-
 	
 	function createTeamMember(){
 
@@ -120,12 +108,12 @@ var playerScreen = function(){
 		memberGroup.add(kidName)
 		memberGroup.kidName = kidName
 		
-		var yogoName = new Phaser.Text(memberGroup.game, 0, 150, PLAYER_DATA.yogo.charAt(0).toUpperCase() + PLAYER_DATA.yogo.slice(1), fontStyle)
+		var yogoName = new Phaser.Text(memberGroup.game, 0, 150, PLAYER_DATA.yogo, fontStyle)
 		yogoName.anchor.setTo(0.5)
 		memberGroup.add(yogoName)
 		memberGroup.yogoName = yogoName
-
-		var yogo = memberGroup.create(-2, 53, "atlas.player", PLAYER_DATA.index)
+		
+		var yogo = memberGroup.create(-2, 53, "atlas.player", getYogoNumber(PLAYER_DATA.yogo))
 		yogo.anchor.setTo(0.5, 1)
 		memberGroup.yogo = yogo
 
@@ -134,10 +122,10 @@ var playerScreen = function(){
 
 	function getYogoNumber(name){
 
-		var NAMES_LIST = ["tomiko", "luna", "nao", "theffanie", "eagle", "dinamita", "arthurius", "estrella"] 
+		var NAMES_LIST = ["Tomiko", "Luna", "Nao", "Theffanie", "Eagle", "Dinamita", "Arthurius", "Estrella"] 
 		var index = NAMES_LIST.indexOf(name)
 
-		return index
+		return "yogo" + index
 	}
 
 	return {
@@ -158,10 +146,7 @@ var playerScreen = function(){
 			createTeamMember()
 		},
         setTeams: function (player) {
-			var index = getYogoNumber(player.yogo)
-			PLAYER_DATA.yogo = player.yogo
-			PLAYER_DATA.kid = player.kid
-			PLAYER_DATA.index = "yogo" + index
+			PLAYER_DATA = player
 		},
 		shutdown: function () {
 			sceneGroup.destroy()

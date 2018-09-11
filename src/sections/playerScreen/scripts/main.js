@@ -84,7 +84,7 @@ function startGame(){
 	}
 
 	var player = {
-		yogo: "eagle",
+		yogo: "Eagle",
 		kid: "Rock"
 	}
 
