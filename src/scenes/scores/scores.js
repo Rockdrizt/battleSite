@@ -271,8 +271,9 @@ var scores = function(){
 			var bubble = scoresGroup.create(0, 0, "atlas.scores", "score" + i)
 			bubble.anchor.setTo(0.5)
 			bubble.x = pivotX * ORDER_SIDES[i].direction
+			bubble.points = 0
 			
-			var score = new Phaser.Text(scoresGroup.game, 0, 50, "99", fontStyle)
+			var score = new Phaser.Text(scoresGroup.game, 0, 50, bubble.points, fontStyle)
             score.anchor.setTo(0.5)
             bubble.addChild(score)
             bubble.text = score
@@ -375,6 +376,14 @@ var scores = function(){
 		assets.images.push(charObj)
 	}
 
+	function setScore(index){
+
+		var bubble = scoresGroup.children[index]
+		bubble.points++
+		game.add.tween(bubble.scale).to({x:1.2, y:1.2}, 200, Phaser.Easing.Cubic.InOut, true, 0, 0, true)
+		bubble.text.setText(bubble.points)
+	}
+
 	return {
 		assets: assets,
         bootFiles:bootFiles,
@@ -394,7 +403,6 @@ var scores = function(){
 			createTeams()
 			createVS()
 			createScoreBubble()
-            // createTimeToken()
 		},
         setCharacter:setCharacter,
         setTeams: function (myTeams, kidsTeam) {
@@ -416,6 +424,7 @@ var scores = function(){
                     setCharacter(kidsTeam[i][j])
             }
 		},
+		setScore:setScore,
 		shutdown: function () {
 			sceneGroup.destroy()
 		}

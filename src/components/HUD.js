@@ -22,6 +22,7 @@ var HUD = function(){
             var lifeBox = teamSide.create(game.world.centerX * pivotX, 150, "atlas.battle", "lifeContainer" + i)
             lifeBox.x -= 10 * side
             lifeBox.anchor.setTo(i, 0.5)
+            lifeBox.scale.setTo(0.95)
 
             var teamName = new Phaser.Text(teamSide.game, lifeBox.x, lifeBox.y - 105, "Equipo Alpha", fontStyle)
             teamName.anchor.setTo(i, 0.5)
@@ -30,12 +31,12 @@ var HUD = function(){
             teamName.strokeThickness = 10
             teamSide.add(teamName)
             
-            var life = teamSide.create(game.world.centerX * pivotX, lifeBox.y - 5, "atlas.battle", "lifeGauge")
+            var life = teamSide.create(lifeBox.x + (23 * side), lifeBox.y - 5, "atlas.battle", "lifeGauge")
             life.anchor.setTo(0, 0.5)
             life.scale.setTo(side, 1)
             teamSide.life = life
             
-            var teamScore = teamSide.create(life.x - 80 * side, life.y * 2.5, "atlas.battle", "score" + i)
+            var teamScore = teamSide.create(lifeBox.x - 80 * side, lifeBox.y * 2.5, "atlas.battle", "score" + i)
             teamScore.anchor.setTo(0.5)
             teamScore.scale.setTo(0.6)
             teamScore.points = 0
@@ -52,7 +53,7 @@ var HUD = function(){
 			teamSide.add(tokenGroup)
             teamSide.tokenGroup = tokenGroup
             
-                var token = tokenGroup.create(life.x, life.y, "atlas.battle", "token" + i)
+                var token = tokenGroup.create(lifeBox.x, lifeBox.y, "atlas.battle", "token" + i)
                 token.anchor.setTo(0.5)
                 token.scale.setTo(side, 1)
                 token.x -= 78 * side
@@ -66,7 +67,7 @@ var HUD = function(){
                 
                 for(var j = 0; j < 2; j++){
                     
-                    var token = tokenGroup.create(life.x, life.y + 120, "atlas.battle", "token" + i)
+                    var token = tokenGroup.create(lifeBox.x, lifeBox.y + 120, "atlas.battle", "token" + i)
                     token.anchor.setTo(0.5)
                     token.scale.setTo(0.75 * side, 0.75)
                     token.x -= 155 * j * side
@@ -82,7 +83,8 @@ var HUD = function(){
             pivotX += 1.5
         }
     
-		teamName.setText("Equipo Bravo")
+        teamName.setText("Equipo Bravo")
+        life.x -= 4 //hardcode due to art diferen sizes
 		
 		//createTimer(HUDGroup)
 		HUDGroup.rotateTokens = rotateTokens.bind(HUDGroup)
