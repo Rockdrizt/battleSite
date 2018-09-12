@@ -10,7 +10,7 @@
       "file":"/spines/yogotars/battle/Razzle/razzle_projectiles.json",
       "scales":["@0.5x"],
       "skin":"razzle1",
-      "animations":["idle_ultra","idle_ultra"]
+      "animations":["idle_ultra"]
     }
   ],
   "sounds":[

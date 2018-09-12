@@ -4,14 +4,14 @@
     "removal":1700,
     "hit":1000
   },
-     "particles":[
-    ],
+    
+    
   "spines":[
     {
       "file":"/spines/yogotars/battle/Razzle/razzle_projectiles.json",
       "scales":["@0.5x"],
       "skin":"razzle1",
-      "animations":["idle_super","idle_super"]
+      "animations":["idle_super"]
     }
     ],
     

@@ -4,135 +4,142 @@ size: 2048,1024
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+normal/particle
+  rotate: false
+  xy: 2, 2
+  size: 52, 52
+  orig: 52, 52
+  offset: 0, 0
+  index: -1
 normal1/ultra_explosion1
   rotate: false
-  xy: 2, 355
+  xy: 2, 409
   size: 218, 530
   orig: 218, 530
   offset: 0, 0
   index: -1
 normal1/ultra_explosion2
   rotate: true
-  xy: 757, 710
+  xy: 757, 764
   size: 175, 535
   orig: 175, 535
   offset: 0, 0
   index: -1
 normal1/ultra_explosion3
   rotate: true
-  xy: 222, 705
+  xy: 222, 759
   size: 180, 533
   orig: 180, 533
   offset: 0, 0
   index: -1
 normal1/ultra_explosion4
   rotate: true
-  xy: 222, 524
+  xy: 222, 578
   size: 179, 525
   orig: 179, 525
   offset: 0, 0
   index: -1
 normal1/ultra_wave_00
   rotate: true
-  xy: 2, 2
+  xy: 2, 56
   size: 351, 142
   orig: 351, 142
   offset: 0, 0
   index: -1
 normal1/ultra_wave_01
   rotate: false
-  xy: 1294, 743
+  xy: 1294, 797
   size: 351, 142
   orig: 351, 142
   offset: 0, 0
   index: -1
 normal1/ultra_wave_02
   rotate: false
-  xy: 222, 380
+  xy: 222, 434
   size: 351, 142
   orig: 351, 142
   offset: 0, 0
   index: -1
 normal1/ultra_wave_03
   rotate: false
-  xy: 1647, 743
+  xy: 1647, 797
   size: 351, 142
   orig: 351, 142
   offset: 0, 0
   index: -1
 normal1/ultra_wave_04
   rotate: true
-  xy: 146, 2
+  xy: 146, 56
   size: 351, 142
   orig: 351, 142
   offset: 0, 0
   index: -1
 normal1/ultra_wave_05
   rotate: true
-  xy: 290, 27
+  xy: 290, 81
   size: 351, 142
   orig: 351, 142
   offset: 0, 0
   index: -1
 normal1/ultra_wave_06
   rotate: true
-  xy: 434, 27
+  xy: 434, 81
   size: 351, 142
   orig: 351, 142
   offset: 0, 0
   index: -1
 normal1/ultra_wave_07
   rotate: false
-  xy: 1294, 599
+  xy: 1294, 653
   size: 351, 142
   orig: 351, 142
   offset: 0, 0
   index: -1
 normal1/ultra_wave_08
   rotate: false
-  xy: 1647, 599
+  xy: 1647, 653
   size: 351, 142
   orig: 351, 142
   offset: 0, 0
   index: -1
 normal1/ultra_wave_09
   rotate: false
-  xy: 757, 566
+  xy: 757, 620
   size: 351, 142
   orig: 351, 142
   offset: 0, 0
   index: -1
 normal1/ultra_wave_10
   rotate: false
-  xy: 749, 422
+  xy: 749, 476
   size: 351, 142
   orig: 351, 142
   offset: 0, 0
   index: -1
 normal1/ultra_wave_11
   rotate: true
-  xy: 578, 171
+  xy: 578, 225
   size: 351, 142
   orig: 351, 142
   offset: 0, 0
   index: -1
 normal1/ultra_wave_12
   rotate: false
-  xy: 722, 278
+  xy: 722, 332
   size: 351, 142
   orig: 351, 142
   offset: 0, 0
   index: -1
 normal1/ultra_wave_13
   rotate: false
-  xy: 722, 134
+  xy: 722, 188
   size: 351, 142
   orig: 351, 142
   offset: 0, 0
   index: -1
 normal1/water_ball1
   rotate: false
-  xy: 1110, 571
+  xy: 1110, 625
   size: 137, 137
   orig: 137, 137
   offset: 0, 0
