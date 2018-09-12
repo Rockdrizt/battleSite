@@ -43,7 +43,8 @@ function startGame(){
 
 		alertDialog.init()
 		cliente = new Client();
-		connectToServer(cliente.id_game)
+		var idGameFromHash = window.location.hash.substr(1);
+		connectToServer(idGameFromHash)
 		//sceneloader.show("rewardClient")
 	}
 
