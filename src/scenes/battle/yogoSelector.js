@@ -54,7 +54,7 @@ var yogoSelector = function(){
 			{	name: "robotBeep",
 				file: soundsPath + "robotBeep.mp3"},
 			{	name: "shineSpell",
-				file: "../../sounds/sounds/shineSpell.wav"},
+				file: "../../sounds/sounds/shineSpell.mp3"},
 			{	name: "pop",
 				file: soundsPath + "pop.mp3"},
 			{	name: "brightTransition",
@@ -84,10 +84,45 @@ var yogoSelector = function(){
 		],
 		spines:[
 			{
-				name:"lava",
-				file:settings.BASE_PATH + "/spines/yogotars/selector/lava/skeleton.json",
-				//scales: ["@0.5x"]
-			}
+				name:"tomiko",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/tomiko/tomikoSelector.json",
+				scales: ["@0.5x"]
+			},
+			{
+				name:"luna",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/luna/lunaSelector.json",
+				scales: ["@0.5x"]
+			},
+			{
+				name:"nao",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/nao/naoSelector.json",
+				scales: ["@0.5x"]
+			},
+			{
+				name:"theffanie",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/theffanie/theffanieSelector.json",
+				scales: ["@0.5x"]
+			},
+			{
+				name:"eagle",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/eagle/eagleSelector.json",
+				scales: ["@0.5x"]
+			},
+			{
+				name:"dinamita",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/dinamita/dinamitaSelector.json",
+				scales: ["@0.5x"]
+			},
+			{
+				name:"arthurius",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/arthurius/arthuriusSelector.json",
+				scales: ["@0.5x"]
+			},
+			{
+				name:"estrella",
+				file: settings.BASE_PATH + "/spines/yogotars/selector/estrella/estrellaSelector.json",
+				scales: ["@0.5x"]
+			},
 		],
 		particles: [
 			{
@@ -102,52 +137,6 @@ var yogoSelector = function(){
 			}
 		]
 	}
-
-	var YOGOTARS_LIST = [
-		{
-			name:"tomiko",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/tomiko/tomikoSelector.json",
-			scales: ["@0.5x"]
-		},
-		{
-			name:"luna",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/luna/lunaSelector.json",
-			scales: ["@0.5x"]
-		},
-		{
-			name:"nao",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/nao/naoSelector.json",
-			scales: ["@0.5x"]
-		},
-		{
-			name:"theffanie",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/theffanie/theffanieSelector.json",
-			scales: ["@0.5x"]
-		},
-		{
-			name:"eagle",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/eagle/eagleSelector.json",
-			scales: ["@0.5x"]
-		},
-		{
-			name:"dinamita",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/dinamita/dinamitaSelector.json",
-			scales: ["@0.5x"]
-		},
-		{
-			name:"arthurius",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/arthurius/arthuriusSelector.json",
-			scales: ["@0.5x"]
-		},
-		{
-			name:"estrella",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/estrella/estrellaSelector.json",
-			scales: ["@0.5x"]
-		},
-	]
-	
-	assets.spines = assets.spines.concat(YOGOTARS_LIST)
-
 
 	var gameSong
 	var sceneGroup
@@ -165,12 +154,6 @@ var yogoSelector = function(){
 	var STATES = {yellow: 0, red: 1, blue: 2, bicolor: 3}
 	var SIDE = {left: 1, rigth: -1}
 	var NUM_PLAYERS_EACH = 3
-
-	var SIDES = {
-		LEFT:{direction: -1, scale:{x:1}},
-		RIGHT:{direction: 1, scale:{x:-1}},
-	}
-	var ORDER_SIDES = [SIDES.LEFT, SIDES.RIGHT]
 
 	var loadingGroup
 	var splashArtGroup
@@ -219,13 +202,16 @@ var yogoSelector = function(){
 		}
 
 		tile = game.add.tileSprite(0, 0, game.world.width, game.world.height, "tile")
+		//tile.anchor.setTo(0.5)
 		tile.tint = 0x0099AA
+		//tile.angle = 45
         tile.alpha = 0
 		//sceneGroup.add(tile)
 	}
 
 	function update(){
 		tile.tilePosition.y -= 0.4
+		//tile.tilePosition.x -= 0.4
 		epicparticles.update()
 	}
     
@@ -301,20 +287,21 @@ var yogoSelector = function(){
 		var aux = 0
 		var skinNum = 1
 
-		for(var i = 0; i < YOGOTARS_LIST.length * 2; i++){
+		for(var i = 0; i < assets.spines.length * 2; i++){
 
-			var player = spineLoader.createSpine(YOGOTARS_LIST[aux].name, YOGOTARS_LIST[aux].name + skinNum, "wait", 0, 0, true)
+			var player = spineLoader.createSpine(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait", 0, 0, true)//(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait")
 			player.x = 0
 			player.y = -100
-			player.name = YOGOTARS_LIST[aux].name
+			player.name = assets.spines[aux].name
 			player.tag = aux
 			player.used = false
-			player.skin = YOGOTARS_LIST[aux].name + skinNum
+			player.skin = assets.spines[aux].name + skinNum
 			player.setAlive(false)
 			pullGroup.add(player)
 
 			aux = i - aux
 			skinNum = i % 2 ? 1 : 2
+
 		}
 	}
 
@@ -360,7 +347,7 @@ var yogoSelector = function(){
 		var pivotY = 270
 		var aux = 0
 
-		for(var i = 0; i < YOGOTARS_LIST.length; i++){
+		for(var i = 0; i < 8; i++){
 
 			var subGroup = game.add.group()
 			subGroup.x = game.world.centerX * pivotX
@@ -403,7 +390,7 @@ var yogoSelector = function(){
 				aux = 0
 			}
 
-			var yogotarName = YOGOTARS_LIST[i].name
+			var yogotarName = assets.spines[i].name
 			tokens[yogotarName] = token
 		}
 
@@ -738,7 +725,7 @@ var yogoSelector = function(){
     function showName(tag){
         
         game.add.tween(namesGroup.light.scale).to({x: 1, y: 1}, 200, Phaser.Easing.linear, true, 0, 0, true)
-        sound.play(YOGOTARS_LIST[tag].name)
+        sound.play(assets.spines[tag].name)
         namesGroup.yogoName.loadTexture("atlas.yogoSelector", "name" + tag)
         namesGroup.yogoName.alpha = 1
 
@@ -809,70 +796,67 @@ var yogoSelector = function(){
 
 	function createSplashArt(){
 
-		var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
-		var delay = 0
-		var images = [alphaGroup.auxArray, bravoGroup.auxArray]
-		
-		for(var j = 0; j < images.length; j++){
+		var pivotX = 0.25
+		var aux = 1
+		var pivotS = 1
+		var offsetY = 400
+        var txtX = 90
+        var txtY = -0.5
+        var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
+        
+		var images = []
 
-			var side = ORDER_SIDES[j]
-			var pivotX = game.world.centerX * 0.82 * side.direction
-			var RISE_X = game.world.centerY * 0.5 * -side.direction
-			var team = images[j]
+		for(var x = 0; x < alphaGroup.auxArray.length; x++){
 
-			for(var i = 0; i < team.length; i++){
-
-				var lava = game.add.spine(pivotX, game.world.height * 1.3 * side.direction, "lava")
-				lava.setSkinByName("normal")
-				lava.scale.setTo(1, side.scale.x)
-				lava.dir = 150 * side.direction
-				splashArtGroup.add(lava)
-
-				game.time.events.add(delay, function(lava){
-					lava.setAnimationByName(0, "idle", true)
-				},null, lava)
-
-				var splash = game.add.sprite(0, 230, "atlas.loading", YOGOTARS_LIST[team[i]].name)
-				splash.anchor.setTo(0.5)
-				splash.scale.setTo(1, side.scale.x)
-
-				var slot = getSpineSlot(lava, "yogo")
-				slot.add(splash)
-
-				var text = new Phaser.Text(splashArtGroup.game, 75 * side.direction, 240, YOGOTARS_LIST[team[i]].name.toUpperCase(), fontStyle)
-				text.anchor.setTo(0, 0.5)
-				text.scale.setTo(1, side.scale.x)
-				text.stroke = "#751375"
-				text.strokeThickness = 20
-				text.angle = 90 * side.direction
-				lava.addChild(text)
-
-				delay += 300
-				pivotX += RISE_X
-			}
-		}
-	}
-
-	function getSpineSlot(spine, slotName){
-		
-		var slotIndex
-		for(var index = 0, n = spine.skeletonData.slots.length; index < n; index++){
-			var slotData = spine.skeletonData.slots[index]
-			if(slotData.name === slotName){
-				slotIndex = index
-			}
+			images[x] = alphaGroup.auxArray[x]
+			images[x + 3] = bravoGroup.auxArray[x]
 		}
 
-		if (slotIndex){
-			return spine.slotContainers[slotIndex]
+		for(var i = 0; i < 6; i++){
+
+			var container = game.add.sprite(0, 100 * aux, "atlas.loading", "container" + aux)
+			var splash = game.add.sprite(0, offsetY, "atlas.loading", assets.spines[images[i]].name)
+
+			var splashMask = game.make.bitmapData(splash.width, container.height + 100)
+			splashMask.alphaMask(splash, container)
+
+			var splashArt = game.add.image(game.world.centerX * pivotX, game.world.height * aux, splashMask)
+			splashArt.anchor.setTo(0.5, aux)
+			splashArt.scale.setTo(0.9)
+			splashArt.alpha = 0
+			splashArtGroup.add(splashArt)
+            
+            var text = new Phaser.Text(sceneGroup.game, txtX, splashArt.height * txtY, assets.spines[images[i]].name.toUpperCase(), fontStyle)
+            text.anchor.setTo(0, 0.5)
+            text.stroke = "#751375"
+            text.strokeThickness = 20
+            text.angle = -90
+            splashArt.addChild(text)
+
+			if(i === 2){
+				aux = 0
+				offsetY = 150
+                txtX = -80
+                txtY = 0.37
+			}
+
+			i === 2 ? pivotX += 0.5 : pivotX += 0.25
+
+			if(pivotS === i){
+				pivotS += 2
+				splashArt.scale.setTo(-0.9, 0.9)
+                text.scale.setTo(1, -1)
+                text.x *= -1
+			}
+
+			container.destroy()
+			splash.destroy()
 		}
 	}
 
 	function createReady(){
 
 		splashArtGroup = game.add.group()
-		splashArtGroup.x = game.world.centerX
-		splashArtGroup.y = game.world.centerY
 		loadingGroup.add(splashArtGroup)
 
 		readyGroup = game.add.group()
@@ -985,11 +969,18 @@ var yogoSelector = function(){
 
 	function animateSplashArt(){
 
+		var delay = 500
+		var aux = 0
+
+		//sound.play("shineSpell")
+
 		for(var i = 0; i < splashArtGroup.length; i++){
 
-			var splashArt = splashArtGroup.children[i]
-			var delay = game.rnd.integerInRange(300, 400)
-			var landing = game.add.tween(splashArt).to({y: splashArt.dir}, delay, Phaser.Easing.Cubic.Out, true, 400)
+			splashArtGroup.children[i].alpha = 1
+			var landing = game.add.tween(splashArtGroup.children[i]).from({y: game.world.height * aux}, game.rnd.integerInRange(300, 400), Phaser.Easing.Cubic.Out, true, 400)
+
+			if(i === 2)
+				aux = 1
 		}
 
 		pullGroup.destroy()
@@ -1082,8 +1073,8 @@ var yogoSelector = function(){
 			game.add.tween(tile).to({alpha:1}, 1000, Phaser.Easing.Cubic.Out, true).onComplete.add(animateSelector)
 
 			createReady()
-			createWhite()
-			
+            createWhite()
+
 			if(server)
 				server.addEventListener("onPlayersChange", onPlayersChange)
 			// game.time.events.add(6000, function () {

@@ -61,13 +61,13 @@ var teamSelector = function(){
 		],
 		sounds: [
 			{	name: "shineSpell",
-				file: "../../sounds/sounds/shineSpell.wav"},
+				file: "../../sounds/sounds/shineSpell.mp3"},
 			{	name: "swipe",
 				file: soundsPath + "swipe.mp3"},
 			{	name: "robotBeep",
 				file: soundsPath + "robotBeep.mp3"},
 			{	name: "lightUp",
-				file: "../../sounds/sounds/lightUp.wav"},
+				file: "../../sounds/sounds/lightUp.mp3"},
 			{	name: "cut",
 				file: soundsPath + "cut.mp3"},
 			{	name: "gameSong", 
@@ -171,6 +171,7 @@ var teamSelector = function(){
 
 	var DEFAULT_NUMTEAM = 1
 	var TEAM_COMPLETE = 3
+	var MAX_YOGOTARS = 8
 
 	var STATES
 	var SIDE
@@ -777,21 +778,23 @@ var teamSelector = function(){
 
 	function createSplashArt(){
 
-		var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
-		var pivotX = game.world.centerX * 0.8 * -SIDE
-		var RISE_X = game.world.centerY * 0.6 * SIDE
+		var pivotX = SIDE > 0 ? 0.3 : 1.7
+		var aux = SIDE
+		var pivotS = 1
+		var offsetY = SIDE > 0 ? 100 : 110
 		var delay = 0
 		
 		for(var i = 0; i < teamGroup.auxArray.length; i++){
 
-			var lava = game.add.spine(pivotX, game.world.height * 1.3 * -SIDE, "lava")
+			var lava = game.add.spine(game.world.centerX * pivotX, game.world.centerY - 50 * aux, "lava")
 			lava.setSkinByName("normal")
-			lava.scale.setTo(1, SIDE)
+			lava.scale.setTo(1, aux)
+			//lava.alpha = 0
 			splashArtGroup.add(lava)
 
-			var splash = game.add.sprite(0, 230, "atlas.loading", YOGOTARS_LIST[teamGroup.auxArray[i]].name)
+			var splash = game.add.sprite(0, offsetY, "atlas.loading", YOGOTARS_LIST[teamGroup.auxArray[i]].name)
 			splash.anchor.setTo(0.5)
-			splash.scale.setTo(1, SIDE)
+			splash.scale.setTo(1, aux)
 
 			var slot = getSpineSlot(lava, "yogo")
 			slot.add(splash)
@@ -802,22 +805,32 @@ var teamSelector = function(){
 
 			delay += 300
 
-			var text = new Phaser.Text(splashArtGroup.game, -75 * SIDE, 250, YOGOTARS_LIST[teamGroup.auxArray[i]].name.toUpperCase(), fontStyle)
-			text.anchor.setTo(0, 0.5)
-			text.scale.setTo(SIDE, 1)
-			text.stroke = "#751375"
-			text.strokeThickness = 20
-			text.angle = -90
-			lava.addChild(text)
+			// var container = game.add.sprite(0, 100 * aux, "atlas.loading", "container" + aux)
+			// var splash = game.add.sprite(0, offsetY, "atlas.loading", assets.spines[teamGroup.auxArray[i]].name)
 
-			pivotX += RISE_X
+			// var bmd = game.make.bitmapData(splash.width, container.height)
+			// bmd.alphaMask(splash, container)
 
-			if(i === 1){
-				lava.scale.setTo(-1, SIDE)
-				text.scale.setTo(SIDE, -1)
-				text.x *= -1
+			// var splashArt = game.add.image(game.world.centerX * pivotX, game.world.height * aux, bmd)
+			// splashArt.anchor.setTo(0.5, aux)
+			// //splashArt.scale.setTo(0.9)
+			// //splashArt.alpha = 0
+			// splashArtGroup.add(splashArt)
+
+			pivotX += 0.4 * aux
+
+			if(pivotS === i){
+				pivotS += 2
+				lava.scale.setTo(-1, aux)
 			}
+
+			// container.destroy()
+			// splash.destroy()
 		}
+	}
+
+	function animateSpine(){
+		
 	}
 
 	function getSpineSlot(spine, slotName){
@@ -840,8 +853,6 @@ var teamSelector = function(){
 		var offsetX = SIDE > 0 ? 1.6 : 0.4
 
 		splashArtGroup = game.add.group()
-		splashArtGroup.x = game.world.centerX
-		splashArtGroup.y = game.world.centerY
 		loadingGroup.add(splashArtGroup)
 
 		readyGroup = game.add.group()
@@ -909,12 +920,13 @@ var teamSelector = function(){
 	function animateSplashArt(){
 
 		var delay = 500
+		var aux = SIDE > 0 ? -1.5 : 1.5
 
 		for(var i = 0; i < splashArtGroup.length; i++){
 
 			var splashArt = splashArtGroup.children[i]
-			var delay = game.rnd.integerInRange(4, 5) * 100
-			var landing = game.add.tween(splashArt).to({y: -150 * SIDE}, delay, Phaser.Easing.Cubic.Out, true, 400)
+			splashArt.alpha = 1
+			var landing = game.add.tween(splashArt).from({y: game.world.height * aux}, game.rnd.integerInRange(300, 400), Phaser.Easing.Cubic.Out, true, 400)
 		}
 
 		pullGroup.destroy()
@@ -964,7 +976,6 @@ var teamSelector = function(){
 			createYogoNames()
 			animateSelector()
 			createReady()
-			
 		},
 		shutdown:function () {
 			sceneGroup.destroy()

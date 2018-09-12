@@ -41,11 +41,10 @@
   }
   &-buttons {
     .button {
-      cursor: pointer;
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      width: 7%;
+      width: 10%;
       z-index: 200;
       img {
         width: 100%;
@@ -55,9 +54,6 @@
       }
       &--right {
         right: 5%;
-        img {
-          transform: scaleX(-1);
-        }
       }
     }
   }
@@ -67,6 +63,16 @@
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
+  .item__btn {
+    width: 45%;
+    // height: 20%;
+    display: block;
+    margin: 0 auto;
+    filter: saturate(1);
+    img {
+      width: 100%;
+    }
+  }
 }
 
 /**************************************
