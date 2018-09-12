@@ -465,7 +465,7 @@ var yogoSelector = function(){
 					case STATES.red:
 						if(team === STATES.red){
 							removeCharacter(btn.parent, alphaGroup)
-							turnOff(btn.parent, STATES.yellow)
+							changeButton(btn.parent, STATES.yellow)
 							animateButton(btn.parent, STATES.yellow)
 							changeColor()
 						}
@@ -483,7 +483,7 @@ var yogoSelector = function(){
 					case STATES.blue:
 						if(team === STATES.blue){
 							removeCharacter(btn.parent, bravoGroup)
-							turnOff(btn.parent, STATES.yellow)
+							changeButton(btn.parent, STATES.yellow)
 							animateButton(btn.parent, STATES.yellow)
 							changeColor()
 						}
@@ -539,9 +539,19 @@ var yogoSelector = function(){
 		}*/
 	}
 
-	function turnOff(obj, color){
-		obj.light.alpha = 0
-		obj.color = color
+	function changeButton(btn, numTeam){
+		if(btn.color === STATES.bicolor){
+			if(numTeam === STATES.red) {
+				btn.color = STATES.blue
+				animateButton(btn, STATES.blue)
+			}else{
+				btn.color = STATES.red
+				animateButton(btn, STATES.red)
+			}
+		}else{
+			btn.light.alpha = 0
+			btn.color = STATES.yellow
+		}
 	}
 
 	function changeColor(){
@@ -1026,11 +1036,14 @@ var yogoSelector = function(){
 			var slot = teamGroup.slots[pIndex]
 
 			if((slot.yogo)&&(slot.yogo.name !== yogotar)){
+				//removeCharacter(tokens[slot.yogo.name], teamGroup)
+				changeButton(tokens[slot.yogo.name].parent, numTeam)
 				removeCharacter(tokens[slot.yogo.name], teamGroup)
 				if(yogotar){
 					pressBtn(tokens[yogotar], numTeam)
 					clickOk(numTeam)
 				}
+
 			}else if(!slot.yogo && yogotar){
 				pressBtn(tokens[yogotar], numTeam)
 				clickOk(numTeam)

@@ -22,6 +22,7 @@ var database = firebase.database();
  */
 function Client(){
 	var self = this;
+	var valuesInitialized = false
 	/** Events
 	 */
 	self.events = {};
@@ -90,13 +91,15 @@ function Client(){
 				self.showAlert("El equipo " + self.numTeam + " ya esta siendo ocupado. Da click en OK para continuar", false, true)
 		}
 		else if(!t1.ready){
-			setfb(self.refIdGame.child("t1"), team)//self.refIdGame.child("t1").set(team);
+			//self.refIdGame.child("t1").set(team);
 			self.numTeam = 1;
 			self.opponent = 2
+			setfb(self.refIdGame.child("t1"), team)
 		}else if(!t2.ready){
-			setfb(self.refIdGame.child("t2"), team)//self.refIdGame.child("t2").set(player);
+			//self.refIdGame.child("t2").set(player);
 			self.numTeam = 2;
 			self.opponent = 1;
+			setfb(self.refIdGame.child("t2"), team)
 		}else{
 			self.id_game = null;
 			self.refIdGame= null;
@@ -136,14 +139,6 @@ function Client(){
 			}
 		});
 
-		self.refIdGame.child('t' + self.opponent + "/ready").off()
-		self.refIdGame.child('t' + self.opponent + "/ready").on('value', function (snapshot) {
-			var playerReady = snapshot.val()
-			if(playerReady === false) {
-				self.onWait()
-			}
-		})
-
 		self.refIdGame.child('battleReady').off()
 		self.refIdGame.child('battleReady').on('value', function(snapshot) {
 			var battleReady = snapshot.val();
@@ -178,9 +173,9 @@ function Client(){
 				self.timeOutCallback()
 		})
 
-
 		database.ref(idGame + "/t" + self.numTeam + "/ready").onDisconnect().cancel()
 		database.ref(idGame + "/t" + self.numTeam + "/ready").onDisconnect().set(false)
+
 
 		self.time= (new Date()).getTime();
 		self.fireEvent('onClientInit',[]);
@@ -189,24 +184,49 @@ function Client(){
 	function setGame(idGame){
 
 		//database.ref().child(idGame).off()
-		database.ref().child(idGame + "/serverReady").on('value', function(snapshot) {
-			var gameReady = snapshot.val()
-			if (gameReady) {
-				database.ref().child(idGame).once('value', function (snap) {
-					var val = snap.val()
+		database.ref().child(idGame).on('value', function(snapshot) {
+			var serverReady = snapshot.child("serverReady").val()
+			if (serverReady) {
+
+				if (self.numTeam) {
+					var ready = snapshot.child("t" + self.numTeam + "/ready").val()
+					if (ready === false) {
+						database.ref(idGame + "/t" + self.numTeam + "/ready").onDisconnect().cancel()
+						self.showAlert("Te desconectaste del server, ingresa el pin de nuevo.", true)
+						return
+					}
+				}
+
+				if (self.opponent) {
+					var opponentReady = snapshot.child("t" + self.opponent + "/ready").val()
+					if (opponentReady === false) {
+						self.onWait()
+						return
+					}
+				}
+
+				var val = snapshot.val()
+				if ((val)&&(valuesInitialized !== true)) {
+					valuesInitialized = true
 					self.refIdGame = database.ref(idGame)
 					initialize(idGame, self.team, val)
-				})
+				}
+
 			} else {
-				if(self.numTeam)
+				database.ref().child(idGame).off()
+				valuesInitialized = false
+				if(self.numTeam) {
 					self.showAlert("Se perdió la comunicación con el servidor. ", true)
+					//database.ref(idGame + "/t" + self.numTeam + "/ready").set(false)
+					database.ref().child(idGame).once('value', function (snap) {
+						if(snap.exists() === false)
+							database.ref(idGame + "/t" + self.numTeam + "/ready").onDisconnect().cancel()
+						//self.numTeam = null
+					})
+				}
 				else
 					self.showAlert("La partida no existe.", true)
 
-				database.ref().child(idGame).once('value', function (snap) {
-					if(snap.exists() === false)
-						database.ref(idGame + "/t" + self.numTeam + "/ready").onDisconnect().cancel()
-				})
 			}
 		})
 	}	/*if(!val.gameReady)
@@ -218,7 +238,7 @@ function Client(){
 	 * @summary Starts the client
 	 * @param {type} idGame Code of the game
 	 */
-	this.start =function(idGame, onAlert, onWait){
+	this.start = function(idGame, onAlert, onWait){
 		// self.events = {};
 		console.log(self.events)
 		self.refIdGame= database.ref();
@@ -243,7 +263,7 @@ function Client(){
 					return onAlert("Ingresa un pin valido", true)
 				}else {
 					//if(self.numTeam)
-						//database.ref(idGame + "/t" + self.numTeam + "/ready").set(true)
+					//database.ref(idGame + "/t" + self.numTeam + "/ready").set(true)
 					setGame(idGame)
 				}
 
