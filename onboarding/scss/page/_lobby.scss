@@ -118,36 +118,32 @@
           color: #fff;
         }
         input {
-          outline: none;
           padding: 5px 0;
           background-color: #fff;
           color: #2d1f4e;
           border-radius: 15px;
         }
       }
-      .players__container {
-        margin: 40px auto 20px;
-        .loader {
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: 100%;
-          background-image: url(../img/mathtournament-onboarding-load-pin.png);
-          background-position: top left;
-          background-size: 100%;
-          background-repeat: no-repeat;
-          animation: rotate-pin infinite 5s;
-          z-index: -1;
-        }
-        .player {
-          width: 130px;
-          background-image: url(../img/mathtournament-onboarding-yellow-select.png);
-        //   cursor: move;
-          &:first-of-type {
-          cursor: initial;
-        }
-        }
+    }
+    .players__container {
+      margin: 40px auto 20px;
+      .loader {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-image: url(../img/mathtournament-onboarding-load-pin.png);
+        background-position: top left;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        animation: rotate-pin infinite 5s;
+        z-index: -1;
+      }
+      .player {
+        width: 130px;
+        background-image: url(../img/mathtournament-onboarding-yellow-select.png);
+        cursor: initial;
       }
     }
     .item__buttons {

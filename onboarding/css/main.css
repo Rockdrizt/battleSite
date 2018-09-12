@@ -13,15 +13,13 @@
   margin: 0;
   padding: 0;
   font-family: 'VAGRoundedStd Bold', sans-serif;
-  color: #fff;
-  user-select: none;
-  touch-action: none; }
+  color: #fff; }
 
 .main {
   width: 100vw;
   height: 100vh;
   position: relative;
-  background-image: linear-gradient(#401c59, #2d1f4e 40%); }
+  background-image: linear-gradient(#401c59, #2D1F4E 40%); }
   .main .bubbles {
     width: 100vw;
     height: 100vh;
@@ -44,8 +42,6 @@
   max-width: 1200px;
   transform: translate(-50%, -50%);
   text-align: center; }
-  .container button {
-    outline: none; }
 
 .clearfix {
   overflow: hidden; }
@@ -286,10 +282,8 @@
       font-size: 30px;
       line-height: 60px;
       top: 50px; }
-      .item__buttons .item__btn p:active + .join {
-        background-image: url(../img/mathtournament-onboarding-button-join-press.png); }
-      .item__buttons .item__btn p:active + .create {
-        background-image: url(../img/mathtournament-onboarding-button-create-press.png); }
+      .item__buttons .item__btn p:hover + span {
+        background-image: url(../img/mathtournament-onboarding-play-btn-down.png); }
       .item__buttons .item__btn p::before {
         content: '';
         background-size: cover;
@@ -300,35 +294,13 @@
         z-index: -1; }
     .item__buttons .item__btn span {
       display: inline-block;
-      position: relative;
-      top: -10px;
+      background-size: contain;
+      background-image: url(../img/mathtournament-onboarding-play-btn.png);
+      background-repeat: no-repeat;
       width: 110px;
-      height: 150px;
-      background-size: 100%;
-      background-position: bottom left;
-      background-repeat: no-repeat; }
-      .item__buttons .item__btn span.join {
-        background-image: url(../img/mathtournament-onboarding-button-join.png); }
-        .item__buttons .item__btn span.join:active {
-          background-image: url(../img/mathtournament-onboarding-button-join-press.png); }
-      .item__buttons .item__btn span.create {
-        background-image: url(../img/mathtournament-onboarding-button-create.png); }
-        .item__buttons .item__btn span.create:active {
-          background-image: url(../img/mathtournament-onboarding-button-create-press.png); }
-
-.item__btn--ok {
-  outline: none;
-  width: 120px;
-  height: 150px;
-  cursor: pointer;
-  background-image: url(../img/mathtournament-onboarding-ok-btn.png);
-  background-position: bottom center;
-  background-size: 100%;
-  background-repeat: no-repeat; }
-  .item__btn--ok:hover {
-    background-image: url(../img/mathtournament-onboarding-ok-btn-hover.png); }
-  .item__btn--ok:active {
-    background-image: url(../img/mathtournament-onboarding-ok-btn-press.png); }
+      height: 145px; }
+      .item__buttons .item__btn span:hover {
+        background-image: url(../img/mathtournament-onboarding-play-btn-down.png); }
 
 .item__btn--back {
   float: left; }
@@ -487,8 +459,7 @@
         padding-bottom: 10px;
         margin-bottom: 15px; }
         .modal .borde .modal__container header h2 {
-          letter-spacing: 2px;
-          text-shadow: 0 3px 0 #2d1f4e, 0 -3px 0 #2d1f4e, -3px 0 0 #2d1f4e, 3px 0 0 #2d1f4e, 2px 2px 0 #2d1f4e, -2px -2px 0 #2d1f4e, 2px -2px 0 #2d1f4e, -2px 2px 0 #2d1f4e;
+          text-shadow: 0 0 5px black;
           font-size: 45px; }
         .modal .borde .modal__container header p {
           font-size: 25px;
@@ -536,14 +507,13 @@
               vertical-align: text-bottom;
               transition: all 0.5s ease; }
       .modal .borde .modal__container .modal__btn {
-        outline: none;
         cursor: pointer;
         border: none;
         background-color: transparent;
         width: 110px;
-        height: 130px;
+        height: 110px;
         position: absolute;
-        bottom: -80px;
+        bottom: -60px;
         left: 50%;
         transform: translateX(-50%); }
         .modal .borde .modal__container .modal__btn img {
@@ -962,30 +932,28 @@
         .item--lobby.item--middle .item__textbox__container .item__pin h3 {
           color: #fff; }
         .item--lobby.item--middle .item__textbox__container .item__pin input {
-          outline: none;
           padding: 5px 0;
           background-color: #fff;
           color: #2d1f4e;
           border-radius: 15px; }
-      .item--lobby.item--middle .item__textbox__container .players__container {
-        margin: 40px auto 20px; }
-        .item--lobby.item--middle .item__textbox__container .players__container .loader {
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: 100%;
-          background-image: url(../img/mathtournament-onboarding-load-pin.png);
-          background-position: top left;
-          background-size: 100%;
-          background-repeat: no-repeat;
-          animation: rotate-pin infinite 5s;
-          z-index: -1; }
-        .item--lobby.item--middle .item__textbox__container .players__container .player {
-          width: 130px;
-          background-image: url(../img/mathtournament-onboarding-yellow-select.png); }
-          .item--lobby.item--middle .item__textbox__container .players__container .player:first-of-type {
-            cursor: initial; }
+    .item--lobby.item--middle .players__container {
+      margin: 40px auto 20px; }
+      .item--lobby.item--middle .players__container .loader {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-image: url(../img/mathtournament-onboarding-load-pin.png);
+        background-position: top left;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        animation: rotate-pin infinite 5s;
+        z-index: -1; }
+      .item--lobby.item--middle .players__container .player {
+        width: 130px;
+        background-image: url(../img/mathtournament-onboarding-yellow-select.png);
+        cursor: initial; }
     .item--lobby.item--middle .item__buttons .item__btn {
       width: 130px; }
       .item--lobby.item--middle .item__buttons .item__btn img {
@@ -1077,11 +1045,10 @@
   .carousel .unlocked h2 {
     display: inline-block; }
   .carousel-buttons .button {
-    cursor: pointer;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 7%;
+    width: 10%;
     z-index: 200; }
     .carousel-buttons .button img {
       width: 100%; }
@@ -1089,14 +1056,19 @@
       left: 5%; }
     .carousel-buttons .button--right {
       right: 5%; }
-      .carousel-buttons .button--right img {
-        transform: scaleX(-1); }
 
 .item__buttons--carousel {
   position: absolute;
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%); }
+  .item__buttons--carousel .item__btn {
+    width: 45%;
+    display: block;
+    margin: 0 auto;
+    filter: saturate(1); }
+    .item__buttons--carousel .item__btn img {
+      width: 100%; }
 
 /**************************************
  ********* Media Queries **************
@@ -1177,7 +1149,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    bottom: -100px; }
+    bottom: -80px; }
     .item--difficulty .item__buttons .item__btn {
       width: 120px; }
       .item--difficulty .item__buttons .item__btn img {
@@ -1282,7 +1254,6 @@
             padding-left: 10px;
             display: inline-block; }
             .container--customize .item .customize__container .customize__row .customize__col div button {
-              cursor: pointer;
               position: absolute;
               display: inline-block;
               height: 80px;

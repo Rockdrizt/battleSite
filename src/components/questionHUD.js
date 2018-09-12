@@ -394,7 +394,7 @@ var questionHUD = function(){
 		var riddle = this.riddle
 		var correctBtn = getCorrectAns(self)
 		var btn = this.options.btnPressed
-		var ans = btn.groupPos == riddle.correctAnswer
+		var ans = btn.groupPos == riddle.correctAnswer 
 		var texture = ans ? "correct" : "wrong"
 
 		this.feedBackImg.loadTexture("atlas.question", texture)
@@ -414,7 +414,7 @@ var questionHUD = function(){
 			}
 
 			endTween.onComplete.add(function(){
-				game.time.events.add(3000, self.clearQuestion)
+				game.time.events.add(1000, self.clearQuestion)
 			})
 		})
 

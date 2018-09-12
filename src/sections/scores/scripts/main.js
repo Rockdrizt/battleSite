@@ -88,12 +88,7 @@ function startGame(){
 		["dinamita", "theffanie", "luna"],
 		["eagle", "nao", "estrella"],
 	]
-	var kids = [
-		["Rock", "Pawel", "Rulas"], 
-		["Mares", "Cherry", "Humbert"]
-	]
-
-	scores.setTeams(teams, kids)
+	scores.setTeams(teams)
     
 	function create(){
 

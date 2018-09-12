@@ -159,23 +159,8 @@ var questions = function(){
 	}
 
 	function setReadyGo(){
-		
-		var obj = {
-			question: "lorem impus dolor",
-			existImage : false,
-			src: settings.BASE_PATH + "/images/questionDB/default.png",
-			image: "default",
-			answers: ["a", "be", "ce", "de"],
-			grade: 1,
-			level: 1,
-			correctAnswer: 2,
-			//time:DIFFICULT_RULES[level].time
-			index: 0,
-			correctValue: "be"
-			//correctIndex:
-		}
-
-		var riddle = obj
+		var grade = 1
+		var riddle = riddles.getQuestion(grade)
 		questionGroup.showQuestion(riddle)
 	}
 
