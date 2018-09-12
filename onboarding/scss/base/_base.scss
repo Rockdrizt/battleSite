@@ -15,13 +15,15 @@
   padding: 0;
   font-family: 'VAGRoundedStd Bold', sans-serif;
   color: #fff;
+  user-select: none;
+  touch-action: none;
 }
 
 .main {
   width: 100vw;
   height: 100vh;
   position: relative;
-  background-image: linear-gradient(hsl(275, 52%, 23%), #2D1F4E 40%);
+  background-image: linear-gradient(hsl(275, 52%, 23%), #2d1f4e 40%);
 
   .bubbles {
     width: 100vw;
@@ -43,7 +45,6 @@
     display: none;
   }
 }
-
 .container {
   position: absolute;
   top: 50%;
@@ -52,6 +53,9 @@
   max-width: 1200px;
   transform: translate(-50%, -50%);
   text-align: center;
+  button {
+    outline: none;
+  }
 }
 
 .clearfix {
@@ -94,6 +98,6 @@
 }
 @media only screen and (max-width: 575px) {
   .container {
-    top: 45%
+    top: 45%;
   }
 }
