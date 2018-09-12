@@ -43,9 +43,8 @@ function startGame(){
 
 		alertDialog.init()
 		cliente = new Client();
-		var idGameFromHash = window.location.hash.substr(1);
-		connectToServer(idGameFromHash)
-		//sceneloader.show("rewardClient")
+		connectToServer(cliente.id_game)
+		//sceneloader.show("teamSelector")
 	}
 
 	function preloadScenes(sceneList){
@@ -109,8 +108,8 @@ function startGame(){
 
 	// var teams = [
             
-	// 	[{name:"arthuriusWin", skin:"arthurius1"}, {name:"naoWin", skin:"nao1"}, {name:"theffanieWin", skin:"theffanie1"}],
-	// 	[{name:"arthuriusWin", skin:"arthurius2"}, {name:"naoWin", skin:"nao2"}, {name:"theffanieWin", skin:"theffanie2"}],
+	// 	[{name:"arthurius", skin:"arthurius1"}, {name:"nao", skin:"nao1"}, {name:"theffanie", skin:"theffanie1"}],
+	// 	[{name:"arthurius", skin:"arthurius2"}, {name:"nao", skin:"nao2"}, {name:"theffanie", skin:"theffanie2"}],
 		
 	// ];
 	

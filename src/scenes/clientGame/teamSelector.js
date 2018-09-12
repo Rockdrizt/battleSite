@@ -44,8 +44,8 @@ var teamSelector = function(){
 		atlases: [
 			{
 				name: "atlas.yogoSelector",
-				json: "../../images/teamSelector/atlas.json",
-				image: "../../images/teamSelector/atlas.png",
+				json: settings.BASE_PATH + "/images/teamSelector/atlas.json",
+				image: settings.BASE_PATH + "/images/teamSelector/atlas.png",
 			},
 			{
 				name: "atlas.loading",
@@ -61,17 +61,17 @@ var teamSelector = function(){
 		],
 		sounds: [
 			{	name: "shineSpell",
-				file: "../../sounds/sounds/shineSpell.wav"},
+				file: settings.BASE_PATH +"/sounds/sounds/shineSpell.wav"},
 			{	name: "swipe",
 				file: soundsPath + "swipe.mp3"},
 			{	name: "robotBeep",
 				file: soundsPath + "robotBeep.mp3"},
 			{	name: "lightUp",
-				file: "../../sounds/sounds/lightUp.wav"},
+				file: settings.BASE_PATH + "/sounds/sounds/lightUp.wav"},
 			{	name: "cut",
 				file: soundsPath + "cut.mp3"},
 			{	name: "gameSong", 
-				file: "../../sounds/songs/selector.mp3"},
+				file: settings.BASE_PATH + "/sounds/songs/selector.mp3"},
 			{	name: "tomiko",
 				file: settings.BASE_PATH + "/sounds/selectorNames/tomiko.mp3"},
             {	name: "luna",
@@ -93,49 +93,6 @@ var teamSelector = function(){
 
 		],
 		spines:[
-			
-			//win
-			{
-				name:"tomikoWin",
-				file:settings.BASE_PATH + "/spines/yogotars/win/tomiko/tomikoWin.json",
-				scales: ["@0.5x"]
-			},
-			{
-				name:"lunaWin",
-				file:settings.BASE_PATH + "/spines/yogotars/win/luna/lunaWin.json",
-				scales: ["@0.5x"]
-			},
-			{
-				name:"naoWin",
-				file:settings.BASE_PATH + "/spines/yogotars/win/nao/naoWin.json",
-				scales: ["@0.5x"]
-			},
-			{
-				name:"theffanieWin",
-				file:settings.BASE_PATH + "/spines/yogotars/win/theffanie/theffanieWin.json",
-				scales: ["@0.5x"]
-			},
-			{
-				name:"eagleWin",
-				file:settings.BASE_PATH + "/spines/yogotars/win/eagle/eagleWin.json",
-				scales: ["@0.5x"]
-			},
-			{
-				name:"dinamitaWin",
-				file:settings.BASE_PATH + "/spines/yogotars/win/dinamita/dinamitaWin.json",
-				scales: ["@0.5x"]
-			},
-			{
-				name:"arthuriusWin",
-				file:settings.BASE_PATH + "/spines/yogotars/win/arthurius/arthuriusWin.json",
-				scales: ["@0.5x"]
-			},
-			{
-				name:"estrellaWin",
-				file:settings.BASE_PATH + "/spines/yogotars/win/estrella/estrellaWin.json",
-				scales: ["@0.5x"]
-			},
-
 			{
 				name:"lava",
 				file:settings.BASE_PATH + "/spines/yogotars/selector/lava/skeleton.json",
@@ -197,42 +154,42 @@ var teamSelector = function(){
 	var YOGOTARS_LIST = [
 		{
 			name:"tomiko",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/tomiko/tomikoSelector.json",
+			file:settings.BASE_PATH + "/spines/yogotars/client/tomiko/tomikoClient.json",
 			scales: ["@0.5x"]
 		},
 		{
 			name:"luna",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/luna/lunaSelector.json",
+			file:settings.BASE_PATH + "/spines/yogotars/client/luna/lunaClient.json",
 			scales: ["@0.5x"]
 		},
 		{
 			name:"nao",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/nao/naoSelector.json",
+			file:settings.BASE_PATH + "/spines/yogotars/client/nao/naoClient.json",
 			scales: ["@0.5x"]
 		},
 		{
 			name:"theffanie",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/theffanie/theffanieSelector.json",
+			file:settings.BASE_PATH + "/spines/yogotars/client/theffanie/theffanieClient.json",
 			scales: ["@0.5x"]
 		},
 		{
 			name:"eagle",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/eagle/eagleSelector.json",
+			file:settings.BASE_PATH + "/spines/yogotars/client/eagle/eagleClient.json",
 			scales: ["@0.5x"]
 		},
 		{
 			name:"dinamita",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/dinamita/dinamitaSelector.json",
+			file:settings.BASE_PATH + "/spines/yogotars/client/dinamita/dinamitaClient.json",
 			scales: ["@0.5x"]
 		},
 		{
 			name:"arthurius",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/arthurius/arthuriusSelector.json",
+			file:settings.BASE_PATH + "/spines/yogotars/client/arthurius/arthuriusClient.json",
 			scales: ["@0.5x"]
 		},
 		{
 			name:"estrella",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/estrella/estrellaSelector.json",
+			file:settings.BASE_PATH + "/spines/yogotars/client/estrella/estrellaClient.json",
 			scales: ["@0.5x"]
 		},
 	]
@@ -711,7 +668,7 @@ var teamSelector = function(){
 	function showName(tag){
 
 		game.add.tween(namesGroup.light.scale).to({x: 1, y: 1}, 400, Phaser.Easing.linear, true, 0, 0, true)
-		sound.play(assets.spines[tag].name)
+		sound.play(YOGOTARS_LIST[tag].name)
 		namesGroup.yogoName.loadTexture("atlas.yogoSelector", "name" + tag)
 		namesGroup.yogoName.alpha = 1
 

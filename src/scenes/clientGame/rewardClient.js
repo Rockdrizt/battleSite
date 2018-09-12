@@ -14,22 +14,6 @@ var rewardClient = function(){
         }
     }
     
-    var bootFiles = {
-		jsons: [
-			//{
-				//name: "sounds",
-				//file: settings.BASE_PATH + "/data/sounds/tournament.json"
-			//},
-		],
-		characters: [
-			// {
-			// 	name:"yogotarLuna",
-			// 	file:"data/characters/yogotarLuna.json",
-			// 	scales:['@0.5x']
-			// }
-		]
-	}
-
     var assets = {
         atlases: [
             {   
@@ -43,31 +27,22 @@ var rewardClient = function(){
             {
                 name: "tile",
                 file: imagePath + "bgTile.png",
+            },
+            {
+                name: "confetti",
+                file: settings.BASE_PATH + "/particles/rewardScreen/confetti/Conffeti_win.png",
             }
         ],
         sounds: [
             {	name: "shineSpell",
-                file: settings.BASE_PATH + "/sounds/sounds/shineSpell.mp3"
+                file: settings.BASE_PATH + "/sounds/sounds/shineSpell.wav"
             },
-            {
-                name: "song",
-                file: soundsPath + "winBattle1.mp3"
-            },
-            {
-                name: "cheers",
-                file: soundsPath + "cheers.mp3"
-            },
-            {
-                name: "goldShine",
-                file: soundsPath + "goldShine.mp3"
-            },
-            {
-                name: "bright",
-                file: soundsPath + "brightTransition.mp3"
+            {	name: "cheers",
+                file: settings.BASE_PATH + "/sounds/sounds/cheers.wav"
             },
             {
                 name: "rewardSong",
-                file: settings.BASE_PATH + "/sounds/songs/reward.mp3",
+                file: settings.BASE_PATH + "/sounds/songs/reward.wav",
             }
         ],
         spines:[
@@ -77,32 +52,13 @@ var rewardClient = function(){
             }
         ],
         jsons: [
-			{
-				name: "sounds",
-				file: settings.BASE_PATH + "/data/sounds/tournament.json"
-			},
 		],
         particles: [
-            {
-                name: "brainSpheres",
-                file: settings.BASE_PATH + "/particles/rewardScreen/brain_particles/sphere_ligths1.json",
-                texture: "sphere_ligths1.png"
-            },
-            {
-                name: "brainLigths",
-                file: settings.BASE_PATH + "/particles/rewardScreen/brain_particles/Ligth_Brain.json",
-                texture: "Ligth_Brain.png"
-            },
-            {
-                name: "confetti",
-                file: settings.BASE_PATH + "/particles/rewardScreen/confetti/Conffeti_win.json",
-                texture: "Conffeti_win.png"
-            }
         ]
     }
     
-    var TEAMS = [
-		{
+    var TEAMS = {
+		1:{
 			name: "Equipo Alpha",
             side: 1,
             color: 1,
@@ -111,7 +67,7 @@ var rewardClient = function(){
             index:0,
             pivot: 0
 		},
-		{
+		2:{
 			name: "Equipo Bravo",
             side: -1,
             color: 2,
@@ -120,17 +76,17 @@ var rewardClient = function(){
             index:0,
             pivot: 1
 		},
-    ]
+    }
     
-    var DEFAULT_NUMTEAM = 0
-    var TEAM_MEMBERS = 3
+    var DEFAULT_NUMTEAM = 1
     
     var WIN_DATA
     var LOSE_DATA
+    var COUP_X = [0.75, 1.25]
+    var WIN_SCALES = [0.8, 0.9, 0.8]
 
     var sceneGroup
     var tile
-    var rewardSong
     var winnerGroup
     var loserGroup
     var players
@@ -147,11 +103,11 @@ var rewardClient = function(){
 
         cliente = parent.cliente || {}
         var numTeam = cliente.numTeam || DEFAULT_NUMTEAM
-        var otherTeam = numTeam == 0 ? 1 : 0
+        var otherTeam = numTeam == 1 ? 2 : 1
         WIN_DATA = TEAMS[numTeam]
-        WIN_DATA.index = numTeam
+        WIN_DATA.index = numTeam - 1
         LOSE_DATA = TEAMS[otherTeam]
-        LOSE_DATA.index = otherTeam
+        LOSE_DATA.index = otherTeam - 1
     }
     
     function preload(){
@@ -192,7 +148,7 @@ var rewardClient = function(){
 
 		var border = WIN_DATA.color - 1
 
-		teamBar = sceneGroup.create(game.world.width * border, 30, "atlas.yogoSelector", "teamBar" + WIN_DATA.color)
+		teamBar = sceneGroup.create(game.world.width * border, 30, "atlas.reward", "teamBar" + WIN_DATA.color)
 		teamBar.anchor.setTo(border, 0)
 		//teamBar.scale.setTo(0.8)
 
@@ -208,11 +164,9 @@ var rewardClient = function(){
     
     function createCoup(){
 
-        var posX = WIN_DATA.color == 1 ? 0.75 : 1.25
-
-        var coup = game.add.spine(game.world.centerX, game.world.height - 70, "coup")
+        var coup = game.add.spine(0, game.world.height - 70, "coup")
+        coup.x = COUP_X[WIN_DATA.index] * game.world.centerX
         coup.scale.setTo(0.8)
-        coup.x *= posX
         coup.setSkinByName(WIN_DATA.coupSkin)
         coup.setAnimationByName(0,"idle", false)
         var anim = coup.addAnimationByName(0, "win", false)
@@ -220,43 +174,37 @@ var rewardClient = function(){
                 sound.play("shineSpell")
             }
             anim.onComplete = function(){
-                rewardSong = sound.play("rewardSong", {loop:true, volume:0.6})
                 appearWiners()
                 apearLosers()
             }
         coup.addAnimationByName(0, "winstill", true)
         sceneGroup.add(coup)
         sceneGroup.coup = coup
-
-        var particle = epicparticles.newEmitter("confetti")
-        particle.x = game.world.centerX
-        particle.y = 100
-        sceneGroup.add(particle)
     }
 
     function createWinTeam(){
 
-        var WIN_SCALES = [0.8, 0.9, 0.8]
-
         winnerGroup = game.add.group()
+        winnerGroup.x = sceneGroup.coup.centerX
+        winnerGroup.y = sceneGroup.coup.centerY - 100
         sceneGroup.add(winnerGroup)
 
-        var pivotX = sceneGroup.coup.centerX * 0.5//WIN_DATA.color == 1 ? 0.5 : 0.7
-        var RISE = 1 - pivotX
+        var distance = sceneGroup.coup.game.width * 0.2
+        var pivotX = -distance
         var directon = -1
+
+        var winers = players[WIN_DATA.index]
         
+        for(var i = 0; i < winers.length; i++){
 
-        for(var i = 0; i < TEAM_MEMBERS; i++){
-
-            var obj = players[WIN_DATA.index][i]
-            var player = spineLoader.createSpine(obj.name, obj.skin, "wait", 0, 0, true)
-			player.x = sceneGroup.coup.centerX * pivotX
-            player.y = sceneGroup.coup.centerY - 100
+            var obj = winers[i]
+            var player = spineLoader.createSpine(obj.name, obj.skin, "gg", 0, 0, true)
+			player.x = pivotX
             player.scale.setTo(WIN_SCALES[i] * directon, WIN_SCALES[i])
 			player.setAlive(false)
             winnerGroup.add(player)
             
-            pivotX += RISE
+            pivotX += distance
             directon = 1
         }
         winnerGroup.children[1].y += 45
@@ -273,6 +221,10 @@ var rewardClient = function(){
                 player.setAlive(true)
             },null, player)
         }
+        
+        game.time.events.add(delay, function(){
+            sound.play("cheers")
+        })
     }
 
     function createLoseTeam(){
@@ -286,22 +238,24 @@ var rewardClient = function(){
         var offsetX = 40 * LOSE_DATA.side
         var DIRECTION = LOSE_DATA.side
         var SCALE = 0.7
+        var losers = players[LOSE_DATA.index]
 
-        for(var i = 0; i < TEAM_MEMBERS; i++){
+        for(var i = 0; i < losers.length; i++){
 
             var subGroup = game.add.group()
             subGroup.x = (game.world.width * side) + pivotX
             subGroup.y = game.world.centerY * pivotY
+            subGroup.scale.setTo(DIRECTION, 1)
             subGroup.alpha = 0
             loserGroup.add(subGroup)
 
             var frame = subGroup.create(0, 0, "atlas.reward", "ventanaFondo")
-            frame.anchor.setTo(side, 0.5)
+            frame.anchor.setTo(0, 0.5)
 
-            var obj = players[LOSE_DATA.index][i]
+            var obj = losers[i]
 
             var player = spineLoader.createSpine(obj.name, obj.skin, "gg", frame.width * 0.65, frame.height * 1.1, true)
-            player.scale.setTo(DIRECTION * SCALE, SCALE)
+            player.scale.setTo(SCALE)
 			player.setAlive(false)
             subGroup.add(player)
             subGroup.anim = player
@@ -312,8 +266,7 @@ var rewardClient = function(){
             player.mask = mask
             player.addChild(mask)
 
-            var lowBar = subGroup.create(-2 * LOSE_DATA.side, frame.height * 0.47, "atlas.reward", "ventanaFrente")
-            lowBar.anchor.setTo(side, 0)
+            subGroup.create(-2, frame.height * 0.47, "atlas.reward", "ventanaFrente")
             
             pivotX -= offsetX
             pivotY += 0.45
@@ -336,31 +289,30 @@ var rewardClient = function(){
         }
     }
 
-    function createParticles(){
+    function createConfetti(){
 
-        game.time.events.add(2000,function(){
-            sound.play("bright");
-            createEmitterParticles("brain_particles", coupSpine.x + 3, coupSpine.y - 500,brainGroup);
-            createEmitterParticles("brain_particlesB",coupSpine.x -10,coupSpine.y - 620,brainGroupBack);
-        },this);
-
-        game.time.events.add(3000,function(){
-            sound.play("song");
-            createEmitterParticles("confetti",game.world.centerX,0,null);
-            sound.play("cheers");
-            //rewardSong = sound.play("music", {loop:true, volume:0.4});
-            for(var j=0; j<3; j++)
-                squareLoser[j].children[0].setAlive(true)
-        },this);
+        var confetti = game.add.emitter(game.world.centerX, 0, 50)
+        confetti.makeParticles("confetti")
+        confetti.gravity = 10
+        confetti.maxParticleSpeed.setTo(0, 500)
+        confetti.minParticleSpeed.setTo(0, 200)
+        confetti.width = game.world.width
+        confetti.height = 0
+        confetti.forEach(element => {
+            element.tint = getRandomColor()
+        });
+        confetti.start(false, 5000, 100, 0) 
+        sceneGroup.add(confetti)
     }
 
-    function createEmitterParticles(name, x, y, group){
-        var prefabParticles = epicparticles.newEmitter(name);
-        prefabParticles.x = x;
-        prefabParticles.y = y;
-        if(group!=null){
-            group.add(prefabParticles);
+    function getRandomColor(){
+
+        var letters = '0123456789ABCDEF'
+        var color = '0x'
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)]
         }
+        return color
     }
 
     return {
@@ -370,17 +322,18 @@ var rewardClient = function(){
         preload:preload,
         create: function(event){
             
-            
-
             sceneGroup = game.add.group()
            
             createBackground()
             initialize()
-            createTeamBar()
             createCoup()
+            createTeamBar()
             createWinTeam()
             createLoseTeam()
+            createConfetti()
             
+            var rewardSong = sound.play("rewardSong", {loop:true, volume:0.6})
+
             game.add.tween(sceneGroup).from({alpha:0},500, Phaser.Easing.Cubic.Out,true)
 
 			game.onPause.add(function () {
