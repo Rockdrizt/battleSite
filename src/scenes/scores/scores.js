@@ -73,16 +73,10 @@ var scores = function(){
 		}
 	]
     
-    var teams
-    var kids
 	var sceneGroup
     var tile
 	var teamsGroup
 	var scoresGroup
-    
-    var bmd
-    var innerCircle
-    var outerCircle
     
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -118,9 +112,7 @@ var scores = function(){
         sceneGroup.add(back)
         
         tile = game.add.tileSprite(0, 0, game.world.width, game.world.width, "tile")
-        //tile.anchor.setTo(0.5)
         tile.tint = 0x0099AA
-        //tile.angle = 45
 		sceneGroup.add(tile)
 		
 		var title = new Phaser.Text(sceneGroup.game, game.world.centerX, 230, "Resultados", fontStyle)
@@ -132,11 +124,12 @@ var scores = function(){
 	
        	for(var j = 0; j < 2; j++){
            
-			var logo = logos.create(game.world.centerX, game.world.height - 30, "atlas.scores", "logo" + j)
-			logo.x -= 50 * ORDER_SIDES[j].direction
-           	logo.anchor.setTo(j, 1)
+			var logo = logos.create(game.world.centerX, game.world.height - 150, "atlas.scores", "logo" + j)
+			logo.x -= 150 * ORDER_SIDES[j].direction
+           	logo.anchor.setTo(0.5, 0)
 		}
 		logos.children[0].scale.setTo(0.3)
+		logos.children[1].scale.setTo(0.9)
 	}
 	
 	function createTeamBar(){
@@ -166,15 +159,7 @@ var scores = function(){
     
 	function update(){
         tile.tilePosition.y -= 0.4
-        //tile.tilePosition.x -= 0.4
         epicparticles.update()
-        
-//        var grd = bmd.context.createRadialGradient(innerCircle.x, innerCircle.y, innerCircle.radius, outerCircle.x, outerCircle.y, outerCircle.radius);
-//        grd.addColorStop(0, '#8ED6FF');
-//        grd.addColorStop(1, '#FF3FA2');
-//
-//        bmd.cls();
-//        bmd.circle(outerCircle.x, outerCircle.y, outerCircle.radius, grd);
     }
     
     function createTimeToken(){
@@ -206,10 +191,12 @@ var scores = function(){
             var pivotX = game.world.centerX * 0.82 * side.direction
 			var pivotY = game.world.centerY * -0.2
 			var RISE_Y = game.world.centerY * 0.35
+			var yogos = TEAMS_DATA[j].yogos
+			var kids = TEAMS_DATA[j].kids
 
-			for(var i = 0; i < kids[j].length; i++){
+			for(var i = 0; i < kids.length; i++){
 
-				var teamMate = createYogoToken(j, teams[j][i], kids[j][i])
+				var teamMate = createYogoToken(j, yogos[i], kids[i])
                 teamMate.x = pivotX
                 teamMate.y = pivotY
 				sideTeam.add(teamMate)
@@ -387,21 +374,6 @@ var scores = function(){
 		}
 		assets.images.push(charObj)
 	}
-    
-    function circle(){
-        
-        bmd = game.make.bitmapData(800, 600);
-
-        //  Add it to the world or we can't see it
-        bmd.addToWorld();
-
-        //  Create the Circles
-        innerCircle = new Phaser.Circle(200, 200, 100);
-        outerCircle = new Phaser.Circle(200, 200, 300);
-
-        game.add.tween(innerCircle).to( { x: 100, y: 100, radius: 1 }, 3000, "Sine.easeInOut", true, 0, -1, true);
-
-    }
 
 	return {
 		assets: assets,
@@ -426,22 +398,22 @@ var scores = function(){
 		},
         setCharacter:setCharacter,
         setTeams: function (myTeams, kidsTeam) {
-			teams = myTeams
+
 			for(var teamIndex = 0; teamIndex < myTeams.length; teamIndex++){
 				var team = myTeams[teamIndex]
-				// var kids = kidsTeam[teamIndex]
-				// TEAMS_DATA[teamIndex].yogos = team
-				// TEAMS_DATA[teamIndex].kids = kids
+				var kids = kidsTeam[teamIndex]
+				TEAMS_DATA[teamIndex].yogos = team
+				TEAMS_DATA[teamIndex].kids = kids
 
 				for(var charIndex = 0; charIndex < team.length; charIndex++){
 					var character = team[charIndex]
 					setCharacter(character)
 				}
 			}
-            kids = [["Rock", "Pawel", "Rulas"], ["Mares", "Cherry", "Humbert"]]
-            for(var i = 0; i < kids.length; i++){
-                for(var j = 0; j < kids[i].length; j++)
-                    setCharacter(kids[i][j])
+            
+            for(var i = 0; i < kidsTeam.length; i++){
+                for(var j = 0; j < kidsTeam[i].length; j++)
+                    setCharacter(kidsTeam[i][j])
             }
 		},
 		shutdown: function () {

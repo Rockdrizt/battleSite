@@ -74,7 +74,8 @@ function startGame(){
 	    	function onCompleteSceneLoading(){
 				alertDialog.init()
 				server = new Server()
-				server.start(null, checkPlayers, {rules:operationGenerator.RULES_SET.MASTER}, showError)
+				var idGameFromHash = window.location.hash.substr(1);
+				server.start(idGameFromHash, checkPlayers, {rules:operationGenerator.RULES_SET.MASTER}, showError)
 
 				if (server) {
 					/*server.startGame = function () {

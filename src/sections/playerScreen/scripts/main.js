@@ -84,7 +84,11 @@ function startGame(){
 	}
 
 	var player = {
+<<<<<<< HEAD
+		yogo: "eagle",
+=======
 		yogo: "Eagle",
+>>>>>>> 36534c314d67d4ee7feeaecd639dd5347a9a906c
 		kid: "Rock"
 	}
 

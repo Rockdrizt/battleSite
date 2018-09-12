@@ -38,7 +38,15 @@ var playerScreen = function(){
 		]
     }
 
+<<<<<<< HEAD
+	var PLAYER_DATA = {
+			yogo: "",
+			kid: "",
+			index: 0
+		}
+=======
 	var PLAYER_DATA
+>>>>>>> 36534c314d67d4ee7feeaecd639dd5347a9a906c
 	
 	var sceneGroup
     var tile
@@ -60,6 +68,11 @@ var playerScreen = function(){
     
 	function createBackground(){
 		
+<<<<<<< HEAD
+		var fontStyle = {font: "100px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
+
+=======
+>>>>>>> 36534c314d67d4ee7feeaecd639dd5347a9a906c
         var bmd = game.add.bitmapData(game.world.width, game.world.height)
         var back = bmd.addToWorld()
 
@@ -78,12 +91,25 @@ var playerScreen = function(){
 		tile.tint = 0x00FFFF
 		tile.alpha = 0.2
 		sceneGroup.add(tile)
+<<<<<<< HEAD
+		
+		// var title = new Phaser.Text(sceneGroup.game, game.world.centerX, 230, "Resultados", fontStyle)
+		// title.anchor.setTo(0.5)
+		// sceneGroup.add(title)
+=======
+>>>>>>> 36534c314d67d4ee7feeaecd639dd5347a9a906c
 	}
 	
     
 	function update(){
         tile.tilePosition.y -= 0.4
+<<<<<<< HEAD
+        //epicparticles.update()
     }
+
+=======
+    }
+>>>>>>> 36534c314d67d4ee7feeaecd639dd5347a9a906c
 	
 	function createTeamMember(){
 
@@ -108,6 +134,14 @@ var playerScreen = function(){
 		memberGroup.add(kidName)
 		memberGroup.kidName = kidName
 		
+<<<<<<< HEAD
+		var yogoName = new Phaser.Text(memberGroup.game, 0, 150, PLAYER_DATA.yogo.charAt(0).toUpperCase() + PLAYER_DATA.yogo.slice(1), fontStyle)
+		yogoName.anchor.setTo(0.5)
+		memberGroup.add(yogoName)
+		memberGroup.yogoName = yogoName
+
+		var yogo = memberGroup.create(-2, 53, "atlas.player", PLAYER_DATA.index)
+=======
 		var yogoName = new Phaser.Text(memberGroup.game, 0, 150, PLAYER_DATA.yogo, fontStyle)
 		yogoName.anchor.setTo(0.5)
 		yogoName.fill = "#00D8FF"
@@ -115,6 +149,7 @@ var playerScreen = function(){
 		memberGroup.yogoName = yogoName
 		
 		var yogo = memberGroup.create(-2, 53, "atlas.player", getYogoNumber(PLAYER_DATA.yogo))
+>>>>>>> 36534c314d67d4ee7feeaecd639dd5347a9a906c
 		yogo.anchor.setTo(0.5, 1)
 		memberGroup.yogo = yogo
 
@@ -123,10 +158,17 @@ var playerScreen = function(){
 
 	function getYogoNumber(name){
 
+<<<<<<< HEAD
+		var NAMES_LIST = ["tomiko", "luna", "nao", "theffanie", "eagle", "dinamita", "arthurius", "estrella"] 
+		var index = NAMES_LIST.indexOf(name)
+
+		return index
+=======
 		var NAMES_LIST = ["Tomiko", "Luna", "Nao", "Theffanie", "Eagle", "Dinamita", "Arthurius", "Estrella"] 
 		var index = NAMES_LIST.indexOf(name)
 
 		return "yogo" + index
+>>>>>>> 36534c314d67d4ee7feeaecd639dd5347a9a906c
 	}
 
 	return {
@@ -147,7 +189,14 @@ var playerScreen = function(){
 			createTeamMember()
 		},
         setTeams: function (player) {
+<<<<<<< HEAD
+			var index = getYogoNumber(player.yogo)
+			PLAYER_DATA.yogo = player.yogo
+			PLAYER_DATA.kid = player.kid
+			PLAYER_DATA.index = "yogo" + index
+=======
 			PLAYER_DATA = player
+>>>>>>> 36534c314d67d4ee7feeaecd639dd5347a9a906c
 		},
 		shutdown: function () {
 			sceneGroup.destroy()
