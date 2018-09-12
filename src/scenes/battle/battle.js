@@ -629,7 +629,7 @@ var battle = function(){
                 for(var i = 0; i < 2; i++){
                     game.time.events.add(delay * 0.5, rotateTeam, null, i)
                 }
-                game.time.events.add(delay, initGame)
+                game.time.events.add(delay, setReadyGo)
             }
 		})
 	}
@@ -881,7 +881,7 @@ var battle = function(){
         for(var i = 0; i < 2; i++){
             game.time.events.add(2000, rotateTeam, null, i)
         }
-        game.time.events.add(4000, initGame)
+        game.time.events.add(4000, setReadyGo)
     }
 
 	return {
