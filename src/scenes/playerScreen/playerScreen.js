@@ -96,8 +96,8 @@ var playerScreen = function(){
 
 	function createYogoToken(){
 		
-		var fontStyle = {font: "90px VAGRounded", fontWeight: "bold", fill: "#000066", align: "center", stroke : "#FFFFFF", strokeThickness : 15}
-		
+		var fontStyle = {font: "90px VAGRounded", fontWeight: "bold", fill: "#FC1E79", align: "center", stroke : "#FFFFFF", strokeThickness : 15}
+		//000066
 		var memberGroup = game.add.group()
 
 		var token = memberGroup.create(0, 0, "atlas.player", "token0")
@@ -110,6 +110,7 @@ var playerScreen = function(){
 		
 		var yogoName = new Phaser.Text(memberGroup.game, 0, 150, PLAYER_DATA.yogo, fontStyle)
 		yogoName.anchor.setTo(0.5)
+		yogoName.fill = "#00D8FF"
 		memberGroup.add(yogoName)
 		memberGroup.yogoName = yogoName
 		
