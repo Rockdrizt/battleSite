@@ -1,2 +1,5 @@
 .idea/
 node_modules/
+src/scenes/playerScreen/playerScreen.js
+src/sections/playerScreen/scripts/main.js
+src/sections/playerScreen/scripts/main.js
