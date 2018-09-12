@@ -1,28 +1,36 @@
 {
   "timing":{
-    "stop":800,
+    "stop":1050,
     "removal":1700,
-    "hit":800
+    "hit":1000
   },
-  "particles":[
-    "/particles/characters/normalAttackWater2/normalAttackWater3.json",
-    "/particles/characters/normalAttackWater2/normalAttackWater4.json"
-  ],
+     "particles":[
+    ],
   "spines":[
     {
-      "file":"/spines/yogotars/battle/Estrella/estrella_projectiles.json",
+      "file":"/spines/yogotars/battle/Razzle/razzle_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"estrella1",
-      "animations":["in_normal","idle_normal"]
+      "skin":"razzle1",
+      "animations":["idle_super","idle_super"]
     }
+    ],
+    
+     "sounds":[
+    {
+      "soundID":"tournamentWaterProjectile1",
+      "delay":0
+    }
+         
   ],
+    
   "impact":{
     "particles":[
-      "/particles/characters/impactWater8/impactWater21.json",
-      "/particles/characters/impactWater8/impactWater22.json",
-      "/particles/characters/impactWater8/impactWater23.json"
+      "/particles/characters/impactWater9/impactWater24.json",
+      "/particles/characters/impactWater9/impactWater25.json",
+      "/particles/characters/impactWater9/impactWater26.json",
+      "/particles/characters/impactWater9/impactWater27.json"    
     ],
-    "soundID":"tournamentImpactWater1"
+    "soundID":"tournamentWaterSplash3"
   },
   "onShoot":[
     {
@@ -53,14 +61,14 @@
       "id":"set",
       "name":"transitionParams",
       "index":"time",
-      "value":500    
+      "value":800
     },
-    {
+      {
       "id":"set",
       "name":"transitionParams",
       "index":"delay",
-      "value":300
-    }, 
+      "value":100
+    },
     {
       "index":"to",
       "id":"execute",
