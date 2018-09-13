@@ -15,7 +15,7 @@
     border-radius: 5px;
     list-style: none;
     label {
-      color: #000000;
+      color: #2d1f4e;
       font-size: 25px;
       margin-left: 10px;
       width: 100%;
@@ -29,13 +29,13 @@
           &::after {
             content: '';
             position: absolute;
-            top: 2px;
-            left: 5px;
+            top: 3px;
+            left: 6px;
             height: 75%;
             width: 45%;
             border-radius: 3px;
-            border-right: 4px solid;
-            border-bottom: 4px solid;
+            border-right: 6px solid;
+            border-bottom: 6px solid;
             border-color: rgb(255, 255, 255);
           }
         }
@@ -45,12 +45,12 @@
         width: 10px;
         margin-right: 20px;
         display: inline-block;
-        width: 25px;
-        height: 25px;
+        width: 30px;
+        height: 30px;
         background-color: #7f7a93;
         transform: rotate(45deg);
         border: 2px solid #fff;
-        border-radius: 7px;
+        border-radius: 8px;
         vertical-align: text-bottom;
         transition: all 0.5s ease;
       }
@@ -64,12 +64,23 @@
 }
 @mixin first-li {
   li:first-child {
-    background-color: #fdf3ab;
+    background-color: #ffe180;
     label {
       input {
         &:checked + span {
           border: 2px solid rgb(251, 115, 18);
           background-color: rgb(255, 151, 6);
+          &::after {
+            border: none;
+            width: 150%;
+            height: 150%;
+            background-image: url(../img/mathtournament-onboarding-select-all-star.png);
+            background-repeat: no-repeat;
+            background-size: 100%;
+            top: -7px;
+            left: -7px;
+            transform: rotate(25deg)
+          }
         }
       }
     }

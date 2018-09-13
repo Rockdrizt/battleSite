@@ -41,36 +41,41 @@
       margin: 10px 0 20px 50px;
       .difficulty__list {
         @include list-items;
+        @include first-li;
         li {
           position: relative;
           text-align: left;
           &:first-child {
-            background-color: #2d1f4e;
             padding: 0 10px;
             width: 50%;
             border-radius: 10px;
             label {
               background-color: inherit;
-              color: #fff;
             }
           }
           label {
-            width: 350px;
+            width: 380px;
             margin-left: 60px;
             background-color: #fff;
             padding: 10px 20px;
             position: relative;
             text-align: left;
             border-radius: 10px;
+            input:checked + .difficulty__btn {
+              display: inline;
+            }
             span {
               position: absolute;
               left: -50px;
             }
           }
-          img {
-            width: 60px;
-            position: absolute;
-            right: 100px;
+          .difficulty__btn {
+            display: none;
+            img {
+              width: 60px;
+              position: absolute;
+              right: 50px;
+            }
           }
         }
       }
