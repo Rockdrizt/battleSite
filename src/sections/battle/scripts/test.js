@@ -85,7 +85,7 @@ function startGame(){
 		var defaultSkin = 1
 		var teams = [
 
-			["yogotarTheffanie", "yogotarRazzle", "yogotarArthurius"],
+			["yogotarTheffanie", "yogotarDazzle", "yogotarArthurius"],
 			["yogotarLuna", "yogotarOona", "yogotarDinamita"],
 
 		]
