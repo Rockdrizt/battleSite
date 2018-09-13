@@ -616,6 +616,11 @@ var teamSelector = function(){
 		okButton.canClick = false
 		sceneGroup.add(okButton)
 
+		var okUndone = okButton.create(0, 9, "atlas.yogoSelector", "okUndone")
+		okUndone.anchor.setTo(0.5)
+		okUndone.alpha = 0
+		okButton.okUndone = okUndone
+
 		var okOff = okButton.create(0, 0, "atlas.yogoSelector", "okOff")
 		okOff.anchor.setTo(0.5)
 		okOff.inputEnabled = true
@@ -637,16 +642,16 @@ var teamSelector = function(){
 				sound.play("lightUp")
 				okButton.setAll("alpha", 0)
 				okButton.onBtn.alpha = 1
-				clickOk()
 			}
 		}, this)
 		okOff.events.onInputUp.add(function(btn){
 			okButton.setAll("alpha", 0)
-			okButton.off.alpha = 1
+			okButton.okUndone.alpha = 1
+			clickOk()
 		}, this)
 		okButton.off = okOff
 
-		var overBtn = okButton.create(0, - 40, "atlas.yogoSelector", "okOver")
+		var overBtn = okButton.create(0, -40, "atlas.yogoSelector", "okOver")
 		overBtn.anchor.setTo(0.5)
 		overBtn.alpha = 0
 		okButton.over = overBtn
@@ -662,12 +667,17 @@ var teamSelector = function(){
 		function activate(){
 			this.canClick = true
 			this.setAll("tint", 0xFFFFFF)
+			this.off.alpha = 1
 		}
 	
 		function deActivate(){
 			this.canClick = false
 			this.setAll("tint", 0x888888)
+			this.off.alpha = 0
+			this.okUndone.alpha = 1
 		}
+
+		okButton.deActivate()
 	}
 	
 	function getTeam() {
