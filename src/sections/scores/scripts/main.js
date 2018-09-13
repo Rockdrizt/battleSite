@@ -6,8 +6,8 @@ function startGame(){
 		return
 	}*/
 
-	window.game = new Phaser.Game(document.body.clientWidth, document.body.clientHeight, Phaser.CANVAS, null, {init: init, create: create }, true, true);
-	document.body.style.visibility = "hidden"
+	window.game = new Phaser.Game(1920, 1080, Phaser.WEBGL, "ingame", {init: init, create: create }, false, false);
+    document.body.style.visibility = "hidden"
 
 	function bootConfigFiles(sceneList) {
 
@@ -30,13 +30,16 @@ function startGame(){
 
 	    	function onCompleteSceneLoading(){
 				//sceneloader.show("battle")
-				sceneloader.show("scores")
-                
+				//sceneloader.show("scores")
+				alertDialog.init()
+				var idGameFromHash = window.location.hash.substr(1);
+                var scoreService = new ScoreService()
+				scoreService.start(idGameFromHash, scoreMain.start)
 	    	}
 
 			document.body.style.visibility = "visible"
 	      	sceneloader.preload(sceneList, {onLoadFile: onLoadFile, onComplete: onCompleteSceneLoading})
-            sceneloader.show("preloaderIntro")
+            //sceneloader.show("preloaderIntro")
     	}
 
     	sceneloader.preload([preloaderIntro], {onComplete: onCompletePreloading})
@@ -47,22 +50,26 @@ function startGame(){
 		var fullWidth = 720
 		var fullHeight = 1080
 
-		var ratio = document.body.clientWidth / document.body.clientHeight
-		var gameHeight = Math.round(fullHeight)
-		var gameWidth = Math.round(fullHeight * ratio)
+		// var ratio = document.body.clientWidth / document.body.clientHeight
+		// var gameHeight = Math.round(fullHeight)
+		// var gameWidth = Math.round(fullHeight * ratio)
 
-		game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT
-		game.scale.setGameSize(gameWidth, gameHeight)
+		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
+		//game.scale.setGameSize(gameWidth, gameHeight)
 
 		game.stage.backgroundColor = "#ffffff"
 		game.time.advancedTiming = true
 		game.stage.disableVisibilityChange = true;
+		game.scale.pageAlignHorizontally = true;
+		game.scale.pageAlignVertically = true;
+		game.scale.refresh()
 
-		game.add.plugin(PhaserInput.Plugin);
+		//game.add.plugin(PhaserInput.Plugin);
 		game.plugins.add(PhaserSpine.SpinePlugin);
+		game.add.plugin(PhaserInput.Plugin);
 		epicparticles.init(game)
 
-		var language = "EN"
+		//var language = "EN"
 		/*if(window.location.search){
 			var params = window.location.search.trim(1)
 			var regex = /language=(..)/i
@@ -75,31 +82,67 @@ function startGame(){
 
 		}*/
 
-		localization.setLanguage(language)
+		localization.setLanguage(parent.language)
 
 		window.minigame.game = window.game
 		sceneloader.init(game)
 		sound.init(game)
 
-		//server test
+		/*var teamsData = [
+			[
+				{
+					nickname : "Rock",
+					avatar : "dinamita"
+				},
+				{
+					nickname : "Pawel",
+					avatar : "theffanie"
+				},
+				{
+					nickname : "Rulas",
+					avatar : "luna"
+				}
+			],
+			[
+				{
+					nickname: "Cherry",
+					avatar: "dinamita"
+				},
+				{
+					nickname: "Humbert",
+					avatar: "theffanie"
+				},
+				{
+					nickname: "Mares",
+					avatar: "luna"
+				}
+			]
+		]
+		scores.setTeamData(teamsData)*/
 	}
 
-	var teams = [
-		["dinamita", "theffanie", "luna"],
-		["eagle", "nao", "estrella"],
-	]
-	scores.setTeams(teams)
+	//scores.setTeams(teams, kids)
     
 	function create(){
 
 		bootConfigFiles([
-			scores
+			alertDialog
 		])
 	}
 }
 
-(function () {
-	startGame()
-	//cliente.startGame = startGame
-})()
+var wfconfig = {
+
+	active: function() {
+		console.log("font loaded");
+        startGame()
+	},
+    custom: {
+        families: [ 'VAGRounded' ],
+        urls:['../../../shared/minigames/css/custom_fonts.css']
+    },
+};
+WebFont.load(wfconfig);
+
+
 //minigame.orientation.init(startGame)

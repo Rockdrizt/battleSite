@@ -20,7 +20,18 @@ var characterBattle = function () {
 		var self = this
 
 		var attackType = type || "normal"
-		var attacks = self.data.attacks[attackType]
+		var attacks
+		if(self.data.attacks.skins){
+			if(!self.data.attacks.skins[self.skin]) {
+				console.warn("Attack from skin " + self.skin + " not found")
+				return
+			}
+			attacks = self.data.attacks.skins[self.skin][attackType]
+
+		} else {
+			attacks = self.data.attacks[attackType]
+		}
+
 		var element = self.data.stats.element
 
 		self.setAnimation(["attack_" + type, "idle_normal"], true)

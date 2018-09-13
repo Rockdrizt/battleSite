@@ -1,0 +1,84 @@
+{"frames": [
+
+{
+	"filename": "arthurius",
+	"frame": {"x":1247,"y":465,"w":408,"h":434},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":408,"h":434},
+	"sourceSize": {"w":408,"h":434},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "dinamita",
+	"frame": {"x":384,"y":501,"w":309,"h":407},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":309,"h":407},
+	"sourceSize": {"w":309,"h":407},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "eagle",
+	"frame": {"x":820,"y":436,"w":425,"h":478},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":425,"h":478},
+	"sourceSize": {"w":425,"h":478},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "estrella",
+	"frame": {"x":1291,"y":1,"w":367,"h":462},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":367,"h":462},
+	"sourceSize": {"w":367,"h":462},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "luna",
+	"frame": {"x":820,"y":1,"w":469,"h":433},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":469,"h":433},
+	"sourceSize": {"w":469,"h":433},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "nao",
+	"frame": {"x":1,"y":505,"w":381,"h":409},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":381,"h":409},
+	"sourceSize": {"w":381,"h":409},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "theffanie",
+	"frame": {"x":353,"y":1,"w":465,"h":498},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":465,"h":498},
+	"sourceSize": {"w":465,"h":498},
+	"pivot": {"x":0.5,"y":0.5}
+},
+{
+	"filename": "tomiko",
+	"frame": {"x":1,"y":1,"w":350,"h":502},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":350,"h":502},
+	"sourceSize": {"w":350,"h":502},
+	"pivot": {"x":0.5,"y":0.5}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "yogotars.png",
+	"format": "RGBA8888",
+	"size": {"w":1659,"h":915},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:47594b11ae5704476edc52698e9bed76:f1f2fd5c29db34e900937199665d93c5:8b13b33dc1109e90e40e3972847b587c$"
+}
+}

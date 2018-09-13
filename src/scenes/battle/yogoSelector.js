@@ -54,15 +54,13 @@ var yogoSelector = function(){
 			{	name: "robotBeep",
 				file: soundsPath + "robotBeep.mp3"},
 			{	name: "shineSpell",
-				file: "../../sounds/sounds/shineSpell.wav"},
-			{	name: "pop",
-				file: soundsPath + "pop.mp3"},
-			{	name: "brightTransition",
-				file: soundsPath + "brightTransition.mp3"},
+				file: settings.BASE_PATH + "/sounds/sounds/shineSpell.wav"},
 			{	name: "cut",
 				file: soundsPath + "cut.mp3"},
+			{	name: "lightUp",
+				file: settings.BASE_PATH + "/sounds/sounds/lightUp.wav"},
 			{	name: "gameSong", 
-				file: "../../sounds/songs/selector.mp3"},
+				file: settings.BASE_PATH + "/sounds/songs/selector.mp3"},
             {	name: "tomiko",
 				file: settings.BASE_PATH + "/sounds/selectorNames/tomiko.mp3"},
             {	name: "luna",
@@ -148,7 +146,6 @@ var yogoSelector = function(){
 	
 	assets.spines = assets.spines.concat(YOGOTARS_LIST)
 
-
 	var gameSong
 	var sceneGroup
 	var teamsBarGroup
@@ -177,7 +174,6 @@ var yogoSelector = function(){
 	var selectorGroup
 	var readyGroup
 	var playersSelected
-	var VS
 	var bmd
 	var tokens
 
@@ -370,12 +366,12 @@ var yogoSelector = function(){
 
 			var token = subGroup.create(0, 0, "atlas.yogoSelector", "token" + 0)
 			token.anchor.setTo(0.5)
-			token.inputEnabled = true
-			token.events.onInputDown.add(function(btn){
+			// token.inputEnabled = true
+			// token.events.onInputDown.add(function(btn){
 
-				//chosenOne = catch team input
-				pressBtn(btn, chosenOne)
-			}, this)
+			// 	//chosenOne = catch team input
+			// 	pressBtn(btn, chosenOne)
+			// }, this)
 			token.tag = i
 			token.canClick = false
 			subGroup.token = token
@@ -465,7 +461,7 @@ var yogoSelector = function(){
 					case STATES.red:
 						if(team === STATES.red){
 							removeCharacter(btn.parent, alphaGroup)
-							turnOff(btn.parent, STATES.yellow)
+							changeButton(btn.parent, STATES.yellow)
 							animateButton(btn.parent, STATES.yellow)
 							changeColor()
 						}
@@ -483,7 +479,7 @@ var yogoSelector = function(){
 					case STATES.blue:
 						if(team === STATES.blue){
 							removeCharacter(btn.parent, bravoGroup)
-							turnOff(btn.parent, STATES.yellow)
+							changeButton(btn.parent, STATES.yellow)
 							animateButton(btn.parent, STATES.yellow)
 							changeColor()
 						}
@@ -539,9 +535,19 @@ var yogoSelector = function(){
 		}*/
 	}
 
-	function turnOff(obj, color){
-		obj.light.alpha = 0
-		obj.color = color
+	function changeButton(btn, numTeam){
+		if(btn.color === STATES.bicolor){
+			if(numTeam === STATES.red) {
+				btn.color = STATES.blue
+				animateButton(btn, STATES.blue)
+			}else{
+				btn.color = STATES.red
+				animateButton(btn, STATES.red)
+			}
+		}else{
+			btn.light.alpha = 0
+			btn.color = STATES.yellow
+		}
 	}
 
 	function changeColor(){
@@ -790,7 +796,7 @@ var yogoSelector = function(){
 			while(i !== 5){
 				buttonsGroup.children[i].yogotar.alpha = 1
 				game.add.tween(buttonsGroup.children[i].yogotar.scale).from({x: 0,y: 0}, 500, Phaser.Easing.Cubic.Out, true, delay)
-				game.time.events.add(delay, function(){sound.play("pop")})
+				game.time.events.add(delay, function(){sound.play("lightUp")})
 
 
 				i === 2 ? i = 7 : i--
@@ -893,10 +899,18 @@ var yogoSelector = function(){
         spiner.alpha = 0
         readyGroup.spiner = spiner
 
-		VS = readyGroup.create(game.world.centerX, game.world.centerY, "atlas.loading", "vs")
+		var VS = readyGroup.create(game.world.centerX, game.world.centerY, "atlas.loading", "vs")
 		VS.anchor.setTo(0.5)
 		VS.alpha = 0
 		readyGroup.VS = VS
+
+		var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
+            
+		var text = new Phaser.Text(readyGroup.game, spiner.x, spiner.y + 150, "100%", fontStyle)
+		text.anchor.setTo(0.5)
+		text.alpha = 0
+		readyGroup.add(text)
+		readyGroup.text = text
 	}
 
 	function shake(position, periodA, periodB) {
@@ -966,6 +980,7 @@ var yogoSelector = function(){
 			game.add.tween(readyGroup.ready.scale).from({x: 0, y:0}, 200, Phaser.Easing.linear, true).onComplete.add(function () {
 				battleMain.init(teams)
 				battleMain.create()
+				game.add.tween(readyGroup.text).to({alpha:1}, 500, Phaser.Easing.Cubic.Out, true)
 				game.time.events.add(6000, function () {
 					timerFlag = true
 					if(barCompleteFlag){
@@ -997,9 +1012,9 @@ var yogoSelector = function(){
 			game.add.tween(readyGroup.ready).to({alpha:0}, 300, Phaser.Easing.Cubic.Out, true, 500).onComplete.add(function(){
                 readyGroup.spiner.alpha = 1
                 game.add.tween(readyGroup.spiner).to({angle: -360}, 2000, Phaser.Easing.linear, true).repeat(-1)
-                VS.alpha = 1
-                game.add.tween(VS.scale).from({x: 10, y: 10}, 400, Phaser.Easing.Cubic.Out, true)
-                game.add.tween(VS).to({x: VS.x + 10}, 500, function (k) {
+                readyGroup.VS.alpha = 1
+                game.add.tween(readyGroup.VS.scale).from({x: 10, y: 10}, 400, Phaser.Easing.Cubic.Out, true)
+                game.add.tween(readyGroup.VS).to({x: readyGroup.VS.x + 10}, 500, function (k) {
                     return shake(k, 45, 100)
                 }, true, 500, -1)
             })
@@ -1026,11 +1041,14 @@ var yogoSelector = function(){
 			var slot = teamGroup.slots[pIndex]
 
 			if((slot.yogo)&&(slot.yogo.name !== yogotar)){
+				//removeCharacter(tokens[slot.yogo.name], teamGroup)
+				changeButton(tokens[slot.yogo.name].parent, numTeam)
 				removeCharacter(tokens[slot.yogo.name], teamGroup)
 				if(yogotar){
 					pressBtn(tokens[yogotar], numTeam)
 					clickOk(numTeam)
 				}
+
 			}else if(!slot.yogo && yogotar){
 				pressBtn(tokens[yogotar], numTeam)
 				clickOk(numTeam)
@@ -1040,12 +1058,22 @@ var yogoSelector = function(){
 		}
 	}
 
+	function updateLoadingBar(loadedFiles, totalFiles) {
+
+		if (readyGroup.spiner) {
+		    var loadingAmount = loadedFiles / totalFiles
+			var total = loadingAmount.toFixed(2).substr(2)
+			readyGroup.text.setText(total + "%")
+		}
+	}
+
 	return {
 		bootFiles:bootFiles,
 		assets: assets,
 		name: "yogoSelector",
 		update: update,
 		preload:preload,
+		updateLoadingBar:updateLoadingBar,
 		showBattle:function () {
 			barCompleteFlag = true
 			if(timerFlag){
@@ -1083,7 +1111,7 @@ var yogoSelector = function(){
 
 			createReady()
 			createWhite()
-			
+
 			if(server)
 				server.addEventListener("onPlayersChange", onPlayersChange)
 			// game.time.events.add(6000, function () {

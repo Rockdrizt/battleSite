@@ -2,6 +2,7 @@
 var riddles = function(){
 
 	var questions
+	var testQuestions
 	var usedQuestions
 	var NUMBER_OF_FAKE_ANSWERS = 3
 
@@ -21,8 +22,10 @@ var riddles = function(){
 				"grade": 2
 			}*/
 		]
+		testQuestions = []
 		usedQuestions = []
 		loadQuestions()
+		loadTestQuestions()
 		//operationGenerator.setConfiguration()
 	}
 
@@ -68,29 +71,72 @@ var riddles = function(){
 		console.log("questions loaded")
 	}
 
+	function loadTestQuestions(){
+
+		if(!rawListTest)
+			return
+
+		var list = rawListTest
+
+		for(var i = 0; i < list.length; i++){
+
+			var element = list[i]
+
+			var answers = [element.A, element.B, element.C, element.D]
+			var correctValue = answers[element.answer - 1]
+
+			if(element.imgExist)
+				var imagePath = settings.BASE_PATH + "/images/questionDB/grade" + element.grade + "/" + element.image + ".png"
+			else
+				var imagePath = settings.BASE_PATH + "/images/questionDB/default.png"
+				
+			var obj = {
+				question: element.question,
+				existImage : element.imgExist,
+				src: imagePath,
+				image: element.image,
+				answers: answers,
+				grade: element.grade,
+				level: element.level,
+				correctAnswer: element.answer - 1,
+				//time:DIFFICULT_RULES[level].time
+				index: i,
+				correctValue: correctValue
+				//correctIndex:
+			}
+			testQuestions.push(obj)
+		}
+		console.log("test questions loaded")
+	}
+
 	function getQuestion(grade){
 	
-		var lastQuestion = questions[grade].length - 1
-		var rand
-		var newQuestion
-
-	    if(usedQuestions.length == lastQuestion){
-			usedQuestions = []
-			console.log("last")
-			newQuestion =  questions[grade][lastQuestion]
-			//getQuestion(grade)
-	    }
-	    else{
-	        do{
-	            rand = game.rnd.integerInRange(0, lastQuestion - 1)
-	        }while(usedQuestions.includes(rand))
-			
-			console.log(rand)
-	        usedQuestions.push(rand)
-			newQuestion = questions[grade][rand]
+		if(grade == -1){
+			var rand = game.rnd.integerInRange(0, testQuestions.length - 1)
+			return testQuestions[rand]
 		}
-		
-		return newQuestion
+		else{
+
+			var lastQuestion = questions[grade].length - 1
+			var rand
+			var newQuestion
+
+			if(usedQuestions.length == lastQuestion){
+				usedQuestions = []
+				newQuestion =  questions[grade][lastQuestion]
+				//getQuestion(grade)
+			}
+			else{
+				do{
+					rand = game.rnd.integerInRange(0, lastQuestion - 1)
+				}while(usedQuestions.includes(rand))
+				
+				usedQuestions.push(rand)
+				newQuestion = questions[grade][rand]
+			}
+			
+			return newQuestion
+		}
 	}
 
 	function getOperation(){

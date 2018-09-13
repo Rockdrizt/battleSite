@@ -384,6 +384,11 @@
 "tournamentFlipPage1":"/sounds/characters/flipPage1.mp3",
 "tournamentFemaleInhale1":"/sounds/characters/femaleInhale1.mp3",
 "tournamentFemaleBlow1":"/sounds/characters/femaleBlow1.mp3",
-"tournamentMagicSpawn1":"/sounds/characters/magicSpawn1.mp3"    
+"tournamentMagicSpawn1":"/sounds/characters/magicSpawn1.mp3",
+"tournamentWaterPillar1":"/sounds/characters/waterPillar1.mp3",
+"tournamentElectricStatic1":"/sounds/characters/electricStatic1.mp3",
+"tournamentElectricAttack1":"/sounds/characters/electricAttack1.mp3",
+"tournamentRunningFast1":"/sounds/characters/runningFast1.mp3",
+"tournamentWaveSurf1":"/sounds/characters/waveSurf1.mp3"    
     
 }

@@ -74,7 +74,10 @@ function startGame(){
 	    	function onCompleteSceneLoading(){
 				alertDialog.init()
 				server = new Server()
-				server.start(null, checkPlayers, {rules:operationGenerator.RULES_SET.MASTER}, showError)
+				var idGameFromHash = window.location.hash.substr(1);
+				server.start(idGameFromHash, checkPlayers, {rules:operationGenerator.RULES_SET.MASTER}, showError)
+
+				var loaderScene = sceneloader.getScene("preloaderIntro")
 
 				if (server) {
 					/*server.startGame = function () {
@@ -85,15 +88,16 @@ function startGame(){
 					server.addEventListener("onTeamDisconnect", checkPlayers)
 					server.addEventListener("onInitTeam", checkPlayers)
 					onReadyCallback = function () {
-						sceneloader.show("yogoSelector")
+						loaderScene.onComplete("yogoSelector")
+						//sceneloader.show("yogoSelector")
 					}
 				}
 				else {
 					//sceneloader.show("yogoSelector")
-					var loaderScene = sceneloader.getScene("preloaderIntro")
+					
 
-					//loaderScene.onComplete("startScreen")
-					sceneloader.show("yogoSelector")
+					loaderScene.onComplete("yogoSelector")
+					//sceneloader.show("yogoSelector")
 				}
 	    	}
 

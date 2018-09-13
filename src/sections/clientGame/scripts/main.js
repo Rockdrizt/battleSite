@@ -23,10 +23,21 @@ function startGame(){
 	}
 
 	function connectToServer(value){
+		// cliente.team = {
+		// 	players: [
+		// 		{nickname: "Pawel", avatar: false, skin:false},
+		// 		{nickname: "Mares", avatar: false, skin:false},
+		// 		{nickname: "Rock", avatar: false, skin:false}
+		// 	],
+		// 	ready:true
+		// }
+
 		cliente.start(value, showAlert, onWaitingPlayers)
 		cliente.startGame = function () {
 			alertDialog.hide()
-			sceneloader.show("teamSelector")
+			var loaderScene = sceneloader.getScene("preloaderIntro")
+			loaderScene.onComplete("teamSelector")
+			//sceneloader.show("teamSelector")
 		}
 	}
 
@@ -43,7 +54,8 @@ function startGame(){
 
 		alertDialog.init()
 		cliente = new Client();
-		connectToServer(cliente.id_game)
+		var idGameFromHash = window.location.hash.substr(1);
+		connectToServer(idGameFromHash)
 		//sceneloader.show("rewardClient")
 	}
 
@@ -107,7 +119,7 @@ function startGame(){
 	}
 
 	// var teams = [
-            
+
 	// 	[{name:"arthuriusWin", skin:"arthurius1"}, {name:"naoWin", skin:"nao1"}, {name:"theffanieWin", skin:"theffanie1"}],
 	// 	[{name:"arthuriusWin", skin:"arthurius2"}, {name:"naoWin", skin:"nao2"}, {name:"theffanieWin", skin:"theffanie2"}],
 		

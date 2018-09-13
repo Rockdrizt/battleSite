@@ -36,6 +36,23 @@ function Server(){
 	var DAMAGE_BY_CRITICAL_HIT = 30;
 	var NUM_TEAMS = 2
 	var NUMBER_OF_FAKE_ANSWERS = 3;
+	var TEAM1_DEFAULT = {
+		players: [
+			{nickname: "yogome", avatar: false, skin:false},
+			{nickname: "yogome", avatar: false, skin:false},
+			{nickname: "yogome", avatar: false, skin:false}
+		],
+		ready:false
+	}
+
+	var TEAM2_DEFAULT = {
+		players: [
+			{nickname: "yogome", avatar: false, skin:false},
+			{nickname: "yogome", avatar: false, skin:false},
+			{nickname: "yogome", avatar: false, skin:false}
+		],
+		ready:false
+	}
 
 	/**
 	 * @summary As default, an empty array has one element (an empty String). This function removes that element
@@ -120,12 +137,18 @@ function Server(){
 	 * @returns {String} The code of the current game
 	 */
 	var makeid = function(id) {
-		if(id){
+		var ref2
+		if (id) {
 			ref2 = database.ref(id);
 			return ref2.once('value').then(function (snapshot) {
-				return id;
+				var val = snapshot.val()
+				return {
+					id : id,
+					val : val
+				}
 			});
-		}else{
+
+		} else {
 			var text = "";
 			//var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 			var possible = "0123456789";
@@ -133,16 +156,16 @@ function Server(){
 				text += possible.charAt(Math.floor(Math.random() * possible.length));
 			ref2 = database.ref(text);
 			return ref2.once('value').then(function (snapshot) {
-				if(!snapshot.exists()){
-					return text;
-				}else{
+				if (!snapshot.exists()) {
+					return {
+						id : text
+					};
+				} else {
 					return makeid();
 				}
 			});
 		}
-	};
-
-
+	}
 
 	var shuffleArray = function(array) {
 		var currentIndex = array.length, temporaryValue, randomIndex;
@@ -320,17 +343,23 @@ function Server(){
 		self.fireEvent('afterGenerateQuestion',[questionData]);
 	}
 
+	function getData(val) {
+		valores = val
+		refIdGame.update({serverReady : true})
+
+		self.currentData = val
+	}
+
 	/**
 	 * @summary Starts the server
 	 */
-	function initialize(id){
-		id_game = id;
+	function initializeData(id){
 		operationGenerator.setConfiguration(self.rules, self.numPerOperations)
 
 		valores = {
 			rules:self.rules,
-			t1: {ready : false},
-			t2: {ready : false},
+			t1: TEAM1_DEFAULT,
+			t2: TEAM2_DEFAULT,
 			winner :false,
 			t1answer : false,
 			t2answer : false,
@@ -345,9 +374,9 @@ function Server(){
 			timeOut:false,
 			serverReady:true
 		};
-		refIdGame = database.ref(id_game);
-		refIdGame.set(valores).then(function () {  serverReady = true })
 		self.currentData = valores
+
+		refIdGame.set(valores)
 	}
 
 	function evaluateAllReady(key){
@@ -389,16 +418,14 @@ function Server(){
 		for(var teamIndex = 1; teamIndex <= NUM_TEAMS; teamIndex++){
 			var refT = database.ref(id_game + "/t" + teamIndex);
 			refT.on('value', function (snapshot) {
-				if (serverReady) {
-					var value = snapshot.val()
-					var key = snapshot.key
-					var num = Number(key[key.length - 1])
-					var players = snapshot.child("players").val()
-					var team = snapshot.toJSON();
+				var value = snapshot.val()
+				var key = snapshot.key
+				var num = Number(key[key.length - 1])
+				var players = snapshot.child("players").val()
+				var team = snapshot.toJSON();
 
-					checkTeamReady(value, key, num, team)
-					checkPlayers(players, num)
-				}
+				checkTeamReady(value, key, num, team)
+				checkPlayers(players, num)
 			});
 		}
 	}
@@ -428,70 +455,49 @@ function Server(){
 	}
 
 	function checkDisconnect(id){
-		if(id !== "000000") {
-			database.ref(id_game).onDisconnect().remove()
+		if(id.lenght < 6) {
+			database.ref(id).onDisconnect().remove()
 		}
 		else{
-			// if(!id_game.includes("egs"))
-			database.ref(id_game + "/serverReady").onDisconnect().set(false)
+			var resetValues = {
+				serverReady : false,
+				gameReady : false,
+				battleReady : false
+			}
+
+			database.ref(id).onDisconnect().update(resetValues)
+			database.ref(id + "/t1/ready").onDisconnect().set(false)
+			database.ref(id + "/t2/ready").onDisconnect().set(false)
 		}
+	}
+
+	function initializeSession(obj){
+		var id = obj.id
+		var val = obj.val
+		refIdGame = database.ref(id);
+
+		if(val)
+			getData(val)
+		else
+			initializeData(id)
+
+		if(!id_game) {
+			id_game = id
+
+			checkTeams()
+			checkTeamAnswers()
+			checkDisconnect(id)
+		}
+
+		if((id)&&(self.onStart)) self.onStart()
 	}
 
 	function setGame(currentId) {
 		var promise = makeid(currentId);
-		promise.then(function(id){
-			initialize(id)
-
-			if((id)&&(self.onStart)) self.onStart()
-
-			if((!currentId)||("000000")) {
-
-				checkTeams()
-				checkTeamAnswers()
-				checkDisconnect(id)
-			}
-		});
+		promise.then(initializeSession);
 	};
 
-	function getGame(currentId) {
-		if((!currentId) || (currentId === "")) {
-			var message = "El pin es invalido."
-			alertDialog.show({
-				message: message,
-			})
-			return
-		}
-
-		refIdGame = database.ref(currentId);
-		refIdGame.once('value').then(function (snapshot) {
-			if(snapshot.exists()){
-				valores = snapshot.val()
-				serverReady = true
-				var reconnectStatus = {
-					serverReady : true,
-					battleReady : false
-				}
-				database.ref(currentId).update(reconnectStatus)
-				self.currentData = valores
-
-				if(!id_game){
-					id_game = currentId
-
-					checkTeams()
-					checkTeamAnswers()
-					checkDisconnect(currentId)
-
-				}
-			}else{
-				var message = "No existe el servidor al que se intento conectar."
-				alertDialog.show({
-					message:message,
-				})
-			}
-		});
-	}
-
-	function checkConnected(currentId, callback){
+	function checkConnected(currentId){
 		database.ref('.info/connected').off()
 		database.ref('.info/connected').on('value', function (snap) {
 			if (snap.val() === false) {
@@ -503,12 +509,19 @@ function Server(){
 				})
 				serverReady = false
 				if(id_game) {
-					self.setGameReady(false)
-					database.ref(id_game + "/serverReady").set(serverReady)
+					//self.setGameReady(false)
+					var onDisconnectValues = {
+						serverReady : false,
+						gameReady : false,
+						battleReady : false,
+					}
+					database.ref(id_game).update(onDisconnectValues)
+					database.ref(id_game + "/t1/ready").set(false)
+					database.ref(id_game + "/t2/ready").set(false)
 				}
 			} else if (snap.val() === true) {
 				var id = id_game || currentId
-				callback(id)
+				setGame(id)
 			}
 		})
 	}
@@ -529,15 +542,8 @@ function Server(){
 		var numPerOperations = Math.round(battleTime / 60000) * 3
 		self.numberOperation = numPerOperations
 
-		checkConnected(currentId, setGame)
+		checkConnected(currentId)
 
-	}
-
-	this.connect = function (id, onStart, onError) {
-		self.onStart = onStart
-		self.onError = onError
-
-		checkConnected(id, getGame)
 	}
 
 	this.setGameReady = function (value) {

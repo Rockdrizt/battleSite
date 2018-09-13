@@ -1,0 +1,79 @@
+{
+  "timing":{
+    "stop":1050,
+    "removal":1700,
+    "hit":1000
+  },
+    
+    
+  "spines":[
+    {
+      "file":"/spines/yogotars/battle/Razzle/razzle_projectiles.json",
+      "scales":["@0.5x"],
+      "skin":"razzle1",
+      "animations":["idle_super"]
+    }
+    ],
+    
+     "sounds":[
+    {
+      "soundID":"tournamentWaterProjectile1",
+      "delay":0
+    }
+         
+  ],
+    
+  "impact":{
+    "particles":[
+      "/particles/characters/impactWater9/impactWater24.json",
+      "/particles/characters/impactWater9/impactWater25.json",
+      "/particles/characters/impactWater9/impactWater26.json",
+      "/particles/characters/impactWater9/impactWater27.json"    
+    ],
+    "soundID":"tournamentWaterSplash3"
+  },
+  "onShoot":[
+    {
+      "id":"get",
+      "variable":"target",
+      "name":"impactPoint",
+      "index":"impactPoint"
+    },
+    {
+      "id":"get",
+      "variable":"impactPoint",
+      "name":"targetX",
+      "index":"x"
+    },
+    {
+      "id":"get",
+      "variable":"impactPoint",
+      "name":"targetY",
+      "index":"y"
+    },
+    {
+      "id":"set",
+      "name":"transitionParams",
+      "index":"x",
+      "copyFrom":"targetX"
+    },
+    {
+      "id":"set",
+      "name":"transitionParams",
+      "index":"time",
+      "value":800
+    },
+      {
+      "id":"set",
+      "name":"transitionParams",
+      "index":"delay",
+      "value":100
+    },
+    {
+      "index":"to",
+      "id":"execute",
+      "variable":"transition",
+      "parameters":["self","transitionParams"]
+    }
+  ]
+}
