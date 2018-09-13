@@ -53,50 +53,7 @@
         max-height: 250px;
         margin-bottom: 30px;
         overflow: auto;
-        li {
-          padding: 10px;
-          border-radius: 5px;
-          list-style: none;
-          label {
-            color: #000000;
-            font-size: 25px;
-            margin-left: 10px;
-            cursor: pointer;
-            input {
-              display: none;
-              &:checked + span {
-                border: 2px solid rgb(0, 128, 0);
-                background-color: rgb(0, 181, 0);
-                &::after {
-                  content: '';
-                  position: absolute;
-                  top: 2px;
-                  left: 5px;
-                  height: 75%;
-                  width: 45%;
-                  border-radius: 3px;
-                  border-right: 4px solid;
-                  border-bottom: 4px solid;
-                  border-color: rgb(255, 255, 255);
-                }
-              }
-            }
-            span {
-              position: relative;
-              width: 10px;
-              margin-right: 20px;
-              display: inline-block;
-              width: 25px;
-              height: 25px;
-              background-color: #7f7a93;
-              transform: rotate(45deg);
-              border: 2px solid #fff;
-              border-radius: 7px;
-              vertical-align: text-bottom;
-              transition: all 0.5s ease;
-            }
-          }
-        }
+        @include list-items;
       }
       .modal__btn {
         outline: none;
@@ -156,9 +113,7 @@
         border-image: url(../img/mathtournament-onboarding-add-header.png) 1;
       }
       .modal__list {
-        li:nth-child(odd) {
-          background-color: #e3f1f1;
-        }
+        @include list-item-odd(#e3f1f1);
         @include first-li;
       }
     }
@@ -183,9 +138,7 @@
           1;
       }
       .modal__list {
-        li:nth-child(odd) {
-          background-color: #f9eae1;
-        }
+        @include list-item-odd(#f9eae1);
         @include first-li;
       }
     }
@@ -209,9 +162,7 @@
         border-image: url(../img/mathtournament-onboarding-multi-header.png) 1;
       }
       .modal__list {
-        li:nth-child(odd) {
-          background-color: #f8e0eb;
-        }
+        @include list-item-odd(#f8e0eb);
         @include first-li;
       }
     }
@@ -234,9 +185,7 @@
         border-image: url(../img/mathtournament-onboarding-div-header.png) 1;
       }
       .modal__list {
-        li:nth-child(odd) {
-          background-color: #e9e0fc;
-        }
+        @include list-item-odd(#e9e0fc);
         @include first-li;
       }
     }

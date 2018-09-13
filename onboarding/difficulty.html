@@ -33,32 +33,67 @@
             </span>
           </header>
           <div class="difficulty">
-            <ul class="difficulty__list">
-              <li class="difficulty__item">
-                <p>Addition</p>
-                <button class="difficulty__btn">
-                  <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
-                </button>
-              </li>
-              <li class="difficulty__item">
-                <p>Substraction</p>
-                <button class="difficulty__btn">
-                  <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
-                </button>
-              </li>
-              <li class="difficulty__item">
-                <p>Multiplication</p>
-                <button class="difficulty__btn">
-                  <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
-                </button>
-              </li>
-              <li class="difficulty__item">
-                <p>Division</p>
-                <button class="difficulty__btn">
-                  <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
-                </button>
-              </li>
-            </ul>
+            <form class="difficulty__form" name="formAdd">
+              <ul class="difficulty__list">
+                <li>
+                  <label for="select-all-additon">
+                    <input type="checkbox" class="select-all" name="select-all-additon" id="select-all-additon">
+                    <span></span>
+                    Select all
+                  </label>
+                </li>
+                <li>
+                  <label for="difficulty-option0">
+                    <input type="checkbox" name="difficulty-option0" id="difficulty-option0">
+                    <span></span>
+                    Addition
+                  </label>
+                  <span class="difficulty__btn">
+                    <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                  </span>
+                </li>
+                <li>
+                  <label for="difficulty-option1">
+                    <input type="checkbox" name="difficulty-option1" id="difficulty-option1">
+                    <span></span>
+                    Substraction
+                  </label>
+                  <span class="difficulty__btn">
+                    <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                  </span>
+                </li>
+                <li>
+                  <label for="difficulty-option2">
+                    <input type="checkbox" name="difficulty-option2" id="difficulty-option2">
+                    <span></span>
+                    Lorem ipsum dolor sit amet consectetur.
+                  </label>
+                  <span class="difficulty__btn">
+                    <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                  </span>
+                </li>
+                <li>
+                  <label for="difficulty-option3">
+                    <input type="checkbox" name="difficulty-option3" id="difficulty-option3">
+                    <span></span>
+                    division
+                  </label>
+                  <span class="difficulty__btn">
+                    <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                  </span>
+                </li>
+                <li>
+                  <label for="difficulty-option4">
+                    <input type="checkbox" name="difficulty-option4" id="difficulty-option4">
+                    <span></span>
+                    Lorem ipsum dolor sit amet consectetur.
+                  </label>
+                  <span class="difficulty__btn">
+                    <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                  </span>
+                </li>
+              </ul>
+            </form>
           </div>
         </div>
         <div class="item__buttons">
@@ -573,14 +608,14 @@
         var inputs = modalForms[i].elements
         if (e.target.checked === true) {
           for (var index = 1; index < inputs.length - 1; index++) {
-            modalForms[i].elements[index].checked = true
-            modalForms[i].elements[index].addEventListener('change', function () {
+            inputs[index].checked = true
+            inputs[index].addEventListener('change', function () {
               e.target.checked = false
             })
           }
         } else {
           for (var index = 1; index < inputs.length - 1; index++) {
-            modalForms[i].elements[index].checked = false
+            inputs[index].checked = false
           }
         }
       })

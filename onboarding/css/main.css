@@ -505,6 +505,8 @@
             color: #000000;
             font-size: 25px;
             margin-left: 10px;
+            width: 100%;
+            display: inline-block;
             cursor: pointer; }
             .modal .borde .modal__container .modal__list li label input {
               display: none; }
@@ -929,12 +931,14 @@
       background-repeat: no-repeat;
       background-image: url(../img/mathtournament-onboarding-bg-green-select.png);
       transform: translate(-50%, -50%);
-      touch-action: none;
-      user-select: none;
       color: #000;
-      cursor: move; }
+      cursor: move;
+      -khtml-user-drag: element;
+      -webkit-user-drag: element; }
       .item--lobby .players__container .player img {
-        width: 100%; }
+        width: 100%;
+        -khtml-user-drag: element;
+        -webkit-user-drag: element; }
   .item--lobby.item--left .item__header {
     right: 10%;
     text-align: right; }
@@ -980,7 +984,9 @@
           background-size: 100%;
           background-repeat: no-repeat;
           animation: rotate-pin infinite 5s;
-          z-index: -1; }
+          z-index: -1;
+          -khtml-user-drag: element;
+          -webkit-user-drag: element; }
         .item--lobby.item--middle .item__textbox__container .players__container .player {
           width: 130px;
           background-image: url(../img/mathtournament-onboarding-yellow-select.png); }
@@ -1126,7 +1132,7 @@
     letter-spacing: 2px;
     text-shadow: 0 3px 0 #2d1f4e, 0 -3px 0 #2d1f4e, -3px 0 0 #2d1f4e, 3px 0 0 #2d1f4e, 2px 2px 0 #2d1f4e, -2px -2px 0 #2d1f4e, 2px -2px 0 #2d1f4e, -2px 2px 0 #2d1f4e;
     position: relative;
-    transition: ease all .3s; }
+    transition: ease all 0.3s; }
     .item--difficulty .header--difficulty h2 {
       height: 70px;
       line-height: 70px;
@@ -1150,29 +1156,76 @@
     background-size: 150px;
     padding: 10px;
     border-radius: 0 0 10px 10px; }
-    .item--difficulty .difficulty .difficulty__list {
-      padding: 20px 50px 50px; }
-      .item--difficulty .difficulty .difficulty__list .difficulty__item {
+    .item--difficulty .difficulty .difficulty__form {
+      max-height: 350px;
+      overflow: auto;
+      margin: 10px 0 20px 50px; }
+      .item--difficulty .difficulty .difficulty__form .difficulty__list li {
+        padding: 10px;
+        border-radius: 5px;
         list-style: none; }
-        .item--difficulty .difficulty .difficulty__list .difficulty__item p {
-          font-size: 30px;
+        .item--difficulty .difficulty .difficulty__form .difficulty__list li label {
+          color: #000000;
+          font-size: 25px;
+          margin-left: 10px;
+          width: 100%;
           display: inline-block;
-          width: 75%;
-          text-align: left;
-          color: #2d1f4e;
+          cursor: pointer; }
+          .item--difficulty .difficulty .difficulty__form .difficulty__list li label input {
+            display: none; }
+            .item--difficulty .difficulty .difficulty__form .difficulty__list li label input:checked + span {
+              border: 2px solid green;
+              background-color: #00b500; }
+              .item--difficulty .difficulty .difficulty__form .difficulty__list li label input:checked + span::after {
+                content: '';
+                position: absolute;
+                top: 2px;
+                left: 5px;
+                height: 75%;
+                width: 45%;
+                border-radius: 3px;
+                border-right: 4px solid;
+                border-bottom: 4px solid;
+                border-color: white; }
+          .item--difficulty .difficulty .difficulty__form .difficulty__list li label span {
+            position: relative;
+            width: 10px;
+            margin-right: 20px;
+            display: inline-block;
+            width: 25px;
+            height: 25px;
+            background-color: #7f7a93;
+            transform: rotate(45deg);
+            border: 2px solid #fff;
+            border-radius: 7px;
+            vertical-align: text-bottom;
+            transition: all 0.5s ease; }
+      .item--difficulty .difficulty .difficulty__form .difficulty__list li {
+        position: relative;
+        text-align: left; }
+        .item--difficulty .difficulty .difficulty__form .difficulty__list li:first-child {
+          background-color: #2d1f4e;
+          padding: 0 10px;
+          width: 50%;
+          border-radius: 10px; }
+          .item--difficulty .difficulty .difficulty__form .difficulty__list li:first-child label {
+            background-color: inherit;
+            color: #fff; }
+        .item--difficulty .difficulty .difficulty__form .difficulty__list li label {
+          width: 350px;
+          margin-left: 60px;
           background-color: #fff;
-          padding: 10px 30px;
-          margin: 10px;
-          border-radius: 10px;
-          box-shadow: 0 3px 0 rgba(45, 31, 78, 0.2); }
-        .item--difficulty .difficulty .difficulty__list .difficulty__item button {
-          cursor: pointer;
-          border: none;
-          background-color: transparent;
-          width: 55px; }
-          .item--difficulty .difficulty .difficulty__list .difficulty__item button img {
-            width: 100%;
-            vertical-align: middle; }
+          padding: 10px 20px;
+          position: relative;
+          text-align: left;
+          border-radius: 10px; }
+          .item--difficulty .difficulty .difficulty__form .difficulty__list li label span {
+            position: absolute;
+            left: -50px; }
+        .item--difficulty .difficulty .difficulty__form .difficulty__list li img {
+          width: 60px;
+          position: absolute;
+          right: 100px; }
   .item--difficulty .item__buttons {
     position: absolute;
     left: 50%;
