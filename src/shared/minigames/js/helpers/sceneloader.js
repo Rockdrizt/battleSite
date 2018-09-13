@@ -218,7 +218,9 @@ var sceneloader = function(){
 			game.world.remove(alphaMask)
 			game.world.add(alphaMask)
 			alphaMask.alpha = 0
+			if(game.appear) game.appear.stop()
 			var appear = game.add.tween(alphaMask).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
+			game.appear = appear
 			appear.onComplete.add(function(){
 				game.state.start(sceneToShow.name, false)
 				game.world.remove(alphaMask)

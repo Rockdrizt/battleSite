@@ -672,9 +672,11 @@ var teamSelector = function(){
 	function getTeam() {
 		var players = []
 		for(var playerIndex = 0; playerIndex < teamGroup.slots.length; playerIndex++){
+			var nickName = cliente.team.players[playerIndex].nickname
 			var player = teamGroup.slots[playerIndex]
 			var playerObj = {
-				avatar:player.yogo ? player.yogo.name : false
+				avatar:player.yogo ? player.yogo.name : false,
+				nickname:nickName
 			}
 			players.push(playerObj)
 		}
