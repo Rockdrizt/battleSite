@@ -9,15 +9,22 @@
       "file":"/spines/yogotars/battle/Justice/justice_projectiles.json",
       "scales":["@0.5x"],
       "skin":"justice1",
-      "animations":["in_ultra","idle_ultra","out_ultra"]
+      "animations":["in_ultra1","idle_ultra1","idle_ultra1"]
     }
   ],
+    
+    "sounds":[
+    {
+      "soundID":"tournamentRockWoosh1",
+      "delay":0
+    }
+  ],
+    
   "impact":{
     "particles":[
-      "/particles/characters/impactWind7/impactWind21.json",
-      "/particles/characters/impactWind7/impactWind22.json",
-      "/particles/characters/impactWind7/impactWind23.json",
-      "/particles/characters/impactWind7/impactWind24.json"
+      "/particles/characters/rockImpact1/rockImpact1.json",
+      "/particles/characters/rockImpact1/rockImpact2.json",
+      "/particles/characters/rockImpact1/rockImpact3.json"
  ],
     "soundID":"tournamentWindImpact2"
       
