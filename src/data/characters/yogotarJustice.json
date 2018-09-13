@@ -64,14 +64,14 @@
         }
 	},
 
-	"directory": "/spines/yogotars/battle/Arthurius/arthurius.json",
-	"name": "Arthurius",
+	"directory": "/spines/yogotars/battle/Justice/justice.json",
+	"name": "Justice",
 	"spine": {
 		"options": {
 			"scale": 0.85,
 			"events": [],
 			"animationSpeed": 10,
-			"useAtlas":"/spines/characters/arthurius/skeleton.atlas"
+			"useAtlas":"/spines/characters/justice/skeleton.atlas"
 		}
 	},
 	"stats": {
