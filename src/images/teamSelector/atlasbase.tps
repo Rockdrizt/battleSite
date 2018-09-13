@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.8.0</string>
+        <string>4.8.3</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -351,6 +351,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">okUndone.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>55,65,109,129</rect>
+                <key>scale9Paddings</key>
+                <rect>55,65,109,129</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">pinkLight.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -610,6 +623,7 @@
             <filename>name6.png</filename>
             <filename>name7.png</filename>
             <filename>teamBar2.png</filename>
+            <filename>okUndone.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
