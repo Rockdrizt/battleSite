@@ -18,28 +18,37 @@ var scores = function(){
 			// }
 		]
 	}
-    
+
 	var assets = {
-        atlases: [
-            {   
-                name: "atlas.scores",
-                json: settings.BASE_PATH + "/images/scores/atlas.json",
-                image: settings.BASE_PATH + "/images/scores/atlas.png",
-            }
-        ],
-        images: [
-            {
-                name: "tile",
-                file: settings.BASE_PATH + "/images/startScreen/bgTile.png",
-            }
+		atlases: [
+			{
+				name: "atlas.scores",
+				json: settings.BASE_PATH + "/images/scores/atlas.json",
+				image: settings.BASE_PATH + "/images/scores/atlas.png",
+			},
+			{
+				name: "atlas.yogotars",
+				json: settings.BASE_PATH + "/images/scores/yogotars.json",
+				image: settings.BASE_PATH + "/images/scores/yogotars.png",
+			}
+		],
+		images: [
+			{
+				name: "tile",
+				file: settings.BASE_PATH + "/images/startScreen/bgTile.png",
+			},
+			{
+				name: "eagle",
+				file: settings.BASE_PATH + "/images/scores/eagle.png",
+			}
 		],
 		sounds: [
 		],
-        spritesheets: [
-        ],
-        spines:[
+		spritesheets: [
 		],
-        particles: [
+		spines:[
+		],
+		particles: [
 			// {
 			// 	name: 'horizontalLine',
 			// 	file: 'particles/horizontalLine/intence_horison_ligth.json',
@@ -51,87 +60,91 @@ var scores = function(){
 			// 	texture: 'particle_horison_ligth.png'
 			// }
 		]
-    }
-    
-    var SIDES = {
+	}
+
+	var SIDES = {
 		LEFT:{direction: -1, scale:{x:1}},
 		RIGHT:{direction: 1, scale:{x:-1}},
 	}
-    
-	var ORDER_SIDES = [SIDES.LEFT, SIDES.RIGHT]
 
-	var TEAMS_DATA = [
-		{
-			name:"Equipo Alfa",
-			yogos: [],
-			kids: []
-		},
-		{
-			name:"Equipo Bravo",
-			yogos: [],
-			kids: []
-		}
+	var ORDER_SIDES = [SIDES.LEFT, SIDES.RIGHT]
+	var teams = [
+		["dinamita", "theffanie", "luna"],
+		["eagle", "nao", "estrella"],
 	]
-    
+	var kids = [
+		["Rock", "Pawel", "Rulas"],
+		["Mares", "Cherry", "Humbert"]
+	]
+
+	var TEAM_NAMES = [
+		"Equipo Alfa",
+		"Equipo Bravo"
+	]
+
+	var teamsData
+
 	var sceneGroup
-    var tile
+	var tile
 	var teamsGroup
+
+
 	var scoresGroup
-    
+
 	function loadSounds(){
 		sound.decode(assets.sounds)
 	}
 
 	function initialize(){
 
-        game.stage.backgroundColor = "#0D014D"
-        loadSounds()
+		game.stage.backgroundColor = "#0D014D"
+		loadSounds()
 	}
-    
-    function preload(){
-		
-        game.stage.disableVisibilityChange = false
-    }
-    
+
+	function preload(){
+
+		game.stage.disableVisibilityChange = false
+	}
+
 	function createBackground(){
-		
+
 		var fontStyle = {font: "100px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
 
-        var bmd = game.add.bitmapData(game.world.width, game.world.height)
-        var back = bmd.addToWorld()
+		var bmd = game.add.bitmapData(game.world.width, game.world.height)
+		var back = bmd.addToWorld()
 
-        var y = 0
+		var y = 0
 
-        for (var i = 0; i < bmd.height; i++)
-        {
-            var color = Phaser.Color.interpolateColor(0x05072B, 0x0D014D, bmd.height, i)
+		for (var i = 0; i < bmd.height; i++)
+		{
+			var color = Phaser.Color.interpolateColor(0x05072B, 0x0D014D, bmd.height, i)
 
-            bmd.rect(0, y, bmd.width, y + 1, Phaser.Color.getWebRGB(color))
-            y += 2
-        }
-        sceneGroup.add(back)
-        
-        tile = game.add.tileSprite(0, 0, game.world.width, game.world.width, "tile")
-        tile.tint = 0x0099AA
+			bmd.rect(0, y, bmd.width, y + 1, Phaser.Color.getWebRGB(color))
+			y += 2
+		}
+		sceneGroup.add(back)
+
+		tile = game.add.tileSprite(0, 0, game.world.width, game.world.width, "tile")
+		tile.tint = 0x0099AA
 		sceneGroup.add(tile)
-		
+
 		var title = new Phaser.Text(sceneGroup.game, game.world.centerX, 230, "Resultados", fontStyle)
 		title.anchor.setTo(0.5)
 		sceneGroup.add(title)
 
 		var logos = game.add.group()
 		sceneGroup.add(logos)
-	
-       	for(var j = 0; j < 2; j++){
-           
+
+		for(var j = 0; j < 2; j++){
+
 			var logo = logos.create(game.world.centerX, game.world.height - 150, "atlas.scores", "logo" + j)
 			logo.x -= 150 * ORDER_SIDES[j].direction
-           	logo.anchor.setTo(0.5, 0)
+			logo.anchor.setTo(0.5, 0)
 		}
 		logos.children[0].scale.setTo(0.3)
 		logos.children[1].scale.setTo(0.9)
 	}
-	
+
 	function createTeamBar(){
 
 		var fontStyle = {font: "65px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
@@ -141,13 +154,12 @@ var scores = function(){
 
 		for(var i = 0; i < ORDER_SIDES.length; i++){
 
-			var teamInfo = TEAMS_DATA[i]
 			var side = ORDER_SIDES[i]
 
 			var teamBar = barsGroup.create(game.world.width * i, 30, "atlas.scores", "teamBar" + i)
 			teamBar.anchor.setTo(i, 0)
 
-			var name = new Phaser.Text(barsGroup.game, 260, 75, teamInfo.name, fontStyle)
+			var name = new Phaser.Text(barsGroup.game, 260, 75, TEAM_NAMES[i], fontStyle)
 			name.anchor.setTo(0.5)
 			name.stroke = "#000066"
 			name.strokeThickness = 10
@@ -155,56 +167,55 @@ var scores = function(){
 			teamBar.addChild(name)
 			teamBar.name = name
 		}
-    }
-    
+	}
+
 	function update(){
-        tile.tilePosition.y -= 0.4
-        epicparticles.update()
-    }
-    
-    function createTimeToken(){
-        
-        var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#444444", align: "center"}
-        
-        var timeToken = resultGroup.create(game.world.centerX, 320, "atlas.scores", "timeToken")
-        timeToken.anchor.setTo(0.5)
-        
-        var text = new Phaser.Text(resultGroup.game, 0, -5, "3:00", fontStyle)
-        text.anchor.setTo(0.5)
-        timeToken.addChild(text)
-        timeToken.text = text
-    }
-	
+		tile.tilePosition.y -= 0.4
+		epicparticles.update()
+	}
+
+	function createTimeToken(){
+
+		var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#444444", align: "center"}
+
+		var timeToken = resultGroup.create(game.world.centerX, 320, "atlas.scores", "timeToken")
+		timeToken.anchor.setTo(0.5)
+
+		var text = new Phaser.Text(resultGroup.game, 0, -5, "3:00", fontStyle)
+		text.anchor.setTo(0.5)
+		timeToken.addChild(text)
+		timeToken.text = text
+	}
+
 	function createTeams(){
 
 		teamsGroup = game.add.group()
 		teamsGroup.x = game.world.centerX
 		teamsGroup.y = game.world.centerY
 		sceneGroup.add(teamsGroup)
-		
-		for(var j = 0; j < ORDER_SIDES.length; j++){
+
+		for(var sideIndex = 0; sideIndex < ORDER_SIDES.length; sideIndex++){
 
 			var sideTeam = game.add.group()
 			teamsGroup.add(sideTeam)
-		
-			var side = ORDER_SIDES[j]
-            var pivotX = game.world.centerX * 0.82 * side.direction
+
+			var side = ORDER_SIDES[sideIndex]
+			var pivotX = game.world.centerX * 0.82 * side.direction
 			var pivotY = game.world.centerY * -0.2
 			var RISE_Y = game.world.centerY * 0.35
-			var yogos = TEAMS_DATA[j].yogos
-			var kids = TEAMS_DATA[j].kids
 
-			for(var i = 0; i < kids.length; i++){
+			for(var i = 0; i < teamsData[sideIndex].length; i++){
+				var playerData = teamsData[sideIndex][i]
 
-				var teamMate = createYogoToken(j, yogos[i], kids[i])
-                teamMate.x = pivotX
-                teamMate.y = pivotY
+				var teamMate = createYogoToken(sideIndex, playerData.avatar, playerData.nickname)
+				teamMate.x = pivotX
+				teamMate.y = pivotY
 				sideTeam.add(teamMate)
 
 				if(i == 1){
 					teamMate.x += 225 * side.scale.x
 				}
-				
+
 				pivotY += RISE_Y
 			}
 
@@ -214,7 +225,7 @@ var scores = function(){
 	}
 
 	function createYogoToken(color, yogo, kid){
-		
+
 		var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#000066", align: "center"}
 		var side = ORDER_SIDES[color]
 
@@ -227,7 +238,7 @@ var scores = function(){
 		memberGroup.shine = shine
 
 		var token = memberGroup.create(0, 0, "atlas.scores", "token" + color)
-        token.anchor.setTo(0.5)
+		token.anchor.setTo(0.5)
 
 		var nameBoard = memberGroup.create(0, 100, "atlas.scores", "nameBoard")
 		nameBoard.anchor.setTo(0.5)
@@ -240,17 +251,18 @@ var scores = function(){
 		nameBoard.addChild(nameTxt)
 		nameBoard.txt = nameTxt
 
-		var yogo = memberGroup.create(0, 40, yogo)
+		var yogo = memberGroup.create(0, 40, "atlas.yogotars", yogo)
 		yogo.anchor.setTo(0.5, 1)
 		yogo.scale.setTo(0.5)
 		yogo.growScale = 0.5
 		memberGroup.yogo = yogo
 
-		var kid = memberGroup.create(0, 40, kid)
-		kid.anchor.setTo(0.5, 1)
-		kid.scale.setTo(0, 0.4)
-		kid.growScale = 0.4
-		memberGroup.kid = kid
+		var key = game.cache.checkImageKey(kid) ? kid : "eagle"
+		var kidPhoto = memberGroup.create(0, 40, key)
+		kidPhoto.anchor.setTo(0.5, 1)
+		kidPhoto.scale.setTo(0, 0.4)
+		kidPhoto.growScale = 0.4
+		memberGroup.kid = kidPhoto
 
 		return memberGroup
 	}
@@ -271,16 +283,16 @@ var scores = function(){
 			var bubble = scoresGroup.create(0, 0, "atlas.scores", "score" + i)
 			bubble.anchor.setTo(0.5)
 			bubble.x = pivotX * ORDER_SIDES[i].direction
-			
+
 			var score = new Phaser.Text(scoresGroup.game, 0, 50, "99", fontStyle)
-            score.anchor.setTo(0.5)
-            bubble.addChild(score)
-            bubble.text = score
+			score.anchor.setTo(0.5)
+			bubble.addChild(score)
+			bubble.text = score
 		}
 	}
-    
-    function swapImage(){
-		
+
+	function swapImage(){
+
 		var self = this
 
 		for(var i = 0; i < self.length; i++){
@@ -302,73 +314,73 @@ var scores = function(){
 			var scaleDown = game.add.tween(picDown.scale).to({x: 0}, 400, Phaser.Easing.Cubic.InOut, true)
 			var scaleUp = game.add.tween(picUp.scale).to({x: size}, 400, Phaser.Easing.Cubic.InOut, false)
 			scaleDown.chain(scaleUp)
-			
+
 		}
-        
+
 		game.time.events.add(5000, self.swapImage)
-    }
-    
-    function createVS(){
-        
-        var vs = sceneGroup.create(game.world.centerX, game.world.centerY - 100, "atlas.scores", "vs")
+	}
+
+	function createVS(){
+
+		var vs = sceneGroup.create(game.world.centerX, game.world.centerY - 100, "atlas.scores", "vs")
 		vs.anchor.setTo(0.5)
 		vs.scale.setTo(0.8)
-        //vs.alpha = 0
-        sceneGroup.vs = vs
-    }
-    
-    function animateScene(){
-        
+		//vs.alpha = 0
+		sceneGroup.vs = vs
+	}
+
+	function animateScene(){
+
 //        var emitter = epicparticles.newEmitter("horizontalLine")
 //        emitter.x = game.world.centerX
 //        emitter.y = game.world.centerY + 40
-        
-        // var dots = epicparticles.newEmitter("dot")
-        // dots.x = game.world.centerX
-        // dots.y = game.world.centerY + 40
-        
-        var lastTween
-        
-        for(var j = 0; j < teamsGroup.length; j++){
-            
-            var teamG = teamsGroup.children[j]
-            var side = ORDER_SIDES[j].scale.x
-            var posx = -250 * side + (game.world.width * j)
-            var delay = 500
-            
-            for(var i = 0; i < teamG.length; i++){
 
-                lastTween = game.add.tween(teamG.children[i]).from({x:posx}, 200, Phaser.Easing.Cubic.Out, true, delay)                
-                delay += 250
-            }
-        }
-        
-        lastTween.onComplete.add(function(){
-            resultGroup.VS.alpha = 1 
-            var first = game.add.tween(resultGroup.VS.scale).from({x: 10, y: 10}, 400, Phaser.Easing.Cubic.Out, true)
-            var second = game.add.tween(resultGroup.light.scale).to({x: 1, y: 1}, 400, Phaser.Easing.Cubic.InOut, false, 0, 0, true)
-            first.chain(second)
-            
-            second.onComplete.add(function(){
-                //for(var j = 0; j < teamsGroup.length; j++){
-                    //var teamG = teamsGroup.children[j]
-                teamsGroup.forEach(function(teamG){
-                    teamG.forEach(function(grp){
-                        if(grp.shine)
-                            game.add.tween(grp.shine.scale).to({x: 1, y: 1}, 400, Phaser.Easing.Cubic.Out, true)
-                        if(grp.yogo)
-                            grp.yogo.changeYogo()
-                    })
-                })
-                    
-                //}
-            })
-        })
-    }
-        
-    function setCharacter(character){
+		// var dots = epicparticles.newEmitter("dot")
+		// dots.x = game.world.centerX
+		// dots.y = game.world.centerY + 40
 
-        var charObj = {
+		var lastTween
+
+		for(var j = 0; j < teamsGroup.length; j++){
+
+			var teamG = teamsGroup.children[j]
+			var side = ORDER_SIDES[j].scale.x
+			var posx = -250 * side + (game.world.width * j)
+			var delay = 500
+
+			for(var i = 0; i < teamG.length; i++){
+
+				lastTween = game.add.tween(teamG.children[i]).from({x:posx}, 200, Phaser.Easing.Cubic.Out, true, delay)
+				delay += 250
+			}
+		}
+
+		lastTween.onComplete.add(function(){
+			resultGroup.VS.alpha = 1
+			var first = game.add.tween(resultGroup.VS.scale).from({x: 10, y: 10}, 400, Phaser.Easing.Cubic.Out, true)
+			var second = game.add.tween(resultGroup.light.scale).to({x: 1, y: 1}, 400, Phaser.Easing.Cubic.InOut, false, 0, 0, true)
+			first.chain(second)
+
+			second.onComplete.add(function(){
+				//for(var j = 0; j < teamsGroup.length; j++){
+				//var teamG = teamsGroup.children[j]
+				teamsGroup.forEach(function(teamG){
+					teamG.forEach(function(grp){
+						if(grp.shine)
+							game.add.tween(grp.shine.scale).to({x: 1, y: 1}, 400, Phaser.Easing.Cubic.Out, true)
+						if(grp.yogo)
+							grp.yogo.changeYogo()
+					})
+				})
+
+				//}
+			})
+		})
+	}
+
+	function setCharacter(character){
+
+		var charObj = {
 			name: character,
 			file: settings.BASE_PATH + "/images/scores/" + character + ".png",
 		}
@@ -377,44 +389,39 @@ var scores = function(){
 
 	return {
 		assets: assets,
-        bootFiles:bootFiles,
+		bootFiles:bootFiles,
 		name: "scores",
 		update: update,
-        preload:preload,
-        render:function () {
+		preload:preload,
+		render:function () {
 			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
 		},
 		create: function(event){
-            
-            sceneGroup = game.add.group()
 
-            initialize()
+			sceneGroup = game.add.group()
+
+			initialize()
 			createBackground()
 			createTeamBar()
 			createTeams()
 			createVS()
 			createScoreBubble()
-            // createTimeToken()
+			// createTimeToken()
 		},
-        setCharacter:setCharacter,
-        setTeams: function (myTeams, kidsTeam) {
+		setTeamData: function (data) {
+			teamsData = data
 
-			for(var teamIndex = 0; teamIndex < myTeams.length; teamIndex++){
-				var team = myTeams[teamIndex]
-				var kids = kidsTeam[teamIndex]
-				TEAMS_DATA[teamIndex].yogos = team
-				TEAMS_DATA[teamIndex].kids = kids
+			for (var teamIndex = 0; teamIndex < teamsData.length; teamIndex++){
+				for (var playerIndex = 0; playerIndex < teamsData[teamIndex].length; playerIndex++) {
+					var player = teamsData[teamIndex][playerIndex]
+					var image = {
+						name: player.nickname,
+						file: settings.BASE_PATH + "/images/scores/" + player.nickname + ".png"
+					}
 
-				for(var charIndex = 0; charIndex < team.length; charIndex++){
-					var character = team[charIndex]
-					setCharacter(character)
+					assets.images.push(image)
 				}
 			}
-            
-            for(var i = 0; i < kidsTeam.length; i++){
-                for(var j = 0; j < kidsTeam[i].length; j++)
-                    setCharacter(kidsTeam[i][j])
-            }
 		},
 		shutdown: function () {
 			sceneGroup.destroy()

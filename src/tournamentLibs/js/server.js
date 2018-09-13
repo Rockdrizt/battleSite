@@ -438,7 +438,7 @@ function Server(){
 	}
 
 	function checkDisconnect(id){
-		if(id !== "000000") {
+		if(id.lenght < 6) {
 			database.ref(id).onDisconnect().remove()
 		}
 		else{

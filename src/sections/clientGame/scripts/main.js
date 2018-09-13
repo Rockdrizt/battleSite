@@ -23,6 +23,14 @@ function startGame(){
 	}
 
 	function connectToServer(value){
+		// cliente.team = {
+		// 	players: [
+		// 		{nickname: "Pawel", avatar: false, skin:false},
+		// 		{nickname: "Mares", avatar: false, skin:false},
+		// 		{nickname: "Rock", avatar: false, skin:false}
+		// 	],
+		// 	ready:true
+		// }
 		cliente.start(value, showAlert, onWaitingPlayers)
 		cliente.startGame = function () {
 			alertDialog.hide()

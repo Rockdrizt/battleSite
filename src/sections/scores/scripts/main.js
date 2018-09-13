@@ -30,13 +30,16 @@ function startGame(){
 
 	    	function onCompleteSceneLoading(){
 				//sceneloader.show("battle")
-				sceneloader.show("scores")
-                
+				//sceneloader.show("scores")
+				alertDialog.init()
+				var idGameFromHash = window.location.hash.substr(1);
+                var scoreService = new ScoreService()
+				scoreService.start(idGameFromHash, scoreMain.start)
 	    	}
 
 			document.body.style.visibility = "visible"
 	      	sceneloader.preload(sceneList, {onLoadFile: onLoadFile, onComplete: onCompleteSceneLoading})
-            sceneloader.show("preloaderIntro")
+            //sceneloader.show("preloaderIntro")
     	}
 
     	sceneloader.preload([preloaderIntro], {onComplete: onCompletePreloading})
@@ -81,24 +84,45 @@ function startGame(){
 		sceneloader.init(game)
 		sound.init(game)
 
-		//server test
+		/*var teamsData = [
+			[
+				{
+					nickname : "Rock",
+					avatar : "dinamita"
+				},
+				{
+					nickname : "Pawel",
+					avatar : "theffanie"
+				},
+				{
+					nickname : "Rulas",
+					avatar : "luna"
+				}
+			],
+			[
+				{
+					nickname: "Cherry",
+					avatar: "dinamita"
+				},
+				{
+					nickname: "Humbert",
+					avatar: "theffanie"
+				},
+				{
+					nickname: "Mares",
+					avatar: "luna"
+				}
+			]
+		]
+		scores.setTeamData(teamsData)*/
 	}
 
-	var teams = [
-		["dinamita", "theffanie", "luna"],
-		["eagle", "nao", "estrella"],
-	]
-	var kids = [
-		["Rock", "Pawel", "Rulas"], 
-		["Mares", "Cherry", "Humbert"]
-	]
-
-	scores.setTeams(teams, kids)
+	//scores.setTeams(teams, kids)
     
 	function create(){
 
 		bootConfigFiles([
-			scores
+			alertDialog
 		])
 	}
 }
