@@ -15,7 +15,7 @@ var battleMain = function(){
 		function onLoadFile(event){
 
 			//var loaderScene = sceneloader.getScene("yogoSelector")
-			//yogoSelector.updateLoadingBar(event.totalLoaded, event.totalFiles)
+			yogoSelector.updateLoadingBar(event.totalLoaded, event.totalFiles)
 		}
 
 		function onCompleteSceneLoading(){

@@ -31,10 +31,13 @@ function startGame(){
 		// 	],
 		// 	ready:true
 		// }
+
 		cliente.start(value, showAlert, onWaitingPlayers)
 		cliente.startGame = function () {
 			alertDialog.hide()
-			sceneloader.show("teamSelector")
+			var loaderScene = sceneloader.getScene("preloaderIntro")
+			loaderScene.onComplete("teamSelector")
+			//sceneloader.show("teamSelector")
 		}
 	}
 
