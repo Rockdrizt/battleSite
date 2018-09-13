@@ -457,9 +457,10 @@ var battle = function(){
 	function setCharacter(character, teamIndex) {
 
 		var charObj = {
-			name: character,
-			file: settings.BASE_PATH + "/data/characters/" + character + ".json",
+			name: character.name,
+			file: settings.BASE_PATH + "/data/characters/" + character.name + ".json",
 			scales: ["@0.5x"],
+			skin: character.skin,
 			teamNum:teamIndex
 		}
 		bootFiles.characters.push(charObj)
@@ -943,7 +944,7 @@ var battle = function(){
 
 				for(var charIndex = 0; charIndex < team.length; charIndex++){
 					var character = team[charIndex]
-					setCharacter(character.name, teamIndex)
+					setCharacter(character, teamIndex)
 					var img = team[charIndex].name.substr(7)
 					console.log(img)
 					pushSpecialArt(img)
