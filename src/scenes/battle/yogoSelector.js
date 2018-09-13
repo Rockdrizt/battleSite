@@ -54,15 +54,13 @@ var yogoSelector = function(){
 			{	name: "robotBeep",
 				file: soundsPath + "robotBeep.mp3"},
 			{	name: "shineSpell",
-				file: "../../sounds/sounds/shineSpell.wav"},
-			{	name: "pop",
-				file: soundsPath + "pop.mp3"},
-			{	name: "brightTransition",
-				file: soundsPath + "brightTransition.mp3"},
+				file: settings.BASE_PATH + "/sounds/sounds/shineSpell.wav"},
 			{	name: "cut",
 				file: soundsPath + "cut.mp3"},
+			{	name: "lightUp",
+				file: settings.BASE_PATH + "/sounds/sounds/lightUp.wav"},
 			{	name: "gameSong", 
-				file: "../../sounds/songs/selector.mp3"},
+				file: settings.BASE_PATH + "/sounds/songs/selector.mp3"},
             {	name: "tomiko",
 				file: settings.BASE_PATH + "/sounds/selectorNames/tomiko.mp3"},
             {	name: "luna",
@@ -147,7 +145,6 @@ var yogoSelector = function(){
 	]
 	
 	assets.spines = assets.spines.concat(YOGOTARS_LIST)
-
 
 	var gameSong
 	var sceneGroup
@@ -370,12 +367,12 @@ var yogoSelector = function(){
 
 			var token = subGroup.create(0, 0, "atlas.yogoSelector", "token" + 0)
 			token.anchor.setTo(0.5)
-			token.inputEnabled = true
-			token.events.onInputDown.add(function(btn){
+			// token.inputEnabled = true
+			// token.events.onInputDown.add(function(btn){
 
-				//chosenOne = catch team input
-				pressBtn(btn, chosenOne)
-			}, this)
+			// 	//chosenOne = catch team input
+			// 	pressBtn(btn, chosenOne)
+			// }, this)
 			token.tag = i
 			token.canClick = false
 			subGroup.token = token
@@ -800,7 +797,7 @@ var yogoSelector = function(){
 			while(i !== 5){
 				buttonsGroup.children[i].yogotar.alpha = 1
 				game.add.tween(buttonsGroup.children[i].yogotar.scale).from({x: 0,y: 0}, 500, Phaser.Easing.Cubic.Out, true, delay)
-				game.time.events.add(delay, function(){sound.play("pop")})
+				game.time.events.add(delay, function(){sound.play("lightUp")})
 
 
 				i === 2 ? i = 7 : i--

@@ -116,7 +116,7 @@ function startGame(){
 	}
 
 	// var teams = [
-            
+
 	// 	[{name:"arthuriusWin", skin:"arthurius1"}, {name:"naoWin", skin:"nao1"}, {name:"theffanieWin", skin:"theffanie1"}],
 	// 	[{name:"arthuriusWin", skin:"arthurius2"}, {name:"naoWin", skin:"nao2"}, {name:"theffanieWin", skin:"theffanie2"}],
 		

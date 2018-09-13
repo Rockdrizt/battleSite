@@ -96,8 +96,8 @@ var playerScreen = function(){
 
 	function createYogoToken(){
 		
-		var fontStyle = {font: "90px VAGRounded", fontWeight: "bold", fill: "#FC1E79", align: "center", stroke : "#FFFFFF", strokeThickness : 15}
-		//000066
+		var fontStyle = {font: "90px VAGRounded", fontWeight: "bold", fill: "#FC1E79", align: "center", stroke : "#000066", strokeThickness : 15}
+
 		var memberGroup = game.add.group()
 
 		var token = memberGroup.create(0, 0, "atlas.player", "token0")

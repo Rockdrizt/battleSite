@@ -12,7 +12,7 @@
     {
       "file":"/spines/yogotars/battle/Estrella/estrella_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"estrella_projectiles",
+      "skin":"estrella1",
       "animations":["in_normal","idle_normal"]
     }
   ],

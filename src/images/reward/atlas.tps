@@ -4,7 +4,7 @@
         <key>fileFormatVersion</key>
         <int>4</int>
         <key>texturePackerVersion</key>
-        <string>4.8.1</string>
+        <string>4.8.3</string>
         <key>autoSDSettings</key>
         <array>
             <struct type="AutoSDSettings">
@@ -208,6 +208,32 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">teamBar1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>201,35,401,69</rect>
+                <key>scale9Paddings</key>
+                <rect>201,35,401,69</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">teamBar2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>194,36,387,72</rect>
+                <key>scale9Paddings</key>
+                <rect>194,36,387,72</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">ventanaFondo.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -242,6 +268,8 @@
             <filename>equipoRosa.png</filename>
             <filename>ventanaFondo.png</filename>
             <filename>ventanaFrente.png</filename>
+            <filename>teamBar1.png</filename>
+            <filename>teamBar2.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
