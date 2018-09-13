@@ -66,6 +66,7 @@ function startGame(){
 
 		//game.add.plugin(PhaserInput.Plugin);
 		game.plugins.add(PhaserSpine.SpinePlugin);
+		game.add.plugin(PhaserInput.Plugin);
 		epicparticles.init(game)
 
 		//var language = "EN"

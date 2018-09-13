@@ -714,7 +714,7 @@ var teamSelector = function(){
 			else platformGroup.children[aux].apear()
 
 			var teamPlayers = getTeam()
-			//cliente.selectYogotar(teamPlayers)
+			cliente.selectYogotar(teamPlayers)
 		}
 	}
 
