@@ -386,7 +386,7 @@ var reward = function(){
 		},
         setWinner: function(winner, score, time){
             INDEX_WINNER = winner
-            //FINAL_SCORE = score
+            FINAL_SCORE = score
             //FINAL_TIME = time
         },
         shutdown: function () {

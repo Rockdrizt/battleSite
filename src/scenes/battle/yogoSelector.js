@@ -174,7 +174,6 @@ var yogoSelector = function(){
 	var selectorGroup
 	var readyGroup
 	var playersSelected
-	var VS
 	var bmd
 	var tokens
 
@@ -900,10 +899,18 @@ var yogoSelector = function(){
         spiner.alpha = 0
         readyGroup.spiner = spiner
 
-		VS = readyGroup.create(game.world.centerX, game.world.centerY, "atlas.loading", "vs")
+		var VS = readyGroup.create(game.world.centerX, game.world.centerY, "atlas.loading", "vs")
 		VS.anchor.setTo(0.5)
 		VS.alpha = 0
 		readyGroup.VS = VS
+
+		var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
+            
+		var text = new Phaser.Text(readyGroup.game, spiner.x, spiner.y + 150, "100%", fontStyle)
+		text.anchor.setTo(0.5)
+		text.alpha = 0
+		readyGroup.add(text)
+		readyGroup.text = text
 	}
 
 	function shake(position, periodA, periodB) {
@@ -973,6 +980,7 @@ var yogoSelector = function(){
 			game.add.tween(readyGroup.ready.scale).from({x: 0, y:0}, 200, Phaser.Easing.linear, true).onComplete.add(function () {
 				battleMain.init(teams)
 				battleMain.create()
+				game.add.tween(readyGroup.text).to({alpha:1}, 500, Phaser.Easing.Cubic.Out, true)
 				game.time.events.add(6000, function () {
 					timerFlag = true
 					if(barCompleteFlag){
@@ -1004,9 +1012,9 @@ var yogoSelector = function(){
 			game.add.tween(readyGroup.ready).to({alpha:0}, 300, Phaser.Easing.Cubic.Out, true, 500).onComplete.add(function(){
                 readyGroup.spiner.alpha = 1
                 game.add.tween(readyGroup.spiner).to({angle: -360}, 2000, Phaser.Easing.linear, true).repeat(-1)
-                VS.alpha = 1
-                game.add.tween(VS.scale).from({x: 10, y: 10}, 400, Phaser.Easing.Cubic.Out, true)
-                game.add.tween(VS).to({x: VS.x + 10}, 500, function (k) {
+                readyGroup.VS.alpha = 1
+                game.add.tween(readyGroup.VS.scale).from({x: 10, y: 10}, 400, Phaser.Easing.Cubic.Out, true)
+                game.add.tween(readyGroup.VS).to({x: readyGroup.VS.x + 10}, 500, function (k) {
                     return shake(k, 45, 100)
                 }, true, 500, -1)
             })
@@ -1050,12 +1058,22 @@ var yogoSelector = function(){
 		}
 	}
 
+	function updateLoadingBar(loadedFiles, totalFiles) {
+
+		if (readyGroup.spiner) {
+		    var loadingAmount = loadedFiles / totalFiles
+			var total = loadingAmount.toFixed(2).substr(2)
+			readyGroup.text.setText(total + "%")
+		}
+	}
+
 	return {
 		bootFiles:bootFiles,
 		assets: assets,
 		name: "yogoSelector",
 		update: update,
 		preload:preload,
+		updateLoadingBar:updateLoadingBar,
 		showBattle:function () {
 			barCompleteFlag = true
 			if(timerFlag){
@@ -1093,7 +1111,7 @@ var yogoSelector = function(){
 
 			createReady()
 			createWhite()
-			
+
 			if(server)
 				server.addEventListener("onPlayersChange", onPlayersChange)
 			// game.time.events.add(6000, function () {
