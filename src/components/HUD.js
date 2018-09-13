@@ -89,7 +89,8 @@ var HUD = function(){
 		//createTimer(HUDGroup)
 		HUDGroup.rotateTokens = rotateTokens.bind(HUDGroup)
 		HUDGroup.getLifeBar = getLifeBar.bind(HUDGroup)
-		HUDGroup.setScore = setScore.bind(HUDGroup)
+        HUDGroup.setScore = setScore.bind(HUDGroup)
+        HUDGroup.getScore = getScore.bind(HUDGroup)
         
         return HUDGroup
     }
@@ -138,7 +139,13 @@ var HUD = function(){
         game.add.tween(score.scale).to({x: 1, y:1}, 400, Phaser.Easing.Cubic.Out, true, 1500, 0, true).onStart.add(function(){
             score.text.setText(score.points)
         })
-	}
+    }
+    
+    function getScore(index){
+
+        var score = this.children[index].teamScore
+        return score.points
+    }
 	
 	return{
 		createHUD:createHUD,

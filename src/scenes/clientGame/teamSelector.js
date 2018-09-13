@@ -240,7 +240,8 @@ var teamSelector = function(){
 		}
 
 		tile = game.add.tileSprite(0, 0, game.world.width, game.world.height, "tile")
-		tile.tint = 0x0099AA
+		//tile.tint = 0x0099AA
+		tile.alpha = 0.4
 	}
 
 	function update(){
@@ -305,48 +306,48 @@ var teamSelector = function(){
 		//teamGroup.slots[1].y += 100
 	}
 
-	// function createPullGroup(){
-
-	// 	pullGroup = game.add.group()
-	// 	sceneGroup.add(pullGroup)
-
-	// 	for(var i = 0; i < YOGOTARS_LIST.length; i++){
-
-	// 		var player = spineLoader.createSpine(YOGOTARS_LIST[i].name, YOGOTARS_LIST[i].name + "1", "wait", 0, 0, true)//characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait")
-	// 		player.x = 0
-	// 		player.y = -100
-	// 		player.name = YOGOTARS_LIST[i].name
-	// 		player.tag = i
-	// 		player.used = false
-	// 		player.setAlive(false)
-	// 		pullGroup.add(player)
-	// 	}
-	// }
-
 	function createPullGroup(){
 
 		pullGroup = game.add.group()
 		sceneGroup.add(pullGroup)
 
-		var skinNum = 1
-		var aux = 0
+		for(var i = 0; i < YOGOTARS_LIST.length; i++){
 
-		for(var i = 0; i < YOGOTARS_LIST.length * 2; i++){
-
-			var player = spineLoader.createSpine(YOGOTARS_LIST[aux].name, YOGOTARS_LIST[aux].name + skinNum, "wait", 0, 0, true)//characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait")
+			var player = spineLoader.createSpine(YOGOTARS_LIST[i].name, YOGOTARS_LIST[i].name + "1", "wait", 0, 0, true)//characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait")
 			player.x = 0
 			player.y = -100
-			player.name = YOGOTARS_LIST[aux].name
-			player.tag = aux
+			player.name = YOGOTARS_LIST[i].name
+			player.tag = i
 			player.used = false
-			player.skin = YOGOTARS_LIST[aux].name + skinNum
 			player.setAlive(false)
 			pullGroup.add(player)
-
-			aux = i - aux
-			skinNum = i % 2 ? 1 : 2
 		}
 	}
+	//pull group both skins
+	// function createPullGroup(){
+
+	// 	pullGroup = game.add.group()
+	// 	sceneGroup.add(pullGroup)
+
+	// 	var skinNum = 1
+	// 	var aux = 0
+
+	// 	for(var i = 0; i < YOGOTARS_LIST.length * 2; i++){
+
+	// 		var player = spineLoader.createSpine(YOGOTARS_LIST[aux].name, YOGOTARS_LIST[aux].name + skinNum, "wait", 0, 0, true)//characterBattle.createCharacter(assets.spines[aux].name, assets.spines[aux].name + skinNum, "wait")
+	// 		player.x = 0
+	// 		player.y = -100
+	// 		player.name = YOGOTARS_LIST[aux].name
+	// 		player.tag = aux
+	// 		player.used = false
+	// 		player.skin = YOGOTARS_LIST[aux].name + skinNum
+	// 		player.setAlive(false)
+	// 		pullGroup.add(player)
+
+	// 		aux = i - aux
+	// 		skinNum = i % 2 ? 1 : 2
+	// 	}
+	// }
 
 	function createTeamBar(){
 
