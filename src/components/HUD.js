@@ -38,6 +38,17 @@ var HUD = function(){
             life.anchor.setTo(0, 0.5)
             life.scale.setTo(side, 1)
             teamSide.life = life
+
+            var lifeText = "100/100".split("").join(String.fromCharCode(8202))
+
+            var lifePoints = new Phaser.Text(teamSide.game, life.x + 20 * side, life.y + 5, lifeText, fontStyle)
+            lifePoints.anchor.setTo(i, 0.5)
+            lifePoints.fontSize = 45
+            lifePoints.stroke = "#000066"
+            lifePoints.strokeThickness = 10
+            teamSide.add(lifePoints)
+            life.points = lifePoints
+            life.amount = 100
             
             var teamScore = teamSide.create(lifeBox.x - 80 * side, lifeBox.y * 2.5, "atlas.battle", "score" + i)
             teamScore.anchor.setTo(0.5)
@@ -134,7 +145,6 @@ var HUD = function(){
 
 	function dealDamage(loseIndex, percent, ultra){
 
-        //return this.children[index].life
         var self = this
         var life = self.children[loseIndex].life
         var winIndex = loseIndex == 0 ? 1 : 0
@@ -148,7 +158,15 @@ var HUD = function(){
             delay = 5000
         }
 
-		game.add.tween(life).to({width:damage}, 500, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
+        var reduceLife = game.add.tween(life).to({width:damage}, 500, Phaser.Easing.Cubic.Out, true)
+
+		reduceLife.onComplete.add(function(){
+
+            life.amount -= Math.abs(percent) * 100
+            var lifeText = life.amount + "/100"
+            lifeText = lifeText.split("").join(String.fromCharCode(8202))
+            life.points.setText(lifeText)
+
             if(damage == MIN_LIFE){
                 game.time.events.add(2000, self.setWinteam, null, winIndex, loseIndex)
             }

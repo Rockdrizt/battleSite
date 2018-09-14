@@ -922,7 +922,8 @@ var yogoSelector = function(){
 	}
 
 	function showBattle() {
-        
+		
+		readyGroup.text.setText("100%")
         game.add.tween(white).to({alpha:1}, 400, Phaser.Easing.Cubic.Out, true)
 		var fadeTween = game.add.tween(sceneGroup).to({alpha:0}, 400, Phaser.Easing.Cubic.Out, true)
 		fadeTween.onComplete.add(function () {
