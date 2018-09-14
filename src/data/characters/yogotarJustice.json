@@ -1,23 +1,69 @@
 {
 	"category":"yogotar",
-	"attacks": {
-		"normal": [
-			{
-				"id": "earthRocks2",
-				"attachment": "particle2",
-				"delay": 450,
-				"multiplier": 1
-			}
-		],
-		"special": [
-			{
-				"id": "earthBlaster2",
-				"attachment": "particle3",
-				"delay": 250,
-				"multiplier": 1
-			}
-		]
+    "attacks": {
+        
+        "skins": {
+        
+            "justice1": {
+        
+                "normal": [
+                    {
+                        "id": "normalEarth2",
+                        "attachment": "particle12",
+                        "delay":    0,
+                        "multiplier": 1
+                    }
+                ],
+    
+                "super": [
+                    {
+                        "id": "superArthurius",
+                        "attachment": "particle12",
+                        "delay": 1000,
+                        "multiplier": 1
+                    }
+                ],
+
+                "ultra":[
+                    {
+                        "id": "ultraJustice1",
+                        "attachment": "particle8",
+                        "delay": 1200,
+                        "multiplier": 1
+                    }
+                ]
+            },
+
+            "justice2": {
+                
+                "normal": [
+                    {
+                        "id": "normalEarth2",
+                        "attachment": "particle12",
+                        "delay":    0,
+                        "multiplier": 1
+                    }
+                ],
+                "super": [
+                    {
+                        "id": "superArthurius",
+                        "attachment": "particle12",
+                        "delay": 1000,
+                        "multiplier": 1
+                    }
+                ],
+                "ultra":[
+                    {
+                        "id": "ultraJustice2",
+                        "attachment": "particle8",
+                        "delay": 1200,
+                        "multiplier": 1
+                    }
+                ]
+            }
+        }
 	},
+
 	"directory": "/spines/yogotars/battle/Justice/justice.json",
 	"name": "Justice",
 	"spine": {
@@ -33,9 +79,8 @@
 		"element": "earth"
 	},
 	"visuals": {
-		"shadowScaleX": 0.8,
-		"shadowY": -7,
-		"shadowScaleY": 1,
+		"shadowScaleX": 1,
+		"shadowScaleY": 1.4,
 		"cardFacing": "right",
 		"impactAttachment": "torso1"
 	}

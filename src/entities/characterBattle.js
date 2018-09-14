@@ -20,7 +20,18 @@ var characterBattle = function () {
 		var self = this
 
 		var attackType = type || "normal"
-		var attacks = self.data.attacks[attackType]
+		var attacks
+		if(self.data.attacks.skins){
+			if(!self.data.attacks.skins[self.skin]) {
+				console.warn("Attack from skin " + self.skin + " not found")
+				return
+			}
+			attacks = self.data.attacks.skins[self.skin][attackType]
+
+		} else {
+			attacks = self.data.attacks[attackType]
+		}
+
 		var element = self.data.stats.element
 
 		self.setAnimation(["attack_" + type, "idle_normal"], true)
@@ -83,14 +94,25 @@ var characterBattle = function () {
 		})
 	}
 
-	function loadProjectilesData(characterName, characterData) {
+	function loadProjectilesData(character, characterData) {
+		var characterName = character.name
 
 		if(typeof characterData.attacks === "undefined")
 			return
 
 		for(var key in characterData.attacks){
 
-			var attacks = characterData.attacks[key]
+			var attacks
+			if(characterData.attacks.skins){
+				if(!characterData.attacks.skins[character.skin][key]) {
+					console.warn("Attack from skin " + character.skin + " not found")
+					return
+				}
+				attacks = characterData.attacks.skins[character.skin][key]
+
+			} else {
+				attacks = characterData.attacks[key]
+			}
 
 			for(var attackIndex = 0; attackIndex < attacks.length; attackIndex++){
 				var id = attacks[attackIndex].id
@@ -111,7 +133,7 @@ var characterBattle = function () {
 				var characterData = game.cache.getJSON(character.name + "Data")
 				addSpine(character, characterData)
 				character.data = characterData
-				loadProjectilesData(character.name, characterData)
+				loadProjectilesData(character, characterData)
 			}}
 
 	}

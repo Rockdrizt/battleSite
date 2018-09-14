@@ -136,10 +136,11 @@ var battle = function(){
 		DOWN:{x:-70, y: 120, scale:{x:1, y:1}},
 	}
 
-	var DAMAGE_PERCENT = [
-		{normal: 0.1, super: 0.125, ultra: 0.167},
-		{normal: 0.0666, super: 0.083, ultra: 0.111}
-	]
+	var DAMAGE_PERCENT = {
+		1:{normal: 0.1, super: 0.125, ultra: 0.167},
+		2:{normal: 0.0666, super: 0.083, ultra: 0.111},
+		3:{normal: 0.2, super: 0.25, ultra: 0.3}
+	}
 
 	var DIFFICULT_RULES = {
 		1 : {
@@ -166,8 +167,7 @@ var battle = function(){
 	var ORDER_POSITIONS = [POSITIONS.UP, POSITIONS.MID, POSITIONS.DOWN]
 	var CHARACTER_CENTER_OFFSET = {x:-200, y: -200}
 
-	var QUESTIONS = {N_10: 0, N_15:1}
-	var DAMAGE = DAMAGE_PERCENT[QUESTIONS.N_10]
+	var DAMAGE = DAMAGE_PERCENT[3]
 	var MAX_LIFE
     var MIN_LIFE = 0
 	var EMPTY_QUESTION = -1
@@ -457,9 +457,10 @@ var battle = function(){
 	function setCharacter(character, teamIndex) {
 
 		var charObj = {
-			name: character,
-			file: settings.BASE_PATH + "/data/characters/" + character + ".json",
+			name: character.name,
+			file: settings.BASE_PATH + "/data/characters/" + character.name + ".json",
 			scales: ["@0.5x"],
+			skin: character.skin,
 			teamNum:teamIndex
 		}
 		bootFiles.characters.push(charObj)
@@ -610,6 +611,8 @@ var battle = function(){
 
 		var life = HUDGroup.getLifeBar(team)
 		var damage = life.width - (MAX_LIFE * percent * ORDER_SIDES[team].scale.x)
+		var limit = team == 1 ? damage >= -0.1 : damage <= 0.1
+		if(limit) damage = MIN_LIFE
 		var index = team == 0 ? 1 : 0
         var delay = 3500
         
@@ -620,16 +623,14 @@ var battle = function(){
 
 		game.add.tween(life).to({width:damage}, 500, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
             
-			var defeated = team == 0 ? life.width < MIN_LIFE : life.width > MIN_LIFE
-            
-            if(defeated){
+            if(damage == MIN_LIFE){
                 game.time.events.add(2000, setWinteam, null, index, team)
             }
             else{
                 for(var i = 0; i < 2; i++){
                     game.time.events.add(delay * 0.5, rotateTeam, null, i)
                 }
-                game.time.events.add(delay, initGame)
+                game.time.events.add(delay, setReadyGo)
             }
 		})
 	}
@@ -759,9 +760,11 @@ var battle = function(){
         teams[win].forEach(function(member){
             member.setAnimation(["win"], true)
         })
-        
+		
+		var score = HUDGroup.getScore(win)
+		
 		battleMain.initWinerTeam(win)
-		reward.setWinner(win)
+		reward.setWinner(win, score)
 		game.add.tween(white).to({alpha:1}, 300, Phaser.Easing.Cubic.In, true, 4000).onComplete.add(function(){
 			battleSong.stop()
 			sceneloader.show("reward")
@@ -881,7 +884,7 @@ var battle = function(){
         for(var i = 0; i < 2; i++){
             game.time.events.add(2000, rotateTeam, null, i)
         }
-        game.time.events.add(4000, initGame)
+        game.time.events.add(4000, setReadyGo)
     }
 
 	return {
@@ -911,6 +914,12 @@ var battle = function(){
 			battleSong = sound.play("battleSong", {loop:true, volume:0.4})
 			createWhite()
 
+			// var damageBtn = createButton(attackMove.bind(null, "ultra", 0), 0xff0033)
+			// damageBtn.x = game.world.centerX
+			// damageBtn.y = game.world.height - 250
+			// damageBtn.label.text = "damage"
+			// sceneGroup.add(damageBtn)
+
 			if(server){
 				server.removeEventListener('afterGenerateQuestion', questionGroup.showQuestion);
 				server.removeEventListener('onTurnEnds', showFeedback);
@@ -935,7 +944,7 @@ var battle = function(){
 
 				for(var charIndex = 0; charIndex < team.length; charIndex++){
 					var character = team[charIndex]
-					setCharacter(character.name, teamIndex)
+					setCharacter(character, teamIndex)
 					var img = team[charIndex].name.substr(7)
 					console.log(img)
 					pushSpecialArt(img)

@@ -80,16 +80,18 @@
     <section class="modal modal--lobby hidden" id="modal-ready">
       <div class="borde">
         <div class="main modal__container">
-          <span class="close">
+          <!-- <span class="close">
             <img src="./img/close_button.png" alt="">
-          </span>
+          </span> -->
           <div class="img-container">
             <img src="./img/mathtournament-onboarding-eagle-start.png" alt="">
             <img src="./img/mathtournament-onboarding-luna-start.png" alt="">
           </div>
-          <h2>¿Estás seguro<br>de iniciar tu torneo?</h2>
-          <button class="modal__btn item__btn--ok" type="submit">
-          </button>
+          <h3>¿Estás seguro<br>de iniciar tu torneo?</h3>
+          <div class="modal__btn__container">
+            <button class="modal__button modal__button--ok"></button>
+            <button class="modal__button modal__button--close close"></button>
+          </div>
         </div>
       </div>
     </section>
@@ -107,106 +109,7 @@
   </main>
   <script src="./js/DragDropTouch.js"></script>
   <script src="./js/main.js"></script>
-  <script>
-    // Get battle configuration
-    var configBattle = {}
-    var paramstr = window.location.search.substr(1);
-    var paramArr = paramstr.split('&')
-    paramArr.forEach(function (el) {
-      var conf = el.split('=')
-      configBattle[conf[0]] = conf[1]
-    })
-
-    // Generate players
-    var playersContainer = document.getElementById('players-container')
-    function generatePlayer(players) {
-      var playersName = ['player 1', 'player 2', 'player 3', 'player 4', 'player 5', 'player 6']
-
-      for (var index = 0; index < players; index++) {
-        var templatePlayer = document.createElement('div')
-        templatePlayer.classList.add('player')
-        templatePlayer.setAttribute('draggable', true)
-        var templateName = document.createTextNode(playersName[index])
-        templatePlayer.appendChild(templateName)
-        playersContainer.appendChild(templatePlayer)
-      }
-    }
-
-    // hide unnecessary elements
-    function hideHitbox(selector) {
-      var hitboxToHide = document.querySelectorAll(selector)
-      hitboxToHide.forEach(function (el) {
-        el.parentNode.removeChild(el)
-      })
-    }
-
-    if (configBattle.mode === '1vs1') {
-      hideHitbox('.one')
-      generatePlayer(2)
-    } else if (configBattle.mode === '2vs2') {
-      hideHitbox('.two')
-      generatePlayer(4)
-    } else {
-      generatePlayer(6)
-    }
-
-    // Drag and Drop
-    var players = document.querySelectorAll('.player')
-    var container = document.querySelectorAll('.players__container')
-    var from, to, element
-
-    function dragstart(e) {
-      element = e.target
-      from = e.target.parentNode
-      e.target.classList.add('drop')
-      playersContainer.classList.remove('full')
-      container.forEach(function (el) {
-        if (el.children.length === 0) {
-          el.classList.remove('full')
-        }
-      })
-    }
-    function dragover(e) {
-      e.preventDefault()
-    }
-    function dragenter(e) {
-      e.preventDefault()
-      to = e.target
-    }
-    function drop(e) {
-      var drop = document.querySelector('.drop')
-      if (to.parentNode.id === 'players-container') {
-        this.append(drop)
-      } else if (to.parentNode.classList.contains('players__container')) {
-        from.append(to)
-        this.append(drop)
-      } else {
-        this.append(drop)
-      }
-      drop.classList.remove('drop')
-    }
-    container.forEach(function (el) {
-      el.addEventListener('dragstart', dragstart)
-      el.addEventListener('dragover', dragover)
-      el.addEventListener('dragenter', dragenter)
-      el.addEventListener('drop', drop)
-    })
-
-    //show modal
-    var okBtn = document.getElementById('btn-ok')
-    var modalReady = document.getElementById('modal-ready')
-    var modalWarning = document.getElementById('modal-warning')
-    var closeModal = document.querySelectorAll('.close')
-    okBtn.addEventListener('click', function () {
-      modalReady.classList.remove('hidden')
-    })
-    closeModal.forEach(function (el) {
-      el.addEventListener('click', function () {
-        modalReady.classList.add('hidden')
-        modalWarning.classList.add('hidden')
-      })
-    })
-  </script>
+  <script src="./js/lobby.js"></script>
 </body>
 
 </html>

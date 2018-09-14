@@ -1,4 +1,5 @@
 .item--lobby {
+  margin-top: 7%;
   position: relative;
   height: 600px;
   .item__players {
@@ -75,12 +76,14 @@
       background-repeat: no-repeat;
       background-image: url(../img/mathtournament-onboarding-bg-green-select.png);
       transform: translate(-50%, -50%);
-      touch-action: none;
-      user-select: none;
       color: #000;
       cursor: move;
+      -khtml-user-drag: element;
+  -webkit-user-drag: element;
       img {
         width: 100%;
+        -khtml-user-drag: element;
+  -webkit-user-drag: element;
       }
     }
   }
@@ -139,6 +142,8 @@
           background-repeat: no-repeat;
           animation: rotate-pin infinite 5s;
           z-index: -1;
+          -khtml-user-drag: element;
+  -webkit-user-drag: element;
         }
         .player {
           width: 130px;

@@ -81,25 +81,32 @@ function Client(){
 		})
 	}
 
-	function initialize(idGame, team, val){
+	function initialize(idGame, val){
 		var t1 = val.t1;
 		var t2 = val.t2;
 		if(self.numTeam){
+			self.team = val["t" + self.numTeam]
+			self.team.ready = true
+
 			if((val[self.numTeam])&&(!val[self.numTeam].ready))
-				setfb(self.refIdGame.child("t" + self.numTeam), team)
+				setfb(self.refIdGame.child("t" + self.numTeam), self.team)
 			else
 				self.showAlert("El equipo " + self.numTeam + " ya esta siendo ocupado. Da click en OK para continuar", false, true)
 		}
 		else if(!t1.ready){
 			//self.refIdGame.child("t1").set(team);
+			self.team = t1
+			self.team.ready = true
 			self.numTeam = 1;
 			self.opponent = 2
-			setfb(self.refIdGame.child("t1"), team)
+			setfb(self.refIdGame.child("t1"), self.team)
 		}else if(!t2.ready){
 			//self.refIdGame.child("t2").set(player);
+			self.team = t2
+			self.team.ready = true
 			self.numTeam = 2;
 			self.opponent = 1;
-			setfb(self.refIdGame.child("t2"), team)
+			setfb(self.refIdGame.child("t2"), self.team)
 		}else{
 			self.id_game = null;
 			self.refIdGame= null;
@@ -209,7 +216,7 @@ function Client(){
 				if ((val)&&(valuesInitialized !== true)) {
 					valuesInitialized = true
 					self.refIdGame = database.ref(idGame)
-					initialize(idGame, self.team, val)
+					initialize(idGame, val)
 				}
 
 			} else {

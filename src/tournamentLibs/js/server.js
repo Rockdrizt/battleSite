@@ -36,6 +36,23 @@ function Server(){
 	var DAMAGE_BY_CRITICAL_HIT = 30;
 	var NUM_TEAMS = 2
 	var NUMBER_OF_FAKE_ANSWERS = 3;
+	var TEAM1_DEFAULT = {
+		players: [
+			{nickname: "yogome", avatar: false, skin:false},
+			{nickname: "yogome", avatar: false, skin:false},
+			{nickname: "yogome", avatar: false, skin:false}
+		],
+		ready:false
+	}
+
+	var TEAM2_DEFAULT = {
+		players: [
+			{nickname: "yogome", avatar: false, skin:false},
+			{nickname: "yogome", avatar: false, skin:false},
+			{nickname: "yogome", avatar: false, skin:false}
+		],
+		ready:false
+	}
 
 	/**
 	 * @summary As default, an empty array has one element (an empty String). This function removes that element
@@ -341,8 +358,8 @@ function Server(){
 
 		valores = {
 			rules:self.rules,
-			t1: {ready : false},
-			t2: {ready : false},
+			t1: TEAM1_DEFAULT,
+			t2: TEAM2_DEFAULT,
 			winner :false,
 			t1answer : false,
 			t2answer : false,
@@ -438,19 +455,19 @@ function Server(){
 	}
 
 	function checkDisconnect(id){
-		if(id !== "000000") {
+		if(id.lenght < 6) {
 			database.ref(id).onDisconnect().remove()
 		}
 		else{
-			// if(!id_game.includes("egs"))
-			var restartValues = {
+			var resetValues = {
 				serverReady : false,
 				gameReady : false,
-				battleReady: false,
-				t1:{ready:false},
-				t2:{ready:false},
+				battleReady : false
 			}
-			database.ref(id).onDisconnect().update(restartValues)
+
+			database.ref(id).onDisconnect().update(resetValues)
+			database.ref(id + "/t1/ready").onDisconnect().set(false)
+			database.ref(id + "/t2/ready").onDisconnect().set(false)
 		}
 	}
 
@@ -497,10 +514,10 @@ function Server(){
 						serverReady : false,
 						gameReady : false,
 						battleReady : false,
-						t1 : {ready : false},
-						t2 : {ready : false}
 					}
 					database.ref(id_game).update(onDisconnectValues)
+					database.ref(id_game + "/t1/ready").set(false)
+					database.ref(id_game + "/t2/ready").set(false)
 				}
 			} else if (snap.val() === true) {
 				var id = id_game || currentId

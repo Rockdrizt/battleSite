@@ -3,22 +3,30 @@
 	"attacks": {
 		"normal": [
 			{
-				"id": "waterball",
-				"attachment": "particle2",
-				"delay": 350,
+				"id": "normalWater",
+				"attachment": "particle4",
+				"delay":    700,
 				"multiplier": 1
 			}
 		],
-		"special": [
+		"super": [
+            {
+				"id": "superRazzle",
+				"attachment": "particle13",
+				"delay": 2300,
+				"multiplier": 1
+			}
+		],
+		"ultra":[
 			{
-				"id": "waterbeamSpecial",
-				"attachment": "particle8",
-				"delay": 350,
+				"id": "ultraRazzle",
+				"attachment": "particle7",
+				"delay": 3600,
 				"multiplier": 1
 			}
 		]
 	},
-	"directory": "/spines/yogotars/battle/Razzle/razzle.json",
+    "directory": "/spines/yogotars/battle/Razzle/razzle.json",
 	"name": "Razzle",
 	"spine": {
 		"options": {
@@ -33,8 +41,9 @@
 		"element": "water"
 	},
 	"visuals": {
+		"shadowY":-10,
 		"shadowScaleX": 0.8,
-		"shadowScaleY": 1.3,
+		"shadowScaleY": 1.2,
 		"cardFacing": "right",
 		"impactAttachment": "torso1"
 	}

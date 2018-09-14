@@ -33,32 +33,67 @@
             </span>
           </header>
           <div class="difficulty">
-            <ul class="difficulty__list">
-              <li class="difficulty__item">
-                <p>Addition</p>
-                <button class="difficulty__btn">
-                  <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
-                </button>
-              </li>
-              <li class="difficulty__item">
-                <p>Substraction</p>
-                <button class="difficulty__btn">
-                  <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
-                </button>
-              </li>
-              <li class="difficulty__item">
-                <p>Multiplication</p>
-                <button class="difficulty__btn">
-                  <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
-                </button>
-              </li>
-              <li class="difficulty__item">
-                <p>Division</p>
-                <button class="difficulty__btn">
-                  <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
-                </button>
-              </li>
-            </ul>
+            <form class="diff-form difficulty__form" name="formDifficulty">
+              <ul class="difficulty__list">
+                <li>
+                  <label for="select-all-difficulty">
+                    <input type="checkbox" class="select-all" name="select-all-difficulty" id="select-all-difficulty">
+                    <span></span>
+                    Select all
+                  </label>
+                </li>
+                <li>
+                  <label for="difficulty-option0">
+                    <input class="input-active" type="checkbox" name="difficulty-option0" id="difficulty-option0">
+                    <span></span>
+                    Addition
+                  </label>
+                  <span class="difficulty__btn">
+                    <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                  </span>
+                </li>
+                <li>
+                  <label for="difficulty-option1">
+                    <input class="input-active" type="checkbox" name="difficulty-option1" id="difficulty-option1">
+                    <span></span>
+                    Substraction
+                  </label>
+                  <span class="difficulty__btn">
+                    <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                  </span>
+                </li>
+                <li>
+                  <label for="difficulty-option2">
+                    <input class="input-active" type="checkbox" name="difficulty-option2" id="difficulty-option2">
+                    <span></span>
+                    Lorem ipsum dolor sit amet consectetur.
+                  </label>
+                  <span class="difficulty__btn">
+                    <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                  </span>
+                </li>
+                <li>
+                  <label for="difficulty-option3">
+                    <input class="input-active" type="checkbox" name="difficulty-option3" id="difficulty-option3">
+                    <span></span>
+                    division
+                  </label>
+                  <span class="difficulty__btn">
+                    <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                  </span>
+                </li>
+                <li>
+                  <label for="difficulty-option4">
+                    <input class="input-active" type="checkbox" name="difficulty-option4" id="difficulty-option4">
+                    <span></span>
+                    Lorem ipsum dolor sit amet consectetur.
+                  </label>
+                  <span class="difficulty__btn">
+                    <img src="./img/mathtournament-onboarding-button-edit.png" alt="">
+                  </span>
+                </li>
+              </ul>
+            </form>
           </div>
         </div>
         <div class="item__buttons">
@@ -78,7 +113,7 @@
             <h2>Addition</h2>
             <p>Select the Math Operation you want your student to solve</p>
           </header>
-          <form class="modal-form" name="formAdd">
+          <form class="diff-form" name="formAdd">
             <ul class="modal__list">
               <li>
                 <label for="select-all-additon">
@@ -177,7 +212,7 @@
             <h2>Substraction</h2>
             <p>Select the Math Operation you want your student to solve</p>
           </header>
-          <form class="modal-form" name="formSub">
+          <form class="diff-form" name="formSub">
             <ul class="modal__list">
               <li>
                 <label for="select-all-substraction">
@@ -276,7 +311,7 @@
             <h2>Multiplication</h2>
             <p>Select the Math Operation you want your student to solve</p>
           </header>
-          <form class="modal-form" name="formMult">
+          <form class="diff-form" name="formMult">
             <ul class="modal__list">
               <li>
                 <label for="select-all-multiplication">
@@ -375,7 +410,7 @@
             <h2>Division</h2>
             <p>Select the Math Operation you want your student to solve</p>
           </header>
-          <form class="modal-form" name="formDiv">
+          <form class="diff-form" name="formDiv">
             <ul class="modal__list">
               <li>
                 <label for="select-all-division">
@@ -465,127 +500,7 @@
     <!--/Modal Division -->
   </main>
   <script src="./js/main.js"></script>
-  <script>
-    var difficultyBtns = document.querySelectorAll('.difficulty__btn')
-    var modalForms = document.querySelectorAll('.modal-form')
-    var modals = document.querySelectorAll('.modal')
-    var closeModal = document.querySelectorAll('.close')
-    var btnLeft = document.getElementById('btn-left')
-    var btnRight = document.getElementById('btn-right')
-
-    // change difficulty
-    btnLeft.addEventListener('click', function () {
-      switch (btnLeft.parentNode.id) {
-        case 'easy':
-          btnRight.parentNode.children[1].innerText = 'Hard'
-          btnRight.parentNode.id = 'hard'
-          btnRight.parentNode.style.backgroundImage = 'linear-gradient(90deg,  #e8522c, #c52752)'
-          break;
-        case 'medium':
-          btnLeft.parentNode.children[1].innerText = 'Easy'
-          btnLeft.parentNode.id = 'easy'
-          btnLeft.parentNode.style.backgroundImage = 'linear-gradient(90deg, #bbd400, #129264)'
-          break;
-        case 'hard':
-          btnLeft.parentNode.children[1].innerText = 'Medium'
-          btnLeft.parentNode.id = 'medium'
-          btnLeft.parentNode.style.backgroundImage = 'linear-gradient(90deg, #f8c22a, #ec6f32)'
-          break;
-      }
-    })
-    btnRight.addEventListener('click', function () {
-      switch (btnRight.parentNode.id) {
-        case 'easy':
-          btnRight.parentNode.children[1].innerText = 'Medium'
-          btnRight.parentNode.id = 'medium'
-          btnRight.parentNode.style.backgroundImage = 'linear-gradient(90deg, #f8c22a, #ec6f32)'
-          break;
-        case 'medium':
-          btnRight.parentNode.children[1].innerText = 'Hard'
-          btnRight.parentNode.id = 'hard'
-          btnRight.parentNode.style.backgroundImage = 'linear-gradient(90deg, #e8522c, #c52752)'
-          break;
-        case 'hard':
-          btnLeft.parentNode.children[1].innerText = 'Easy'
-          btnLeft.parentNode.id = 'easy'
-          btnLeft.parentNode.style.backgroundImage = 'linear-gradient(90deg, #bbd400, #129264)'
-          break;
-      }
-    })
-
-    // show modal
-    difficultyBtns.forEach(function (el) {
-      el.addEventListener('click', function () {
-        switch (el.previousElementSibling.innerText.toLowerCase()) {
-          case 'addition':
-            modals.forEach(function (el) {
-              if (el.classList.contains('modal--addition')) {
-                el.classList.remove('hidden')
-              }
-            })
-            break;
-          case 'multiplication':
-            modals.forEach(function (el) {
-              if (el.classList.contains('modal--multiplication')) {
-                el.classList.remove('hidden')
-              }
-            })
-            break;
-          case 'substraction':
-            modals.forEach(function (el) {
-              if (el.classList.contains('modal--substraction')) {
-                el.classList.remove('hidden')
-              }
-            })
-            break;
-          case 'division':
-            modals.forEach(function (el) {
-              if (el.classList.contains('modal--division')) {
-                el.classList.remove('hidden')
-              }
-            })
-            break;
-        }
-      })
-    })
-
-    closeModal.forEach(function (el) {
-      el.addEventListener('click', function () {
-        modals.forEach(function (elem) {
-          elem.classList.add('hidden')
-        })
-      })
-    })
-
-    modalForms.forEach(function (el) {
-      el.addEventListener('submit', function (e) {
-        e.preventDefault()
-        modals.forEach(function (elem) {
-          elem.classList.add('hidden')
-        })
-      })
-    })
-
-    // Select all
-    var selectAll = document.querySelectorAll('.select-all')
-    selectAll.forEach(function (el, i) {
-      el.addEventListener('change', function (e) {
-        var inputs = modalForms[i].elements
-        if (e.target.checked === true) {
-          for (var index = 1; index < inputs.length - 1; index++) {
-            modalForms[i].elements[index].checked = true
-            modalForms[i].elements[index].addEventListener('change', function () {
-              e.target.checked = false
-            })
-          }
-        } else {
-          for (var index = 1; index < inputs.length - 1; index++) {
-            modalForms[i].elements[index].checked = false
-          }
-        }
-      })
-    })
-  </script>
+  <script src="./js/difficulty.js"></script>
 </body>
 
 </html>
