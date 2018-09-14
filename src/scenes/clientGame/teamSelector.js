@@ -154,42 +154,42 @@ var teamSelector = function(){
 
 	var YOGOTARS_LIST = [
 		{
-			name:"tomiko",
+			name:"tomikoClient",
 			file:settings.BASE_PATH + "/spines/yogotars/client/tomiko/tomikoClient.json",
 			scales: ["@0.5x"]
 		},
 		{
-			name:"luna",
+			name:"lunaClient",
 			file:settings.BASE_PATH + "/spines/yogotars/client/luna/lunaClient.json",
 			scales: ["@0.5x"]
 		},
 		{
-			name:"nao",
+			name:"naoClient",
 			file:settings.BASE_PATH + "/spines/yogotars/client/nao/naoClient.json",
 			scales: ["@0.5x"]
 		},
 		{
-			name:"theffanie",
+			name:"theffanieClient",
 			file:settings.BASE_PATH + "/spines/yogotars/client/theffanie/theffanieClient.json",
 			scales: ["@0.5x"]
 		},
 		{
-			name:"eagle",
+			name:"eagleClient",
 			file:settings.BASE_PATH + "/spines/yogotars/client/eagle/eagleClient.json",
 			scales: ["@0.5x"]
 		},
 		{
-			name:"dinamita",
+			name:"dinamitaClient",
 			file:settings.BASE_PATH + "/spines/yogotars/client/dinamita/dinamitaClient.json",
 			scales: ["@0.5x"]
 		},
 		{
-			name:"arthurius",
+			name:"arthuriusClient",
 			file:settings.BASE_PATH + "/spines/yogotars/client/arthurius/arthuriusClient.json",
 			scales: ["@0.5x"]
 		},
 		{
-			name:"estrella",
+			name:"estrellaClient",
 			file:settings.BASE_PATH + "/spines/yogotars/client/estrella/estrellaClient.json",
 			scales: ["@0.5x"]
 		},
