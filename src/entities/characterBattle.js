@@ -100,22 +100,22 @@ var characterBattle = function () {
 		if(typeof characterData.attacks === "undefined")
 			return
 
-		for(var key in characterData.attacks){
-
-			var attacks
-			if(characterData.attacks.skins){
-				if(!characterData.attacks.skins[character.skin][key]) {
-					console.warn("Attack from skin " + character.skin + " not found")
-					return
-				}
-				attacks = characterData.attacks.skins[character.skin][key]
-
-			} else {
-				attacks = characterData.attacks[key]
+		var attacks
+		if(characterData.attacks.skins){
+			if(!characterData.attacks.skins[character.skin]) {
+				console.warn("Attack from skin " + character.skin + " not found")
+				return
 			}
+			attacks = characterData.attacks.skins[character.skin]
+
+		} else {
+			attacks = characterData.attacks
+		}
+
+		for(var key in attacks){
 
 			for(var attackIndex = 0; attackIndex < attacks.length; attackIndex++){
-				var id = attacks[attackIndex].id
+				var id = attacks[key][attackIndex].id
 				epicProjectiles.load(id, currentLoader, loadingFiles, currentScene)
 			}
 		}

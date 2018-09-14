@@ -948,7 +948,7 @@ var teamSelector = function(){
 
 		game.load.onLoadComplete.add(createSplashArt)
 
-		for (let i = 0; i < teamGroup.auxArray.length; i++) {
+		for (var i = 0; i < teamGroup.auxArray.length; i++) {
 
 			var name = YOGOTARS_LIST[teamGroup.auxArray[i]].name + STATES.color
 			var src = settings.BASE_PATH + "/images/loading/" + name + ".png"
