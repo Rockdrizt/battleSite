@@ -1,3 +1,3 @@
 var settings = {
-	BASE_PATH : "/src"
+	BASE_PATH : "/MathTournament/src"
 }
