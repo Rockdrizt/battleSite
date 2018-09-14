@@ -850,12 +850,14 @@ var yogoSelector = function(){
 				text.stroke = "#751375"
 				text.strokeThickness = 20
 				text.angle = 90 * side.direction
-				lava.addChild(text)
+				splash.addChild(text)
 
 				delay += 300
 				pivotX += RISE_X
 			}
 		}
+		game.load.onLoadComplete.remove(createSplashArt)
+		game.load.reset()
 	}
 
 	function getSpineSlot(spine, slotName){
@@ -905,7 +907,7 @@ var yogoSelector = function(){
 
 		var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#ffffff", align: "center"}
             
-		var text = new Phaser.Text(readyGroup.game, spiner.x, spiner.y + 150, "100%", fontStyle)
+		var text = new Phaser.Text(readyGroup.game, spiner.x, spiner.y + 150, "0%", fontStyle)
 		text.anchor.setTo(0.5)
 		text.alpha = 0
 		readyGroup.add(text)
