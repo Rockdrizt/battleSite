@@ -1,5 +1,8 @@
 
 var HUD = function(){
+
+    var MAX_LIFE
+    var MIN_LIFE = 0
 	
 	function createHUD(SIDES, listName){
 
@@ -88,9 +91,11 @@ var HUD = function(){
 		
 		//createTimer(HUDGroup)
 		HUDGroup.rotateTokens = rotateTokens.bind(HUDGroup)
-		HUDGroup.getLifeBar = getLifeBar.bind(HUDGroup)
+		HUDGroup.dealDamage = dealDamage.bind(HUDGroup)
         HUDGroup.setScore = setScore.bind(HUDGroup)
         HUDGroup.getScore = getScore.bind(HUDGroup)
+
+        MAX_LIFE = life.width
         
         return HUDGroup
     }
@@ -127,10 +132,35 @@ var HUD = function(){
 		}
 	}
 
-	function getLifeBar(index){
+	function dealDamage(loseIndex, percent, ultra){
 
-		return this.children[index].life
-	}
+        //return this.children[index].life
+        var self = this
+        var life = self.children[loseIndex].life
+        var winIndex = loseIndex == 0 ? 1 : 0
+        var delay = 3500
+        var damage = life.width - (MAX_LIFE * percent)
+		var defeat = loseIndex == 1 ? damage >= -0.1 : damage <= 0.1
+        if(defeat) damage = MIN_LIFE
+		
+        if(ultra){
+            shakeCamera()
+            delay = 5000
+        }
+
+		game.add.tween(life).to({width:damage}, 500, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
+            if(damage == MIN_LIFE){
+                game.time.events.add(2000, self.setWinteam, null, winIndex, loseIndex)
+            }
+            else{
+                self.nextRound(delay)
+            }
+        })
+    }
+    
+    function shakeCamera(){
+        game.camera.shake(0.01, 900)
+    }
 
 	function setScore(index){
 
