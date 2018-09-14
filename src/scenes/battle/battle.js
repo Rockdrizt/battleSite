@@ -201,7 +201,7 @@ var battle = function(){
 		game.stage.backgroundColor = "#0D014D"
 		loadSounds()
 		mainYogotorars = []
-		gradeQuestion = 0
+		gradeQuestion = -1//0
 
         riddles.initialize()
 	}

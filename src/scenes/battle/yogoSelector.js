@@ -31,11 +31,6 @@ var yogoSelector = function(){
 				name: "atlas.yogoSelector",
 				json: settings.BASE_PATH + "/images/yogoSelector/atlas.json",
 				image: settings.BASE_PATH + "/images/yogoSelector/atlas.png",
-			},
-			{
-				name: "atlas.loading",
-				json: settings.BASE_PATH + "/images/loading/atlas.json",
-				image: settings.BASE_PATH + "/images/loading/atlas.png",
 			}
 		],
 		images: [
@@ -46,6 +41,10 @@ var yogoSelector = function(){
 			{
 				name: "ok",
 				file: settings.BASE_PATH + "/images/yogoSelector/ok.png",
+			},
+			{
+				name: "vs",
+				file: settings.BASE_PATH + "/images/loading/vs.png",
 			}
 		],
 		sounds: [
@@ -838,7 +837,7 @@ var yogoSelector = function(){
 					lava.setAnimationByName(0, "idle", true)
 				},null, lava)
 
-				var splash = game.add.sprite(0, 230, "atlas.loading", YOGOTARS_LIST[team[i]].name)
+				var splash = game.add.sprite(0, 230, YOGOTARS_LIST[team[i]].name + (j+1))
 				splash.anchor.setTo(0.5)
 				splash.scale.setTo(1, side.scale.x)
 
@@ -899,7 +898,7 @@ var yogoSelector = function(){
         spiner.alpha = 0
         readyGroup.spiner = spiner
 
-		var VS = readyGroup.create(game.world.centerX, game.world.centerY, "atlas.loading", "vs")
+		var VS = readyGroup.create(game.world.centerX, game.world.centerY, "vs")
 		VS.anchor.setTo(0.5)
 		VS.alpha = 0
 		readyGroup.VS = VS
@@ -990,7 +989,7 @@ var yogoSelector = function(){
 			})
 		})
 
-        createSplashArt()
+        loadSplashArt()
 		game.add.tween(selectorGroup).to({alpha: 0}, 300, Phaser.Easing.linear, true).onComplete.add(function(){
 			alphaGroup.forEach(setAliveSpine, this, false)
 			bravoGroup.forEach(setAliveSpine, this, false)
@@ -1065,6 +1064,24 @@ var yogoSelector = function(){
 			var total = loadingAmount.toFixed(2).substr(2)
 			readyGroup.text.setText(total + "%")
 		}
+	}
+
+	function loadSplashArt(){
+
+		game.load.onLoadComplete.add(createSplashArt)
+		var images = [alphaGroup.auxArray, bravoGroup.auxArray]
+		
+		for(var j = 0; j < images.length; j++){
+			var team = images[j]
+			for (let i = 0; i < team.length; i++) {
+
+				var name = YOGOTARS_LIST[team[i]].name + (j+1)
+				var src = settings.BASE_PATH + "/images/loading/" + name + ".png"
+
+				game.load.image(name, src)
+			}
+		}
+		game.load.start()
 	}
 
 	return {

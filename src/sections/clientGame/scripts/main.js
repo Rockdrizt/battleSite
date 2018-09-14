@@ -56,7 +56,7 @@ function startGame(){
 		cliente = new Client();
 		var idGameFromHash = window.location.hash.substr(1);
 		connectToServer(idGameFromHash)
-		//sceneloader.show("rewardClient")
+		//sceneloader.show("teamSelector")
 	}
 
 	function preloadScenes(sceneList){
