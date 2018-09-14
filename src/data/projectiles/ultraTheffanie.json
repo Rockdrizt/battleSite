@@ -37,7 +37,7 @@
       {
         "file":"/spines/yogotars/battle/Theffanie/theffanie_projectiles.json",
         "scales":["@0.5x"],
-        "skin":"theffanie_projectiles",
+        "skin":"theffanie1",
         "animations":["out_ultra"]
       }
     ],

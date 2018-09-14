@@ -12,7 +12,7 @@
     {
       "file":"/spines/yogotars/battle/Dinamita/dinamita_projectiles.json",
       "scales":["@0.5x"],
-      "skin":"dinamita1_projectiles",
+      "skin":"dinamita1",
       "animations":["in_ultra", "idle_ultra"]
     }
   ],
@@ -23,7 +23,7 @@
       {
         "file":"/spines/yogotars/battle/Dinamita/dinamita_projectiles.json",
         "scales":["@0.5x"],
-        "skin":"dinamita1_projectiles",
+        "skin":"dinamita1",
         "animations":["out_ultra"]
       }
     ],
