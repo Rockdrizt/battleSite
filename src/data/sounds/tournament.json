@@ -389,6 +389,7 @@
 "tournamentElectricStatic1":"/sounds/characters/electricStatic1.mp3",
 "tournamentElectricAttack1":"/sounds/characters/electricAttack1.mp3",
 "tournamentRunningFast1":"/sounds/characters/runningFast1.mp3",
-"tournamentWaveSurf1":"/sounds/characters/waveSurf1.mp3"    
+"tournamentWaveSurf1":"/sounds/characters/waveSurf1.mp3",
+"tournamentMassiveImpact1":"/sounds/characters/massiveImpact1.mp3"    
     
 }

@@ -3,15 +3,23 @@
     "stop":900,
     "removal":1500,
     "hit":750
-  },
+      
+    },
+    
+    "particles":[
+      "/particles/characters/rockImpact1/rockImpact1.json",
+      "/particles/characters/rockImpact1/rockImpact2.json",
+      "/particles/characters/rockImpact1/rockImpact3.json"
+    ],
+    
   "spines":[
-    {
+     {
       "file":"/spines/yogotars/battle/Justice/justice_projectiles.json",
       "scales":["@0.5x"],
       "skin":"justice2",
       "animations":["in_ultra2","idle_ultra2","idle_ultra2"]
-    }
-  ],
+     }
+    ],
     
     "sounds":[
     {

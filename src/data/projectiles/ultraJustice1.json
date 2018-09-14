@@ -3,31 +3,35 @@
     "stop":900,
     "removal":1500,
     "hit":750
-  },
-  "spines":[
-    {
+      
+   },
+   "particles":[
+      "/particles/characters/specialChargeEarth11/specialChargeEarth35.json",
+      "/particles/characters/specialChargeEarth11/specialChargeEarth36.json",
+      "/particles/characters/specialChargeEarth11/specialChargeEarth37.json"
+   ],
+   "spines":[
+     {
       "file":"/spines/yogotars/battle/Justice/justice_projectiles.json",
       "scales":["@0.5x"],
       "skin":"justice1",
       "animations":["in_ultra1","idle_ultra1","idle_ultra1"]
-    }
+     }
   ],
-    
-    "sounds":[
+  "sounds":[
     {
       "soundID":"tournamentRockWoosh1",
       "delay":0
     }
   ],
-    
   "impact":{
-    "particles":[
+      "particles":[
       "/particles/characters/rockImpact1/rockImpact1.json",
       "/particles/characters/rockImpact1/rockImpact2.json",
       "/particles/characters/rockImpact1/rockImpact3.json"
- ],
-    "soundID":"tournamentWindImpact2"
-      
+    ],
+    "forcePosition":{"offsetX":0,"offsetY":-200},    
+    "soundID":"tournamentMassiveImpact1"    
   },
   "onShoot":[
     {
@@ -77,12 +81,6 @@
       "id":"execute",
       "variable":"transition",
       "parameters":["self","transitionParams"]
-    },
-    {
-      "index":"rotate",
-      "id":"execute",
-      "variable":"self",
-      "parameters":[0,0]
-    }  
+    }
   ]
 }

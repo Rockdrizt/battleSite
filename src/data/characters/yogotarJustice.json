@@ -9,7 +9,7 @@
                 "normal": [
                     {
                         "id": "normalEarth2",
-                        "attachment": "particle12",
+                        "attachment": "particle13",
                         "delay":    0,
                         "multiplier": 1
                     }
@@ -39,7 +39,7 @@
                 "normal": [
                     {
                         "id": "normalEarth2",
-                        "attachment": "particle12",
+                        "attachment": "particle13",
                         "delay":    0,
                         "multiplier": 1
                     }
@@ -54,7 +54,7 @@
                 ],
                 "ultra":[
                     {
-                        "id": "ultraJustice2",
+                        "id": "ultraArthurius",
                         "attachment": "particle8",
                         "delay": 1200,
                         "multiplier": 1
