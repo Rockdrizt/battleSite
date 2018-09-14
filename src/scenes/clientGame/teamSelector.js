@@ -46,17 +46,16 @@ var teamSelector = function(){
 				name: "atlas.yogoSelector",
 				json: settings.BASE_PATH + "/images/teamSelector/atlas.json",
 				image: settings.BASE_PATH + "/images/teamSelector/atlas.png",
-			},
-			{
-				name: "atlas.loading",
-				json: settings.BASE_PATH + "/images/loading/atlas.json",
-				image: settings.BASE_PATH + "/images/loading/atlas.png",
 			}
 		],
 		images: [
 			{
 				name: "tile",
 				file: settings.BASE_PATH + "/images/yogoSelector/bgTile.png",
+			},
+			{
+				name: "vs",
+				file: settings.BASE_PATH + "/images/loading/vs.png",
 			}
 		],
 		sounds: [
@@ -832,7 +831,7 @@ var teamSelector = function(){
 			lava.scale.setTo(1, SIDE)
 			splashArtGroup.add(lava)
 
-			var splash = game.add.sprite(0, 230, "atlas.loading", YOGOTARS_LIST[teamGroup.auxArray[i]].name)
+			var splash = game.add.sprite(0, 210, YOGOTARS_LIST[teamGroup.auxArray[i]].name + STATES.color)
 			splash.anchor.setTo(0.5)
 			splash.scale.setTo(1, SIDE)
 
@@ -854,13 +853,8 @@ var teamSelector = function(){
 			lava.addChild(text)
 
 			pivotX += RISE_X
-
-			if(i === 1){
-				lava.scale.setTo(-1, SIDE)
-				text.scale.setTo(SIDE, -1)
-				text.x *= -1
-			}
 		}
+		animateSplashArt()
 	}
 
 	function getSpineSlot(spine, slotName){
@@ -914,7 +908,7 @@ var teamSelector = function(){
 		spiner.alpha = 0
 		readyGroup.spiner = spiner
 
-		var VS = readyGroup.create(spiner.centerX, spiner.centerY, "atlas.loading", "vs")
+		var VS = readyGroup.create(spiner.centerX, spiner.centerY, "vs")
 		VS.anchor.setTo(0.5)
 		VS.alpha = 0
 		readyGroup.VS = VS
@@ -944,9 +938,22 @@ var teamSelector = function(){
 
 		game.add.tween(sceneGroup).to({alpha: 0}, 500, Phaser.Easing.linear, true).onComplete.add(function(){
 			teamGroup.forEach(setAliveSpine, this, false)
-			createSplashArt()
-			animateSplashArt()
+			loadSplashArt()
 		})
+	}
+
+	function loadSplashArt(){
+
+		game.load.onLoadComplete.add(createSplashArt)
+
+		for (let i = 0; i < teamGroup.auxArray.length; i++) {
+
+			var name = YOGOTARS_LIST[teamGroup.auxArray[i]].name + STATES.color
+			var src = settings.BASE_PATH + "/images/loading/" + name + ".png"
+
+			game.load.image(name, src)
+		}
+		game.load.start()
 	}
 
 	function animateSplashArt(){
@@ -1005,7 +1012,6 @@ var teamSelector = function(){
 			createYogoNames()
 			animateSelector()
 			createReady()
-
 		},
 		shutdown:function () {
 			sceneGroup.destroy()
