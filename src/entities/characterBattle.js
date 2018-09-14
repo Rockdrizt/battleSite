@@ -112,10 +112,11 @@ var characterBattle = function () {
 			attacks = characterData.attacks
 		}
 
-		for(var key in attacks){
+		for(var type in attacks){
+			var attacksInType = attacks[type]
 
-			for(var attackIndex = 0; attackIndex < attacks.length; attackIndex++){
-				var id = attacks[key][attackIndex].id
+			for(var attackIndex = 0; attackIndex < attacksInType.length; attackIndex++){
+				var id = attacksInType[attackIndex].id
 				epicProjectiles.load(id, currentLoader, loadingFiles, currentScene)
 			}
 		}
