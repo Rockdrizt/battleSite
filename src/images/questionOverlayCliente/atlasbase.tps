@@ -207,6 +207,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">poker.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>212,60,424,121</rect>
+                <key>scale9Paddings</key>
+                <rect>212,60,424,121</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">questionBox.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -296,6 +309,7 @@
             <filename>blueBtn.png</filename>
             <filename>correct.png</filename>
             <filename>wrong.png</filename>
+            <filename>poker.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

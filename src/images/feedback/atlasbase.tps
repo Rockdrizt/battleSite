@@ -247,6 +247,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">poker.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>34,41,67,81</rect>
+                <key>scale9Paddings</key>
+                <rect>34,41,67,81</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">super.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -340,6 +353,7 @@
             <filename>token_neutral.png</filename>
             <filename>sad.png</filename>
             <filename>happy.png</filename>
+            <filename>poker.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

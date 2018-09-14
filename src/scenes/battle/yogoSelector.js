@@ -850,7 +850,7 @@ var yogoSelector = function(){
 				text.stroke = "#751375"
 				text.strokeThickness = 20
 				text.angle = 90 * side.direction
-				splash.addChild(text)
+				lava.addChild(text)
 
 				delay += 300
 				pivotX += RISE_X

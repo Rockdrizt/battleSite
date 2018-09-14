@@ -140,6 +140,7 @@ var questionHUD = function(){
 			createUsedGroup(questionGroup)
 			questionGroup.client = true
 			questionGroup.showFeedback = showFeedback.bind(questionGroup)
+			questionGroup.getCorrectAns = getCorrectAns.bind(questionGroup)
 		}
 
 		return questionGroup
@@ -392,7 +393,7 @@ var questionHUD = function(){
 		}
 
 		var riddle = this.riddle
-		var correctBtn = getCorrectAns(self)
+		var correctBtn = this.getCorrectAns()
 		var btn = this.options.btnPressed
 		var ans = btn.groupPos == riddle.correctAnswer
 		var texture = ans ? "correct" : "wrong"
@@ -421,11 +422,11 @@ var questionHUD = function(){
 		game.add.tween(this.waiting).to({alpha:0}, 300, Phaser.Easing.linear, true).chain(apearMsg)
 	}
 
-	function getCorrectAns(hud){
+	function getCorrectAns(){
 
-		for(var i = 0 ; i < hud.options.length; i++){
-			var opt = hud.options.children[i]
-			if(opt.value == hud.riddle.correctValue)
+		for(var i = 0 ; i < this.options.length; i++){
+			var opt = this.options.children[i]
+			if(opt.value == this.riddle.correctValue)
 				return opt
 		}
 	}

@@ -146,11 +146,17 @@ var resultsFeedback = function(){
             token.addChild(sad)
             token.sad = sad
 
+            var poker = game.add.sprite(0, 0, "atlas.feedback", "poker")
+            poker.anchor.setTo(0.5)
+            poker.alpha = 0
+            token.addChild(poker)
+            token.poker = poker
+
             token.restore = restore.bind(token)
             token.setInfo = setInfo.bind(token)
 
-            function setInfo(index, correct){
-
+            function setInfo(index, winer, correct){
+                
                 var self = this
                 var neutral = game.add.tween(this.scale).to({x:1.3, y:1.3}, 200, Phaser.Easing.Cubic.Out, false, 1000, 0, true)
 
@@ -158,14 +164,19 @@ var resultsFeedback = function(){
                     neutral.onStart.add(function(){
                         game.add.tween(self.blue).to({alpha: 1}, 200, Phaser.Easing.Cubic.Out, true)
                     },self)
-                    var showCorrect = game.add.tween(this.happy).to({alpha: 1}, 300, Phaser.Easing.Cubic.Out, false, 1100)
+
+                    if(winer){
+                        var showCorrect = game.add.tween(self.happy).to({alpha: 1}, 300, Phaser.Easing.Cubic.Out, false, 1100)
+                    }
+                    else{
+                        var showCorrect = game.add.tween(self.poker).to({alpha: 1}, 300, Phaser.Easing.Cubic.Out, false, 1100)
+                    }
                 }
                 else{
-                    var showCorrect = game.add.tween(this.sad).to({alpha: 1}, 300, Phaser.Easing.Cubic.Out, false, 1100)
+                    var showCorrect = game.add.tween(self.sad).to({alpha: 1}, 300, Phaser.Easing.Cubic.Out, false, 1100)
                 }
 
                 neutral.chain(showCorrect)
-
                 this.text.setText(OPTIONS_LETTER[index])
                 game.add.tween(this.text).to({alpha: 1}, 200, Phaser.Easing.Cubic.Out, true, 300).chain(neutral)
             }
@@ -175,6 +186,7 @@ var resultsFeedback = function(){
                 this.text.alpha = 0
                 this.happy.alpha = 0
                 this.sad.alpha = 0
+                this.poker.alpha = 0
             }
 
             return token
@@ -293,13 +305,14 @@ var resultsFeedback = function(){
 
 			var newScale = convertScale(players[i].time)
             var ansTime = convertTimeFormat(players[i].time)
-            var correct = numTeam == (i + 1) ? true : false //players[i].value == event.correctAnswer
+            var winer = numTeam == (i + 1) ? true : false //players[i].value == riddle.correctAnswer
+            var correct = players[i].value == riddle.correctAnswer
 
 			var score = this.children[i]
 			score.timeTxt.setText(ansTime)
 			score.timeDif.setText("+" + timeConvertedDifference)
             score.time = players[i].time
-            score.token.setInfo(players[i].value, correct)
+            score.token.setInfo(players[i].value, winer, correct)
 
             var showTime = game.add.tween(score.timeTxt).to({alpha: 1}, 200, Phaser.Easing.Cubic.Out, false)
             game.add.tween(score.timeBar.bar.scale).to({x: newScale}, 400, Phaser.Easing.Cubic.Out, true, 400).chain(showTime)
