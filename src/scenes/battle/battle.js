@@ -168,8 +168,6 @@ var battle = function(){
 	var CHARACTER_CENTER_OFFSET = {x:-200, y: -200}
 
 	var DAMAGE = DAMAGE_PERCENT[3]
-	var MAX_LIFE
-    var MIN_LIFE = 0
 	var EMPTY_QUESTION = -1
 
 	var COLORS = [0xFC1E79, 0x00D8FF]
@@ -264,12 +262,6 @@ var battle = function(){
 		returnBtn.y = game.world.height - 200
 		returnBtn.label.text = "initGame"
 		btngroup.add(returnBtn)
-        
-        var returnBtn = createButton(shakeCamera, 0xff0033)
-		returnBtn.x = game.world.centerX
-		returnBtn.y = game.world.height - 250
-		returnBtn.label.text = "shake"
-		btngroup.add(returnBtn)
 	}
 
 	function createButton(callback, color) {
@@ -303,9 +295,18 @@ var battle = function(){
 
         listName = loadNames()
 
-        HUDGroup = HUD.createHUD(ORDER_SIDES, listName)
+		HUDGroup = HUD.createHUD(ORDER_SIDES, listName)
+		
+		HUDGroup.setWinteam = function(win, lose){
+			setWinteam(win, lose)
+		}
+		HUDGroup.nextRound = function(delay){
+			for(var i = 0; i < 2; i++){
+				game.time.events.add(delay * 0.5, rotateTeam, null, i)
+			}
+			game.time.events.add(delay, setReadyGo)
+		}
         sceneGroup.add(HUDGroup)
-        MAX_LIFE = HUDGroup.getLifeBar(0).width
     }
 
     function loadNames(){
@@ -609,30 +610,9 @@ var battle = function(){
 
 	function dealDamage(team, percent){
 
-		var life = HUDGroup.getLifeBar(team)
-		var damage = life.width - (MAX_LIFE * percent * ORDER_SIDES[team].scale.x)
-		var limit = team == 1 ? damage >= -0.1 : damage <= 0.1
-		if(limit) damage = MIN_LIFE
-		var index = team == 0 ? 1 : 0
-        var delay = 3500
-        
-        if(percent == DAMAGE.ultra){
-            shakeCamera()
-            delay = 5000
-        }
-
-		game.add.tween(life).to({width:damage}, 500, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
-            
-            if(damage == MIN_LIFE){
-                game.time.events.add(2000, setWinteam, null, index, team)
-            }
-            else{
-                for(var i = 0; i < 2; i++){
-                    game.time.events.add(delay * 0.5, rotateTeam, null, i)
-                }
-                game.time.events.add(delay, setReadyGo)
-            }
-		})
+		var ultra = percent == DAMAGE.ultra ? true : false
+		percent *= ORDER_SIDES[team].direction // scale.x
+		HUDGroup.dealDamage(team, percent, ultra)
 	}
 
 	function attackMove(type, index){
@@ -746,11 +726,6 @@ var battle = function(){
 			}
 		})
 	}
-    
-    function shakeCamera(){
-        
-        game.camera.shake(0.01, 900)
-    }
 
 	function setWinteam(win, lose){
 

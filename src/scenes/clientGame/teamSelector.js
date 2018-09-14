@@ -854,6 +854,8 @@ var teamSelector = function(){
 
 			pivotX += RISE_X
 		}
+		game.load.onLoadComplete.remove(createSplashArt)
+		game.load.reset()
 		animateSplashArt()
 	}
 
