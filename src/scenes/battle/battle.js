@@ -142,25 +142,6 @@ var battle = function(){
 		3:{normal: 0.2, super: 0.25, ultra: 0.3}
 	}
 
-	var DIFFICULT_RULES = {
-		1 : {
-			time : 20000,
-			attacks : {
-				ultra : 6600,
-				super : 0,
-				normal : 0
-			}
-		},
-		2 : {
-			time : 60000,
-			attacks : {
-				ultra : 6600,
-				super : 0,
-				normal : 0
-			}
-		}
-	}
-
 	var ATTACKS = ["normal", "super", "ultra"]
 
 	var ORDER_SIDES = [SIDES.LEFT, SIDES.RIGHT]

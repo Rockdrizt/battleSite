@@ -12,6 +12,21 @@ var resultsFeedback = function(){
         y: -160
     }
 
+    var QUESTION_INDEX = 0
+
+    var TIME_ATTACKS = {
+		1 : {
+            ultra : 6500,
+            super : 13000,
+            normal : 20000
+		},
+		2 : {
+            ultra : 20000,
+            super : 30000,
+            normal : 60000
+		}
+	}
+
     var MAX_TIME = 30000
     var OPTIONS_LETTER = ["A", "C", "B", "D"]
     
@@ -297,6 +312,8 @@ var resultsFeedback = function(){
 
         var parent = this.parent
 
+        QUESTION_INDEX++
+
         game.add.tween(parent.black).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
         game.add.tween(this).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
         parent.blueAns.setInfo(riddle.correctAnswer, riddle.correctValue)
@@ -401,15 +418,27 @@ var resultsFeedback = function(){
 
     function selectAttackType(time){
 
-        if(time > 0 && time <= 10000){
+        var riddleTime = QUESTION_INDEX == 5 ? TIME_ATTACKS[1] : TIME_ATTACKS[2]
+
+        if(time > 0 && time <= riddleTime.ultra){
 			return "ultra"
 		}
-		else if(time > 10000 && time <= 15000){
+		else if(time > riddleTime.ultra && time <= riddleTime.super){
 			return "super"
 		}
 		else{
  			return "normal"
-		}
+        }
+        
+        // if(time > 0 && time <= 10000){
+		// 	return "ultra"
+		// }
+		// else if(time > 10000 && time <= 15000){
+		// 	return "super"
+		// }
+		// else{
+ 		// 	return "normal"
+		// }
 	}
     
     function convertScale(time){

@@ -274,7 +274,6 @@ var questionHUD = function(){
 		var scaleImg = this.fixImage(1)
 		this.image.key = this.riddle.image
 		
-
 		game.add.tween(this).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
 
 		this.boxes.forEach(function(box){
@@ -291,6 +290,10 @@ var questionHUD = function(){
 			game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay)
 			delay += 200
 		})
+
+		if(!this.riddle.existImage){
+			this.image.alpha = 0
+		}
 
 		var lastTween = game.add.tween(this.image.scale).to({x:scaleImg, y:scaleImg}, 300, Phaser.Easing.Cubic.InOut, true, delay)
 		lastTween.onComplete.add(this.setQuestion)
@@ -402,6 +405,8 @@ var questionHUD = function(){
 		var apearMsg = game.add.tween(this.feedBackImg).to({alpha:1}, 300, Phaser.Easing.linear, false)
 
 		apearMsg.onComplete.add(function(){
+
+			self.waiting.spiner.angle = 0
 
 			if(ans){
 				var endTween = game.add.tween(btn.blue).to({alpha:1}, 200, Phaser.Easing.linear, true)

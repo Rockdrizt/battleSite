@@ -163,7 +163,7 @@ var HUD = function(){
 		reduceLife.onComplete.add(function(){
 
             life.amount -= Math.abs(percent) * 100
-            var lifeText = life.amount + "/100"
+            var lifeText = life.amount > 0 ? life.amount + "/100" : "0/100"
             lifeText = lifeText.split("").join(String.fromCharCode(8202))
             life.points.setText(lifeText)
 
