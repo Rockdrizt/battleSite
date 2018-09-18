@@ -6,6 +6,19 @@ var riddles = function(){
 	var usedQuestions
 	var NUMBER_OF_FAKE_ANSWERS = 3
 
+	var TIME_ATTACKS = {
+		1 : {
+            ultra : 6500,
+            super : 13000,
+            normal : 20000
+		},
+		2 : {
+            ultra : 20000,
+            super : 30000,
+            normal : 60000
+		}
+	}
+
 	function initialize(){
 
 		questions = [
@@ -37,6 +50,7 @@ var riddles = function(){
 
 			var subList = list[k]
 			var gradeList = []
+			var timeIndex = 1
 
 			for(var i = 0; i < subList.length; i++){
 
@@ -44,6 +58,8 @@ var riddles = function(){
 
 				var answers = [element.A, element.B, element.C, element.D]
 				var correctValue = answers[element.answer - 1]
+
+				i == subList.length - 1 ? timeIndex = 2 : timeIndex = 1
 
 				if(element.imgExist)
 					var imagePath = settings.BASE_PATH + "/images/questionDB/grade" + element.grade + "/" + element.image + ".png"
@@ -59,7 +75,7 @@ var riddles = function(){
 					grade: element.grade,
 					level: element.level,
 					correctAnswer: element.answer - 1,
-					//time:DIFFICULT_RULES[level].time
+					timers: TIME_ATTACKS[timeIndex],
 					index: i,
 					correctValue: correctValue
 					//correctIndex:
@@ -99,7 +115,7 @@ var riddles = function(){
 				grade: element.grade,
 				level: element.level,
 				correctAnswer: element.answer - 1,
-				//time:DIFFICULT_RULES[level].time
+				timers: TIME_ATTACKS[1],
 				index: i,
 				correctValue: correctValue
 				//correctIndex:

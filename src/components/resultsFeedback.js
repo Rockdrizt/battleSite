@@ -12,22 +12,12 @@ var resultsFeedback = function(){
         y: -160
     }
 
-    var QUESTION_INDEX = 0
+    var riddleTime = {
+        ultra : 6500,
+        super : 13000,
+        normal : 20000
+    }
 
-    var TIME_ATTACKS = {
-		1 : {
-            ultra : 6500,
-            super : 13000,
-            normal : 20000
-		},
-		2 : {
-            ultra : 20000,
-            super : 30000,
-            normal : 60000
-		}
-	}
-
-    var MAX_TIME = 30000
     var OPTIONS_LETTER = ["A", "C", "B", "D"]
     
     var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#000066", align: "center"}
@@ -312,7 +302,7 @@ var resultsFeedback = function(){
 
         var parent = this.parent
 
-        QUESTION_INDEX++
+        riddleTime = riddle.timers
 
         game.add.tween(parent.black).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
         game.add.tween(this).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
@@ -418,8 +408,6 @@ var resultsFeedback = function(){
 
     function selectAttackType(time){
 
-        var riddleTime = QUESTION_INDEX == 5 ? TIME_ATTACKS[1] : TIME_ATTACKS[2]
-
         if(time > 0 && time <= riddleTime.ultra){
 			return "ultra"
 		}
@@ -443,7 +431,8 @@ var resultsFeedback = function(){
     
     function convertScale(time){
 
-        var scale = 1 - time/MAX_TIME
+        var maxTime = riddleTime || 20000
+        var scale = 1 - time/maxTime
         if(scale < 0) scale = 0
 		return scale
     }

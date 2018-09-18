@@ -858,6 +858,7 @@ var yogoSelector = function(){
 		}
 		game.load.onLoadComplete.remove(createSplashArt)
 		game.load.reset()
+		animateSplashArt()
 	}
 
 	function getSpineSlot(spine, slotName){
@@ -996,7 +997,6 @@ var yogoSelector = function(){
 		game.add.tween(selectorGroup).to({alpha: 0}, 300, Phaser.Easing.linear, true).onComplete.add(function(){
 			alphaGroup.forEach(setAliveSpine, this, false)
 			bravoGroup.forEach(setAliveSpine, this, false)
-			animateSplashArt()
 		})
 	}
 
