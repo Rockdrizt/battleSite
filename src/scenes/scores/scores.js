@@ -116,7 +116,7 @@ var scores = function(){
 
 	function preload(){
 
-		game.stage.disableVisibilityChange = false
+		game.stage.disableVisibilityChange = true
 	}
 
 	function createBackground(){
@@ -217,8 +217,8 @@ var scores = function(){
 			var pivotY = game.world.centerY * -0.2
 			var RISE_Y = game.world.centerY * 0.35
 
-			for(var i = 0; i < teamsData[sideIndex].length; i++){
-				var playerData = teamsData[sideIndex][i]
+			for(var i = 0; i < teamsData[sideIndex].players.length; i++){
+				var playerData = teamsData[sideIndex].players[i]
 
 				var teamMate = createYogoToken(sideIndex, playerData.avatar, playerData.nickname)
 				teamMate.x = pivotX
@@ -298,7 +298,7 @@ var scores = function(){
 			bubble.x = pivotX * ORDER_SIDES[i].direction
 			bubble.points = 0
 
-			var lifeText = "100/100"//.split("").join(String.fromCharCode(8202))
+			var lifeText = teamsData[i].life//.split("").join(String.fromCharCode(8202))
 			
 			var score = new Phaser.Text(scoresGroup.game, 0, 50, lifeText, fontStyle)
             score.anchor.setTo(0.5)
@@ -440,6 +440,10 @@ var scores = function(){
 		//questionGroup.hide()
     }
 
+    function onTeamUpdate(data) {
+		setScore(data.numTeam - 1, data.life)
+	}
+
 	return {
 		assets: assets,
 		bootFiles:bootFiles,
@@ -460,13 +464,20 @@ var scores = function(){
 			createVS()
 			createScoreBubble()
 			createQuestionOverlay()
+
+			scoreService.removeEventListener("newQuestion", questionGroup.showQuestion)
+			scoreService.addEventListener("newQuestion", questionGroup.showQuestion)
+			scoreService.removeEventListener("onTeamUpdate", onTeamUpdate)
+			scoreService.addEventListener("onTeamUpdate", onTeamUpdate)
+			scoreService.removeEventListener("onTurnEnds", questionGroup.hide)
+			scoreService.addEventListener("onTurnEnds", questionGroup.hide)
 		},
 		setTeamData: function (data) {
 			teamsData = data
 
 			for (var teamIndex = 0; teamIndex < teamsData.length; teamIndex++){
-				for (var playerIndex = 0; playerIndex < teamsData[teamIndex].length; playerIndex++) {
-					var player = teamsData[teamIndex][playerIndex]
+				for (var playerIndex = 0; playerIndex < teamsData[teamIndex].players.length; playerIndex++) {
+					var player = teamsData[teamIndex].players[playerIndex]
 					var image = {
 						name: player.nickname,
 						file: settings.BASE_PATH + "/images/scores/" + player.nickname + ".png"

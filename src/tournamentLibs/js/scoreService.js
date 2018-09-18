@@ -23,6 +23,9 @@ var database = firebase.database();
 function ScoreService(){
 	var self = this;
 	var valuesInitialized = false
+	var teamAnswers = []
+
+	var NUM_TEAMS = 2
 	/** Events
 	 */
 	self.events = {};
@@ -73,6 +76,54 @@ function ScoreService(){
 		})
 	}
 
+	function checkAllAnswered(){
+		var allAnswer = true
+		for(var teamIndex = 1; teamIndex <= NUM_TEAMS; teamIndex++){
+			allAnswer = allAnswer && teamAnswers[teamIndex]
+		}
+		return allAnswer
+	}
+
+	function onScoreUpdate(){
+		for(var teamIndex = 1; teamIndex <= NUM_TEAMS; teamIndex++) {
+			var teamKey = "t" + teamIndex
+			self.refIdGame.child(teamKey).on('value', function (snapshot) {
+				var teamValue = snapshot.val()
+				var key = snapshot.key
+				var numTeam = Number(key[key.length - 1])
+				if (teamValue.score && teamValue.life) {
+					var returnValue = {
+						numTeam : numTeam,
+						score : teamValue.score,
+						life : teamValue.life
+					}
+					self.fireEvent("onTeamUpdate", [returnValue])
+				}
+			})
+
+			var tAnswer = self.refIdGame.child("t" + teamIndex + "answer");
+			tAnswer.on('value', function (snapshot) {
+				var answer = snapshot.toJSON();
+				var key = snapshot.key
+				var num = Number(key[1])
+				teamAnswers[num] = answer;
+				var isAllAnswered = checkAllAnswered()
+				if (isAllAnswered) {
+					self.fireEvent("onTurnEnds")
+				}
+			});
+		}
+	}
+
+	function onNewQuestion(){
+		self.refIdGame.child("data").on("value", function (snap) {
+			var data = snap.val()
+			if(data){
+				self.fireEvent("newQuestion", [data])
+			}
+		})
+	}
+
 	function onBattleReady(idGame){
 
 		//database.ref().child(idGame).off()
@@ -80,14 +131,16 @@ function ScoreService(){
 			var battleReady = snapshot.child("battleReady").val()
 			if (battleReady) {
 				if(!valuesInitialized) {
+					alertDialog.hide()
 					valuesInitialized = true
-					var team1 = snapshot.child("t1/players").val()
-					var team2 = snapshot.child("t2/players").val()
+					var team1 = snapshot.child("t1").val()
+					var team2 = snapshot.child("t2").val()
 					var teams = [team1, team2]
 					//scoreMain.start(teams)
 					self.onBattle(teams)
-				}else{
-					alertDialog.hide()
+					self.refIdGame = database.ref(idGame);
+					onNewQuestion()
+					onScoreUpdate()
 				}
 			} else {
 				var message = "Equipos seleccionando yogotats."
@@ -123,8 +176,6 @@ function ScoreService(){
 					isButtonDisabled:true,
 					showSpin:true,
 				})
-				if(self.numTeam)
-					database.ref(idGame + "/t" + self.numTeam + "ready").set(false)
 				//self.numTeam = null
 			} else if (val === true) {
 				if((!idGame) || (idGame === "")){

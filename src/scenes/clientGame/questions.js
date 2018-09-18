@@ -137,7 +137,9 @@ var questions = function(){
 
 		rewardClient.setTeams(teams)
 		rewardClient.setWinner(winner)
-		sceneloader.show("rewardClient")
+		game.time.events.add(2000, function () {
+			sceneloader.show("rewardClient")
+		})
 	}
 
 	function createButton(callback, color) {
