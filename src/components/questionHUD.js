@@ -76,29 +76,30 @@ var questionHUD = function(){
 
 		var callInputAnswer = inputOption.bind(questionGroup)
 
-		if(client){
+		//if(client){
 			INITIAL_X = board.centerX * 0.85
 			offsetX = 0.9
-		}
+		//}
 
 		for(var i = 0; i < 4; i++){
 
 			var btn = createButtons(INITIAL_X, INITIAL_Y, OPTIONS_LETTER[i], options)
 
-			if(client){
+			//
 				btn.x += i % 2 != 0 ? btn.width * offsetX : 0
 				if(i > 1){
 					btn.y += 150
 				}
+			if(client){
 				btn.inputEnabled = true
 				btn.events.onInputDown.add(callInputAnswer)
 			}
-			else{
-				btn.x += btn.width * offsetX * i
-				if(i % 2 != 0){
-					btn.y += 150
-				}
-			}
+			// else{
+			// 	btn.x += btn.width * offsetX * i
+			// 	if(i % 2 != 0){
+			// 		btn.y += 150
+			// 	}
+			// }
 
 			btn.spawn = {x: btn.x, y: btn.y}
 			btn.groupPos = i
@@ -128,13 +129,13 @@ var questionHUD = function(){
 		questionGroup.updateTimer = updateTimer.bind(questionGroup)
 		questionGroup.startTweens = startTweens.bind(questionGroup)
 		questionGroup.clearQuestion = clearQuestion.bind(questionGroup)
+		createChrono(questionGroup)
 		questionGroup.alpha = 0
 
 		if(client){
 			questionGroup.bringToTop(black)
 			black.alpha = 0
 			createTeamName(questionGroup)
-			createChrono(questionGroup)
 			createWaiting(questionGroup)
 			createFeedback(questionGroup)
 			createUsedGroup(questionGroup)
@@ -165,9 +166,9 @@ var questionHUD = function(){
 		var box = hud.boxes[1]
 
 		var chronoGroup = game.add.group()
-		chronoGroup.alpha = 0 // no mostrar timer por ahora 
 		chronoGroup.x = box.centerX * 1.5
 		chronoGroup.y = box.centerY * 1.3
+		chronoGroup.maxTime = 20000
 		hud.add(chronoGroup)
 		hud.chrono = chronoGroup
 
@@ -178,10 +179,29 @@ var questionHUD = function(){
 		timeGauge.anchor.setTo(0.5)
 		chronoGroup.timeGauge = timeGauge
 
-		var timeText = new Phaser.Text(chronoGroup.game, 50, 0, "3:00", fontStyle)
+		var timeText = new Phaser.Text(chronoGroup.game, 50, 0, "0:20", fontStyle)
 		timeText.anchor.setTo(0.5)
 		chronoGroup.add(timeText)
 		chronoGroup.timeText = timeText
+
+		var circle = game.add.graphics(50, 0)
+		circle.lineStyle(40, 0xFF0000, 0.5)
+		//circle.beginFill(0xFF0000, 0.5)
+		circle.lineSize = timeGauge.width * 0.45
+		circle.arc(0, 0, circle.lineSize, game.math.degToRad(-10), game.math.degToRad(280), false)
+		circle.endFill()
+		chronoGroup.add(circle)
+		chronoGroup.circle = circle
+		timeGauge.mask = circle
+
+		chronoGroup.restore = restore.bind(chronoGroup)
+
+		function restore(){
+			this.circle.clear()
+			this.circle.lineStyle(40, 0xFF0000, 0.5)
+			this.circle.arc(0, 0, this.circle.lineSize, game.math.degToRad(-10), game.math.degToRad(280), false)
+			this.circle.endFill()
+		}
 	}
 
 	function createWaiting(hud){
@@ -269,11 +289,16 @@ var questionHUD = function(){
 
 	function startTweens(){
 
+		if(!this.client) return
+
 		var delay = 200
 		this.image.loadTexture(this.riddle.image)
 		var scaleImg = this.fixImage(1)
 		this.image.key = this.riddle.image
-		
+		this.chrono.maxTime = this.riddle.timers.normal
+		var maxTime = convertTime(this.chrono.maxTime)
+		this.chrono.timeText.setText(maxTime)
+
 		game.add.tween(this).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
 
 		this.boxes.forEach(function(box){
@@ -281,9 +306,9 @@ var questionHUD = function(){
 			delay += 400
 		})
 
-		if(this.client){
+		//if(this.client){
 			game.add.tween(this.chrono).from({x: -400}, 300, Phaser.Easing.Cubic.Out, true, delay)
-		}
+		//}
 
 		this.options.forEach(function(opt){
 			opt.info.alpha = 0
@@ -365,6 +390,7 @@ var questionHUD = function(){
 				box.scale.setTo(0, 1)
 			})
 
+			this.chrono.restore()
 			this.image.scale.setTo(0)
 			this.image.alpha = 0
 			if(group.existImage) this.removeImage()
@@ -483,13 +509,13 @@ var questionHUD = function(){
 	}
     
     function startTimer(){
-    
-        var MAX_TIME = 30000
+	
+        var maxTime = this.chrono.maxTime
 		if(this.timer)
 			this.timer.destroy()
 
         this.timer = game.time.create()
-		this.timerEvent = this.timer.add(MAX_TIME, this.stopTimer, this)
+		this.timerEvent = this.timer.add(maxTime, this.stopTimer, this)
 		this.timer.loop(1000, updateTimer, this)
         this.timer.start()
 		console.log("time start")
@@ -498,12 +524,20 @@ var questionHUD = function(){
 	function updateTimer(){
 
 		var text = convertTime(this.timerEvent.delay - this.timer.ms)
-		console.log(text)
+		this.chrono.timeText.setText(text)
+
+		this.chrono.circle.clear()
+        this.chrono.circle.lineStyle(40, 0xFF0000, 0.5)
+
+		var size = game.math.degToRad((270/this.timerEvent.delay)*(this.timerEvent.delay - this.timer.ms))
+        this.chrono.circle.arc(0, 0, this.chrono.circle.lineSize, this.game.math.degToRad(-10), size, false)
+        this.chrono.circle.endFill()
 	}
     
     function stopTimer(){
+		this.chrono.timeText.setText("0:00")
 		this.timer.destroy()
-		this.hide()
+		//this.hide()
 	}
 	
 	function convertTime(time) {

@@ -233,6 +233,32 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">timeGauge.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>56,57,113,113</rect>
+                <key>scale9Paddings</key>
+                <rect>56,57,113,113</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">yellowCircle.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>85,60,171,120</rect>
+                <key>scale9Paddings</key>
+                <rect>85,60,171,120</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
         </map>
         <key>fileList</key>
         <array>
@@ -240,6 +266,8 @@
             <filename>questionBtn.png</filename>
             <filename>questionImage.png</filename>
             <filename>blueBtn.png</filename>
+            <filename>timeGauge.png</filename>
+            <filename>yellowCircle.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
