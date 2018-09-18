@@ -50,7 +50,7 @@ function animateBlob(parent,time1,time2){
 TweenLite.set($(".correct--icon"),{transformOrigin: "50% 50% 0"});       
 TweenLite.set($(".blobAnimate"),{transformOrigin: "50% 50% 0"});
 TweenLite.set($(".st0"),{y:140});    
-TweenMax.fromTo($(".base1"),3,{x:0},{x:300,yoyo:true,repeat:-1});
+TweenMax.fromTo($(".base1"),3,{x:300},{x:300,yoyo:true,repeat:-1});
 TweenMax.fromTo($(".blobAnimate"),2,{rotation:0},{rotation:360,repeat:-1,ease:Back.easeNone});
         
 animateBlob("#animation1",5,6);

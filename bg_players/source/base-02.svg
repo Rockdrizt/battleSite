@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 384 1080" style="enable-background:new 0 0 384 1080;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:url(#SVGID_1_);}
-	.st1{fill:url(#SVGID_2_);}
-	.st2{fill:url(#SVGID_3_);}
-	.st3{fill:url(#SVGID_4_);}
-	.st4{fill:url(#SVGID_5_);}
 </style>
 <g id="mask">
 </g>
 <g id="arc_lower">
-	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="192" y1="1.7858" x2="192" y2="1036.365">
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="192" y1="1485.2427" x2="192" y2="54.8006" gradientTransform="matrix(1 0 0 -1 0 1080)">
 		<stop  offset="4.514761e-04" style="stop-color:#2AD8FF"/>
 		<stop  offset="1" style="stop-color:#FF1E79"/>
 	</linearGradient>
-	<path class="st0" d="M0,317.9c0,0,53.1-16.6,88.2,0c35.1,16.6,103.8,0,103.8,0s51.3-20,109.3,0s82.7,0,82.7,0V1076H0V317.9z"/>
+	<path class="st0" d="M0,26.9c0,0,53.1-16.6,88.2,0s103.8,0,103.8,0S222,25,280,45s104-18.1,104-18.1V1080H0V26.9z"/>
 </g>
 </svg>
