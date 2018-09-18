@@ -26,7 +26,7 @@ function Server(){
 	};
 	firebase.initializeApp(config);
 	var database = firebase.database();
-	var questionGrade = 0
+	var questionGrade = -1//0
 
 
 	var MAX_OPERAND_VALUE = 500;

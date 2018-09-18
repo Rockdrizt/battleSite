@@ -30,7 +30,12 @@ var scores = function(){
 				name: "atlas.yogotars",
 				json: settings.BASE_PATH + "/images/scores/yogotars.json",
 				image: settings.BASE_PATH + "/images/scores/yogotars.png",
-			}
+			},
+			{
+				name: "atlas.question",
+				json: settings.BASE_PATH + "/images/questionOverlay/atlas.json",
+				image: settings.BASE_PATH + "/images/questionOverlay/atlas.png",
+			},
 		],
 		images: [
 			{
@@ -40,6 +45,14 @@ var scores = function(){
 			{
 				name: "eagle",
 				file: settings.BASE_PATH + "/images/scores/eagle.png",
+			},
+			{
+				name: "questionBoard",
+				file: settings.BASE_PATH + "/images/questionOverlay/questionBoard.png",
+			},
+{
+				name: "default",
+				file: settings.BASE_PATH + "/images/questionDB/default.png",
 			}
 		],
 		sounds: [
@@ -269,7 +282,7 @@ var scores = function(){
 
 	function createScoreBubble(){
 
-		var fontStyle = {font: "100px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
+		var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 
 		scoresGroup = game.add.group()
 		scoresGroup.x = game.world.centerX
@@ -284,8 +297,10 @@ var scores = function(){
 			bubble.anchor.setTo(0.5)
 			bubble.x = pivotX * ORDER_SIDES[i].direction
 			bubble.points = 0
+
+			var lifeText = "100/100"//.split("").join(String.fromCharCode(8202))
 			
-			var score = new Phaser.Text(scoresGroup.game, 0, 50, bubble.points, fontStyle)
+			var score = new Phaser.Text(scoresGroup.game, 0, 50, lifeText, fontStyle)
             score.anchor.setTo(0.5)
             bubble.addChild(score)
             bubble.text = score
@@ -388,13 +403,42 @@ var scores = function(){
 		assets.images.push(charObj)
 	}
 
-	function setScore(index){
+	function setScore(index, lifePoints){
 
 		var bubble = scoresGroup.children[index]
 		bubble.points++
 		game.add.tween(bubble.scale).to({x:1.2, y:1.2}, 200, Phaser.Easing.Cubic.InOut, true, 0, 0, true)
-		bubble.text.setText(bubble.points)
+		bubble.text.setText(lifePoints)
 	}
+
+	function createQuestionOverlay(){
+
+		questionGroup = questionHUD.createQuestionOverlay()
+		questionGroup.client = true
+		sceneGroup.add(questionGroup)
+
+		var obj = {
+			question: "lorem ipsum dolor",
+			existImage : false,
+			src: settings.BASE_PATH + "/images/questionDB/default.png",
+			image: "default",
+			answers: ["a", "be", "ce", "de"],
+			grade: 1,
+			level: 1,
+			correctAnswer: 2,
+			timers:{
+				ultra : 6500,
+				super : 13000,
+				normal : 20000
+			},
+			index: 0,
+			correctValue: "be"
+			//correctIndex:
+		}
+
+		//questionGroup.showQuestion(obj)
+		//questionGroup.hide()
+    }
 
 	return {
 		assets: assets,
@@ -415,6 +459,7 @@ var scores = function(){
 			createTeams()
 			createVS()
 			createScoreBubble()
+			createQuestionOverlay()
 		},
 		setTeamData: function (data) {
 			teamsData = data
