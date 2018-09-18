@@ -11,6 +11,7 @@ var HUD = function(){
         var HUDGroup = game.add.group()
         HUDGroup.fixedToCamera = true
         HUDGroup.cameraOffset.setTo(0, 0)
+        HUDGroup.teams = []
         
         var pivotX = 0.25
         var index = 0
@@ -21,6 +22,7 @@ var HUD = function(){
             
             var teamSide = game.add.group()
             HUDGroup.add(teamSide)
+            HUDGroup.teams.push(teamSide)
             
             var lifeBox = teamSide.create(game.world.centerX * pivotX, 150, "atlas.battle", "lifeContainer" + i)
             lifeBox.x -= 10 * side
@@ -143,6 +145,9 @@ var HUD = function(){
 		}
 	}
 
+	//TODO: refactor HUD.js, HUD most only use HUD functions, not damage, shakeCamara, nextRound, etc..
+    //TODO: also damage and type attack are going to be on the server side but in the mainteam, I will add a function
+    //to reduce life in the server
 	function dealDamage(loseIndex, percent, ultra){
 
         var self = this
@@ -173,6 +178,23 @@ var HUD = function(){
             else{
                 self.nextRound(delay)
             }
+
+
+            //UPDATE SCORE SERVER
+            var team1Data = self.teams[0]
+            var team2Data = self.teams[1]
+            var teamsData = {
+                "t1" : {
+					life : team1Data.life.amount > 0 ? team1Data.life.amount : 0,
+                    score : {correct : team1Data.teamScore.points}
+				},
+				"t2" : {
+					life : team2Data.life.amount > 0 ? team2Data.life.amount : 0,
+					score : {correct : team2Data.teamScore.points}
+				}
+            }
+            server.updateTeam(1, teamsData.t1)
+            server.updateTeam(2, teamsData.t2)
         })
     }
     

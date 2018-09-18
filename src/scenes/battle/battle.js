@@ -280,6 +280,7 @@ var battle = function(){
 		
 		HUDGroup.setWinteam = function(win, lose){
 			setWinteam(win, lose)
+			server.setGameEnded(win + 1)
 		}
 		HUDGroup.nextRound = function(delay){
 			for(var i = 0; i < 2; i++){
@@ -594,6 +595,7 @@ var battle = function(){
 		var ultra = percent == DAMAGE.ultra ? true : false
 		percent *= ORDER_SIDES[team].direction // scale.x
 		HUDGroup.dealDamage(team, percent, ultra)
+		//UPDATE SCORE SERVER
 	}
 
 	function attackMove(type, index){

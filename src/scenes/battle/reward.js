@@ -120,7 +120,7 @@ var reward = function(){
         loadSounds()
 
         cliente = parent.cliente || {}
-        var numTeam = INDEX_WINNER || DEFAULT_NUMTEAM //cliente.numTeam 
+        var numTeam = indexWinner || DEFAULT_NUMTEAM //cliente.numTeam
         var scoreTeam = FINAL_SCORE || DEFAULT_SCORE
         var timeTeam = FINAL_TIME || DEFAULT_TIME
         var otherTeam = numTeam == 1 ? 0 : 1
@@ -385,7 +385,7 @@ var reward = function(){
 			players = myTeams
 		},
         setWinner: function(winner, score, time){
-            INDEX_WINNER = winner
+            indexWinner = winner
             FINAL_SCORE = score
             //FINAL_TIME = time
         },
