@@ -298,12 +298,14 @@ var resultsFeedback = function(){
         var players = [t1, t2]
         
         var timeDifference = event.timeDifference || Math.abs(t1.time - t2.time) || 0
-		var timeConvertedDifference = convertTime(timeDifference)
+        //var timeConvertedDifference = convertTime(timeDifference)
+        var timeConvertedDifference = convertTimeFormat(timeDifference)
 
         var parent = this.parent
 
         riddleTime = riddle.timers
 
+        console.log(riddle)
         game.add.tween(parent.black).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
         game.add.tween(this).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
         parent.blueAns.setInfo(riddle.correctAnswer, riddle.correctValue)
@@ -431,7 +433,7 @@ var resultsFeedback = function(){
     
     function convertScale(time){
 
-        var maxTime = riddleTime || 20000
+        var maxTime = riddleTime.normal || 20000
         var scale = 1 - time/maxTime
         if(scale < 0) scale = 0
 		return scale

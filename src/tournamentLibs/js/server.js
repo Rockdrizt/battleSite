@@ -26,7 +26,6 @@ function Server(){
 	};
 	firebase.initializeApp(config);
 	var database = firebase.database();
-	var questionGrade = -1//0
 
 
 	var MAX_OPERAND_VALUE = 500;
@@ -327,7 +326,7 @@ function Server(){
 
 	//TODO: generate question is not a server function
 	this.sendQuestion = function () {
-		var questionData = riddles.getQuestion(questionGrade)
+		var questionData = riddles.getQuestion(this.questionGrade)
 		//var questionData = riddles.getOperation()
 		correctAnswer = questionData.correctAnswer
 
@@ -531,8 +530,10 @@ function Server(){
 		var params = params || {}
 		var rules = params.rules || operationGenerator.RULES_SET.EASY
 		var battleTime = params.battleTime || 300000
+		var questionGrade = params.grade || 0
 		self.battleTime = battleTime
 		self.rules = rules
+		self.questionGrade = questionGrade
 		self.onAlert = onError
 		self.onStart = onStart
 		self.maxRounds = typeof params.maxRounds !== "undefined" ? params.maxRounds : self.maxRounds
