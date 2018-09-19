@@ -1,9 +1,11 @@
 var previusTeam;
 var selectTeam;
-var idGame = "000001"
+var idGameFromHash = window.location.hash.substr(1);
+var idGame = idGameFromHash;
 var teamId = 1
 var service = new ScreenService()
 service.start(idGame, teamId, showTeam)
+
 
 function showTeam(team){ //team is an array
     console.log(team)
