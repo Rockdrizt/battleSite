@@ -1057,7 +1057,12 @@ var yogoSelector = function(){
 			}else if(!slot.check && yogotar){
 				clickOk(numTeam)
 			}
+
+			if(slot.yogo)
+				player.skin = slot.yogo.skin
 		}
+
+		server.updateTeam(numTeam, {players:players})
 	}
 
 	function updateLoadingBar(loadedFiles, totalFiles) {

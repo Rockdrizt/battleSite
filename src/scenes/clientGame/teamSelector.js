@@ -325,6 +325,7 @@ var teamSelector = function(){
 			player.y = -100
 			player.name = YOGOTARS_LIST[i].name
 			player.tag = i
+			player.skin = YOGOTARS_LIST[i].name + "1"
 			player.used = false
 			player.setAlive(false)
 			pullGroup.add(player)
@@ -698,7 +699,8 @@ var teamSelector = function(){
 			var player = teamGroup.slots[playerIndex]
 			var playerObj = {
 				avatar:player.yogo ? player.yogo.name : false,
-				nickname:nickName
+				nickname:nickName,
+				skin:player.yogo ? player.yogo.skin : false
 			}
 			players.push(playerObj)
 		}

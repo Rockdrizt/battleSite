@@ -43,6 +43,7 @@ function Client(){
 	this.restartGame = null
 	this.timeOutCallback = null
 	this.onError = null
+	this.teams = []
 
 	this.addEventListener = function(name, handler) {
 		if (self.events.hasOwnProperty(name))
@@ -84,6 +85,8 @@ function Client(){
 	function initialize(idGame, val){
 		var t1 = val.t1;
 		var t2 = val.t2;
+		self.teams[1] = val.t1
+		self.teams[2] = val.t2
 		if(self.numTeam){
 			self.team = val["t" + self.numTeam]
 			self.team.ready = true
@@ -156,8 +159,9 @@ function Client(){
 
 		self.refIdGame.child('gameEnded').off()
 		self.refIdGame.child('gameEnded').on('value', function(snapshot) {
-			var gameEnded = snapshot.toJSON();
-			if((gameEnded)&&(gameEnded.winner)){
+			var gameEnded = snapshot.val();
+			gameEnded.teams = self.teams
+			if((gameEnded)&&(typeof gameEnded.winner === "number")){
 				self.fireEvent('onGameEnds',[gameEnded]);
 				self.gameEnded = true
 			}
@@ -194,9 +198,14 @@ function Client(){
 		database.ref().child(idGame).on('value', function(snapshot) {
 			var serverReady = snapshot.child("serverReady").val()
 			if (serverReady) {
+				var val = snapshot.val()
 
 				if (self.numTeam) {
 					var ready = snapshot.child("t" + self.numTeam + "/ready").val()
+					if(self.teams[self.numTeam] !== val["t" + self.numTeam]) {
+						self.teams[self.numTeam] = val["t" + self.numTeam]
+						self.fireEvent('onPlayersChange',[self.teams[self.numTeam]]);
+					}
 					if (ready === false) {
 						database.ref(idGame + "/t" + self.numTeam + "/ready").onDisconnect().cancel()
 						self.showAlert("Te desconectaste del server, ingresa el pin de nuevo.", true)
@@ -206,13 +215,15 @@ function Client(){
 
 				if (self.opponent) {
 					var opponentReady = snapshot.child("t" + self.opponent + "/ready").val()
+					if(self.teams[self.opponent] !== val["t" + self.opponent]) {
+						self.teams[self.opponent] = val["t" + self.opponent]
+					}
 					if (opponentReady === false) {
 						self.onWait()
 						return
 					}
 				}
 
-				var val = snapshot.val()
 				if ((val)&&(valuesInitialized !== true)) {
 					valuesInitialized = true
 					self.refIdGame = database.ref(idGame)
@@ -307,6 +318,7 @@ function Client(){
 
 	this.selectYogotar = function (players) {
 		//players.date = firebase.database.ServerValue.TIMESTAMP
+		self.teams[self.numTeam] = players
 		setfb(self.refIdGame.child("t" + self.numTeam + "/players"), players)
 	}
 }

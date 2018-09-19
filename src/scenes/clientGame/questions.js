@@ -135,8 +135,15 @@ var questions = function(){
 		questionGroup.showFeedback()
 	}
 
-	function showWinner(){
+	function showWinner(data){
+		var teams = data.teams
+		var winner = data.winner
 
+		rewardClient.setTeams(teams)
+		rewardClient.setWinner(winner)
+		game.time.events.add(2000, function () {
+			sceneloader.show("rewardClient")
+		})
 	}
 
 	function createButton(callback, color) {
