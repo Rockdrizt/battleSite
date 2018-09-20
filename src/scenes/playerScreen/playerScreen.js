@@ -38,10 +38,12 @@ var playerScreen = function(){
 		]
     }
 
-	var PLAYER_DATA
+	var NAMES_LIST = ["tomiko", "luna", "nao", "theffanie", "eagle", "dinamita", "arthurius", "estrella"]
+	var X_OFFSETS = [-30, 0, 0, 10, 0, 0, 0, 10]
 
 	var sceneGroup
     var tile
+	var teamMate
     
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -55,7 +57,7 @@ var playerScreen = function(){
     
     function preload(){
 		
-        game.stage.disableVisibilityChange = false
+        game.stage.disableVisibilityChange = true
     }
     
 	function createBackground(){
@@ -87,11 +89,29 @@ var playerScreen = function(){
 	
 	function createTeamMember(){
 
-		var teamMate = createYogoToken()
+		teamMate = createYogoToken()
 		teamMate.x = game.world.centerX
 		teamMate.y = game.world.centerY + 50
 		teamMate.scale.setTo(2)
 		sceneGroup.add(teamMate)
+	}
+
+	function updateYogoInfo(data) {
+		console.log(data)
+
+		if(typeof data.avatar !== "string")
+			return
+
+		teamMate.kidName.text = data.nickname
+		var avatar = data.avatar
+		teamMate.yogoName.text = avatar[0].toUpperCase() + avatar.slice(1)
+
+		if(teamMate.yogo) teamMate.yogo.destroy()
+
+		var yogoInfo = getYogoInfo(data.avatar)
+		var yogo = teamMate.create(yogoInfo.offsetX - 2, 53, "atlas.player", yogoInfo.name)
+		yogo.anchor.setTo(0.5, 1)
+		teamMate.yogo = yogo
 	}
 
 	function createYogoToken(){
@@ -103,32 +123,43 @@ var playerScreen = function(){
 		var token = memberGroup.create(0, 0, "atlas.player", "token0")
         token.anchor.setTo(0.5)
 
-		var kidName = new Phaser.Text(memberGroup.game, 0, -170, PLAYER_DATA.kid, fontStyle)
+		var kidName = new Phaser.Text(memberGroup.game, 0, -170, "", fontStyle)
 		kidName.anchor.setTo(0.5)
 		memberGroup.add(kidName)
 		memberGroup.kidName = kidName
 		
 
-		var yogoName = new Phaser.Text(memberGroup.game, 0, 150, PLAYER_DATA.yogo, fontStyle)
+		var yogoName = new Phaser.Text(memberGroup.game, 0, 150, "", fontStyle)
 		yogoName.anchor.setTo(0.5)
 		yogoName.fill = "#00D8FF"
 		memberGroup.add(yogoName)
 		memberGroup.yogoName = yogoName
 		
-		var yogo = memberGroup.create(-2, 53, "atlas.player", getYogoNumber(PLAYER_DATA.yogo))
-
-		yogo.anchor.setTo(0.5, 1)
-		memberGroup.yogo = yogo
+		//updateYogoInfo(memberGroup)
 
 		return memberGroup
 	}
 
-	function getYogoNumber(name){
+	function getYogoInfo(name){
 
-		var NAMES_LIST = ["Tomiko", "Luna", "Nao", "Theffanie", "Eagle", "Dinamita", "Arthurius", "Estrella"] 
 		var index = NAMES_LIST.indexOf(name)
+		var offsetX = X_OFFSETS[index]
 
-		return "yogo" + index
+		return {
+			name:"yogo" + index,
+			offsetX:offsetX
+		}
+	}
+
+	function initializeService() {
+		var hashValue = window.location.hash.substr(1);
+		var arrValues = hashValue.split("/")
+		var idGame = arrValues[0]
+		var numTeam = arrValues[1]
+		var numPlayer = arrValues[2]
+
+		var playerService = new PlayerService()
+		playerService.start(idGame, numTeam, numPlayer, updateYogoInfo)
 	}
 
 	return {
@@ -147,9 +178,8 @@ var playerScreen = function(){
             initialize()
 			createBackground()
 			createTeamMember()
-		},
-        setTeams: function (player) {
-			PLAYER_DATA = player
+
+			initializeService()
 		},
 		shutdown: function () {
 			sceneGroup.destroy()
