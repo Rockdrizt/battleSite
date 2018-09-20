@@ -61,25 +61,31 @@ function ScreenService(){
 		});
     }
     
-   /* this.checkAnswer = function(numTeam){
-        self.refIdGame.child("t" + numTeam + "/players").on('value', function(snapshot) {
-			var t1 = snapshot.val();
-			if(t1) {
-				self.showTeam(t1)
-			}
-		});
-    }*/
+    this.checkAnswer = function(numTeam){
+        self.refIdGame.child("winner/numTeam").on('value',
+            function(snapshot){
+            var answer = snapshot.val();
+            console.log(answer);
+         if(answer){
+             self.animateAnswer(answer)
+         }
+        })
+        
+    }
+
 
 	/**
 	 * @summary Starts the client
 	 * @param {type} idGame Code of the game
 	 */
-	this.start = function(idGame, numTeam, showTeam){
+	this.start = function(idGame, numTeam, showTeam, animateAnswer){
 		// self.events = {};
 		console.log(self.events)
 		self.refIdGame= database.ref(idGame);
         self.showTeam = showTeam
+        self.animateAnswer = animateAnswer
         self.checkTeam(numTeam)
+        self.checkAnswer(numTeam)
 		
 	};
 
