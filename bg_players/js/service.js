@@ -20,7 +20,6 @@ function ScreenService(){
 			self.events[name].push(handler);
 		else
 			self.events[name] = [handler];
-		console.log(self.events[name])
 	};
 
 	/* This is a bit tricky, because how would you identify functions?
@@ -47,7 +46,6 @@ function ScreenService(){
 
 	var setfb = function(ref, value) {
 		ref.set(value).catch(function (reason) {
-			console.log(reason)
 			setfb(ref, value)
 		})
 	}
@@ -62,14 +60,47 @@ function ScreenService(){
     }
     
     this.checkAnswer = function(numTeam){
+        var correctAnswer
+        var winner;
+        var onChangeWinner = false;
+        var answer;
+        
+        self.refIdGame.child("winner/correctAnswer").on('value',
+        function(correct){
+            correctAnswer = correct.val();
+        })
+        
         self.refIdGame.child("winner/numTeam").on('value',
+        function(win){
+            winner = win.val();
+            
+        })
+        
+        self.refIdGame.child("winner/answers/t" + numTeam + "/value").on('value',
             function(snapshot){
-            var answer = snapshot.val();
-            console.log(answer);
-         if(answer){
-             self.animateAnswer(answer)
+            answer = snapshot.val();
+        })
+        
+        
+        self.refIdGame.child("winner").on('value',
+        function(changeRound){
+            onChangeWinner = true;
+        if(answer != null){
+             if(answer == correctAnswer && onChangeWinner){
+                    if(winner == numTeam){
+                        self.animateAnswer(0);
+                    }else{
+                        self.animateAnswer(1);
+                    } 
+
+             }else{
+                 self.animateAnswer(2);
+             }
+            onChangeWinner = false
          }
         })
+        
+        console.log(onChangeWinner)
         
     }
 
@@ -80,7 +111,6 @@ function ScreenService(){
 	 */
 	this.start = function(idGame, numTeam, showTeam, animateAnswer){
 		// self.events = {};
-		console.log(self.events)
 		self.refIdGame= database.ref(idGame);
         self.showTeam = showTeam
         self.animateAnswer = animateAnswer
