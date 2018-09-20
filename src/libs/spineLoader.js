@@ -111,7 +111,7 @@ var spineLoader = function () {
 		var entry
 
 		spineSkeleton.setToSetupPose()
-		spineSkeleton.updateTransform()
+		//spineSkeleton.autoUpdateTransform()
 
 		for (var index = 0; index < animations.length; index++) {
 			var animation = animations[index]

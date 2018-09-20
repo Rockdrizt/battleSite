@@ -366,7 +366,6 @@ function Server(){
 	 * @summary Starts the server
 	 */
 	function initializeData(id){
-		operationGenerator.setConfiguration(self.rules, self.numPerOperations)
 
 		valores = {
 			rules:self.rules,
@@ -558,7 +557,7 @@ function Server(){
 		self.numberOperation = numPerOperations
 
 		checkConnected(currentId)
-
+		operationGenerator.setConfiguration(self.rules, self.numPerOperations)
 	}
 
 	this.setGameReady = function (value) {

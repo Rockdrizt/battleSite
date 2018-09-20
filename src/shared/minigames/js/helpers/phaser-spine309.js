@@ -3049,10 +3049,9 @@ var PhaserSpine;
             this.skeleton.updateWorldTransform();
             var drawOrder = this.skeleton.drawOrder;
             var slots = this.skeleton.slots;
+
             for (var i = 0, n = drawOrder.length; i < n; i++) {
                 if (drawOrder[i].currentSprite !== undefined) {
-                	//this.remove(drawOrder[i].currentSprite.parent)
-					//this.add(drawOrder[i].currentSprite.parent, i)
                     drawOrder[i].currentSprite.parent.z = i;
                 }
             }

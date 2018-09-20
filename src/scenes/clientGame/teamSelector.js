@@ -125,7 +125,7 @@ var teamSelector = function(){
 		},
 	}
 
-	var DEFAULT_NUMTEAM = 2
+	var DEFAULT_NUMTEAM = 1
 	var TEAM_COMPLETE = 3
 
 	var STATES
@@ -870,6 +870,7 @@ var teamSelector = function(){
 			text.strokeThickness = 20
 			text.angle = -90
 			lava.addChild(text)
+			lava.bringToTop(text)
 
 			pivotX += RISE_X
 		}
@@ -963,7 +964,7 @@ var teamSelector = function(){
 	}
 
 	function loadSplashArt(){
-
+		
 		game.load.onLoadComplete.add(createSplashArt)
 
 		for (var i = 0; i < teamGroup.auxArray.length; i++) {

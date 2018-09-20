@@ -82,11 +82,11 @@ function startGame(){
 		spineLoader.init()
     	sound.init(game)
 
-		var defaultSkin = 1
+		var defaultSkin = 2
 		var teams = [
 
-			["yogotarTheffanie", "yogotarJustice", "yogotarArthurius"],
-			["yogotarLuna", "yogotarTheffanie", "yogotarDinamita"],
+			["yogotarTheffanie", "yogotarDinamita", "yogotarDazzle"],
+			["yogotarLuna", "yogotarDinamita", "yogotarDinamita"],
 
 		]
 		var objTeams = []

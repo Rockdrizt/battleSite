@@ -233,17 +233,17 @@ var yogoSelector = function(){
         
         for(var i = 0; i < 3; i++){
             
-            var plat = platformGroup.create(game.world.centerX * pivotX, game.world.centerY + 50, "atlas.yogoSelector", "plat1")
+            var plat = platformGroup.create(game.world.centerX * pivotX, game.world.centerY, "atlas.yogoSelector", "plat1")
             plat.anchor.setTo(0.5)
             
-            var plat = platformGroup.create(game.world.centerX * pivotX  + game.world.centerX, game.world.centerY + 50, "atlas.yogoSelector", "plat2")
+            var plat = platformGroup.create(game.world.centerX * pivotX  + game.world.centerX, game.world.centerY, "atlas.yogoSelector", "plat2")
             plat.anchor.setTo(0.5)
             
             pivotX += 0.25
         }
         
-        platformGroup.children[2].y += 100
-        platformGroup.children[3].y += 100
+        platformGroup.children[2].y += 50
+        platformGroup.children[3].y += 50
     }
 
 	function createTeams(){
@@ -275,17 +275,17 @@ var yogoSelector = function(){
 		for(var i = 0; i < 3; i++){
 
 			alphaGroup.slots[i].x = game.world.centerX * pivotX
-			alphaGroup.slots[i].y = game.world.centerY + 50
+			alphaGroup.slots[i].y = game.world.centerY
 			alphaGroup.slots[i].yogo = null
 
 			bravoGroup.slots[i].x = game.world.centerX * pivotX + game.world.centerX
-			bravoGroup.slots[i].y = game.world.centerY + 50
+			bravoGroup.slots[i].y = game.world.centerY
 			bravoGroup.slots[i].yogo = null
 
 			pivotX += 0.25
 		}
-		alphaGroup.slots[1].y += 100
-		bravoGroup.slots[1].y += 100
+		alphaGroup.slots[1].y += 50
+		bravoGroup.slots[1].y += 50
 	}
 
 	function createPullGroup(){
