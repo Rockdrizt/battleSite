@@ -1,0 +1,153 @@
+{
+"skeleton": { "hash": "4CrFcjw5mrOSs4N0NncIIUHd6ww", "spine": "3.2.01", "width": 802, "height": 138, "images": "" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "banner", "parent": "root", "y": 70 }
+],
+"slots": [
+	{ "name": "banner", "bone": "banner", "attachment": "banner_28" }
+],
+"skins": {
+	"default": {},
+	"alfa": {
+		"banner": {
+			"banner_0": { "name": "alfa/alfa_00", "y": 6, "width": 802, "height": 138 },
+			"banner_1": { "name": "alfa/alfa_01", "y": 6, "width": 802, "height": 138 },
+			"banner_2": { "name": "alfa/alfa_02", "y": 6, "width": 802, "height": 138 },
+			"banner_3": { "name": "alfa/alfa_03", "y": 6, "width": 802, "height": 138 },
+			"banner_4": { "name": "alfa/alfa_04", "y": 6, "width": 802, "height": 138 },
+			"banner_5": { "name": "alfa/alfa_05", "y": 6, "width": 802, "height": 138 },
+			"banner_6": { "name": "alfa/alfa_06", "y": 6, "width": 802, "height": 138 },
+			"banner_7": { "name": "alfa/alfa_07", "y": 6, "width": 802, "height": 138 },
+			"banner_8": { "name": "alfa/alfa_08", "y": 6, "width": 802, "height": 138 },
+			"banner_9": { "name": "alfa/alfa_09", "y": 6, "width": 802, "height": 138 },
+			"banner_10": { "name": "alfa/alfa_10", "y": 6, "width": 802, "height": 138 },
+			"banner_11": { "name": "alfa/alfa_11", "y": 6, "width": 802, "height": 138 },
+			"banner_12": { "name": "alfa/alfa_12", "y": 6, "width": 802, "height": 138 },
+			"banner_13": { "name": "alfa/alfa_13", "y": 6, "width": 802, "height": 138 },
+			"banner_14": { "name": "alfa/alfa_14", "y": 6, "width": 802, "height": 138 },
+			"banner_15": { "name": "alfa/alfa_15", "y": 6, "width": 802, "height": 138 },
+			"banner_16": { "name": "alfa/alfa_16", "y": 6, "width": 802, "height": 138 },
+			"banner_17": { "name": "alfa/alfa_17", "y": 6, "width": 802, "height": 138 },
+			"banner_18": { "name": "alfa/alfa_18", "y": 6, "width": 802, "height": 138 },
+			"banner_19": { "name": "alfa/alfa_19", "y": 6, "width": 802, "height": 138 },
+			"banner_20": { "name": "alfa/alfa_20", "y": 6, "width": 802, "height": 138 },
+			"banner_21": { "name": "alfa/alfa_21", "y": 6, "width": 802, "height": 138 },
+			"banner_22": { "name": "alfa/alfa_22", "y": 6, "width": 802, "height": 138 },
+			"banner_23": { "name": "alfa/alfa_23", "y": 6, "width": 802, "height": 138 },
+			"banner_24": { "name": "alfa/alfa_24", "y": 6, "width": 802, "height": 138 },
+			"banner_25": { "name": "alfa/alfa_25", "y": 6, "width": 802, "height": 138 },
+			"banner_26": { "name": "alfa/alfa_26", "y": 6, "width": 802, "height": 138 },
+			"banner_27": { "name": "alfa/alfa_27", "y": 6, "width": 802, "height": 138 },
+			"banner_28": { "name": "alfa/alfa_28", "y": 6, "width": 802, "height": 138 }
+		}
+	},
+	"bravo": {
+		"banner": {
+			"banner_0": { "name": "bravo/bravo_00", "y": 6, "width": 802, "height": 138 },
+			"banner_1": { "name": "bravo/bravo_01", "y": 6, "width": 802, "height": 138 },
+			"banner_2": { "name": "bravo/bravo_02", "y": 6, "width": 802, "height": 138 },
+			"banner_3": { "name": "bravo/bravo_03", "y": 6, "width": 802, "height": 138 },
+			"banner_4": { "name": "bravo/bravo_04", "y": 6, "width": 802, "height": 138 },
+			"banner_5": { "name": "bravo/bravo_05", "y": 6, "width": 802, "height": 138 },
+			"banner_6": { "name": "bravo/bravo_06", "y": 6, "width": 802, "height": 138 },
+			"banner_7": { "name": "bravo/bravo_07", "y": 6, "width": 802, "height": 138 },
+			"banner_8": { "name": "bravo/bravo_08", "y": 6, "width": 802, "height": 138 },
+			"banner_9": { "name": "bravo/bravo_09", "y": 6, "width": 802, "height": 138 },
+			"banner_10": { "name": "bravo/bravo_10", "y": 6, "width": 802, "height": 138 },
+			"banner_11": { "name": "bravo/bravo_11", "y": 6, "width": 802, "height": 138 },
+			"banner_12": { "name": "bravo/bravo_12", "y": 6, "width": 802, "height": 138 },
+			"banner_13": { "name": "bravo/bravo_13", "y": 6, "width": 802, "height": 138 },
+			"banner_14": { "name": "bravo/bravo_14", "y": 6, "width": 802, "height": 138 },
+			"banner_15": { "name": "bravo/bravo_15", "y": 6, "width": 802, "height": 138 },
+			"banner_16": { "name": "bravo/bravo_16", "y": 6, "width": 802, "height": 138 },
+			"banner_17": { "name": "bravo/bravo_17", "y": 6, "width": 802, "height": 138 },
+			"banner_18": { "name": "bravo/bravo_18", "y": 6, "width": 802, "height": 138 },
+			"banner_19": { "name": "bravo/bravo_19", "y": 6, "width": 802, "height": 138 },
+			"banner_20": { "name": "bravo/bravo_20", "y": 6, "width": 802, "height": 138 },
+			"banner_21": { "name": "bravo/bravo_21", "y": 6, "width": 802, "height": 138 },
+			"banner_22": { "name": "bravo/bravo_22", "y": 6, "width": 802, "height": 138 },
+			"banner_23": { "name": "bravo/bravo_23", "y": 6, "width": 802, "height": 138 },
+			"banner_24": { "name": "bravo/bravo_24", "y": 6, "width": 802, "height": 138 },
+			"banner_25": { "name": "bravo/bravo_25", "y": 6, "width": 802, "height": 138 },
+			"banner_26": { "name": "bravo/bravo_26", "y": 6, "width": 802, "height": 138 },
+			"banner_27": { "name": "bravo/bravo_27", "y": 6, "width": 802, "height": 138 },
+			"banner_28": { "name": "bravo/bravo_28", "y": 6, "width": 802, "height": 138 }
+		}
+	}
+},
+"animations": {
+	"idle": {
+		"slots": {
+			"banner": {
+				"attachment": [
+					{ "time": 0, "name": "banner_0" },
+					{ "time": 0.0666, "name": "banner_1" },
+					{ "time": 0.1333, "name": "banner_2" },
+					{ "time": 0.2, "name": "banner_3" },
+					{ "time": 0.2666, "name": "banner_4" },
+					{ "time": 0.3333, "name": "banner_5" },
+					{ "time": 0.4, "name": "banner_6" },
+					{ "time": 0.4666, "name": "banner_7" },
+					{ "time": 0.5333, "name": "banner_8" },
+					{ "time": 0.6, "name": "banner_9" },
+					{ "time": 0.6666, "name": "banner_10" },
+					{ "time": 0.7333, "name": "banner_11" },
+					{ "time": 0.8, "name": "banner_12" },
+					{ "time": 0.8666, "name": "banner_13" },
+					{ "time": 0.9333, "name": "banner_14" },
+					{ "time": 1, "name": "banner_15" },
+					{ "time": 1.0666, "name": "banner_16" },
+					{ "time": 1.1333, "name": "banner_17" },
+					{ "time": 1.2, "name": "banner_18" },
+					{ "time": 1.2666, "name": "banner_19" },
+					{ "time": 1.3333, "name": "banner_20" },
+					{ "time": 1.4, "name": "banner_21" },
+					{ "time": 1.4666, "name": "banner_22" },
+					{ "time": 1.5333, "name": "banner_23" },
+					{ "time": 1.6, "name": "banner_24" },
+					{ "time": 1.6666, "name": "banner_25" },
+					{ "time": 1.7333, "name": "banner_26" },
+					{ "time": 1.8, "name": "banner_27" },
+					{ "time": 1.8666, "name": "banner_28" },
+					{ "time": 1.9333, "name": "banner_0" }
+				]
+			}
+		},
+		"bones": {
+			"root": {
+				"rotate": [
+					{ "time": 0, "angle": 0, "curve": "stepped" },
+					{ "time": 1.9333, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 1.9333, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 1.9333, "x": 1, "y": 1 }
+				]
+			},
+			"banner": {
+				"rotate": [
+					{ "time": 0, "angle": 0, "curve": "stepped" },
+					{ "time": 1.9333, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0, "curve": "stepped" },
+					{ "time": 1.9333, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1, "curve": "stepped" },
+					{ "time": 1.9333, "x": 1, "y": 1 }
+				]
+			}
+		},
+		"drawOrder": [
+			{ "time": 0 },
+			{ "time": 1.9333 }
+		]
+	}
+}
+}
