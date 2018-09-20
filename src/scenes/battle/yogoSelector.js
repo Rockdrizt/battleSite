@@ -84,7 +84,12 @@ var yogoSelector = function(){
 				name:"lava",
 				file:settings.BASE_PATH + "/spines/yogotars/selector/lava/skeleton.json",
 				//scales: ["@0.5x"]
-			}
+			},
+			{
+				name:"banner",
+				file:settings.BASE_PATH + "/spines/selector/banners.json",
+				//scales: ["@0.5x"]
+			},
 		],
 		particles: [
 			{
@@ -182,7 +187,7 @@ var yogoSelector = function(){
 
 	function initialize(){
         
-		game.stage.backgroundColor = "#0D014D"
+		game.stage.backgroundColor = "#0099AA"
 		chosenOne = 1
 		playersSelected = []
 		tokens = {}
@@ -320,23 +325,43 @@ var yogoSelector = function(){
 		teamsBarGroup = game.add.group()
 		selectorGroup.add(teamsBarGroup)
 
+		var teamsNames = [
+			{
+				skin:"alfa",
+				title: "Equipo Alpha"
+			},
+			{
+				skin:"bravo",
+				title: "Equipo Bravo"
+			}
+		]
+
 		for(var i = 0; i < 2; i++){
 
-			var img = teamsBarGroup.create(game.world.width * i, 30, "atlas.yogoSelector", "teamBar" + (i+1))
-			img.anchor.setTo(i, 0)
-			img.scale.setTo(0.8)
+			var side = ORDER_SIDES[i]
+			// var img = teamsBarGroup.create(game.world.width * i, 30, "atlas.yogoSelector", "teamBar" + (i+1))
+			// img.anchor.setTo(i, 0)
+			// img.scale.setTo(0.8)
+			var delay = 0
 
-			var teamName = new Phaser.Text(teamsBarGroup.game, 320, 25, "Equipo Alpha", fontStyle)
-            teamName.anchor.setTo(0.5, 0)
+			teamBar = game.add.spine(game.world.width * i, 130, "banner")
+			teamBar.setSkinByName(teamsNames[i].skin)
+			game.time.events.add(800 * i, function(teamBar){
+				teamBar.setAnimationByName(0, "idle", true)
+			},null, teamBar)
+			teamBar.scale.setTo(side.scale.x, 1)
+			teamBar.x += 390 * side.scale.x
+			teamsBarGroup.add(teamBar)
+
+			var teamName = new Phaser.Text(teamsBarGroup.game, -100, -70, teamsNames[i].title, fontStyle)
+			teamName.anchor.setTo(0.5)
+			teamName.scale.setTo(side.scale.x, 1)
             teamName.stroke = "#000066"
 			teamName.strokeThickness = 10
 			teamName.alpha = 0
-			img.addChild(teamName)
-			img.text = teamName
-
+			teamBar.addChild(teamName)
+			teamBar.text = teamName
 		}
-		teamName.x *= -1
-		teamName.setText("Equipo Bravo")
 	}
 
 	/*NOTES:
@@ -1081,7 +1106,7 @@ var yogoSelector = function(){
 		
 		for(var j = 0; j < images.length; j++){
 			var team = images[j]
-			for (let i = 0; i < team.length; i++) {
+			for (var i = 0; i < team.length; i++) {
 
 				var name = YOGOTARS_LIST[team[i]].name + (j+1)
 				var src = settings.BASE_PATH + "/images/loading/" + name + ".png"

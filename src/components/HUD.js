@@ -63,7 +63,7 @@ var HUD = function(){
             life.scale.setTo(side, 1)
             teamSide.life = life
 
-            var lifeText = "100/100".split("").join(String.fromCharCode(8202))
+            var lifeText = "100".split("").join(String.fromCharCode(8202))
 
             var lifePoints = new Phaser.Text(teamSide.game, life.x + 20 * side, life.y + 5, lifeText, fontStyle)
             lifePoints.anchor.setTo(i, 0.5)
@@ -194,7 +194,7 @@ var HUD = function(){
 		reduceLife.onComplete.add(function(){
 
             life.amount -= Math.abs(percent) * 100
-            var lifeText = life.amount > 0 ? life.amount + "/100" : "0/100"
+            var lifeText = life.amount > 0 ? life.amount : "0"
             lifeText = lifeText.split("").join(String.fromCharCode(8202))
             life.points.setText(lifeText)
 
