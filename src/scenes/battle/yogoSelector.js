@@ -1081,7 +1081,7 @@ var yogoSelector = function(){
 		
 		for(var j = 0; j < images.length; j++){
 			var team = images[j]
-			for (let i = 0; i < team.length; i++) {
+			for (var i = 0; i < team.length; i++) {
 
 				var name = YOGOTARS_LIST[team[i]].name + (j+1)
 				var src = settings.BASE_PATH + "/images/loading/" + name + ".png"
