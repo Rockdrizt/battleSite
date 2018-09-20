@@ -5,7 +5,7 @@ var idGame = idGameFromHash;
 var teamId = parseInt(getParameterByName("team"));
 console.log(idGame)
 var service = new ScreenService();
-service.start(idGame, teamId, showTeam,animateAnswer)
+service.start(idGame, teamId, showTeam,animateAnswer,hitToLife)
 
 
 function getParameterByName(name, url) {
@@ -42,6 +42,12 @@ function animateAnswer(answer){
     }
 }
 
+function hitToLife(teamHit){
+    if(teamHit == teamId){
+       hitYogotar("#animation2");hitYogotar("#animation3");hitYogotar("#animation4");
+       }
+    
+}
 
 function ChoiceYogotar(parent,obj){
     if(teamId == 1){
@@ -78,6 +84,17 @@ function goodAnswer(parent){
     TweenMax.to($(parent).find(".good--icon").find("img"),0.2,{scaleY:"-=0.1", yoyo:true, repeat:5}); 
     TweenMax.fromTo($(parent).find(".good--icon"),0.5,{alpha:1,top:"200px"},{alpha:0,top:"300px",delay:1});
 }    
+
+        
+function hitYogotar(parent){
+    //TweenMax.fromTo($(parent).find(".gradient--red"),0.5,{height:"0px",top:"1344px"},{height:"1344px",top:"0px"});
+    //TweenMax.fromTo($(parent).find(".gradient--red"),0.5,{height:"1344px",top:"0px"},{height:"0px",top:"1344px",delay:2,onComplete:removeClassYogotar});
+    TweenMax.to($(parent).find(".yogotar").find("img"),0.05,{x:"-=100", yoyo:true, repeat:11,onComplete:removeClassYogotar});
+    $(parent).find(".yogotar").addClass("hitYogotar");
+    function removeClassYogotar(){
+     $(parent).find(".yogotar").removeClass("hitYogotar");   
+    }
+}  
             
 function animateBlob(parent,time1,time2){    
     TweenMax.fromTo($(parent).find(".blobV1"),time1,{scale:0.8,y:500,x:50},{y:-200,delay:1,repeat:-1});
@@ -137,8 +154,8 @@ function selectColorTeam(){
     $('svg defs').prepend(GradientBar);
     
 }
-
-
+var example = $("#animate2").find(".yogotar").find("img")
+TweenLite.to(example, 2, { fill: "rgb(255,0,255)" });
         
 TweenLite.set($(".correct--icon"),{transformOrigin: "50% 50% 0"}); 
 TweenLite.set($(".blobAnimate"),{transformOrigin: "50% 50% 0"});
