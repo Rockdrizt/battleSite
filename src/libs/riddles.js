@@ -127,39 +127,36 @@ var riddles = function(){
 
 	function getQuestion(grade){
 
-		return getOperation()
-	
-		// if(grade == -1){
-		// 	var rand = game.rnd.integerInRange(0, testQuestions.length - 1)
-		// 	return testQuestions[rand]
-		// }
-		// else{
+		if(grade == -1){
+			var rand = game.rnd.integerInRange(0, testQuestions.length - 1)
+			return testQuestions[rand]
+		}
+		else{
 
-		// 	var lastQuestion = questions[grade].length - 1
-		// 	var rand
-		// 	var newQuestion
+			var lastQuestion = questions[grade].length - 1
+			var rand
+			var newQuestion
 
-		// 	if(usedQuestions.length == lastQuestion){
-		// 		//usedQuestions = []
-		// 		usedQuestions.push(lastQuestion)
-		// 		newQuestion =  questions[grade][lastQuestion]
-		// 		//getQuestion(grade)
-		// 	}
-		// 	else if(usedQuestions.length > lastQuestion){
-		// 		console.log("se acabaron las preguntas, ahora van operaciones")
-		// 		return getOperation()
-		// 	}
-		// 	else{
-		// 		do{
-		// 			rand = game.rnd.integerInRange(0, lastQuestion - 1)
-		// 		}while(usedQuestions.includes(rand))
+			if(usedQuestions.length == lastQuestion){
+				//usedQuestions = []
+				usedQuestions.push(lastQuestion)
+				newQuestion =  questions[grade][lastQuestion]
+				//getQuestion(grade)
+			}
+			else if(usedQuestions.length > lastQuestion){
+				return getOperation()
+			}
+			else{
+				do{
+					rand = game.rnd.integerInRange(0, lastQuestion - 1)
+				}while(usedQuestions.includes(rand))
 				
-		// 		usedQuestions.push(rand)
-		// 		newQuestion = questions[grade][rand]
-		// 	}
+				usedQuestions.push(rand)
+				newQuestion = questions[grade][rand]
+			}
 			
-		// 	return newQuestion
-		// }
+			return newQuestion
+		}
 	}
 
 	function getOperation(){

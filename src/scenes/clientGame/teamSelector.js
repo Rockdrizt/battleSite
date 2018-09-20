@@ -948,7 +948,6 @@ var teamSelector = function(){
 		dots.x = game.world.centerX
 		dots.y = game.world.centerY
 
-		gameSong.stop()
 		readyGroup.pinkLight.alpha = 1
 		readyGroup.emitter.alpha = 1
 		game.add.tween(readyGroup.pinkLight.scale).to({x: 1}, 100, Phaser.Easing.linear, true, 0, 0, true).onComplete.add(function(){
@@ -1020,6 +1019,7 @@ var teamSelector = function(){
 
 			initialize()
 			cliente.startBattle = function () {
+				gameSong.stop()
 				sceneloader.show("questions")
 			}
 			gameSong = sound.play("gameSong", {loop:true, volume:0.6})

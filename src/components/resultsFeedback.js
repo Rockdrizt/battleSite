@@ -252,7 +252,7 @@ var resultsFeedback = function(){
         blueBtn.anchor.setTo(0.5)
         blueBtn.alpha = 0
 
-        var txt = new Phaser.Text(blueBtn.game, -137, 0, "B", fontStyle)
+        var txt = new Phaser.Text(blueBtn.game, -blueBtn.width * 0.31, 0, "B", fontStyle)
         txt.anchor.setTo(0.5)
         txt.fill = "#ffffff"
         blueBtn.addChild(txt)
@@ -261,9 +261,12 @@ var resultsFeedback = function(){
         var info = new Phaser.Text(blueBtn.game, 25, 5, "", fontStyle)
         info.anchor.setTo(0.5)
         info.wordWrap = true
-        info.fontSize = 50
+        info.fontSize = 70
         info.wordWrapWidth = blueBtn.width * 0.5
         info.fill = "#ffffff"
+        info.stroke = "#000066"
+        info.strokeThickness = 5
+        info.lineSpacing = -17
         blueBtn.addChild(info)
         blueBtn.info = info
 
@@ -303,9 +306,9 @@ var resultsFeedback = function(){
 
         var parent = this.parent
 
+        console.log(riddle)
         riddleTime = riddle.timers
 
-        console.log(riddle)
         game.add.tween(parent.black).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
         game.add.tween(this).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
         parent.blueAns.setInfo(riddle.correctAnswer, riddle.correctValue)
