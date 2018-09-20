@@ -258,7 +258,7 @@ var resultsFeedback = function(){
         blueBtn.addChild(txt)
         blueBtn.text = txt
         
-        var info = new Phaser.Text(blueBtn.game, 25, 5, "", fontStyle)
+        var info = new Phaser.Text(blueBtn.game, 30, 5, "", fontStyle)
         info.anchor.setTo(0.5)
         info.wordWrap = true
         info.fontSize = 70
