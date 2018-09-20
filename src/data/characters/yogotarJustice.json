@@ -28,7 +28,7 @@
                     {
                         "id": "ultraJustice1",
                         "attachment": "particle8",
-                        "delay": 1200,
+                        "delay": 1000,
                         "multiplier": 1
                     }
                 ]
