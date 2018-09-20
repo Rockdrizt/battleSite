@@ -41,6 +41,11 @@ var battle = function(){
 				image: settings.BASE_PATH + "/images/battle/atlas.png",
 			},
 			{
+				name: "atlas.pics",
+				json: settings.BASE_PATH + "/images/battle/pics/atlas.json",
+				image: settings.BASE_PATH + "/images/battle/pics/atlas.png",
+			},
+			{
 				name: "atlas.question",
 				json: settings.BASE_PATH + "/images/questionOverlayCliente/atlas.json",
 				image: settings.BASE_PATH + "/images/questionOverlayCliente/atlas.png",
@@ -169,7 +174,6 @@ var battle = function(){
 
 	var mainYogotorars
 	var mainSpine
-	var listName
 
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -274,9 +278,7 @@ var battle = function(){
 
     function createHUD(){
 
-        listName = loadNames()
-
-		HUDGroup = HUD.createHUD(ORDER_SIDES, listName)
+		HUDGroup = HUD.createHUD(ORDER_SIDES, teams)
 		
 		HUDGroup.setWinteam = function(win, lose){
 			setWinteam(win, lose)
@@ -289,26 +291,6 @@ var battle = function(){
 			game.time.events.add(delay, setReadyGo)
 		}
         sceneGroup.add(HUDGroup)
-    }
-
-    function loadNames(){
-
-        var nameList = []
-
-        for(var i = 0; i < teams.length; i++){
-            for(var j = 0; j < teams[i].length; j++){
-                var character = teams[i][j].name.substr(7).toLowerCase()
-                nameList.push(character)
-            }
-        }
-
-        for(var i = 0; i < 4; i+=3){
-            var aux = nameList[i]
-            nameList[i] = nameList[i+1]
-            nameList [i+1] = aux
-        }
-
-        return nameList
     }
 
     function createSpecialAttack(){
@@ -453,7 +435,7 @@ var battle = function(){
 
 		var charObj = {
 			name: character + "Special",
-			file: settings.BASE_PATH + "/images/battle/" + character + "Special.png",
+			file: settings.BASE_PATH + "/images/battle/ultras/" + character + "Special.png",
 		}
 		assets.images.push(charObj)
 	}
@@ -911,7 +893,6 @@ var battle = function(){
 					var character = team[charIndex]
 					setCharacter(character, teamIndex)
 					var img = team[charIndex].name.substr(7)
-					console.log(img)
 					pushSpecialArt(img)
 				}
 			}

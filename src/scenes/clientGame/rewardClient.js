@@ -327,7 +327,7 @@ var rewardClient = function(){
             createTeamBar()
             createWinTeam()
             createLoseTeam()
-            //createConfetti()
+            createConfetti()
             
             var rewardSong = sound.play("rewardSong", {loop:true, volume:0.6})
 

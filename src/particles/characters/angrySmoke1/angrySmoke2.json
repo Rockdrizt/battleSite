@@ -29,7 +29,7 @@
   "sourcePositionVariancey" : 0,
   "startColorRed" : 0.999996,
   "finishColorVarianceRed" : 0,
-  "absolutePosition" : true,
+  "absolutePosition" : false,
   "textureFileName" : "angrySmoke2.png",
   "startColorVarianceAlpha" : 0,
   "maxParticles" : 118,

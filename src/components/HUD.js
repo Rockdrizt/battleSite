@@ -3,8 +3,30 @@ var HUD = function(){
 
     var MAX_LIFE
     var MIN_LIFE = 0
+
+    function loadNames(teams){
+
+        var nameList = []
+
+        for(var i = 0; i < teams.length; i++){
+            for(var j = 0; j < teams[i].length; j++){
+                var character = teams[i][j].skin//.name.substr(7).toLowerCase()
+                nameList.push(character)
+            }
+        }
+
+        for(var i = 0; i < 4; i+=3){
+            var aux = nameList[i]
+            nameList[i] = nameList[i+1]
+            nameList [i+1] = aux
+        }
+
+        return nameList
+    }
 	
-	function createHUD(SIDES, listName){
+	function createHUD(SIDES, teams){
+
+        var listName = loadNames(teams)
 
         var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
         
@@ -25,11 +47,11 @@ var HUD = function(){
             HUDGroup.teams.push(teamSide)
             
             var lifeBox = teamSide.create(game.world.centerX * pivotX, 150, "atlas.battle", "lifeContainer" + i)
-            lifeBox.x -= 10 * side
+            lifeBox.x += 15 * side
             lifeBox.anchor.setTo(i, 0.5)
             lifeBox.scale.setTo(0.95)
 
-            var teamName = new Phaser.Text(teamSide.game, lifeBox.x, lifeBox.y - 105, "Equipo Alpha", fontStyle)
+            var teamName = new Phaser.Text(teamSide.game, lifeBox.x, lifeBox.y - 95, "Equipo Alpha", fontStyle)
             teamName.anchor.setTo(i, 0.5)
             teamName.fontSize = 65
             teamName.stroke = "#000066"
@@ -52,15 +74,19 @@ var HUD = function(){
             life.points = lifePoints
             life.amount = 100
             
-            var teamScore = teamSide.create(lifeBox.x - 80 * side, lifeBox.y * 2.5, "atlas.battle", "score" + i)
+            var teamScore = teamSide.create(lifeBox.x - 80 * side, lifeBox.y * 2.4, "atlas.battle", "score")
             teamScore.anchor.setTo(0.5)
-            teamScore.scale.setTo(0.6)
+            teamScore.scale.setTo(0.5 * side, 0.5)
+            teamScore.side = side
             teamScore.points = 0
             teamSide.teamScore = teamScore
             
-                var score = new Phaser.Text(teamSide.game, 0, 60, "0", fontStyle)
+                var score = new Phaser.Text(teamSide.game, -30, 30, "0", fontStyle)
                 score.anchor.setTo(0.5)
-                score.scale.setTo(1.5)
+                score.scale.setTo(1.1 * side, 1.1)
+                score.fontSize = 100
+                score.stroke = "#000066"
+                score.strokeThickness = 10
                 teamScore.addChild(score)
                 teamScore.text = score
             
@@ -74,7 +100,7 @@ var HUD = function(){
                 token.scale.setTo(side, 1)
                 token.x -= 78 * side
 
-                var pic = game.add.sprite(0, - 10, "atlas.battle", listName[index])
+                var pic = game.add.sprite(0, - 10, "atlas.pics", listName[index])
                 pic.anchor.setTo(0.5)
                 pic.scale.setTo(0.8, 0.8)
                 token.addChild(pic)
@@ -88,7 +114,7 @@ var HUD = function(){
                     token.scale.setTo(0.75 * side, 0.75)
                     token.x -= 155 * j * side
                     
-                    var pic = game.add.sprite(0, - 10, "atlas.battle", listName[index])
+                    var pic = game.add.sprite(0, - 10, "atlas.pics", listName[index])
                     pic.anchor.setTo(0.5)
                     pic.scale.setTo(0.8, 0.8)
                     token.addChild(pic)
@@ -109,7 +135,7 @@ var HUD = function(){
         HUDGroup.getScore = getScore.bind(HUDGroup)
 
         MAX_LIFE = life.width
-        
+
         return HUDGroup
     }
 
@@ -206,7 +232,7 @@ var HUD = function(){
 
         var score = this.children[index].teamScore
         score.points++
-        game.add.tween(score.scale).to({x: 1, y:1}, 400, Phaser.Easing.Cubic.Out, true, 1500, 0, true).onStart.add(function(){
+        game.add.tween(score.scale).to({x: 1 * score.side, y:1}, 400, Phaser.Easing.Cubic.InOut, true, 1500, 0, true).onStart.add(function(){
             score.text.setText(score.points)
         })
     }
