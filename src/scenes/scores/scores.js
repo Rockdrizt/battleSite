@@ -33,8 +33,8 @@ var scores = function(){
 			},
 			{
 				name: "atlas.question",
-				json: settings.BASE_PATH + "/images/questionOverlay/atlas.json",
-				image: settings.BASE_PATH + "/images/questionOverlay/atlas.png",
+				json: settings.BASE_PATH + "/images/questionOverlayCliente/atlas.json",
+				image: settings.BASE_PATH + "/images/questionOverlayCliente/atlas.png",
 			},
 		],
 		images: [
@@ -48,7 +48,7 @@ var scores = function(){
 			},
 			{
 				name: "questionBoard",
-				file: settings.BASE_PATH + "/images/questionOverlay/questionBoard.png",
+				file: settings.BASE_PATH + "/images/questionOverlayCliente/questionBoard.png",
 			},
 {
 				name: "default",

@@ -97,6 +97,11 @@ var teamSelector = function(){
 				file:settings.BASE_PATH + "/spines/yogotars/selector/lava/skeleton.json",
 				//scales: ["@0.5x"]
 			},
+			{
+				name:"banner",
+				file:settings.BASE_PATH + "/spines/selector/banners.json",
+				//scales: ["@0.5x"]
+			},
 		],
 		particles: [
 			{
@@ -117,15 +122,17 @@ var teamSelector = function(){
 			name: "Equipo Alpha",
 			side: 1,
 			states: {yellow: 0, color: 1},
+			animSkin: "alfa"
 		},
 		2: {
 			name: "Equipo Bravo",
 			side: -1,
 			states: {yellow: 0, color: 2},
+			animSkin: "bravo"
 		},
 	}
 
-	var DEFAULT_NUMTEAM = 1
+	var DEFAULT_NUMTEAM = 2
 	var TEAM_COMPLETE = 3
 
 	var STATES
@@ -214,6 +221,7 @@ var teamSelector = function(){
 		SIDE = config.side
 		TEAM_NAME = config.name
 		TILE_MOVE = SIDE * 0.4
+		ANIM_SKIN = config.animSkin
 
 		loadSounds()
 	}
@@ -363,16 +371,23 @@ var teamSelector = function(){
 
 		var border = STATES.color - 1
 
-		teamBar = sceneGroup.create(game.world.width * border, 30, "atlas.yogoSelector", "teamBar" + STATES.color)
-		teamBar.anchor.setTo(border, 0)
-		teamBar.scale.setTo(0.8)
+		// teamBar = sceneGroup.create(game.world.width * border, 30, "atlas.yogoSelector", "teamBar" + STATES.color)
+		// teamBar.anchor.setTo(border, 0)
+		// teamBar.scale.setTo(0.8)
 
-		var text = new Phaser.Text(sceneGroup.game, 320, 25, TEAM_NAME, fontStyle)
-		text.anchor.setTo(0.5, 0)
+		teamBar = game.add.spine(game.world.width * border, 145, "banner")
+		teamBar.setSkinByName(ANIM_SKIN)
+		teamBar.setAnimationByName(0, "idle", true)
+		teamBar.scale.setTo(SIDE, 1)
+		teamBar.x += 390 * SIDE
+		sceneGroup.add(teamBar)
+
+		var text = new Phaser.Text(sceneGroup.game, -100, -70, TEAM_NAME, fontStyle)
+		text.anchor.setTo(0.5)
+		text.scale.setTo(SIDE, 1)
 		text.stroke = "#000066"
 		text.strokeThickness = 10
 		text.alpha = 0
-		text.x *= SIDE
 		teamBar.addChild(text)
 		teamBar.text = text
 	}
