@@ -126,7 +126,7 @@ var riddles = function(){
 	}
 
 	function getQuestion(grade){
-	
+
 		if(grade == -1){
 			var rand = game.rnd.integerInRange(0, testQuestions.length - 1)
 			return testQuestions[rand]
@@ -138,9 +138,13 @@ var riddles = function(){
 			var newQuestion
 
 			if(usedQuestions.length == lastQuestion){
-				usedQuestions = []
+				//usedQuestions = []
+				usedQuestions.push(lastQuestion)
 				newQuestion =  questions[grade][lastQuestion]
 				//getQuestion(grade)
+			}
+			else if(usedQuestions.length > lastQuestion){
+				return getOperation()
 			}
 			else{
 				do{
@@ -179,6 +183,12 @@ var riddles = function(){
 			question = operation.operand1 + " " + operation.operator + " " + operation.operand2 + " = " + operation.result
 		}
 
+		var TIMES = {
+            ultra : 800,
+            super : 15000,
+            normal : 30000
+		}
+
 		//TODO: correctAnswer only in server side
 
 		var riddle = {
@@ -189,7 +199,10 @@ var riddles = function(){
 			answers: possibleAnswers,
 			grade: 10,
 			level: 10,
-			correctAnswer: correctAnswer
+			correctAnswer: correctAnswer,
+			timers: TIMES,
+			correctAnswer: possibleAnswers.indexOf(correctAnswer),
+			correctValue: correctAnswer
 			//index: i,
 		}
 

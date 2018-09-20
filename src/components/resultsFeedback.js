@@ -252,7 +252,7 @@ var resultsFeedback = function(){
         blueBtn.anchor.setTo(0.5)
         blueBtn.alpha = 0
 
-        var txt = new Phaser.Text(blueBtn.game, -137, 0, "B", fontStyle)
+        var txt = new Phaser.Text(blueBtn.game, -blueBtn.width * 0.31, 0, "B", fontStyle)
         txt.anchor.setTo(0.5)
         txt.fill = "#ffffff"
         blueBtn.addChild(txt)
@@ -261,9 +261,12 @@ var resultsFeedback = function(){
         var info = new Phaser.Text(blueBtn.game, 25, 5, "", fontStyle)
         info.anchor.setTo(0.5)
         info.wordWrap = true
-        info.fontSize = 50
+        info.fontSize = 70
         info.wordWrapWidth = blueBtn.width * 0.5
         info.fill = "#ffffff"
+        info.stroke = "#000066"
+        info.strokeThickness = 5
+        info.lineSpacing = -17
         blueBtn.addChild(info)
         blueBtn.info = info
 
@@ -298,10 +301,12 @@ var resultsFeedback = function(){
         var players = [t1, t2]
         
         var timeDifference = event.timeDifference || Math.abs(t1.time - t2.time) || 0
-		var timeConvertedDifference = convertTime(timeDifference)
+        //var timeConvertedDifference = convertTime(timeDifference)
+        var timeConvertedDifference = convertTimeFormat(timeDifference)
 
         var parent = this.parent
 
+        console.log(riddle)
         riddleTime = riddle.timers
 
         game.add.tween(parent.black).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true)
@@ -431,7 +436,7 @@ var resultsFeedback = function(){
     
     function convertScale(time){
 
-        var maxTime = riddleTime || 20000
+        var maxTime = riddleTime.normal || 20000
         var scale = 1 - time/maxTime
         if(scale < 0) scale = 0
 		return scale

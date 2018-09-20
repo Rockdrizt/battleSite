@@ -1,12 +1,13 @@
 var previusTeam;
 var selectTeam;
-var idGame = "000001"
+var idGameFromHash = window.location.hash.substr(1);
+var idGame = idGameFromHash;
 var teamId = 1
 var service = new ScreenService()
-service.start(idGame, teamId, showTeam)
+service.start(idGame, teamId, showTeam,animateAnswer)
+
 
 function showTeam(team){ //team is an array
-    console.log(team)
     for(var i = 0; i<=team.length -1 ; i ++){
         if((team[i].avatar && previusTeam && previusTeam[i].avatar != team[i].avatar) || (!previusTeam && team[i].avatar)) {
            ChoiceYogotar("#animation" + [i+2],team[i].avatar) 
@@ -15,9 +16,14 @@ function showTeam(team){ //team is an array
     previusTeam = team;
 }
 
+function animateAnswer(winner){
+    console.log("ok")
+    console.log(winner)
+}
+
 
 function ChoiceYogotar(parent,obj){
-    $(parent).find(".yogotar").find("img").attr("src","vectores/" + obj + ".svg" );
+ $(parent).find(".yogotar").find("img").attr("src","vectores/" + obj + ".svg" );
     TweenMax.fromTo($(parent).find(".yogotar").find("img"),0.5,{top:"1080px"},{top:"0px",ease:Back.easeOut,delay:1});
 }
 

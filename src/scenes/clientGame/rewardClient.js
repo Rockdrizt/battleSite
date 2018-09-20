@@ -82,7 +82,7 @@ var rewardClient = function(){
     
     var WIN_DATA
     var LOSE_DATA
-    var COUP_X = [0.75, 1.25]
+    var COUP_X = [1.25, 0.75]
     var WIN_SCALES = [0.8, 0.9, 0.8]
 
     var sceneGroup
@@ -137,9 +137,7 @@ var rewardClient = function(){
         sceneGroup.add(back);
         
         tile = game.add.tileSprite(0, 0, game.world.width, game.world.height, "tile")
-        //tile.anchor.setTo(0.5)
-        tile.tint = 0x0099AA
-        //tile.angle = 45
+        tile.alpha = 0.5
         sceneGroup.add(tile)
     }
 
@@ -151,13 +149,11 @@ var rewardClient = function(){
 
 		teamBar = sceneGroup.create(game.world.width * border, 30, "atlas.reward", "teamBar" + WIN_DATA.color)
 		teamBar.anchor.setTo(border, 0)
-		//teamBar.scale.setTo(0.8)
 
 		var text = new Phaser.Text(sceneGroup.game, 320, 25, WIN_DATA.name, fontStyle)
 		text.anchor.setTo(0.5, 0)
 		text.stroke = "#000066"
 		text.strokeThickness = 10
-		//text.alpha = 0
 		text.x *= WIN_DATA.side
 		teamBar.addChild(text)
 		teamBar.text = text
@@ -331,7 +327,7 @@ var rewardClient = function(){
             createTeamBar()
             createWinTeam()
             createLoseTeam()
-            createConfetti()
+            //createConfetti()
             
             var rewardSong = sound.play("rewardSong", {loop:true, volume:0.6})
 
