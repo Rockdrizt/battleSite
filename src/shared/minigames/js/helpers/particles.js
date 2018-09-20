@@ -423,13 +423,13 @@ var epicparticles = function(){
 					removeParticleAtIndex(emitter, index)
 
 				}
-			}
 
-			if (emitter.particleCount <= 0){
-				removeEmitter(emitter)
-				emitters.splice(i, 1)
-				emitter.index = null
-				return
+				if (emitter.particleCount <= 0){
+					removeEmitter(emitter)
+					emitters.splice(i, 1)
+					emitter.index = null
+					return
+				}
 			}
 		}
 	}
@@ -450,8 +450,8 @@ var epicparticles = function(){
 
 	function newEmitter(key, options){
 		var emitter
-		var emitterIndex = 1
-		var emitterPullKey = key + "v" + emitterIndex
+		//var emitterIndex = 1
+		//var emitterPullKey = key + "v" + emitterIndex
 
 		// while((emittersPull[emitterPullKey])&&(emittersPull[emitterPullKey].alive)){
 		// 	emitterIndex++

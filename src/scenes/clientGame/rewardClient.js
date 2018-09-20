@@ -82,15 +82,16 @@ var rewardClient = function(){
     
     var WIN_DATA
     var LOSE_DATA
-    var COUP_X = [0.75, 1.25]
+    var COUP_X = [1.25, 0.75]
     var WIN_SCALES = [0.8, 0.9, 0.8]
 
     var sceneGroup
     var tile
     var winnerGroup
     var loserGroup
-    var players
+    var teams
     var cliente
+    var indexWinner
 
     function loadSounds(){
         sound.decode(assets.sounds)
@@ -102,16 +103,16 @@ var rewardClient = function(){
         loadSounds()
 
         cliente = parent.cliente || {}
-        var numTeam = cliente.numTeam || DEFAULT_NUMTEAM
-        var otherTeam = numTeam == 1 ? 2 : 1
-        WIN_DATA = TEAMS[numTeam]
-        WIN_DATA.index = numTeam - 1
-        LOSE_DATA = TEAMS[otherTeam]
-        LOSE_DATA.index = otherTeam - 1
+        var winnerTeam = indexWinner || DEFAULT_NUMTEAM
+        var loseTeam = winnerTeam === 1 ? 2 : 1
+        WIN_DATA = TEAMS[winnerTeam]
+        WIN_DATA.index = winnerTeam
+        LOSE_DATA = TEAMS[loseTeam]
+        LOSE_DATA.index = loseTeam
     }
     
     function preload(){
-        game.stage.disableVisibilityChange = false;
+        game.stage.disableVisibilityChange = true;
     }
 
     function update(){
@@ -136,9 +137,7 @@ var rewardClient = function(){
         sceneGroup.add(back);
         
         tile = game.add.tileSprite(0, 0, game.world.width, game.world.height, "tile")
-        //tile.anchor.setTo(0.5)
-        tile.tint = 0x0099AA
-        //tile.angle = 45
+        tile.alpha = 0.5
         sceneGroup.add(tile)
     }
 
@@ -150,13 +149,11 @@ var rewardClient = function(){
 
 		teamBar = sceneGroup.create(game.world.width * border, 30, "atlas.reward", "teamBar" + WIN_DATA.color)
 		teamBar.anchor.setTo(border, 0)
-		//teamBar.scale.setTo(0.8)
 
 		var text = new Phaser.Text(sceneGroup.game, 320, 25, WIN_DATA.name, fontStyle)
 		text.anchor.setTo(0.5, 0)
 		text.stroke = "#000066"
 		text.strokeThickness = 10
-		//text.alpha = 0
 		text.x *= WIN_DATA.side
 		teamBar.addChild(text)
 		teamBar.text = text
@@ -193,12 +190,12 @@ var rewardClient = function(){
         var pivotX = -distance
         var directon = -1
 
-        var winers = players[WIN_DATA.index]
+        var winers = teams[WIN_DATA.index].players
         
         for(var i = 0; i < winers.length; i++){
 
             var obj = winers[i]
-            var player = spineLoader.createSpine(obj.name, obj.skin, "gg", 0, 0, true)
+            var player = spineLoader.createSpine(obj.avatar, obj.skin, "gg", 0, 0, true)
 			player.x = pivotX
             player.scale.setTo(WIN_SCALES[i] * directon, WIN_SCALES[i])
 			player.setAlive(false)
@@ -238,7 +235,7 @@ var rewardClient = function(){
         var offsetX = 40 * LOSE_DATA.side
         var DIRECTION = LOSE_DATA.side
         var SCALE = 0.7
-        var losers = players[LOSE_DATA.index]
+        var losers = teams[LOSE_DATA.index].players
 
         for(var i = 0; i < losers.length; i++){
 
@@ -254,7 +251,7 @@ var rewardClient = function(){
 
             var obj = losers[i]
 
-            var player = spineLoader.createSpine(obj.name, obj.skin, "gg", frame.width * 0.65, frame.height * 1.1, true)
+            var player = spineLoader.createSpine(obj.avatar, obj.skin, "gg", frame.width * 0.65, frame.height * 1.1, true)
             player.scale.setTo(SCALE)
 			player.setAlive(false)
             subGroup.add(player)
@@ -298,7 +295,7 @@ var rewardClient = function(){
         confetti.minParticleSpeed.setTo(0, 200)
         confetti.width = game.world.width
         confetti.height = 0
-        confetti.forEach(element => {
+        confetti.forEach(function(element) {
             element.tint = getRandomColor()
         });
         confetti.start(false, 5000, 100, 0) 
@@ -330,7 +327,7 @@ var rewardClient = function(){
             createTeamBar()
             createWinTeam()
             createLoseTeam()
-            createConfetti()
+            //createConfetti()
             
             var rewardSong = sound.play("rewardSong", {loop:true, volume:0.6})
 
@@ -345,18 +342,10 @@ var rewardClient = function(){
             
         },
         setTeams: function (myTeams) {
-			players = myTeams
-			// for(var teamIndex = 0; teamIndex < myTeams.length; teamIndex++){
-			// 	var team = myTeams[teamIndex]
-
-			// 	for(var charIndex = 0; charIndex < team.length; charIndex++){
-			// 		var character = team[charIndex]
-			// 		setCharacter(character.name, teamIndex)
-			// 	}
-			// }
+			teams = myTeams
 		},
         setWinner: function(winner){
-            INDEX_WINNER = winner
+            indexWinner = winner
         },
         shutdown: function () {
             sceneGroup.destroy()

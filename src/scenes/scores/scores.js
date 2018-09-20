@@ -30,7 +30,12 @@ var scores = function(){
 				name: "atlas.yogotars",
 				json: settings.BASE_PATH + "/images/scores/yogotars.json",
 				image: settings.BASE_PATH + "/images/scores/yogotars.png",
-			}
+			},
+			{
+				name: "atlas.question",
+				json: settings.BASE_PATH + "/images/questionOverlay/atlas.json",
+				image: settings.BASE_PATH + "/images/questionOverlay/atlas.png",
+			},
 		],
 		images: [
 			{
@@ -40,6 +45,14 @@ var scores = function(){
 			{
 				name: "eagle",
 				file: settings.BASE_PATH + "/images/scores/eagle.png",
+			},
+			{
+				name: "questionBoard",
+				file: settings.BASE_PATH + "/images/questionOverlay/questionBoard.png",
+			},
+{
+				name: "default",
+				file: settings.BASE_PATH + "/images/questionDB/default.png",
 			}
 		],
 		sounds: [
@@ -103,7 +116,7 @@ var scores = function(){
 
 	function preload(){
 
-		game.stage.disableVisibilityChange = false
+		game.stage.disableVisibilityChange = true
 	}
 
 	function createBackground(){
@@ -204,8 +217,8 @@ var scores = function(){
 			var pivotY = game.world.centerY * -0.2
 			var RISE_Y = game.world.centerY * 0.35
 
-			for(var i = 0; i < teamsData[sideIndex].length; i++){
-				var playerData = teamsData[sideIndex][i]
+			for(var i = 0; i < teamsData[sideIndex].players.length; i++){
+				var playerData = teamsData[sideIndex].players[i]
 
 				var teamMate = createYogoToken(sideIndex, playerData.avatar, playerData.nickname)
 				teamMate.x = pivotX
@@ -269,7 +282,7 @@ var scores = function(){
 
 	function createScoreBubble(){
 
-		var fontStyle = {font: "100px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
+		var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 
 		scoresGroup = game.add.group()
 		scoresGroup.x = game.world.centerX
@@ -284,8 +297,10 @@ var scores = function(){
 			bubble.anchor.setTo(0.5)
 			bubble.x = pivotX * ORDER_SIDES[i].direction
 			bubble.points = 0
+
+			var lifeText = teamsData[i].life//.split("").join(String.fromCharCode(8202))
 			
-			var score = new Phaser.Text(scoresGroup.game, 0, 50, bubble.points, fontStyle)
+			var score = new Phaser.Text(scoresGroup.game, 0, 50, lifeText, fontStyle)
             score.anchor.setTo(0.5)
             bubble.addChild(score)
             bubble.text = score
@@ -388,12 +403,45 @@ var scores = function(){
 		assets.images.push(charObj)
 	}
 
-	function setScore(index){
+	function setScore(index, lifePoints){
 
 		var bubble = scoresGroup.children[index]
 		bubble.points++
 		game.add.tween(bubble.scale).to({x:1.2, y:1.2}, 200, Phaser.Easing.Cubic.InOut, true, 0, 0, true)
-		bubble.text.setText(bubble.points)
+		bubble.text.setText(lifePoints)
+	}
+
+	function createQuestionOverlay(){
+
+		questionGroup = questionHUD.createQuestionOverlay()
+		questionGroup.client = true
+		sceneGroup.add(questionGroup)
+
+		var obj = {
+			question: "lorem ipsum dolor",
+			existImage : false,
+			src: settings.BASE_PATH + "/images/questionDB/default.png",
+			image: "default",
+			answers: ["a", "be", "ce", "de"],
+			grade: 1,
+			level: 1,
+			correctAnswer: 2,
+			timers:{
+				ultra : 6500,
+				super : 13000,
+				normal : 20000
+			},
+			index: 0,
+			correctValue: "be"
+			//correctIndex:
+		}
+
+		//questionGroup.showQuestion(obj)
+		//questionGroup.hide()
+    }
+
+    function onTeamUpdate(data) {
+		setScore(data.numTeam - 1, data.life)
 	}
 
 	return {
@@ -415,13 +463,21 @@ var scores = function(){
 			createTeams()
 			createVS()
 			createScoreBubble()
+			createQuestionOverlay()
+
+			scoreService.removeEventListener("newQuestion", questionGroup.showQuestion)
+			scoreService.addEventListener("newQuestion", questionGroup.showQuestion)
+			scoreService.removeEventListener("onTeamUpdate", onTeamUpdate)
+			scoreService.addEventListener("onTeamUpdate", onTeamUpdate)
+			scoreService.removeEventListener("onTurnEnds", questionGroup.hide)
+			scoreService.addEventListener("onTurnEnds", questionGroup.hide)
 		},
 		setTeamData: function (data) {
 			teamsData = data
 
 			for (var teamIndex = 0; teamIndex < teamsData.length; teamIndex++){
-				for (var playerIndex = 0; playerIndex < teamsData[teamIndex].length; playerIndex++) {
-					var player = teamsData[teamIndex][playerIndex]
+				for (var playerIndex = 0; playerIndex < teamsData[teamIndex].players.length; playerIndex++) {
+					var player = teamsData[teamIndex].players[playerIndex]
 					var image = {
 						name: player.nickname,
 						file: settings.BASE_PATH + "/images/scores/" + player.nickname + ".png"

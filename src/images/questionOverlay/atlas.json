@@ -2,7 +2,7 @@
 
 {
 	"filename": "blueBtn",
-	"frame": {"x":1530,"y":248,"w":481,"h":205},
+	"frame": {"x":438,"y":1,"w":481,"h":205},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":1,"y":1,"w":481,"h":205},
@@ -10,7 +10,7 @@
 },
 {
 	"filename": "questionBox",
-	"frame": {"x":1,"y":1,"w":1657,"h":245},
+	"frame": {"x":1,"y":243,"w":1657,"h":245},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":1657,"h":245},
@@ -18,7 +18,7 @@
 },
 {
 	"filename": "questionBtn",
-	"frame": {"x":1530,"y":455,"w":435,"h":139},
+	"frame": {"x":1,"y":1,"w":435,"h":139},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":30,"y":30,"w":435,"h":139},
@@ -26,19 +26,35 @@
 },
 {
 	"filename": "questionImage",
-	"frame": {"x":1,"y":248,"w":1527,"h":385},
+	"frame": {"x":1,"y":490,"w":1527,"h":385},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":1527,"h":385},
 	"sourceSize": {"w":1527,"h":385}
+},
+{
+	"filename": "timeGauge",
+	"frame": {"x":921,"y":1,"w":225,"h":226},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":226},
+	"sourceSize": {"w":225,"h":226}
+},
+{
+	"filename": "yellowCircle",
+	"frame": {"x":1148,"y":1,"w":341,"h":240},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":341,"h":240},
+	"sourceSize": {"w":341,"h":240}
 }],
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
 	"image": "atlas.png",
 	"format": "RGBA8888",
-	"size": {"w":2012,"h":634},
+	"size": {"w":1659,"h":876},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:772d94c8963c347ae83007ae515e5a6b:6e799bdcb709bcfae27939e36ab8c527:cbce6b53f0f49e0bf15173c25c41f876$"
+	"smartupdate": "$TexturePacker:SmartUpdate:ba15a8dc4cc4342886768e8724db64e7:9fc0f3da4954727ae3245f09aa9623c5:cbce6b53f0f49e0bf15173c25c41f876$"
 }
 }

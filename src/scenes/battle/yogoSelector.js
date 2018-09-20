@@ -858,6 +858,7 @@ var yogoSelector = function(){
 		}
 		game.load.onLoadComplete.remove(createSplashArt)
 		game.load.reset()
+		animateSplashArt()
 	}
 
 	function getSpineSlot(spine, slotName){
@@ -928,6 +929,7 @@ var yogoSelector = function(){
 		var fadeTween = game.add.tween(sceneGroup).to({alpha:0}, 400, Phaser.Easing.Cubic.Out, true)
 		fadeTween.onComplete.add(function () {
 			//bmd.destroy()
+			gameSong.stop()
 			sceneloader.show("battle")
 		})
 	}
@@ -972,8 +974,6 @@ var yogoSelector = function(){
 		readyGroup.addAt(emitter,0)
 
 		var teams = getTeams()
-
-		gameSong.stop()
         //inputsGroup.alpha = 0
 
 		game.add.tween(readyGroup.pinkLight.scale).to({x: 1, y: 1}, 400, Phaser.Easing.Cubic.InOut, true, 0, 0, true).onComplete.add(function(){
@@ -986,6 +986,7 @@ var yogoSelector = function(){
 				game.time.events.add(6000, function () {
 					timerFlag = true
 					if(barCompleteFlag){
+						readyGroup.text.setText("100%")
 						showBattle()
 					}
 				})
@@ -996,7 +997,6 @@ var yogoSelector = function(){
 		game.add.tween(selectorGroup).to({alpha: 0}, 300, Phaser.Easing.linear, true).onComplete.add(function(){
 			alphaGroup.forEach(setAliveSpine, this, false)
 			bravoGroup.forEach(setAliveSpine, this, false)
-			animateSplashArt()
 		})
 	}
 
@@ -1057,7 +1057,12 @@ var yogoSelector = function(){
 			}else if(!slot.check && yogotar){
 				clickOk(numTeam)
 			}
+
+			if(slot.yogo)
+				player.skin = slot.yogo.skin
 		}
+
+		server.updateTeam(numTeam, {players:players})
 	}
 
 	function updateLoadingBar(loadedFiles, totalFiles) {

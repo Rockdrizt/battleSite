@@ -42,8 +42,8 @@ var battle = function(){
 			},
 			{
 				name: "atlas.question",
-				json: settings.BASE_PATH + "/images/questionOverlay/atlas.json",
-				image: settings.BASE_PATH + "/images/questionOverlay/atlas.png",
+				json: settings.BASE_PATH + "/images/questionOverlayCliente/atlas.json",
+				image: settings.BASE_PATH + "/images/questionOverlayCliente/atlas.png",
 			},
 			{
 				name: "atlas.feedback",
@@ -70,7 +70,7 @@ var battle = function(){
 			},
 			{
 				name: "questionBoard",
-				file: settings.BASE_PATH + "/images/questionOverlay/questionBoard.png",
+				file: settings.BASE_PATH + "/images/questionOverlayCliente/questionBoard.png",
 			},
 			{
 				name: "pinkLight",
@@ -133,7 +133,7 @@ var battle = function(){
 	var POSITIONS = {
 		UP:{x:130, y: -200, scale:{x:0.8, y:0.8}},
 		MID:{x:350, y: 0, scale:{x:0.9, y:0.9}},
-		DOWN:{x:-70, y: 120, scale:{x:1, y:1}},
+		DOWN:{x:-20, y: 120, scale:{x:1, y:1}},
 	}
 
 	var DAMAGE_PERCENT = {
@@ -280,6 +280,7 @@ var battle = function(){
 		
 		HUDGroup.setWinteam = function(win, lose){
 			setWinteam(win, lose)
+			server.setGameEnded(win + 1)
 		}
 		HUDGroup.nextRound = function(delay){
 			for(var i = 0; i < 2; i++){
@@ -319,17 +320,17 @@ var battle = function(){
     function createQuestionOverlay(){
 
         questionGroup = questionHUD.createQuestionOverlay()
-        questionGroup.callback = function (event) {
-			questionGroup.hide()
-            //questionGroup.timer.stop()
-        	game.time.events.add(2000, checkAnswer)
-		}
-        questionGroup.stopTimer = function(){
-			questionGroup.timer.destroy()
-            questionGroup.hide()
-            setNoAnswer()
-            console.log("time out")
-        }
+        // questionGroup.callback = function (event) {
+		// 	//questionGroup.hide()
+        //     //questionGroup.timer.stop()
+        // 	game.time.events.add(2000, checkAnswer)
+		// }
+        // questionGroup.stopTimer = function(){
+		// 	questionGroup.timer.destroy()
+        //     //questionGroup.hide()
+        //     setNoAnswer()
+        //     console.log("time out")
+        // }
 		sceneGroup.add(questionGroup)
     }
 
@@ -498,6 +499,7 @@ var battle = function(){
 					x : game.world.centerX * 0.5 * side.direction + xOffset,
 					y : CHARACTER_CENTER_OFFSET.y + game.world.centerY + position.y
 				}
+				
 				var character = characterBattle.createCharacter(characterName, skin, characterPos)
 				console.log("postion", character.position)
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
@@ -535,6 +537,10 @@ var battle = function(){
 
 				if(ORDER_POSITIONS[charIndex] === POSITIONS.MID){
 					mainYogotorars[teamIndex] = character
+				}
+
+				if(ORDER_POSITIONS[charIndex] === POSITIONS.DOWN){
+					console.log(characterPos.x)
 				}
 			}
 
@@ -594,6 +600,7 @@ var battle = function(){
 		var ultra = percent == DAMAGE.ultra ? true : false
 		percent *= ORDER_SIDES[team].direction // scale.x
 		HUDGroup.dealDamage(team, percent, ultra)
+		//UPDATE SCORE SERVER
 	}
 
 	function attackMove(type, index){
@@ -710,7 +717,7 @@ var battle = function(){
 
 	function setWinteam(win, lose){
 
-         teams[lose].forEach(function(member){
+        teams[lose].forEach(function(member){
             member.setAnimation(["gg"], true)
         })
         teams[win].forEach(function(member){
@@ -748,6 +755,7 @@ var battle = function(){
         
 		event = event || {}
 		var answers = event.answers || {}
+		var numTeam = event.numTeam || -1
         
 		var t1 = answers.t1 || {}
 		var t2 = answers.t2 ||{}
@@ -756,7 +764,8 @@ var battle = function(){
 		swapYogotars(feedbackGroup)
 		
 		for(var i = 0; i < players.length; i++){
-			var anim = players[i].value == event.correctAnswer ? "answer_good" : "answer_bad"
+			//var anim = players[i].value == event.correctAnswer ? "answer_good" : "answer_bad"
+			var anim = numTeam == (i + 1) ? "answer_good" : "answer_bad"
 			var yogo = mainYogotorars[i]
 			game.time.events.add(1000, changeAnim, null, yogo, anim)
 		}

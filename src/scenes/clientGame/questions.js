@@ -100,7 +100,11 @@ var questions = function(){
 
 		questionGroup = questionHUD.createQuestionOverlay(true)
 		questionGroup.callback = cliente.buttonOnClick
-		questionGroup.teamName.setText(NAME)
+		// questionGroup.callback = function(){
+		// 	questionGroup.timer.stop()
+		// 	cliente.buttonOnClick()
+		// }
+		//questionGroup.teamName.setText(NAME)
 		sceneGroup.add(questionGroup)
 	}
 
@@ -131,8 +135,15 @@ var questions = function(){
 		questionGroup.showFeedback()
 	}
 
-	function showWinner(){
+	function showWinner(data){
+		var teams = data.teams
+		var winner = data.winner
 
+		rewardClient.setTeams(teams)
+		rewardClient.setWinner(winner)
+		game.time.events.add(2000, function () {
+			sceneloader.show("rewardClient")
+		})
 	}
 
 	function createButton(callback, color) {
@@ -161,7 +172,7 @@ var questions = function(){
 	function setReadyGo(){
 		
 		var obj = {
-			question: "lorem impus dolor",
+			question: "lorem ipsum dolor",
 			existImage : false,
 			src: settings.BASE_PATH + "/images/questionDB/default.png",
 			image: "default",
@@ -175,7 +186,8 @@ var questions = function(){
 			//correctIndex:
 		}
 
-		var riddle = obj
+		//var riddle = obj
+		var riddle = riddles.getQuestion(5)
 		questionGroup.showQuestion(riddle)
 	}
 
@@ -193,14 +205,16 @@ var questions = function(){
 			createBackground()
 			createQuestionOverlay()
 
+			//riddles.initialize()
+
 			// var quest = createButton(setReadyGo, 0x00ffff)
 			// quest.x = game.world.centerX
-			// quest.y = game.world.height - 100
+			// quest.y = game.world.height - 50
 			// quest.label.text = "questions"
 
 			// var quest = createButton(checkAnswer, 0x00ffff)
-			// quest.x = game.world.centerX
-			// quest.y = game.world.height - 150
+			// quest.x = game.world.centerX + 200
+			// quest.y = game.world.height - 50
 			// quest.label.text = "clear"
 
 			if(cliente){

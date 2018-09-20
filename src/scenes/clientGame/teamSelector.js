@@ -261,6 +261,7 @@ var teamSelector = function(){
 			var plat = platformGroup.create(game.world.centerX * pivotX, game.world.centerY + 30, "atlas.yogoSelector", "plat" + STATES.color)
 			plat.anchor.setTo(0.5)
 			plat.alpha = 0
+			plat.finalY = plat.y
 			plat.apear = showPlat.bind(plat)
 			plat.hide = hidePlat.bind(plat)
 
@@ -268,16 +269,23 @@ var teamSelector = function(){
 		}
 
 		platformGroup.children[1].y += 50
+		platformGroup.children[1].finalY += 50
 
 		function showPlat(){
 			this.alpha = 1
-			game.add.tween(this).from({y: -150}, 700, Phaser.Easing.Bounce.Out, true).onComplete.add(function(){
+			this.moveDown = game.add.tween(this).from({y: -150}, 700, Phaser.Easing.Bounce.Out, true)
+			this.moveDown.onComplete.add(function(){
 				gameActive = true
-			})
+				this.y = this.finalY
+				this.alpha = 1
+			}, this)
 		}
 
 		function hidePlat(){
-			game.add.tween(this).to({alpha: 0}, 500, Phaser.Easing.Cubic.Out, true)
+			gameActive = false
+			game.add.tween(this).to({alpha: 0}, 500, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
+				this.alpha = 0
+			},this)
 		}
 	}
 
@@ -317,6 +325,7 @@ var teamSelector = function(){
 			player.y = -100
 			player.name = YOGOTARS_LIST[i].name
 			player.tag = i
+			player.skin = YOGOTARS_LIST[i].name + "1"
 			player.used = false
 			player.setAlive(false)
 			pullGroup.add(player)
@@ -446,6 +455,8 @@ var teamSelector = function(){
 	}
 
 	function pressBtn(btn){
+
+		if(!gameActive) return
 
 		if(btn.canClick && gameActive){
 
@@ -667,6 +678,7 @@ var teamSelector = function(){
 			this.canClick = true
 			this.setAll("tint", 0xFFFFFF)
 			this.off.alpha = 1
+			gameActive = true
 		}
 	
 		function deActivate(){
@@ -674,6 +686,7 @@ var teamSelector = function(){
 			this.setAll("tint", 0x888888)
 			this.off.alpha = 0
 			this.okUndone.alpha = 1
+			gameActive = false
 		}
 
 		okButton.deActivate()
@@ -686,7 +699,8 @@ var teamSelector = function(){
 			var player = teamGroup.slots[playerIndex]
 			var playerObj = {
 				avatar:player.yogo ? player.yogo.name : false,
-				nickname:nickName
+				nickname:nickName,
+				skin:player.yogo ? player.yogo.skin : false
 			}
 			players.push(playerObj)
 		}
@@ -746,13 +760,18 @@ var teamSelector = function(){
 
 	function showName(tag){
 
-		game.add.tween(namesGroup.light.scale).to({x: 1, y: 1}, 400, Phaser.Easing.linear, true, 0, 0, true)
+		game.add.tween(namesGroup.light.scale).to({x: 1, y: 1}, 400, Phaser.Easing.linear, true, 0, 0, true).onComplete.add(function(){
+			namesGroup.light.scale.setTo(0)
+		})
 		sound.play(YOGOTARS_LIST[tag].name)
 		namesGroup.yogoName.loadTexture("atlas.yogoSelector", "name" + tag)
 		namesGroup.yogoName.alpha = 1
 
 		var fadeOut = game.add.tween(namesGroup.yogoName).to({alpha:0}, 400, Phaser.Easing.linear, false, 1000)
-		//fadeOut.onComplete.add(okButton.activate)
+		fadeOut.onComplete.add(function(){
+			namesGroup.yogoName.alpha = 0
+			namesGroup.yogoName.scale.setTo(1)
+		})
 		game.add.tween(namesGroup.yogoName.scale).from({y:0}, 100, Phaser.Easing.linear, true, 200).chain(fadeOut)
 	}
 
@@ -929,7 +948,6 @@ var teamSelector = function(){
 		dots.x = game.world.centerX
 		dots.y = game.world.centerY
 
-		gameSong.stop()
 		readyGroup.pinkLight.alpha = 1
 		readyGroup.emitter.alpha = 1
 		game.add.tween(readyGroup.pinkLight.scale).to({x: 1}, 100, Phaser.Easing.linear, true, 0, 0, true).onComplete.add(function(){
@@ -1001,6 +1019,7 @@ var teamSelector = function(){
 
 			initialize()
 			cliente.startBattle = function () {
+				gameSong.stop()
 				sceneloader.show("questions")
 			}
 			gameSong = sound.play("gameSong", {loop:true, volume:0.6})

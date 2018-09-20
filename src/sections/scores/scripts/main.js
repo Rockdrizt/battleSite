@@ -33,7 +33,7 @@ function startGame(){
 				//sceneloader.show("scores")
 				alertDialog.init()
 				var idGameFromHash = window.location.hash.substr(1);
-                var scoreService = new ScoreService()
+                scoreService = new ScoreService()
 				scoreService.start(idGameFromHash, scoreMain.start)
 	    	}
 

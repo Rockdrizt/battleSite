@@ -26,7 +26,6 @@ function Server(){
 	};
 	firebase.initializeApp(config);
 	var database = firebase.database();
-	var questionGrade = 0
 
 
 	var MAX_OPERAND_VALUE = 500;
@@ -42,7 +41,12 @@ function Server(){
 			{nickname: "yogome", avatar: false, skin:false},
 			{nickname: "yogome", avatar: false, skin:false}
 		],
-		ready:false
+		ready:false,
+		life:100,
+		score:{
+			correct:0,
+			wrong:0
+		}
 	}
 
 	var TEAM2_DEFAULT = {
@@ -51,7 +55,12 @@ function Server(){
 			{nickname: "yogome", avatar: false, skin:false},
 			{nickname: "yogome", avatar: false, skin:false}
 		],
-		ready:false
+		ready:false,
+		life:100,
+		score:{
+			correct:0,
+			wrong:0
+		}
 	}
 
 	/**
@@ -252,16 +261,16 @@ function Server(){
 			}
 		}
 
-		if(valores.winner === 1 && (typeQuestion === 1 || typeQuestion === 2) ){
-			valores.t2.life+=damage;
-			//setfb(refIdGame.child("t2/life"), valores.t2.life)//refIdGame.child("t2/life").set(valores.t2.life);
-		}else if(valores.winner === 2 && typeQuestion === 3 ){
-			valores.t2.life+=damage;
-			//setfb(refIdGame.child("t2/life"), valores.t2.life)//refIdGame.child("t2/life").set(valores.t2.life);
-		}else {
-			valores.t1.life+=damage;
-			//setfb(refIdGame.child("t1/life"), valores.t1.life)//refIdGame.child("t1/life").set(valores.t1.life);
-		}
+		// if(valores.winner === 1 && (typeQuestion === 1 || typeQuestion === 2) ){
+		// 	valores.t2.life+=damage;
+		// 	//setfb(refIdGame.child("t2/life"), valores.t2.life)//refIdGame.child("t2/life").set(valores.t2.life);
+		// }else if(valores.winner === 2 && typeQuestion === 3 ){
+		// 	valores.t2.life+=damage;
+		// 	//setfb(refIdGame.child("t2/life"), valores.t2.life)//refIdGame.child("t2/life").set(valores.t2.life);
+		// }else {
+		// 	valores.t1.life+=damage;
+		// 	//setfb(refIdGame.child("t1/life"), valores.t1.life)//refIdGame.child("t1/life").set(valores.t1.life);
+		// }
 		var actualDate = firebase.database.ServerValue.TIMESTAMP
 		// console.log(actualDate)
 		var answers = {
@@ -327,7 +336,7 @@ function Server(){
 
 	//TODO: generate question is not a server function
 	this.sendQuestion = function () {
-		var questionData = riddles.getQuestion(questionGrade)
+		var questionData = riddles.getQuestion(this.questionGrade)
 		//var questionData = riddles.getOperation()
 		correctAnswer = questionData.correctAnswer
 
@@ -345,7 +354,10 @@ function Server(){
 
 	function getData(val) {
 		valores = val
-		refIdGame.update({serverReady : true})
+		refIdGame.update({
+			serverReady : true,
+			gameEnded : false,
+		})
 
 		self.currentData = val
 	}
@@ -354,7 +366,6 @@ function Server(){
 	 * @summary Starts the server
 	 */
 	function initializeData(id){
-		operationGenerator.setConfiguration(self.rules, self.numPerOperations)
 
 		valores = {
 			rules:self.rules,
@@ -462,7 +473,8 @@ function Server(){
 			var resetValues = {
 				serverReady : false,
 				gameReady : false,
-				battleReady : false
+				battleReady : false,
+				gameEnded : false
 			}
 
 			database.ref(id).onDisconnect().update(resetValues)
@@ -531,8 +543,10 @@ function Server(){
 		var params = params || {}
 		var rules = params.rules || operationGenerator.RULES_SET.EASY
 		var battleTime = params.battleTime || 300000
+		var questionGrade = params.grade || 0
 		self.battleTime = battleTime
 		self.rules = rules
+		self.questionGrade = questionGrade
 		self.onAlert = onError
 		self.onStart = onStart
 		self.maxRounds = typeof params.maxRounds !== "undefined" ? params.maxRounds : self.maxRounds
@@ -543,7 +557,7 @@ function Server(){
 		self.numberOperation = numPerOperations
 
 		checkConnected(currentId)
-
+		operationGenerator.setConfiguration(self.rules, self.numPerOperations)
 	}
 
 	this.setGameReady = function (value) {
@@ -552,6 +566,13 @@ function Server(){
 
 	this.setBattleReady = function (value) {
 		setfb(refIdGame.child("battleReady"), value)//refIdGame.child("gameReady").set(value);
+	}
+	
+	this.updateTeam = function (teamIndex, value) {
+			var key = "t" + teamIndex
+			valores[key].life = value.life
+			valores[key].score = value.score
+			refIdGame.child(key).update(value);
 	}
 
 	this.retry = function(location){
@@ -580,7 +601,7 @@ function Server(){
 	}
 
 	this.setGameEnded = function (numTeamWinner) {
-		var data = {winner:numTeamWinner}
+		var data = {winner:numTeamWinner, date:firebase.database.ServerValue.TIMESTAMP}
 		setfb(refIdGame.child("gameEnded"), data)//refIdGame.child("gameEnded").set(data);
 	}
 
