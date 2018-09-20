@@ -282,7 +282,7 @@ var scores = function(){
 
 	function createScoreBubble(){
 
-		var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
+		var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 
 		scoresGroup = game.add.group()
 		scoresGroup.x = game.world.centerX
