@@ -82,13 +82,6 @@ function startGame(){
 
 		//server test
 	}
-
-	var player = {
-		yogo: "Eagle",
-		kid: "Rock"
-	}
-
-	playerScreen.setTeams(player)
     
 	function create(){
 

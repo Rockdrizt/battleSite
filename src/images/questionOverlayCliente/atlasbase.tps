@@ -285,6 +285,19 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">timeOut.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>190,86,379,172</rect>
+                <key>scale9Paddings</key>
+                <rect>190,86,379,172</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">wrong.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -324,6 +337,7 @@
             <filename>wrong.png</filename>
             <filename>poker.png</filename>
             <filename>btnBoard.png</filename>
+            <filename>timeOut.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
