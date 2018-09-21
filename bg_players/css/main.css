@@ -138,11 +138,6 @@
               
           }  
           
-          video{
-              position: absolute;
-              margin: 0;
-              padding: 0;
-              width: 380px;
-              left: 384px;
-              top:20px;
-          }
+        .hitYogotar{
+            mix-blend-mode:screen;
+        }
