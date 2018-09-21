@@ -49,7 +49,11 @@ var rewardClient = function(){
             {
                 name:"coup",
                 file:settings.BASE_PATH + "/spines/reward/brain/pantalla_victoria.json"
-            }
+            },
+            {
+				name:"banner",
+				file:settings.BASE_PATH + "/spines/selector/banners.json",
+			},
         ],
         jsons: [
 		],
@@ -146,15 +150,19 @@ var rewardClient = function(){
 		var fontStyle = {font: "65px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 
 		var border = WIN_DATA.color - 1
+        
+        teamBar = game.add.spine(game.world.width * border, 160, "banner")
+		teamBar.setSkinByName(LOSE_DATA.coupSkin)
+		teamBar.setAnimationByName(0, "idle", true)
+		teamBar.scale.setTo(WIN_DATA.side, 1)
+		teamBar.x += 390 * WIN_DATA.side
+		sceneGroup.add(teamBar)
 
-		teamBar = sceneGroup.create(game.world.width * border, 30, "atlas.reward", "teamBar" + WIN_DATA.color)
-		teamBar.anchor.setTo(border, 0)
-
-		var text = new Phaser.Text(sceneGroup.game, 320, 25, WIN_DATA.name, fontStyle)
-		text.anchor.setTo(0.5, 0)
+		var text = new Phaser.Text(sceneGroup.game, -100, -70, WIN_DATA.name, fontStyle)
+		text.anchor.setTo(0.5)
+		text.scale.setTo(WIN_DATA.side, 1)
 		text.stroke = "#000066"
 		text.strokeThickness = 10
-		text.x *= WIN_DATA.side
 		teamBar.addChild(text)
 		teamBar.text = text
     }
@@ -293,8 +301,8 @@ var rewardClient = function(){
         confetti.gravity = 10
         confetti.maxParticleSpeed.setTo(0, 500)
         confetti.minParticleSpeed.setTo(0, 200)
-        confetti.width = game.world.width
-        confetti.height = 0
+        confetti.setSize(game.world.width, 0)
+        confetti.setScale(0.3, 0.5, 0.3, 0.5, 0) 
         confetti.forEach(function(element) {
             element.tint = getRandomColor()
         });

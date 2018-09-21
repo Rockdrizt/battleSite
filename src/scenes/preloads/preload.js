@@ -5,8 +5,7 @@ var preloaderIntro = function(){
 				name: "logoAtlas",
 				json: settings.BASE_PATH + "/images/preload/atlas.json",
 				image: settings.BASE_PATH + "/images/preload/atlas.png"
-			}],
-		
+            }],
 	}
 
     var spiner
@@ -53,14 +52,15 @@ var preloaderIntro = function(){
             
             sceneGroup = game.add.group()
             
-            var particle = game.add.emitter(game.world.centerX, game.world.centerY, 100);
-            particle.makeParticles("logoAtlas", "dot");
-            particle.minParticleSpeed.setTo(-200, -200);
-            particle.maxParticleSpeed.setTo(200, 200);
-            particle.minParticleScale = 1;
-            particle.maxParticleScale = 2;
+            var particle = game.add.emitter(game.world.centerX, game.world.centerY, 100)
+            particle.makeParticles("logoAtlas", "dot")
+            particle.minParticleSpeed.setTo(-200, -200)
+            particle.maxParticleSpeed.setTo(200, 200)
+            particle.minParticleScale = 1
+            particle.maxParticleScale = 3
             particle.setAlpha(0.35, 0, 1000, Phaser.Easing.Cubic.In)
             particle.width = 800
+            
             sceneGroup.add(particle)
             particle.start(false, 3000, 50, 0)
             
