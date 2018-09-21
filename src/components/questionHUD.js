@@ -372,8 +372,7 @@ var questionHUD = function(){
 
 		this.timeElapsed = 0
 		this.riddle = riddle
-
-		if(!this.client) return
+		this.answered = false
 
 		if(riddle.existImage){
 			game.load.image(this.riddle.image, this.riddle.src)
@@ -391,7 +390,8 @@ var questionHUD = function(){
 		var maxTime = convertTime(this.chrono.maxTime)
 		this.chrono.timeText.setText(maxTime)
 
-		var apearOverlay = game.add.tween(this).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
+		var toAlpha = this.client ? 1 : 0
+		var apearOverlay = game.add.tween(this).to({alpha: toAlpha}, 100, Phaser.Easing.Cubic.Out, true)
 		var apearButtons = game.add.tween(this.buttons).to({alpha: 1}, 300, Phaser.Easing.Cubic.Out, false)
 		var apearChrono = game.add.tween(this.chrono).from({x: -400}, 300, Phaser.Easing.Cubic.Out, false)
 		apearOverlay.chain(apearButtons)
@@ -532,12 +532,15 @@ var questionHUD = function(){
 	}
 
 	function inputOption(btn){
+		if(this.answered)
+			return
 
 		if(this.timer){
 			this.timer.stop()
 			this.timer.destroy()
 		}
 
+		this.answered = true
 		sound.play("shineSpell")
 		this.buttons.options.btnPressed = btn
 		this.buttons.options.setAll("inputEnabled", false)
@@ -635,7 +638,7 @@ var questionHUD = function(){
     
     function startTimer(){
 	
-        var maxTime = this.chrono.maxTime
+        var maxTime = this.riddle.timers.normal
 		if(this.timer)
 			this.timer.destroy()
 
@@ -663,6 +666,7 @@ var questionHUD = function(){
 		this.timer.stop()
 		this.timer.destroy()
 		this.chrono.timeText.setText("0:00")
+		if(this.timeOutCallback) this.timeOutCallback()
 
 		// this.buttons.options.setAll("inputEnabled", false)
 		// this.feedBackImg.loadTexture("atlas.question", "timeOut")
