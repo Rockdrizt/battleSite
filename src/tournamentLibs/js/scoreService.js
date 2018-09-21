@@ -91,7 +91,7 @@ function ScoreService(){
 				var teamValue = snapshot.val()
 				var key = snapshot.key
 				var numTeam = Number(key[key.length - 1])
-				if (teamValue.score && teamValue.life) {
+				if (typeof teamValue.score === "number" && typeof teamValue.life === "number") {
 					var returnValue = {
 						numTeam : numTeam,
 						score : teamValue.score,
@@ -143,7 +143,7 @@ function ScoreService(){
 					onScoreUpdate()
 				}
 			} else {
-				var message = "Equipos seleccionando yogotats."
+				var message = "Equipos seleccionando yogotars."
 				alertDialog.show({
 					message:message,
 					isButtonDisabled:true,
