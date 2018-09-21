@@ -483,7 +483,6 @@ var battle = function(){
 				}
 				
 				var character = characterBattle.createCharacter(characterName, skin, characterPos)
-				console.log("postion", character.position)
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
 				character.teamIndex = teamIndex
 				character.alpha = 0
@@ -885,6 +884,7 @@ var battle = function(){
 		},
 		setCharacter:setCharacter,
 		setTeams: function (myTeams) {
+			
 			teams = myTeams
 			for(var teamIndex = 0; teamIndex < myTeams.length; teamIndex++){
 				var team = myTeams[teamIndex]
