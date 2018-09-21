@@ -84,7 +84,7 @@ var riddles = function(){
 			}
 			questions.push(gradeList)
 		}
-		console.log("questions loaded")
+		// console.log("questions loaded")
 	}
 
 	function loadTestQuestions(){
@@ -122,7 +122,7 @@ var riddles = function(){
 			}
 			testQuestions.push(obj)
 		}
-		console.log("test questions loaded")
+		// console.log("test questions loaded")
 	}
 
 	function getQuestion(grade){

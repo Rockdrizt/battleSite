@@ -66,7 +66,7 @@ var sceneloader = function(){
 			if((loadingFiles[cachekey])&&(typeof (loadingFiles[cachekey].onComplete)) === "function")
 				loadingFiles[cachekey].onComplete()
 
-			console.log(cachekey)
+			//console.log(cachekey)
 		})
 
 		newLoader.onLoadComplete.add(function(){

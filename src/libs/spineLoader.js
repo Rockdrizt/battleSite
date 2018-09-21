@@ -73,7 +73,7 @@ var spineLoader = function () {
 		if(emitter.absolute) {
 			emitter.x = character.scale.x > 0 ? slot.x : slot.x * -1
 			emitter.y = slot.y
-			console.log("cord", slot.x, slot.y)
+			// console.log("cord", slot.x, slot.y)
 			character.add(emitter)
 		}
 		else {
@@ -82,7 +82,7 @@ var spineLoader = function () {
 		emitter.scale.x = character.scale.x
 
 		particles[particleName] = emitter
-		console.log(emitter.duration)
+		// console.log(emitter.duration)
 	}
 
 	function removeParticleCharacter(character, params) {
@@ -143,7 +143,7 @@ var spineLoader = function () {
 	function playEvent(i, e) {
 		var spineGroup = this
 		var eventName = e.data.name
-		console.log(eventName)
+		// console.log(eventName)
 
 		if ((!eventName) && (typeof eventName !== 'string'))
 			return
@@ -276,7 +276,7 @@ var spineLoader = function () {
 			texture:name + ".png"
 		}
 
-		console.log(particleObj)
+		// console.log(particleObj)
 
 		assetsParticles.push(particleObj)
 		epicparticles.loadEmitter(currentLoader, particleObj.name, particleObj.texture, particleObj.file)
@@ -286,7 +286,7 @@ var spineLoader = function () {
 
 		var jsonFile = game.cache.getJSON(cacheKey)
 		var animations = jsonFile.animations
-		console.log(jsonFile, spine)
+		// console.log(jsonFile, spine)
 
 		var soundsList = game.cache.getJSON('sounds')
 		var assetsSounds = currentScene.assets.sounds
@@ -294,18 +294,18 @@ var spineLoader = function () {
 		currentScene.assets.particles = currentScene.assets.particles || []
 		var assetsParticles = currentScene.assets.particles
 
-		console.log(animations)
+		// console.log(animations)
 		for(var animation in animations){
-			console.log(animation)
+			// console.log(animation)
 			var events = animations[animation].events
-			console.log("events", animations[animation])
+			// console.log("events", animations[animation])
 			if(events) {
 				for (var eventIndex = 0; eventIndex < events.length; eventIndex++) {
 					var objContent = events[eventIndex]
 					var key = objContent.name
 
 					var functionData = getFunctionData(key)
-					console.log(functionData.name)
+					// console.log(functionData.name)
 
 					if ((functionData) && (functionData.name === "PLAY")) {
 						addSound(functionData, soundsList, assetsSounds)

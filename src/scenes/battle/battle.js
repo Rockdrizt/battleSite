@@ -136,9 +136,9 @@ var battle = function(){
 	}
 
 	var POSITIONS = {
-		UP:{x:130, y: -200, scale:{x:0.8, y:0.8}},
-		MID:{x:350, y: 0, scale:{x:0.9, y:0.9}},
-		DOWN:{x:-20, y: 120, scale:{x:1, y:1}},
+		UP:{x:130, y: -200, scale:{x:0.7, y:0.7}},
+		MID:{x:350, y: 0, scale:{x:0.8, y:0.8}},
+		DOWN:{x:-20, y: 120, scale:{x:0.9, y:0.9}},
 	}
 
 	var DAMAGE_PERCENT = {
@@ -483,7 +483,7 @@ var battle = function(){
 				}
 				
 				var character = characterBattle.createCharacter(characterName, skin, characterPos)
-				console.log("postion", character.position)
+				// console.log("postion", character.position)
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
 				character.teamIndex = teamIndex
 				character.alpha = 0
@@ -522,7 +522,7 @@ var battle = function(){
 				}
 
 				if(ORDER_POSITIONS[charIndex] === POSITIONS.DOWN){
-					console.log(characterPos.x)
+					// console.log(characterPos.x)
 				}
 			}
 

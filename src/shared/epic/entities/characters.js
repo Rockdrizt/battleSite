@@ -37,11 +37,11 @@ var charactersEntity = function () {
 		var imageList = scene.assets.images
 		for(var pcardIndex = 0; pcardIndex < cards.length; pcardIndex++){
 			var name = cards[pcardIndex].id
-			console.log(name, "playerCard")
+			// console.log(name, "playerCard")
 			var path = epicCharacters[name].directory
 			var yogotarReplace = name.replace("yogotar", "")
 			yogotarReplace = yogotarReplace.charAt(0).toLowerCase() + yogotarReplace.slice(1)
-			console.log(yogotarReplace)
+			// console.log(yogotarReplace)
 			path = path.replace(".json", "")
 			path = path.replace("/" + yogotarReplace, "")
 			var file = path + "/card.png"

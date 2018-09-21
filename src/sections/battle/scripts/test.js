@@ -5,7 +5,7 @@ window.minigame = window.minigame || {}
 
 function startGame(){
 
-	window.game = new Phaser.Game(1920, 1080, Phaser.WEBGL, "ingame", {init: init, create: create }, false, false);
+	window.game = new Phaser.Game(document.body.clientWidth, document.body.clientHeight, Phaser.WEBGL, "ingame", {init: init, create: create }, true, false);
     document.body.style.visibility = "hidden"
 
 	function bootConfigFiles(sceneList) {
@@ -44,12 +44,12 @@ function startGame(){
         var fullWidth = 1024
         var fullHeight = 1080
 
-        // var ratio = document.body.clientWidth / document.body.clientHeight
-        // var gameHeight = Math.round(fullHeight)
-        // var gameWidth = Math.round(fullHeight * ratio)
+        var ratio = document.body.clientWidth / document.body.clientHeight
+        var gameHeight = Math.round(fullHeight)
+        var gameWidth = Math.round(fullHeight * ratio)
 
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
-        // game.scale.setGameSize(gameWidth, gameHeight); game.input.maxPointers = 1
+        game.scale.setGameSize(gameWidth, gameHeight); game.input.maxPointers = 1
 
         game.stage.backgroundColor = "#ffffff"
         game.time.advancedTiming = true
