@@ -107,6 +107,9 @@ function randomPlayers (listChildren, listContainer) {
     }
     listContainer[i].append(listChildren[position[i]])
   }
+  setTimeout(() => {
+    modalReady.classList.remove('hidden')
+  }, 2000)
 }
 
 // show modal

@@ -485,7 +485,7 @@ var scores = function(){
 			createTeams()
 			createVS()
 			createScoreBubble()
-			createQuestionOverlay()
+			createQuestionOverlay()		
 
 			scoreService.removeEventListener("newQuestion", questionGroup.showQuestion)
 			scoreService.addEventListener("newQuestion", questionGroup.showQuestion)

@@ -17,20 +17,6 @@ var questions = function(){
 		}
 	}
 
-	var localizationData = {
-		"EN":{
-			"howTo":"How to Play?",
-			"moves":"Moves left",
-			"stop":"Stop!"
-		},
-
-		"ES":{
-			"moves":"Movimientos extra",
-			"howTo":"¿Cómo jugar?",
-			"stop":"¡Detener!"
-		}
-	}
-
 	var assets = {
 		atlases: [
 			{
@@ -59,6 +45,12 @@ var questions = function(){
 		],
 		sounds: [
 		],
+		spines:[
+			{
+				name:"banner",
+				file:settings.BASE_PATH + "/spines/selector/banners.json",
+			},
+		],
 		spritesheets: [
 
 		],
@@ -68,6 +60,22 @@ var questions = function(){
 	}
 
 	var DEFAULT_NUMTEAM = 1
+
+	var TEAMS = {
+		1: {
+			name: "Equipo Alpha",
+			side: 1,
+			states: {yellow: 0, color: 1},
+			animSkin: "alfa"
+		},
+		2: {
+			name: "Equipo Bravo",
+			side: -1,
+			states: {yellow: 0, color: 2},
+			animSkin: "bravo"
+		},
+	}
+	var DATA 
 
 	var sceneGroup
 	var tile
@@ -85,6 +93,7 @@ var questions = function(){
 
 		cliente = parent.cliente || {}
 		numTeam = cliente.numTeam || DEFAULT_NUMTEAM
+		DATA = TEAMS[numTeam]
 		loadSounds()
 	}
 
@@ -96,15 +105,12 @@ var questions = function(){
 
 	function createQuestionOverlay(){
 
-		var NAME = numTeam == 1 ? "Equipo Alpha" : "Equipo Bravo"
-
 		questionGroup = questionHUD.createQuestionOverlay(true)
 		questionGroup.callback = cliente.buttonOnClick
 		// questionGroup.callback = function(){
 		// 	questionGroup.timer.stop()
 		// 	cliente.buttonOnClick()
 		// }
-		//questionGroup.teamName.setText(NAME)
 		sceneGroup.add(questionGroup)
 	}
 
@@ -125,9 +131,7 @@ var questions = function(){
 		}
 
 		tile = game.add.tileSprite(0, 0, game.world.width, game.world.height, "tile")
-		//tile.anchor.setTo(0.5)
-		tile.tint = 0x0099AA
-		//tile.angle = 45
+		tile.alpha = 0.4
 		sceneGroup.add(tile)
 	}
 
@@ -145,6 +149,28 @@ var questions = function(){
 			sceneloader.show("rewardClient")
 		})
 	}
+
+	function createTeamBar(){
+
+		var fontStyle = {font: "65px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
+
+		var border = DATA.states.color - 1
+        
+        var teamBar = game.add.spine(game.world.width * border, 160, "banner")
+		teamBar.setSkinByName(DATA.animSkin)
+		teamBar.setAnimationByName(0, "idle", true)
+		teamBar.scale.setTo(DATA.side, 1)
+		teamBar.x += 390 * DATA.side
+		sceneGroup.add(teamBar)
+
+		var text = new Phaser.Text(sceneGroup.game, -100, -70, DATA.name, fontStyle)
+		text.anchor.setTo(0.5)
+		text.scale.setTo(DATA.side, 1)
+		text.stroke = "#000066"
+		text.strokeThickness = 10
+		teamBar.addChild(text)
+		teamBar.text = text
+    }
 
 	function createButton(callback, color) {
 		color = color || 0x000000
@@ -170,24 +196,30 @@ var questions = function(){
 	}
 
 	function setReadyGo(){
+
+		var TIMES = {
+            ultra : 800,
+            super : 15000,
+            normal : 30000
+		}
 		
 		var obj = {
-			question: "lorem ipsum dolor",
+			question: "Estrella resolvió las siguientes dos operaciones y tapó algunos números con figuras. Cada figura, representa un número diferente. ¿Qué número está abajo de la figura de corazón?",
 			existImage : false,
 			src: settings.BASE_PATH + "/images/questionDB/default.png",
 			image: "default",
 			answers: ["a", "be", "ce", "de"],
 			grade: 1,
 			level: 1,
-			correctAnswer: 2,
-			//time:DIFFICULT_RULES[level].time
+			correctAnswer: 1,
+			timers: TIMES,
 			index: 0,
 			correctValue: "be"
 			//correctIndex:
 		}
 
-		//var riddle = obj
-		var riddle = riddles.getQuestion(5)
+		var riddle = obj
+		//var riddle = riddles.getQuestion(2)
 		questionGroup.showQuestion(riddle)
 	}
 	
@@ -210,6 +242,7 @@ var questions = function(){
 			initialize()
 			createBackground()
 			createQuestionOverlay()
+			createTeamBar()
 
 			//riddles.initialize()
 

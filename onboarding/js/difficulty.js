@@ -6,50 +6,56 @@ var modals = document.querySelectorAll('.modal')
 var closeModal = document.querySelectorAll('.close')
 
 // change difficulty
-btnLeft.addEventListener('click', function () {
-  switch (btnLeft.parentNode.id) {
-    case 'easy':
-      btnRight.parentNode.children[1].innerText = 'Hard'
-      btnRight.parentNode.id = 'hard'
-      btnRight.parentNode.style.backgroundImage =
-        'linear-gradient(90deg,  #e8522c, #c52752)'
-      break
-    case 'medium':
-      btnLeft.parentNode.children[1].innerText = 'Easy'
-      btnLeft.parentNode.id = 'easy'
-      btnLeft.parentNode.style.backgroundImage =
-        'linear-gradient(90deg, #bbd400, #129264)'
-      break
-    case 'hard':
-      btnLeft.parentNode.children[1].innerText = 'Medium'
-      btnLeft.parentNode.id = 'medium'
-      btnLeft.parentNode.style.backgroundImage =
-        'linear-gradient(90deg, #f8c22a, #ec6f32)'
-      break
-  }
+;[btnLeft, btnRight].forEach(function (el) {
+  el.addEventListener('click', function (e) {
+    if (e.target === btnLeft) {
+      console.log('left');
+    }
+  })
 })
-btnRight.addEventListener('click', function () {
-  switch (btnRight.parentNode.id) {
-    case 'easy':
-      btnRight.parentNode.children[1].innerText = 'Medium'
-      btnRight.parentNode.id = 'medium'
-      btnRight.parentNode.style.backgroundImage =
-        'linear-gradient(90deg, #f8c22a, #ec6f32)'
-      break
-    case 'medium':
-      btnRight.parentNode.children[1].innerText = 'Hard'
-      btnRight.parentNode.id = 'hard'
-      btnRight.parentNode.style.backgroundImage =
-        'linear-gradient(90deg, #e8522c, #c52752)'
-      break
-    case 'hard':
-      btnLeft.parentNode.children[1].innerText = 'Easy'
-      btnLeft.parentNode.id = 'easy'
-      btnLeft.parentNode.style.backgroundImage =
-        'linear-gradient(90deg, #bbd400, #129264)'
-      break
-  }
-})
+// btnLeft.addEventListener('click', function () {
+//   switch (btnLeft.parentNode.id) {
+//     case 'easy':
+//       btnRight.parentNode.children[1].innerText = 'Hard'
+//       btnRight.parentNode.id = 'hard'
+//       btnRight.parentNode.classList.add('hard')
+//       btnRight.parentNode.classList.remove('easy')
+//       break
+//     case 'medium':
+//       btnLeft.parentNode.children[1].innerText = 'Easy'
+//       btnLeft.parentNode.id = 'easy'
+//       btnRight.parentNode.classList.add('medium')
+//       btnRight.parentNode.classList.remove('hard')
+//       break
+//     case 'hard':
+//       btnLeft.parentNode.children[1].innerText = 'Medium'
+//       btnLeft.parentNode.id = 'medium'
+//       btnRight.parentNode.classList.add('easy')
+//       btnRight.parentNode.classList.remove('medium')
+//   }
+// })
+// btnRight.addEventListener('click', function () {
+//   switch (btnRight.parentNode.id) {
+//     case 'easy':
+//       btnRight.parentNode.children[1].innerText = 'Medium'
+//       btnRight.parentNode.id = 'medium'
+//       btnRight.parentNode.classList.add('medium')
+//       btnRight.parentNode.classList.remove('easy')
+//       break
+//     case 'medium':
+//       btnRight.parentNode.children[1].innerText = 'Hard'
+//       btnRight.parentNode.id = 'hard'
+//       btnRight.parentNode.classList.add('hard')
+//       btnRight.parentNode.classList.remove('medium')
+//       break
+//     case 'hard':
+//       btnLeft.parentNode.children[1].innerText = 'Easy'
+//       btnLeft.parentNode.id = 'easy'
+//       btnRight.parentNode.classList.add('easy')
+//       btnRight.parentNode.classList.remove('medium')
+//       break
+//   }
+// })
 
 // show modal
 difficultyBtns.forEach(function (el) {
@@ -105,34 +111,70 @@ diffForms.forEach(function (el) {
 })
 
 // Select all
-var selectAll = document.querySelectorAll('.select-all')
-selectAll.forEach(function (el, i) {
-  el.addEventListener('change', function (e) {
-    var inputs = diffForms[i].elements
-    if (e.target.checked === true) {
-      for (var j = 1; j < inputs.length - 1; j++) {
-        inputs[j].checked = true
-        inputs[j].addEventListener('change', function () {
-          e.target.checked = false
+function showEditBtn (form) {
+  if (diffForms[0] === form) {
+    for (var index = 1; index < form.elements.length; index++) {
+      if (form.elements[index].checked) {
+        form.elements[index].parentNode.nextElementSibling.classList.remove('hidden')
+      } else {
+        form.elements[index].parentNode.nextElementSibling.classList.add('hidden')
+      }
+    }
+  }
+}
+function autoSelectAll (form) {
+  var autoSelect = true
+  for (var index = 1; index < form.elements.length; index++) {
+    if (form.elements[index].nodeName !== 'BUTTON' && !form.elements[index].checked) {
+      autoSelect = false
+      break
+    }
+  }
+  if (autoSelect) {
+    form.elements[0].checked = true
+  }
+}
+function selectAndUnselectAll (form, bool) {
+  for (var index = 1; index < form.elements.length; index++) {
+    if (form.elements[index].nodeName !== 'BUTTON') {
+      form.elements[index].checked = bool
+    }
+  }
+}
+function unselectAll (form) {
+  for (var index = 1; index < form.elements.length; index++) {
+    if (form.elements[index].nodeName !== 'BUTTON') {
+      form.elements[index].addEventListener('change', function (e) {
+        showEditBtn(form)
+        autoSelectAll(form)
+        if (!e.target.checked) {
+          form.elements[0].checked = false
+        }
+      })
+    }
+  }
+}
+function selectAll (form) {
+  Object.values(form.elements).forEach(function (input, j) {
+    if (input === Object.values(form.elements)[0] && input.nodeName !== 'BUTTON') {
+      if (input === form[0]) {
+        input.addEventListener('click', function (e) {
+          if (e.target.checked) {
+            selectAndUnselectAll(form, true)
+            showEditBtn(form)
+            autoSelectAll(form)
+          } else {
+            selectAndUnselectAll(form, false)
+            showEditBtn(form)
+            autoSelectAll(form)
+          }
         })
       }
-    } else {
-      for (var k = 1; k < inputs.length - 1; k++) {
-        inputs[k].checked = false
-      }
+    } else if (input !== Object.values(form.elements)[0] && input.nodeName !== 'BUTTON') {
     }
   })
-})
-
-// show btn edit
-var inputActive = document.querySelectorAll('.input-active')
-
-inputActive.forEach(function (el) {
-  el.addEventListener('change', function (e) {
-    if (el.checked) {
-      el.parentNode.nextElementSibling.style.display = 'inline'
-    } else {
-      el.parentNode.nextElementSibling.style.display = 'none'
-    }
-  })
+}
+diffForms.forEach(function (form) {
+  selectAll(form)
+  unselectAll(form)
 })

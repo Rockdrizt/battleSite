@@ -233,19 +233,6 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">questionBox.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>414,61,829,123</rect>
-                <key>scale9Paddings</key>
-                <rect>414,61,829,123</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">questionBtn.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -327,7 +314,6 @@
         </map>
         <key>fileList</key>
         <array>
-            <filename>questionBox.png</filename>
             <filename>questionBtn.png</filename>
             <filename>questionImage.png</filename>
             <filename>timeGauge.png</filename>
