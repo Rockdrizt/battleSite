@@ -45,7 +45,16 @@ var reward = function(){
             {
                 name:"coup",
                 file:settings.BASE_PATH + "/spines/reward/brain/pantalla_victoria.json"
-            }
+            },
+            {
+                name:"boardInfo",
+                file:settings.BASE_PATH + "/spines/reward/PlecaAmarilla/PlecaAmarilla.json",
+                scales: ["@0.5x"]
+            },
+            {
+				name:"banner",
+				file:settings.BASE_PATH + "/spines/selector/banners.json",
+			},
         ],
         jsons: [
 		],
@@ -77,7 +86,7 @@ var reward = function(){
             appear: "appear_alpha",
             index: 0,
             pivot: 0,
-            info: ["Aciertos: ", "Tiempo: "]
+            info: "Aciertos: "
 		},
 		{
 			name: "Equipo Bravo",
@@ -87,7 +96,7 @@ var reward = function(){
             appear: "appear_delta",
             index: 0,
             pivot: 1,
-            info: ["Aciertos: ", "Tiempo: "]
+            info: "Aciertos: "
 		},
     ]
     
@@ -100,7 +109,7 @@ var reward = function(){
     var WIN_SCALES = [0.8, 0.9, 0.8]
     var INDEX_WINNER
     var FINAL_SCORE
-    var FINAL_TIME
+    //var FINAL_TIME
 
     var sceneGroup
     var tile
@@ -122,12 +131,12 @@ var reward = function(){
         cliente = parent.cliente || {}
         var numTeam = indexWinner || DEFAULT_NUMTEAM //cliente.numTeam
         var scoreTeam = FINAL_SCORE || DEFAULT_SCORE
-        var timeTeam = FINAL_TIME || DEFAULT_TIME
+        //var timeTeam = FINAL_TIME || DEFAULT_TIME
         var otherTeam = numTeam == 1 ? 0 : 1
         WIN_DATA = TEAMS[numTeam]
         WIN_DATA.index = numTeam
-        WIN_DATA.info[0] = WIN_DATA.info[0] + scoreTeam
-        WIN_DATA.info[1] = WIN_DATA.info[1] + timeTeam
+        WIN_DATA.info = WIN_DATA.info + scoreTeam
+        //WIN_DATA.info[1] = WIN_DATA.info[1] + timeTeam
         LOSE_DATA = TEAMS[otherTeam]
         LOSE_DATA.index = otherTeam
     }
@@ -137,7 +146,7 @@ var reward = function(){
     }
 
     function update(){
-        tile.tilePosition.x -= 0.4
+        tile.tilePosition.x += 0.4 * WIN_DATA.side
         epicparticles.update()
     }
 
@@ -165,18 +174,33 @@ var reward = function(){
 
 		var fontStyle = {font: "65px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 
-		var border = WIN_DATA.color - 1
+        var border = WIN_DATA.color - 1
+        
+        teamBar = game.add.spine(game.world.width * border, 160, "banner")
+		teamBar.setSkinByName(LOSE_DATA.coupSkin)
+		teamBar.setAnimationByName(0, "idle", true)
+		teamBar.scale.setTo(WIN_DATA.side, 1)
+		teamBar.x += 390 * WIN_DATA.side
+		sceneGroup.add(teamBar)
 
-		teamBar = sceneGroup.create(game.world.width * border, 30, "atlas.reward", "teamBar" + WIN_DATA.color)
-		teamBar.anchor.setTo(border, 0)
-
-		var text = new Phaser.Text(sceneGroup.game, 320, 25, WIN_DATA.name, fontStyle)
-		text.anchor.setTo(0.5, 0)
+		var text = new Phaser.Text(sceneGroup.game, -100, -70, WIN_DATA.name, fontStyle)
+		text.anchor.setTo(0.5)
+		text.scale.setTo(WIN_DATA.side, 1)
 		text.stroke = "#000066"
 		text.strokeThickness = 10
-		text.x *= WIN_DATA.side
 		teamBar.addChild(text)
 		teamBar.text = text
+
+		// teamBar = sceneGroup.create(game.world.width * border, 30, "atlas.reward", "teamBar" + WIN_DATA.color)
+		// teamBar.anchor.setTo(border, 0)
+
+		// var text = new Phaser.Text(sceneGroup.game, 320, 25, WIN_DATA.name, fontStyle)
+		// text.anchor.setTo(0.5, 0)
+		// text.stroke = "#000066"
+		// text.strokeThickness = 10
+		// text.x *= WIN_DATA.side
+		// teamBar.addChild(text)
+		// teamBar.text = text
     }
     
     function createCoup(){
@@ -305,30 +329,31 @@ var reward = function(){
 
         var fontStyle = {font: "65px VAGRounded", fontWeight: "bold", fill: "#000066", align: "center"}
         var border = LOSE_DATA.pivot * game.world.width
-        var pivotY = 50
-        var pivotX = 160 * LOSE_DATA.side
+        var pivotX = 400 * LOSE_DATA.side
         
         infoGroup = game.add.group()
         infoGroup.alpha = 0
         sceneGroup.add(infoGroup)
 
-        for (let i = 0; i < 2; i++) {
-            
-            var board = infoGroup.create(border + pivotX, pivotY, "atlas.reward", "barraAmarilla")
-            board.scale.setTo(LOSE_DATA.side, 1)
+        // var board = infoGroup.create(border + pivotX, pivotY, "atlas.reward", "barraAmarilla")
+        // board.scale.setTo(LOSE_DATA.side, 1)
 
-            var text = new Phaser.Text(infoGroup.game, board.centerX + (25 * LOSE_DATA.side), board.centerY + 10, WIN_DATA.info[i], fontStyle)
-            text.anchor.setTo(0.5)
-            //text.stroke = "#000066"
-            //text.strokeThickness = 10
-            infoGroup.add(text)
-            board.text = text
+        // var text = new Phaser.Text(infoGroup.game, board.centerX + (25 * LOSE_DATA.side), board.centerY + 10, WIN_DATA.info, fontStyle)
+        // text.anchor.setTo(0.5)
+        // infoGroup.add(text)
+        // board.text = text
 
-            pivotY += 130
-            pivotX += 90 * WIN_DATA.side
-        }
-        board.alpha = 0 // hide time info
-        board.text.alpha = 0
+        teamBar = game.add.spine(border + pivotX, 120, "boardInfo")
+		teamBar.setSkinByName("PlecaAmarilla")
+		teamBar.setAnimationByName(0, "IDLE", true)
+		teamBar.scale.setTo(LOSE_DATA.side * 0.5, 0.5)
+		infoGroup.add(teamBar)
+
+		var text = new Phaser.Text(infoGroup.game, 30, 5, WIN_DATA.info, fontStyle)
+		text.anchor.setTo(0.5)
+		text.scale.setTo(LOSE_DATA.side * 2, 2)
+		teamBar.addChild(text)
+		teamBar.text = text
     }
 
     function createBrainParticles(){
