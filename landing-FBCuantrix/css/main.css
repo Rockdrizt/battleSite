@@ -1,0 +1,48 @@
+  body {
+            margin: 0;
+            padding: 3vh;
+            background:url("../img/stars01.png"),  linear-gradient(to bottom, rgba(127,0,138,1) 5%, rgba(21,5,89,1) 20%);
+      color:#FFF;
+      font-family: monospace;
+      text-align: center;
+        }
+          
+    .logo{
+        width: 10%;
+    }
+
+    .container{
+        text-align: center;
+    }
+
+    .linkGroup{
+        display: flex;
+        border:2px solid #FFF;
+    }
+    a{
+        text-decoration: none;
+    }
+
+    h2{
+        text-align: left;
+        font-size: 1.4vw;
+        padding: 1vw;
+        width: 20%;
+    }
+
+    .btn{
+        position: relative;
+        background-color: #0bc427;
+        color:#FFF;
+        width: 100%;
+        text-align: center;
+        left:50%;
+        top:50%;
+        transform: translate(-50%,-50%);
+        font-size: 2vw;
+        padding: 0.5vw;
+        border-radius: 1vw;
+        border:5px solid #FFF;
+        font-family: sans-serif;
+
+    }
