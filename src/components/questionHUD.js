@@ -663,7 +663,12 @@ var questionHUD = function(){
 		this.timer.stop()
 		this.timer.destroy()
 		this.chrono.timeText.setText("0:00")
-		//this.hide()
+
+		// this.buttons.options.setAll("inputEnabled", false)
+		// this.feedBackImg.loadTexture("atlas.question", "timeOut")
+		// game.add.tween(this.black).to({alpha:0.5}, 300, Phaser.Easing.linear, true)
+		// game.add.tween(this.feedBackImg).to({alpha:1}, 300, Phaser.Easing.linear, true)
+		// game.time.events.add(3000, this.clearQuestion)
 	}
 	
 	function convertTime(time) {
