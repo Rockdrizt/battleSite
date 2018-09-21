@@ -41,9 +41,14 @@ var battle = function(){
 				image: settings.BASE_PATH + "/images/battle/atlas.png",
 			},
 			{
+				name: "atlas.pics",
+				json: settings.BASE_PATH + "/images/battle/pics/atlas.json",
+				image: settings.BASE_PATH + "/images/battle/pics/atlas.png",
+			},
+			{
 				name: "atlas.question",
-				json: settings.BASE_PATH + "/images/questionOverlay/atlas.json",
-				image: settings.BASE_PATH + "/images/questionOverlay/atlas.png",
+				json: settings.BASE_PATH + "/images/questionOverlayCliente/atlas.json",
+				image: settings.BASE_PATH + "/images/questionOverlayCliente/atlas.png",
 			},
 			{
 				name: "atlas.feedback",
@@ -70,7 +75,7 @@ var battle = function(){
 			},
 			{
 				name: "questionBoard",
-				file: settings.BASE_PATH + "/images/questionOverlay/questionBoard.png",
+				file: settings.BASE_PATH + "/images/questionOverlayCliente/questionBoard.png",
 			},
 			{
 				name: "pinkLight",
@@ -131,9 +136,9 @@ var battle = function(){
 	}
 
 	var POSITIONS = {
-		UP:{x:130, y: -200, scale:{x:0.8, y:0.8}},
-		MID:{x:350, y: 0, scale:{x:0.9, y:0.9}},
-		DOWN:{x:-70, y: 120, scale:{x:1, y:1}},
+		UP:{x:130, y: -200, scale:{x:0.7, y:0.7}},
+		MID:{x:350, y: 0, scale:{x:0.8, y:0.8}},
+		DOWN:{x:-20, y: 120, scale:{x:0.9, y:0.9}},
 	}
 
 	var DAMAGE_PERCENT = {
@@ -169,7 +174,6 @@ var battle = function(){
 
 	var mainYogotorars
 	var mainSpine
-	var listName
 
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -274,9 +278,7 @@ var battle = function(){
 
     function createHUD(){
 
-        listName = loadNames()
-
-		HUDGroup = HUD.createHUD(ORDER_SIDES, listName)
+		HUDGroup = HUD.createHUD(ORDER_SIDES, teams)
 		
 		HUDGroup.setWinteam = function(win, lose){
 			setWinteam(win, lose)
@@ -291,26 +293,6 @@ var battle = function(){
         sceneGroup.add(HUDGroup)
     }
 
-    function loadNames(){
-
-        var nameList = []
-
-        for(var i = 0; i < teams.length; i++){
-            for(var j = 0; j < teams[i].length; j++){
-                var character = teams[i][j].name.substr(7).toLowerCase()
-                nameList.push(character)
-            }
-        }
-
-        for(var i = 0; i < 4; i+=3){
-            var aux = nameList[i]
-            nameList[i] = nameList[i+1]
-            nameList [i+1] = aux
-        }
-
-        return nameList
-    }
-
     function createSpecialAttack(){
 
         specialAttack = battleField.createSpecialAttack(mainYogotorars[0].data.name)
@@ -320,17 +302,17 @@ var battle = function(){
     function createQuestionOverlay(){
 
         questionGroup = questionHUD.createQuestionOverlay()
-        questionGroup.callback = function (event) {
-			questionGroup.hide()
-            //questionGroup.timer.stop()
-        	game.time.events.add(2000, checkAnswer)
-		}
-        questionGroup.stopTimer = function(){
-			questionGroup.timer.destroy()
-            questionGroup.hide()
-            setNoAnswer()
-            console.log("time out")
-        }
+        // questionGroup.callback = function (event) {
+		// 	//questionGroup.hide()
+        //     //questionGroup.timer.stop()
+        // 	game.time.events.add(2000, checkAnswer)
+		// }
+        // questionGroup.stopTimer = function(){
+		// 	questionGroup.timer.destroy()
+        //     //questionGroup.hide()
+        //     setNoAnswer()
+        //     console.log("time out")
+        // }
 		sceneGroup.add(questionGroup)
     }
 
@@ -453,7 +435,7 @@ var battle = function(){
 
 		var charObj = {
 			name: character + "Special",
-			file: settings.BASE_PATH + "/images/battle/" + character + "Special.png",
+			file: settings.BASE_PATH + "/images/battle/ultras/" + character + "Special.png",
 		}
 		assets.images.push(charObj)
 	}
@@ -499,8 +481,9 @@ var battle = function(){
 					x : game.world.centerX * 0.5 * side.direction + xOffset,
 					y : CHARACTER_CENTER_OFFSET.y + game.world.centerY + position.y
 				}
+				
 				var character = characterBattle.createCharacter(characterName, skin, characterPos)
-				console.log("postion", character.position)
+				// console.log("postion", character.position)
 				character.scale.setTo(position.scale.x * side.scale.x, position.scale.y)
 				character.teamIndex = teamIndex
 				character.alpha = 0
@@ -536,6 +519,10 @@ var battle = function(){
 
 				if(ORDER_POSITIONS[charIndex] === POSITIONS.MID){
 					mainYogotorars[teamIndex] = character
+				}
+
+				if(ORDER_POSITIONS[charIndex] === POSITIONS.DOWN){
+					// console.log(characterPos.x)
 				}
 			}
 
@@ -712,7 +699,7 @@ var battle = function(){
 
 	function setWinteam(win, lose){
 
-         teams[lose].forEach(function(member){
+        teams[lose].forEach(function(member){
             member.setAnimation(["gg"], true)
         })
         teams[win].forEach(function(member){
@@ -750,6 +737,7 @@ var battle = function(){
         
 		event = event || {}
 		var answers = event.answers || {}
+		var numTeam = event.numTeam || -1
         
 		var t1 = answers.t1 || {}
 		var t2 = answers.t2 ||{}
@@ -758,7 +746,8 @@ var battle = function(){
 		swapYogotars(feedbackGroup)
 		
 		for(var i = 0; i < players.length; i++){
-			var anim = players[i].value == event.correctAnswer ? "answer_good" : "answer_bad"
+			//var anim = players[i].value == event.correctAnswer ? "answer_good" : "answer_bad"
+			var anim = numTeam == (i + 1) ? "answer_good" : "answer_bad"
 			var yogo = mainYogotorars[i]
 			game.time.events.add(1000, changeAnim, null, yogo, anim)
 		}
@@ -904,7 +893,6 @@ var battle = function(){
 					var character = team[charIndex]
 					setCharacter(character, teamIndex)
 					var img = team[charIndex].name.substr(7)
-					console.log(img)
 					pushSpecialArt(img)
 				}
 			}

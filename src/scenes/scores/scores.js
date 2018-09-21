@@ -33,8 +33,8 @@ var scores = function(){
 			},
 			{
 				name: "atlas.question",
-				json: settings.BASE_PATH + "/images/questionOverlay/atlas.json",
-				image: settings.BASE_PATH + "/images/questionOverlay/atlas.png",
+				json: settings.BASE_PATH + "/images/questionOverlayCliente/atlas.json",
+				image: settings.BASE_PATH + "/images/questionOverlayCliente/atlas.png",
 			},
 		],
 		images: [
@@ -48,9 +48,9 @@ var scores = function(){
 			},
 			{
 				name: "questionBoard",
-				file: settings.BASE_PATH + "/images/questionOverlay/questionBoard.png",
+				file: settings.BASE_PATH + "/images/questionOverlayCliente/questionBoard.png",
 			},
-{
+			{
 				name: "default",
 				file: settings.BASE_PATH + "/images/questionDB/default.png",
 			}
@@ -60,18 +60,12 @@ var scores = function(){
 		spritesheets: [
 		],
 		spines:[
+			{
+				name:"banner",
+				file:settings.BASE_PATH + "/spines/selector/banners.json",
+			},
 		],
 		particles: [
-			// {
-			// 	name: 'horizontalLine',
-			// 	file: 'particles/horizontalLine/intence_horison_ligth.json',
-			// 	texture: 'intence_horison_ligth.png'
-			// },
-			// {
-			// 	name: 'dot',
-			// 	file: 'particles/particlesHorizontal/particle_horison_ligth.json',
-			// 	texture: 'particle_horison_ligth.png'
-			// }
 		]
 	}
 
@@ -88,11 +82,6 @@ var scores = function(){
 	var kids = [
 		["Rock", "Pawel", "Rulas"],
 		["Mares", "Cherry", "Humbert"]
-	]
-
-	var TEAM_NAMES = [
-		"Equipo Alfa",
-		"Equipo Bravo"
 	]
 
 	var teamsData
@@ -138,7 +127,7 @@ var scores = function(){
 		sceneGroup.add(back)
 
 		tile = game.add.tileSprite(0, 0, game.world.width, game.world.width, "tile")
-		tile.tint = 0x0099AA
+		tile.alpha = 0.4
 		sceneGroup.add(tile)
 
 		var title = new Phaser.Text(sceneGroup.game, game.world.centerX, 230, "Resultados", fontStyle)
@@ -162,28 +151,61 @@ var scores = function(){
 
 		var fontStyle = {font: "65px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 
+		var teamsNames = [
+			{
+				skin:"alfa",
+				title: "Equipo Alpha"
+			},
+			{
+				skin:"bravo",
+				title: "Equipo Bravo"
+			}
+		]
+
 		var barsGroup = game.add.group()
+		barsGroup.alpha = 0
 		sceneGroup.add(barsGroup)
 
 		for(var i = 0; i < ORDER_SIDES.length; i++){
 
 			var side = ORDER_SIDES[i]
 
-			var teamBar = barsGroup.create(game.world.width * i, 30, "atlas.scores", "teamBar" + i)
-			teamBar.anchor.setTo(i, 0)
+			var teamBar = game.add.spine(game.world.width * i, 150, "banner")
+			teamBar.setSkinByName(teamsNames[i].skin)
+			game.time.events.add(800 * i, function(teamBar){
+				teamBar.setAnimationByName(0, "idle", true)
+			},null, teamBar)
+			teamBar.scale.setTo(side.scale.x, 1)
+			teamBar.x += 390 * side.scale.x
+			barsGroup.add(teamBar)
 
-			var name = new Phaser.Text(barsGroup.game, 260, 75, TEAM_NAMES[i], fontStyle)
-			name.anchor.setTo(0.5)
-			name.stroke = "#000066"
-			name.strokeThickness = 10
-			name.x *= -side.direction
-			teamBar.addChild(name)
-			teamBar.name = name
+			var teamName = new Phaser.Text(barsGroup.game, -100, -70, teamsNames[i].title, fontStyle)
+			teamName.anchor.setTo(0.5)
+			teamName.scale.setTo(side.scale.x, 1)
+            teamName.stroke = "#000066"
+			teamName.strokeThickness = 10
+			teamBar.addChild(teamName)
+			teamBar.name = teamName
 		}
+
+		game.add.tween(barsGroup).to({alpha:1}, 1000, Phaser.Easing.Cubic.InOut, true, 1500)
+
+		
+
+			// var teamBar = barsGroup.create(game.world.width * i, 30, "atlas.scores", "teamBar" + i)
+			// teamBar.anchor.setTo(i, 0)
+
+			// var name = new Phaser.Text(barsGroup.game, 260, 75, TEAM_NAMES[i], fontStyle)
+			// name.anchor.setTo(0.5)
+			// name.stroke = "#000066"
+			// name.strokeThickness = 10
+			// name.x *= -side.direction
+			// teamBar.addChild(name)
+			// teamBar.name = name
 	}
 
 	function update(){
-		tile.tilePosition.y -= 0.4
+		tile.tilePosition.y -= 0.7
 		epicparticles.update()
 	}
 
@@ -282,7 +304,7 @@ var scores = function(){
 
 	function createScoreBubble(){
 
-		var fontStyle = {font: "60px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
+		var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
 
 		scoresGroup = game.add.group()
 		scoresGroup.x = game.world.centerX

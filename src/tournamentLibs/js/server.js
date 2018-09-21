@@ -93,7 +93,7 @@ function Server(){
 			self.events[name].push(handler);
 		else
 			self.events[name] = [handler];
-		console.log(self.events[name])
+		// console.log(self.events[name])
 	};
 
 	/* This is a bit tricky, because how would you identify functions?
@@ -136,7 +136,7 @@ function Server(){
 			clearInterval(intervalTime)
 
 		ref.set(value).catch(function (reason) {
-			console.log("error", reason)
+			// console.log("error", reason)
 			setInterval(function(){ setfb(ref, value) }, 3000);
 		})
 	}
@@ -239,7 +239,7 @@ function Server(){
 
 		var damage =checkDamage();
 
-		console.log(correctAnswer, t1Value, t2Value, "answers")
+		// console.log(correctAnswer, t1Value, t2Value, "answers")
 		if(t1Value === t2Value && t1Value === correctAnswer){
 			timeDifference = Math.abs(t1Time - t2Time)
 			// console.log(timeDifference)
@@ -366,7 +366,6 @@ function Server(){
 	 * @summary Starts the server
 	 */
 	function initializeData(id){
-		operationGenerator.setConfiguration(self.rules, self.numPerOperations)
 
 		valores = {
 			rules:self.rules,
@@ -457,7 +456,7 @@ function Server(){
 				var answer = snapshot.toJSON();
 				var key = snapshot.key
 				valores[key] = answer;
-				console.log("answer", answer)
+				// console.log("answer", answer)
 				var isAllAnswered = checkAllAnswered()
 				if (isAllAnswered) {
 					checkResults();
@@ -544,7 +543,7 @@ function Server(){
 		var params = params || {}
 		var rules = params.rules || operationGenerator.RULES_SET.EASY
 		var battleTime = params.battleTime || 300000
-		var questionGrade = params.grade || 0
+		var questionGrade = params.grade || -1
 		self.battleTime = battleTime
 		self.rules = rules
 		self.questionGrade = questionGrade
@@ -553,12 +552,12 @@ function Server(){
 		self.maxRounds = typeof params.maxRounds !== "undefined" ? params.maxRounds : self.maxRounds
 
 		self.events = {};
-		console.log(self.events)
+		// console.log(self.events)
 		var numPerOperations = Math.round(battleTime / 60000) * 3
 		self.numberOperation = numPerOperations
 
 		checkConnected(currentId)
-
+		operationGenerator.setConfiguration(self.rules, self.numPerOperations)
 	}
 
 	this.setGameReady = function (value) {

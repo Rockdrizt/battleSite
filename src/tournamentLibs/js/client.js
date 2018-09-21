@@ -50,7 +50,7 @@ function Client(){
 			self.events[name].push(handler);
 		else
 			self.events[name] = [handler];
-		console.log(self.events[name])
+		// console.log(self.events[name])
 	};
 
 	/* This is a bit tricky, because how would you identify functions?
@@ -77,7 +77,7 @@ function Client(){
 
 	var setfb = function(ref, value) {
 		ref.set(value).catch(function (reason) {
-			console.log(reason)
+			// console.log(reason)
 			setfb(ref, value)
 		})
 	}
@@ -135,7 +135,7 @@ function Client(){
 
 			var values = snapshot.val();
 			if(values){
-				console.log("on Turn End triggered")
+				// console.log("on Turn End triggered")
 				self.fireEvent('onTurnEnds',[values]);
 			}
 
@@ -170,7 +170,7 @@ function Client(){
 		self.refIdGame.child('retry').off()
 		self.refIdGame.child('retry').on('value', function(snapshot) {
 			var values = snapshot.toJSON();
-			console.log("retryPressed", values)
+			// console.log("retryPressed", values)
 			if((values)&&(values.retry)){
 				self.restartGame(values.retry)
 				self.gameEnded = false
@@ -258,7 +258,7 @@ function Client(){
 	 */
 	this.start = function(idGame, onAlert, onWait){
 		// self.events = {};
-		console.log(self.events)
+		// console.log(self.events)
 		self.refIdGame= database.ref();
 		self.showAlert = onAlert
 		self.onWait = onWait

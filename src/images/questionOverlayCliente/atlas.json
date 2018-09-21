@@ -2,15 +2,23 @@
 
 {
 	"filename": "blueBtn",
-	"frame": {"x":1263,"y":487,"w":481,"h":205},
+	"frame": {"x":1075,"y":244,"w":523,"h":199},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":1,"y":1,"w":481,"h":205},
-	"sourceSize": {"w":482,"h":208}
+	"spriteSourceSize": {"x":0,"y":0,"w":523,"h":199},
+	"sourceSize": {"w":535,"h":199}
+},
+{
+	"filename": "btnBoard",
+	"frame": {"x":1,"y":1,"w":1072,"h":366},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":1072,"h":366},
+	"sourceSize": {"w":1072,"h":366}
 },
 {
 	"filename": "correct",
-	"frame": {"x":1127,"y":244,"w":827,"h":241},
+	"frame": {"x":851,"y":818,"w":827,"h":241},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":827,"h":241},
@@ -18,7 +26,7 @@
 },
 {
 	"filename": "poker",
-	"frame": {"x":1127,"y":1,"w":848,"h":241},
+	"frame": {"x":1,"y":721,"w":848,"h":241},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":848,"h":241},
@@ -26,39 +34,47 @@
 },
 {
 	"filename": "questionBox",
-	"frame": {"x":1,"y":594,"w":1260,"h":220},
+	"frame": {"x":344,"y":1106,"w":1152,"h":179},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":1260,"h":220},
-	"sourceSize": {"w":1260,"h":220}
+	"spriteSourceSize": {"x":0,"y":0,"w":1152,"h":179},
+	"sourceSize": {"w":1152,"h":179}
 },
 {
 	"filename": "questionBtn",
-	"frame": {"x":1263,"y":694,"w":435,"h":139},
+	"frame": {"x":344,"y":964,"w":483,"h":140},
 	"rotated": false,
 	"trimmed": true,
-	"spriteSourceSize": {"x":30,"y":30,"w":435,"h":139},
-	"sourceSize": {"w":465,"h":199}
+	"spriteSourceSize": {"x":10,"y":16,"w":483,"h":140},
+	"sourceSize": {"w":499,"h":172}
 },
 {
 	"filename": "questionImage",
-	"frame": {"x":1,"y":1,"w":1124,"h":348},
+	"frame": {"x":1,"y":369,"w":1071,"h":350},
 	"rotated": false,
 	"trimmed": false,
-	"spriteSourceSize": {"x":0,"y":0,"w":1124,"h":348},
-	"sourceSize": {"w":1124,"h":348}
+	"spriteSourceSize": {"x":0,"y":0,"w":1071,"h":350},
+	"sourceSize": {"w":1071,"h":350}
 },
 {
 	"filename": "timeGauge",
-	"frame": {"x":1746,"y":487,"w":225,"h":226},
+	"frame": {"x":1600,"y":244,"w":225,"h":226},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":225,"h":226},
 	"sourceSize": {"w":225,"h":226}
 },
 {
+	"filename": "timeOut",
+	"frame": {"x":1074,"y":472,"w":758,"h":344},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":758,"h":344},
+	"sourceSize": {"w":758,"h":344}
+},
+{
 	"filename": "wrong",
-	"frame": {"x":1,"y":351,"w":720,"h":241},
+	"frame": {"x":1075,"y":1,"w":720,"h":241},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":720,"h":241},
@@ -66,7 +82,7 @@
 },
 {
 	"filename": "yellowCircle",
-	"frame": {"x":723,"y":351,"w":341,"h":240},
+	"frame": {"x":1,"y":964,"w":341,"h":240},
 	"rotated": false,
 	"trimmed": false,
 	"spriteSourceSize": {"x":0,"y":0,"w":341,"h":240},
@@ -77,8 +93,8 @@
 	"version": "1.0",
 	"image": "atlas.png",
 	"format": "RGBA8888",
-	"size": {"w":1976,"h":834},
+	"size": {"w":1833,"h":1286},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:c72875357844f96d5dd66ef3f3b41b34:e0e3b3a2cd67640e33230cb1c0c0916d:cbce6b53f0f49e0bf15173c25c41f876$"
+	"smartupdate": "$TexturePacker:SmartUpdate:11145a58905a74c439b8878adc7d71c5:526d19343a1a3cf3c36552b24f1aa904:cbce6b53f0f49e0bf15173c25c41f876$"
 }
 }

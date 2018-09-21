@@ -1,6 +1,11 @@
 {
 	"category":"yogotar",
 	"attacks": {
+        
+        "skins": {
+            
+        "dinamita1": {    
+            
 		"normal": [
 			{
 				"id": "normalFire",
@@ -20,12 +25,47 @@
 		],
 		"ultra":[
 			{
-				"id": "ultraDinamita",
+				"id": "ultraDinamita1",
 				"attachment": "particle8",
 				"delay": 1200,
 				"multiplier": 1
+                
+                    }
+                ]
+            
+            },
+            
+        "dinamita2": {    
+            
+		"normal": [
+			{
+				"id": "normalFire",
+				"attachment": "particle4",
+				"delay": 600,
+				"multiplier": 1
 			}
-		]
+		],
+		"super": [
+            {
+				"id": "superDinamita",
+				"attachment": "particle12",
+				"delay": 800,
+				"multiplier": 1
+			}
+
+		],
+		"ultra":[
+			{
+				"id": "ultraDinamita2",
+				"attachment": "particle8",
+				"delay": 1200,
+				"multiplier": 1
+                
+                    }
+                ]
+            
+            }    
+        }    
 	},
 	"directory": "/spines/yogotars/battle/Dinamita/dinamita.json",
 	"name": "Dinamita",

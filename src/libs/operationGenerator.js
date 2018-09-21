@@ -204,7 +204,7 @@ var operationGenerator = function () {
 				var diff = operand1 % operand2
 				if(diff > 0)
 					operand1 = operand1 + (operand2 - diff)
-				console.log(operand1, operand2, "DIV")
+				// console.log(operand1, operand2, "DIV")
 				answer = (operand1 / operand2)
 				break
 		}
@@ -223,7 +223,7 @@ var operationGenerator = function () {
 		if ((rule.maxRange) && (result > rule.maxRange)) {
 			if(operator === "SUM" || operator === "SUB") {
 				var dif = rule.maxRange - result
-				console.log(dif)
+				// console.log(dif)
 				if (operand2 > operand1)
 					operand2 = operand2 + dif
 				else
@@ -241,11 +241,11 @@ var operationGenerator = function () {
 		}
 
 		var minRange = rule.minRange || MIN_RANGE_DEFAULT
-		console.log(result, minRange)
+		// console.log(result, minRange)
 		if (result < minRange) {
 			if(operator === "SUM" || operator === "SUB") {
 				var dif = minRange - result
-				console.log(dif)
+				// console.log(dif)
 				if (operand1 > operand2) {
 					operand1 = operand1 + dif
 				} else {
@@ -274,7 +274,7 @@ var operationGenerator = function () {
 			var maxOperand1 = Math.pow(10, rule.operand1X) - 1
 			var minOperand1 = Math.pow(10, rule.operand1X - 1) - 1
 			minOperand1 = minOperand1 < 1 ? 1 : minOperand1
-			console.log(maxOperand1, minOperand1)
+			// console.log(maxOperand1, minOperand1)
 			operand1 = Math.floor(Math.random() * (maxOperand1 - minOperand1)) + minOperand1
 		}else if(rule.operand1Const){
 			operand1 = rule.operand1Const

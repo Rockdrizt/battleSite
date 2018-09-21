@@ -5,7 +5,7 @@ window.minigame = window.minigame || {}
 
 function startGame(){
 
-	window.game = new Phaser.Game(1920, 1080, Phaser.WEBGL, "ingame", {init: init, create: create }, false, false);
+	window.game = new Phaser.Game(1792, 1024, Phaser.WEBGL, "ingame", {init: init, create: create }, false, false);
     document.body.style.visibility = "hidden"
 
 	function bootConfigFiles(sceneList) {
@@ -37,9 +37,8 @@ function startGame(){
 				// else {
 					//sceneloader.show("yogoSelector")
 					var loaderScene = sceneloader.getScene("preloaderIntro")
-
-					//loaderScene.onComplete("startScreen")
-					sceneloader.show("battle")
+					loaderScene.onComplete("battle")
+					//sceneloader.show("yogoSelector")
 				// }
 	    	}
 
@@ -94,26 +93,16 @@ function startGame(){
 		spineLoader.init()
     	sound.init(game)
 
-//		var teams = [
-//            
-//			[{name:"yogotarEagle", skin:"eagle1"}, {name:"yogotarNao", skin:"nao2"}, {name:"yogotarTomiko", skin:"tomiko1"}],
-//			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarArthurius", skin:"arthurius1"}, {name:"yogotarEstrella", skin:"estrella1"}],
-//
-//		]
-
         var teams = [
             
-//            [{name:"dinamita", skin:"dinamita1"}, {name:"theffanie", skin:"theffanie2"}, {name:"luna", skin:"luna1"}],
-//			[{name:"eagle", skin:"eagle2"}, {name:"nao", skin:"nao1"}, {name:"estrella", skin:"estrella1"}],
-            
-            [{name:"yogotarNao", skin:"nao1"}, {name:"yogotarDinamita", skin:"dinamita2"}, {name:"yogotarLuna", skin:"luna1"}],
-			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarNao", skin:"nao2"}, {name:"yogotarEstrella", skin:"estrella1"}],
-            
-        ];
+			[{name:"yogotarNao", skin:"nao1"}, {name:"yogotarDinamita", skin:"dinamita2"}, {name:"yogotarLuna", skin:"luna1"}],
+			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarNao", skin:"nao2"}, {name:"yogotarEstrella", skin:"estrella1"}],            
+		];
+		
 		//battleScene.setTeams(teams)
 		battle.setTeams(teams)
-        //reward.setTeams(teams)
-        //reward.setWinner(1)
+        reward.setTeams(teams)
+        reward.setWinner(1)
 		server = new Server()
     }
 
@@ -121,8 +110,9 @@ function startGame(){
 		console.log("createEpicBattle")
     	bootConfigFiles([
             //startScreen,
-            //yogoSelector,
-            battle,
+			//yogoSelector,
+			battle,
+			reward,
     	])
     }
 }

@@ -3049,11 +3049,13 @@ var PhaserSpine;
             this.skeleton.updateWorldTransform();
             var drawOrder = this.skeleton.drawOrder;
             var slots = this.skeleton.slots;
+
             for (var i = 0, n = drawOrder.length; i < n; i++) {
                 if (drawOrder[i].currentSprite !== undefined) {
-                    this.children[i] = drawOrder[i].currentSprite.parent;
+                    drawOrder[i].currentSprite.parent.z = i;
                 }
             }
+            this.sort()
             for (var i = 0, n = slots.length; i < n; i++) {
                 var slot = slots[i];
                 var attachment = slot.attachment;
