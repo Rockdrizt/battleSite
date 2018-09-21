@@ -134,7 +134,8 @@ function selectColorTeam(){
         }).appendTo(GradientBar);         
         
     }else{
-        $("#teamLogo").attr("src","img/beta_team.png");
+        $("#logoCuantrix").attr("src","img/beta_team.png");
+        $("#teamLogo").attr("src","img/logo.png");
         createSVGElement('stop')
             .attr({
                 offset: "4.514761e-04",
