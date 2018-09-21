@@ -83,9 +83,9 @@ var battleScene = function() {
 	}
 
 	var POSITIONS = {
-		UP:{x:130, y: -200, scale:{x:0.8, y:0.8}},
-		MID:{x:350, y: 0, scale:{x:0.9, y:0.9}},
-		DOWN:{x:-70, y: 120, scale:{x:1, y:1}},
+		UP:{x:170, y: -200, scale:{x:0.7, y:0.7}},
+		MID:{x:350, y: 0, scale:{x:0.8, y:0.8}},
+		DOWN:{x:-20, y: 120, scale:{x:0.9, y:0.9}},
 	}
 
 	var ATTACKS = ["normal", "super", "ultra"]
@@ -312,7 +312,7 @@ var battleScene = function() {
 			groupPoint.beginFill(0xffffff)
 			groupPoint.drawRect(0, 0, 50, 10)
 			groupPoint.endFill()
-			groupPoint.x = game.world.centerX * 0.5 * side.direction + 100 * side.direction
+			groupPoint.x = game.world.centerX * 0.5 * side.direction + 40 * side.direction
 			groupPoint.y = CHARACTER_CENTER_OFFSET.y + game.world.centerY + POSITIONS.MID.y
 			groupPoint.characters = teamCharacters
 			groupPoint.impactPoint = {x:groupPoint.x, y:groupPoint.y}

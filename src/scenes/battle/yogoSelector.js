@@ -777,7 +777,7 @@ var yogoSelector = function(){
     }
 
 	function setAliveSpine(obj, alive){
-		console.log(alive)
+		// console.log(alive)
 		obj.setAlive(alive)
 	}
 
