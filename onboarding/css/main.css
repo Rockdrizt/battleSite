@@ -1192,7 +1192,6 @@
   width: 60%; }
   .item--difficulty .header--difficulty {
     width: 100%;
-    background-image: linear-gradient(90deg, #bbd400, #129264);
     letter-spacing: 2px;
     text-shadow: 0 3px 0 #2d1f4e, 0 -3px 0 #2d1f4e, -3px 0 0 #2d1f4e, 3px 0 0 #2d1f4e, 2px 2px 0 #2d1f4e, -2px -2px 0 #2d1f4e, 2px -2px 0 #2d1f4e, -2px 2px 0 #2d1f4e;
     position: relative;
@@ -1214,6 +1213,12 @@
         transform: scaleX(-1); }
       .item--difficulty .header--difficulty .header__btn img {
         width: 100%; }
+    .item--difficulty .header--difficulty.easy {
+      background-image: linear-gradient(90deg, #bbd400, #129264); }
+    .item--difficulty .header--difficulty.medium {
+      background-image: linear-gradient(90deg, #f8c22a, #ec6f32); }
+    .item--difficulty .header--difficulty.hard {
+      background-image: linear-gradient(90deg, #e8522c, #c52752); }
   .item--difficulty .difficulty {
     background-color: #f9f3d1;
     background-image: url(../img/mathtournament-onboarding-board-tile.png);
@@ -1301,12 +1306,10 @@
           .item--difficulty .difficulty .difficulty__form .difficulty__list li label span {
             position: absolute;
             left: -50px; }
-        .item--difficulty .difficulty .difficulty__form .difficulty__list li .difficulty__btn {
-          display: none; }
-          .item--difficulty .difficulty .difficulty__form .difficulty__list li .difficulty__btn img {
-            width: 60px;
-            position: absolute;
-            right: 50px; }
+        .item--difficulty .difficulty .difficulty__form .difficulty__list li .difficulty__btn img {
+          width: 60px;
+          position: absolute;
+          right: 50px; }
   .item--difficulty .item__buttons {
     position: absolute;
     left: 50%;

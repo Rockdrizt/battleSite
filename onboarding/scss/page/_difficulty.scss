@@ -2,7 +2,6 @@
   width: 60%;
   .header--difficulty {
     width: 100%;
-    background-image: linear-gradient(90deg, #bbd400, #129264);
     @include text-border;
     position: relative;
     transition: ease all 0.3s;
@@ -27,6 +26,15 @@
       img {
         width: 100%;
       }
+    }
+    &.easy {
+      background-image: linear-gradient(90deg, #bbd400, #129264);
+    }
+    &.medium {
+      background-image: linear-gradient(90deg, #f8c22a, #ec6f32);
+    }
+    &.hard {
+      background-image: linear-gradient(90deg, #e8522c, #c52752);
     }
   }
   .difficulty {
@@ -70,7 +78,7 @@
             }
           }
           .difficulty__btn {
-            display: none;
+            // display: none;
             img {
               width: 60px;
               position: absolute;
