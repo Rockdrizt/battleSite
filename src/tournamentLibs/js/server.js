@@ -345,6 +345,7 @@ function Server(){
 		valores.t2answer = false;
 
 		questionData.date = firebase.database.ServerValue.TIMESTAMP
+		questionData.timeOut = false
 		valores.data = questionData;
 
 		setfb(refIdGame.child("data"), questionData)//refIdGame.child("data").set(valores.data);
@@ -354,10 +355,18 @@ function Server(){
 
 	function getData(val) {
 		valores = val
-		refIdGame.update({
-			serverReady : true,
-			gameEnded : false,
-		})
+		//TODO: when retry is applied change player reset
+		var team1 = val.t1
+		var team2 = val.t2
+		team1.life = 100
+		team2.life = 100
+		team1.score = {correct : 0, wrong : 0}
+		team2.score = {correct : 0, wrong : 0}
+		team1.avatar = false
+		team2.avatar = false
+		valores.serverReady = true
+		valores.gameEnded = false
+		refIdGame.update(valores)
 
 		self.currentData = val
 	}
@@ -607,5 +616,9 @@ function Server(){
 
 	this.setTimeOut = function () {
 		setfb(refIdGame.child("timeOut"), true)
+	}
+
+	this.setQuestionTimeOut = function () {
+		setfb(refIdGame.child("data/timeOut"), true)
 	}
 }

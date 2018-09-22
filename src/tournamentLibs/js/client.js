@@ -124,10 +124,11 @@ function Client(){
 		self.refIdGame.child("data").off()
 		self.refIdGame.child("data").on('value', function(snapshot) {
 			var data = snapshot.val();
-			if(data) {
+			if(data && !data.timeOut) {
 				self.currentData = data
 				self.fireEvent('showEquation', [data]);
-			}
+			}else if(data.timeOut === true)
+				self.fireEvent("questionTimeOut")
 		});
 
 		self.refIdGame.child('winner').off()

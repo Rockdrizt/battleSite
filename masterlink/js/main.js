@@ -56,6 +56,11 @@ for(var i= 0; i<arrayList.length;i++){
             <h2>`+arrayList[i].name+`</h2>
             <a href=`+arrayList[i].link+`><div class="btn">Entra Aquí</div></a>
             </div>
+            <div class="qrCode`+ i +`"></div>
             `
         );
+    
+    jQuery('.qrCode' + i).qrcode({
+		text	: arrayList[i].link
+	});	
 }

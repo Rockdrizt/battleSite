@@ -18,7 +18,7 @@ var resultsFeedback = function(){
         normal : 20000
     }
 
-    var OPTIONS_LETTER = ["A", "C", "B", "D"]
+    var OPTIONS_LETTER = ["A", "B", "C", "D"]
     
     var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#000066", align: "center"}
 
@@ -182,7 +182,8 @@ var resultsFeedback = function(){
                 }
 
                 neutral.chain(showCorrect)
-                this.text.setText(OPTIONS_LETTER[index])
+                var letter = index > 0 ? OPTIONS_LETTER[index] : "-"
+                this.text.setText(letter)
                 game.add.tween(this.text).to({alpha: 1}, 200, Phaser.Easing.Cubic.Out, true, 300).chain(neutral)
             }
 

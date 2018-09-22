@@ -1,0 +1,223 @@
+
+PlecaAmarilla.png
+size: 2048,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Comp 1/PlacaAmarilla_0
+  rotate: false
+  xy: 2, 387
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_1
+  rotate: false
+  xy: 2, 310
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_10
+  rotate: false
+  xy: 2, 79
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_11
+  rotate: false
+  xy: 304, 156
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_12
+  rotate: false
+  xy: 606, 233
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_13
+  rotate: false
+  xy: 908, 310
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_14
+  rotate: false
+  xy: 1210, 387
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_15
+  rotate: false
+  xy: 2, 2
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_16
+  rotate: false
+  xy: 304, 79
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_17
+  rotate: false
+  xy: 606, 156
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_18
+  rotate: false
+  xy: 908, 233
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_19
+  rotate: false
+  xy: 1210, 310
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_2
+  rotate: false
+  xy: 304, 387
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_20
+  rotate: false
+  xy: 1512, 387
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_21
+  rotate: false
+  xy: 304, 2
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_22
+  rotate: false
+  xy: 606, 79
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_23
+  rotate: false
+  xy: 908, 156
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_24
+  rotate: false
+  xy: 1210, 233
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_25
+  rotate: false
+  xy: 1512, 310
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_26
+  rotate: false
+  xy: 606, 2
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_27
+  rotate: false
+  xy: 908, 79
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_28
+  rotate: false
+  xy: 1210, 156
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_29
+  rotate: false
+  xy: 1512, 233
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_3
+  rotate: false
+  xy: 2, 233
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_30
+  rotate: false
+  xy: 908, 2
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_4
+  rotate: false
+  xy: 304, 310
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_5
+  rotate: false
+  xy: 606, 387
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_6
+  rotate: false
+  xy: 2, 156
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_7
+  rotate: false
+  xy: 304, 233
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_8
+  rotate: false
+  xy: 606, 310
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
+Comp 1/PlacaAmarilla_9
+  rotate: false
+  xy: 908, 387
+  size: 300, 75
+  orig: 300, 75
+  offset: 0, 0
+  index: -1
