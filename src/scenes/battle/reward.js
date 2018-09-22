@@ -79,7 +79,7 @@ var reward = function(){
     
     var TEAMS = [
 		{
-			name: "Equipo Alpha",
+			name: "Equipo Alfa",
             side: 1,
             color: 1,
             coupSkin: "bravo",
@@ -290,15 +290,15 @@ var reward = function(){
 
             var obj = losers[i]
 
-            var player = spineLoader.createSpine(obj.name, obj.skin, "gg", frame.x, frame.height * 1.1, true)
+            var player = spineLoader.createSpine(obj.name, obj.skin, "gg", frame.x, frame.height * 0.9, true)
             player.scale.setTo(0.7)
 			player.setAlive(false)
             subGroup.add(player)
             subGroup.anim = player
 
-            var mask = game.add.graphics(-frame.width * 0.8, -160)
+            var mask = game.add.graphics(-frame.width * 0.8, -200)
             mask.beginFill(0xffffff)
-            mask.drawRect(0, 0, frame.width * 1.5, frame.height * 1.5)
+            mask.drawRect(0, 0, frame.width * 1.5, frame.height * 1.55)
             player.mask = mask
             player.addChild(mask)
 

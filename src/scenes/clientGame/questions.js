@@ -63,7 +63,7 @@ var questions = function(){
 
 	var TEAMS = {
 		1: {
-			name: "Equipo Alpha",
+			name: "Equipo Alfa",
 			side: 1,
 			states: {yellow: 0, color: 1},
 			animSkin: "alfa"
@@ -225,9 +225,10 @@ var questions = function(){
 	
 	function setQuestionTimeOut() {
 		console.log("timeOut")
-		questionGroup.stopTimer()
+		//questionGroup.stopTimer()
 		cliente.buttonOnClick({time : 0, value : -1})
-		questionGroup.hide()
+
+		game.time.events.add(3000, questionGroup.clearQuestion)
 	}
 
 	return {

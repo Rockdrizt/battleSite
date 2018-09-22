@@ -119,7 +119,7 @@ var teamSelector = function(){
 
 	var TEAMS = {
 		1: {
-			name: "Equipo Alpha",
+			name: "Equipo Alfa",
 			side: 1,
 			states: {yellow: 0, color: 1},
 			animSkin: "alfa"
