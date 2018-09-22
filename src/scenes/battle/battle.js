@@ -873,6 +873,7 @@ var battle = function(){
 				server.addEventListener('afterGenerateQuestion', questionGroup.showQuestion);
 				server.addEventListener('onTurnEnds', showFeedback);
 			}
+			questionGroup.timeOutCallback = server.setQuestionTimeOut
 
 			game.add.tween(sceneGroup).from({alpha:0},500, Phaser.Easing.Cubic.Out,true)
 

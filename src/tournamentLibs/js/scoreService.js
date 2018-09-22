@@ -91,7 +91,7 @@ function ScoreService(){
 				var teamValue = snapshot.val()
 				var key = snapshot.key
 				var numTeam = Number(key[key.length - 1])
-				if (typeof teamValue.score === "number" && typeof teamValue.life === "number") {
+				if (teamValue.score !== undefined && teamValue.life !== undefined) {
 					var returnValue = {
 						numTeam : numTeam,
 						score : teamValue.score,

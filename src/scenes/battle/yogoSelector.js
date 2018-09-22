@@ -328,7 +328,7 @@ var yogoSelector = function(){
 		var teamsNames = [
 			{
 				skin:"alfa",
-				title: "Equipo Alpha"
+				title: "Equipo Alfa"
 			},
 			{
 				skin:"bravo",

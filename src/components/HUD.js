@@ -51,7 +51,7 @@ var HUD = function(){
             lifeBox.anchor.setTo(i, 0.5)
             lifeBox.scale.setTo(0.95)
 
-            var teamName = new Phaser.Text(teamSide.game, lifeBox.x, lifeBox.y - 95, "Equipo Alpha", fontStyle)
+            var teamName = new Phaser.Text(teamSide.game, lifeBox.x, lifeBox.y - 95, "Equipo Alfa", fontStyle)
             teamName.anchor.setTo(i, 0.5)
             teamName.fontSize = 65
             teamName.stroke = "#000066"

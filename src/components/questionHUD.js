@@ -323,10 +323,8 @@ var questionHUD = function(){
 		chronoGroup.timeText = timeText
 
 		var circle = game.add.graphics(50, 0)
-		//circle.lineStyle(40, 0xFF0000, 0.5)
 		circle.beginFill(0xFF0000, 0.5)
 		circle.lineSize = timeGauge.width * 0.55
-		//circle.arc(0, 0, circle.lineSize, game.math.degToRad(-10), game.math.degToRad(280), true)
 		circle.arc(0, 0, circle.lineSize, game.math.degToRad(290), game.math.degToRad(-10), true)
 		circle.endFill()
 		chronoGroup.add(circle)
@@ -382,8 +380,7 @@ var questionHUD = function(){
 
 		this.timeElapsed = 0
 		this.riddle = riddle
-
-		if(!this.client) return
+		this.answered = false
 
 		this.chrono.maxTime = this.riddle.timers.normal
 		var maxTime = convertTime(this.chrono.maxTime)
@@ -412,7 +409,8 @@ var questionHUD = function(){
 
 	function showNoImage(){
 
-		var apearOverlay = game.add.tween(this).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
+		var toAlpha = this.client ? 1 : 0
+		var apearOverlay = game.add.tween(this).to({alpha: toAlpha}, 100, Phaser.Easing.Cubic.Out, true)
 		var apearButtons = game.add.tween(this.buttons).to({alpha: 1}, 300, Phaser.Easing.Cubic.Out, false)
 		var apearChrono = game.add.tween(this.chrono).from({x: -400}, 300, Phaser.Easing.Cubic.Out, false)
 		apearOverlay.chain(apearButtons)
@@ -436,11 +434,12 @@ var questionHUD = function(){
 	}
 
 	function showYesImage(){
-		
+
+		var toAlpha = this.client ? 1 : 0
 		this.image.image.loadTexture(this.riddle.image)
 		this.image.image.key = this.riddle.image
 
-		var apearOverlay = game.add.tween(this).to({alpha: 1}, 100, Phaser.Easing.Cubic.Out, true)
+		var apearOverlay = game.add.tween(this).to({alpha: toAlpha}, 100, Phaser.Easing.Cubic.Out, true)
 		var apearButtons = game.add.tween(this.buttons).to({alpha: 1}, 300, Phaser.Easing.Cubic.Out, false)
 		var apearChrono = game.add.tween(this.chrono).from({x: -400}, 300, Phaser.Easing.Cubic.Out, false)
 		var scaleContainer = game.add.tween(this.image.container.scale).to({y: 1}, 300, Phaser.Easing.Cubic.Out, false)
@@ -477,7 +476,7 @@ var questionHUD = function(){
 
         game.add.tween(this.question).to({alpha:1}, 300, Phaser.Easing.linear, true)
         
-        //this.startTimer()
+        this.startTimer()
     }
 
 	function hideOverlay(){
@@ -505,12 +504,15 @@ var questionHUD = function(){
 	}
 
 	function inputOption(btn){
+		if(this.answered)
+			return
 
 		if(this.timer){
 			this.timer.stop()
 			this.timer.destroy()
 		}
 
+		this.answered = true
 		sound.play("shineSpell")
 		this.buttons.options.btnPressed = btn
 		this.buttons.options.setAll("inputEnabled", false)
@@ -605,7 +607,7 @@ var questionHUD = function(){
     
     function startTimer(){
 	
-        var maxTime = this.chrono.maxTime
+        var maxTime = this.riddle.timers.normal
 		if(this.timer)
 			this.timer.destroy()
 
@@ -632,12 +634,14 @@ var questionHUD = function(){
 		this.timer.stop()
 		this.timer.destroy()
 		this.chrono.timeText.setText("0:00")
+		if(this.timeOutCallback) this.timeOutCallback()
 
-		// this.buttons.options.setAll("inputEnabled", false)
-		// this.feedBackImg.loadTexture("atlas.question", "timeOut")
-		// game.add.tween(this.black).to({alpha:0.5}, 300, Phaser.Easing.linear, true)
-		// game.add.tween(this.feedBackImg).to({alpha:1}, 300, Phaser.Easing.linear, true)
-		//game.time.events.add(3000, this.clearQuestion)
+		if(this.client){
+			this.buttons.options.setAll("inputEnabled", false)
+			this.feedBackImg.loadTexture("atlas.question", "timeOut")
+			game.add.tween(this.black).to({alpha:0.5}, 300, Phaser.Easing.linear, true)
+			game.add.tween(this.feedBackImg).to({alpha:1}, 300, Phaser.Easing.linear, true)
+		}
 	}
 	
 	function convertTime(time) {

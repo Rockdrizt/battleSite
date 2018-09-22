@@ -63,7 +63,7 @@ var questions = function(){
 
 	var TEAMS = {
 		1: {
-			name: "Equipo Alpha",
+			name: "Equipo Alfa",
 			side: 1,
 			states: {yellow: 0, color: 1},
 			animSkin: "alfa"
@@ -222,7 +222,14 @@ var questions = function(){
 		//var riddle = riddles.getQuestion(2)
 		questionGroup.showQuestion(riddle)
 	}
+	
+	function setQuestionTimeOut() {
+		console.log("timeOut")
+		//questionGroup.stopTimer()
+		cliente.buttonOnClick({time : 0, value : -1})
 
+		game.time.events.add(3000, questionGroup.clearQuestion)
+	}
 
 	return {
 
@@ -254,9 +261,11 @@ var questions = function(){
 				cliente.removeEventListener("onTurnEnds", checkAnswer)
 				cliente.removeEventListener("onGameEnds", showWinner)
 				cliente.removeEventListener("showEquation", questionGroup.showQuestion)
+				cliente.removeEventListener("questionTimeOut", setQuestionTimeOut)
 				cliente.addEventListener("onTurnEnds", checkAnswer)
 				cliente.addEventListener("showEquation", questionGroup.showQuestion)
 				cliente.addEventListener("onGameEnds", showWinner)
+				cliente.addEventListener("questionTimeOut", setQuestionTimeOut)
 
 				//cliente.timeOutCallback = setTimeOut
 				// clientData.setReady(true)
