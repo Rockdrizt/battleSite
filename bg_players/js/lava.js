@@ -63,22 +63,22 @@ function animateEnd(ended){
     console.log(ended)
     if(ended){
         if(teamId == ended.winner){
-            function createConfetti(NumConfetti){
-                 for (var i = 0; i < NumConfetti; i++) {
-                  create(i);
-                }   
-            }
+            TweenMax.fromTo($(parent).find(".gradient--gold"),0.5,{height:"1344px",top:"0px"},{height:"0px",top:"1344px"});
+            createConfetti(20)
+        }else{
+            
+            TweenMax.fromTo($(parent).find(".gradient--silver"),0.5,{height:"1344px",top:"0px"},{height:"0px",top:"1344px"});
             createConfetti(20)
         } 
     }else{
-       function createConfetti(NumConfetti){
-           
-       }
-        
+            TweenMax.fromTo($(parent).find(".gradient--gold"),0.5,{height:"1344px",top:"0px"},{height:"0px",top:"1344px"});
+            TweenMax.fromTo($(parent).find(".gradient--silver"),0.5,{height:"1344px",top:"0px"},{height:"0px",top:"1344px"});
         createConfetti(0)
+        console.log("ended")
     }
 }
 
+    
 
 function correctAnswer(parent){  
     TweenMax.fromTo($(parent).find(".gradient--green"),0.5,{height:"0px",top:"1344px"},{height:"1344px",top:"0px"})
@@ -193,7 +193,12 @@ selectColorTeam();
 
 
 
+function createConfetti(NumConfetti){
 
+                 for (var i = 0; i < NumConfetti; i++) {
+                  create(i);
+                }   
+            }
 
 
 function create(i) {
@@ -240,4 +245,5 @@ function reset(x) {
     drop(x);             
   });
 }
+
 

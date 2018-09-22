@@ -122,6 +122,7 @@ function ScreenService(){
     this.endGame = function (numTeam){
         self.refIdGame.child("gameEnded").on('value', function(ended) {
 			var EndGame = ended.val();
+            console.log("EndGame " + EndGame)
 			if(EndGame) {
 				self.animateEnd(EndGame)
 			}
