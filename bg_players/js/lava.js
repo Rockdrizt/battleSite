@@ -5,7 +5,7 @@ var idGame = idGameFromHash;
 var teamId = parseInt(getParameterByName("team"));
 console.log(idGame)
 var service = new ScreenService();
-service.start(idGame, teamId, showTeam,animateAnswer,hitToLife)
+service.start(idGame, teamId, showTeam,animateAnswer,hitToLife, animateEnd);
 
 
 function getParameterByName(name, url) {
@@ -58,6 +58,26 @@ function ChoiceYogotar(parent,obj){
     TweenMax.fromTo($(parent).find(".yogotar").find("img"),0.5,{top:"1080px"},{top:"0px",ease:Back.easeOut,delay:1});
 }
 
+
+function animateEnd(ended){
+    console.log(ended)
+    if(ended){
+        if(teamId == ended.winner){
+            function createConfetti(NumConfetti){
+                 for (var i = 0; i < NumConfetti; i++) {
+                  create(i);
+                }   
+            }
+            createConfetti(20)
+        } 
+    }else{
+       function createConfetti(NumConfetti){
+           
+       }
+        
+        createConfetti(0)
+    }
+}
 
 
 function correctAnswer(parent){  
@@ -170,3 +190,54 @@ animateBlob("#animation3",5,6);
 animateBlob("#animation4",4,3);
 animateBlob("#animation5",5,7);
 selectColorTeam();
+
+
+
+
+
+
+function create(i) {
+  var width = Math.random() * 58;
+  var height = width * 2;
+  var colourIdx = Math.ceil(Math.random() * 3);
+  var colour = "red";
+  switch(colourIdx) {
+    case 1:
+      colour = "yellow";
+      break;
+    case 2:
+      colour = "blue";
+      break;
+    default:
+      colour = "red";
+  }
+  $('<div class="confetti-'+i+' '+colour+'"></div>').css({
+    "width" : width+"px",
+    "height" : height+"px",
+    "top" : -Math.random()*20+"%",
+    "left" : Math.random()*100+"%",
+    "opacity" : Math.random()+0.5,
+    "transform" : "rotate("+Math.random()*360+"deg)"
+  }).appendTo('.wrapper');  
+  
+  drop(i);
+}
+
+function drop(x) {
+  $('.confetti-'+x).animate({
+    top: "100%",
+    left: "+="+Math.random()*15+"%"
+  }, Math.random()*2000 + 3000, function() {
+    reset(x);
+  });
+}
+
+function reset(x) {
+  $('.confetti-'+x).animate({
+    "top" : -Math.random()*20+"%",
+    "left" : "-="+Math.random()*15+"%"
+  }, 0, function() {
+    drop(x);             
+  });
+}
+

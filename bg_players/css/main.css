@@ -141,3 +141,28 @@
         .hitYogotar{
             mix-blend-mode:screen;
         }
+
+
+
+.wrapper {
+  position: absolute;
+  height: 100vh;
+    width: 100vw;
+}
+
+[class|="confetti"] {
+  position: absolute;
+}
+
+.red {
+  background-color: #ff2222;
+}
+
+.yellow {
+  background-color: #ff8400;
+}
+
+.blue {
+  background-color: #07fa1a;
+}
+
