@@ -296,6 +296,8 @@ var rewardClient = function(){
 
     function createConfetti(){
 
+        var color = indexWinner == cliente.numTeam - 1 ? "0xFCE347" : "0xB7D8DD"
+
         var confetti = game.add.emitter(game.world.centerX, 0, 50)
         confetti.makeParticles("confetti")
         confetti.gravity = 10
@@ -304,7 +306,8 @@ var rewardClient = function(){
         confetti.setSize(game.world.width, 0)
         confetti.setScale(0.3, 0.5, 0.3, 0.5, 0) 
         confetti.forEach(function(element) {
-            element.tint = getRandomColor()
+            //element.tint = getRandomColor()
+            element.tint = color
         });
         confetti.start(false, 5000, 100, 0) 
         sceneGroup.add(confetti)

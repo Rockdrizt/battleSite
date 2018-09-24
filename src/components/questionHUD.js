@@ -291,7 +291,7 @@ var questionHUD = function(){
 		function fixText(){
 
 			if(this.info.height > this.textBox.height){
-				this.info.fontSize--
+				this.info.fontSize -= 2
 				return this.fixText()
 			}
 			else{
