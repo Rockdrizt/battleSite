@@ -346,9 +346,9 @@ function Server(){
 
 		questionData.date = firebase.database.ServerValue.TIMESTAMP
 		questionData.timeOut = false
-		valores.data = questionData;
+		valores.questions.push(questionData);
 
-		setfb(refIdGame.child("data"), questionData)//refIdGame.child("data").set(valores.data);
+		refIdGame.child("questions").push().set(valores.data);
 		//TODO: showPossibleAnswers deprected check client events to avoid conflicts.
 		self.fireEvent('afterGenerateQuestion',[questionData]);
 	}
@@ -384,7 +384,7 @@ function Server(){
 			t1answer : false,
 			t2answer : false,
 			possibleAnswers: [],
-			data:false,
+			questions:[],
 			gameReady:false,
 			battleReady:false,
 			gameEnded:false,
@@ -598,7 +598,7 @@ function Server(){
 		valores.time = self.battleTime;
 		valores.maxRounds = self.maxRounds;
 		valores.rules = self.rules
-		valores.data = false;
+		valores.questions = [];
 		valores.gameEnded = false;
 		valores.retry = {retry:location, date:actualDate};
 		valores.timeOut = false
@@ -619,6 +619,6 @@ function Server(){
 	}
 
 	this.setQuestionTimeOut = function () {
-		setfb(refIdGame.child("data/timeOut"), true)
+		setfb(refIdGame.child("questions/timeOut"), true)
 	}
 }
