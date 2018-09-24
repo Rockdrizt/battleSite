@@ -130,12 +130,12 @@ var characterBattle = function () {
 		game = currentGame
 
 		loader.json(character.name + "Data", character.file)
-		loadingFiles[character.name + "Data"] = {onComplete:function(){
+		loadingFiles[character.name + "Data"] = {onComplete:function(character){
 				var characterData = game.cache.getJSON(character.name + "Data")
 				addSpine(character, characterData)
 				character.data = characterData
 				loadProjectilesData(character, characterData)
-			}}
+			}.bind(this, character)}
 
 	}
 

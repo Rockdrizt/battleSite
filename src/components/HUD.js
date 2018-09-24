@@ -221,12 +221,12 @@ var HUD = function(){
             lifeText = lifeText.split("").join(String.fromCharCode(8202))
             life.points.setText(lifeText)
 
-            if(damage == MIN_LIFE){
+            // if(damage == MIN_LIFE){
                 game.time.events.add(2000, self.setWinteam, null, winIndex, loseIndex)
-            }
-            else{
-                self.nextRound(delay)
-            }
+            // }
+            // else{
+            //     self.nextRound(delay)
+            // }
 
             //UPDATE SCORE SERVER
             var team1Data = self.teams[0]

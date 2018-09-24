@@ -143,7 +143,7 @@ function startGame(){
             
         ];
 
-		battle.setTeams(teams)
+		//battle.setTeams(teams)
     }
 
     function create(){

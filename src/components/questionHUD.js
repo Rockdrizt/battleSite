@@ -422,7 +422,7 @@ var questionHUD = function(){
 			var delay = 200
 			var lasTween
 
-			for (let i = 0; i < this.buttons.options.length; i++) {
+			for (var i = 0; i < this.buttons.options.length; i++) {
 				const opt = this.buttons.options.children[i]
 				opt.info.alpha = 0
 				lasTween = game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay)
@@ -453,7 +453,7 @@ var questionHUD = function(){
 			var delay = 200
 			var lasTween
 
-			for (let i = 0; i < this.buttons.options.length; i++) {
+			for (var i = 0; i < this.buttons.options.length; i++) {
 				const opt = this.buttons.options.children[i]
 				opt.info.alpha = 0
 				lasTween = game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay)
@@ -508,7 +508,7 @@ var questionHUD = function(){
 			return
 
 		if(this.timer){
-			this.timer.stop()
+			this.timer.stop(true)
 			this.timer.destroy()
 		}
 
@@ -532,6 +532,11 @@ var questionHUD = function(){
 		
 		if(this.waiting.spin){
 			this.waiting.spin.stop()
+		}
+
+		if(this.timer){
+			this.timer.stop(true)
+			this.timer.destroy()
 		}
 
 		var riddle = this.riddle
@@ -608,8 +613,10 @@ var questionHUD = function(){
     function startTimer(){
 	
         var maxTime = this.riddle.timers.normal
-		if(this.timer)
+		if(this.timer) {
+        	this.timer.stop(true)
 			this.timer.destroy()
+		}
 
         this.timer = game.time.create()
 		this.timerEvent = this.timer.add(maxTime, this.stopTimer, this)
@@ -631,7 +638,7 @@ var questionHUD = function(){
 	}
     
     function stopTimer(){
-		this.timer.stop()
+		this.timer.stop(true)
 		this.timer.destroy()
 		this.chrono.timeText.setText("0:00")
 		if(this.timeOutCallback) this.timeOutCallback()
