@@ -260,7 +260,7 @@ var questionHUD = function(){
 		btn.maxSize = 70
 		btn.correct = false
 
-		var textBox = game.add.graphics(-110, -60)
+		var textBox = game.add.graphics(-110, -55)
 		textBox.beginFill(0x000000, 0)
 		textBox.drawRect(0, 0, btn.width * 0.6, btn.height - 60)
 		textBox.endFill()
@@ -281,7 +281,7 @@ var questionHUD = function(){
 		var info = new Phaser.Text(group.game, 40, 5, "", fontStyle)
 		info.anchor.setTo(0.5)
         info.alpha = 0
-		info.wordWrapWidth = btn.textBox.width
+		info.wordWrapWidth = textBox.width
 		info.lineSpacing = -20
 		btn.addChild(info)
 		btn.info = info
@@ -290,7 +290,7 @@ var questionHUD = function(){
 
 		function fixText(){
 
-			if(this.info.width > this.textBox.width){
+			if(this.info.height > this.textBox.height){
 				this.info.fontSize--
 				return this.fixText()
 			}
