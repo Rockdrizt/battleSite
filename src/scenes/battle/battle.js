@@ -120,7 +120,11 @@ var battle = function(){
 			{
 				name:"triangles",
 				file:settings.BASE_PATH + "/spines/battle/triangle/triangle.json",
-			}
+			},
+			{
+				name:"banner",
+				file:settings.BASE_PATH + "/spines/selector/banners.json",
+			},
 		],
 		particles: [
 		]
@@ -728,6 +732,10 @@ var battle = function(){
 
 	function showFeedback(event){
 		questionGroup.hide()
+		if(questionGroup.timer){
+			questionGroup.timer.stop(true)
+			questionGroup.timer.destroy()
+		}
 		game.time.events.add(2000, function () {
 			checkAnswer(event)
 		})

@@ -285,6 +285,7 @@ function Server(){
 			correctAnswer:correctAnswer,
 		}
 		setfb(refIdGame.child("winner"), data)//refIdGame.child("winner").set(data);
+		console.log("onTurnEnds")
 		self.fireEvent('onTurnEnds',[data]);
 
 		// valores.t1answer=false;
@@ -619,6 +620,7 @@ function Server(){
 	}
 
 	this.setQuestionTimeOut = function () {
+		console.log("timeOUT!")
 		setfb(refIdGame.child("data/timeOut"), true)
 	}
 }
