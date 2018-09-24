@@ -5,7 +5,7 @@ var idGame = idGameFromHash;
 var teamId = parseInt(getParameterByName("team"));
 console.log(idGame)
 var service = new ScreenService();
-service.start(idGame, teamId, showTeam,animateAnswer,hitToLife)
+service.start(idGame, teamId, showTeam,animateAnswer,hitToLife, animateEnd);
 
 
 function getParameterByName(name, url) {
@@ -59,6 +59,26 @@ function ChoiceYogotar(parent,obj){
 }
 
 
+function animateEnd(ended){
+    console.log(ended)
+    if(ended){
+        if(teamId == ended.winner){
+            TweenMax.fromTo($(parent).find(".gradient--gold"),0.5,{height:"1344px",top:"0px"},{height:"0px",top:"1344px"});
+            createConfetti(20)
+        }else{
+            
+            TweenMax.fromTo($(parent).find(".gradient--silver"),0.5,{height:"1344px",top:"0px"},{height:"0px",top:"1344px"});
+            createConfetti(20)
+        } 
+    }else{
+            TweenMax.fromTo($(parent).find(".gradient--gold"),0.5,{height:"1344px",top:"0px"},{height:"0px",top:"1344px"});
+            TweenMax.fromTo($(parent).find(".gradient--silver"),0.5,{height:"1344px",top:"0px"},{height:"0px",top:"1344px"});
+        createConfetti(0)
+        console.log("ended")
+    }
+}
+
+    
 
 function correctAnswer(parent){  
     TweenMax.fromTo($(parent).find(".gradient--green"),0.5,{height:"0px",top:"1344px"},{height:"1344px",top:"0px"})
@@ -170,3 +190,60 @@ animateBlob("#animation3",5,6);
 animateBlob("#animation4",4,3);
 animateBlob("#animation5",5,7);
 selectColorTeam();
+
+
+
+function createConfetti(NumConfetti){
+
+                 for (var i = 0; i < NumConfetti; i++) {
+                  create(i);
+                }   
+            }
+
+
+function create(i) {
+  var width = Math.random() * 58;
+  var height = width * 2;
+  var colourIdx = Math.ceil(Math.random() * 3);
+  var colour = "red";
+  switch(colourIdx) {
+    case 1:
+      colour = "yellow";
+      break;
+    case 2:
+      colour = "blue";
+      break;
+    default:
+      colour = "red";
+  }
+  $('<div class="confetti-'+i+' '+colour+'"></div>').css({
+    "width" : width+"px",
+    "height" : height+"px",
+    "top" : -Math.random()*20+"%",
+    "left" : Math.random()*100+"%",
+    "opacity" : Math.random()+0.5,
+    "transform" : "rotate("+Math.random()*360+"deg)"
+  }).appendTo('.wrapper');  
+  
+  drop(i);
+}
+
+function drop(x) {
+  $('.confetti-'+x).animate({
+    top: "100%",
+    left: "+="+Math.random()*15+"%"
+  }, Math.random()*2000 + 3000, function() {
+    reset(x);
+  });
+}
+
+function reset(x) {
+  $('.confetti-'+x).animate({
+    "top" : -Math.random()*20+"%",
+    "left" : "-="+Math.random()*15+"%"
+  }, 0, function() {
+    drop(x);             
+  });
+}
+
+

@@ -49,7 +49,8 @@ function ScreenService(){
 			setfb(ref, value)
 		})
 	}
-
+    
+    
     this.checkLife = function (numTeam){
         var lifeInitial;
         self.refIdGame.child("t" + numTeam + "/life").on('value', function(life) {
@@ -93,7 +94,8 @@ function ScreenService(){
             function(snapshot){
             answer = snapshot.val();
         })
-
+        
+        
         self.refIdGame.child("winner").on('value',
         function(changeRound){
             onChangeWinner = true;
@@ -117,19 +119,31 @@ function ScreenService(){
     }
 
 
+    this.endGame = function (numTeam){
+        self.refIdGame.child("gameEnded").on('value', function(ended) {
+			var EndGame = ended.val();
+            console.log("EndGame " + EndGame)
+			if(EndGame) {
+				self.animateEnd(EndGame)
+			}
+		});
+    }    
+
 	/**
 	 * @summary Starts the client
 	 * @param {type} idGame Code of the game
 	 */
-	this.start = function(idGame, numTeam, showTeam, animateAnswer,hitToLife){
+	this.start = function(idGame, numTeam, showTeam, animateAnswer,hitToLife, animateEnd){
 		// self.events = {};
 		self.refIdGame= database.ref(idGame);
         self.showTeam = showTeam
         self.animateAnswer = animateAnswer
         self.hitToLife = hitToLife
+        self.animateEnd = animateEnd
         self.checkTeam(numTeam)
         self.checkAnswer(numTeam)
         self.checkLife(numTeam)
+        self.endGame(numTeam);
 		
 	};
 
