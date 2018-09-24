@@ -50,7 +50,7 @@ var resultsFeedback = function(){
             var roundInfo = game.add.group()
             roundInfo.x = posX * side.direction
             roundInfo.y = OFFSET.y
-            roundInfo.DEFAULT_Y = roundInfo.y
+            roundInfo.SPAWN_Y = OFFSET.y
             roundInfo.time = 0
             roundInfo.twist = side.direction
             roundInfo.INDEX = i
@@ -253,7 +253,7 @@ var resultsFeedback = function(){
         var blueBtn = game.add.sprite(0, 0, "atlas.question", "blueBtn")
         blueBtn.anchor.setTo(0.5)
         blueBtn.alpha = 0
-        blueBtn.maxSize = 70
+        blueBtn.maxFontSize = 70
 
         var textBox = game.add.graphics(-100, -55)
 		textBox.beginFill(0x000000, 0)
@@ -293,6 +293,7 @@ var resultsFeedback = function(){
         function clearInfo(){
             this.text.setText("")
             this.info.setText("")
+            this.info.fontSize = this.maxFontSize
             game.add.tween(this).to({alpha: 0}, 500, Phaser.Easing.Cubic.Out, true)
         }
 
@@ -419,10 +420,10 @@ var resultsFeedback = function(){
         var self = this
 		if(tie) loseSide.timeDif.alpha = 1
 
-		var fadeOut = game.add.tween(loseSide.parent).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, false, 1500)
+		var fadeOut = game.add.tween(loseSide.parent).to({alpha: 0}, 1100, Phaser.Easing.Cubic.Out, false, 1400)
         fadeOut.onStart.add(function(){
-            self.loserCallback()
             game.add.tween(loseSide).to({y: loseSide.y + 100}, 900, Phaser.Easing.Cubic.Out, true)
+            self.loserCallback()
             game.add.tween(loseSide.parent.parent.black).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, true)
             self.parent.blueAns.clearInfo()
         })
@@ -489,7 +490,7 @@ var resultsFeedback = function(){
 		for(var i = 0; i < this.length; i++){
 
             var roundInfo = this.children[i]
-            roundInfo.y = roundInfo.DEFAULT_Y
+            roundInfo.y = roundInfo.SPAWN_Y
             roundInfo.angle = 0
             roundInfo.timeDif.alpha = 0
             roundInfo.timeTxt.alpha = 0

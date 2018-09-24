@@ -28,10 +28,6 @@ var rewardClient = function(){
                 name: "tile",
                 file: imagePath + "bgTile.png",
             },
-            {
-                name: "confetti",
-                file: settings.BASE_PATH + "/particles/rewardScreen/confetti/Conffeti_win.png",
-            }
         ],
         sounds: [
             {	name: "shineSpell",
@@ -301,7 +297,7 @@ var rewardClient = function(){
         var color = indexWinner == cliente.numTeam - 1 ? "0xFCE347" : "0xB7D8DD"
 
         var confetti = game.add.emitter(game.world.centerX, 0, 50)
-        confetti.makeParticles("confetti")
+        confetti.makeParticles("atlas.reward", "conffeti")
         confetti.gravity = 10
         confetti.maxParticleSpeed.setTo(0, 500)
         confetti.minParticleSpeed.setTo(0, 200)

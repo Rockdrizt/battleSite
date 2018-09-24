@@ -71,8 +71,8 @@ var reward = function(){
             },
             {
                 name: "confetti",
-                file: settings.BASE_PATH + "/particles/rewardScreen/confetti/Conffeti_win.json",
-                texture: "Conffeti_win.png"
+                file: settings.BASE_PATH + "/particles/rewardScreen/confettiReward1/confettiReward1.json",
+                texture: "confettiReward2.png"
             }
         ]
     }
