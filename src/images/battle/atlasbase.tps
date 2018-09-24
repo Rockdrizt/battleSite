@@ -181,6 +181,19 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">lifeContainer.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>125,18,249,35</rect>
+                <key>scale9Paddings</key>
+                <rect>125,18,249,35</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">lifeContainer0.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
@@ -298,6 +311,7 @@
             <filename>token0.png</filename>
             <filename>token1.png</filename>
             <filename>score.png</filename>
+            <filename>lifeContainer.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>
