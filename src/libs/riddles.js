@@ -164,15 +164,26 @@ var riddles = function(){
 		var operation = operationGenerator.generate()
 		var correctAnswer = operation.correctAnswer
 
+		// var possibleAnswers = [correctAnswer];
+		// var negativeOrPositive = Math.round(Math.random()) * 2 - 1;
+		// for(var i = 0; i< NUMBER_OF_FAKE_ANSWERS; i++){
+		// 	var diff = Math.floor(correctAnswer / 10) > 1 ? 10 : 1
+		// 	// 	while(possibleAnswers.includes(n)){
+		// 	negativeOrPositive = negativeOrPositive * -1
+		// 	var n = correctAnswer + diff * negativeOrPositive
+		// 	possibleAnswers.push(n);
+		// }
+
 		var possibleAnswers = [correctAnswer];
-		var negativeOrPositive = Math.round(Math.random()) * 2 - 1;
-		for(var i = 0; i< NUMBER_OF_FAKE_ANSWERS; i++){
-			var diff = Math.floor(correctAnswer / 10) > 1 ? 10 : 1
-			// 	while(possibleAnswers.includes(n)){
-			negativeOrPositive = negativeOrPositive * -1
-			var n = correctAnswer + diff * negativeOrPositive
-			possibleAnswers.push(n);
-		}
+			var range = correctAnswer <= 10 ? correctAnswer : correctAnswer * 0.1
+			for(var i = 0; i< 3; i++){
+				do{
+					var diff = game.rnd.integerInRange(-range, range)
+					var n = correctAnswer + diff
+				}while(possibleAnswers.includes(n) && n != 0)
+				
+				possibleAnswers.push(n);
+			}
 
 		Phaser.ArrayUtils.shuffle(possibleAnswers)
 
