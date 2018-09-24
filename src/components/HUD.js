@@ -162,12 +162,6 @@ var HUD = function(){
         return HUDGroup
     }
 
-    function animateSpine(bar){
-        console.log(bar)
-        
-        
-	}
-    
 	function createTimer(group){
         
         var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#000066", align: "center"}
