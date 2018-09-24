@@ -120,7 +120,11 @@ var battle = function(){
 			{
 				name:"triangles",
 				file:settings.BASE_PATH + "/spines/battle/triangle/triangle.json",
-			}
+			},
+			{
+				name:"banner",
+				file:settings.BASE_PATH + "/spines/selector/banners.json",
+			},
 		],
 		particles: [
 		]

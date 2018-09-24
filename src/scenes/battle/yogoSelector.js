@@ -108,42 +108,42 @@ var yogoSelector = function(){
 	var YOGOTARS_LIST = [
 		{
 			name:"tomiko",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/tomiko/tomikoSelector.json",
+			file:settings.BASE_PATH + "/spines/yogotars/client/tomiko/tomikoClient.json",
 			scales: ["@0.5x"]
 		},
 		{
 			name:"luna",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/luna/lunaSelector.json",
+			file:settings.BASE_PATH + "/spines/yogotars/client/luna/lunaClient.json",
 			scales: ["@0.5x"]
 		},
 		{
 			name:"nao",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/nao/naoSelector.json",
+			file:settings.BASE_PATH + "/spines/yogotars/client/nao/naoClient.json",
 			scales: ["@0.5x"]
 		},
 		{
 			name:"theffanie",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/theffanie/theffanieSelector.json",
+			file:settings.BASE_PATH + "/spines/yogotars/client/theffanie/theffanieClient.json",
 			scales: ["@0.5x"]
 		},
 		{
 			name:"eagle",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/eagle/eagleSelector.json",
+			file:settings.BASE_PATH + "/spines/yogotars/client/eagle/eagleClient.json",
 			scales: ["@0.5x"]
 		},
 		{
 			name:"dinamita",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/dinamita/dinamitaSelector.json",
+			file:settings.BASE_PATH + "/spines/yogotars/client/dinamita/dinamitaClient.json",
 			scales: ["@0.5x"]
 		},
 		{
 			name:"arthurius",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/arthurius/arthuriusSelector.json",
+			file:settings.BASE_PATH + "/spines/yogotars/client/arthurius/arthuriusClient.json",
 			scales: ["@0.5x"]
 		},
 		{
 			name:"estrella",
-			file:settings.BASE_PATH + "/spines/yogotars/selector/estrella/estrellaSelector.json",
+			file:settings.BASE_PATH + "/spines/yogotars/client/estrella/estrellaClient.json",
 			scales: ["@0.5x"]
 		},
 	]
@@ -390,12 +390,12 @@ var yogoSelector = function(){
 
 			var token = subGroup.create(0, 0, "atlas.yogoSelector", "token" + 0)
 			token.anchor.setTo(0.5)
-			// token.inputEnabled = true
-			// token.events.onInputDown.add(function(btn){
+			token.inputEnabled = true
+			token.events.onInputDown.add(function(btn){
 
-			// 	//chosenOne = catch team input
-			// 	pressBtn(btn, chosenOne)
-			// }, this)
+				//chosenOne = catch team input
+				pressBtn(btn, chosenOne)
+			}, this)
 			token.tag = i
 			token.canClick = false
 			subGroup.token = token
@@ -430,6 +430,7 @@ var yogoSelector = function(){
 		buttonsGroup.children[0].yogotar.x -= 30
 		buttonsGroup.children[3].yogotar.x += 10
 		buttonsGroup.children[7].yogotar.x += 10
+		buttonsGroup.children[5].yogotar.y += 10
 
 		alphaGroup.marker = buttonsGroup.children[0]
 		bravoGroup.marker = buttonsGroup.children[3]
