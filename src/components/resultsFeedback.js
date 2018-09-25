@@ -50,6 +50,7 @@ var resultsFeedback = function(){
             var roundInfo = game.add.group()
             roundInfo.x = posX * side.direction
             roundInfo.y = OFFSET.y
+            roundInfo.SPAWN_Y = OFFSET.y
             roundInfo.time = 0
             roundInfo.twist = side.direction
             roundInfo.INDEX = i
@@ -117,8 +118,8 @@ var resultsFeedback = function(){
         feedbackGroup.displayResults = displayResults.bind(subGroup)
         feedbackGroup.setWinLose = setWinLose.bind(subGroup)
         feedbackGroup.showAttack = showAttack.bind(feedbackGroup)
-
-        return feedbackGroup  
+        
+        return feedbackGroup
     }
 
     function createToken(){
@@ -182,7 +183,7 @@ var resultsFeedback = function(){
                 }
 
                 neutral.chain(showCorrect)
-                var letter = index > 0 ? OPTIONS_LETTER[index] : "-"
+                var letter = index >= 0 ? OPTIONS_LETTER[index] : "-"
                 this.text.setText(letter)
                 game.add.tween(this.text).to({alpha: 1}, 200, Phaser.Easing.Cubic.Out, true, 300).chain(neutral)
             }
@@ -240,7 +241,7 @@ var resultsFeedback = function(){
         var particle = game.add.emitter(0, 0, 50)
         particle.makeParticles("atlas.feedback", "bubblePart")
         particle.gravity = -150
-        particle.setAlpha(1, 0, 2500, Phaser.Easing.Cubic.In)
+        particle.setAlpha(1, 0, 1700, Phaser.Easing.Cubic.In)
         particle.width = width
         //particle.start(true, 2000, null, 40)
 
@@ -252,6 +253,14 @@ var resultsFeedback = function(){
         var blueBtn = game.add.sprite(0, 0, "atlas.question", "blueBtn")
         blueBtn.anchor.setTo(0.5)
         blueBtn.alpha = 0
+        blueBtn.maxFontSize = 70
+
+        var textBox = game.add.graphics(-100, -55)
+		textBox.beginFill(0x000000, 0)
+		textBox.drawRect(0, 0, blueBtn.width * 0.57, blueBtn.height - 80)
+		textBox.endFill()
+		blueBtn.addChild(textBox)
+		blueBtn.textBox = textBox
 
         var txt = new Phaser.Text(blueBtn.game, -blueBtn.width * 0.31, 0, "B", fontStyle)
         txt.anchor.setTo(0.5)
@@ -259,34 +268,46 @@ var resultsFeedback = function(){
         blueBtn.addChild(txt)
         blueBtn.text = txt
         
-        var info = new Phaser.Text(blueBtn.game, 30, 5, "", fontStyle)
+        var info = new Phaser.Text(blueBtn.game, 50, 5, "", fontStyle)
         info.anchor.setTo(0.5)
         info.wordWrap = true
-        info.fontSize = 70
-        info.wordWrapWidth = blueBtn.width * 0.5
+        info.wordWrapWidth = textBox.width
         info.fill = "#ffffff"
         info.stroke = "#000066"
         info.strokeThickness = 5
-        info.lineSpacing = -17
+        info.lineSpacing = -20
         blueBtn.addChild(info)
         blueBtn.info = info
 
         blueBtn.setInfo = setInfo.bind(blueBtn)
         blueBtn.clearInfo = clearInfo.bind(blueBtn)
+        blueBtn.fixText = fixText.bind(blueBtn)
         
         function setInfo(index, info){
-            console.log(index)
             this.text.setText(OPTIONS_LETTER[index])
             this.info.setText(info)
+            this.fixText()
             game.add.tween(this).to({alpha: 1}, 300, Phaser.Easing.Cubic.Out, true)
         }
 
         function clearInfo(){
             this.text.setText("")
             this.info.setText("")
+            this.info.fontSize = this.maxFontSize
             game.add.tween(this).to({alpha: 0}, 500, Phaser.Easing.Cubic.Out, true)
         }
 
+        function fixText(){
+
+			if(this.info.height > this.textBox.height){
+				this.info.fontSize -= 2
+				return this.fixText()
+			}
+			else{
+				return
+			}
+		}
+        
         return blueBtn
     }
 
@@ -399,8 +420,9 @@ var resultsFeedback = function(){
         var self = this
 		if(tie) loseSide.timeDif.alpha = 1
 
-		var fadeOut = game.add.tween(loseSide.parent).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, false, 1500)
+		var fadeOut = game.add.tween(loseSide.parent).to({alpha: 0}, 1100, Phaser.Easing.Cubic.Out, false, 1400)
         fadeOut.onStart.add(function(){
+            game.add.tween(loseSide).to({y: loseSide.y + 100}, 900, Phaser.Easing.Cubic.Out, true)
             self.loserCallback()
             game.add.tween(loseSide.parent.parent.black).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, true)
             self.parent.blueAns.clearInfo()
@@ -454,10 +476,11 @@ var resultsFeedback = function(){
     function convertTimeFormat(timeElapsed) {
 		var seconds = Math.floor(timeElapsed * 0.001)
 		var decimals = Math.floor(timeElapsed * 0.01) % 10
-		var centimals = (Math.floor(timeElapsed / 10) % 10)
+        var centimals = (Math.floor(timeElapsed / 10) % 10)
+        var next = (Math.floor(timeElapsed / 1) % 10)
 		// elapsedSeconds = Math.round(elapsedSeconds * 100) / 100
-		var result = (seconds < 10) ? "0" + seconds : seconds;
-		result += ":" + decimals + centimals
+		var result = seconds + "'"
+		result += " " + decimals + "''" + " " + centimals + next
 
 		return result
 	}
@@ -467,6 +490,7 @@ var resultsFeedback = function(){
 		for(var i = 0; i < this.length; i++){
 
             var roundInfo = this.children[i]
+            roundInfo.y = roundInfo.SPAWN_Y
             roundInfo.angle = 0
             roundInfo.timeDif.alpha = 0
             roundInfo.timeTxt.alpha = 0

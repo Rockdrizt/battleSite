@@ -161,26 +161,10 @@
         }
 
 
-
-.wrapper {
-  position: absolute;
-  height: 100vh;
-    width: 100vw;
+#canvasConfetti{
+    position: absolute;
+    width: 1920px;
+    height: 1080px;
+    left: 0;
+    top: 0;
 }
-
-[class|="confetti"] {
-  position: absolute;
-}
-
-.red {
-  background-color: #ff2222;
-}
-
-.yellow {
-  background-color: #ff8400;
-}
-
-.blue {
-  background-color: #07fa1a;
-}
-

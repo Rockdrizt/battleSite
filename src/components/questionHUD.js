@@ -35,7 +35,7 @@ var questionHUD = function(){
 		questionGroup.add(black)
 		questionGroup.black = black
 
-		var board = questionGroup.create(game.world.centerX, game.world.centerY, "questionBoard")
+		var board = questionGroup.create(game.world.centerX, game.world.centerY - 20, "questionBoard")
 		board.anchor.setTo(0.5)
 		questionGroup.mainBoard = board
 
@@ -46,8 +46,8 @@ var questionHUD = function(){
 		questionGroup.question = questionText
 
 		var questionImage = createQuesitonImage()
-		questionImage.x = board.x * 0.75
-		questionImage.y = board.y * 1.4
+		questionImage.x = board.x - board.width * 0.175
+		questionImage.y = board.y + board.height * 0.285
 		questionGroup.add(questionImage)
 		questionGroup.image = questionImage
 
@@ -70,8 +70,8 @@ var questionHUD = function(){
 		buttonsGroup.options.btnPressed = null
 
 		chronoGroup = createChrono()
-		chronoGroup.x = board.x - board.width * 0.57
-		chronoGroup.y = board.y * 1.5
+		chronoGroup.x = board.x - board.width * 0.35
+		chronoGroup.y = game.world.height - chronoGroup.height * 0.5//board.y + board.height * 0.6
 		questionGroup.add(chronoGroup)
 		questionGroup.chrono = chronoGroup
 
@@ -260,7 +260,7 @@ var questionHUD = function(){
 		btn.maxSize = 70
 		btn.correct = false
 
-		var textBox = game.add.graphics(-110, -60)
+		var textBox = game.add.graphics(-110, -55)
 		textBox.beginFill(0x000000, 0)
 		textBox.drawRect(0, 0, btn.width * 0.6, btn.height - 60)
 		textBox.endFill()
@@ -281,7 +281,7 @@ var questionHUD = function(){
 		var info = new Phaser.Text(group.game, 40, 5, "", fontStyle)
 		info.anchor.setTo(0.5)
         info.alpha = 0
-		info.wordWrapWidth = btn.textBox.width
+		info.wordWrapWidth = textBox.width
 		info.lineSpacing = -20
 		btn.addChild(info)
 		btn.info = info
@@ -290,8 +290,8 @@ var questionHUD = function(){
 
 		function fixText(){
 
-			if(this.info.width > this.textBox.width){
-				this.info.fontSize--
+			if(this.info.height > this.textBox.height){
+				this.info.fontSize -= 2
 				return this.fixText()
 			}
 			else{
@@ -308,6 +308,7 @@ var questionHUD = function(){
 
 		var chronoGroup = game.add.group()
 		chronoGroup.alpha = 0
+		chronoGroup.scale.setTo(0.9)
 		chronoGroup.maxTime = 20000
 
 		var cont = chronoGroup.create(0, 0, "atlas.question", "yellowCircle")
@@ -337,8 +338,8 @@ var questionHUD = function(){
 			this.alpha = 0
 			this.timeText.setText("0:20")
 			this.circle.clear()
-			this.circle.lineStyle(40, 0xFF0000, 0.5)
-			this.circle.arc(0, 0, this.circle.lineSize, game.math.degToRad(-10), game.math.degToRad(280), false)
+			this.circle.beginFill(0xFF0000, 0.5)
+			this.circle.arc(0, 0, this.circle.lineSize, game.math.degToRad(290), game.math.degToRad(-10), true)
 			this.circle.endFill()
 		}
 
@@ -416,13 +417,17 @@ var questionHUD = function(){
 		apearOverlay.chain(apearButtons)
 		apearButtons.chain(apearChrono)
 
+		apearChrono.onStart.add(function(){
+			this.chrono.alpha = 1
+		},this)
+		
 		apearButtons.onComplete.add(function(){
 			
 			this.chrono.alpha = 1
 			var delay = 200
 			var lasTween
 
-			for (let i = 0; i < this.buttons.options.length; i++) {
+			for (var i = 0; i < this.buttons.options.length; i++) {
 				const opt = this.buttons.options.children[i]
 				opt.info.alpha = 0
 				lasTween = game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay)
@@ -446,6 +451,10 @@ var questionHUD = function(){
 		apearOverlay.chain(apearButtons)
 		apearButtons.chain(apearChrono)
 		apearChrono.chain(scaleContainer)
+
+		apearChrono.onStart.add(function(){
+			this.chrono.alpha = 1
+		},this)
 		
 		apearButtons.onComplete.add(function(){
 			
@@ -453,7 +462,7 @@ var questionHUD = function(){
 			var delay = 200
 			var lasTween
 
-			for (let i = 0; i < this.buttons.options.length; i++) {
+			for (var i = 0; i < this.buttons.options.length; i++) {
 				const opt = this.buttons.options.children[i]
 				opt.info.alpha = 0
 				lasTween = game.add.tween(opt).to({alpha: 1}, 1000, Phaser.Easing.Cubic.Out, true, delay)
@@ -508,7 +517,7 @@ var questionHUD = function(){
 			return
 
 		if(this.timer){
-			this.timer.stop()
+			this.timer.stop(true)
 			this.timer.destroy()
 		}
 
@@ -532,6 +541,11 @@ var questionHUD = function(){
 		
 		if(this.waiting.spin){
 			this.waiting.spin.stop()
+		}
+
+		if(this.timer){
+			this.timer.stop(true)
+			this.timer.destroy()
 		}
 
 		var riddle = this.riddle
@@ -608,8 +622,10 @@ var questionHUD = function(){
     function startTimer(){
 	
         var maxTime = this.riddle.timers.normal
-		if(this.timer)
+		if(this.timer) {
+        	this.timer.stop(true)
 			this.timer.destroy()
+		}
 
         this.timer = game.time.create()
 		this.timerEvent = this.timer.add(maxTime, this.stopTimer, this)
@@ -631,7 +647,7 @@ var questionHUD = function(){
 	}
     
     function stopTimer(){
-		this.timer.stop()
+		this.timer.stop(true)
 		this.timer.destroy()
 		this.chrono.timeText.setText("0:00")
 		if(this.timeOutCallback) this.timeOutCallback()

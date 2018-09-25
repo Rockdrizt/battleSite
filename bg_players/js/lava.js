@@ -3,7 +3,7 @@ var selectTeam;
 var idGameFromHash = window.location.hash.substr(1);
 var idGame = idGameFromHash;
 var teamId = parseInt(getParameterByName("team"));
-console.log(idGame)
+var colorConfetti;
 var service = new ScreenService();
 service.start(idGame, teamId, showTeam,animateAnswer,hitToLife, animateEnd);
 
@@ -60,20 +60,21 @@ function ChoiceYogotar(parent,obj){
 
 
 function animateEnd(ended){
-    console.log(ended)
+    console.log(ended);
     if(ended){
+        
         if(teamId == ended.winner){
-            TweenMax.fromTo($(parent).find(".gradient--gold"),0.5,{height:"1344px",top:"0px"},{height:"0px",top:"1344px"});
-            createConfetti(20)
+            //primer lugar 
+            colorConfetti = "0xFCE347";
+            changeColorLava("#FCE347","#FCBC47");
         }else{
-            
-            TweenMax.fromTo($(parent).find(".gradient--silver"),0.5,{height:"1344px",top:"0px"},{height:"0px",top:"1344px"});
-            createConfetti(20)
+            //segundo lugar 
+            colorConfetti = "0xB7D8DD";
+            changeColorLava("#B7D8DD","#416367");
         } 
+        startGame();
     }else{
-            TweenMax.fromTo($(parent).find(".gradient--gold"),0.5,{height:"1344px",top:"0px"},{height:"0px",top:"1344px"});
-            TweenMax.fromTo($(parent).find(".gradient--silver"),0.5,{height:"1344px",top:"0px"},{height:"0px",top:"1344px"});
-        createConfetti(0)
+            
         console.log("ended")
     }
 }
@@ -81,28 +82,31 @@ function animateEnd(ended){
     
 
 function correctAnswer(parent){  
-    TweenMax.fromTo($(parent).find(".gradient--green"),0.5,{height:"0px",top:"1344px"},{height:"1344px",top:"0px"})
-    TweenMax.fromTo($(parent).find(".gradient--green"),0.5,{height:"1344px",top:"0px"},{height:"0px",top:"1344px",delay:1})
-    TweenMax.fromTo($(parent).find(".correct--icon"),0.5,{alpha:0,top:"300px"},{alpha:1,top:"200px"});
-    TweenMax.to($(parent).find(".correct--icon").find("img"),0.2,{scaleY:"-=0.1", yoyo:true, repeat:5}); 
-    TweenMax.fromTo($(parent).find(".correct--icon"),0.5,{alpha:1,top:"200px"},{alpha:0,top:"100px",delay:1});
+    TweenMax.fromTo($(parent).find(".gradient--green"),0.5,{height:"0px",top:"1344px"},{height:"1344px",top:"0px",delay:6})
+    TweenMax.fromTo($(parent).find(".correct--icon"),0.5,{alpha:0,top:"300px"},{alpha:1,top:"200px",delay:6});
+    TweenMax.to($(parent).find(".correct--icon").find("img"),0.2,{scaleY:"-=0.1", yoyo:true, repeat:13,delay:6}); 
+    
+    TweenMax.to($(parent).find(".gradient--green"),0.5,{height:"0px",top:"1344px",delay:9})
+    TweenMax.to($(parent).find(".correct--icon"),0.5,{alpha:0,top:"100px",delay:9});
 }    
         
 function wrongAnswer(parent){
-    TweenMax.fromTo($(parent).find(".gradient--red"),0.5,{height:"0px",top:"1344px"},{height:"1344px",top:"0px"});
-    TweenMax.fromTo($(parent).find(".gradient--red"),0.5,{height:"1344px",top:"0px"},{height:"0px",top:"1344px",delay:1});
-    TweenMax.fromTo($(parent).find(".wrong--icon"),0.5,{alpha:0,top:"100px"},{alpha:1,top:"200px"});
-    TweenMax.to($(parent).find(".wrong--icon").find("img"),0.2,{scaleY:"-=0.1", yoyo:true, repeat:5}); 
-    TweenMax.fromTo($(parent).find(".wrong--icon"),0.5,{alpha:1,top:"200px"},{alpha:0,top:"300px",delay:1});
-    TweenMax.to($(parent).find(".yogotar").find("img"),0.05,{x:"-=100", yoyo:true, repeat:9});
+    TweenMax.fromTo($(parent).find(".gradient--red"),0.5,{height:"0px",top:"1344px"},{height:"1344px",top:"0px",delay:6});
+    TweenMax.fromTo($(parent).find(".wrong--icon"),0.5,{alpha:0,top:"100px"},{alpha:1,top:"200px",delay:6});
+    TweenMax.to($(parent).find(".wrong--icon").find("img"),0.2,{scaleY:"-=0.1", yoyo:true, repeat:13,delay:6}); 
+    
+    TweenMax.to($(parent).find(".gradient--red"),0.5,{height:"0px",top:"1344px",delay:9});
+    TweenMax.to($(parent).find(".wrong--icon"),0.5,{alpha:0,top:"300px",delay:9});
+    //TweenMax.to($(parent).find(".yogotar").find("img"),0.05,{x:"-=100", yoyo:true, repeat:9});
 }   
 
 function goodAnswer(parent){
-    TweenMax.fromTo($(parent).find(".gradient--yellow"),0.5,{height:"0px",top:"1344px"},{height:"1344px",top:"0px"});
-    TweenMax.fromTo($(parent).find(".gradient--yellow"),0.5,{height:"1344px",top:"0px"},{height:"0px",top:"1344px",delay:1});
-    TweenMax.fromTo($(parent).find(".good--icon"),0.5,{alpha:0,top:"100px"},{alpha:1,top:"200px"});
-    TweenMax.to($(parent).find(".good--icon").find("img"),0.2,{scaleY:"-=0.1", yoyo:true, repeat:5}); 
-    TweenMax.fromTo($(parent).find(".good--icon"),0.5,{alpha:1,top:"200px"},{alpha:0,top:"300px",delay:1});
+    TweenMax.fromTo($(parent).find(".gradient--yellow"),0.5,{height:"0px",top:"1344px"},{height:"1344px",top:"0px",delay:6});
+    TweenMax.fromTo($(parent).find(".good--icon"),0.5,{alpha:0,top:"100px"},{alpha:1,top:"200px",delay:6});
+    TweenMax.to($(parent).find(".good--icon").find("img"),0.2,{scaleY:"-=0.1", yoyo:true, repeat:13,delay:6});
+    
+    TweenMax.to($(parent).find(".gradient--yellow"),0.5,{height:"0px",top:"1344px",delay:9});
+    TweenMax.to($(parent).find(".good--icon"),0.5,{alpha:0,top:"300px",delay:9});
 }    
 
         
@@ -125,6 +129,36 @@ function animateBlob(parent,time1,time2){
        
 createSVGElement= function(element) {
     return $(document.createElementNS('http://www.w3.org/2000/svg', element));
+}
+
+
+function changeColorLava(color1,color2){
+    $(".animationHex").css("background","linear-gradient(to bottom, "+ color1 +" 50%, "+ color2 +" 100%)")
+    //$(".yogotar img").css("mix-blend-mode" ,"luminosity");
+    var GradientBar= createSVGElement('linearGradient')
+    .attr( {
+            id:"SVGID_1_",
+            gradientUnits:"userSpaceOnUse",
+            x1:"192",
+            y1:"1",
+            x2:"92",
+            y2:"436.365"
+        });
+    var myDefs = createSVGElement('defs');
+    createSVGElement('stop')
+            .attr({
+                offset: "4.514761e-04",
+                "stop-color": color1
+            })
+            .appendTo(GradientBar);
+        createSVGElement('stop')
+            .attr({
+                offset:"1",
+                "stop-color":color2
+            }).appendTo(GradientBar);
+        $('svg defs').prepend(GradientBar);
+    $('svg').prepend(myDefs);
+    $('svg defs').prepend(GradientBar);
 }
 
 
@@ -192,58 +226,5 @@ animateBlob("#animation5",5,7);
 selectColorTeam();
 
 
-
-function createConfetti(NumConfetti){
-
-                 for (var i = 0; i < NumConfetti; i++) {
-                  create(i);
-                }   
-            }
-
-
-function create(i) {
-  var width = Math.random() * 58;
-  var height = width * 2;
-  var colourIdx = Math.ceil(Math.random() * 3);
-  var colour = "red";
-  switch(colourIdx) {
-    case 1:
-      colour = "yellow";
-      break;
-    case 2:
-      colour = "blue";
-      break;
-    default:
-      colour = "red";
-  }
-  $('<div class="confetti-'+i+' '+colour+'"></div>').css({
-    "width" : width+"px",
-    "height" : height+"px",
-    "top" : -Math.random()*20+"%",
-    "left" : Math.random()*100+"%",
-    "opacity" : Math.random()+0.5,
-    "transform" : "rotate("+Math.random()*360+"deg)"
-  }).appendTo('.wrapper');  
-  
-  drop(i);
-}
-
-function drop(x) {
-  $('.confetti-'+x).animate({
-    top: "100%",
-    left: "+="+Math.random()*15+"%"
-  }, Math.random()*2000 + 3000, function() {
-    reset(x);
-  });
-}
-
-function reset(x) {
-  $('.confetti-'+x).animate({
-    "top" : -Math.random()*20+"%",
-    "left" : "-="+Math.random()*15+"%"
-  }, 0, function() {
-    drop(x);             
-  });
-}
 
 

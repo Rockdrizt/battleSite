@@ -28,6 +28,18 @@ var HUD = function(){
 
         var listName = loadNames(teams)
 
+
+        var TEAM_DATA = [
+			{
+				skin:"alfa",
+				title: "Equipo Alfa"
+			},
+			{
+				skin:"bravo",
+				title: "Equipo Bravo"
+			}
+		]
+
         var fontStyle = {font: "80px VAGRounded", fontWeight: "bold", fill: "#FFFFFF", align: "center"}
         
         var HUDGroup = game.add.group()
@@ -48,19 +60,33 @@ var HUD = function(){
             
             var lifeBox = teamSide.create(game.world.centerX * pivotX, 150, "atlas.battle", "lifeContainer" + i)
             lifeBox.x += 15 * side
+            lifeBox.alpha = 0
             lifeBox.anchor.setTo(i, 0.5)
             lifeBox.scale.setTo(0.95)
 
-            var teamName = new Phaser.Text(teamSide.game, lifeBox.x, lifeBox.y - 95, "Equipo Alfa", fontStyle)
+            var teamName = new Phaser.Text(teamSide.game, lifeBox.x, lifeBox.y - 95, TEAM_DATA[i].title, fontStyle)
             teamName.anchor.setTo(i, 0.5)
             teamName.fontSize = 65
             teamName.stroke = "#000066"
             teamName.strokeThickness = 10
             teamSide.add(teamName)
+
+            var barAnim = game.add.spine(lifeBox.x + 330 * side, lifeBox.y + 55, "banner")
+            barAnim.setSkinByName(TEAM_DATA[i].skin)
+			barAnim.scale.setTo(side * 0.9, 0.8)
+            teamSide.add(barAnim)
+            game.time.events.add(1500 * i, function(bar){
+				bar.setAnimationByName(0, "idle", true)
+			},null, barAnim)
+            
+            var container = teamSide.create(lifeBox.x + (20 * side), lifeBox.y - 5, "atlas.battle", "lifeContainer")
+            container.anchor.setTo(0, 0.5)
+            container.scale.setTo(side, 1)
+            teamSide.container = container
             
             var life = teamSide.create(lifeBox.x + (23 * side), lifeBox.y - 5, "atlas.battle", "lifeGauge")
             life.anchor.setTo(0, 0.5)
-            life.scale.setTo(side, 1)
+            life.scale.setTo(side * 1.05, 1)
             teamSide.life = life
 
             var lifeText = "100".split("").join(String.fromCharCode(8202))
@@ -124,9 +150,6 @@ var HUD = function(){
             
             pivotX += 1.5
         }
-    
-        teamName.setText("Equipo Bravo")
-        life.x -= 4 //hardcode due to art diferen sizes
 		
 		//createTimer(HUDGroup)
 		HUDGroup.rotateTokens = rotateTokens.bind(HUDGroup)
@@ -204,7 +227,6 @@ var HUD = function(){
             else{
                 self.nextRound(delay)
             }
-
 
             //UPDATE SCORE SERVER
             var team1Data = self.teams[0]
