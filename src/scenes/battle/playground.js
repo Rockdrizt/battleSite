@@ -83,7 +83,7 @@ var battleScene = function() {
 	}
 
 	var POSITIONS = {
-		UP:{x:170, y: -200, scale:{x:0.7, y:0.7}},
+		UP:{x:130, y: -200, scale:{x:0.7, y:0.7}},
 		MID:{x:350, y: 0, scale:{x:0.8, y:0.8}},
 		DOWN:{x:-20, y: 120, scale:{x:0.9, y:0.9}},
 	}

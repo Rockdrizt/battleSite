@@ -732,6 +732,10 @@ var battle = function(){
 
 	function showFeedback(event){
 		questionGroup.hide()
+		if(questionGroup.timer){
+			questionGroup.timer.stop(true)
+			questionGroup.timer.destroy()
+		}
 		game.time.events.add(2000, function () {
 			checkAnswer(event)
 		})

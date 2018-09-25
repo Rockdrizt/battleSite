@@ -180,6 +180,7 @@ var yogoSelector = function(){
 	var playersSelected
 	var bmd
 	var tokens
+	var yogotars
 
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -191,6 +192,7 @@ var yogoSelector = function(){
 		chosenOne = 1
 		playersSelected = []
 		tokens = {}
+		yogotars = {}
 
 		loadSounds()
 	}
@@ -315,6 +317,10 @@ var yogoSelector = function(){
 
 			aux = i - aux
 			skinNum = i % 2 ? 1 : 2
+			if(yogotars[player.name] === undefined)
+				yogotars[player.name] = {}
+
+			yogotars[player.name][player.skin] = player
 		}
 	}
 
@@ -424,6 +430,7 @@ var yogoSelector = function(){
 			}
 
 			var yogotarName = YOGOTARS_LIST[i].name
+			token.name = yogotarName
 			tokens[yogotarName] = token
 		}
 
@@ -452,7 +459,7 @@ var yogoSelector = function(){
         namesGroup.yogoName = yogoName
     }
 
-	function pressBtn(btn, team){
+	function pressBtn(btn, team, skin){
 		if(btn.canClick){
 
 			btn.canClick = false
@@ -464,7 +471,7 @@ var yogoSelector = function(){
 			if(btn.parent.color === STATES.yellow){
 				if(teamGroup.teamPivot < 3){
 
-					markYogotar(btn.parent, teamGroup)
+					markYogotar(btn.parent, teamGroup, skin)
 
 					if(alphaGroup.marker == bravoGroup.marker){
 						animateButton(btn.parent, STATES.bicolor)
@@ -492,7 +499,7 @@ var yogoSelector = function(){
 						}
 						else{
 							if(bravoGroup.teamPivot < 3){
-								markYogotar(btn.parent, bravoGroup)
+								markYogotar(btn.parent, bravoGroup, skin)
 								animateButton(btn.parent, STATES.bicolor)
 							}
 							else{
@@ -510,7 +517,7 @@ var yogoSelector = function(){
 						}
 						else{
 							if(alphaGroup.teamPivot < 3){
-								markYogotar(btn.parent, alphaGroup)
+								markYogotar(btn.parent, alphaGroup, skin)
 								animateButton(btn.parent, STATES.bicolor)
 							}
 							else{
@@ -592,7 +599,7 @@ var yogoSelector = function(){
 		}
 	}
 
-	function markYogotar(obj, teamGroup){
+	function markYogotar(obj, teamGroup, skin){
 
 		var slot = teamGroup.slots[teamGroup.teamPivot]
 
@@ -600,7 +607,7 @@ var yogoSelector = function(){
 			restoreAll()
 			teamGroup.currentSelect = obj.token.tag
 
-			var yogo = getYogotar(obj.token.tag)
+			var yogo = getYogotar(obj.token.name, skin)
 
 			if(yogo){
 				pullGroup.remove(yogo)
@@ -622,22 +629,19 @@ var yogoSelector = function(){
 			teamGroup.remove(slot.yogo)
 			pullGroup.add(slot.yogo)
 			slot.yogo = null
-			markYogotar(obj, teamGroup)
+			markYogotar(obj, teamGroup, skin)
 		}
 	}
 
-	function getYogotar(tag){
+	function getYogotar(name, skin){
 
+		skin = skin || name + 1
 		var yogoNotUsed
+		var variantSkin = name + (Number(skin[skin.length-1]) === 1 ? 2 : 1)
 
-		for(var i = 0; i < pullGroup.length; i++){
-
-			var yogo = pullGroup.children[i]
-			if(yogo.tag == tag && !yogo.used){
-				yogoNotUsed = yogo
-				break
-			}
-		}
+		yogoNotUsed = yogotars[name][skin]
+		if(yogoNotUsed.used)
+			yogoNotUsed = yogotars[name][variantSkin]
 
 		yogoNotUsed.setAlive(true)
 		//yogoNotUsed.setAnimation(["wait"], true)
@@ -773,7 +777,10 @@ var yogoSelector = function(){
         namesGroup.yogoName.loadTexture("atlas.yogoSelector", "name" + tag)
         namesGroup.yogoName.alpha = 1
 
-        var fadeOut = game.add.tween(namesGroup.yogoName).to({alpha:0}, 400, Phaser.Easing.linear, false, 500)
+		var fadeOut = game.add.tween(namesGroup.yogoName).to({alpha:0}, 400, Phaser.Easing.linear, false, 500)
+		fadeOut.onComplete.add(function(){
+			namesGroup.light.scale.setTo(0)
+		})
         game.add.tween(namesGroup.yogoName.scale).from({y:0}, 100, Phaser.Easing.linear, true, 200).chain(fadeOut)    
     }
 
@@ -1068,17 +1075,17 @@ var yogoSelector = function(){
 			var yogotar = player.avatar
 			var slot = teamGroup.slots[pIndex]
 
-			if((slot.yogo)&&(slot.yogo.name !== yogotar)){
+			if((slot.yogo)&&((slot.yogo.name !== yogotar) || (slot.yogo.skin !== player.skin))){
 				//removeCharacter(tokens[slot.yogo.name], teamGroup)
 				changeButton(tokens[slot.yogo.name].parent, numTeam)
 				removeCharacter(tokens[slot.yogo.name], teamGroup)
 				if(yogotar){
-					pressBtn(tokens[yogotar], numTeam)
+					pressBtn(tokens[yogotar], numTeam, player.skin)
 					clickOk(numTeam)
 				}
 
 			}else if(!slot.yogo && yogotar){
-				pressBtn(tokens[yogotar], numTeam)
+				pressBtn(tokens[yogotar], numTeam, player.skin)
 				clickOk(numTeam)
 			}else if(!slot.check && yogotar){
 				clickOk(numTeam)
@@ -1163,8 +1170,10 @@ var yogoSelector = function(){
 			createReady()
 			createWhite()
 
-			if(server)
+			if(server) {
 				server.addEventListener("onPlayersChange", onPlayersChange)
+				//server.initializeTeams()
+			}
 			// game.time.events.add(6000, function () {
 			// 	var data = {
 			// 		numTeam:1,

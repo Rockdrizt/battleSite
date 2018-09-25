@@ -181,109 +181,223 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">barraAmarilla.png</key>
+            <key type="filename">arthurius1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>132,28,263,56</rect>
+                <rect>40,45,79,91</rect>
                 <key>scale9Paddings</key>
-                <rect>132,28,263,56</rect>
+                <rect>40,45,79,91</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">conffeti.png</key>
+            <key type="filename">arthurius2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>32,32,64,64</rect>
+                <rect>40,49,79,98</rect>
                 <key>scale9Paddings</key>
-                <rect>32,32,64,64</rect>
+                <rect>40,49,79,98</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">equipoAzul.png</key>
-            <key type="filename">equipoRosa.png</key>
+            <key type="filename">dinamita1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>160,32,320,64</rect>
+                <rect>37,42,73,84</rect>
                 <key>scale9Paddings</key>
-                <rect>160,32,320,64</rect>
+                <rect>37,42,73,84</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">teamBar1.png</key>
+            <key type="filename">dinamita2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>201,35,401,69</rect>
+                <rect>37,42,73,85</rect>
                 <key>scale9Paddings</key>
-                <rect>201,35,401,69</rect>
+                <rect>37,42,73,85</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">teamBar2.png</key>
+            <key type="filename">eagle1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>194,36,387,72</rect>
+                <rect>41,45,81,90</rect>
                 <key>scale9Paddings</key>
-                <rect>194,36,387,72</rect>
+                <rect>41,45,81,90</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">ventanaFondo.png</key>
+            <key type="filename">eagle2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>91,52,181,104</rect>
+                <rect>41,45,81,91</rect>
                 <key>scale9Paddings</key>
-                <rect>91,52,181,104</rect>
+                <rect>41,45,81,91</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
-            <key type="filename">ventanaFrente.png</key>
+            <key type="filename">estrella1.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0.5,0.5</point_f>
                 <key>scale9Enabled</key>
                 <false/>
                 <key>scale9Borders</key>
-                <rect>91,6,182,13</rect>
+                <rect>47,43,94,86</rect>
                 <key>scale9Paddings</key>
-                <rect>91,6,182,13</rect>
+                <rect>47,43,94,86</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">estrella2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>47,43,94,87</rect>
+                <key>scale9Paddings</key>
+                <rect>47,43,94,87</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">luna1.png</key>
+            <key type="filename">luna2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>41,47,81,93</rect>
+                <key>scale9Paddings</key>
+                <rect>41,47,81,93</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">nao1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>41,46,81,91</rect>
+                <key>scale9Paddings</key>
+                <rect>41,46,81,91</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">nao2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>41,46,81,92</rect>
+                <key>scale9Paddings</key>
+                <rect>41,46,81,92</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">theffanie1.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>44,44,87,87</rect>
+                <key>scale9Paddings</key>
+                <rect>44,44,87,87</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">theffanie2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>44,44,87,88</rect>
+                <key>scale9Paddings</key>
+                <rect>44,44,87,88</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">token.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>48,57,97,113</rect>
+                <key>scale9Paddings</key>
+                <rect>48,57,97,113</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
+            <key type="filename">tomiko1.png</key>
+            <key type="filename">tomiko2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0.5,0.5</point_f>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>52,46,104,91</rect>
+                <key>scale9Paddings</key>
+                <rect>52,46,104,91</rect>
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
         </map>
         <key>fileList</key>
         <array>
-            <filename>barraAmarilla.png</filename>
-            <filename>equipoAzul.png</filename>
-            <filename>equipoRosa.png</filename>
-            <filename>ventanaFondo.png</filename>
-            <filename>ventanaFrente.png</filename>
-            <filename>teamBar1.png</filename>
-            <filename>teamBar2.png</filename>
-            <filename>conffeti.png</filename>
+            <filename>arthurius2.png</filename>
+            <filename>dinamita2.png</filename>
+            <filename>eagle2.png</filename>
+            <filename>estrella2.png</filename>
+            <filename>luna2.png</filename>
+            <filename>nao2.png</filename>
+            <filename>theffanie2.png</filename>
+            <filename>tomiko2.png</filename>
+            <filename>tomiko1.png</filename>
+            <filename>luna1.png</filename>
+            <filename>nao1.png</filename>
+            <filename>theffanie1.png</filename>
+            <filename>eagle1.png</filename>
+            <filename>dinamita1.png</filename>
+            <filename>arthurius1.png</filename>
+            <filename>estrella1.png</filename>
+            <filename>token.png</filename>
         </array>
         <key>ignoreFileList</key>
         <array/>

@@ -28,8 +28,8 @@ var scores = function(){
 			},
 			{
 				name: "atlas.yogotars",
-				json: settings.BASE_PATH + "/images/scores/yogotars.json",
-				image: settings.BASE_PATH + "/images/scores/yogotars.png",
+				json: settings.BASE_PATH + "/images/battle/pics/atlas.json",
+				image: settings.BASE_PATH + "/images/battle/pics/atlas.png",
 			},
 			{
 				name: "atlas.question",
@@ -242,9 +242,11 @@ var scores = function(){
 			for(var i = 0; i < teamsData[sideIndex].players.length; i++){
 				var playerData = teamsData[sideIndex].players[i]
 
-				var teamMate = createYogoToken(sideIndex, playerData.avatar, playerData.nickname)
+				var teamMate = createYogoToken(sideIndex, playerData.skin, playerData.nickname)
 				teamMate.x = pivotX
 				teamMate.y = pivotY
+				teamMate.yogo.scale.setTo(1 * side.scale.x, 1)
+				teamMate.yogo.growScale = 1 * side.scale.x
 				sideTeam.add(teamMate)
 
 				if(i == 1){
@@ -288,15 +290,28 @@ var scores = function(){
 
 		var yogo = memberGroup.create(0, 40, "atlas.yogotars", yogo)
 		yogo.anchor.setTo(0.5, 1)
-		yogo.scale.setTo(0.5)
-		yogo.growScale = 0.5
+		yogo.growScale = 1
 		memberGroup.yogo = yogo
 
+		var poly = new Phaser.Polygon([new Phaser.Point(token.x, token.y + token.height * 0.29), 
+										new Phaser.Point(token.x - token.width * 0.4, token.y + 25),
+										new Phaser.Point(token.x - token.width * 0.4, token.y - token.height * 0.25),
+										new Phaser.Point(token.x, token.y - token.height * 0.45),
+										new Phaser.Point(token.x + token.width * 0.4, token.y - token.height * 0.25),
+										new Phaser.Point(token.x + token.width * 0.4, token.y + 25)])
+										
+
+		var mask = game.add.graphics(0, 0)
+		mask.beginFill(0xffffff) 
+		mask.drawPolygon(poly.points) 
+		memberGroup.add(mask)
+
 		var key = game.cache.checkImageKey(kid) ? kid : "eagle"
-		var kidPhoto = memberGroup.create(0, 40, key)
-		kidPhoto.anchor.setTo(0.5, 1)
+		var kidPhoto = memberGroup.create(0, 0, key)
+		kidPhoto.anchor.setTo(0.5)
 		kidPhoto.scale.setTo(0, 0.4)
 		kidPhoto.growScale = 0.4
+		kidPhoto.mask = mask
 		memberGroup.kid = kidPhoto
 
 		return memberGroup

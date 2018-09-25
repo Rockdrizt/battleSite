@@ -18,8 +18,8 @@ var playerScreen = function(){
         atlases: [
             {   
                 name: "atlas.player",
-                json: settings.BASE_PATH + "/images/yogoSelector/atlas.json",
-                image: settings.BASE_PATH + "/images/yogoSelector/atlas.png",
+                json: settings.BASE_PATH + "/images/yogoSelector/portraits/atlas.json",
+                image: settings.BASE_PATH + "/images/yogoSelector/portraits/atlas.png",
             }
         ],
         images: [
@@ -109,7 +109,7 @@ var playerScreen = function(){
 		if(teamMate.yogo) teamMate.yogo.destroy()
 
 		var yogoInfo = getYogoInfo(data.avatar)
-		var yogo = teamMate.create(yogoInfo.offsetX - 2, 53, "atlas.player", yogoInfo.name)
+		var yogo = teamMate.create(yogoInfo.offsetX - 2, 53, "atlas.player", data.skin)//yogoInfo.name)
 		yogo.anchor.setTo(0.5, 1)
 		teamMate.yogo = yogo
 	}
@@ -120,14 +120,13 @@ var playerScreen = function(){
 
 		var memberGroup = game.add.group()
 
-		var token = memberGroup.create(0, 0, "atlas.player", "token0")
+		var token = memberGroup.create(0, 0, "atlas.player", "token")
         token.anchor.setTo(0.5)
 
 		var kidName = new Phaser.Text(memberGroup.game, 0, -170, "", fontStyle)
 		kidName.anchor.setTo(0.5)
 		memberGroup.add(kidName)
 		memberGroup.kidName = kidName
-		
 
 		var yogoName = new Phaser.Text(memberGroup.game, 0, 150, "", fontStyle)
 		yogoName.anchor.setTo(0.5)
@@ -146,7 +145,7 @@ var playerScreen = function(){
 		var offsetX = X_OFFSETS[index]
 
 		return {
-			name:"yogo" + index,
+			name: "yogo" + index,
 			offsetX:offsetX
 		}
 	}

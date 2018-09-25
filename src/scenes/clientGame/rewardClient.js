@@ -28,10 +28,6 @@ var rewardClient = function(){
                 name: "tile",
                 file: imagePath + "bgTile.png",
             },
-            {
-                name: "confetti",
-                file: settings.BASE_PATH + "/particles/rewardScreen/confetti/Conffeti_win.png",
-            }
         ],
         sounds: [
             {	name: "shineSpell",
@@ -61,8 +57,8 @@ var rewardClient = function(){
         ]
     }
     
-    var TEAMS = [
-		{
+    var TEAMS = {
+		1:{
 			name: "Equipo Alfa",
             side: 1,
             color: 1,
@@ -71,7 +67,7 @@ var rewardClient = function(){
             index:0,
             pivot: 0
 		},
-		{
+		2:{
 			name: "Equipo Bravo",
             side: -1,
             color: 2,
@@ -79,10 +75,12 @@ var rewardClient = function(){
             appear: "appear_delta",
             index:0,
             pivot: 1
-		},
-    ]
-    
-    var DEFAULT_NUMTEAM = 0
+		}
+	}
+
+
+
+		var DEFAULT_NUMTEAM = 0
     
     var WIN_DATA
     var LOSE_DATA
@@ -108,7 +106,7 @@ var rewardClient = function(){
 
         cliente = parent.cliente || {}
         var winnerTeam = indexWinner || DEFAULT_NUMTEAM
-        var loseTeam = winnerTeam === 1 ? 0 : 1
+        var loseTeam = winnerTeam === 1 ? 2 : 1
         WIN_DATA = TEAMS[winnerTeam]
         WIN_DATA.index = winnerTeam
         LOSE_DATA = TEAMS[loseTeam]
@@ -170,7 +168,7 @@ var rewardClient = function(){
     function createCoup(){
 
         var coup = game.add.spine(0, game.world.height - 70, "coup")
-        coup.x = COUP_X[WIN_DATA.index] * game.world.centerX
+        coup.x = COUP_X[WIN_DATA.index - 1] * game.world.centerX
         coup.scale.setTo(0.8)
         coup.setSkinByName(WIN_DATA.coupSkin)
         coup.setAnimationByName(0,"idle", false)
@@ -259,15 +257,15 @@ var rewardClient = function(){
 
             var obj = losers[i]
 
-            var player = spineLoader.createSpine(obj.avatar, obj.skin, "gg", frame.width * 0.65, frame.height * 0.9, true)
+            var player = spineLoader.createSpine(obj.avatar, obj.skin, "gg", frame.width * 0.75, frame.height * 0.9, true)
             player.scale.setTo(SCALE)
 			player.setAlive(false)
             subGroup.add(player)
             subGroup.anim = player
             
-            var mask = game.add.graphics(50, -200)
+            var mask = game.add.graphics(0, -200)
             mask.beginFill(0xffffff)
-            mask.drawRect(0, 0, frame.width, frame.height * 1.65)
+            mask.drawRect(0, 0, frame.width * 1.3, frame.height * 1.65)
             player.mask = mask
             player.addChild(mask)
 
@@ -296,20 +294,22 @@ var rewardClient = function(){
 
     function createConfetti(){
 
-        var color = indexWinner == cliente.numTeam - 1 ? "0xFCE347" : "0xB7D8DD"
+        var gold = ["0xFCE347", "0xFCBC47"]
+        var silver = ["0xB7D8DD", "0x416367"]
+        var color = indexWinner == cliente.numTeam - 1 ? silver : gold
 
         var confetti = game.add.emitter(game.world.centerX, 0, 50)
-        confetti.makeParticles("confetti")
+        confetti.makeParticles("atlas.reward", "conffeti")
         confetti.gravity = 10
         confetti.maxParticleSpeed.setTo(0, 500)
         confetti.minParticleSpeed.setTo(0, 200)
         confetti.setSize(game.world.width, 0)
         confetti.setScale(0.3, 0.5, 0.3, 0.5, 0) 
         confetti.forEach(function(element) {
-            //element.tint = getRandomColor()
-            element.tint = color
+            var rand = game.rnd.integerInRange(0, 1)
+            element.tint = color[rand]
         });
-        confetti.start(false, 5000, 100, 0) 
+        confetti.start(false, 5000, 100, 0)
         sceneGroup.add(confetti)
     }
 

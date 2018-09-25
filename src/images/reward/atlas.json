@@ -9,6 +9,14 @@
 	"sourceSize": {"w":526,"h":112}
 },
 {
+	"filename": "conffeti",
+	"frame": {"x":1813,"y":141,"w":47,"h":103},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":41,"y":13,"w":47,"h":103},
+	"sourceSize": {"w":128,"h":128}
+},
+{
 	"filename": "equipoAzul",
 	"frame": {"x":529,"y":174,"w":640,"h":128},
 	"rotated": false,
@@ -63,6 +71,6 @@
 	"format": "RGBA8888",
 	"size": {"w":1933,"h":324},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:8504b37cc4d4638560851809a1132f7e:a00251e6ad6db31aa72e306e96f8809d:cbce6b53f0f49e0bf15173c25c41f876$"
+	"smartupdate": "$TexturePacker:SmartUpdate:99d5ca8bcc1973fa5cd9c3953994cdcf:f88c7114b56044dae7570478f6a9d990:cbce6b53f0f49e0bf15173c25c41f876$"
 }
 }

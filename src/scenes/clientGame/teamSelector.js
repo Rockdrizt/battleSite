@@ -158,6 +158,7 @@ var teamSelector = function(){
 	var splashArtGroup
 	var readyGroup
 	var cliente
+	var yogotars
 
 	var YOGOTARS_LIST = [
 		{
@@ -216,6 +217,7 @@ var teamSelector = function(){
         var numTeam = cliente.numTeam || DEFAULT_NUMTEAM
 		var config = TEAMS[numTeam]
 		gameActive = false
+		yogotars = {}
 
 		STATES = config.states
 		SIDE = config.side
@@ -360,6 +362,11 @@ var teamSelector = function(){
 			player.skin = YOGOTARS_LIST[aux].name + skinNum
 			player.setAlive(false)
 			pullGroup.add(player)
+
+			if(yogotars[player.name] === undefined)
+				yogotars[player.name] = {}
+
+			yogotars[player.name][player.skin] = player
 
 			aux = i - aux
 			skinNum = i % 2 ? 1 : 2
@@ -1019,6 +1026,28 @@ var teamSelector = function(){
 		})
 	}
 
+	function initializeYogotars() {
+
+		for(var name in yogotars){
+			var yogotar = yogotars[name]
+			for(var skin in yogotar) {
+				yogotar[skin].used = false
+				yogotar[skin].used = false
+			}
+		}
+	}
+
+	function blockYogotars(team) {
+		var players = team.players
+		initializeYogotars()
+
+		for(var playerIndex = 0; playerIndex < players.length; playerIndex++){
+			var player = players[playerIndex]
+			if(player.avatar)
+				yogotars[player.avatar][player.skin].used = true
+		}
+	}
+
 	return {
 		bootFiles:bootFiles,
 		assets: assets,
@@ -1051,6 +1080,8 @@ var teamSelector = function(){
 			createYogoNames()
 			animateSelector()
 			createReady()
+
+			cliente.addEventListener("onPlayersChange", blockYogotars)
 		},
 		shutdown:function () {
 			sceneGroup.destroy()
