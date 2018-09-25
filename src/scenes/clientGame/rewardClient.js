@@ -294,7 +294,9 @@ var rewardClient = function(){
 
     function createConfetti(){
 
-        var color = indexWinner == cliente.numTeam - 1 ? "0xFCE347" : "0xB7D8DD"
+        var gold = ["0xFCE347", "0xFCBC47"]
+        var silver = ["0xB7D8DD", "0x416367"]
+        var color = indexWinner == cliente.numTeam - 1 ? silver : gold
 
         var confetti = game.add.emitter(game.world.centerX, 0, 50)
         confetti.makeParticles("atlas.reward", "conffeti")
@@ -304,10 +306,10 @@ var rewardClient = function(){
         confetti.setSize(game.world.width, 0)
         confetti.setScale(0.3, 0.5, 0.3, 0.5, 0) 
         confetti.forEach(function(element) {
-            //element.tint = getRandomColor()
-            element.tint = color
+            var rand = game.rnd.integerInRange(0, 1)
+            element.tint = color[rand]
         });
-        confetti.start(false, 5000, 100, 0) 
+        confetti.start(false, 5000, 100, 0)
         sceneGroup.add(confetti)
     }
 
