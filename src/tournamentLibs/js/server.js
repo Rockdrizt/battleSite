@@ -363,8 +363,7 @@ function Server(){
 		team2.life = 100
 		team1.score = {correct : 0, wrong : 0}
 		team2.score = {correct : 0, wrong : 0}
-		team1.avatar = false
-		team2.avatar = false
+		self.initializeTeams()
 		valores.serverReady = true
 		valores.gameEnded = false
 		refIdGame.update(valores)
@@ -583,6 +582,19 @@ function Server(){
 			valores[key].life = value.life
 			valores[key].score = value.score
 			refIdGame.child(key).update(value);
+	}
+
+	this.initializeTeams = function () {
+		for(var teamIndex = 1; teamIndex <= NUM_TEAMS; teamIndex++){
+			var key = "t" + teamIndex
+			var players = valores[key].players
+			valores[key].life = 100
+			for(var playerIndex = 0; playerIndex < players.length; playerIndex++){
+				var player = players[playerIndex]
+				player.avatar = false
+			}
+			//refIdGame.child(key).set(valores[key])
+		}
 	}
 
 	this.retry = function(location){
