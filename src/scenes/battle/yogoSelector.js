@@ -773,7 +773,10 @@ var yogoSelector = function(){
         namesGroup.yogoName.loadTexture("atlas.yogoSelector", "name" + tag)
         namesGroup.yogoName.alpha = 1
 
-        var fadeOut = game.add.tween(namesGroup.yogoName).to({alpha:0}, 400, Phaser.Easing.linear, false, 500)
+		var fadeOut = game.add.tween(namesGroup.yogoName).to({alpha:0}, 400, Phaser.Easing.linear, false, 500)
+		fadeOut.onComplete.add(function(){
+			namesGroup.light.scale.setTo(0)
+		})
         game.add.tween(namesGroup.yogoName.scale).from({y:0}, 100, Phaser.Easing.linear, true, 200).chain(fadeOut)    
     }
 

@@ -338,8 +338,8 @@ var questionHUD = function(){
 			this.alpha = 0
 			this.timeText.setText("0:20")
 			this.circle.clear()
-			this.circle.lineStyle(40, 0xFF0000, 0.5)
-			this.circle.arc(0, 0, this.circle.lineSize, game.math.degToRad(-10), game.math.degToRad(280), false)
+			this.circle.beginFill(0xFF0000, 0.5)
+			this.circle.arc(0, 0, this.circle.lineSize, game.math.degToRad(290), game.math.degToRad(-10), true)
 			this.circle.endFill()
 		}
 
@@ -417,6 +417,10 @@ var questionHUD = function(){
 		apearOverlay.chain(apearButtons)
 		apearButtons.chain(apearChrono)
 
+		apearChrono.onStart.add(function(){
+			this.chrono.alpha = 1
+		},this)
+		
 		apearButtons.onComplete.add(function(){
 			
 			this.chrono.alpha = 1
@@ -447,6 +451,10 @@ var questionHUD = function(){
 		apearOverlay.chain(apearButtons)
 		apearButtons.chain(apearChrono)
 		apearChrono.chain(scaleContainer)
+
+		apearChrono.onStart.add(function(){
+			this.chrono.alpha = 1
+		},this)
 		
 		apearButtons.onComplete.add(function(){
 			
