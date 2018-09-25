@@ -22,7 +22,7 @@ function startGame(){
 		alertDialog.show({message:"Esperando jugadores.", isButtonDisabled:true})
 	}
 
-	function connectToServer(value){
+	function connectToServer(value, numTeam){
 		// cliente.team = {
 		// 	players: [
 		// 		{nickname: "Pawel", avatar: false, skin:false},
@@ -32,7 +32,7 @@ function startGame(){
 		// 	ready:true
 		// }
 
-		cliente.start(value, showAlert, onWaitingPlayers)
+		cliente.start(value, showAlert, onWaitingPlayers, numTeam)
 		cliente.startGame = function () {
 			alertDialog.hide()
 			var loaderScene = sceneloader.getScene("preloaderIntro")
@@ -54,8 +54,11 @@ function startGame(){
 
 		alertDialog.init()
 		cliente = new Client();
-		var idGameFromHash = window.location.hash.substr(1);
-		connectToServer(idGameFromHash)
+		var hashValue = window.location.hash.substr(1);
+		var arrValues = hashValue.split("/")
+		var idGameFromHash = arrValues[0]
+		var numTeam = Number(arrValues[1])
+		connectToServer(idGameFromHash, numTeam)
 		//sceneloader.show("teamSelector")
 	}
 
