@@ -3,7 +3,7 @@ var selectTeam;
 var idGameFromHash = window.location.hash.substr(1);
 var idGame = idGameFromHash;
 var teamId = parseInt(getParameterByName("team"));
-console.log(idGame)
+var colorConfetti;
 var service = new ScreenService();
 service.start(idGame, teamId, showTeam,animateAnswer,hitToLife, animateEnd);
 
@@ -60,15 +60,19 @@ function ChoiceYogotar(parent,obj){
 
 
 function animateEnd(ended){
-    console.log(ended)
+    console.log(ended);
     if(ended){
+        
         if(teamId == ended.winner){
             //primer lugar 
+            colorConfetti = "0xFCE347";
             changeColorLava("#FCE347","#FCBC47");
         }else{
+            //segundo lugar 
+            colorConfetti = "0xB7D8DD";
             changeColorLava("#B7D8DD","#416367");
-           //segundo lugar 
         } 
+        startGame();
     }else{
             
         console.log("ended")
