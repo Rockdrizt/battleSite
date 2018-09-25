@@ -121,8 +121,8 @@ function Client(){
 		//if(((idGame!==null)&&(!self.id_game))||(idGame === "000000")){
 		self.id_game = idGame;
 
-		self.refIdGame.child("data").off()
-		self.refIdGame.child("data").on('value', function(snapshot) {
+		self.refIdGame.child("questions").off()
+		self.refIdGame.child("questions").on('child_added', function(snapshot) {
 			var data = snapshot.val();
 			if(data && !data.timeOut) {
 				self.currentData = data

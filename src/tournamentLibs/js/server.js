@@ -349,7 +349,7 @@ function Server(){
 		questionData.timeOut = false
 		valores.questions.push(questionData);
 
-		refIdGame.child("questions").push().set(questionData);
+		refIdGame.child("questions").set(valores.questions);
 		//TODO: showPossibleAnswers deprected check client events to avoid conflicts.
 		self.fireEvent('afterGenerateQuestion',[questionData]);
 	}
