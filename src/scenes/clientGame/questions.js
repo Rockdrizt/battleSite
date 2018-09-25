@@ -156,7 +156,7 @@ var questions = function(){
 
 		var border = DATA.states.color - 1
         
-        var teamBar = game.add.spine(game.world.width * border, 160, "banner")
+        var teamBar = game.add.spine(game.world.width * border, 140, "banner")
 		teamBar.setSkinByName(DATA.animSkin)
 		teamBar.setAnimationByName(0, "idle", true)
 		teamBar.scale.setTo(DATA.side, 1)
@@ -246,7 +246,7 @@ var questions = function(){
 			createQuestionOverlay()
 			createTeamBar()
 
-			//riddles.initialize()
+			// riddles.initialize()
 
 			// var quest = createButton(setReadyGo, 0x00ffff)
 			// quest.x = game.world.centerX
