@@ -89,10 +89,12 @@ function Client(){
 		self.teams[2] = val.t2
 		if(self.numTeam){
 			self.team = val["t" + self.numTeam]
-			self.team.ready = true
+			self.opponent = self.numTeam === 1 ? 2 : 1
 
-			if((val[self.numTeam])&&(!val[self.numTeam].ready))
+			if((self.team)&&(!self.team.ready)){
+				self.team.ready = true
 				setfb(self.refIdGame.child("t" + self.numTeam), self.team)
+				}
 			else
 				self.showAlert("El equipo " + self.numTeam + " ya esta siendo ocupado. Da click en OK para continuar", false, true)
 		}
@@ -201,7 +203,7 @@ function Client(){
 			if (serverReady) {
 				var val = snapshot.val()
 
-				if (self.numTeam) {
+				if (self.numTeam && self.team[self.numTeam]) {
 					var ready = snapshot.child("t" + self.numTeam + "/ready").val()
 					if(self.teams[self.numTeam].players !== val["t" + self.numTeam].players) {
 						self.teams[self.numTeam] = val["t" + self.numTeam]
@@ -258,12 +260,13 @@ function Client(){
 	 * @summary Starts the client
 	 * @param {type} idGame Code of the game
 	 */
-	this.start = function(idGame, onAlert, onWait){
+	this.start = function(idGame, onAlert, onWait, numTeam){
 		// self.events = {};
 		// console.log(self.events)
 		self.refIdGame= database.ref();
 		self.showAlert = onAlert
 		self.onWait = onWait
+		if(numTeam) self.numTeam = numTeam
 
 		database.ref('.info/connected').off()
 		database.ref('.info/connected').on('value', function (snap) {
