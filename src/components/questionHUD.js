@@ -35,7 +35,7 @@ var questionHUD = function(){
 		questionGroup.add(black)
 		questionGroup.black = black
 
-		var board = questionGroup.create(game.world.centerX, game.world.centerY, "questionBoard")
+		var board = questionGroup.create(game.world.centerX, game.world.centerY - 20, "questionBoard")
 		board.anchor.setTo(0.5)
 		questionGroup.mainBoard = board
 
@@ -46,8 +46,8 @@ var questionHUD = function(){
 		questionGroup.question = questionText
 
 		var questionImage = createQuesitonImage()
-		questionImage.x = board.x * 0.75
-		questionImage.y = board.y * 1.4
+		questionImage.x = board.x - board.width * 0.175
+		questionImage.y = board.y + board.height * 0.285
 		questionGroup.add(questionImage)
 		questionGroup.image = questionImage
 
@@ -70,8 +70,8 @@ var questionHUD = function(){
 		buttonsGroup.options.btnPressed = null
 
 		chronoGroup = createChrono()
-		chronoGroup.x = board.x - board.width * 0.57
-		chronoGroup.y = board.y * 1.5
+		chronoGroup.x = board.x - board.width * 0.35
+		chronoGroup.y = game.world.height - chronoGroup.height * 0.5//board.y + board.height * 0.6
 		questionGroup.add(chronoGroup)
 		questionGroup.chrono = chronoGroup
 
@@ -308,6 +308,7 @@ var questionHUD = function(){
 
 		var chronoGroup = game.add.group()
 		chronoGroup.alpha = 0
+		chronoGroup.scale.setTo(0.9)
 		chronoGroup.maxTime = 20000
 
 		var cont = chronoGroup.create(0, 0, "atlas.question", "yellowCircle")

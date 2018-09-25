@@ -257,15 +257,15 @@ var rewardClient = function(){
 
             var obj = losers[i]
 
-            var player = spineLoader.createSpine(obj.avatar, obj.skin, "gg", frame.width * 0.65, frame.height * 0.9, true)
+            var player = spineLoader.createSpine(obj.avatar, obj.skin, "gg", frame.width * 0.75, frame.height * 0.9, true)
             player.scale.setTo(SCALE)
 			player.setAlive(false)
             subGroup.add(player)
             subGroup.anim = player
             
-            var mask = game.add.graphics(50, -200)
+            var mask = game.add.graphics(0, -200)
             mask.beginFill(0xffffff)
-            mask.drawRect(0, 0, frame.width, frame.height * 1.65)
+            mask.drawRect(0, 0, frame.width * 1.3, frame.height * 1.65)
             player.mask = mask
             player.addChild(mask)
 
@@ -294,7 +294,9 @@ var rewardClient = function(){
 
     function createConfetti(){
 
-        var color = indexWinner == cliente.numTeam - 1 ? "0xFCE347" : "0xB7D8DD"
+        var gold = ["0xFCE347", "0xFCBC47"]
+        var silver = ["0xB7D8DD", "0x416367"]
+        var color = indexWinner == cliente.numTeam - 1 ? silver : gold
 
         var confetti = game.add.emitter(game.world.centerX, 0, 50)
         confetti.makeParticles("atlas.reward", "conffeti")
@@ -304,10 +306,10 @@ var rewardClient = function(){
         confetti.setSize(game.world.width, 0)
         confetti.setScale(0.3, 0.5, 0.3, 0.5, 0) 
         confetti.forEach(function(element) {
-            //element.tint = getRandomColor()
-            element.tint = color
+            var rand = game.rnd.integerInRange(0, 1)
+            element.tint = color[rand]
         });
-        confetti.start(false, 5000, 100, 0) 
+        confetti.start(false, 5000, 100, 0)
         sceneGroup.add(confetti)
     }
 
