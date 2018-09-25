@@ -226,7 +226,8 @@ var questions = function(){
 	function setQuestionTimeOut() {
 		console.log("timeOut")
 		//questionGroup.stopTimer()
-		if(!questionHUD.answered) {
+		if(!questionGroup.answered) {
+			questionGroup.answered = true
 			cliente.buttonOnClick({time: 0, value: -1})
 			game.time.events.add(3000, questionGroup.clearQuestion)
 		}
