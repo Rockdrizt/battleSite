@@ -46,8 +46,8 @@ var questionHUD = function(){
 		questionGroup.question = questionText
 
 		var questionImage = createQuesitonImage()
-		questionImage.x = board.x * 0.75
-		questionImage.y = board.y * 1.4
+		questionImage.x = board.x - board.width * 0.175
+		questionImage.y = board.y + board.height * 0.285
 		questionGroup.add(questionImage)
 		questionGroup.image = questionImage
 
