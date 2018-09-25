@@ -28,8 +28,8 @@ var scores = function(){
 			},
 			{
 				name: "atlas.yogotars",
-				json: settings.BASE_PATH + "/images/battle/pics/atlas.json",
-				image: settings.BASE_PATH + "/images/battle/pics/atlas.png",
+				json: settings.BASE_PATH + "/images/yogoSelector/portraits/atlas.json",
+				image: settings.BASE_PATH + "/images/yogoSelector/portraits/atlas.png",
 			},
 			{
 				name: "atlas.question",
@@ -75,14 +75,9 @@ var scores = function(){
 	}
 
 	var ORDER_SIDES = [SIDES.LEFT, SIDES.RIGHT]
-	var teams = [
-		["dinamita", "theffanie", "luna"],
-		["eagle", "nao", "estrella"],
-	]
-	var kids = [
-		["Rock", "Pawel", "Rulas"],
-		["Mares", "Cherry", "Humbert"]
-	]
+	var NAMES_LIST = ["tomiko", "luna", "nao", "theffanie", "eagle", "dinamita", "arthurius", "estrella"]
+	var X_OFFSETS = [-30, 0, 0, -10, 0, 0, 0, -10]
+	var X_SCALES = [1, 1, -1, -1, 1, 1, -1, -1]
 
 	var teamsData
 
@@ -245,8 +240,6 @@ var scores = function(){
 				var teamMate = createYogoToken(sideIndex, playerData.skin, playerData.nickname)
 				teamMate.x = pivotX
 				teamMate.y = pivotY
-				teamMate.yogo.scale.setTo(1 * side.scale.x, 1)
-				teamMate.yogo.growScale = 1 * side.scale.x
 				sideTeam.add(teamMate)
 
 				if(i == 1){
@@ -271,7 +264,6 @@ var scores = function(){
 
 		var shine = memberGroup.create(0, 50, "atlas.scores", "light" + color)
 		shine.anchor.setTo(0.5, 1)
-		//shine.scale.setTo(1,0)
 		memberGroup.shine = shine
 
 		var token = memberGroup.create(0, 0, "atlas.scores", "token" + color)
@@ -288,9 +280,11 @@ var scores = function(){
 		nameBoard.addChild(nameTxt)
 		nameBoard.txt = nameTxt
 
-		var yogo = memberGroup.create(0, 40, "atlas.yogotars", yogo)
+		var pos = getOffset(yogo)
+		var yogo = memberGroup.create(pos.offsetX * side.scale.x, 55, "atlas.yogotars", yogo)
 		yogo.anchor.setTo(0.5, 1)
-		yogo.growScale = 1
+		yogo.scale.setTo(pos.scaleX * side.scale.x, 1)
+		yogo.growScale = pos.scaleX * side.scale.x
 		memberGroup.yogo = yogo
 
 		var poly = new Phaser.Polygon([new Phaser.Point(token.x, token.y + token.height * 0.29), 
@@ -315,6 +309,18 @@ var scores = function(){
 		memberGroup.kid = kidPhoto
 
 		return memberGroup
+	}
+
+	function getOffset(name){
+
+		var index = NAMES_LIST.indexOf(name.slice(0, -1))
+		var offsetX = X_OFFSETS[index]
+		var scaleX = X_SCALES[index]
+
+		return {
+			offsetX,
+			scaleX
+		}
 	}
 
 	function createScoreBubble(){
