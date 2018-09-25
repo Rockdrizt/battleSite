@@ -580,28 +580,28 @@ normal2/mouth_b7
   index: -1
 normal/mouth_c1
   rotate: false
-  xy: 1280, 2
+  xy: 1306, 2
   size: 8, 13
   orig: 8, 13
   offset: 0, 0
   index: -1
 normal2/mouth_c1
   rotate: false
-  xy: 1280, 2
+  xy: 1306, 2
   size: 8, 13
   orig: 8, 13
   offset: 0, 0
   index: -1
 normal/mouth_c2
   rotate: true
-  xy: 1290, 4
+  xy: 1316, 4
   size: 11, 15
   orig: 11, 15
   offset: 0, 0
   index: -1
 normal2/mouth_c2
   rotate: true
-  xy: 1290, 4
+  xy: 1316, 4
   size: 11, 15
   orig: 11, 15
   offset: 0, 0
@@ -1276,6 +1276,13 @@ normal2/hand2_h
   xy: 2023, 1426
   size: 27, 20
   orig: 27, 20
+  offset: 0, 0
+  index: -1
+normal2/hand2_i
+  rotate: false
+  xy: 1280, 4
+  size: 24, 11
+  orig: 24, 11
   offset: 0, 0
   index: -1
 normal2/head
