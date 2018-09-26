@@ -100,11 +100,13 @@ var battle = function(){
 			{	name: "normalAttack",
 				file: settings.BASE_PATH + "/sounds/sounds/attackCharge1.mp3"},
 			{	name: "superAttack",
-				file: settings.BASE_PATH + "/sounds/sounds/energyBlast.mp3"},
+				file: settings.BASE_PATH + "/sounds/sounds/energyBlast.wav"},
 			{	name: "ultraAttack",
-				file: settings.BASE_PATH + "/sounds/sounds/shineSpell.mp3"},
+				file: settings.BASE_PATH + "/sounds/sounds/shineSpell.wav"},
 			{	name: "walkRotate",
 				file: settings.BASE_PATH + "/sounds/sounds/walkRotate2.mp3"},
+            {	name: "answerBell",
+				file: settings.BASE_PATH + "/sounds/sounds/answerBell1.mp3"},
 		],
 		spritesheets: [
 		],
@@ -430,6 +432,7 @@ var battle = function(){
 
 		}
 
+        sound.play("walkRotate")
 		yogoGroup.sort('y', Phaser.Group.SORT_ASCENDING)
 		//ORDER_POSITIONS = copyPositions
 

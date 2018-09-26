@@ -173,6 +173,7 @@ var resultsFeedback = function(){
 
                     if(winer){
                         var showCorrect = game.add.tween(self.happy).to({alpha: 1}, 300, Phaser.Easing.Cubic.Out, false, 1100)
+                        showCorrect.onStart.add(function(){sound.play("answerBell")})
                     }
                     else{
                         var showCorrect = game.add.tween(self.poker).to({alpha: 1}, 300, Phaser.Easing.Cubic.Out, false, 1100)
