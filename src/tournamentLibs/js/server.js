@@ -337,7 +337,7 @@ function Server(){
 
 	//TODO: generate question is not a server function
 	this.sendQuestion = function () {
-		var questionData = riddles.getQuestion(this.questionGrade)
+		var questionData = riddles.getQuestion(self.questionGrade)
 		//var questionData = riddles.getOperation()
 		correctAnswer = questionData.correctAnswer
 
@@ -503,8 +503,10 @@ function Server(){
 		var lastIndex = valores.questions.length - 1
 		refIdGame.child("questions/" + lastIndex + "/date").on('value', function (snap) {
 			var currentTime = snap.val()
+			var ref = snap.ref
 			if(currentTime){
-				self.fireEvent("setTimer", [currentTime])
+				ref.off()
+				self.fireEvent("setTimer", [currentTime - self.timeOffset])
 			}
 		})
 	}
@@ -525,6 +527,7 @@ function Server(){
 			checkTeams()
 			checkTeamAnswers()
 			checkDisconnect(id)
+			checkTimeOffset()
 		}
 
 		if((id)&&(self.onStart)) self.onStart()
@@ -569,7 +572,7 @@ function Server(){
 		var params = params || {}
 		var rules = params.rules || operationGenerator.RULES_SET.EASY
 		var battleTime = params.battleTime || 300000
-		var questionGrade = params.grade || -1
+		var questionGrade = typeof params.grade == "number" ? params.grade : -1
 		self.battleTime = battleTime
 		self.rules = rules
 		self.questionGrade = questionGrade
@@ -652,6 +655,13 @@ function Server(){
 		console.log("timeOUT!")
 		var lastIndex = valores.questions.length - 1
 		refIdGame.child("questions/" + lastIndex).update({timeOut:true})
+	}
+	
+	function checkTimeOffset() {
+		var offsetRef = firebase.database().ref(".info/serverTimeOffset");
+		offsetRef.on("value", function(snap) {
+			self.timeOffset = snap.val();
+		});
 	}
 
 	this.setDate = function () {
