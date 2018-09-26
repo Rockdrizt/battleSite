@@ -382,8 +382,12 @@ var questionHUD = function(){
 		this.timeElapsed = 0
 		this.riddle = riddle
 		this.answered = false
+		var currDate = new Date()
+		var currTime = currDate.getTime()
+		var timeDiff = currTime - riddle.date
+		this.chrono.date = riddle.date
 
-		this.chrono.maxTime = this.riddle.timers.normal
+		this.chrono.maxTime = this.riddle.timers.normal - timeDiff
 		var maxTime = convertTime(this.chrono.maxTime)
 		this.chrono.timeText.setText(maxTime)
 
@@ -620,8 +624,12 @@ var questionHUD = function(){
 	}
     
     function startTimer(){
-	
-        var maxTime = this.riddle.timers.normal
+
+		var currDate = new Date()
+		var currTime = currDate.getTime()
+		var timeDiff = currTime - this.chrono.date
+		var maxTime = this.chrono.maxTime - timeDiff
+
 		if(this.timer) {
         	this.timer.stop(true)
 			this.timer.destroy()
