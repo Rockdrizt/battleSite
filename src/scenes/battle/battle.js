@@ -882,7 +882,7 @@ var battle = function(){
 			createListosYa()
 			//createMenuAnimations()
 			//menubuttons()
-			battleSong = sound.play("battleSong", {loop:true, volume:0.4})
+			battleSong = sound.play("battleSong", {loop:true, volume:0.1})
 			createWhite()
 
 			// var damageBtn = createButton(attackMove.bind(null, "ultra", 0), 0xff0033)

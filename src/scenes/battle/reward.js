@@ -383,6 +383,7 @@ var reward = function(){
             var confetti = epicparticles.newEmitter(assets.particles[i].name)
             confetti.x = game.world.centerX
             confetti.y = 0
+            confetti.scale.setTo(2)
             confettisGroup.add(confetti)
         }
     }
