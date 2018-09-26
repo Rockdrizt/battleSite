@@ -390,6 +390,10 @@
 "tournamentElectricAttack1":"/sounds/characters/electricAttack1.mp3",
 "tournamentRunningFast1":"/sounds/characters/runningFast1.mp3",
 "tournamentWaveSurf1":"/sounds/characters/waveSurf1.mp3",
-"tournamentMassiveImpact1":"/sounds/characters/massiveImpact1.mp3"    
+"tournamentMassiveImpact1":"/sounds/characters/massiveImpact1.mp3",
+"tournamentAnswerBell1":"/sounds/characters/answerBell1.mp3",
+"tournamentAttackCharge1":"/sounds/characters/attackCharge1.mp3",
+"tournamentWalkRotate1":"/sounds/characters/walkRotate1.mp3",
+"tournamentWalkRotate2":"/sounds/characters/walkRotate2.mp3"    
     
 }
