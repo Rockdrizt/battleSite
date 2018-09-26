@@ -1147,9 +1147,9 @@ var yogoSelector = function(){
 				showBattle()
 			}
 		},
-		render:function () {
-			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
-		},
+//		render:function () {
+//			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
+//		},
 		create: function(event){
             
             createBackground()
@@ -1164,7 +1164,7 @@ var yogoSelector = function(){
 
 			initialize()
 
-			gameSong = sound.play("gameSong", {loop:true, volume:0.6})
+			gameSong = sound.play("gameSong", {loop:true, volume:0.1})
 
             createPlatforms()
 			createTeams()
