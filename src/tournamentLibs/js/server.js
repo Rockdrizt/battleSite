@@ -349,7 +349,8 @@ function Server(){
 		questionData.timeOut = false
 		valores.questions.push(questionData);
 
-		refIdGame.child("questions").set(valores.questions);
+		var numIndex = valores.questions.length - 1
+		refIdGame.child("questions/" + numIndex).set(questionData);
 		//TODO: showPossibleAnswers deprected check client events to avoid conflicts.
 		self.fireEvent('afterGenerateQuestion',[questionData]);
 	}
@@ -366,6 +367,7 @@ function Server(){
 		self.initializeTeams()
 		valores.serverReady = true
 		valores.gameEnded = false
+		valores.winner = false
 		if(!valores.questions)
 			valores.questions = []
 		refIdGame.update(valores)
@@ -637,6 +639,7 @@ function Server(){
 
 	this.setQuestionTimeOut = function () {
 		console.log("timeOUT!")
-		setfb(refIdGame.child("data/timeOut"), true)
+		lastIndex = valores.questions.length - 1
+		refIdGame.child("questions/" + lastIndex).update({timeOut:true})
 	}
 }

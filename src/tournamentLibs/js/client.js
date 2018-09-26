@@ -82,6 +82,24 @@ function Client(){
 		})
 	}
 
+	this.setOnQuestions = function(){
+		self.refIdGame.child("questions").off()
+		self.refIdGame.child("questions").limitToLast(1).on('child_added', function(snapshot) {
+			var data = snapshot.val();
+			var ref = snapshot.ref
+			if(data && !data.timeOut) {
+				self.currentData = data
+				self.fireEvent('showEquation', [data]);
+				ref.child("timeOut").on("value", function (snap) {
+					var timeOut = snap.val()
+					if(timeOut === true)
+						self.fireEvent("questionTimeOut")
+				})
+			}
+
+		});
+	}
+
 	function initialize(idGame, val){
 		var t1 = val.t1;
 		var t2 = val.t2;
@@ -122,16 +140,6 @@ function Client(){
 
 		//if(((idGame!==null)&&(!self.id_game))||(idGame === "000000")){
 		self.id_game = idGame;
-
-		self.refIdGame.child("questions").off()
-		self.refIdGame.child("questions").on('child_added', function(snapshot) {
-			var data = snapshot.val();
-			if(data && !data.timeOut) {
-				self.currentData = data
-				self.fireEvent('showEquation', [data]);
-			}else if(data.timeOut === true)
-				self.fireEvent("questionTimeOut")
-		});
 
 		self.refIdGame.child('winner').off()
 		self.refIdGame.child('winner').on('value', function(snapshot) {

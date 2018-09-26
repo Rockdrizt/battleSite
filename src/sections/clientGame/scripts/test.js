@@ -22,8 +22,8 @@ function startGame(){
 		//alertDialog.show({message:"Esperando jugadores.", isButtonDisabled:true})
 	}
 
-	function connectToServer(value){
-		cliente.start(value, onWaitingPlayers, onErrorConnection)
+	function connectToServer(value, numTeam){
+		cliente.start(value, onWaitingPlayers, onErrorConnection, numTeam)
 		//cliente.startGame = function () {
 		//alertDialog.hide()
 		sceneloader.show("questions")
@@ -39,8 +39,12 @@ function startGame(){
 
 		//alertDialog.init()
 		cliente = new Client();
-		var idGameFromHash = window.location.hash.substr(1);
-		connectToServer(idGameFromHash)
+
+		var hashValue = window.location.hash.substr(1);
+		var arrValues = hashValue.split("/")
+		var idGameFromHash = arrValues[0]
+		var numTeam = Number(arrValues[1])
+		connectToServer(idGameFromHash, numTeam)
 		//sceneloader.show("teamSelector")
 	}
 

@@ -269,6 +269,8 @@ var questions = function(){
 				cliente.addEventListener("onGameEnds", showWinner)
 				cliente.addEventListener("questionTimeOut", setQuestionTimeOut)
 
+				cliente.setOnQuestions()
+
 				//cliente.timeOutCallback = setTimeOut
 				// clientData.setReady(true)
 			}else{
