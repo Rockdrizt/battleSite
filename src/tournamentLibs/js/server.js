@@ -353,6 +353,7 @@ function Server(){
 		refIdGame.child("questions/" + numIndex).set(questionData);
 		//TODO: showPossibleAnswers deprected check client events to avoid conflicts.
 		self.fireEvent('afterGenerateQuestion',[questionData]);
+		checkDate()
 	}
 
 	function getData(val) {
@@ -496,6 +497,16 @@ function Server(){
 			database.ref(id + "/t1/ready").onDisconnect().set(false)
 			database.ref(id + "/t2/ready").onDisconnect().set(false)
 		}
+	}
+
+	function checkDate() {
+		var lastIndex = valores.questions.length - 1
+		refIdGame.child("questions/" + lastIndex + "/date").on('value', function (snap) {
+			var currentTime = snap.val()
+			if(currentTime){
+				self.fireEvent("setTimer", [currentTime])
+			}
+		})
 	}
 
 	function initializeSession(obj){

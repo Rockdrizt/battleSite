@@ -95,6 +95,11 @@ function Client(){
 					if(timeOut === true)
 						self.fireEvent("questionTimeOut")
 				})
+				ref.child("date").on("value", function (snap) {
+					var date = snap.val()
+					if(date)
+						self.fireEvent("setTimer", [date])
+				})
 			}
 
 		});
