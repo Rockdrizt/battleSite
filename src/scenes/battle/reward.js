@@ -60,16 +60,6 @@ var reward = function(){
 		],
         particles: [
             {
-                name: "partsA",
-                file: settings.BASE_PATH + "/particles/rewardScreen/brain_particles/sphere_ligths1.json",
-                texture: "sphere_ligths1.png"
-            },
-            {
-                name: "partsB",
-                file: settings.BASE_PATH + "/particles/rewardScreen/brain_particles/Ligth_Brain.json",
-                texture: "Ligth_Brain.png"
-            },
-            {
                 name: "confetti1",
                 file: settings.BASE_PATH + "/particles/rewardScreen/confettiReward1/confettiReward1.json",
                 texture: "confettiReward1.png"
@@ -83,16 +73,6 @@ var reward = function(){
                 name: "confetti3",
                 file: settings.BASE_PATH + "/particles/rewardScreen/confettiReward1/confettiReward3.json",
                 texture: "confettiReward3.png"
-            },
-            {
-                name: "confetti4",
-                file: settings.BASE_PATH + "/particles/rewardScreen/confettiReward1/confettiReward4.json",
-                texture: "confettiReward4.png"
-            },
-            {
-                name: "confetti5",
-                file: settings.BASE_PATH + "/particles/rewardScreen/confettiReward1/confettiReward5.json",
-                texture: "confettiReward5.png"
             },
             {
                 name: "confetti6",
@@ -399,8 +379,8 @@ var reward = function(){
         var confettisGroup = game.add.group()
         sceneGroup.add(confettisGroup)
 
-        for (let i = 1; i < 7; i++) {
-            var confetti = epicparticles.newEmitter("confetti" + i)
+        for (let i = 0; i < assets.particles.length; i++) {
+            var confetti = epicparticles.newEmitter(assets.particles[i].name)
             confetti.x = game.world.centerX
             confetti.y = 0
             confettisGroup.add(confetti)

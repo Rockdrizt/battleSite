@@ -90,6 +90,7 @@ var questionHUD = function(){
 		questionGroup.updateTimer = updateTimer.bind(questionGroup)
 		questionGroup.clearQuestion = clearQuestion.bind(questionGroup)
 		questionGroup.alpha = 0
+		questionGroup.totalDelay = 0
 
 		if(clientConfig){
 			questionGroup.client = true
@@ -435,6 +436,7 @@ var questionHUD = function(){
 			}
 
 			lasTween.onComplete.add(this.setQuestion)
+			this.totalDelay += 2500
 		},this)
 	}
 
@@ -472,6 +474,8 @@ var questionHUD = function(){
 			var scaleImage = game.add.tween(this.image.image).to({alpha: 1}, 300, Phaser.Easing.Cubic.InOut, false)
 			scaleImage.onStart.add(this.setQuestion)
 			lasTween.chain(scaleImage)
+
+			this.totalDelay += 3100
 		},this)
 	}
     
@@ -483,7 +487,8 @@ var questionHUD = function(){
 			opt.inputEnabled = true
 		}
 
-        game.add.tween(this.question).to({alpha:1}, 300, Phaser.Easing.linear, true)
+		game.add.tween(this.question).to({alpha:1}, 300, Phaser.Easing.linear, true)
+		this.totalDelay += 300
         
         this.startTimer()
     }
@@ -600,6 +605,7 @@ var questionHUD = function(){
 
 		var fadeOut = game.add.tween(this.black).to({alpha:0}, 300, Phaser.Easing.linear, true)
 		
+		this.totalDelay = 0
 		fadeOut.onComplete.add(function(){
 
 			game.add.tween(this.feedBackImg).to({alpha:0}, 300, Phaser.Easing.linear, true)
