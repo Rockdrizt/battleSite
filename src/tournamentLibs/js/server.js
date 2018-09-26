@@ -337,7 +337,7 @@ function Server(){
 
 	//TODO: generate question is not a server function
 	this.sendQuestion = function () {
-		var questionData = riddles.getQuestion(this.questionGrade)
+		var questionData = riddles.getQuestion(self.questionGrade)
 		//var questionData = riddles.getOperation()
 		correctAnswer = questionData.correctAnswer
 
@@ -569,7 +569,7 @@ function Server(){
 		var params = params || {}
 		var rules = params.rules || operationGenerator.RULES_SET.EASY
 		var battleTime = params.battleTime || 300000
-		var questionGrade = params.grade || -1
+		var questionGrade = typeof params.grade == "number" ? params.grade : -1
 		self.battleTime = battleTime
 		self.rules = rules
 		self.questionGrade = questionGrade
