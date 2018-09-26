@@ -119,7 +119,8 @@
           .svgYogotar{
               margin: 0;
               padding: 0;
-              height: 100%;
+              width: 100%;
+              margin-top:-60%;
           }  
           
           .good--icon,
@@ -150,9 +151,9 @@
           
           .yogotar img{
               position: absolute;
-              width: 300%;
+              width: 200%;
               top: 1344px;
-              transform: translate(-25%,30%);
+              transform: translate(-33%,35%);
               
           }  
           
@@ -168,3 +169,4 @@
     left: 0;
     top: 0;
 }
+

@@ -214,7 +214,7 @@ TweenLite.to(example, 2, { fill: "rgb(255,0,255)" });
         
 TweenLite.set($(".correct--icon"),{transformOrigin: "50% 50% 0"}); 
 TweenLite.set($(".blobAnimate"),{transformOrigin: "50% 50% 0"});
-TweenLite.set($(".st0"),{y:270});    
+TweenLite.set($(".st0"),{y:270}); 
 TweenMax.fromTo($(".base1"),3,{x:300},{x:300,yoyo:true,repeat:-1});
 TweenMax.fromTo($(".blobAnimate"),2,{rotation:0},{rotation:360,repeat:-1,ease:Back.easeNone});
         
