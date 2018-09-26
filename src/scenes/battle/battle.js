@@ -183,6 +183,7 @@ var battle = function(){
 	var blackMask
 	var layers
 	var gradeQuestion
+	var clickHatch
 
 	var mainYogotorars
 	var mainSpine
@@ -197,6 +198,7 @@ var battle = function(){
 		loadSounds()
 		mainYogotorars = []
 		gradeQuestion = -1//0
+		clickHatch = true
 
         riddles.initialize()
 	}
@@ -286,6 +288,11 @@ var battle = function(){
 
 	function update(){
 		epicparticles.update()
+
+		if((game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))&&(!clickHatch)) {
+			server.setDate()
+			clickHatch = true
+		}
     }
 
     function createHUD(){
@@ -812,6 +819,7 @@ var battle = function(){
 			// questionGroup.showQuestion(server.generateQuestion())
 			// var riddle = riddles.getQuestion(gradeQuestion)
 			// questionGroup.showQuestion(riddle)
+			clickHatch = false
 			server.sendQuestion()
 		})
 
@@ -886,8 +894,10 @@ var battle = function(){
 			if(server){
 				server.removeEventListener('afterGenerateQuestion', questionGroup.showQuestion);
 				server.removeEventListener('onTurnEnds', showFeedback);
+				server.removeEventListener('setTimer', questionGroup.startTimer);
 				server.addEventListener('afterGenerateQuestion', questionGroup.showQuestion);
 				server.addEventListener('onTurnEnds', showFeedback);
+				server.addEventListener('setTimer', questionGroup.startTimer);
 			}
 			questionGroup.timeOutCallback = server.setQuestionTimeOut
 
@@ -899,6 +909,7 @@ var battle = function(){
 			game.onResume.add(function () {
 				PhaserSpine.Spine.globalAutoUpdate = true
 			})
+
 		},
 		setCharacter:setCharacter,
 		setTeams: function (myTeams) {
