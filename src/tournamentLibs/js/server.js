@@ -503,8 +503,10 @@ function Server(){
 		var lastIndex = valores.questions.length - 1
 		refIdGame.child("questions/" + lastIndex + "/date").on('value', function (snap) {
 			var currentTime = snap.val()
+			var ref = snap.ref
 			if(currentTime){
-				self.fireEvent("setTimer", [currentTime])
+				ref.off()
+				self.fireEvent("setTimer", [currentTime - self.timeOffset])
 			}
 		})
 	}
@@ -525,6 +527,7 @@ function Server(){
 			checkTeams()
 			checkTeamAnswers()
 			checkDisconnect(id)
+			checkTimeOffset()
 		}
 
 		if((id)&&(self.onStart)) self.onStart()
@@ -652,6 +655,13 @@ function Server(){
 		console.log("timeOUT!")
 		var lastIndex = valores.questions.length - 1
 		refIdGame.child("questions/" + lastIndex).update({timeOut:true})
+	}
+	
+	function checkTimeOffset() {
+		var offsetRef = firebase.database().ref(".info/serverTimeOffset");
+		offsetRef.on("value", function(snap) {
+			self.timeOffset = snap.val();
+		});
 	}
 
 	this.setDate = function () {

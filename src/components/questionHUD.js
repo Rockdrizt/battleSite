@@ -412,7 +412,7 @@ var questionHUD = function(){
 
 	function showNoImage(){
 
-		var toAlpha = this.client ? 1 : 0
+		var toAlpha = 1//this.client ? 1 : 0
 		var apearOverlay = game.add.tween(this).to({alpha: toAlpha}, 100, Phaser.Easing.Cubic.Out, true)
 		var apearButtons = game.add.tween(this.buttons).to({alpha: 1}, 300, Phaser.Easing.Cubic.Out, false)
 		var apearChrono = game.add.tween(this.chrono).from({x: -400}, 300, Phaser.Easing.Cubic.Out, false)
@@ -443,7 +443,7 @@ var questionHUD = function(){
 
 	function showYesImage(){
 
-		var toAlpha = this.client ? 1 : 0
+		var toAlpha = 1//this.client ? 1 : 0
 		this.image.image.loadTexture(this.riddle.image)
 		this.image.image.key = this.riddle.image
 
@@ -529,6 +529,8 @@ var questionHUD = function(){
 			this.timer.stop(true)
 			this.timer.destroy()
 		}
+		else
+			return
 
 		this.answered = true
 		sound.play("shineSpell")
@@ -633,8 +635,9 @@ var questionHUD = function(){
 
 		var currDate = new Date()
 		var currTime = currDate.getTime()
-		var timeDiff = currTime - serverTimer
+		var timeDiff = serverTimer - currTime
 		var maxTime = this.chrono.maxTime - timeDiff
+		this.timeElapsed = 0
 
 		if(this.timer) {
         	this.timer.stop(true)
@@ -642,7 +645,7 @@ var questionHUD = function(){
 		}
 
         this.timer = game.time.create()
-		this.timerEvent = this.timer.add(maxTime, this.stopTimer, this)
+		this.timerEvent = this.timer.add(maxTime, this.topTimer, this)
 		this.timer.loop(1000, updateTimer, this)
         this.timer.start()
 		console.log("time start")
@@ -678,8 +681,8 @@ var questionHUD = function(){
 	
 	function convertTime(time) {
 
-		var min = Math.floor(time / 60000)
-		var sec = Math.floor((time % 60000) / 1000)
+		var min = Math.round(time / 60000)
+		var sec = Math.round((time % 60000) / 1000)
 
 		return min + ":" + (sec < 10 ? '0' : '') + sec
 	}

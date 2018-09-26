@@ -98,7 +98,7 @@ function Client(){
 				ref.child("date").on("value", function (snap) {
 					var date = snap.val()
 					if(date)
-						self.fireEvent("setTimer", [date])
+						self.fireEvent("setTimer", [date - self.timeOffset])
 				})
 			}
 
@@ -199,6 +199,8 @@ function Client(){
 			if(timeOut)
 				self.timeOutCallback()
 		})
+
+		checkTimeOffset()
 
 		database.ref(idGame + "/t" + self.numTeam + "/ready").onDisconnect().cancel()
 		database.ref(idGame + "/t" + self.numTeam + "/ready").onDisconnect().set(false)
@@ -338,6 +340,13 @@ function Client(){
 		//players.date = firebase.database.ServerValue.TIMESTAMP
 		self.teams[self.numTeam] = players
 		setfb(self.refIdGame.child("t" + self.numTeam + "/players"), players)
+	}
+
+	function checkTimeOffset() {
+		var offsetRef = firebase.database().ref(".info/serverTimeOffset");
+		offsetRef.on("value", function(snap) {
+			self.timeOffset = snap.val();
+		});
 	}
 }
 
