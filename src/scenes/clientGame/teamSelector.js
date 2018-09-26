@@ -65,8 +65,8 @@ var teamSelector = function(){
 				file: soundsPath + "swipe.mp3"},
 			{	name: "robotBeep",
 				file: soundsPath + "robotBeep.mp3"},
-			{	name: "lightUp",
-				file: settings.BASE_PATH + "/sounds/sounds/lightUp.wav"},
+			{	name: "energyBlast",
+				file: settings.BASE_PATH + "/sounds/sounds/energyBlast.wav"},
 			{	name: "cut",
 				file: soundsPath + "cut.mp3"},
 			{	name: "gameSong", 
@@ -673,7 +673,7 @@ var teamSelector = function(){
 		okOff.events.onInputDown.add(function(btn){
 			if(okButton.canClick && teamGroup.currentSelect !== -1){
 				okButton.canClick = false
-				sound.play("lightUp")
+				sound.play("energyBlast")
 				okButton.setAll("alpha", 0)
 				okButton.onBtn.alpha = 1
 			}
@@ -842,7 +842,7 @@ var teamSelector = function(){
 			while(i !== 5){
 				buttonsGroup.children[i].yogotar.alpha = 1
 				game.add.tween(buttonsGroup.children[i].yogotar.scale).from({x: 0,y: 0}, 500, Phaser.Easing.Cubic.Out, true, delay)
-				game.time.events.add(delay, function(){sound.play("lightUp")})
+				game.time.events.add(delay, function(){sound.play("energyBlast")})
 
 
 				i === 2 ? i = 7 : i--

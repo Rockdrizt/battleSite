@@ -56,8 +56,8 @@ var yogoSelector = function(){
 				file: settings.BASE_PATH + "/sounds/sounds/shineSpell.wav"},
 			{	name: "cut",
 				file: soundsPath + "cut.mp3"},
-			{	name: "lightUp",
-				file: settings.BASE_PATH + "/sounds/sounds/lightUp.wav"},
+			{	name: "energyBlast",
+				file: settings.BASE_PATH + "/sounds/sounds/energyBlast.wav"},
 			{	name: "gameSong", 
 				file: settings.BASE_PATH + "/sounds/songs/selector.mp3"},
             {	name: "tomiko",
@@ -837,7 +837,7 @@ var yogoSelector = function(){
 			while(i !== 5){
 				buttonsGroup.children[i].yogotar.alpha = 1
 				game.add.tween(buttonsGroup.children[i].yogotar.scale).from({x: 0,y: 0}, 500, Phaser.Easing.Cubic.Out, true, delay)
-				game.time.events.add(delay, function(){sound.play("lightUp")})
+				game.time.events.add(delay, function(){sound.play("energyBlast")})
 
 
 				i === 2 ? i = 7 : i--
