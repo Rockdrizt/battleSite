@@ -490,8 +490,10 @@ var questionHUD = function(){
 
 		game.add.tween(this.question).to({alpha:1}, 300, Phaser.Easing.linear, true)
 		this.totalDelay += 300
-        
-        this.startTimer()
+
+		if(server)
+			server.setDate()
+        //this.startTimer()
     }
 
 	function hideOverlay(){

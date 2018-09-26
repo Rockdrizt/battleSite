@@ -345,7 +345,7 @@ function Server(){
 		valores.t1answer = false;
 		valores.t2answer = false;
 
-		questionData.date = firebase.database.ServerValue.TIMESTAMP
+		//questionData.date = firebase.database.ServerValue.TIMESTAMP
 		questionData.timeOut = false
 		valores.questions.push(questionData);
 
@@ -374,7 +374,7 @@ function Server(){
 
 		if(valores.questions )
 
-		self.currentData = val
+			self.currentData = val
 	}
 
 	/**
@@ -582,12 +582,12 @@ function Server(){
 	this.setBattleReady = function (value) {
 		setfb(refIdGame.child("battleReady"), value)//refIdGame.child("gameReady").set(value);
 	}
-	
+
 	this.updateTeam = function (teamIndex, value) {
-			var key = "t" + teamIndex
-			valores[key].life = value.life
-			valores[key].score = value.score
-			refIdGame.child(key).update(value);
+		var key = "t" + teamIndex
+		valores[key].life = value.life
+		valores[key].score = value.score
+		refIdGame.child(key).update(value);
 	}
 
 	this.initializeTeams = function () {
@@ -639,7 +639,12 @@ function Server(){
 
 	this.setQuestionTimeOut = function () {
 		console.log("timeOUT!")
-		lastIndex = valores.questions.length - 1
+		var lastIndex = valores.questions.length - 1
 		refIdGame.child("questions/" + lastIndex).update({timeOut:true})
+	}
+
+	this.setDate = function () {
+		var lastIndex = valores.questions.length - 1
+		refIdGame.child("questions/" + lastIndex).update({date:firebase.database.ServerValue.TIMESTAMP})
 	}
 }
