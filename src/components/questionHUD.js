@@ -482,11 +482,11 @@ var questionHUD = function(){
     
     function setQuestion(){
 			
-        for(var i = 0; i < this.buttons.options.length; i++){
-			var opt = this.buttons.options.children[i]
-			game.add.tween(opt.info).to({alpha:1}, 300, Phaser.Easing.linear, true)
-			opt.inputEnabled = true
-		}
+//        for(var i = 0; i < this.buttons.options.length; i++){
+//			var opt = this.buttons.options.children[i]
+//			game.add.tween(opt.info).to({alpha:1}, 300, Phaser.Easing.linear, true)
+//			opt.inputEnabled = true
+//		}
 
 		game.add.tween(this.question).to({alpha:1}, 300, Phaser.Easing.linear, true)
 		this.totalDelay += 300
@@ -638,6 +638,12 @@ var questionHUD = function(){
 		var timeDiff = serverTimer - currTime
 		var maxTime = this.chrono.maxTime - timeDiff
 		this.timeElapsed = 0
+        
+        for(var i = 0; i < this.buttons.options.length; i++){
+			var opt = this.buttons.options.children[i]
+			game.add.tween(opt.info).to({alpha:1}, 300, Phaser.Easing.linear, true)
+			opt.inputEnabled = true
+		}
 
 		if(this.timer) {
         	this.timer.stop(true)

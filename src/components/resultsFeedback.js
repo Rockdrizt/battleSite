@@ -422,7 +422,9 @@ var resultsFeedback = function(){
 
 		var fadeOut = game.add.tween(loseSide.parent).to({alpha: 0}, 1100, Phaser.Easing.Cubic.Out, false, 1400)
         fadeOut.onStart.add(function(){
-            game.add.tween(loseSide).to({y: loseSide.y + 100}, 900, Phaser.Easing.Cubic.Out, true)
+            game.add.tween(loseSide).to({y: loseSide.y + 100}, 900, Phaser.Easing.Cubic.Out, true).onComplete.add(function(){
+                loseSide.y = loseSide.SPAWN_Y
+            })
             self.loserCallback()
             game.add.tween(loseSide.parent.parent.black).to({alpha: 0}, 1000, Phaser.Easing.Cubic.Out, true)
             self.parent.blueAns.clearInfo()

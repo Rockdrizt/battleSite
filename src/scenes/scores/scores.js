@@ -506,14 +506,14 @@ var scores = function(){
 			createTeams()
 			createVS()
 			createScoreBubble()
-			createQuestionOverlay()		
+			//createQuestionOverlay()		
 
-			scoreService.removeEventListener("newQuestion", questionGroup.showQuestion)
-			scoreService.addEventListener("newQuestion", questionGroup.showQuestion)
+//			scoreService.removeEventListener("newQuestion", questionGroup.showQuestion)
+//			scoreService.addEventListener("newQuestion", questionGroup.showQuestion)
 			scoreService.removeEventListener("onTeamUpdate", onTeamUpdate)
 			scoreService.addEventListener("onTeamUpdate", onTeamUpdate)
-			scoreService.removeEventListener("onTurnEnds", questionGroup.hide)
-			scoreService.addEventListener("onTurnEnds", questionGroup.hide)
+//			scoreService.removeEventListener("onTurnEnds", questionGroup.hide)
+//			scoreService.addEventListener("onTurnEnds", questionGroup.hide)
 		},
 		setTeamData: function (data) {
 			teamsData = data
