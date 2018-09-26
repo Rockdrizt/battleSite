@@ -184,6 +184,7 @@ var battle = function(){
 	var layers
 	var gradeQuestion
 	var clickHatch
+	var newQuestionHatch
 
 	var mainYogotorars
 	var mainSpine
@@ -199,6 +200,7 @@ var battle = function(){
 		mainYogotorars = []
 		gradeQuestion = -1//0
 		clickHatch = true
+		newQuestionHatch = true
 
         riddles.initialize()
 	}
@@ -293,6 +295,11 @@ var battle = function(){
 			server.setDate()
 			clickHatch = true
 		}
+
+		if((game.input.keyboard.isDown(Phaser.Keyboard.ENTER))&&(!newQuestionHatch)) {
+			setReadyGo()
+			newQuestionHatch = true
+		}
     }
 
     function createHUD(){
@@ -307,7 +314,8 @@ var battle = function(){
 			for(var i = 0; i < 2; i++){
 				game.time.events.add(delay * 0.5, rotateTeam, null, i)
 			}
-			game.time.events.add(delay, setReadyGo)
+			newQuestionHatch = false
+			//game.time.events.add(delay, setReadyGo)
 		}
         sceneGroup.add(HUDGroup)
     }
@@ -836,7 +844,8 @@ var battle = function(){
                 changeAnim(yogo, "idle_normal")
             }
         }
-        game.time.events.add(1000, setReadyGo)
+        newQuestionHatch = false
+        //game.time.events.add(1000, setReadyGo)
     }
     
     function changeAnim(yogo, anim){
@@ -855,7 +864,7 @@ var battle = function(){
         for(var i = 0; i < 2; i++){
             game.time.events.add(2000, rotateTeam, null, i)
         }
-        game.time.events.add(4000, setReadyGo)
+        //game.time.events.add(4000, setReadyGo)
     }
 
 	return {
