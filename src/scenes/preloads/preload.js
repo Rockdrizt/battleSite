@@ -20,6 +20,7 @@ var preloaderIntro = function(){
             if(spiner){
                 var loadingAmount = loadedFiles / totalFiles
                 var total = loadingAmount.toFixed(2).substr(2)
+                if(total > 99) total = 100
                 spiner.text.setText(total)
             }
 		},

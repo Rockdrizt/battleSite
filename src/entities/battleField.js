@@ -12,7 +12,7 @@ var battleField = function(){
 //        var background = spineLoader.createSpine("background", "normal", "idle", game.world.centerX, game.world.centerY, true)
 //        group.add(background)
         
-        var pipes = group.create(-60, -150, "pipes")
+        group.create(-60, -150, "pipes")
         
         var cubes = spineLoader.createSpine("cubes", "normal", "idle", game.world.centerX - 30, game.world.centerY - 110, true)
         group.add(cubes)

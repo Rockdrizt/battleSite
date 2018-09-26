@@ -264,10 +264,14 @@ var questions = function(){
 				cliente.removeEventListener("onGameEnds", showWinner)
 				cliente.removeEventListener("showEquation", questionGroup.showQuestion)
 				cliente.removeEventListener("questionTimeOut", setQuestionTimeOut)
+				cliente.removeEventListener('setTimer', questionGroup.startTimer);
 				cliente.addEventListener("onTurnEnds", checkAnswer)
 				cliente.addEventListener("showEquation", questionGroup.showQuestion)
 				cliente.addEventListener("onGameEnds", showWinner)
 				cliente.addEventListener("questionTimeOut", setQuestionTimeOut)
+				cliente.addEventListener('setTimer', questionGroup.startTimer);
+
+				cliente.setOnQuestions()
 
 				//cliente.timeOutCallback = setTimeOut
 				// clientData.setReady(true)

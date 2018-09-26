@@ -345,13 +345,15 @@ function Server(){
 		valores.t1answer = false;
 		valores.t2answer = false;
 
-		questionData.date = firebase.database.ServerValue.TIMESTAMP
+		//questionData.date = firebase.database.ServerValue.TIMESTAMP
 		questionData.timeOut = false
-		valores.data = questionData;
+		valores.questions.push(questionData);
 
-		setfb(refIdGame.child("data"), questionData)//refIdGame.child("data").set(valores.data);
+		var numIndex = valores.questions.length - 1
+		refIdGame.child("questions/" + numIndex).set(questionData);
 		//TODO: showPossibleAnswers deprected check client events to avoid conflicts.
 		self.fireEvent('afterGenerateQuestion',[questionData]);
+		checkDate()
 	}
 
 	function getData(val) {
@@ -366,9 +368,14 @@ function Server(){
 		self.initializeTeams()
 		valores.serverReady = true
 		valores.gameEnded = false
+		valores.winner = false
+		if(!valores.questions)
+			valores.questions = []
 		refIdGame.update(valores)
 
-		self.currentData = val
+		if(valores.questions )
+
+			self.currentData = val
 	}
 
 	/**
@@ -384,7 +391,7 @@ function Server(){
 			t1answer : false,
 			t2answer : false,
 			possibleAnswers: [],
-			data:false,
+			questions:[],
 			gameReady:false,
 			battleReady:false,
 			gameEnded:false,
@@ -492,6 +499,16 @@ function Server(){
 		}
 	}
 
+	function checkDate() {
+		var lastIndex = valores.questions.length - 1
+		refIdGame.child("questions/" + lastIndex + "/date").on('value', function (snap) {
+			var currentTime = snap.val()
+			if(currentTime){
+				self.fireEvent("setTimer", [currentTime])
+			}
+		})
+	}
+
 	function initializeSession(obj){
 		var id = obj.id
 		var val = obj.val
@@ -576,12 +593,12 @@ function Server(){
 	this.setBattleReady = function (value) {
 		setfb(refIdGame.child("battleReady"), value)//refIdGame.child("gameReady").set(value);
 	}
-	
+
 	this.updateTeam = function (teamIndex, value) {
-			var key = "t" + teamIndex
-			valores[key].life = value.life
-			valores[key].score = value.score
-			refIdGame.child(key).update(value);
+		var key = "t" + teamIndex
+		valores[key].life = value.life
+		valores[key].score = value.score
+		refIdGame.child(key).update(value);
 	}
 
 	this.initializeTeams = function () {
@@ -611,7 +628,7 @@ function Server(){
 		valores.time = self.battleTime;
 		valores.maxRounds = self.maxRounds;
 		valores.rules = self.rules
-		valores.data = false;
+		valores.questions = [];
 		valores.gameEnded = false;
 		valores.retry = {retry:location, date:actualDate};
 		valores.timeOut = false
@@ -633,6 +650,12 @@ function Server(){
 
 	this.setQuestionTimeOut = function () {
 		console.log("timeOUT!")
-		setfb(refIdGame.child("data/timeOut"), true)
+		var lastIndex = valores.questions.length - 1
+		refIdGame.child("questions/" + lastIndex).update({timeOut:true})
+	}
+
+	this.setDate = function () {
+		var lastIndex = valores.questions.length - 1
+		refIdGame.child("questions/" + lastIndex).update({date:firebase.database.ServerValue.TIMESTAMP})
 	}
 }
