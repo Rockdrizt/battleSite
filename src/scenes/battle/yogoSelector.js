@@ -59,7 +59,7 @@ var yogoSelector = function(){
 			{	name: "energyBlast",
 				file: settings.BASE_PATH + "/sounds/sounds/energyBlast.wav"},
 			{	name: "gameSong", 
-				file: settings.BASE_PATH + "/sounds/songs/selector.mp3"},
+				file: settings.BASE_PATH + "/sounds/songs/selector.wav"},
             {	name: "tomiko",
 				file: settings.BASE_PATH + "/sounds/selectorNames/tomiko.mp3"},
             {	name: "luna",

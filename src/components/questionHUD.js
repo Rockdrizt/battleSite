@@ -383,6 +383,7 @@ var questionHUD = function(){
 		this.timeElapsed = 0
 		this.riddle = riddle
 		this.answered = false
+		//this.chrono.date = riddle.date
 
 		this.chrono.maxTime = this.riddle.timers.normal
 		var maxTime = convertTime(this.chrono.maxTime)
@@ -489,8 +490,11 @@ var questionHUD = function(){
 
 		game.add.tween(this.question).to({alpha:1}, 300, Phaser.Easing.linear, true)
 		this.totalDelay += 300
-        
-        this.startTimer()
+
+		// if(!this.client) {
+		// 	server.setDate()
+		// }
+        //this.startTimer()
     }
 
 	function hideOverlay(){
@@ -625,9 +629,13 @@ var questionHUD = function(){
 		},this)
 	}
     
-    function startTimer(){
-	
-        var maxTime = this.riddle.timers.normal
+    function startTimer(serverTimer){
+
+		var currDate = new Date()
+		var currTime = currDate.getTime()
+		var timeDiff = currTime - serverTimer
+		var maxTime = this.chrono.maxTime - timeDiff
+
 		if(this.timer) {
         	this.timer.stop(true)
 			this.timer.destroy()
@@ -642,10 +650,12 @@ var questionHUD = function(){
 	
 	function updateTimer(){
 
-		var text = convertTime(this.timerEvent.delay - this.timer.ms)
+		var time = this.timerEvent.delay - this.timer.ms
+		time = Phaser.Math.clamp(time, 0, this.chrono.maxTime)
+		var text = convertTime(time)
 		this.chrono.timeText.setText(text)
 
-		var size = game.math.degToRad((290/this.timerEvent.delay)*(this.timerEvent.delay - this.timer.ms))
+		var size = game.math.degToRad((290/this.timerEvent.delay)*(time))
 		this.chrono.circle.clear()
         this.chrono.circle.beginFill(0xFF0000, 0.5)
         this.chrono.circle.arc(0, 0, this.chrono.circle.lineSize, size, this.game.math.degToRad(-10), true)
@@ -669,7 +679,7 @@ var questionHUD = function(){
 	function convertTime(time) {
 
 		var min = Math.floor(time / 60000)
-		var sec = ((time % 60000) / 1000).toFixed(0)
+		var sec = Math.floor((time % 60000) / 1000)
 
 		return min + ":" + (sec < 10 ? '0' : '') + sec
 	}

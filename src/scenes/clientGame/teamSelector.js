@@ -70,7 +70,7 @@ var teamSelector = function(){
 			{	name: "cut",
 				file: soundsPath + "cut.mp3"},
 			{	name: "gameSong", 
-				file: settings.BASE_PATH + "/sounds/songs/selector.mp3"},
+				file: settings.BASE_PATH + "/sounds/songs/selector.wav"},
 			{	name: "tomiko",
 				file: settings.BASE_PATH + "/sounds/selectorNames/tomiko.mp3"},
             {	name: "luna",
