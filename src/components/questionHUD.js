@@ -383,12 +383,9 @@ var questionHUD = function(){
 		this.timeElapsed = 0
 		this.riddle = riddle
 		this.answered = false
-		var currDate = new Date()
-		var currTime = currDate.getTime()
-		var timeDiff = currTime - riddle.date
 		this.chrono.date = riddle.date
 
-		this.chrono.maxTime = this.riddle.timers.normal - timeDiff
+		this.chrono.maxTime = this.riddle.timers.normal
 		var maxTime = convertTime(this.chrono.maxTime)
 		this.chrono.timeText.setText(maxTime)
 
