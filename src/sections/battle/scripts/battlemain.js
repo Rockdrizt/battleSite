@@ -30,9 +30,9 @@ var battleMain = function(){
 
 	}
 
-	function init(teams){
-		battle.setTeams(teams)
-		reward.setTeams(teams)
+	function init(myTeams){
+		battle.setTeams(myTeams)
+		reward.setTeams(myTeams)
 	}
     
     

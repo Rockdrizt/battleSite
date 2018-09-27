@@ -172,7 +172,7 @@ var battle = function(){
 
 	var COLORS = [0xFC1E79, 0x00D8FF]
 
-	var teams
+	var battleTeams
 	var battleSong
 	var sceneGroup
 	var HUDGroup
@@ -306,7 +306,7 @@ var battle = function(){
 
     function createHUD(){
 
-		HUDGroup = HUD.createHUD(ORDER_SIDES, teams)
+		HUDGroup = HUD.createHUD(ORDER_SIDES, battleTeams)
 		
 		HUDGroup.setWinteam = function(win, lose){
 			setWinteam(win, lose)
@@ -369,7 +369,7 @@ var battle = function(){
 
     function rotateTeam(teamIndex){
 
-		var team = teams[teamIndex]
+		var team = battleTeams[teamIndex]
 		var side = ORDER_SIDES[teamIndex]
 		var copyPositions = []
 
@@ -473,7 +473,7 @@ var battle = function(){
 	function createAppear(character, teamIndex, charIndex) {
 		character.alpha = 0
 		var teamName = TEAM_NAMES[teamIndex]
-		var teamTime = teamIndex * DELAY_APPEAR * teams[teamIndex].length
+		var teamTime = teamIndex * DELAY_APPEAR * battleTeams[teamIndex].length
 		var appearTime = DELAY_APPEAR * charIndex
 		game.time.events.add(teamTime + appearTime, function (animation) {
 			this.alpha = 1
@@ -495,8 +495,8 @@ var battle = function(){
 			layers.push(layer)
 		}
 
-		for(var teamIndex = 0; teamIndex < teams.length; teamIndex++){
-			var teamCharacters = teams[teamIndex]
+		for(var teamIndex = 0; teamIndex < battleTeams.length; teamIndex++){
+			var teamCharacters = battleTeams[teamIndex]
 			var side = ORDER_SIDES[teamIndex]
 
 			for(var charIndex = 0; charIndex < teamCharacters.length; charIndex++){
@@ -542,7 +542,7 @@ var battle = function(){
                 shadow.alpha = 0.3
                 character.addAt(shadow, 0)
 
-				teams[teamIndex][charIndex] = character
+				battleTeams[teamIndex][charIndex] = character
 
 				if(charIndex === 1)
 					mainSpine = character
@@ -622,7 +622,7 @@ var battle = function(){
 		var xPos = 0.4 * ORDER_SIDES[index].direction
         var delay = 1000
         var zoom = 1.15
-        var target = type === "ultra" ? teams[otherTeam].groupPoint : mainYogotorars[otherTeam]
+        var target = type === "ultra" ? battleTeams[otherTeam].groupPoint : mainYogotorars[otherTeam]
 
 		if(type == "normal"){
 			var damage = DAMAGE.normal
@@ -676,7 +676,7 @@ var battle = function(){
 
 	function supportAnimation(index){
 
-		var subteam = teams[index]
+		var subteam = battleTeams[index]
 		var aux = 2
 
 		var color = COLORS[index]
@@ -729,10 +729,10 @@ var battle = function(){
 
 	function setWinteam(win, lose){
 
-        teams[lose].forEach(function(member){
+        battleTeams[lose].forEach(function(member){
             member.setAnimation(["gg"], true)
         })
-        teams[win].forEach(function(member){
+        battleTeams[win].forEach(function(member){
             member.setAnimation(["win"], true)
         })
 		
@@ -840,8 +840,8 @@ var battle = function(){
     
     function initGame(){
         
-        for(var i = 0; i < teams.length; i++){
-            var team = teams[i]
+        for(var i = 0; i < battleTeams.length; i++){
+            var team = battleTeams[i]
             for(var k = 0; k < team.length; k++){
                 var yogo = team[k]
                 changeAnim(yogo, "idle_normal")
@@ -857,8 +857,8 @@ var battle = function(){
     
     function setNoAnswer(){
         
-        for(var i = 0; i < teams.length; i++){
-            var team = teams[i]
+        for(var i = 0; i < battleTeams.length; i++){
+            var team = battleTeams[i]
             for(var k = 0; k < team.length; k++){
                 var yogo = team[k]
                 changeAnim(yogo, "answer_bad")
@@ -867,6 +867,7 @@ var battle = function(){
         for(var i = 0; i < 2; i++){
             game.time.events.add(2000, rotateTeam, null, i)
         }
+        newQuestionHatch = false
         //game.time.events.add(4000, setReadyGo)
     }
 
@@ -925,7 +926,7 @@ var battle = function(){
 		},
 		setCharacter:setCharacter,
 		setTeams: function (myTeams) {
-			teams = myTeams
+			battleTeams = myTeams
 			for(var teamIndex = 0; teamIndex < myTeams.length; teamIndex++){
 				var team = myTeams[teamIndex]
 

@@ -977,9 +977,9 @@ var yogoSelector = function(){
 	}
 
 	function getTeams(){
-		var teams = []
-		teams[0] = []
-		teams[1] = []
+		var teamsArray = []
+		teamsArray[0] = []
+		teamsArray[1] = []
 		for(var alphaIndex = 0; alphaIndex < alphaGroup.length; alphaIndex++){
 			var char = alphaGroup.children[alphaIndex]
 			var name = "yogotar" + char.name.charAt(0).toUpperCase() + char.name.slice(1)
@@ -987,7 +987,7 @@ var yogoSelector = function(){
 				name:name,
 				skin:char.skin
 			}
-			teams[0].push(obj)
+			teamsArray[0].push(obj)
 		}
 
 		for(var bravoIndex = 0; bravoIndex < bravoGroup.length; bravoIndex++){
@@ -997,10 +997,10 @@ var yogoSelector = function(){
 				name:name,
 				skin:char.skin
 			}
-			teams[1].push(obj)
+			teamsArray[1].push(obj)
 		}
 
-		return teams
+		return teamsArray
 	}
 
 	function getReady(){
@@ -1015,14 +1015,14 @@ var yogoSelector = function(){
 		emitter.y = game.world.centerY
 		readyGroup.addAt(emitter,0)
 
-		var teams = getTeams()
+		var selectedTeams = getTeams()
         //inputsGroup.alpha = 0
 
 		game.add.tween(readyGroup.pinkLight.scale).to({x: 1, y: 1}, 400, Phaser.Easing.Cubic.InOut, true, 0, 0, true).onComplete.add(function(){
 			readyGroup.ready.alpha = 1
 			sound.play("shineSpell")
 			game.add.tween(readyGroup.ready.scale).from({x: 0, y:0}, 200, Phaser.Easing.linear, true).onComplete.add(function () {
-				battleMain.init(teams)
+				battleMain.init(selectedTeams)
 				battleMain.create()
 				game.add.tween(readyGroup.text).to({alpha:1}, 500, Phaser.Easing.Cubic.Out, true)
 				game.time.events.add(6000, function () {

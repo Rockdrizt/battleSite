@@ -141,12 +141,12 @@ function startGame(){
 		spineLoader.init()
     	sound.init(game)
 
-        var teams = [
+        /*var teams = [
 
             [{name:"yogotarNao", skin:"nao1"}, {name:"yogotarTheffanie", skin:"theffanie2"}, {name:"yogotarLuna", skin:"luna1"}],
 			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarNao", skin:"nao2"}, {name:"yogotarEstrella", skin:"estrella1"}],
             
-        ];
+        ];*/
 
 		//battle.setTeams(teams)
     }
