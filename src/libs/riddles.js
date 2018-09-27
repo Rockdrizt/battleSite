@@ -5,6 +5,7 @@ var riddles = function(){
 	var testQuestions
 	var usedQuestions
 	var NUMBER_OF_FAKE_ANSWERS = 3
+    var usedTestQuestions
 
 	var TIME_ATTACKS = {
 		1 : {
@@ -37,6 +38,7 @@ var riddles = function(){
 		]
 		testQuestions = []
 		usedQuestions = []
+        usedTestQuestions = []
 		loadQuestions()
 		loadTestQuestions()
 		//operationGenerator.setConfiguration()
@@ -128,8 +130,31 @@ var riddles = function(){
 	function getQuestion(grade){
 
 		if(grade == -1){
-			var rand = game.rnd.integerInRange(0, testQuestions.length - 1)
-			return testQuestions[rand]
+            
+            var lastTestQuestion = testQuestions.length - 1
+			var rand
+			var newTestQuestion
+            
+            if(usedTestQuestions.length == lastTestQuestion){
+				//usedQuestions = []
+                console.log("last test question")
+				usedTestQuestions.push(lastTestQuestion)
+				newTestQuestion =  testQuestions[lastTestQuestion]
+				//getQuestion(grade)
+			}
+            else if(usedTestQuestions.length > lastTestQuestion){
+				return getOperation()
+                
+            }
+            else{
+                do{
+					rand = game.rnd.integerInRange(0, lastTestQuestion - 1)
+				}while(usedTestQuestions.includes(rand))
+				
+				usedTestQuestions.push(rand)
+                newTestQuestion = testQuestions[rand]
+            }
+            return newTestQuestion
 		}
 		else{
 
@@ -226,11 +251,17 @@ var riddles = function(){
     
     function allQuestionsUsed(grade){
        
-        if(grade == -1) return false
+        if(grade == -1){
+            
+            var lastQuestion = testQuestions.length
         
-        var lastQuestion = questions[grade].length
+            return (usedTestQuestions.length == lastQuestion)
+        } 
+        else{
+             var lastQuestion = questions[grade].length
         
-        return (usedQuestions.length == lastQuestion)
+            return (usedQuestions.length == lastQuestion)
+        }
     }
 
 	return{

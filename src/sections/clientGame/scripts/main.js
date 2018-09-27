@@ -56,8 +56,8 @@ function startGame(){
 		cliente = new Client();
 		var hashValue = window.location.hash.substr(1);
 		var arrValues = hashValue.split("/")
-		var idGameFromHash = arrValues[0]
-		var numTeam = Number(arrValues[1])
+		var idGameFromHash = arrValues[1]
+		var numTeam = Number(arrValues[0])
 		connectToServer(idGameFromHash, numTeam)
 		//sceneloader.show("teamSelector")
 	}

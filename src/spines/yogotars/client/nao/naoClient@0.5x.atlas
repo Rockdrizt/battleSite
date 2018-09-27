@@ -460,15 +460,15 @@ normal/foot2_a_i
   offset: 0, 0
   index: -1
 normal/foot2_b
-  rotate: false
-  xy: 1922, 1612
+  rotate: true
+  xy: 253, 50
   size: 27, 8
   orig: 27, 8
   offset: 0, 0
   index: -1
 normal/foot2_c
   rotate: true
-  xy: 759, 136
+  xy: 872, 136
   size: 20, 24
   orig: 20, 24
   offset: 0, 0
@@ -489,21 +489,21 @@ normal/foot2_e
   index: -1
 normal/foot2_e_i
   rotate: false
-  xy: 1002, 142
+  xy: 675, 142
   size: 27, 14
   orig: 27, 14
   offset: 0, 0
   index: -1
 normal/foot2_f
   rotate: true
-  xy: 785, 138
+  xy: 733, 138
   size: 18, 26
   orig: 18, 26
   offset: 0, 0
   index: -1
 normal/foot2_g
   rotate: true
-  xy: 732, 136
+  xy: 845, 136
   size: 20, 25
   orig: 20, 25
   offset: 0, 0
@@ -643,14 +643,14 @@ normal2/hand1_f
   index: -1
 normal/hand1_g
   rotate: false
-  xy: 975, 139
+  xy: 953, 139
   size: 25, 17
   orig: 25, 17
   offset: 0, 0
   index: -1
 normal2/hand1_g
   rotate: false
-  xy: 975, 139
+  xy: 953, 139
   size: 25, 17
   orig: 25, 17
   offset: 0, 0
@@ -699,96 +699,103 @@ normal2/hand2_a
   index: -1
 normal/hand2_a_i
   rotate: true
-  xy: 233, 26
+  xy: 1954, 1685
   size: 22, 14
   orig: 22, 14
   offset: 0, 0
   index: -1
 normal/hand2_b
-  rotate: true
-  xy: 1923, 189
+  rotate: false
+  xy: 1057, 136
   size: 22, 20
   orig: 22, 20
   offset: 0, 0
   index: -1
 normal2/hand2_b
-  rotate: true
-  xy: 1923, 189
+  rotate: false
+  xy: 1057, 136
   size: 22, 20
   orig: 22, 20
   offset: 0, 0
   index: -1
 normal/hand2_c
   rotate: false
-  xy: 1922, 213
+  xy: 247, 93
   size: 22, 19
   orig: 22, 19
   offset: 0, 0
   index: -1
 normal2/hand2_c
   rotate: false
-  xy: 1922, 213
+  xy: 247, 93
   size: 22, 19
   orig: 22, 19
   offset: 0, 0
   index: -1
 normal/hand2_d
   rotate: false
-  xy: 897, 137
+  xy: 898, 137
   size: 25, 19
   orig: 25, 19
   offset: 0, 0
   index: -1
 normal2/hand2_d
   rotate: false
-  xy: 897, 137
+  xy: 898, 137
   size: 25, 19
   orig: 25, 19
   offset: 0, 0
   index: -1
 normal/hand2_e
   rotate: false
-  xy: 950, 136
+  xy: 1032, 136
   size: 23, 20
   orig: 23, 20
   offset: 0, 0
   index: -1
 normal2/hand2_e
   rotate: false
-  xy: 950, 136
+  xy: 1032, 136
   size: 23, 20
   orig: 23, 20
   offset: 0, 0
   index: -1
 normal/hand2_f
-  rotate: true
-  xy: 1954, 1683
+  rotate: false
+  xy: 980, 139
   size: 24, 17
   orig: 24, 17
   offset: 0, 0
   index: -1
 normal2/hand2_f
-  rotate: true
-  xy: 1954, 1683
+  rotate: false
+  xy: 980, 139
   size: 24, 17
   orig: 24, 17
   offset: 0, 0
   index: -1
 normal/hand2_g
   rotate: false
-  xy: 1948, 1661
+  xy: 283, 110
   size: 21, 20
   orig: 21, 20
   offset: 0, 0
   index: -1
 normal2/hand2_g
   rotate: false
-  xy: 1948, 1661
+  xy: 283, 110
   size: 21, 20
   orig: 21, 20
   offset: 0, 0
   index: -1
 normal/hand2_h
+  rotate: false
+  xy: 1673, 50
+  size: 27, 20
+  orig: 27, 20
+  offset: 0, 0
+  index: -1
+normal2/hand2_h
   rotate: false
   xy: 1673, 50
   size: 27, 20
@@ -860,14 +867,14 @@ normal/leg2_c
   index: -1
 normal/mouth_a1
   rotate: true
-  xy: 134, 5
+  xy: 1975, 1812
   size: 18, 4
   orig: 18, 4
   offset: 0, 0
   index: -1
 normal2/mouth_a1
   rotate: true
-  xy: 134, 5
+  xy: 1975, 1812
   size: 18, 4
   orig: 18, 4
   offset: 0, 0
@@ -902,28 +909,28 @@ normal2/mouth_a3
   index: -1
 normal/mouth_a4
   rotate: false
-  xy: 1716, 73
+  xy: 1105, 150
   size: 29, 6
   orig: 29, 6
   offset: 0, 0
   index: -1
 normal2/mouth_a4
   rotate: false
-  xy: 1716, 73
+  xy: 1105, 150
   size: 29, 6
   orig: 29, 6
   offset: 0, 0
   index: -1
 normal/mouth_a5
   rotate: false
-  xy: 2020, 427
+  xy: 1827, 147
   size: 26, 7
   orig: 26, 7
   offset: 0, 0
   index: -1
 normal2/mouth_a5
   rotate: false
-  xy: 2020, 427
+  xy: 1827, 147
   size: 26, 7
   orig: 26, 7
   offset: 0, 0
@@ -943,15 +950,15 @@ normal2/mouth_a6
   offset: 0, 0
   index: -1
 normal/mouth_a7
-  rotate: false
-  xy: 303, 124
+  rotate: true
+  xy: 271, 94
   size: 18, 8
   orig: 18, 8
   offset: 0, 0
   index: -1
 normal2/mouth_a7
-  rotate: false
-  xy: 303, 124
+  rotate: true
+  xy: 271, 94
   size: 18, 8
   orig: 18, 8
   offset: 0, 0
@@ -1028,28 +1035,28 @@ normal2/mouth_b4
   index: -1
 normal/mouth_b5
   rotate: false
-  xy: 1828, 164
+  xy: 1716, 71
   size: 28, 8
   orig: 28, 8
   offset: 0, 0
   index: -1
 normal2/mouth_b5
   rotate: false
-  xy: 1828, 164
+  xy: 1716, 71
   size: 28, 8
   orig: 28, 8
   offset: 0, 0
   index: -1
 normal/mouth_b6
   rotate: false
-  xy: 1115, 148
+  xy: 1876, 176
   size: 19, 8
   orig: 19, 8
   offset: 0, 0
   index: -1
 normal2/mouth_b6
   rotate: false
-  xy: 1115, 148
+  xy: 1876, 176
   size: 19, 8
   orig: 19, 8
   offset: 0, 0
@@ -1069,15 +1076,15 @@ normal2/mouth_b7
   offset: 0, 0
   index: -1
 normal/mouth_c1
-  rotate: true
-  xy: 1876, 175
+  rotate: false
+  xy: 1981, 1821
   size: 9, 13
   orig: 9, 13
   offset: 0, 0
   index: -1
 normal2/mouth_c1
-  rotate: true
-  xy: 1876, 175
+  rotate: false
+  xy: 1981, 1821
   size: 9, 13
   orig: 9, 13
   offset: 0, 0
@@ -1098,14 +1105,14 @@ normal2/mouth_c2
   index: -1
 normal/mouth_c3
   rotate: true
-  xy: 283, 118
+  xy: 247, 79
   size: 12, 18
   orig: 12, 18
   offset: 0, 0
   index: -1
 normal2/mouth_c3
   rotate: true
-  xy: 283, 118
+  xy: 247, 79
   size: 12, 18
   orig: 12, 18
   offset: 0, 0
@@ -1168,28 +1175,28 @@ normal2/mouth_d4
   index: -1
 normal/mouth_d5
   rotate: false
-  xy: 1088, 142
+  xy: 1105, 134
   size: 25, 14
   orig: 25, 14
   offset: 0, 0
   index: -1
 normal2/mouth_d5
   rotate: false
-  xy: 1088, 142
+  xy: 1105, 134
   size: 25, 14
   orig: 25, 14
   offset: 0, 0
   index: -1
 normal/mouth_d6
   rotate: false
-  xy: 1827, 148
+  xy: 1922, 218
   size: 21, 14
   orig: 21, 14
   offset: 0, 0
   index: -1
 normal2/mouth_d6
   rotate: false
-  xy: 1827, 148
+  xy: 1922, 218
   size: 21, 14
   orig: 21, 14
   offset: 0, 0
@@ -1224,14 +1231,14 @@ normal2/mouth_d8
   index: -1
 normal/mouth_d9
   rotate: false
-  xy: 247, 91
+  xy: 1081, 135
   size: 22, 21
   orig: 22, 21
   offset: 0, 0
   index: -1
 normal2/mouth_d9
   rotate: false
-  xy: 247, 91
+  xy: 1081, 135
   size: 22, 21
   orig: 22, 21
   offset: 0, 0
@@ -1546,7 +1553,7 @@ normal2/arm1_a_i
   index: -1
 normal2/arm2_a_i
   rotate: true
-  xy: 813, 138
+  xy: 761, 138
   size: 18, 26
   orig: 18, 26
   offset: 0, 0
@@ -1602,49 +1609,49 @@ normal2/foot1_e_i
   index: -1
 normal2/foot1_f
   rotate: true
-  xy: 841, 138
+  xy: 789, 138
   size: 18, 26
   orig: 18, 26
   offset: 0, 0
   index: -1
 normal2/foot1_g
   rotate: true
-  xy: 704, 136
+  xy: 817, 136
   size: 20, 26
   orig: 20, 26
   offset: 0, 0
   index: -1
 normal2/foot2_g
   rotate: true
-  xy: 704, 136
+  xy: 817, 136
   size: 20, 26
   orig: 20, 26
   offset: 0, 0
   index: -1
 normal2/foot2_a
-  rotate: true
-  xy: 1975, 1803
+  rotate: false
+  xy: 1828, 165
   size: 27, 7
   orig: 27, 7
   offset: 0, 0
   index: -1
 normal2/foot2_a_i
   rotate: false
-  xy: 1984, 1817
+  xy: 1827, 156
   size: 27, 7
   orig: 27, 7
   offset: 0, 0
   index: -1
 normal2/foot2_b
   rotate: false
-  xy: 1984, 1826
+  xy: 1922, 1612
   size: 27, 8
   orig: 27, 8
   offset: 0, 0
   index: -1
 normal2/foot2_c
   rotate: true
-  xy: 924, 136
+  xy: 1006, 136
   size: 20, 24
   orig: 20, 24
   offset: 0, 0
@@ -1658,21 +1665,21 @@ normal2/foot2_d
   index: -1
 normal2/foot2_e
   rotate: false
-  xy: 1031, 142
+  xy: 704, 142
   size: 27, 14
   orig: 27, 14
   offset: 0, 0
   index: -1
 normal2/foot2_e_i
   rotate: false
-  xy: 1060, 142
+  xy: 2020, 420
   size: 26, 14
   orig: 26, 14
   offset: 0, 0
   index: -1
 normal2/foot2_f
   rotate: true
-  xy: 869, 138
+  xy: 925, 138
   size: 18, 26
   orig: 18, 26
   offset: 0, 0
@@ -1700,16 +1707,9 @@ normal2/hand1_a_i
   index: -1
 normal2/hand2_a_i
   rotate: true
-  xy: 249, 26
+  xy: 233, 26
   size: 22, 14
   orig: 22, 14
-  offset: 0, 0
-  index: -1
-normal2/hand2_h
-  rotate: false
-  xy: 675, 136
-  size: 27, 20
-  orig: 27, 20
   offset: 0, 0
   index: -1
 normal2/head

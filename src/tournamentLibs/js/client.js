@@ -278,6 +278,11 @@ function Client(){
 	this.start = function(idGame, onAlert, onWait, numTeam){
 		// self.events = {};
 		// console.log(self.events)
+		// if(!idGame) {
+		// 	getCurrentID(onAlert, onWait, numTeam)
+		// 	return
+		// }
+
 		self.refIdGame= database.ref();
 		self.showAlert = onAlert
 		self.onWait = onWait
@@ -340,6 +345,18 @@ function Client(){
 		//players.date = firebase.database.ServerValue.TIMESTAMP
 		self.teams[self.numTeam] = players
 		setfb(self.refIdGame.child("t" + self.numTeam + "/players"), players)
+	}
+
+	function getCurrentID(onAlert, onWait, numTeam){
+		database.ref("currentId").on("value", function (snap) {
+			if(self.id_game) {
+				window.location.reload()
+				return
+			}
+			var currentId = snap.val()
+			if(currentId)
+				self.start(currentId, onAlert, onWait, numTeam)
+		})
 	}
 
 	function checkTimeOffset() {
