@@ -566,6 +566,9 @@ var questionHUD = function(){
 		var riddle = this.riddle
 		var correctBtn = this.getCorrectAns()
 		var btn = this.buttons.options.btnPressed
+		if(!btn)
+			return
+
 		var ans = btn.groupPos == riddle.correctAnswer
 		var texture = ans ? "correct" : "wrong"
 
