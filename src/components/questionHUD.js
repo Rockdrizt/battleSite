@@ -424,6 +424,8 @@ var questionHUD = function(){
 		},this)
 		
 		apearButtons.onComplete.add(function(){
+            
+            this.setQuestion()
 			
 			this.chrono.alpha = 1
 			var delay = 200
@@ -436,7 +438,7 @@ var questionHUD = function(){
 				delay += 200
 			}
 
-			lasTween.onComplete.add(this.setQuestion)
+			//lasTween.onComplete.add(this.setQuestion)
 			this.totalDelay += 2500
 		},this)
 	}
@@ -461,6 +463,8 @@ var questionHUD = function(){
 		
 		apearButtons.onComplete.add(function(){
 			
+            this.setQuestion()
+            
 			this.chrono.alpha = 1
 			var delay = 200
 			var lasTween
@@ -473,7 +477,7 @@ var questionHUD = function(){
 			}
 
 			var scaleImage = game.add.tween(this.image.image).to({alpha: 1}, 300, Phaser.Easing.Cubic.InOut, false)
-			scaleImage.onStart.add(this.setQuestion)
+			//scaleImage.onStart.add(this.setQuestion)
 			lasTween.chain(scaleImage)
 
 			this.totalDelay += 3100
