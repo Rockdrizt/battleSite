@@ -121,7 +121,7 @@ var playerScreen = function(){
 		if(teamMate.yogo) teamMate.yogo.destroy()
 
 		var yogoInfo = getYogoInfo(data.avatar)
-		var yogo = teamMate.create(yogoInfo.offsetX - 2, 53, "atlas.player", data.skin)//yogoInfo.name)
+		var yogo = teamMate.create((yogoInfo.offsetX * side) - 2, 53, "atlas.player", data.skin)//yogoInfo.name)
 		yogo.anchor.setTo(0.5, 1)
         yogo.scale.setTo(yogoInfo.scaleX * side, 1)
 		teamMate.yogo = yogo
