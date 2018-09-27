@@ -373,9 +373,8 @@ function Server(){
 			valores.questions = []
 		refIdGame.update(valores)
 
-		if(valores.questions )
-
-			self.currentData = val
+		self.questionGrade = valores.grade
+		self.currentData = val
 	}
 
 	/**
