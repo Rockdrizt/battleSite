@@ -139,6 +139,7 @@ var riddles = function(){
 
 			if(usedQuestions.length == lastQuestion){
 				//usedQuestions = []
+                console.log("last question")
 				usedQuestions.push(lastQuestion)
 				newQuestion =  questions[grade][lastQuestion]
 				//getQuestion(grade)
@@ -222,10 +223,20 @@ var riddles = function(){
 
 		return riddle
     }
+    
+    function allQuestionsUsed(grade){
+       
+        if(grade == -1) return false
+        
+        var lastQuestion = questions[grade].length
+        
+        return (usedQuestions.length == lastQuestion)
+    }
 
 	return{
 		initialize:initialize,
 		getOperation:getOperation,
-		getQuestion:getQuestion
+		getQuestion:getQuestion,
+        allQuestionsUsed:allQuestionsUsed 
 	}
 }()
