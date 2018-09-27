@@ -81,7 +81,7 @@ function startGame(){
 				server = new Server()
 				var idGameFromHash = window.location.hash.substr(1);
 				var questionsGrade = 0
-				server.start(idGameFromHash, checkPlayers, {rules:operationGenerator.RULES_SET.MEDIUM, grade:questionsGrade}, showError)
+				server.start(idGameFromHash, checkPlayers, {rules:operationGenerator.RULES_SET.MEDIUM}, showError)
 
 				var loaderScene = sceneloader.getScene("preloaderIntro")
 
