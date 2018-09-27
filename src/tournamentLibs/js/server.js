@@ -399,7 +399,8 @@ function Server(){
 			time:self.battleTime,
 			maxRounds:self.maxRounds,
 			timeOut:false,
-			serverReady:true
+			serverReady:true,
+			grade:self.questionGrade
 		};
 		self.currentData = valores
 
