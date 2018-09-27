@@ -40,6 +40,7 @@ var playerScreen = function(){
 
 	var NAMES_LIST = ["tomiko", "luna", "nao", "theffanie", "eagle", "dinamita", "arthurius", "estrella"]
 	var X_OFFSETS = [-30, 0, 0, 10, 0, 0, 0, 10]
+    var X_SCALES = [1, 1, -1, -1, 1, 1, -1, -1]
 
 	var sceneGroup
     var tile
@@ -91,7 +92,7 @@ var playerScreen = function(){
 
 		teamMate = createYogoToken()
 		teamMate.x = game.world.centerX
-		teamMate.y = game.world.centerY + 50
+		teamMate.y = game.world.centerY - 50
 		teamMate.scale.setTo(2)
 		sceneGroup.add(teamMate)
 	}
@@ -102,6 +103,7 @@ var playerScreen = function(){
 		if(typeof data.avatar !== "string")
 			return
 
+        var side = data.numTeam == 1 ? 1 : -1
 		teamMate.kidName.text = data.nickname
 		var avatar = data.avatar
 		teamMate.yogoName.text = avatar[0].toUpperCase() + avatar.slice(1)
@@ -111,6 +113,7 @@ var playerScreen = function(){
 		var yogoInfo = getYogoInfo(data.avatar)
 		var yogo = teamMate.create(yogoInfo.offsetX - 2, 53, "atlas.player", data.skin)//yogoInfo.name)
 		yogo.anchor.setTo(0.5, 1)
+        yogo.scale.setTo(yogoInfo.scaleX * side, 1)
 		teamMate.yogo = yogo
 	}
 
@@ -143,10 +146,12 @@ var playerScreen = function(){
 
 		var index = NAMES_LIST.indexOf(name)
 		var offsetX = X_OFFSETS[index]
+        var scaleX = X_SCALE[index]
 
 		return {
 			name: "yogo" + index,
-			offsetX:offsetX
+			offsetX:offsetX,
+            scaleX:scaleX
 		}
 	}
 
