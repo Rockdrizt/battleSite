@@ -846,8 +846,8 @@ var yogoSelector = function(){
 
 			game.time.events.add(delay, function(){
 				buttonsGroup.setAll("token.canClick", true)
-				pressBtn(alphaGroup.marker.token, STATES.red)
-				pressBtn(bravoGroup.marker.token, STATES.blue)
+				//pressBtn(alphaGroup.marker.token, STATES.red)
+				//pressBtn(bravoGroup.marker.token, STATES.blue)
 			})
 		})
 	}
