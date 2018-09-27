@@ -1038,7 +1038,7 @@ var teamSelector = function(){
 	}
 
 	function blockYogotars(team) {
-		var players = team.players
+		var players = team
 		initializeYogotars()
 
 		for(var playerIndex = 0; playerIndex < players.length; playerIndex++){

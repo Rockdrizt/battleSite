@@ -39,11 +39,10 @@ function startGame(){
 
 		//alertDialog.init()
 		cliente = new Client();
-
 		var hashValue = window.location.hash.substr(1);
 		var arrValues = hashValue.split("/")
-		var idGameFromHash = arrValues[0]
-		var numTeam = Number(arrValues[1])
+		var idGameFromHash = arrValues[1]
+		var numTeam = Number(arrValues[0])
 		connectToServer(idGameFromHash, numTeam)
 		//sceneloader.show("teamSelector")
 	}
@@ -112,7 +111,8 @@ function startGame(){
 		bootConfigFiles([
 			alertDialog,
 			teamSelector,
-			questions
+			questions,
+			rewardClient
 		])
 	}
 }

@@ -300,7 +300,7 @@ var HUD = function(){
         var loser = winner == 1 ? 0 : 1
         console.log("winner " + winner)
         console.log("loser " + loser)
-        return {winner, loser}
+        return {winner:winner, loser:loser}
     }
     
     function checkEndGame(){
