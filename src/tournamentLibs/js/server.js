@@ -569,6 +569,11 @@ function Server(){
 
 	this.start = function(currentId, onStart, params, onError) {
 
+		// if(!currentId) {
+		// 	getCurrentID(onStart, params, onError)
+		// 	return
+		// }
+
 		var params = params || {}
 		var rules = params.rules || operationGenerator.RULES_SET.EASY
 		var battleTime = params.battleTime || 300000
@@ -657,12 +662,24 @@ function Server(){
 		var lastIndex = valores.questions.length - 1
 		refIdGame.child("questions/" + lastIndex).update({timeOut:true})
 	}
-	
+
 	function checkTimeOffset() {
 		var offsetRef = firebase.database().ref(".info/serverTimeOffset");
 		offsetRef.on("value", function(snap) {
 			self.timeOffset = snap.val();
 		});
+	}
+
+	function getCurrentID(onStart, params, onError){
+		database.ref("currentId").on("value", function (snap) {
+			if(id_game) {
+				window.location.reload()
+				return
+			}
+			var currentId = snap.val()
+			if(currentId)
+				self.start(currentId, onStart, params, onError)
+		})
 	}
 
 	this.setDate = function () {
