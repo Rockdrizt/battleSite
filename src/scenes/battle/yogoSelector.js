@@ -60,21 +60,21 @@ var yogoSelector = function(){
 				file: settings.BASE_PATH + "/sounds/sounds/energyBlast.wav"},
 			{	name: "gameSong", 
 				file: settings.BASE_PATH + "/sounds/songs/selector.wav"},
-            {	name: "tomiko",
+            {	name: "tomikoVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/tomiko.mp3"},
-            {	name: "luna",
+            {	name: "lunaVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/luna.mp3"},
-            {	name: "nao",
+            {	name: "naoVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/nao.mp3"},
-            {	name: "theffanie",
+            {	name: "theffanieVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/theffanie.mp3"},
-            {	name: "eagle",
+            {	name: "eagleVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/eagle.mp3"},
-            {	name: "dinamita",
+            {	name: "dinamitaVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/dinamita.mp3"},
-            {	name: "arthurius",
+            {	name: "arthuriusVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/arthurius.mp3"},
-            {	name: "estrella",
+            {	name: "estrellaVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/estrella.mp3"},
 		],
 		spritesheets: [
@@ -785,7 +785,7 @@ var yogoSelector = function(){
 		var names = namesGroup.children[index]
         
         game.add.tween(names.light.scale).to({x: 1, y: 1}, 200, Phaser.Easing.linear, true, 0, 0, true)
-        sound.play(YOGOTARS_LIST[tag].name)
+        sound.play(YOGOTARS_LIST[tag].name + "Voice")
         names.yogoName.loadTexture("atlas.yogoSelector", "name" + tag)
         names.yogoName.alpha = 1
 
