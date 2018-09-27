@@ -45,6 +45,7 @@ var playerScreen = function(){
 	var sceneGroup
     var tile
 	var teamMate
+    var numTeam
     
 	function loadSounds(){
 		sound.decode(assets.sounds)
@@ -100,7 +101,7 @@ var playerScreen = function(){
 //            avatar: "nao",
 //            nickname : "asd",
 //            skin: "nao1",
-//            numTeam :1
+//            numTeam :2
 //            
 //        }
 //		
@@ -108,7 +109,6 @@ var playerScreen = function(){
 	}
 
 	function updateYogoInfo(data) {
-		console.log(data)
 
 		if(typeof data.avatar !== "string")
 			return
@@ -123,7 +123,7 @@ var playerScreen = function(){
 		var yogoInfo = getYogoInfo(data.avatar)
 		var yogo = teamMate.create(yogoInfo.offsetX - 2, 53, "atlas.player", data.skin)//yogoInfo.name)
 		yogo.anchor.setTo(0.5, 1)
-        //yogo.scale.setTo(yogoInfo.scaleX * side, 1)
+        yogo.scale.setTo(yogoInfo.scaleX * side, 1)
 		teamMate.yogo = yogo
 	}
 
@@ -167,7 +167,7 @@ var playerScreen = function(){
 		var hashValue = window.location.hash.substr(1);
 		var arrValues = hashValue.split("/")
 		var idGame = arrValues[0]
-		var numTeam = arrValues[1]
+		numTeam = arrValues[1]
 		var numPlayer = arrValues[2]
 
 		var playerService = new PlayerService()
