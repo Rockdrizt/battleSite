@@ -320,6 +320,9 @@ var battle = function(){
 			newQuestionHatch = false
 			//game.time.events.add(delay, setReadyGo)
 		}
+        HUDGroup.setNoAnswer = function(){
+            setNoAnswer()
+        }
         sceneGroup.add(HUDGroup)
     }
 
@@ -357,7 +360,7 @@ var battle = function(){
             attack == "ultra" ? ultraMove(index) : attackMove(attack, index)
 		}
 		feedbackGroup.score.tieCallback = function(){
-			setNoAnswer()
+            HUDGroup.checkEndGame()
 		}
         sceneGroup.add(feedbackGroup)
     }
