@@ -210,7 +210,7 @@ var yogoSelector = function(){
 		var back = bmd.addToWorld()
 		//sceneGroup.add(back)
 
-		var y = 0
+		var y = -10
 
 		for (var i = 0; i < bmd.height; i++)
 		{
@@ -1151,6 +1151,11 @@ var yogoSelector = function(){
 //			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
 //		},
 		create: function(event){
+            
+            var blackScreen = game.add.graphics(-200, -200)
+            blackScreen.beginFill(0x000000)
+            blackScreen.drawRect(0, 0, game.world.width + 200, game.world.height + 200)
+            blackScreen.endFill()
             
             createBackground()
             
