@@ -184,9 +184,9 @@ var battle = function(){
 	var specialAttack
 	var blackMask
 	var layers
-	var gradeQuestion
 	var clickHatch
 	var newQuestionHatch
+    var useReadyGo
 
 	var mainYogotorars
 	var mainSpine
@@ -200,9 +200,9 @@ var battle = function(){
 		game.stage.backgroundColor = "#0D014D"
 		loadSounds()
 		mainYogotorars = []
-		gradeQuestion = -1//0
 		clickHatch = true
 		newQuestionHatch = true
+        useReadyGo = true
 
         riddles.initialize()
 	}
@@ -299,7 +299,7 @@ var battle = function(){
 		}
 
 		if((game.input.keyboard.isDown(Phaser.Keyboard.ENTER))&&(!newQuestionHatch)) {
-			setReadyGo()
+			useReadyGo ? setReadyGo() : setFastQuestion()
 			newQuestionHatch = true
 		}
     }
@@ -307,6 +307,7 @@ var battle = function(){
     function createHUD(){
 
 		HUDGroup = HUD.createHUD(ORDER_SIDES, battleTeams)
+        HUDGroup.grade = server.questionGrade
 		
 		HUDGroup.setWinteam = function(win, lose){
 			setWinteam(win, lose)
@@ -817,6 +818,7 @@ var battle = function(){
 
     function setReadyGo(){
 
+        useReadyGo = false
 		var first = game.add.tween(listosYaGroup.listos).to({y: game.world.centerY}, 200, Phaser.Easing.Cubic.Out, true)
 		sound.play("listos")
         first.yoyo(true, 700)
@@ -836,6 +838,12 @@ var battle = function(){
 
         first.chain(second)
         second.chain(secondOut)
+    }
+    
+    function setFastQuestion(){
+        
+        clickHatch = false
+        server.sendQuestion()
     }
     
     function initGame(){
