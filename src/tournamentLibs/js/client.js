@@ -221,7 +221,7 @@ function Client(){
 				if (self.numTeam && self.team[self.numTeam]) {
 					var ready = snapshot.child("t" + self.numTeam + "/ready").val()
 					if(self.teams[self.numTeam].players !== val["t" + self.numTeam].players) {
-						self.teams[self.numTeam] = val["t" + self.numTeam]
+						self.teams[self.numTeam] = val["t" + self.numTeam].players
 						self.fireEvent('onPlayersChange',[self.teams[self.numTeam]]);
 					}
 					if (ready === false) {
@@ -234,7 +234,7 @@ function Client(){
 				if (self.opponent) {
 					var opponentReady = snapshot.child("t" + self.opponent + "/ready").val()
 					if(self.teams[self.opponent].players !== val["t" + self.opponent].players) {
-						self.teams[self.opponent] = val["t" + self.opponent]
+						self.teams[self.opponent] = val["t" + self.opponent].players
 						self.fireEvent('onPlayersChange',[self.teams[self.opponent]]);
 					}
 					if (opponentReady === false) {

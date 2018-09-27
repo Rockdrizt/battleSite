@@ -196,7 +196,7 @@ var rewardClient = function(){
         var pivotX = -distance
         var directon = -1
 
-        var winers = teams[WIN_DATA.index].players
+        var winers = teams[WIN_DATA.index]
         
         for(var i = 0; i < winers.length; i++){
 
@@ -241,7 +241,7 @@ var rewardClient = function(){
         var offsetX = 40 * LOSE_DATA.side
         var DIRECTION = LOSE_DATA.side
         var SCALE = 0.7
-        var losers = teams[LOSE_DATA.index].players
+        var losers = teams[LOSE_DATA.index]
 
         for(var i = 0; i < losers.length; i++){
 

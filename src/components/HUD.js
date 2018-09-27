@@ -296,11 +296,11 @@ var HUD = function(){
     
     function getWiner(){
         
-        var winner = this.children[0].life.width > this.children[1].life.width ? 0 : 1
+        var winner = this.children[0].teamScore.points > this.children[1].teamScore.points ? 0 : 1
         var loser = winner == 1 ? 0 : 1
         console.log("winner " + winner)
         console.log("loser " + loser)
-        return {winner, loser}
+        return {winner:winner, loser:loser}
     }
     
     function checkEndGame(){
