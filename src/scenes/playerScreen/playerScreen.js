@@ -95,6 +95,16 @@ var playerScreen = function(){
 		teamMate.y = game.world.centerY - 50
 		teamMate.scale.setTo(2)
 		sceneGroup.add(teamMate)
+        
+//        var memberGroup = {
+//            avatar: "nao",
+//            nickname : "asd",
+//            skin: "nao1",
+//            numTeam :1
+//            
+//        }
+//		
+//		updateYogoInfo(memberGroup)
 	}
 
 	function updateYogoInfo(data) {
@@ -113,7 +123,7 @@ var playerScreen = function(){
 		var yogoInfo = getYogoInfo(data.avatar)
 		var yogo = teamMate.create(yogoInfo.offsetX - 2, 53, "atlas.player", data.skin)//yogoInfo.name)
 		yogo.anchor.setTo(0.5, 1)
-        yogo.scale.setTo(yogoInfo.scaleX * side, 1)
+        //yogo.scale.setTo(yogoInfo.scaleX * side, 1)
 		teamMate.yogo = yogo
 	}
 
@@ -136,8 +146,6 @@ var playerScreen = function(){
 		yogoName.fill = "#00D8FF"
 		memberGroup.add(yogoName)
 		memberGroup.yogoName = yogoName
-		
-		//updateYogoInfo(memberGroup)
 
 		return memberGroup
 	}
@@ -146,7 +154,7 @@ var playerScreen = function(){
 
 		var index = NAMES_LIST.indexOf(name)
 		var offsetX = X_OFFSETS[index]
-        var scaleX = X_SCALE[index]
+        var scaleX = X_SCALES[index]
 
 		return {
 			name: "yogo" + index,
