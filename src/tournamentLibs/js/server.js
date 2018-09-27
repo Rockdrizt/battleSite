@@ -612,6 +612,7 @@ function Server(){
 			for(var playerIndex = 0; playerIndex < players.length; playerIndex++){
 				var player = players[playerIndex]
 				player.avatar = false
+				player.skin = false
 			}
 			//refIdGame.child(key).set(valores[key])
 		}

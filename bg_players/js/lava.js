@@ -190,6 +190,8 @@ function selectColorTeam(){
     }else{
         $("#logoCuantrix").attr("src","img/beta_team.png");
         $("#teamLogo").attr("src","img/logo.png");
+        $(".yogotar").find("img").addClass("yogotar-bravo");
+
         createSVGElement('stop')
             .attr({
                 offset: "4.514761e-04",

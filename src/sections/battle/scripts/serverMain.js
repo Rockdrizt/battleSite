@@ -5,6 +5,11 @@ window.minigame = window.minigame || {}
 
 function startGame(){
 
+	var TEAMS = [
+		"Alfa",
+		"Bravo"
+	]
+
 	var onReadyCallback
 
 	window.game = new Phaser.Game(1920, 1080, Phaser.WEBGL, "ingame", {init: init, create: create }, false, false);
@@ -53,9 +58,9 @@ function startGame(){
 				onReadyCallback = null
 			}
 		}else if(t1Ready){
-			showAlert("Esperando a equipo 2 en conectarse")
+			showAlert("Esperando a equipo " + TEAMS[1] + " en conectarse")
 		}else if(t2Ready){
-			showAlert("Esperando a equipo 1 en conectarse")
+			showAlert("Esperando a equipo " + TEAMS[0] + " en conectarse")
 		}else{
 			showAlert("Esperando a equipos en conectarse")
 		}
@@ -136,12 +141,12 @@ function startGame(){
 		spineLoader.init()
     	sound.init(game)
 
-        var teams = [
+        /*var teams = [
 
             [{name:"yogotarNao", skin:"nao1"}, {name:"yogotarTheffanie", skin:"theffanie2"}, {name:"yogotarLuna", skin:"luna1"}],
 			[{name:"yogotarEagle", skin:"eagle2"}, {name:"yogotarNao", skin:"nao2"}, {name:"yogotarEstrella", skin:"estrella1"}],
             
-        ];
+        ];*/
 
 		//battle.setTeams(teams)
     }

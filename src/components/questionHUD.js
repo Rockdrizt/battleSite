@@ -655,7 +655,7 @@ var questionHUD = function(){
 		}
 
         this.timer = game.time.create()
-		this.timerEvent = this.timer.add(maxTime, this.topTimer, this)
+		this.timerEvent = this.timer.add(maxTime, this.stopTimer, this)
 		this.timer.loop(1000, updateTimer, this)
         this.timer.start()
 		console.log("time start")
