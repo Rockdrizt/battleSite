@@ -391,6 +391,8 @@ var questionHUD = function(){
 
 		this.question.text.setText(this.riddle.question)
 		this.question.fixText(this.riddle.existImage)
+        
+        this.setQuestion()
 
 		for(var i = 0; i < riddle.answers.length; i++){
 			var opt = this.buttons.options.children[i]
@@ -424,8 +426,6 @@ var questionHUD = function(){
 		},this)
 		
 		apearButtons.onComplete.add(function(){
-            
-            this.setQuestion()
 			
 			this.chrono.alpha = 1
 			var delay = 200
@@ -462,8 +462,6 @@ var questionHUD = function(){
 		},this)
 		
 		apearButtons.onComplete.add(function(){
-			
-            this.setQuestion()
             
 			this.chrono.alpha = 1
 			var delay = 200
@@ -492,8 +490,8 @@ var questionHUD = function(){
 //			opt.inputEnabled = true
 //		}
 
-		game.add.tween(this.question).to({alpha:1}, 300, Phaser.Easing.linear, true)
-		this.totalDelay += 300
+		game.add.tween(this.question).to({alpha:1}, 300, Phaser.Easing.linear, true, 300)
+		this.totalDelay += 600
 
 		// if(!this.client) {
 		// 	server.setDate()
@@ -566,6 +564,9 @@ var questionHUD = function(){
 		var riddle = this.riddle
 		var correctBtn = this.getCorrectAns()
 		var btn = this.buttons.options.btnPressed
+		if(!btn)
+			return
+
 		var ans = btn.groupPos == riddle.correctAnswer
 		var texture = ans ? "correct" : "wrong"
 
