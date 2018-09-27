@@ -39,7 +39,7 @@ var playerScreen = function(){
     }
 
 	var NAMES_LIST = ["tomiko", "luna", "nao", "theffanie", "eagle", "dinamita", "arthurius", "estrella"]
-	var X_OFFSETS = [-30, 0, 0, 10, 0, 0, 0, 10]
+	var X_OFFSETS = [-30, 0, 0, -10, 0, 0, 0, -10]
     var X_SCALES = [1, 1, -1, -1, 1, 1, -1, -1]
 
 	var sceneGroup
@@ -98,9 +98,9 @@ var playerScreen = function(){
 		sceneGroup.add(teamMate)
         
 //        var memberGroup = {
-//            avatar: "nao",
+//            avatar: "theffanie",
 //            nickname : "asd",
-//            skin: "nao1",
+//            skin: "theffanie2",
 //            numTeam :2
 //            
 //        }
