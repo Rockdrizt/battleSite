@@ -569,10 +569,10 @@ function Server(){
 
 	this.start = function(currentId, onStart, params, onError) {
 
-		if(!currentId) {
-			getCurrentID(onStart, params, onError)
-			return
-		}
+		// if(!currentId) {
+		// 	getCurrentID(onStart, params, onError)
+		// 	return
+		// }
 
 		var params = params || {}
 		var rules = params.rules || operationGenerator.RULES_SET.EASY
@@ -585,6 +585,7 @@ function Server(){
 		self.onStart = onStart
 		self.maxRounds = typeof params.maxRounds !== "undefined" ? params.maxRounds : self.maxRounds
 
+		self.events = {};
 		// console.log(self.events)
 		var numPerOperations = Math.round(battleTime / 60000) * 3
 		self.numberOperation = numPerOperations

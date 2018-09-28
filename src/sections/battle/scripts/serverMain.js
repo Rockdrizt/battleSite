@@ -12,7 +12,7 @@ function startGame(){
 
 	var onReadyCallback
 
-	window.game = new Phaser.Game(1920, 1080, Phaser.WEBGL, "ingame", {init: init, create: create }, false, true);
+	window.game = new Phaser.Game(1920, 1080, Phaser.WEBGL, "ingame", {init: init, create: create }, true, true);
     document.body.style.visibility = "hidden"
 
 	function bootConfigFiles(sceneList) {
@@ -124,7 +124,7 @@ function startGame(){
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
 		game.input.maxPointers = 1
 
-        game.stage.backgroundColor = "#000000"
+        game.stage.backgroundColor = "#ffffff"
         game.time.advancedTiming = true
         game.stage.disableVisibilityChange = true;
 		game.scale.pageAlignHorizontally = true;
