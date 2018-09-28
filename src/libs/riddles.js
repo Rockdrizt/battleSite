@@ -184,6 +184,21 @@ var riddles = function(){
 			return newQuestion
 		}
 	}
+    
+    function isLastQuestion(grade){
+        
+        if(grade == -1){
+            
+           var lastQuestion = testQuestions.length - 1
+           
+           return (usedTestQuestions.length == lastQuestion)
+        }
+        else{
+           var lastQuestion = questions[grade].length - 1
+           
+            return (usedQuestions.length == lastQuestion)
+       }
+    }
 
 	function getOperation(){
 
@@ -268,6 +283,7 @@ var riddles = function(){
 		initialize:initialize,
 		getOperation:getOperation,
 		getQuestion:getQuestion,
-        allQuestionsUsed:allQuestionsUsed 
+        allQuestionsUsed:allQuestionsUsed,
+        isLastQuestion:isLastQuestion
 	}
 }()
