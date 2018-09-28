@@ -16,7 +16,7 @@ var questionHUD = function(){
 
 	function update() {
 		this.timeElapsed += game.time.elapsedMS
-		this.time = convertTimeFormat(this.timeElapsed)
+		//this.time = convertTimeFormat(this.timeElapsed)
 	}
 
 	function initialize(){

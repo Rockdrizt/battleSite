@@ -203,7 +203,15 @@ var riddles = function(){
 			var n = correctAnswer + diff * negativeOrPositive
 			possibleAnswers.push(n)
 		}
-		var n = game.rnd.integerInRange(possibleAnswers[1] , possibleAnswers[2])
+        
+        var min = possibleAnswers[1]
+        var max = possibleAnswers[2]
+        if(correctAnswer < 15){
+            min *= 2
+            max *= 2
+        }
+        
+		var n = game.rnd.integerInRange(min, max)
 		possibleAnswers.push(n)
 		
 
