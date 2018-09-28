@@ -409,6 +409,7 @@ var resultsFeedback = function(){
         var apear = game.add.tween(self.attack.scale).from({x: 0,y: 0}, 300, Phaser.Easing.Elastic.Out, true, 2300)
         apear.onStart.add(function(){
             self.attack.alpha = 1
+            sound.play(attack + "Attack")
         })
 
         var fadeOut = game.add.tween(self.attack).to({alpha: 0}, 300, Phaser.Easing.Cubic.InOut, false, 800)

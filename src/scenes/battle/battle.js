@@ -665,7 +665,9 @@ var battle = function(){
 			})
 
 			game.add.tween(blackMask).to({alpha:0.5}, 300, Phaser.Easing.Cubic.InOut, true)
-			game.add.tween(specialAttack.yogo).from({x:0}, 500, Phaser.Easing.Cubic.InOut, true, 300)
+			game.add.tween(specialAttack.yogo).from({x:0}, 500, Phaser.Easing.Cubic.InOut, true, 300).onStart.add(function(){
+                sound.play("ultraAttack")
+            })
 			var specialMove = game.add.tween(specialAttack).from({x:spawnX}, 500, Phaser.Easing.Cubic.InOut, true, 200)
 			specialMove.repeat(1, 800)
 			specialMove.onComplete.add(function(){
