@@ -141,7 +141,7 @@ var battle = function(){
 	}
 
 	var TEAM_NAMES = ["alpha", "delta"]
-	var DELAY_APPEAR = 800
+	var DELAY_APPEAR = 1100
 	var YOGOTARS_PER_TEAM = 3
 
 	var SIDES = {
@@ -478,7 +478,7 @@ var battle = function(){
 		character.alpha = 0
 		var teamName = TEAM_NAMES[teamIndex]
 		var teamTime = teamIndex * DELAY_APPEAR * battleTeams[teamIndex].length
-		var appearTime = DELAY_APPEAR * charIndex
+		var appearTime = DELAY_APPEAR * (charIndex + 1)
 		game.time.events.add(teamTime + appearTime, function (animation) {
 			this.alpha = 1
 			this.setAnimation([animation, "answer_good"], true)
