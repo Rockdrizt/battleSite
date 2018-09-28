@@ -19,6 +19,7 @@ function getParameterByName(name, url) {
 }
 
 function showTeam(team){ //team is an array
+     $("#logoCuantrix").attr("src","img/logo.png");
     for(var i = 0; i<=team.length -1 ; i ++){
         if((team[i].avatar && previusTeam && previusTeam[i].avatar != team[i].avatar) || (!previusTeam && team[i].avatar)) {
            ChoiceYogotar("#animation" + [i+2],team[i].avatar) 
@@ -175,7 +176,7 @@ function selectColorTeam(){
 
     var myDefs = createSVGElement('defs');
     if(teamId == 1){
-        $("#teamLogo").attr("src","img/alpha_team.png");
+        $("#teamLogo").attr("src","img/logo.png");
         createSVGElement('stop')
         .attr({
             offset:"8.514761e-04",
@@ -188,7 +189,7 @@ function selectColorTeam(){
         }).appendTo(GradientBar);         
         
     }else{
-        $("#logoCuantrix").attr("src","img/beta_team.png");
+       
         $("#teamLogo").attr("src","img/logo.png");
         $(".yogotar").find("img").addClass("yogotar-bravo");
 
