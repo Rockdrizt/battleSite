@@ -152,6 +152,7 @@ function startGame(){
 		];
 
 		battle.setTeams(teams)
+		reward.setTeams(teams)
 	}
 
 	function create(){
@@ -162,6 +163,7 @@ function startGame(){
 			alertDialog,
 			//yogoSelector,
 			battle,
+			reward
 		])
 	}
 }

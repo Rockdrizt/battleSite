@@ -60,21 +60,21 @@ var yogoSelector = function(){
 				file: settings.BASE_PATH + "/sounds/sounds/energyBlast.wav"},
 			{	name: "gameSong", 
 				file: settings.BASE_PATH + "/sounds/songs/selector.wav"},
-            {	name: "tomiko",
+            {	name: "tomikoVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/tomiko.mp3"},
-            {	name: "luna",
+            {	name: "lunaVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/luna.mp3"},
-            {	name: "nao",
+            {	name: "naoVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/nao.mp3"},
-            {	name: "theffanie",
+            {	name: "theffanieVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/theffanie.mp3"},
-            {	name: "eagle",
+            {	name: "eagleVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/eagle.mp3"},
-            {	name: "dinamita",
+            {	name: "dinamitaVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/dinamita.mp3"},
-            {	name: "arthurius",
+            {	name: "arthuriusVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/arthurius.mp3"},
-            {	name: "estrella",
+            {	name: "estrellaVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/estrella.mp3"},
 		],
 		spritesheets: [
@@ -210,7 +210,7 @@ var yogoSelector = function(){
 		var back = bmd.addToWorld()
 		//sceneGroup.add(back)
 
-		var y = 0
+		var y = -10
 
 		for (var i = 0; i < bmd.height; i++)
 		{
@@ -785,7 +785,7 @@ var yogoSelector = function(){
 		var names = namesGroup.children[index]
         
         game.add.tween(names.light.scale).to({x: 1, y: 1}, 200, Phaser.Easing.linear, true, 0, 0, true)
-        sound.play(YOGOTARS_LIST[tag].name)
+        sound.play(YOGOTARS_LIST[tag].name + "Voice")
         names.yogoName.loadTexture("atlas.yogoSelector", "name" + tag)
         names.yogoName.alpha = 1
 
@@ -837,7 +837,7 @@ var yogoSelector = function(){
 			while(i !== 5){
 				buttonsGroup.children[i].yogotar.alpha = 1
 				game.add.tween(buttonsGroup.children[i].yogotar.scale).from({x: 0,y: 0}, 500, Phaser.Easing.Cubic.Out, true, delay)
-				game.time.events.add(delay, function(){sound.play("energyBlast")})
+				//game.time.events.add(delay, function(){sound.play("energyBlast")})
 
 
 				i === 2 ? i = 7 : i--
@@ -1151,6 +1151,11 @@ var yogoSelector = function(){
 //			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
 //		},
 		create: function(event){
+            
+            var blackScreen = game.add.graphics(-200, -200)
+            blackScreen.beginFill(0x000000)
+            blackScreen.drawRect(0, 0, game.world.width + 200, game.world.height + 200)
+            blackScreen.endFill()
             
             createBackground()
             

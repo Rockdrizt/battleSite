@@ -124,7 +124,7 @@ function startGame(){
         game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL
 		game.input.maxPointers = 1
 
-        game.stage.backgroundColor = "#ffffff"
+        game.stage.backgroundColor = "#000000"
         game.time.advancedTiming = true
         game.stage.disableVisibilityChange = true;
 		game.scale.pageAlignHorizontally = true;

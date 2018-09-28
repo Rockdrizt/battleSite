@@ -585,7 +585,6 @@ function Server(){
 		self.onStart = onStart
 		self.maxRounds = typeof params.maxRounds !== "undefined" ? params.maxRounds : self.maxRounds
 
-		self.events = {};
 		// console.log(self.events)
 		var numPerOperations = Math.round(battleTime / 60000) * 3
 		self.numberOperation = numPerOperations

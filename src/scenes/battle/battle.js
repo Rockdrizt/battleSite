@@ -141,7 +141,7 @@ var battle = function(){
 	}
 
 	var TEAM_NAMES = ["alpha", "delta"]
-	var DELAY_APPEAR = 800
+	var DELAY_APPEAR = 1100
 	var YOGOTARS_PER_TEAM = 3
 
 	var SIDES = {
@@ -301,6 +301,13 @@ var battle = function(){
 		if((game.input.keyboard.isDown(Phaser.Keyboard.ENTER))&&(!newQuestionHatch)) {
 			useReadyGo ? setReadyGo() : setFastQuestion()
 			newQuestionHatch = true
+		}
+
+		if((game.input.keyboard.isDown(Phaser.Keyboard.Q))&&(!newQuestionHatch)) {
+			var winIndex = HUDGroup.children[0].life.width < HUDGroup.children[1].life.width ? 1 : 0
+			var loseIndex = winIndex === 0 ? 1 : 0
+			setWinteam(winIndex, loseIndex)
+			server.setGameEnded(winIndex + 1)
 		}
     }
 
@@ -478,7 +485,7 @@ var battle = function(){
 		character.alpha = 0
 		var teamName = TEAM_NAMES[teamIndex]
 		var teamTime = teamIndex * DELAY_APPEAR * battleTeams[teamIndex].length
-		var appearTime = DELAY_APPEAR * charIndex
+		var appearTime = DELAY_APPEAR * (charIndex + 1)
 		game.time.events.add(teamTime + appearTime, function (animation) {
 			this.alpha = 1
 			this.setAnimation([animation, "answer_good"], true)
@@ -615,7 +622,7 @@ var battle = function(){
 
 		var ultra = percent == DAMAGE.ultra ? true : false
 		percent *= ORDER_SIDES[team].direction // scale.x
-		HUDGroup.dealDamage(team, percent, ultra)
+		HUDGroup.dealDamage(team, percent, ultra, questionGroup.riddle.lastQuestion)
 		//UPDATE SCORE SERVER
 	}
 
@@ -665,7 +672,9 @@ var battle = function(){
 			})
 
 			game.add.tween(blackMask).to({alpha:0.5}, 300, Phaser.Easing.Cubic.InOut, true)
-			game.add.tween(specialAttack.yogo).from({x:0}, 500, Phaser.Easing.Cubic.InOut, true, 300)
+			game.add.tween(specialAttack.yogo).from({x:0}, 500, Phaser.Easing.Cubic.InOut, true, 300).onStart.add(function(){
+                sound.play("ultraAttack")
+            })
 			var specialMove = game.add.tween(specialAttack).from({x:spawnX}, 500, Phaser.Easing.Cubic.InOut, true, 200)
 			specialMove.repeat(1, 800)
 			specialMove.onComplete.add(function(){
@@ -893,6 +902,11 @@ var battle = function(){
 //			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
 //		},
 		create: function(event){
+            
+            var blackScreen = game.add.graphics(-200, -200)
+            blackScreen.beginFill(0x000000)
+            blackScreen.drawRect(0, 0, game.world.width + 200, game.world.height + 200)
+            blackScreen.endFill()
 
 			sceneGroup = game.add.group()
 
