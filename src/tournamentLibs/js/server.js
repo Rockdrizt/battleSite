@@ -569,10 +569,10 @@ function Server(){
 
 	this.start = function(currentId, onStart, params, onError) {
 
-		if(!currentId) {
-			getCurrentID(onStart, params, onError)
-			return
-		}
+		// if(!currentId) {
+		// 	getCurrentID(onStart, params, onError)
+		// 	return
+		// }
 
 		var params = params || {}
 		var rules = params.rules || operationGenerator.RULES_SET.EASY

@@ -692,7 +692,7 @@ var questionHUD = function(){
 	
 	function convertTime(time) {
 
-		var min = Math.round(time / 60000)
+		var min = Math.floor(time / 60000)
 		var sec = Math.round((time % 60000) / 1000)
 
 		return min + ":" + (sec < 10 ? '0' : '') + sec

@@ -16,7 +16,7 @@ var riddles = function(){
 		2 : {
             ultra : 20000,
             super : 30000,
-            normal : 60000
+            normal : 90000
 		}
 	}
 
