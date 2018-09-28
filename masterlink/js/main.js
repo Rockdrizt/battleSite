@@ -7,11 +7,11 @@ var arrayList = [
     },
     {
         name:"#cliente1:",
-        link:"https://yogome.github.io/MathTournament/src/sections/clientGame/index.html#prueba001"
+        link:"https://yogome.github.io/MathTournament/src/sections/clientGame/index.html#1/prueba001"
     },
     {
         name:"#cliente2:",
-        link:"https://yogome.github.io/MathTournament/src/sections/clientGame/index.html#prueba001"
+        link:"https://yogome.github.io/MathTournament/src/sections/clientGame/index.html#2/prueba001"
     },
     {
         name:"#bg_screen/team1:",
