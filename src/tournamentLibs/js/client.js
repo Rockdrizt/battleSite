@@ -278,10 +278,10 @@ function Client(){
 	this.start = function(idGame, onAlert, onWait, numTeam){
 		// self.events = {};
 		// console.log(self.events)
-		if(!idGame) {
-			getCurrentID(onAlert, onWait, numTeam)
-			return
-		}
+		// if(!idGame) {
+		// 	getCurrentID(onAlert, onWait, numTeam)
+		// 	return
+		// }
 
 		self.refIdGame= database.ref();
 		self.showAlert = onAlert
