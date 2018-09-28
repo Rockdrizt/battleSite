@@ -324,7 +324,7 @@ var resultsFeedback = function(){
         var players = [t1, t2]
         
         var timeDifference = event.timeDifference || Math.abs(t1.time - t2.time) || 0
-        if(timeDifference < 10) timeDifference = 10
+        if(timeDifference < 5) timeDifference *= 10
         console.log(timeDifference)
         var timeConvertedDifference = convertTimeFormat(timeDifference)
 
@@ -341,7 +341,7 @@ var resultsFeedback = function(){
 
             var winer = numTeam == (i + 1) ? true : false //players[i].value == riddle.correctAnswer
 			var newScale = convertScale(players[i].time)
-            var playerTime = winer ? players[i].time += 10 : players[i].time
+            var playerTime = timeDifference < 5 ? players[i].time += timeDifference : players[i].time
             var ansTime = convertTimeFormat(playerTime)
             var correct = players[i].value == riddle.correctAnswer
 
