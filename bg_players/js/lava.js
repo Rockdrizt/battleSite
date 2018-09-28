@@ -5,8 +5,10 @@ var idGame = idGameFromHash;
 var teamId = parseInt(getParameterByName("team"));
 var colorConfetti;
 var service = new ScreenService();
-service.start(idGame, teamId, showTeam,animateAnswer,hitToLife, animateEnd);
+//service.start(idGame, teamId, showTeam,animateAnswer,hitToLife, animateEnd);
 
+
+TweenMax.fromTo($(".yogotar").find("img"),0.5,{top:"1080px"},{top:"0px",ease:Back.easeOut,delay:1});
 
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
