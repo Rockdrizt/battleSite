@@ -203,6 +203,12 @@ var HUD = function(){
 	function dealDamage(loseIndex, percent, ultra, lastQuestion){
 
         var self = this
+        
+        if(riddles.isLastQuestion(self.grade)){
+            console.log("double damage")
+            percent *= 2
+        }
+
         var life = self.children[loseIndex].life
         var winIndex = loseIndex == 0 ? 1 : 0
         var delay = 3500
