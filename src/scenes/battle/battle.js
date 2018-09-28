@@ -615,7 +615,7 @@ var battle = function(){
 
 		var ultra = percent == DAMAGE.ultra ? true : false
 		percent *= ORDER_SIDES[team].direction // scale.x
-		HUDGroup.dealDamage(team, percent, ultra)
+		HUDGroup.dealDamage(team, percent, ultra, questionGroup.riddle.lastQuestion)
 		//UPDATE SCORE SERVER
 	}
 
