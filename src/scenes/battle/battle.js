@@ -302,6 +302,13 @@ var battle = function(){
 			useReadyGo ? setReadyGo() : setFastQuestion()
 			newQuestionHatch = true
 		}
+
+		if((game.input.keyboard.isDown(Phaser.Keyboard.Q))&&(!newQuestionHatch)) {
+			var winIndex = HUDGroup.children[0].life.width < HUDGroup.children[1].life.width ? 1 : 0
+			var loseIndex = winIndex === 0 ? 1 : 0
+			setWinteam(winIndex, loseIndex)
+			server.setGameEnded(winIndex + 1)
+		}
     }
 
     function createHUD(){
