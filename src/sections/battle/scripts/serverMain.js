@@ -12,7 +12,7 @@ function startGame(){
 
 	var onReadyCallback
 
-	window.game = new Phaser.Game(1920, 1080, Phaser.WEBGL, "ingame", {init: init, create: create }, false, false);
+	window.game = new Phaser.Game(1920, 1080, Phaser.WEBGL, "ingame", {init: init, create: create }, false, true);
     document.body.style.visibility = "hidden"
 
 	function bootConfigFiles(sceneList) {
