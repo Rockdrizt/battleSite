@@ -380,10 +380,11 @@ function Server(){
 		valores.winner = false
 		if(!valores.questions)
 			valores.questions = []
-		refIdGame.update(valores)
 
 		self.questionGrade = valores.grade
-		self.currentData = val
+		self.currentData = valores
+
+		refIdGame.update(valores)
 	}
 
 	/**
@@ -430,8 +431,8 @@ function Server(){
 			self.setGameReady(false)
 			self.fireEvent('onTeamDisconnect', [{numTeam: num, teamWinner: valores[key]}]);
 		} else if (valores[key].ready === false) {
-			valores[key] = team;
-			self.currentData = valores
+			valores[key].ready = true;
+			self.currentData[key].ready = true
 			self.fireEvent('onInitTeam', [{numTeam: num, team: valores[key]}]);
 			var allTeamsReady = evaluateAllReady(key)
 			if (allTeamsReady) {
@@ -620,7 +621,7 @@ function Server(){
 
 	this.updateTeam = function (teamIndex, value) {
 		var key = "t" + teamIndex
-		valores[key].life = value.life
+		if(value.life) valores[key].life = value.life
 		valores[key].score = value.score
 		refIdGame.child(key).update(value);
 	}
