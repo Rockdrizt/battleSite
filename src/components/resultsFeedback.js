@@ -337,9 +337,10 @@ var resultsFeedback = function(){
 
         for(var i = 0; i < this.length; i++){
 
-			var newScale = convertScale(players[i].time)
-            var ansTime = convertTimeFormat(players[i].time)
             var winer = numTeam == (i + 1) ? true : false //players[i].value == riddle.correctAnswer
+            var ansTime = winer ? players[i].time - 1 : players[i].time
+			var newScale = convertScale(ansTime)
+            var ansTime = convertTimeFormat(players[i].time)
             var correct = players[i].value == riddle.correctAnswer
 
 			var score = this.children[i]

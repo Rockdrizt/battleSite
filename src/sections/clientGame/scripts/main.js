@@ -32,12 +32,12 @@ function startGame(){
 		// 	ready:true
 		// }
 
-		cliente.start(value, showAlert, onWaitingPlayers)
-		cliente.startGame = function () {
+			cliente.start(value, showAlert, onWaitingPlayers)
+			cliente.startGame = function () {
 			alertDialog.hide()
 			var loaderScene = sceneloader.getScene("preloaderIntro")
 			loaderScene.onComplete("teamSelector")
-			//sceneloader.show("teamSelector")
+			//sceneloader.show("questions")
 		}
 	}
 
@@ -56,7 +56,7 @@ function startGame(){
 		cliente = new Client();
 		var idGameFromHash = window.location.hash.substr(1);
 		connectToServer(idGameFromHash)
-		//sceneloader.show("teamSelector")
+		//sceneloader.show("rewardClient")
 	}
 
 	function preloadScenes(sceneList){
@@ -118,14 +118,30 @@ function startGame(){
 		//server test
 	}
 
-	// var teams = [
-
-	// 	[{name:"arthuriusWin", skin:"arthurius1"}, {name:"naoWin", skin:"nao1"}, {name:"theffanieWin", skin:"theffanie1"}],
-	// 	[{name:"arthuriusWin", skin:"arthurius2"}, {name:"naoWin", skin:"nao2"}, {name:"theffanieWin", skin:"theffanie2"}],
-		
-	// ];
+	// var teams = {
+	// 	1:{	life: 100, 
+	// 		players: [
+	// 			{avatar: "eagle", nickname: "yogome", skin: "eagle1"}, 
+	// 			{avatar: "arthurius", nickname: "yogome", skin: "arthurius1"}, 
+	// 			{avatar: "dinamita", nickname: "yogome", skin: "dinamita1"}
+	// 		], 
+	// 		ready: true, 
+	// 		score: {correct: 4}
+	// 	},
+	// 	2:{	
+	// 		life: 0, 
+	// 		players: [
+	// 			{avatar: "tomiko", nickname: "yogome", skin: "tomiko1"}, 
+	// 			{avatar: "dinamita", nickname: "yogome", skin: "dinamita2"}, 
+	// 			{avatar: "eagle", nickname: "yogome", skin: "eagle2"}
+	// 		], 
+	// 		ready: true, 
+	// 		score: {correct: 0}
+	// 	}
+	// };
 	
 	// rewardClient.setTeams(teams)
+	// rewardClient.setWinner(2)
 
 	function create(){
 

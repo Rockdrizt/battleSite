@@ -29,12 +29,13 @@ function startGame(){
 	    	}
 
 	    	function onCompleteSceneLoading(){
-				//sceneloader.show("battle")
-				//sceneloader.show("scores")
-				alertDialog.init()
-				var idGameFromHash = window.location.hash.substr(1);
-                scoreService = new ScoreService()
-				scoreService.start(idGameFromHash, scoreMain.start)
+				
+				
+				// alertDialog.init()
+				// var idGameFromHash = window.location.hash.substr(1);
+                // scoreService = new ScoreService()
+				// scoreService.start(idGameFromHash, scoreMain.start)
+				sceneloader.show("scores")
 	    	}
 
 			document.body.style.visibility = "visible"
@@ -88,40 +89,29 @@ function startGame(){
 		sceneloader.init(game)
 		sound.init(game)
 
-		/*var teamsData = [
-			[
-				{
-					nickname : "Rock",
-					avatar : "dinamita"
-				},
-				{
-					nickname : "Pawel",
-					avatar : "theffanie"
-				},
-				{
-					nickname : "Rulas",
-					avatar : "luna"
-				}
-			],
-			[
-				{
-					nickname: "Cherry",
-					avatar: "dinamita"
-				},
-				{
-					nickname: "Humbert",
-					avatar: "theffanie"
-				},
-				{
-					nickname: "Mares",
-					avatar: "luna"
-				}
-			]
-		]
-		scores.setTeamData(teamsData)*/
+		// var teams = [
+		// 	{	life: 100, 
+		// 		players: [
+		// 			{avatar: "theffanie", nickname: "yogome", skin: "theffanie1"}, 
+		// 			{avatar: "arthurius", nickname: "yogome", skin: "arthurius1"}, 
+		// 			{avatar: "estrella", nickname: "yogome", skin: "estrella1"}
+		// 		], 
+		// 		ready: true, 
+		// 		score: {correct: 4}
+		// 	},
+		// 	{	
+		// 		life: 0, 
+		// 		players: [
+		// 			{avatar: "theffanie", nickname: "yogome", skin: "theffanie2"}, 
+		// 			{avatar: "tomiko", nickname: "yogome", skin: "tomiko2"}, 
+		// 			{avatar: "eagle", nickname: "yogome", skin: "eagle2"}
+		// 		], 
+		// 		ready: true, 
+		// 		score: {correct: 0}
+		// 	}
+		// ];
+		// scores.setTeamData(teams)
 	}
-
-	//scores.setTeams(teams, kids)
     
 	function create(){
 
