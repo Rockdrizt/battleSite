@@ -181,7 +181,7 @@ var battle = function(){
 	var listosYaGroup
 	var feedbackGroup
     var answersGroup
-	var specialAttack
+	var ultraPreview
 	var blackMask
 	var layers
 	var clickHatch
@@ -332,12 +332,12 @@ var battle = function(){
         }
         sceneGroup.add(HUDGroup)
     }
+	
+	function createUltraPreview(){
 
-    function createSpecialAttack(){
-
-        specialAttack = battleField.createSpecialAttack(mainYogotorars[0].data.name)
-        sceneGroup.add(specialAttack)
-    }
+		ultraPreview = ultraEntitie.createUltraPreview(mainYogotorars[0].data.name)
+		sceneGroup.add(ultraPreview)
+	}
 
     function createQuestionOverlay(){
 
@@ -652,6 +652,12 @@ var battle = function(){
         })
 	}
 
+	function getDamageAmount(totalTime, ansTime){
+
+		var damage = 1 - ansTime/totalTime
+		return damage
+	}
+
 	function ultraMove(index){
 
 		var yogotar = mainYogotorars[index]
@@ -661,26 +667,22 @@ var battle = function(){
 
 		game.time.events.add(2000, function(){
 
-			specialAttack.scale.setTo(side.scale.x, 1)
-			specialAttack.y = 0
-			specialAttack.x = game.world.width * index
-			var spawnX = (specialAttack.frame.width + specialAttack.x) * side.direction
+			ultraPreview.scale.setTo(side.scale.x, 1)
+			ultraPreview.y = 0
+			ultraPreview.x = game.world.width * index
+			var spawnX = (ultraPreview.frame.width + ultraPreview.x) * side.direction
 
-			specialAttack.yogo.loadTexture(yogotar.data.name + "Special")
-			specialAttack.lines.forEach(function(line){
-				line.slide.resume()
-			})
+			ultraPreview.yogo.loadTexture(yogotar.data.name + "Special")
+			ultraPreview.startLines()
 
 			game.add.tween(blackMask).to({alpha:0.5}, 300, Phaser.Easing.Cubic.InOut, true)
-			game.add.tween(specialAttack.yogo).from({x:0}, 500, Phaser.Easing.Cubic.InOut, true, 300).onStart.add(function(){
+			game.add.tween(ultraPreview.yogo).from({x:0}, 500, Phaser.Easing.Cubic.InOut, true, 300).onStart.add(function(){
                 sound.play("ultraAttack")
             })
-			var specialMove = game.add.tween(specialAttack).from({x:spawnX}, 500, Phaser.Easing.Cubic.InOut, true, 200)
+			var specialMove = game.add.tween(ultraPreview).from({x:spawnX}, 500, Phaser.Easing.Cubic.InOut, true, 200)
 			specialMove.repeat(1, 800)
 			specialMove.onComplete.add(function(){
-				specialAttack.lines.forEach(function(line){
-					line.slide.pause()
-				})
+				ultraPreview.stopLines()
 				blackMask.alpha = 0
 				attackMove("ultra", index)
 			})
@@ -914,12 +916,12 @@ var battle = function(){
 			createBackground()
 			placeYogotars()
 			createHUD()
-			createSpecialAttack()
+			createUltraPreview()
 			createFeedback()
 			createQuestionOverlay()
 			createListosYa()
 			//createMenuAnimations()
-			//menubuttons()
+			menubuttons()
 			battleSong = sound.play("battleSong", {loop:true, volume:0.1})
 			createWhite()
 
