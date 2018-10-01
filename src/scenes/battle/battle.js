@@ -92,11 +92,21 @@ var battle = function(){
 		],
 		sounds: [
 			{	name: "battleSong",
-				file: "../../sounds/songs/battle.mp3"},
+				file: settings.BASE_PATH + "/sounds/songs/battle.mp3"},
 			{	name: "listos",
-				file: "../../sounds/sounds/listos.wav"},
+				file: settings.BASE_PATH + "/sounds/sounds/listos.wav"},
 			{	name: "ya",
-				file: "../../sounds/sounds/ya.wav"},
+				file: settings.BASE_PATH + "/sounds/sounds/ya.wav"},
+			{	name: "normalAttack",
+				file: settings.BASE_PATH + "/sounds/sounds/attackCharge1.mp3"},
+			{	name: "superAttack",
+				file: settings.BASE_PATH + "/sounds/sounds/energyBlast.wav"},
+			{	name: "ultraAttack",
+				file: settings.BASE_PATH + "/sounds/sounds/shineSpell.wav"},
+			{	name: "walkRotate",
+				file: settings.BASE_PATH + "/sounds/sounds/walkRotate2.mp3"},
+            {	name: "answerBell",
+				file: settings.BASE_PATH + "/sounds/sounds/answerBell1.mp3"},
 		],
 		spritesheets: [
 		],
@@ -131,7 +141,7 @@ var battle = function(){
 	}
 
 	var TEAM_NAMES = ["alpha", "delta"]
-	var DELAY_APPEAR = 800
+	var DELAY_APPEAR = 1100
 	var YOGOTARS_PER_TEAM = 3
 
 	var SIDES = {
@@ -162,7 +172,7 @@ var battle = function(){
 
 	var COLORS = [0xFC1E79, 0x00D8FF]
 
-	var teams
+	var battleTeams
 	var battleSong
 	var sceneGroup
 	var HUDGroup
@@ -174,7 +184,9 @@ var battle = function(){
 	var specialAttack
 	var blackMask
 	var layers
-	var gradeQuestion
+	var clickHatch
+	var newQuestionHatch
+    var useReadyGo
 
 	var mainYogotorars
 	var mainSpine
@@ -188,7 +200,9 @@ var battle = function(){
 		game.stage.backgroundColor = "#0D014D"
 		loadSounds()
 		mainYogotorars = []
-		gradeQuestion = -1//0
+		clickHatch = true
+		newQuestionHatch = true
+        useReadyGo = true
 
         riddles.initialize()
 	}
@@ -278,11 +292,29 @@ var battle = function(){
 
 	function update(){
 		epicparticles.update()
+
+		if((game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR))&&(!clickHatch)) {
+			server.setDate()
+			clickHatch = true
+		}
+
+		if((game.input.keyboard.isDown(Phaser.Keyboard.ENTER))&&(!newQuestionHatch)) {
+			useReadyGo ? setReadyGo() : setFastQuestion()
+			newQuestionHatch = true
+		}
+
+		if((game.input.keyboard.isDown(Phaser.Keyboard.Q))&&(!newQuestionHatch)) {
+			var winIndex = HUDGroup.children[0].life.width < HUDGroup.children[1].life.width ? 1 : 0
+			var loseIndex = winIndex === 0 ? 1 : 0
+			setWinteam(winIndex, loseIndex)
+			server.setGameEnded(winIndex + 1)
+		}
     }
 
     function createHUD(){
 
-		HUDGroup = HUD.createHUD(ORDER_SIDES, teams)
+		HUDGroup = HUD.createHUD(ORDER_SIDES, battleTeams)
+        HUDGroup.grade = server.questionGrade
 		
 		HUDGroup.setWinteam = function(win, lose){
 			setWinteam(win, lose)
@@ -292,8 +324,12 @@ var battle = function(){
 			for(var i = 0; i < 2; i++){
 				game.time.events.add(delay * 0.5, rotateTeam, null, i)
 			}
-			game.time.events.add(delay, setReadyGo)
+			newQuestionHatch = false
+			//game.time.events.add(delay, setReadyGo)
 		}
+        HUDGroup.setNoAnswer = function(){
+            setNoAnswer()
+        }
         sceneGroup.add(HUDGroup)
     }
 
@@ -331,7 +367,7 @@ var battle = function(){
             attack == "ultra" ? ultraMove(index) : attackMove(attack, index)
 		}
 		feedbackGroup.score.tieCallback = function(){
-			setNoAnswer()
+            HUDGroup.checkEndGame()
 		}
         sceneGroup.add(feedbackGroup)
     }
@@ -344,7 +380,7 @@ var battle = function(){
 
     function rotateTeam(teamIndex){
 
-		var team = teams[teamIndex]
+		var team = battleTeams[teamIndex]
 		var side = ORDER_SIDES[teamIndex]
 		var copyPositions = []
 
@@ -407,6 +443,7 @@ var battle = function(){
 
 		}
 
+        sound.play("walkRotate")
 		yogoGroup.sort('y', Phaser.Group.SORT_ASCENDING)
 		//ORDER_POSITIONS = copyPositions
 
@@ -447,8 +484,8 @@ var battle = function(){
 	function createAppear(character, teamIndex, charIndex) {
 		character.alpha = 0
 		var teamName = TEAM_NAMES[teamIndex]
-		var teamTime = teamIndex * DELAY_APPEAR * teams[teamIndex].length
-		var appearTime = DELAY_APPEAR * charIndex
+		var teamTime = teamIndex * DELAY_APPEAR * battleTeams[teamIndex].length
+		var appearTime = DELAY_APPEAR * (charIndex + 1)
 		game.time.events.add(teamTime + appearTime, function (animation) {
 			this.alpha = 1
 			this.setAnimation([animation, "answer_good"], true)
@@ -469,8 +506,8 @@ var battle = function(){
 			layers.push(layer)
 		}
 
-		for(var teamIndex = 0; teamIndex < teams.length; teamIndex++){
-			var teamCharacters = teams[teamIndex]
+		for(var teamIndex = 0; teamIndex < battleTeams.length; teamIndex++){
+			var teamCharacters = battleTeams[teamIndex]
 			var side = ORDER_SIDES[teamIndex]
 
 			for(var charIndex = 0; charIndex < teamCharacters.length; charIndex++){
@@ -516,7 +553,7 @@ var battle = function(){
                 shadow.alpha = 0.3
                 character.addAt(shadow, 0)
 
-				teams[teamIndex][charIndex] = character
+				battleTeams[teamIndex][charIndex] = character
 
 				if(charIndex === 1)
 					mainSpine = character
@@ -585,7 +622,7 @@ var battle = function(){
 
 		var ultra = percent == DAMAGE.ultra ? true : false
 		percent *= ORDER_SIDES[team].direction // scale.x
-		HUDGroup.dealDamage(team, percent, ultra)
+		HUDGroup.dealDamage(team, percent, ultra, questionGroup.riddle.lastQuestion)
 		//UPDATE SCORE SERVER
 	}
 
@@ -596,7 +633,7 @@ var battle = function(){
 		var xPos = 0.4 * ORDER_SIDES[index].direction
         var delay = 1000
         var zoom = 1.15
-        var target = type === "ultra" ? teams[otherTeam].groupPoint : mainYogotorars[otherTeam]
+        var target = type === "ultra" ? battleTeams[otherTeam].groupPoint : mainYogotorars[otherTeam]
 
 		if(type == "normal"){
 			var damage = DAMAGE.normal
@@ -635,7 +672,9 @@ var battle = function(){
 			})
 
 			game.add.tween(blackMask).to({alpha:0.5}, 300, Phaser.Easing.Cubic.InOut, true)
-			game.add.tween(specialAttack.yogo).from({x:0}, 500, Phaser.Easing.Cubic.InOut, true, 300)
+			game.add.tween(specialAttack.yogo).from({x:0}, 500, Phaser.Easing.Cubic.InOut, true, 300).onStart.add(function(){
+                sound.play("ultraAttack")
+            })
 			var specialMove = game.add.tween(specialAttack).from({x:spawnX}, 500, Phaser.Easing.Cubic.InOut, true, 200)
 			specialMove.repeat(1, 800)
 			specialMove.onComplete.add(function(){
@@ -650,7 +689,7 @@ var battle = function(){
 
 	function supportAnimation(index){
 
-		var subteam = teams[index]
+		var subteam = battleTeams[index]
 		var aux = 2
 
 		var color = COLORS[index]
@@ -703,10 +742,10 @@ var battle = function(){
 
 	function setWinteam(win, lose){
 
-        teams[lose].forEach(function(member){
+        battleTeams[lose].forEach(function(member){
             member.setAnimation(["gg"], true)
         })
-        teams[win].forEach(function(member){
+        battleTeams[win].forEach(function(member){
             member.setAnimation(["win"], true)
         })
 		
@@ -791,6 +830,7 @@ var battle = function(){
 
     function setReadyGo(){
 
+        useReadyGo = false
 		var first = game.add.tween(listosYaGroup.listos).to({y: game.world.centerY}, 200, Phaser.Easing.Cubic.Out, true)
 		sound.play("listos")
         first.yoyo(true, 700)
@@ -804,6 +844,7 @@ var battle = function(){
 			// questionGroup.showQuestion(server.generateQuestion())
 			// var riddle = riddles.getQuestion(gradeQuestion)
 			// questionGroup.showQuestion(riddle)
+			clickHatch = false
 			server.sendQuestion()
 		})
 
@@ -811,16 +852,23 @@ var battle = function(){
         second.chain(secondOut)
     }
     
+    function setFastQuestion(){
+        
+        clickHatch = false
+        server.sendQuestion()
+    }
+    
     function initGame(){
         
-        for(var i = 0; i < teams.length; i++){
-            var team = teams[i]
+        for(var i = 0; i < battleTeams.length; i++){
+            var team = battleTeams[i]
             for(var k = 0; k < team.length; k++){
                 var yogo = team[k]
                 changeAnim(yogo, "idle_normal")
             }
         }
-        game.time.events.add(1000, setReadyGo)
+        newQuestionHatch = false
+        //game.time.events.add(1000, setReadyGo)
     }
     
     function changeAnim(yogo, anim){
@@ -829,8 +877,8 @@ var battle = function(){
     
     function setNoAnswer(){
         
-        for(var i = 0; i < teams.length; i++){
-            var team = teams[i]
+        for(var i = 0; i < battleTeams.length; i++){
+            var team = battleTeams[i]
             for(var k = 0; k < team.length; k++){
                 var yogo = team[k]
                 changeAnim(yogo, "answer_bad")
@@ -839,7 +887,8 @@ var battle = function(){
         for(var i = 0; i < 2; i++){
             game.time.events.add(2000, rotateTeam, null, i)
         }
-        game.time.events.add(4000, setReadyGo)
+        newQuestionHatch = false
+        //game.time.events.add(4000, setReadyGo)
     }
 
 	return {
@@ -849,10 +898,15 @@ var battle = function(){
 		name: "battle",
 		update: update,
 		preload:preload,
-		render:function () {
-			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
-		},
+//		render:function () {
+//			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
+//		},
 		create: function(event){
+            
+            var blackScreen = game.add.graphics(-200, -200)
+            blackScreen.beginFill(0x000000)
+            blackScreen.drawRect(0, 0, game.world.width + 200, game.world.height + 200)
+            blackScreen.endFill()
 
 			sceneGroup = game.add.group()
 
@@ -866,7 +920,7 @@ var battle = function(){
 			createListosYa()
 			//createMenuAnimations()
 			//menubuttons()
-			battleSong = sound.play("battleSong", {loop:true, volume:0.4})
+			battleSong = sound.play("battleSong", {loop:true, volume:0.1})
 			createWhite()
 
 			// var damageBtn = createButton(attackMove.bind(null, "ultra", 0), 0xff0033)
@@ -878,8 +932,10 @@ var battle = function(){
 			if(server){
 				server.removeEventListener('afterGenerateQuestion', questionGroup.showQuestion);
 				server.removeEventListener('onTurnEnds', showFeedback);
+				server.removeEventListener('setTimer', questionGroup.startTimer);
 				server.addEventListener('afterGenerateQuestion', questionGroup.showQuestion);
 				server.addEventListener('onTurnEnds', showFeedback);
+				server.addEventListener('setTimer', questionGroup.startTimer);
 			}
 			questionGroup.timeOutCallback = server.setQuestionTimeOut
 
@@ -891,10 +947,11 @@ var battle = function(){
 			game.onResume.add(function () {
 				PhaserSpine.Spine.globalAutoUpdate = true
 			})
+
 		},
 		setCharacter:setCharacter,
 		setTeams: function (myTeams) {
-			teams = myTeams
+			battleTeams = myTeams
 			for(var teamIndex = 0; teamIndex < myTeams.length; teamIndex++){
 				var team = myTeams[teamIndex]
 

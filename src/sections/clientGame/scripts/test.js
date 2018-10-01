@@ -19,27 +19,32 @@ function startGame(){
 	}
 
 	function onWaitingPlayers() {
-		alertDialog.show({message:"Esperando jugadores.", isButtonDisabled:true})
+		//alertDialog.show({message:"Esperando jugadores.", isButtonDisabled:true})
 	}
 
-	function connectToServer(value){
-		cliente.start(value, onWaitingPlayers, onErrorConnection)
-		cliente.startGame = function () {
-			sceneloader.show("teamSelector")
-		}
+	function connectToServer(value, numTeam){
+		cliente.start(value, onWaitingPlayers, onErrorConnection, numTeam)
+		//cliente.startGame = function () {
+		//alertDialog.hide()
+		sceneloader.show("questions")
+		//}
 	}
 
 	function onErrorConnection(message, showInput){
 
-		alertDialog.show({message:message, callback:connectToServer, showInput:showInput})
+		//alertDialog.show({message:message, callback:connectToServer, showInput:showInput})
 	}
 
 	function onCompleteSceneLoading(){
 
 		//alertDialog.init()
-		//cliente = new Client();
-		//connectToServer(cliente.id_game)
-		sceneloader.show("teamSelector")
+		cliente = new Client();
+		var hashValue = window.location.hash.substr(1);
+		var arrValues = hashValue.split("/")
+		var idGameFromHash = arrValues[1]
+		var numTeam = Number(arrValues[0])
+		connectToServer(idGameFromHash, numTeam)
+		//sceneloader.show("teamSelector")
 	}
 
 	function preloadScenes(sceneList){
@@ -106,7 +111,8 @@ function startGame(){
 		bootConfigFiles([
 			alertDialog,
 			teamSelector,
-			questions
+			questions,
+			rewardClient
 		])
 	}
 }

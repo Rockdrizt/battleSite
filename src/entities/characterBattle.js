@@ -4,6 +4,7 @@ var characterBattle = function () {
 	var loadingFiles
 	var currentLoader
 	var game
+	var loadedCharacters = {}
 
 	function updateImpactPoint() {
 		this.spine.setToSetupPose()
@@ -93,31 +94,45 @@ var characterBattle = function () {
 			data:data
 		})
 	}
-
+	//TODO: loadProjectiles must be at the end of loading all spines, in this all skins are loading
 	function loadProjectilesData(character, characterData) {
 		var characterName = character.name
+		if(loadedCharacters[characterName] !== undefined)
+			return
 
+		loadedCharacters[characterName] = true
 		if(typeof characterData.attacks === "undefined")
 			return
 
 		var attacks
 		if(characterData.attacks.skins){
-			if(!characterData.attacks.skins[character.skin]) {
-				console.warn("Attack from skin " + character.skin + " not found")
-				return
+			for(var skin in characterData.attacks.skins) {
+				if (!characterData.attacks.skins[skin]) {
+					console.warn("Attack from skin " + skin + " not found")
+					return
+				}
+				attacks = characterData.attacks.skins[skin]
+
+				for(var type in attacks){
+					var attacksInType = attacks[type]
+
+					for(var attackIndex = 0; attackIndex < attacksInType.length; attackIndex++){
+						var id = attacksInType[attackIndex].id
+						epicProjectiles.load(id, currentLoader, loadingFiles, currentScene)
+					}
+				}
 			}
-			attacks = characterData.attacks.skins[character.skin]
 
 		} else {
 			attacks = characterData.attacks
-		}
 
-		for(var type in attacks){
-			var attacksInType = attacks[type]
+			for(var type in attacks){
+				var attacksInType = attacks[type]
 
-			for(var attackIndex = 0; attackIndex < attacksInType.length; attackIndex++){
-				var id = attacksInType[attackIndex].id
-				epicProjectiles.load(id, currentLoader, loadingFiles, currentScene)
+				for(var attackIndex = 0; attackIndex < attacksInType.length; attackIndex++){
+					var id = attacksInType[attackIndex].id
+					epicProjectiles.load(id, currentLoader, loadingFiles, currentScene)
+				}
 			}
 		}
 	}

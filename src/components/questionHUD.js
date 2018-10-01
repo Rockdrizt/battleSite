@@ -16,7 +16,7 @@ var questionHUD = function(){
 
 	function update() {
 		this.timeElapsed += game.time.elapsedMS
-		this.time = convertTimeFormat(this.timeElapsed)
+		//this.time = convertTimeFormat(this.timeElapsed)
 	}
 
 	function initialize(){
@@ -90,6 +90,7 @@ var questionHUD = function(){
 		questionGroup.updateTimer = updateTimer.bind(questionGroup)
 		questionGroup.clearQuestion = clearQuestion.bind(questionGroup)
 		questionGroup.alpha = 0
+		questionGroup.totalDelay = 0
 
 		if(clientConfig){
 			questionGroup.client = true
@@ -382,6 +383,7 @@ var questionHUD = function(){
 		this.timeElapsed = 0
 		this.riddle = riddle
 		this.answered = false
+		//this.chrono.date = riddle.date
 
 		this.chrono.maxTime = this.riddle.timers.normal
 		var maxTime = convertTime(this.chrono.maxTime)
@@ -389,6 +391,8 @@ var questionHUD = function(){
 
 		this.question.text.setText(this.riddle.question)
 		this.question.fixText(this.riddle.existImage)
+        
+        this.setQuestion()
 
 		for(var i = 0; i < riddle.answers.length; i++){
 			var opt = this.buttons.options.children[i]
@@ -410,7 +414,7 @@ var questionHUD = function(){
 
 	function showNoImage(){
 
-		var toAlpha = this.client ? 1 : 0
+		var toAlpha = 1//this.client ? 1 : 0
 		var apearOverlay = game.add.tween(this).to({alpha: toAlpha}, 100, Phaser.Easing.Cubic.Out, true)
 		var apearButtons = game.add.tween(this.buttons).to({alpha: 1}, 300, Phaser.Easing.Cubic.Out, false)
 		var apearChrono = game.add.tween(this.chrono).from({x: -400}, 300, Phaser.Easing.Cubic.Out, false)
@@ -434,13 +438,14 @@ var questionHUD = function(){
 				delay += 200
 			}
 
-			lasTween.onComplete.add(this.setQuestion)
+			//lasTween.onComplete.add(this.setQuestion)
+			this.totalDelay += 2500
 		},this)
 	}
 
 	function showYesImage(){
 
-		var toAlpha = this.client ? 1 : 0
+		var toAlpha = 1//this.client ? 1 : 0
 		this.image.image.loadTexture(this.riddle.image)
 		this.image.image.key = this.riddle.image
 
@@ -457,7 +462,7 @@ var questionHUD = function(){
 		},this)
 		
 		apearButtons.onComplete.add(function(){
-			
+            
 			this.chrono.alpha = 1
 			var delay = 200
 			var lasTween
@@ -470,22 +475,28 @@ var questionHUD = function(){
 			}
 
 			var scaleImage = game.add.tween(this.image.image).to({alpha: 1}, 300, Phaser.Easing.Cubic.InOut, false)
-			scaleImage.onStart.add(this.setQuestion)
+			//scaleImage.onStart.add(this.setQuestion)
 			lasTween.chain(scaleImage)
+
+			this.totalDelay += 3100
 		},this)
 	}
     
     function setQuestion(){
 			
-        for(var i = 0; i < this.buttons.options.length; i++){
-			var opt = this.buttons.options.children[i]
-			game.add.tween(opt.info).to({alpha:1}, 300, Phaser.Easing.linear, true)
-			opt.inputEnabled = true
-		}
+//        for(var i = 0; i < this.buttons.options.length; i++){
+//			var opt = this.buttons.options.children[i]
+//			game.add.tween(opt.info).to({alpha:1}, 300, Phaser.Easing.linear, true)
+//			opt.inputEnabled = true
+//		}
 
-        game.add.tween(this.question).to({alpha:1}, 300, Phaser.Easing.linear, true)
-        
-        this.startTimer()
+		game.add.tween(this.question).to({alpha:1}, 300, Phaser.Easing.linear, true, 300)
+		this.totalDelay += 600
+
+		// if(!this.client) {
+		// 	server.setDate()
+		// }
+        //this.startTimer()
     }
 
 	function hideOverlay(){
@@ -520,6 +531,8 @@ var questionHUD = function(){
 			this.timer.stop(true)
 			this.timer.destroy()
 		}
+		else
+			return
 
 		this.answered = true
 		sound.play("shineSpell")
@@ -551,6 +564,9 @@ var questionHUD = function(){
 		var riddle = this.riddle
 		var correctBtn = this.getCorrectAns()
 		var btn = this.buttons.options.btnPressed
+		if(!btn)
+			return
+
 		var ans = btn.groupPos == riddle.correctAnswer
 		var texture = ans ? "correct" : "wrong"
 
@@ -600,6 +616,7 @@ var questionHUD = function(){
 
 		var fadeOut = game.add.tween(this.black).to({alpha:0}, 300, Phaser.Easing.linear, true)
 		
+		this.totalDelay = 0
 		fadeOut.onComplete.add(function(){
 
 			game.add.tween(this.feedBackImg).to({alpha:0}, 300, Phaser.Easing.linear, true)
@@ -619,9 +636,20 @@ var questionHUD = function(){
 		},this)
 	}
     
-    function startTimer(){
-	
-        var maxTime = this.riddle.timers.normal
+    function startTimer(serverTimer){
+
+		var currDate = new Date()
+		var currTime = currDate.getTime()
+		var timeDiff = serverTimer - currTime
+		var maxTime = this.chrono.maxTime - timeDiff
+		this.timeElapsed = 0
+        
+        for(var i = 0; i < this.buttons.options.length; i++){
+			var opt = this.buttons.options.children[i]
+			game.add.tween(opt.info).to({alpha:1}, 300, Phaser.Easing.linear, true)
+			opt.inputEnabled = true
+		}
+
 		if(this.timer) {
         	this.timer.stop(true)
 			this.timer.destroy()
@@ -636,10 +664,12 @@ var questionHUD = function(){
 	
 	function updateTimer(){
 
-		var text = convertTime(this.timerEvent.delay - this.timer.ms)
+		var time = this.timerEvent.delay - this.timer.ms
+		time = Phaser.Math.clamp(time, 0, this.chrono.maxTime)
+		var text = convertTime(time)
 		this.chrono.timeText.setText(text)
 
-		var size = game.math.degToRad((290/this.timerEvent.delay)*(this.timerEvent.delay - this.timer.ms))
+		var size = game.math.degToRad((290/this.timerEvent.delay)*(time))
 		this.chrono.circle.clear()
         this.chrono.circle.beginFill(0xFF0000, 0.5)
         this.chrono.circle.arc(0, 0, this.chrono.circle.lineSize, size, this.game.math.degToRad(-10), true)
@@ -663,7 +693,7 @@ var questionHUD = function(){
 	function convertTime(time) {
 
 		var min = Math.floor(time / 60000)
-		var sec = ((time % 60000) / 1000).toFixed(0)
+		var sec = Math.round((time % 60000) / 1000)
 
 		return min + ":" + (sec < 10 ? '0' : '') + sec
 	}

@@ -493,9 +493,9 @@ var scores = function(){
 		name: "scores",
 		update: update,
 		preload:preload,
-		render:function () {
-			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
-		},
+//		render:function () {
+//			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
+//		},
 		create: function(event){
 
 			sceneGroup = game.add.group()
@@ -506,14 +506,14 @@ var scores = function(){
 			createTeams()
 			createVS()
 			createScoreBubble()
-			createQuestionOverlay()		
+			//createQuestionOverlay()		
 
-			scoreService.removeEventListener("newQuestion", questionGroup.showQuestion)
-			scoreService.addEventListener("newQuestion", questionGroup.showQuestion)
+//			scoreService.removeEventListener("newQuestion", questionGroup.showQuestion)
+//			scoreService.addEventListener("newQuestion", questionGroup.showQuestion)
 			scoreService.removeEventListener("onTeamUpdate", onTeamUpdate)
 			scoreService.addEventListener("onTeamUpdate", onTeamUpdate)
-			scoreService.removeEventListener("onTurnEnds", questionGroup.hide)
-			scoreService.addEventListener("onTurnEnds", questionGroup.hide)
+//			scoreService.removeEventListener("onTurnEnds", questionGroup.hide)
+//			scoreService.addEventListener("onTurnEnds", questionGroup.hide)
 		},
 		setTeamData: function (data) {
 			teamsData = data

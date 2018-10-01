@@ -1,6 +1,6 @@
 {
   "startColorAlpha" : 1,
-  "startParticleSizeVariance" : 40,
+  "startParticleSizeVariance" : 60,
   "startColorGreen" : 0.813454,
   "rotatePerSecond" : 0,
   "radialAcceleration" : 0,
@@ -32,7 +32,7 @@
   "absolutePosition" : false,
   "textureFileName" : "scifiTeleport2.png",
   "startColorVarianceAlpha" : 0,
-  "maxParticles" : 400,
+  "maxParticles" : 100,
   "finishColorVarianceGreen" : 0,
   "finishParticleSize" : 0,
   "duration" : 0.1,
@@ -49,7 +49,7 @@
   "radialAccelVariance" : 0,
   "textureImageData" : "",
   "tangentialAccelVariance" : 0,
-  "particleLifespanVariance" : 0.1,
+  "particleLifespanVariance" : 0.2,
   "angleVariance" : 360,
   "angle" : 0,
   "maxRadius" : 116.84

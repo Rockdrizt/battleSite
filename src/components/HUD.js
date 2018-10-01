@@ -156,6 +156,9 @@ var HUD = function(){
 		HUDGroup.dealDamage = dealDamage.bind(HUDGroup)
         HUDGroup.setScore = setScore.bind(HUDGroup)
         HUDGroup.getScore = getScore.bind(HUDGroup)
+        HUDGroup.getTiedTeams = getTiedTeams.bind(HUDGroup)
+        HUDGroup.getWiner = getWiner.bind(HUDGroup)
+        HUDGroup.checkEndGame = checkEndGame.bind(HUDGroup)
 
         MAX_LIFE = life.width
 
@@ -197,14 +200,21 @@ var HUD = function(){
 	//TODO: refactor HUD.js, HUD most only use HUD functions, not damage, shakeCamara, nextRound, etc..
     //TODO: also damage and type attack are going to be on the server side but in the mainteam, I will add a function
     //to reduce life in the server
-	function dealDamage(loseIndex, percent, ultra){
+	function dealDamage(loseIndex, percent, ultra, lastQuestion){
 
         var self = this
+        
+        if(lastQuestion){
+            console.log("double damage")
+            percent *= 2
+        }
+
         var life = self.children[loseIndex].life
         var winIndex = loseIndex == 0 ? 1 : 0
         var delay = 3500
         var damage = life.width - (MAX_LIFE * percent)
 		var defeat = loseIndex == 1 ? damage >= -0.1 : damage <= 0.1
+        var allQuestions = riddles.allQuestionsUsed(self.grade)
         if(defeat) damage = MIN_LIFE
 		
         if(ultra){
@@ -220,12 +230,26 @@ var HUD = function(){
             var lifeText = life.amount > 0 ? life.amount + "" : "0"
             lifeText = lifeText.split("").join(String.fromCharCode(8202))
             life.points.setText(lifeText)
-
+            
             if(damage == MIN_LIFE){
                 game.time.events.add(2000, self.setWinteam, null, winIndex, loseIndex)
             }
             else{
-                self.nextRound(delay)
+                if(allQuestions){
+                    if(self.getTiedTeams()){
+                        console.log("se acabaron las preguntas y hay ganador")
+                        var infoRound = self.getWiner() 
+                        game.time.events.add(2000, self.setWinteam, null, infoRound.winner, infoRound.loser)
+                    }
+                    else{
+                        console.log("se acabaron las preguntas y no hay ganador")
+                        self.nextRound(delay)
+                    }
+                }
+                else{
+                    console.log("no se acabaron las preguntas")
+                    self.nextRound(delay)
+                }
             }
 
             //UPDATE SCORE SERVER
@@ -263,6 +287,46 @@ var HUD = function(){
 
         var score = this.children[index].teamScore
         return score.points
+    }
+    
+    function getTiedTeams(){
+        
+        var scores = []
+        
+        for(var i = 0; i < this.length; i++){
+            scores[i] = this.getScore(i)
+        }
+        console.log(scores[0] != scores[1])
+        return (scores[0] != scores[1])
+    }
+    
+    function getWiner(){
+        
+        var winner = this.children[0].teamScore.points > this.children[1].teamScore.points ? 0 : 1
+        var loser = winner == 1 ? 0 : 1
+        console.log("winner " + winner)
+        console.log("loser " + loser)
+        return {winner:winner, loser:loser}
+    }
+    
+    function checkEndGame(){
+     
+        var allQuestions = riddles.allQuestionsUsed(this.grade)
+        
+        if(allQuestions){
+            if(this.getTiedTeams()){
+                console.log("se acabaron las preguntas y hay ganador")
+                var infoRound = this.getWiner() 
+                game.time.events.add(2000, this.setWinteam, null, infoRound.winner, infoRound.loser)
+            }
+            else{
+                this.setNoAnswer()
+            }
+        }
+        else{
+            console.log("no se acabaron las preguntas y no hay ganador")
+            this.setNoAnswer()
+        }
     }
 	
 	return{

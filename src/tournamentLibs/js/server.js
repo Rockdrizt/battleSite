@@ -337,7 +337,7 @@ function Server(){
 
 	//TODO: generate question is not a server function
 	this.sendQuestion = function () {
-		var questionData = riddles.getQuestion(this.questionGrade)
+		var questionData = riddles.getQuestion(self.questionGrade)
 		//var questionData = riddles.getOperation()
 		correctAnswer = questionData.correctAnswer
 
@@ -345,13 +345,15 @@ function Server(){
 		valores.t1answer = false;
 		valores.t2answer = false;
 
-		questionData.date = firebase.database.ServerValue.TIMESTAMP
+		//questionData.date = firebase.database.ServerValue.TIMESTAMP
 		questionData.timeOut = false
-		valores.data = questionData;
+		valores.questions.push(questionData);
 
-		setfb(refIdGame.child("data"), questionData)//refIdGame.child("data").set(valores.data);
+		var numIndex = valores.questions.length - 1
+		refIdGame.child("questions/" + numIndex).set(questionData);
 		//TODO: showPossibleAnswers deprected check client events to avoid conflicts.
 		self.fireEvent('afterGenerateQuestion',[questionData]);
+		checkDate()
 	}
 
 	function getData(val) {
@@ -366,8 +368,12 @@ function Server(){
 		self.initializeTeams()
 		valores.serverReady = true
 		valores.gameEnded = false
+		valores.winner = false
+		if(!valores.questions)
+			valores.questions = []
 		refIdGame.update(valores)
 
+		self.questionGrade = valores.grade
 		self.currentData = val
 	}
 
@@ -384,7 +390,7 @@ function Server(){
 			t1answer : false,
 			t2answer : false,
 			possibleAnswers: [],
-			data:false,
+			questions:[],
 			gameReady:false,
 			battleReady:false,
 			gameEnded:false,
@@ -392,7 +398,8 @@ function Server(){
 			time:self.battleTime,
 			maxRounds:self.maxRounds,
 			timeOut:false,
-			serverReady:true
+			serverReady:true,
+			grade:self.questionGrade
 		};
 		self.currentData = valores
 
@@ -492,6 +499,18 @@ function Server(){
 		}
 	}
 
+	function checkDate() {
+		var lastIndex = valores.questions.length - 1
+		refIdGame.child("questions/" + lastIndex + "/date").on('value', function (snap) {
+			var currentTime = snap.val()
+			var ref = snap.ref
+			if(currentTime){
+				ref.off()
+				self.fireEvent("setTimer", [currentTime - self.timeOffset])
+			}
+		})
+	}
+
 	function initializeSession(obj){
 		var id = obj.id
 		var val = obj.val
@@ -508,6 +527,7 @@ function Server(){
 			checkTeams()
 			checkTeamAnswers()
 			checkDisconnect(id)
+			checkTimeOffset()
 		}
 
 		if((id)&&(self.onStart)) self.onStart()
@@ -549,10 +569,15 @@ function Server(){
 
 	this.start = function(currentId, onStart, params, onError) {
 
+		// if(!currentId) {
+		// 	getCurrentID(onStart, params, onError)
+		// 	return
+		// }
+
 		var params = params || {}
 		var rules = params.rules || operationGenerator.RULES_SET.EASY
 		var battleTime = params.battleTime || 300000
-		var questionGrade = params.grade || -1
+		var questionGrade = typeof params.grade == "number" ? params.grade : -1
 		self.battleTime = battleTime
 		self.rules = rules
 		self.questionGrade = questionGrade
@@ -560,7 +585,6 @@ function Server(){
 		self.onStart = onStart
 		self.maxRounds = typeof params.maxRounds !== "undefined" ? params.maxRounds : self.maxRounds
 
-		self.events = {};
 		// console.log(self.events)
 		var numPerOperations = Math.round(battleTime / 60000) * 3
 		self.numberOperation = numPerOperations
@@ -576,12 +600,12 @@ function Server(){
 	this.setBattleReady = function (value) {
 		setfb(refIdGame.child("battleReady"), value)//refIdGame.child("gameReady").set(value);
 	}
-	
+
 	this.updateTeam = function (teamIndex, value) {
-			var key = "t" + teamIndex
-			valores[key].life = value.life
-			valores[key].score = value.score
-			refIdGame.child(key).update(value);
+		var key = "t" + teamIndex
+		valores[key].life = value.life
+		valores[key].score = value.score
+		refIdGame.child(key).update(value);
 	}
 
 	this.initializeTeams = function () {
@@ -592,6 +616,7 @@ function Server(){
 			for(var playerIndex = 0; playerIndex < players.length; playerIndex++){
 				var player = players[playerIndex]
 				player.avatar = false
+				player.skin = false
 			}
 			//refIdGame.child(key).set(valores[key])
 		}
@@ -611,7 +636,7 @@ function Server(){
 		valores.time = self.battleTime;
 		valores.maxRounds = self.maxRounds;
 		valores.rules = self.rules
-		valores.data = false;
+		valores.questions = [];
 		valores.gameEnded = false;
 		valores.retry = {retry:location, date:actualDate};
 		valores.timeOut = false
@@ -633,6 +658,31 @@ function Server(){
 
 	this.setQuestionTimeOut = function () {
 		console.log("timeOUT!")
-		setfb(refIdGame.child("data/timeOut"), true)
+		var lastIndex = valores.questions.length - 1
+		refIdGame.child("questions/" + lastIndex).update({timeOut:true})
+	}
+
+	function checkTimeOffset() {
+		var offsetRef = firebase.database().ref(".info/serverTimeOffset");
+		offsetRef.on("value", function(snap) {
+			self.timeOffset = snap.val();
+		});
+	}
+
+	function getCurrentID(onStart, params, onError){
+		database.ref("currentId").on("value", function (snap) {
+			if(id_game) {
+				window.location.reload()
+				return
+			}
+			var currentId = snap.val()
+			if(currentId)
+				self.start(currentId, onStart, params, onError)
+		})
+	}
+
+	this.setDate = function () {
+		var lastIndex = valores.questions.length - 1
+		refIdGame.child("questions/" + lastIndex).update({date:firebase.database.ServerValue.TIMESTAMP})
 	}
 }

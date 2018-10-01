@@ -5,6 +5,7 @@ var riddles = function(){
 	var testQuestions
 	var usedQuestions
 	var NUMBER_OF_FAKE_ANSWERS = 3
+    var usedTestQuestions
 
 	var TIME_ATTACKS = {
 		1 : {
@@ -15,7 +16,7 @@ var riddles = function(){
 		2 : {
             ultra : 20000,
             super : 30000,
-            normal : 60000
+            normal : 90000
 		}
 	}
 
@@ -37,6 +38,7 @@ var riddles = function(){
 		]
 		testQuestions = []
 		usedQuestions = []
+        usedTestQuestions = []
 		loadQuestions()
 		loadTestQuestions()
 		//operationGenerator.setConfiguration()
@@ -60,6 +62,7 @@ var riddles = function(){
 				var correctValue = answers[element.answer - 1]
 
 				i == subList.length - 1 ? timeIndex = 2 : timeIndex = 1
+                var lastQuestion = i == subList.length - 1 ? true : false
 
 				if(element.imgExist)
 					var imagePath = settings.BASE_PATH + "/images/questionDB/grade" + element.grade + "/" + element.image + ".png"
@@ -77,7 +80,8 @@ var riddles = function(){
 					correctAnswer: element.answer - 1,
 					timers: TIME_ATTACKS[timeIndex],
 					index: i,
-					correctValue: correctValue
+					correctValue: correctValue,
+                    lastQuestion: lastQuestion
 					//correctIndex:
 				}
 				gradeList.push(obj)
@@ -100,6 +104,7 @@ var riddles = function(){
 
 			var answers = [element.A, element.B, element.C, element.D]
 			var correctValue = answers[element.answer - 1]
+            var lastQuestion = i == list.length - 1 ? true : false
 
 			if(element.imgExist)
 				var imagePath = settings.BASE_PATH + "/images/questionDB/grade" + element.grade + "/" + element.image + ".png"
@@ -117,7 +122,8 @@ var riddles = function(){
 				correctAnswer: element.answer - 1,
 				timers: TIME_ATTACKS[1],
 				index: i,
-				correctValue: correctValue
+				correctValue: correctValue,
+                lastQuestion: lastQuestion
 				//correctIndex:
 			}
 			testQuestions.push(obj)
@@ -128,8 +134,31 @@ var riddles = function(){
 	function getQuestion(grade){
 
 		if(grade == -1){
-			var rand = game.rnd.integerInRange(0, testQuestions.length - 1)
-			return testQuestions[rand]
+            
+            var lastTestQuestion = testQuestions.length - 1
+			var rand
+			var newTestQuestion
+            
+            if(usedTestQuestions.length == lastTestQuestion){
+				//usedQuestions = []
+                console.log("last test question")
+				usedTestQuestions.push(lastTestQuestion)
+				newTestQuestion =  testQuestions[lastTestQuestion]
+				//getQuestion(grade)
+			}
+            else if(usedTestQuestions.length > lastTestQuestion){
+				return getOperation()
+                
+            }
+            else{
+                do{
+					rand = game.rnd.integerInRange(0, lastTestQuestion - 1)
+				}while(usedTestQuestions.includes(rand))
+				
+				usedTestQuestions.push(rand)
+                newTestQuestion = testQuestions[rand]
+            }
+            return newTestQuestion
 		}
 		else{
 
@@ -139,6 +168,7 @@ var riddles = function(){
 
 			if(usedQuestions.length == lastQuestion){
 				//usedQuestions = []
+                console.log("last question")
 				usedQuestions.push(lastQuestion)
 				newQuestion =  questions[grade][lastQuestion]
 				//getQuestion(grade)
@@ -173,7 +203,15 @@ var riddles = function(){
 			var n = correctAnswer + diff * negativeOrPositive
 			possibleAnswers.push(n)
 		}
-		var n = game.rnd.integerInRange(possibleAnswers[1] , possibleAnswers[2])
+        
+        var min = possibleAnswers[1]
+        var max = possibleAnswers[2]
+        if(correctAnswer < 15){
+            min *= 2
+            max *= 2
+        }
+        
+		var n = game.rnd.integerInRange(min, max)
 		possibleAnswers.push(n)
 		
 
@@ -222,10 +260,26 @@ var riddles = function(){
 
 		return riddle
     }
+    
+    function allQuestionsUsed(grade){
+       
+        if(grade == -1){
+            
+            var lastQuestion = testQuestions.length
+        
+            return (usedTestQuestions.length == lastQuestion)
+        } 
+        else{
+             var lastQuestion = questions[grade].length
+        
+            return (usedQuestions.length == lastQuestion)
+        }
+    }
 
 	return{
 		initialize:initialize,
 		getOperation:getOperation,
-		getQuestion:getQuestion
+		getQuestion:getQuestion,
+        allQuestionsUsed:allQuestionsUsed,
 	}
 }()

@@ -82,6 +82,29 @@ function Client(){
 		})
 	}
 
+	this.setOnQuestions = function(){
+		self.refIdGame.child("questions").off()
+		self.refIdGame.child("questions").limitToLast(1).on('child_added', function(snapshot) {
+			var data = snapshot.val();
+			var ref = snapshot.ref
+			if(data && !data.timeOut) {
+				self.currentData = data
+				self.fireEvent('showEquation', [data]);
+				ref.child("timeOut").on("value", function (snap) {
+					var timeOut = snap.val()
+					if(timeOut === true)
+						self.fireEvent("questionTimeOut")
+				})
+				ref.child("date").on("value", function (snap) {
+					var date = snap.val()
+					if(date)
+						self.fireEvent("setTimer", [date - self.timeOffset])
+				})
+			}
+
+		});
+	}
+
 	function initialize(idGame, val){
 		var t1 = val.t1;
 		var t2 = val.t2;
@@ -89,10 +112,12 @@ function Client(){
 		self.teams[2] = val.t2
 		if(self.numTeam){
 			self.team = val["t" + self.numTeam]
-			self.team.ready = true
+			self.opponent = self.numTeam === 1 ? 2 : 1
 
-			if((val[self.numTeam])&&(!val[self.numTeam].ready))
+			if((self.team)&&(!self.team.ready)){
+				self.team.ready = true
 				setfb(self.refIdGame.child("t" + self.numTeam), self.team)
+				}
 			else
 				self.showAlert("El equipo " + self.numTeam + " ya esta siendo ocupado. Da click en OK para continuar", false, true)
 		}
@@ -120,16 +145,6 @@ function Client(){
 
 		//if(((idGame!==null)&&(!self.id_game))||(idGame === "000000")){
 		self.id_game = idGame;
-
-		self.refIdGame.child("data").off()
-		self.refIdGame.child("data").on('value', function(snapshot) {
-			var data = snapshot.val();
-			if(data && !data.timeOut) {
-				self.currentData = data
-				self.fireEvent('showEquation', [data]);
-			}else if(data.timeOut === true)
-				self.fireEvent("questionTimeOut")
-		});
 
 		self.refIdGame.child('winner').off()
 		self.refIdGame.child('winner').on('value', function(snapshot) {
@@ -185,6 +200,8 @@ function Client(){
 				self.timeOutCallback()
 		})
 
+		checkTimeOffset()
+
 		database.ref(idGame + "/t" + self.numTeam + "/ready").onDisconnect().cancel()
 		database.ref(idGame + "/t" + self.numTeam + "/ready").onDisconnect().set(false)
 
@@ -201,10 +218,10 @@ function Client(){
 			if (serverReady) {
 				var val = snapshot.val()
 
-				if (self.numTeam) {
+				if (self.numTeam && self.team[self.numTeam]) {
 					var ready = snapshot.child("t" + self.numTeam + "/ready").val()
 					if(self.teams[self.numTeam].players !== val["t" + self.numTeam].players) {
-						self.teams[self.numTeam] = val["t" + self.numTeam]
+						self.teams[self.numTeam] = val["t" + self.numTeam].players
 						self.fireEvent('onPlayersChange',[self.teams[self.numTeam]]);
 					}
 					if (ready === false) {
@@ -217,7 +234,7 @@ function Client(){
 				if (self.opponent) {
 					var opponentReady = snapshot.child("t" + self.opponent + "/ready").val()
 					if(self.teams[self.opponent].players !== val["t" + self.opponent].players) {
-						self.teams[self.opponent] = val["t" + self.opponent]
+						self.teams[self.opponent] = val["t" + self.opponent].players
 						self.fireEvent('onPlayersChange',[self.teams[self.opponent]]);
 					}
 					if (opponentReady === false) {
@@ -258,12 +275,18 @@ function Client(){
 	 * @summary Starts the client
 	 * @param {type} idGame Code of the game
 	 */
-	this.start = function(idGame, onAlert, onWait){
+	this.start = function(idGame, onAlert, onWait, numTeam){
 		// self.events = {};
 		// console.log(self.events)
+		// if(!idGame) {
+		// 	getCurrentID(onAlert, onWait, numTeam)
+		// 	return
+		// }
+
 		self.refIdGame= database.ref();
 		self.showAlert = onAlert
 		self.onWait = onWait
+		if(numTeam) self.numTeam = numTeam
 
 		database.ref('.info/connected').off()
 		database.ref('.info/connected').on('value', function (snap) {
@@ -322,6 +345,25 @@ function Client(){
 		//players.date = firebase.database.ServerValue.TIMESTAMP
 		self.teams[self.numTeam] = players
 		setfb(self.refIdGame.child("t" + self.numTeam + "/players"), players)
+	}
+
+	function getCurrentID(onAlert, onWait, numTeam){
+		database.ref("currentId").on("value", function (snap) {
+			if(self.id_game) {
+				window.location.reload()
+				return
+			}
+			var currentId = snap.val()
+			if(currentId)
+				self.start(currentId, onAlert, onWait, numTeam)
+		})
+	}
+
+	function checkTimeOffset() {
+		var offsetRef = firebase.database().ref(".info/serverTimeOffset");
+		offsetRef.on("value", function(snap) {
+			self.timeOffset = snap.val();
+		});
 	}
 }
 

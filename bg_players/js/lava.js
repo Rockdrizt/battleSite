@@ -19,6 +19,7 @@ function getParameterByName(name, url) {
 }
 
 function showTeam(team){ //team is an array
+     $("#logoCuantrix").attr("src","img/logo.png");
     for(var i = 0; i<=team.length -1 ; i ++){
         if((team[i].avatar && previusTeam && previusTeam[i].avatar != team[i].avatar) || (!previusTeam && team[i].avatar)) {
            ChoiceYogotar("#animation" + [i+2],team[i].avatar) 
@@ -175,7 +176,7 @@ function selectColorTeam(){
 
     var myDefs = createSVGElement('defs');
     if(teamId == 1){
-        $("#teamLogo").attr("src","img/alpha_team.png");
+        $("#teamLogo").attr("src","img/logo.png");
         createSVGElement('stop')
         .attr({
             offset:"8.514761e-04",
@@ -188,8 +189,10 @@ function selectColorTeam(){
         }).appendTo(GradientBar);         
         
     }else{
-        $("#logoCuantrix").attr("src","img/beta_team.png");
+       
         $("#teamLogo").attr("src","img/logo.png");
+        $(".yogotar").find("img").addClass("yogotar-bravo");
+
         createSVGElement('stop')
             .attr({
                 offset: "4.514761e-04",
@@ -214,7 +217,7 @@ TweenLite.to(example, 2, { fill: "rgb(255,0,255)" });
         
 TweenLite.set($(".correct--icon"),{transformOrigin: "50% 50% 0"}); 
 TweenLite.set($(".blobAnimate"),{transformOrigin: "50% 50% 0"});
-TweenLite.set($(".st0"),{y:270});    
+TweenLite.set($(".st0"),{y:270}); 
 TweenMax.fromTo($(".base1"),3,{x:300},{x:300,yoyo:true,repeat:-1});
 TweenMax.fromTo($(".blobAnimate"),2,{rotation:0},{rotation:360,repeat:-1,ease:Back.easeNone});
         

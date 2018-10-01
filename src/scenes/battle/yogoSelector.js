@@ -56,25 +56,25 @@ var yogoSelector = function(){
 				file: settings.BASE_PATH + "/sounds/sounds/shineSpell.wav"},
 			{	name: "cut",
 				file: soundsPath + "cut.mp3"},
-			{	name: "lightUp",
-				file: settings.BASE_PATH + "/sounds/sounds/lightUp.wav"},
+			{	name: "energyBlast",
+				file: settings.BASE_PATH + "/sounds/sounds/energyBlast.wav"},
 			{	name: "gameSong", 
-				file: settings.BASE_PATH + "/sounds/songs/selector.mp3"},
-            {	name: "tomiko",
+				file: settings.BASE_PATH + "/sounds/songs/selector.wav"},
+            {	name: "tomikoVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/tomiko.mp3"},
-            {	name: "luna",
+            {	name: "lunaVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/luna.mp3"},
-            {	name: "nao",
+            {	name: "naoVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/nao.mp3"},
-            {	name: "theffanie",
+            {	name: "theffanieVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/theffanie.mp3"},
-            {	name: "eagle",
+            {	name: "eagleVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/eagle.mp3"},
-            {	name: "dinamita",
+            {	name: "dinamitaVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/dinamita.mp3"},
-            {	name: "arthurius",
+            {	name: "arthuriusVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/arthurius.mp3"},
-            {	name: "estrella",
+            {	name: "estrellaVoice",
 				file: settings.BASE_PATH + "/sounds/selectorNames/estrella.mp3"},
 		],
 		spritesheets: [
@@ -210,7 +210,7 @@ var yogoSelector = function(){
 		var back = bmd.addToWorld()
 		//sceneGroup.add(back)
 
-		var y = 0
+		var y = -10
 
 		for (var i = 0; i < bmd.height; i++)
 		{
@@ -396,12 +396,12 @@ var yogoSelector = function(){
 
 			var token = subGroup.create(0, 0, "atlas.yogoSelector", "token" + 0)
 			token.anchor.setTo(0.5)
-			token.inputEnabled = true
-			token.events.onInputDown.add(function(btn){
+			// token.inputEnabled = true
+			// token.events.onInputDown.add(function(btn){
 
-				//chosenOne = catch team input
-				pressBtn(btn, chosenOne)
-			}, this)
+			// 	//chosenOne = catch team input
+			// 	pressBtn(btn, chosenOne)
+			// }, this)
 			token.tag = i
 			token.canClick = false
 			subGroup.token = token
@@ -446,17 +446,27 @@ var yogoSelector = function(){
     function createYogoNames(){
         
         namesGroup = game.add.group()
-        selectorGroup.add(namesGroup)
-        
-        var light = namesGroup.create(game.world.centerX, game.world.centerY, "atlas.yogoSelector", "pinkLight")
-        light.anchor.setTo(0.5)
-        light.scale.setTo(0)
-        namesGroup.light = light
-        
-        var yogoName = namesGroup.create(light.x, light.y, "atlas.yogoSelector", "name0")
-        yogoName.anchor.setTo(0.5)
-        yogoName.alpha = 0
-        namesGroup.yogoName = yogoName
+		selectorGroup.add(namesGroup)
+		
+		var pivotX = 0.5
+		
+		for(let i = 0; i < ORDER_SIDES.length; i++) {
+
+			names = game.add.group()
+			namesGroup.add(names)
+
+			var light = names.create(game.world.centerX * pivotX, game.world.centerY, "atlas.yogoSelector", "pinkLight")
+			light.anchor.setTo(0.5)
+			light.scale.setTo(0)
+			names.light = light
+			
+			var yogoName = names.create(light.x, light.y, "atlas.yogoSelector", "name0")
+			yogoName.anchor.setTo(0.5)
+			yogoName.alpha = 0
+			names.yogoName = yogoName
+
+			pivotX += 1
+		}
     }
 
 	function pressBtn(btn, team, skin){
@@ -754,7 +764,7 @@ var yogoSelector = function(){
 			teamGroup.slots[teamGroup.teamPivot].check = true
 			teamGroup.slots[teamGroup.teamPivot].yogo.setAnimation(["select", "ready"], true)
 			teamGroup.marker = null
-            showName(teamGroup.currentSelect)
+            showName(teamGroup.currentSelect, numTeam - 1)
                 
 			if(teamGroup == alphaGroup)
 				var aux = teamGroup.auxArray.indexOf(-1) //index
@@ -770,18 +780,17 @@ var yogoSelector = function(){
 		}
 	}
     
-    function showName(tag){
-        
-        game.add.tween(namesGroup.light.scale).to({x: 1, y: 1}, 200, Phaser.Easing.linear, true, 0, 0, true)
-        sound.play(YOGOTARS_LIST[tag].name)
-        namesGroup.yogoName.loadTexture("atlas.yogoSelector", "name" + tag)
-        namesGroup.yogoName.alpha = 1
+    function showName(tag, index){
 
-		var fadeOut = game.add.tween(namesGroup.yogoName).to({alpha:0}, 400, Phaser.Easing.linear, false, 500)
-		fadeOut.onComplete.add(function(){
-			namesGroup.light.scale.setTo(0)
-		})
-        game.add.tween(namesGroup.yogoName.scale).from({y:0}, 100, Phaser.Easing.linear, true, 200).chain(fadeOut)    
+		var names = namesGroup.children[index]
+        
+        game.add.tween(names.light.scale).to({x: 1, y: 1}, 200, Phaser.Easing.linear, true, 0, 0, true)
+        sound.play(YOGOTARS_LIST[tag].name + "Voice")
+        names.yogoName.loadTexture("atlas.yogoSelector", "name" + tag)
+        names.yogoName.alpha = 1
+
+		var fadeOut = game.add.tween(names.yogoName).to({alpha:0}, 400, Phaser.Easing.linear, false, 500)
+        game.add.tween(names.yogoName.scale).from({y:0}, 100, Phaser.Easing.linear, true, 200).chain(fadeOut)    
     }
 
 	function setAliveSpine(obj, alive){
@@ -828,7 +837,7 @@ var yogoSelector = function(){
 			while(i !== 5){
 				buttonsGroup.children[i].yogotar.alpha = 1
 				game.add.tween(buttonsGroup.children[i].yogotar.scale).from({x: 0,y: 0}, 500, Phaser.Easing.Cubic.Out, true, delay)
-				game.time.events.add(delay, function(){sound.play("lightUp")})
+				//game.time.events.add(delay, function(){sound.play("energyBlast")})
 
 
 				i === 2 ? i = 7 : i--
@@ -837,8 +846,8 @@ var yogoSelector = function(){
 
 			game.time.events.add(delay, function(){
 				buttonsGroup.setAll("token.canClick", true)
-				pressBtn(alphaGroup.marker.token, STATES.red)
-				pressBtn(bravoGroup.marker.token, STATES.blue)
+				//pressBtn(alphaGroup.marker.token, STATES.red)
+				//pressBtn(bravoGroup.marker.token, STATES.blue)
 			})
 		})
 	}
@@ -968,9 +977,9 @@ var yogoSelector = function(){
 	}
 
 	function getTeams(){
-		var teams = []
-		teams[0] = []
-		teams[1] = []
+		var teamsArray = []
+		teamsArray[0] = []
+		teamsArray[1] = []
 		for(var alphaIndex = 0; alphaIndex < alphaGroup.length; alphaIndex++){
 			var char = alphaGroup.children[alphaIndex]
 			var name = "yogotar" + char.name.charAt(0).toUpperCase() + char.name.slice(1)
@@ -978,7 +987,7 @@ var yogoSelector = function(){
 				name:name,
 				skin:char.skin
 			}
-			teams[0].push(obj)
+			teamsArray[0].push(obj)
 		}
 
 		for(var bravoIndex = 0; bravoIndex < bravoGroup.length; bravoIndex++){
@@ -988,10 +997,10 @@ var yogoSelector = function(){
 				name:name,
 				skin:char.skin
 			}
-			teams[1].push(obj)
+			teamsArray[1].push(obj)
 		}
 
-		return teams
+		return teamsArray
 	}
 
 	function getReady(){
@@ -1006,14 +1015,14 @@ var yogoSelector = function(){
 		emitter.y = game.world.centerY
 		readyGroup.addAt(emitter,0)
 
-		var teams = getTeams()
+		var selectedTeams = getTeams()
         //inputsGroup.alpha = 0
 
 		game.add.tween(readyGroup.pinkLight.scale).to({x: 1, y: 1}, 400, Phaser.Easing.Cubic.InOut, true, 0, 0, true).onComplete.add(function(){
 			readyGroup.ready.alpha = 1
 			sound.play("shineSpell")
 			game.add.tween(readyGroup.ready.scale).from({x: 0, y:0}, 200, Phaser.Easing.linear, true).onComplete.add(function () {
-				battleMain.init(teams)
+				battleMain.init(selectedTeams)
 				battleMain.create()
 				game.add.tween(readyGroup.text).to({alpha:1}, 500, Phaser.Easing.Cubic.Out, true)
 				game.time.events.add(6000, function () {
@@ -1138,10 +1147,15 @@ var yogoSelector = function(){
 				showBattle()
 			}
 		},
-		render:function () {
-			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
-		},
+//		render:function () {
+//			game.debug.text(game.time.fps || '--', 2, 14, "#00ff00");
+//		},
 		create: function(event){
+            
+            var blackScreen = game.add.graphics(-200, -200)
+            blackScreen.beginFill(0x000000)
+            blackScreen.drawRect(0, 0, game.world.width + 200, game.world.height + 200)
+            blackScreen.endFill()
             
             createBackground()
             
@@ -1155,7 +1169,7 @@ var yogoSelector = function(){
 
 			initialize()
 
-			gameSong = sound.play("gameSong", {loop:true, volume:0.6})
+			gameSong = sound.play("gameSong", {loop:true, volume:0.1})
 
             createPlatforms()
 			createTeams()
