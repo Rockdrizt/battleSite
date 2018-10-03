@@ -100,7 +100,7 @@ var HUD = function(){
             lifePoints.strokeThickness = 10
             teamSide.add(lifePoints)
             life.points = lifePoints
-            life.amount = 100
+            life.amount = lifes[i]
             
             var teamScore = teamSide.create(lifeBox.x - 80 * side, lifeBox.y * 2.4, "atlas.battle", "score")
             teamScore.anchor.setTo(0.5)
@@ -158,7 +158,7 @@ var HUD = function(){
 		HUDGroup.dealDamage = dealDamage.bind(HUDGroup)
         HUDGroup.setScore = setScore.bind(HUDGroup)
         HUDGroup.getScore = getScore.bind(HUDGroup)
-        HUDGroup.getTiedTeams = getTiedTeams.bind(HUDGroup)
+        HUDGroup.isTiedTeams = isTiedTeams.bind(HUDGroup)
         HUDGroup.getWiner = getWiner.bind(HUDGroup)
         HUDGroup.checkEndGame = checkEndGame.bind(HUDGroup)
 
@@ -238,7 +238,7 @@ var HUD = function(){
             }
             else{
                 if(allQuestions){
-                    if(self.getTiedTeams()){
+                    if(self.isTiedTeams === false){
                         console.log("se acabaron las preguntas y hay ganador")
                         var infoRound = self.getWiner() 
                         game.time.events.add(2000, self.setWinteam, null, infoRound.winner, infoRound.loser)
@@ -291,20 +291,20 @@ var HUD = function(){
         return score.points
     }
     
-    function getTiedTeams(){
+    function isTiedTeams(){
         
         var scores = []
         
         for(var i = 0; i < this.length; i++){
-            scores[i] = this.getScore(i)
+            scores[i] = this.teams[i].life.amount
         }
-        console.log(scores[0] != scores[1])
-        return (scores[0] != scores[1])
+
+        return (scores[0] === scores[1])
     }
     
     function getWiner(){
         
-        var winner = this.children[0].teamScore.points > this.children[1].teamScore.points ? 0 : 1
+        var winner = this.teams[0].life.amount > this.teams[1].life.amount ? 0 : 1
         var loser = winner == 1 ? 0 : 1
         console.log("winner " + winner)
         console.log("loser " + loser)
@@ -316,7 +316,7 @@ var HUD = function(){
         var allQuestions = riddles.allQuestionsUsed(this.grade)
         
         if(allQuestions){
-            if(this.getTiedTeams()){
+            if(this.isTiedTeams() === false){
                 console.log("se acabaron las preguntas y hay ganador")
                 var infoRound = this.getWiner() 
                 game.time.events.add(2000, this.setWinteam, null, infoRound.winner, infoRound.loser)

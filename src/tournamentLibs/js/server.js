@@ -376,7 +376,7 @@ function Server(){
 		team2.score = {correct : 0, wrong : 0}
 		self.initializeTeams()
 		valores.serverReady = true
-		valores.gameEnded = false
+		//valores.gameEnded = false
 		valores.winner = false
 		if(!valores.questions)
 			valores.questions = []
@@ -501,14 +501,6 @@ function Server(){
 				gameReady : false,
 				battleReady : false,
 				gameEnded : false
-			}
-
-			if((valores.gameEnded)&&(typeof valores.gameEnded.winner === "number")) {
-				resetValues.t1 = TEAM1_DEFAULT
-				resetValues.t2 = TEAM2_DEFAULT
-				resetValues.questions = []
-				if(valores.grade >= 0 )
-					resetValues.grade = valores.grade + 1
 			}
 
 			database.ref(id).onDisconnect().update(resetValues)
@@ -672,7 +664,14 @@ function Server(){
 	this.setGameEnded = function (numTeamWinner) {
 		var data = {winner:numTeamWinner, date:firebase.database.ServerValue.TIMESTAMP}
 		valores.gameEnded = data
-		setfb(refIdGame.child("gameEnded"), data)//refIdGame.child("gameEnded").set(data);
+		valores.t1 = TEAM1_DEFAULT
+		valores.t2 = TEAM2_DEFAULT
+		valores.questions = []
+
+		if(valores.grade >= 0 )
+			valores.grade = valores.grade + 1
+
+		refIdGame.child("gameEnded").update(data);
 	}
 
 	this.setTimeOut = function () {
