@@ -521,8 +521,10 @@ var scores = function(){
 			for (var teamIndex = 0; teamIndex < teamsData.length; teamIndex++){
 				for (var playerIndex = 0; playerIndex < teamsData[teamIndex].players.length; playerIndex++) {
 					var player = teamsData[teamIndex].players[playerIndex]
+					var nicknamePhoto = player.nickname.replace(/\s/g,'')
+					nicknamePhoto.toLowerCase()
 					var image = {
-						name: player.nickname,
+						name: nicknamePhoto,
 						file: settings.BASE_PATH + "/images/scores/" + player.nickname + ".png"
 					}
 

@@ -312,8 +312,8 @@ var battle = function(){
     }
 
     function createHUD(){
-
-		HUDGroup = HUD.createHUD(ORDER_SIDES, battleTeams)
+		var lifes = [server.currentData.t1.life, server.currentData.t2.life]
+		HUDGroup = HUD.createHUD(ORDER_SIDES, battleTeams, lifes)
         HUDGroup.grade = server.questionGrade
 		
 		HUDGroup.setWinteam = function(win, lose){

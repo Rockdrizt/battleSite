@@ -63,6 +63,15 @@ function Server(){
 		}
 	}
 
+	var GRADE_NAMES = [
+		[["Ixchel Alexa", "Gael", "Salvador"],["Erik", "Santiago", "Jonathan"]],
+		[["Juan Antonio", "Alexis", "Andrei"],["María", "Christopher", "Rodrigo"]],
+		[["Diego Alonso", "Jimena", "Alfredo Rafael"],["Antonio", "Omar", "Rafael"]],
+		[["Diego", "Hannah", "Luis Daniel"],["Emma", "Mario", "Metztli"]],
+		[["Gabriela", "Tadeo", "Braulio"],["Santiago", "Hassebi", "Emmanuel"]],
+		[["Manuel", "Jorge", "Joel"],["Gael", "Ian", "Ever"]],
+	]
+
 	/**
 	 * @summary As default, an empty array has one element (an empty String). This function removes that element
 	 * @param {type} arr Array to be cleaned
@@ -361,8 +370,8 @@ function Server(){
 		//TODO: when retry is applied change player reset
 		var team1 = val.t1
 		var team2 = val.t2
-		team1.life = 100
-		team2.life = 100
+		//team1.life = 100
+		//team2.life = 100
 		team1.score = {correct : 0, wrong : 0}
 		team2.score = {correct : 0, wrong : 0}
 		self.initializeTeams()
@@ -371,10 +380,11 @@ function Server(){
 		valores.winner = false
 		if(!valores.questions)
 			valores.questions = []
-		refIdGame.update(valores)
 
 		self.questionGrade = valores.grade
-		self.currentData = val
+		self.currentData = valores
+
+		refIdGame.update(valores)
 	}
 
 	/**
@@ -421,8 +431,8 @@ function Server(){
 			self.setGameReady(false)
 			self.fireEvent('onTeamDisconnect', [{numTeam: num, teamWinner: valores[key]}]);
 		} else if (valores[key].ready === false) {
-			valores[key] = team;
-			self.currentData = valores
+			valores[key].ready = true;
+			self.currentData[key].ready = true
 			self.fireEvent('onInitTeam', [{numTeam: num, team: valores[key]}]);
 			var allTeamsReady = evaluateAllReady(key)
 			if (allTeamsReady) {
@@ -491,6 +501,14 @@ function Server(){
 				gameReady : false,
 				battleReady : false,
 				gameEnded : false
+			}
+
+			if((valores.gameEnded)&&(typeof valores.gameEnded.winner === "number")) {
+				resetValues.t1 = TEAM1_DEFAULT
+				resetValues.t2 = TEAM2_DEFAULT
+				resetValues.questions = []
+				if(valores.grade >= 0 )
+					resetValues.grade = valores.grade + 1
 			}
 
 			database.ref(id).onDisconnect().update(resetValues)
@@ -603,7 +621,7 @@ function Server(){
 
 	this.updateTeam = function (teamIndex, value) {
 		var key = "t" + teamIndex
-		valores[key].life = value.life
+		if(value.life) valores[key].life = value.life
 		valores[key].score = value.score
 		refIdGame.child(key).update(value);
 	}
@@ -612,13 +630,17 @@ function Server(){
 		for(var teamIndex = 1; teamIndex <= NUM_TEAMS; teamIndex++){
 			var key = "t" + teamIndex
 			var players = valores[key].players
-			valores[key].life = 100
+			//valores[key].life = 100
 			for(var playerIndex = 0; playerIndex < players.length; playerIndex++){
 				var player = players[playerIndex]
 				player.avatar = false
 				player.skin = false
+
+				if(self.questionGrade >= 0) {
+					var gradeNames = GRADE_NAMES[self.questionGrade]
+					player.nickname = gradeNames[teamIndex - 1][playerIndex]
+				}
 			}
-			//refIdGame.child(key).set(valores[key])
 		}
 	}
 
@@ -649,6 +671,7 @@ function Server(){
 
 	this.setGameEnded = function (numTeamWinner) {
 		var data = {winner:numTeamWinner, date:firebase.database.ServerValue.TIMESTAMP}
+		valores.gameEnded = data
 		setfb(refIdGame.child("gameEnded"), data)//refIdGame.child("gameEnded").set(data);
 	}
 

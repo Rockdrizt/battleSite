@@ -24,7 +24,7 @@ var HUD = function(){
         return nameList
     }
 	
-	function createHUD(SIDES, teams){
+	function createHUD(SIDES, teams, lifes){
 
         var listName = loadNames(teams)
 
@@ -89,7 +89,9 @@ var HUD = function(){
             life.scale.setTo(side * 1.05, 1)
             teamSide.life = life
 
-            var lifeText = "100".split("").join(String.fromCharCode(8202))
+            var amount = "" + lifes[i]
+            var lifeText = amount.split("").join(String.fromCharCode(8202))
+            life.width = life.width * lifes[i] / 100
 
             var lifePoints = new Phaser.Text(teamSide.game, life.x + 20 * side, life.y + 5, lifeText, fontStyle)
             lifePoints.anchor.setTo(i, 0.5)
