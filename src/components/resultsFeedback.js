@@ -324,7 +324,8 @@ var resultsFeedback = function(){
         var players = [t1, t2]
         
         var timeDifference = event.timeDifference || Math.abs(t1.time - t2.time) || 0
-        //var timeConvertedDifference = convertTime(timeDifference)
+        if(timeDifference < 5) timeDifference *= 10
+        console.log(timeDifference)
         var timeConvertedDifference = convertTimeFormat(timeDifference)
 
         var parent = this.parent
@@ -340,7 +341,7 @@ var resultsFeedback = function(){
 
             var winer = numTeam == (i + 1) ? true : false //players[i].value == riddle.correctAnswer
 			var newScale = convertScale(players[i].time)
-            var playerTime = winer ? players[i].time += 1 : players[i].time
+            var playerTime = timeDifference < 5 ? players[i].time += timeDifference : players[i].time
             var ansTime = convertTimeFormat(playerTime)
             var correct = players[i].value == riddle.correctAnswer
 
@@ -408,6 +409,7 @@ var resultsFeedback = function(){
         var apear = game.add.tween(self.attack.scale).from({x: 0,y: 0}, 300, Phaser.Easing.Elastic.Out, true, 2300)
         apear.onStart.add(function(){
             self.attack.alpha = 1
+            sound.play(attack + "Attack")
         })
 
         var fadeOut = game.add.tween(self.attack).to({alpha: 0}, 300, Phaser.Easing.Cubic.InOut, false, 800)

@@ -16,7 +16,7 @@ var riddles = function(){
 		2 : {
             ultra : 20000,
             super : 30000,
-            normal : 60000
+            normal : 90000
 		}
 	}
 
@@ -62,6 +62,7 @@ var riddles = function(){
 				var correctValue = answers[element.answer - 1]
 
 				i == subList.length - 1 ? timeIndex = 2 : timeIndex = 1
+                var lastQuestion = i == subList.length - 1 ? true : false
 
 				if(element.imgExist)
 					var imagePath = settings.BASE_PATH + "/images/questionDB/grade" + element.grade + "/" + element.image + ".png"
@@ -79,7 +80,8 @@ var riddles = function(){
 					correctAnswer: element.answer - 1,
 					timers: TIME_ATTACKS[timeIndex],
 					index: i,
-					correctValue: correctValue
+					correctValue: correctValue,
+                    lastQuestion: lastQuestion
 					//correctIndex:
 				}
 				gradeList.push(obj)
@@ -102,6 +104,7 @@ var riddles = function(){
 
 			var answers = [element.A, element.B, element.C, element.D]
 			var correctValue = answers[element.answer - 1]
+            var lastQuestion = i == list.length - 1 ? true : false
 
 			if(element.imgExist)
 				var imagePath = settings.BASE_PATH + "/images/questionDB/grade" + element.grade + "/" + element.image + ".png"
@@ -119,7 +122,8 @@ var riddles = function(){
 				correctAnswer: element.answer - 1,
 				timers: TIME_ATTACKS[1],
 				index: i,
-				correctValue: correctValue
+				correctValue: correctValue,
+                lastQuestion: lastQuestion
 				//correctIndex:
 			}
 			testQuestions.push(obj)
@@ -184,21 +188,6 @@ var riddles = function(){
 			return newQuestion
 		}
 	}
-    
-    function isLastQuestion(grade){
-        
-        if(grade == -1){
-            
-           var lastQuestion = testQuestions.length - 1
-           
-           return (usedTestQuestions.length == lastQuestion)
-        }
-        else{
-           var lastQuestion = questions[grade].length - 1
-           
-            return (usedQuestions.length == lastQuestion)
-       }
-    }
 
 	function getOperation(){
 
@@ -214,7 +203,15 @@ var riddles = function(){
 			var n = correctAnswer + diff * negativeOrPositive
 			possibleAnswers.push(n)
 		}
-		var n = game.rnd.integerInRange(possibleAnswers[1] , possibleAnswers[2])
+        
+        var min = possibleAnswers[1]
+        var max = possibleAnswers[2]
+        if(correctAnswer < 15){
+            min *= 2
+            max *= 2
+        }
+        
+		var n = game.rnd.integerInRange(min, max)
 		possibleAnswers.push(n)
 		
 
@@ -284,6 +281,5 @@ var riddles = function(){
 		getOperation:getOperation,
 		getQuestion:getQuestion,
         allQuestionsUsed:allQuestionsUsed,
-        isLastQuestion:isLastQuestion
 	}
 }()

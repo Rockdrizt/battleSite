@@ -206,7 +206,7 @@ var HUD = function(){
 
         var self = this
         
-        if(riddles.isLastQuestion(self.grade)){
+        if(lastQuestion){
             console.log("double damage")
             percent *= 2
         }
