@@ -16,6 +16,16 @@ var questionHUD = function(){
 
 	function update() {
 		this.timeElapsed += game.time.elapsedMS
+		if((this.riddle)&&(this.riddle.date)&&(!this.riddle.timeOut)) {
+			var serverDate = this.riddle.date
+			var date = new Date()
+			var currentTime = date.getTime()
+			var timeDiff = currentTime - serverDate
+			var time = this.chrono.maxTime - timeDiff
+			this.updateTimer(time)
+			if(time<=0)
+				this.stopTimer()
+		}
 		//this.time = convertTimeFormat(this.timeElapsed)
 	}
 
@@ -496,7 +506,8 @@ var questionHUD = function(){
 		// if(!this.client) {
 		// 	server.setDate()
 		// }
-        //this.startTimer()
+		if(this.riddle.date)
+        	this.startTimer(this.riddle.date)
     }
 
 	function hideOverlay(){
@@ -640,36 +651,41 @@ var questionHUD = function(){
 
 		var currDate = new Date()
 		var currTime = currDate.getTime()
-		var timeDiff = serverTimer - currTime
-		var maxTime = this.chrono.maxTime - timeDiff
-		this.timeElapsed = 0
-        
-        for(var i = 0; i < this.buttons.options.length; i++){
-			var opt = this.buttons.options.children[i]
-			game.add.tween(opt.info).to({alpha:1}, 300, Phaser.Easing.linear, true)
-			opt.inputEnabled = true
-		}
+		var timeDiff = currTime - serverTimer
+		this.riddle.date = serverTimer
 
-		if(this.timer) {
-        	this.timer.stop(true)
-			this.timer.destroy()
-		}
+		//if(timeDiff <= 0)
+		//	return
 
-        this.timer = game.time.create()
-		this.timerEvent = this.timer.add(maxTime, this.stopTimer, this)
-		this.timer.loop(1000, updateTimer, this)
-        this.timer.start()
-		console.log("time start")
+		// var maxTime = this.chrono.maxTime - timeDiff
+		// this.timeElapsed = 0
+		//
+		// for(var i = 0; i < this.buttons.options.length; i++){
+		// 	var opt = this.buttons.options.children[i]
+		// 	game.add.tween(opt.info).to({alpha:1}, 300, Phaser.Easing.linear, true)
+		// 	opt.inputEnabled = true
+		// }
+		//
+		// if(this.timer) {
+        	// this.timer.stop(true)
+		// 	this.timer.destroy()
+		// }
+		//
+		// this.timer = game.time.create()
+		// this.timerEvent = this.timer.add(maxTime, this.stopTimer, this)
+		// this.timer.loop(1000, updateTimer, this)
+		// this.timer.start()
+		// console.log("time start")
 	}
 	
-	function updateTimer(){
+	function updateTimer(time){
 
-		var time = this.timerEvent.delay - this.timer.ms
+		//var time = this.timerEvent.delay - this.timer.ms
 		time = Phaser.Math.clamp(time, 0, this.chrono.maxTime)
 		var text = convertTime(time)
 		this.chrono.timeText.setText(text)
 
-		var size = game.math.degToRad((290/this.timerEvent.delay)*(time))
+		var size = game.math.degToRad((290/this.chrono.maxTime)*(time))
 		this.chrono.circle.clear()
         this.chrono.circle.beginFill(0xFF0000, 0.5)
         this.chrono.circle.arc(0, 0, this.chrono.circle.lineSize, size, this.game.math.degToRad(-10), true)
@@ -677,10 +693,11 @@ var questionHUD = function(){
 	}
     
     function stopTimer(){
-		this.timer.stop(true)
-		this.timer.destroy()
+		// this.timer.stop(true)
+		// this.timer.destroy()
 		this.chrono.timeText.setText("0:00")
 		if(this.timeOutCallback) this.timeOutCallback()
+		this.riddle.timeOut = true
 
 		if(this.client){
 			this.buttons.options.setAll("inputEnabled", false)
@@ -693,7 +710,7 @@ var questionHUD = function(){
 	function convertTime(time) {
 
 		var min = Math.floor(time / 60000)
-		var sec = Math.round((time % 60000) / 1000)
+		var sec = Math.ceil((time % 60000) / 1000)
 
 		return min + ":" + (sec < 10 ? '0' : '') + sec
 	}
