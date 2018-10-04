@@ -386,14 +386,13 @@ var resultsFeedback = function(){
 
     function setWiner(winSide){
 
-        var self = this
 		var showShine = game.add.tween(winSide.timeBar.shine).to({alpha:1}, 300, Phaser.Easing.Cubic.Out, true, 3000)
 		showShine.onStart.add(function(){
 			winSide.particles.start(true, 2000, null, 40)
         })
         showShine.onComplete.add(function(){
-            self.parent.showAttack(winSide)
-        })
+            this.parent.showAttack(winSide)
+        },this)
     }
     
     function showAttack(winSide){
